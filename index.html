@@ -20,9 +20,11 @@ h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.
 .archive-link:hover .archive-date{color:#0969da}
 .archive-date{display:inline-block;font-size:16px;font-weight:700;color:#0d1117;letter-spacing:-.005em;margin-bottom:4px;font-variant-numeric:tabular-nums}
 .archive-dow{font-size:13px;font-weight:400;color:#656d76;margin-left:2px}
-.archive-summary{display:block;color:#3b434d;font-size:14px;line-height:1.6}
-.archive-summary.placeholder{color:#9aa4af;font-style:italic}
-.archive-summary .dot{color:#c0c7d0;margin:0 6px}
+.archive-summary{display:block;color:#3b434d;font-size:14px;line-height:1.6;margin:4px 0 0;padding:0;list-style:none}
+.archive-summary li{position:relative;padding-left:14px;margin:2px 0}
+.archive-summary li::before{content:"•";position:absolute;left:2px;color:#8b95a1}
+.archive-summary.placeholder{color:#9aa4af;font-style:italic;padding-left:0}
+.archive-summary.placeholder::before{content:none}
 .archive-summary em.empty{color:#9aa4af;font-style:italic}
 footer{margin-top:36px;padding-top:16px;border-top:1px solid #eaeef2;font-size:12px;color:#656d76;text-align:center}
 footer a{color:#656d76}
@@ -129,7 +131,7 @@ footer a{color:#656d76}
     dow.textContent = ` (${dowOf(date)})`;
     dateEl.appendChild(dow);
 
-    const summary = document.createElement('span');
+    const summary = document.createElement('ul');
     summary.className = 'archive-summary placeholder';
     summary.textContent = '인사이트 불러오는 중…';
 
@@ -144,20 +146,17 @@ footer a{color:#656d76}
     el.classList.remove('placeholder');
     el.textContent = '';
     if (!titles.length) {
+      el.classList.add('placeholder');
       const em = document.createElement('em');
       em.className = 'empty';
       em.textContent = '(인사이트 없음)';
       el.appendChild(em);
       return;
     }
-    titles.forEach((t, i) => {
-      if (i > 0) {
-        const dot = document.createElement('span');
-        dot.className = 'dot';
-        dot.textContent = '·';
-        el.appendChild(dot);
-      }
-      el.appendChild(document.createTextNode(t));
+    titles.forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = t;
+      el.appendChild(li);
     });
   }
 
