@@ -44,503 +44,305 @@ ul.links li{margin:4px 0}
 <body>
 <div class="container">
 
-<h1>📄 arXiv Daily Briefing — 2026-04-18 (토)</h1>
+<h1>📄 arXiv Daily Briefing — 2026-04-18 (금)</h1>
 
 <div class="meta">
-<div><strong>주간 시야:</strong> 2026-04-13 ~ 2026-04-17 · cs.CV/new + cs.RO/new</div>
-<div><strong>오늘의 /new 배치 기준일:</strong> 2026-04-17 (Fri) — cs.CV 약 95편 신규 + cs.RO 약 30편 신규</div>
-<div><strong>선정 원칙:</strong> ROI 8버킷 매칭 엄격 판정, 명백한 incremental 제외. 버킷 내 상한 없음.</div>
+<div><strong>시야:</strong> 주간 2026-04-13 ~ 2026-04-17 · 오늘 배치 2026-04-17 공지분</div>
+<div><strong>소스:</strong> cs.CV/new + cs.RO/new (pastweek 포함 트렌드 분석)</div>
+<div><strong>주간 규모:</strong> cs.CV ~866편 · cs.RO ~116편</div>
+<div><strong>오늘 선별:</strong> 33편 (8개 ROI 버킷)</div>
 </div>
 
+<!-- ============ 주간 동향 ============ -->
 <h2>🔭 주간 동향</h2>
 
-<p>교수님, 지난 일주일 cs.CV랑 cs.RO를 쭉 훑어봤는데 제일 눈에 띄는 건 역시 VLA(vision-language-action) 쪽이에요. cs.RO만 놓고 봐도 일주일에 240편 정도가 올라왔는데 그 중 20편 가까이가 VLA/end-to-end 정책 학습 계열입니다. 재밌는 건 이게 이제 "VLA가 되냐/안 되냐"의 경쟁이 아니라 <strong>내부 구조를 어떻게 쪼갤 것인가</strong>의 경쟁으로 넘어간 느낌이에요. HiVLA 같은 계층형, World-Value-Action 같은 implicit-planning형, R3D 같은 3D-perception-heavy형 — 각자 다른 축을 끊고 있습니다. 오늘 나온 것만 해도 R3D, World-Value-Action, Hierarchical Spatiotemporal Action Tokenizer 세 편이 동시에 "계층 분리" 방향으로 답을 들고 나왔어요. 이거 한 주 트렌드가 아니라 향후 몇 달 이어질 주제 같습니다.</p>
+<p>이번 주 제일 뜨거운 버킷은 단연 <strong>Robot Learning</strong>이에요. cs.RO 전체 116편 중 조작·학습 관련 논문이 28편으로 거의 4분의 1을 차지했는데, 특히 VLA(Vision-Language-Action) 모델이 단순 action regression을 넘어 world model과 value function을 내장하는 방향으로 진화하는 흐름이 뚜렷합니다. 오늘만 해도 WAV model, HiVLA, R3D 같은 구조적으로 한 단계 올라간 VLA 논문이 한꺼번에 나왔어요. <strong>3D/Scene</strong> 버킷도 여전히 강세인데, 3DGS(3D Gaussian Splatting)가 이제 순수 렌더링을 완전히 벗어나서 SLAM, 시뮬레이션, 심지어 4D 레이더까지 침투하고 있습니다. GlobalSplat이나 TokenGS처럼 feed-forward 3DGS를 더 효율적으로 만들려는 시도도 활발하구요.</p>
 
-<p>한편 cs.CV 쪽에서는 VLM이 여전히 제일 큰 버킷(한 주 20여 편)인데, 내용 결이 조금 달라진 게 보입니다. 지난 1~2주 동안 "더 크게, 더 잘"에서 <strong>"왜 VLM이 잘 안 되는가"</strong> 를 뜯어보는 논문들이 몰려나오는 중이에요. 오늘만 해도 "Why Do VLMs Struggle To Recognize Human Emotions"와 cross-list로 올라온 "Centroid Erasure Exposes Modal Competition", "Reasoning Dynamics and Monitoring Modality Reliance in VLMs", "Knowing When Not to Answer" 네 편이 거의 한 묶음처럼 나왔거든요. 주제가 전부 <strong>"VLM은 실은 비전보다 텍스트에 기대서 답한다"</strong> 계열이에요. 이거 한동안 계속 나올 흐름 같습니다. 3DGS도 흥미로운 건, 예전엔 rendering quality 경쟁이었는데 이번 주 보면 GlobalSplat, TokenGS, StreamCacheVGGT, Hybrid Latents 전부 <strong>"더 적은 primitive로, 더 빨리, 더 compact하게"</strong> 로 축이 넘어갔습니다.</p>
+<p>한편 조용한 쪽을 보면, <strong>Safety/Alignment</strong>가 이번 주 내내 얇았어요. cs.RO에서 safety 관련이 11편 정도 나오긴 했지만 대부분 control barrier function 같은 전통적 안전 제어 쪽이고, VLA나 foundation model 레벨의 safety 연구는 거의 없었습니다. <strong>Autonomous Driving</strong>도 cs.CV 쪽에서는 의외로 2편밖에 안 나왔는데, 이건 AD 연구가 cs.RO 쪽으로 더 쏠리는 추세를 반영하는 것 같아요. 다만 RAD-2처럼 diffusion + RL 기반 planning 같은 새로운 접근은 눈에 띄네요.</p>
 
-<p>반대로 조용한 영역은 <strong>순수 sim2real / domain randomization</strong> 이에요. cs.RO 240편 중 6편 정도밖에 안 되고, 오늘은 Abstract Sim2Real (Approximate Information States) 한 편 정도가 유일하게 의미 있어 보입니다. 이건 조금 의외인데, VLA가 커지면서 real-world data scaling에 밀린 인상입니다. Safety/Alignment 쪽도 cs.CV에서는 Physically-Induced Atmospheric Adversarial이랑 Class Unlearning 정도로 양이 많진 않지만, 오늘 cs.RO에서 Vision-Based Safe HRC with Uncertainty Guarantees가 나왔고, 이번 주 HazardArena(VLA safety benchmark)가 cross-list로 올라왔어요. <strong>VLA safety 자체가 조용히 하나의 미니 토픽으로 떠오르는 중</strong> 입니다. 오늘 논문으로는 SpaceMind(on-orbit VLA)도 이 맥락에 살짝 걸칩니다.</p>
+<p>부상 중인 미니토픽으로는 <strong>텔레오퍼레이션/데이터 수집 인프라</strong>가 있습니다. DEX-Mouse(150달러짜리 텔레오퍼레이션 인터페이스), HRDexDB(인간-로봇 그래스핑 대규모 데이터셋) 같은 논문이 오늘 동시에 나온 건 우연이 아닌 것 같아요. VLA 모델이 점점 강력해지면서 "그럼 학습 데이터는 어디서?"라는 질문에 대한 답을 찾으려는 움직임이 뚜렷해지고 있습니다. 또 하나는 <strong>VLM의 효율적 추론</strong> — Chain of Modality, AVR, VisPCO 같이 토큰 사용량을 50~90% 줄이면서도 정확도를 유지하는 연구가 이번 주 꾸준히 나왔습니다.</p>
 
+<!-- ============ 인사이트 ============ -->
 <h2>💡 오늘의 인사이트</h2>
 
 <div class="insight">
-<h3>1. VLA가 이제 "계층 분리" 축으로 수렴하는 것 같습니다</h3>
-<p>이번 주 HiVLA(hierarchical), Failure Identification in Imitation Learning, Diffusion Sequence Models for In-Context Meta-Learning 등이 쭉 올라왔는데 공통적으로 "policy 전체를 monolithic하게 학습하지 말고 어딘가에서 끊자"는 흐름이 읽혀요. 오늘 발표된 <a href="https://arxiv.org/abs/2604.14732">World-Value-Action Model</a>은 value 함수를 통해 implicit planning 계층을 끼워넣었고, <a href="https://arxiv.org/abs/2604.15281">R3D</a>는 3D perception을 완전히 분리해 diffusion decoder로 받도록 해서 training instability를 줄였어요. 거기에 <a href="https://arxiv.org/abs/2604.15215">Hierarchical Spatiotemporal Action Tokenizer</a>까지 in-context imitation을 위해 action space를 계층 vector-quantize 하고요. 세 논문이 같은 날 다른 축으로 "계층" 을 말하고 있어서 이건 주목할 만한 신호입니다. 솔직히 "flat policy로 모든 걸 하겠다"는 접근은 이번 분기를 넘기면 힘들 것 같아요.</p>
+<h3>1. 3DGS가 렌더링 도구를 넘어 로보틱스 인프라로 변하고 있다</h3>
+<p>이번 주 내내 3DGS가 원래 영역인 novel view synthesis를 완전히 벗어나는 모습이 반복됐어요. 오늘 나온 <a href="https://arxiv.org/abs/2604.14268">HY-World 2.0</a>은 텍스트/이미지/비디오 입력에서 탐색 가능한 3DGS 세계를 만들고, <a href="https://arxiv.org/abs/2604.14868">4D Radar Gaussian</a>은 레이더 스캔 매칭에 Gaussian을 쓰고, 이번 주 초에 나온 RMGS-SLAM이나 Habitat-GS는 각각 실시간 SLAM과 내비게이션 시뮬레이터에 3DGS를 투입했습니다. 3DGS가 "예쁜 그림 그리는 도구"에서 "로봇이 세상을 이해하는 표현 방식"으로 포지셔닝이 바뀌고 있다고 봐야 합니다. 이 흐름은 한동안 가속될 것 같아요.</p>
 </div>
 
 <div class="insight">
-<h3>2. VLM의 "modal reliance" 를 들여다보는 해석/진단 연구가 한 덩어리로 몰려들어옵니다</h3>
-<p>오늘 하루에만 <a href="https://arxiv.org/abs/2604.15280">Why Do VLMs Struggle To Recognize Human Emotions?</a>, <a href="https://arxiv.org/abs/2604.14363">The Cost of Language: Centroid Erasure Exposes Modal Competition</a>, <a href="https://arxiv.org/abs/2604.14888">Reasoning Dynamics and the Limits of Monitoring Modality Reliance</a>, <a href="https://arxiv.org/abs/2604.14799">Knowing When Not to Answer</a> 네 편이 비슷한 메시지로 올라왔어요. 핵심은 "VLM은 시각적으로 보는 게 아니라 텍스트 prior에 끌려간다", "답변 관성이 있어서 reasoning이 실제 결정에 반영되지 않는다" 같은 부정적 진단들입니다. 지난 주에 MEBench(mutual exclusivity bias)가 나왔던 것과도 결이 같고요. 이거 진짜 중요한 변화예요 — "성능 지표가 아닌 내부 실패 모드" 를 측정하는 연구가 VLM 분야의 두 번째 단계로 넘어가는 신호로 봅니다.</p>
+<h3>2. VLA가 "행동 예측기"에서 "구조적 추론기"로 진화 중이다</h3>
+<p>오늘 나온 VLA 논문들이 인상적인 게, 하나같이 단순 action prediction을 넘어서려 합니다. <a href="https://arxiv.org/abs/2604.14732">WAV model</a>은 world model + value function으로 latent space에서 계획을 세우고, <a href="https://arxiv.org/abs/2604.14125">HiVLA</a>는 VLM planner와 diffusion action expert를 분리해서 long-horizon task를 풀고, <a href="https://arxiv.org/abs/2604.15281">R3D</a>는 3D 인코더 + 디퓨전 디코더로 cross-embodiment transfer를 노립니다. 이번 주 cs.RO 전체를 봐도 VLA/multimodal 논문이 10편 이상이었는데, 공통적으로 "직접 action을 뱉는 것"에서 "먼저 생각하고 action을 뱉는 것"으로 패러다임이 이동하고 있어요. 솔직히 이건 꽤 중요한 전환점이라고 생각합니다.</p>
 </div>
 
 <div class="insight">
-<h3>3. 3DGS의 싸움이 "품질"에서 "compactness/robustness"로 축 이동했습니다</h3>
-<p>이번 주 RMGS-SLAM(real-time multi-sensor), ReefMapGS 같은 robotics 응용들과 cs.CV의 feed-forward 계열이 나란히 올라왔는데, 오늘 <a href="https://arxiv.org/abs/2604.15284">GlobalSplat</a>(global scene tokens로 primitive 수 감소), <a href="https://arxiv.org/abs/2604.15239">TokenGS</a>(pose noise에 robust), <a href="https://arxiv.org/abs/2604.15237">StreamCacheVGGT</a>(streaming + hybrid cache compression), <a href="https://arxiv.org/abs/2604.14928">Hybrid Latents</a>(order of magnitude fewer primitives) — 전부 다른 축이지만 "적게, 빠르게, 안정적으로"로 수렴하고 있어요. 한편 로봇 쪽에서 <a href="https://arxiv.org/abs/2604.14795">Keep It CALM</a>이 visual geometry foundation model 기반 kilometer-scale SLAM을 calibration-free로 하겠다고 나왔습니다. 이거 합치면 <strong>"edge deploy 가능한 3DGS" 라는 큰 그림이 본격적으로 구체화되는 중</strong> 이라고 봐도 될 것 같습니다.</p>
+<h3>3. 데이터 수집 인프라 투자가 알고리즘만큼 뜨겁다</h3>
+<p>이번 주 눈에 띄는 건 알고리즘 논문만이 아닙니다. <a href="https://arxiv.org/abs/2604.14944">HRDexDB</a>는 100개 물체에 대해 인간 손과 다양한 로봇 손의 grasping을 1.4K 트라이얼 촬영하고, <a href="https://arxiv.org/abs/2604.15013">DEX-Mouse</a>는 150달러짜리 핸드헬드 텔레오퍼레이션 장치를 만들었고, <a href="https://arxiv.org/abs/2604.15023">DockAnywhere</a>는 하나의 데모에서 다양한 시점의 학습 데이터를 증강합니다. VLA 시대에 "좋은 데이터가 곧 좋은 정책"이라는 인식이 커뮤니티에 확실히 자리잡은 것 같아요. 알고리즘 성능이 평탄해지면 결국 데이터 싸움이 되는데, 그 전조가 보이는 느낌입니다.</p>
 </div>
 
+<!-- ============ 추천 연구주제 ============ -->
 <h2>🔬 추천 연구주제</h2>
 
 <div class="topic">
-<h3>1. 계층 VLA에 "실패 감지 헤드" 를 명시적으로 끼워넣는 구조</h3>
-<p>이번 주 Failure Identification in Imitation Learning via Statistical and Semantic Filtering이 나왔고, 오늘 World-Value-Action이 implicit planning을 제안했는데, 이 둘을 합치면 재밌을 것 같아요. 현재 VLA들은 실패를 "외부에서" 판정하는데, 계층 VLA 구조라면 value head 옆에 "이 trajectory가 failing 중인가" 를 실시간 판정하는 보조 헤드를 두고, threshold 넘으면 replanning하는 구조가 자연스럽습니다. 데이터셋은 이번 주 나온 HRDexDB, Hoi! 같은 multi-modal manipulation dataset에 failure label을 합성으로 주입해 시작하면 비용이 크지 않아요. HazardArena benchmark와 바로 붙일 수 있어서 evaluation도 깔끔합니다.</p>
+<h3>1. 3DGS 기반 Manipulable Object Simulator 구축</h3>
+<p>3DGS가 SLAM, 내비게이션, world model에 다 쓰이고 있는데, 정작 로봇 조작 학습용 실시간 시뮬레이터에는 아직 본격적으로 투입되지 않았어요. 오늘 HY-World 2.0이 보여준 "3DGS 세계 + 캐릭터 지원 렌더링 플랫폼"에 간단한 물리 엔진(rigid body 정도)을 붙이면, 실제 장면 스캔 → 3DGS 재구성 → 시뮬레이션 → 정책 학습 파이프라인이 가능할 겁니다. 기존 MuJoCo/Isaac보다 sim2real gap이 작을 수 있고, 이번 주 나온 R3D의 3D 정책 학습 프레임워크와 바로 결합할 수도 있어요.</p>
 </div>
 
 <div class="topic">
-<h3>2. 3DGS "Pareto compactness benchmark" 제안</h3>
-<p>GlobalSplat, TokenGS, Hybrid Latents 모두 compactness를 자랑하는데 서로 비교 가능한 공통 프로토콜이 없어요. 렌더링 품질(PSNR/SSIM/LPIPS) × primitive 수 × peak VRAM 3차원 Pareto를 한 벤치마크에서 측정하는 게 필요합니다. 시작은 Mip-NeRF360이나 Tanks & Temples에 "memory budget" 축을 추가해 publish하면 되고, robotics 쪽 요구를 반영하려면 StreamCacheVGGT 같은 streaming setting도 optional track으로 넣으면 좋아요. 이 벤치마크 하나 나오면 on-device 3DGS 쪽 논문들이 줄을 서서 올 겁니다. 작업량 대비 임팩트가 크다고 봅니다.</p>
+<h3>2. VLA Planning에 Conformal Safety Guarantee 통합</h3>
+<p>이번 주 주간 패턴에서 가장 눈에 띄는 공백이 "VLA + Safety"입니다. WAV model 같은 latent planning VLA는 world model로 미래 상태를 예측하는데, 여기에 오늘 나온 <a href="https://arxiv.org/abs/2604.15221">Vision-Based Safe HRC</a>의 conformal prediction 접근을 결합하면 어떨까요? VLA의 world model 예측에 통계적 안전 보장을 붙여서, 특정 확률 이상으로 위험한 trajectory를 사전에 거부하는 시스템을 만들 수 있을 겁니다. Safety 버킷이 비어있는 건 그만큼 기회가 많다는 뜻이기도 해요.</p>
 </div>
 
 <div class="topic">
-<h3>3. Inference-time Modal Reliance Monitoring → 자동 abstention</h3>
-<p>오늘 발표된 "Reasoning Dynamics" 논문이 VLM 내부에서 modality reliance를 측정하는 방법을 제안했고, "Knowing When Not to Answer"는 abstention을 평가했는데, 이 둘은 따로 다니고 있어요. 둘을 합쳐서 inference-time에 "이 답변이 visual grounding이 약할 때" 자동으로 abstention하거나 visual re-look을 트리거하는 gating 모듈을 만들면 실용적 가치가 높습니다. 베이스라인은 Qwen2.5-VL이나 InternVL 계열로 잡고, MM-AQA와 MEBench에서 평가하면 되겠고요. 한 발 더 나가면 VLA의 vision encoder에도 옮겨 심을 수 있어서 — "로봇이 시각적으로 확신 없을 때 pause" — 라는 안전 응용으로 이어집니다.</p>
+<h3>3. Cross-Embodiment Dexterous Manipulation 전이 학습 벤치마크</h3>
+<p>HRDexDB가 인간 손과 여러 로봇 손의 그래스핑 데이터를 같은 물체에 대해 제공하기 시작했는데, 아직 cross-embodiment transfer를 체계적으로 평가할 벤치마크가 부족합니다. R3D가 보여준 "3D 인코더 + 디퓨전 디코더" 구조가 embodiment-agnostic한 정책 표현을 가능하게 하니까, HRDexDB 데이터 위에서 "손 A로 학습 → 손 B로 전이" 성능을 체계적으로 측정하는 벤치마크를 만들면 임팩트가 클 거예요. 특히 bimanual manipulation이나 tool use로 확장하면 더 좋겠습니다.</p>
 </div>
 
+<!-- ============ 버킷 현황 ============ -->
 <h2>📊 오늘의 버킷 현황</h2>
 
-<div class="bucket-line">[3D/Scene] 17 · [Robot Learning] 12 · [Autonomous Driving] 3 · [Foundation Models] 11 · [Generation] 15 · [Efficiency/Systems] 2 · [Embodied AI] 4 · [Safety/Alignment] 4</div>
+<div class="bucket-line">[3D/Scene] 6 · [Robot Learning] 10 · [AD] 2 · [FM] 5 · [Gen] 4 · [Eff] 2 · [Embodied] 3 · [Safety] 1</div>
 
-<p><span class="hot">🔥 TOP3:</span> 3D/Scene · Generation · Robot Learning<br>
-<span class="cold">❄️ BOTTOM2:</span> Efficiency/Systems (단독 분류만 2편) · Autonomous Driving (3편)</p>
+<p>🔥 TOP3: <span class="hot">Robot Learning (10)</span>, <span class="hot">3D/Scene (6)</span>, <span class="hot">Foundation Models (5)</span> &nbsp;|&nbsp; ❄️ BOTTOM2: <span class="cold">Safety/Alignment (1)</span>, <span class="cold">Autonomous Driving (2)</span></p>
 
-<blockquote>Efficiency는 전용 논문이 적어 보이지만 VLM의 token pruning(VisPCO), KD(Switch-KD), 3DGS의 compact 계열이 "다른 버킷 안에서의 효율화" 로 분산돼 있음 — 실제로는 조용한 주제가 아님.</blockquote>
-
+<!-- ============ 논문별 요약 ============ -->
 <h2>📄 논문별 요약</h2>
 
-<h4 class="bucket">📦 3D/Scene <span class="count">· 17편</span></h4>
+<!-- 3D/Scene -->
+<h4 class="bucket">📦 3D/Scene <span class="count">· 6편</span></h4>
+
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14268"><strong>HY-World 2.0: A Multi-Modal World Model for Reconstructing, Generating, and Simulating 3D Worlds</strong></a> <span class="badge badge-cv">CV</span></div>
+<div class="paper-authors">👥 Chenjie Cao, Xuhui Zuo, Zhenwei Wang et al. (Team HY-World)</div>
+<p>텍스트, 이미지, 비디오 등 다양한 입력에서 탐색 가능한 3DGS 세계를 만드는 종합 프레임워크입니다. 파노라마 생성 → 경로 계획 → 세계 확장 → 세계 합성의 4단계 파이프라인이 인상적이고, WorldLens라는 자체 3DGS 렌더링 플랫폼까지 공개했어요. 오픈소스 중에서는 SOTA이고 클로즈드소스인 Marble과 비슷한 수준을 달성했다고 합니다. 이번 주 3DGS가 단순 렌더링을 넘어 "세계 모델"로 확장되는 대표적인 사례네요.</p>
+</div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15284"><strong>GlobalSplat: Efficient Feed-Forward 3D Gaussian Splatting via Global Scene Tokens</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Roni Itkin, Noam Issachar, et al.</div>
-<p>이 논문은 3DGS의 가장 근본 문제인 "primitive를 공간에 어떻게 뿌릴 것인가" 를 global scene token 기반으로 재설계했어요. 기존 feed-forward 3DGS들이 per-pixel prediction으로 Gaussian을 뱉어내다 보니 redundancy가 많았는데, 여기선 scene 전체를 token으로 요약해서 훨씬 적은 Gaussian으로 consistent한 재구성을 만들어냅니다. 이번 주 TokenGS, Hybrid Latents와 나란히 놓고 보면 feed-forward 3DGS의 "compactness 경쟁" 의 출발 신호 같아요. 개인적으로 이 논문이 제일 깔끔한 출발점이라 생각합니다.</p>
+<div class="paper-authors">👥 Roni Itkin, Noam Issachar, Yehonatan Keypur, Anpei Chen et al.</div>
+<p>Feed-forward 3DGS의 효율성 문제를 정면으로 다룬 논문이에요. 핵심 아이디어는 multi-view 입력에서 먼저 글로벌 latent scene representation을 학습하고, 거기서 3D geometry를 디코딩하는 건데요. 16K Gaussian만으로(약 4MB) 경쟁력 있는 novel-view synthesis를 달성하면서 forward pass가 78ms 미만입니다. 기존 pixel-aligned 방식의 "표현 bloat" 문제를 깔끔하게 해결한 느낌이에요.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15239"><strong>TokenGS: Decoupling 3D Gaussian Prediction from Pixels with Learnable Tokens</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Jiawei Ren, Michal Jan Tyszkiewicz, et al.</div>
-<p>재밌는 건 이 논문은 3DGS prediction을 pixel space에서 token space로 <strong>완전히 분리해</strong> 버렸다는 점이에요. 이렇게 하면 multi-view inconsistency나 pose noise에 robust해지거든요. GlobalSplat이 "token으로 요약"이라면 이건 "pose noise에도 덜 흔들리도록 decouple"이라 결이 약간 다릅니다. 주간 흐름에서 3DGS가 rendering quality → compactness → robustness로 축을 넓히고 있는 증거로 봐도 될 것 같아요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15237"><strong>StreamCacheVGGT: Streaming Visual Geometry Transformers with Robust Scoring and Hybrid Cache Compression</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Xuanyi Liu, Deyi Ji, et al.</div>
-<p>이건 training-free framework인데, dense 3D reconstruction을 비디오 스트림에서 constant memory로 돌리는 게 포인트예요. Cross-layer consistency로 cache에 무엇을 남길지 scoring하고, hybrid 압축으로 memory를 잡아주고요. 5개 벤치마크에서 SOTA라고 주장하는데, 개인적으로는 <strong>training-free면서 streaming을 해낸다</strong>는 게 robotics 쪽에 바로 꽂히는 기술이라 봅니다. Keep It CALM이랑 나란히 놓고 보면 "real-time VGFM SLAM 생태계" 구축의 한 축이에요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14928"><strong>Hybrid Latents — Geometry-Appearance-Aware Surfel Splatting</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 N. Kelkar, S. Niedermayr, K. Engel, et al.</div>
-<p>Hash-grid와 Gaussian을 섞은 hybrid radiance representation 제안입니다. Primitive 수를 order of magnitude 줄였다고 주장해요. 이번 주 compactness 경쟁에서 제일 공격적인 숫자를 들고 나온 논문이라 눈에 띕니다. Surfel 기반이라는 점도 재밌는데, 표면 근방에서는 Gaussian, 나머지는 hash — 이 split이 합리적이고 Keep It CALM 같은 foundation-model SLAM에 적용해도 잘 맞을 각도가 보여요.</p>
+<div class="paper-authors">👥 Jiawei Ren, Michal Jan Tyszkiewicz, Jiahui Huang, Zan Gojcic et al.</div>
+<p>Transformer 기반 feed-forward 3DGS에서 설계 선택을 재검토한 논문입니다. 카메라 ray를 따라 depth를 regress하는 대신 learnable Gaussian token으로 3D 좌표를 직접 예측하는데, 이러면 예측 primitive 수가 이미지 해상도에 묶이지 않아요. 포즈 노이즈에 대한 robustness가 좋고, static/dynamic decomposition과 scene flow까지 자연스럽게 나온다는 게 재밌는 부분입니다.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14706"><strong>NG-GS: NeRF-Guided 3D Gaussian Splatting Segmentation</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Yi He, Tao Wang, Yi Jin, et al.</div>
-<p>NeRF가 feature를 먼저 형성한 뒤 그 supervision으로 3DGS segmentation을 정제하는 구조입니다. NeRF vs 3DGS 이분법이 아니라 <strong>둘을 상보적으로 쓴다</strong>는 접근이 흥미로워요. Segmentation이라는 downstream task 관점에서 NeRF의 dense field가 여전히 유용하다는 주장인데, 실용적으로 받아들일 만합니다. 다만 실시간성은 떨어질 거라 robotics보단 offline scene understanding 쪽으로 쓸 만하겠어요.</p>
+<div class="paper-authors">👥 Yi He, Tao Wang, Yi Jin, Congyan Lang et al.</div>
+<p>3DGS segmentation에서 경계가 이산적으로 뭉개지는 문제를 NeRF의 연속적 표현으로 보완하는 접근입니다. RBF interpolation을 써서 Gaussian 경계를 부드럽게 만드는데, NVOS와 LERF-OVS 벤치마크에서 boundary mIoU가 크게 올라갔다고 합니다. NeRF와 3DGS를 대립 관계가 아니라 상호보완으로 보는 시각이 흥미롭네요.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14268"><strong>HY-World 2.0: A Multi-Modal World Model for Reconstructing, Generating, and Simulating 3D Worlds</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Team HY-World, Chenjie Cao, Xuhui Zuo, et al.</div>
-<p>Tencent HY-World의 2세대 world model입니다. Reconstruction + generation + simulation 세 개를 한 framework에서 처리한다는 야심찬 프레이밍이에요. 이 흐름을 Google Genie나 DeepMind SIMA 계열과 나란히 놓고 보면 "industry lab 주도 3D world model" 이 한 축으로 굳어지는 분위기입니다. 논문 자체보다 "이런 종합 framework가 한 주에 한 편꼴로 나오기 시작했다"는 것 자체가 trend sign 같아요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14302"><strong>Geometrically Consistent Multi-View Scene Generation from Freehand Sketches</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Ahmed Bourouis, Savas Ozkan, Andrea Maracani, et al.</div>
-<p>Sketch 하나에서 geometrically consistent multi-view scene을 만들어내는 문제 정의인데, 이게 3D generation과 2D-to-3D 중간 지대에 있어서 재밌습니다. Attention adapter를 써서 sketch prior를 주입하는 방식이에요. 주간 흐름 보면 controllable 3D generation 논문들이 쭉 올라오는 중인데, freehand sketch는 UX 관점에서 가장 자연스러운 입력이라 design 도구 쪽 응용이 실질적으로 보입니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14782"><strong>One-shot Compositional 3D Head Avatars with Deformable Hair</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Y. Sun, X. Wang, W. Zhang, et al.</div>
-<p>Single image에서 3D head avatar를 만드는데 <strong>hair를 face와 분리해</strong> 별도 deformation paradigm을 쓰는 게 핵심이에요. 기존 methods들은 hair가 항상 뿔나무처럼 굳어 있어서 진짜 애니메이션이 안 됐거든요. 주간 내 talking avatar (TurboTalk 등) 계열이 활발한데, 그 흐름에 hair 특화 접근까지 정돈돼 들어오는 느낌입니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14541"><strong>Giving Faces Their Feelings Back: Explicit Emotion Control for Feedforward Single-Image 3D Head Avatars</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Yicheng Gong, Jiawei Zhang, Liqiang Liu, et al.</div>
-<p>위 논문과 짝으로 보면 재밌어요. 이쪽은 <strong>emotion을 explicit하게 조절</strong>하는 dual-path modulation framework입니다. "얼굴에 감정을 돌려주겠다"는 표현이 신선하긴 한데, 실제로는 FACS-style 제어가 feedforward 구조에서 얼마나 깔끔하게 되는가의 문제고요. 3D head avatar 쪽이 이제 geometry → motion → emotion 으로 상세도를 한 단 더 내리는 단계에 들어온 것 같습니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14914"><strong>Beyond Prompts: Unconditional 3D Inversion for Out-of-Distribution Shapes</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Vincent Y. Chen, Emery Pierson, Louis Maillard, et al.</div>
-<p>Text-to-3D의 잘 알려진 failure mode, 즉 <strong>"model이 prompt를 무시하는 latent sink"</strong> 문제를 정식으로 파고들었어요. Bypass 방식으로 OOD shape editing이 가능해진다는 결과고요. 이번 주 3D generation 논문 중에서 제일 "문제 정의가 깔끔한" 편이에요. Diffusion 3D generation의 robustness를 제대로 측정하려면 이런 failure mode 논문이 베이스가 돼야 해서 주목할 만합니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14795"><strong>Keep It CALM: Toward Calibration-Free Kilometer-Level SLAM with Visual Geometry Foundation Models via an Assistant Eye</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 T. Zhang, F. Zhang, T. Deng, et al.</div>
-<p>이거 정말 중요한 변화예요. <strong>VGFM(visual geometry foundation model)을 pre-calibration 없이 플러그인처럼 붙여 km 스케일 SLAM을 하겠다</strong>는 프레이밍이거든요. "Assistant Eye"라는 보조 카메라 컨셉으로 calibration 자체를 제거하는데, 이게 된다면 field robotics의 배치 비용이 확 내려갑니다. StreamCacheVGGT랑 합치면 VGFM 기반 end-to-end SLAM의 그림이 꽤 구체적으로 그려져요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14421"><strong>BIEVR-LIO: Robust LiDAR-Inertial Odometry through Bump-Image-Enhanced Voxel Maps</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 P. Pfreundschuh, T. Tuna, C. L. Gentil, et al.</div>
-<p>Voxel-wise height image representation을 도입해 기하적으로 희소한 환경에서 LIO robustness를 올린 논문입니다. 기존 voxel map은 평평한 공간에서 drift가 심했는데, bump image로 지형의 미세 구조를 보존하는 방식이 깔끔해요. 주간 내 radar SLAM (4D Radar Gaussian, Graph-theoretic 4D radar) 과 나란히 놓고 보면 "degraded sensor, degraded environment"에서의 SLAM robustness가 한 덩어리로 움직이고 있다는 걸 알 수 있어요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14545"><strong>CT-VIR: Continuous-Time Visual-Inertial-Ranging Fusion for Indoor Localization with Sparse Anchors</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 Y. Liu, L. Zhang</div>
-<p>UWB ranging을 VIO와 spline-based continuous-time fusion으로 묶는 접근이에요. Indoor with sparse anchors라는 setting이 실용적으로 중요한데, 보통 이런 hybrid 시스템은 discrete-time으로 붙이다 timing error 문제가 나거든요. Continuous-time으로 가면 sensor sync 이슈가 본질적으로 풀리는 게 장점입니다. 이번 주 SLAM 버킷 중 가장 실용지향적인 한 편 같아요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14857"><strong>Graph Theoretical Outlier Rejection for 4D Radar Registration in Feature-Poor Environments</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 G. Dorndorf, D. Adolfsson, M. Doostdar</div>
-<p>Open-pit mining 같은 feature-poor 환경에서 4D radar scan registration을 graph-based pairwise consistency로 푸는 논문입니다. 이런 환경은 LiDAR도 힘든데 radar는 노이즈가 더 심해서 outlier rejection이 승부처예요. Mining/construction 같은 niche 쪽에서 4D radar가 LiDAR의 대체재로 자리 잡는 신호로 봅니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14795"><strong>Keep It CALM: Toward Calibration-Free Kilometer-Level SLAM with Visual Geometry Foundation Models</strong></a> <span class="badge badge-ro">RO</span></div>
+<div class="paper-authors">👥 Tianjun Zhang, Fengyi Zhang, Tianchen Deng, Lin Zhang, Hesheng Wang</div>
+<p>VGFM(Visual Geometry Foundation Model)을 킬로미터 스케일 SLAM에 쓰려면 비선형 기하 왜곡 때문에 단순 Sim3 정합으로는 안 된다는 걸 정면으로 지적한 논문이에요. "보조 눈(assistant eye)"으로 스케일 모호성을 제거하고, epipolar 기반으로 내부 파라미터와 포즈 오류를 교정하고, 앵커 전파로 글로벌 일관성을 확보합니다. Foundation model 시대에 SLAM의 새로운 패러다임을 제시하는 논문이라 주목할 만합니다.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14868"><strong>4D Radar Gaussian Modeling and Scan Matching with RCS</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 F. Amodeo, L. Merino, F. Caballero</div>
-<p>이번엔 radar의 RCS(radar cross-section)라는 물리적 속성을 Gaussian modeling에 직접 통합해 scan matching을 올립니다. 위 논문과 짝으로 보면 <strong>"4D radar + Gaussian representation"</strong> 이 한 주 안에 두 편 올라왔다는 게 주목할 부분이에요. Radar SLAM이 Gaussian Splatting의 방법론을 끌어다 쓰는 흐름이 본격화되는 것 같습니다.</p>
+<div class="paper-authors">👥 Fernando Amodeo, Luis Merino, Fernando Caballero</div>
+<p>4D mmWave 레이더에서 보통 무시되는 RCS(Radar Cross Section) 정보를 Gaussian 모델에 물리적으로 통합한 논문입니다. 기존 3D Gaussian 모델링을 레이더로 확장하면서 RCS의 물리적 행동을 반영했는데, 이걸로 scan matching 성능이 올라갔다고 해요. 3DGS가 비전 센서를 넘어 레이더까지 확장되는 이번 주 트렌드의 한 사례입니다.</p>
 </div>
 
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15052"><strong>CAVERS: Multimodal SLAM Data from a Natural Karstic Cave with Ground Truth Motion Capture</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 G. Franchini, D. Rodríguez-Martínez, A. Martínez-Petersen, et al.</div>
-<p>자연 동굴에서 RGB-D/thermal/LiDAR + ground truth를 동기화한 dataset입니다. Extreme environment SLAM benchmark의 빈 칸을 메우는 논문이에요. 지난 주 maritime/underwater 쪽 데이터셋도 한 편 있었는데, 이번 주 cave까지 — extreme environment benchmark 생태계가 조용히 커지는 중입니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14353"><strong>RoSLAC: Robust Simultaneous Localization and Calibration of Multiple Magnetometers</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 Q. Lyu, Z. Wu, W. Wang, et al.</div>
-<p>GPS-denied 환경에서 multi-magnetometer 기반 localization을 alternating optimization으로 푸는 논문입니다. Magnetometer는 production에서 실제로 많이 쓰는데 calibration이 귀찮아서 연구는 적은 편인데, 이 "calibration과 localization을 동시에" 접근이 실용적으로 의미가 있어요. Indoor navigation의 underused sensor modality를 되살리는 관점이 눈에 띕니다.</p>
-</div>
-
-<h4 class="bucket">🤖 Robot Learning <span class="count">· 12편</span></h4>
+<!-- Robot Learning -->
+<h4 class="bucket">🤖 Robot Learning <span class="count">· 10편</span></h4>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14732"><strong>World-Value-Action Model: Implicit Planning for Vision-Language-Action Systems</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 R. Li, H. Zhang, J. Jin, et al.</div>
-<p>오늘의 VLA 논문 중 가장 주목해야 할 편입니다. <strong>Value function을 매개로 latent trajectory를 샘플링하는 implicit planning 계층</strong>을 VLA에 붙였어요. 지금까지 VLA들은 flat하게 action을 뱉었는데, 이건 중간에 "상상된 미래" 를 value로 평가하고 그 결과가 다시 action decoder를 guide하는 구조라 reasoning-like한 행동이 나옵니다. 오늘의 인사이트 1번에서 말한 "계층 VLA" 흐름의 중심 논문이에요.</p>
+<div class="paper-authors">👥 Runze Li, Hongyin Zhang, Junxi Jin, Qixin Zeng et al.</div>
+<p>오늘 나온 논문 중 제일 주목해야 할 것 같습니다. VLA 시스템에 implicit planning을 도입하는 WAV(World-Value-Action) 프레임워크인데, world model로 미래 상태를 예측하고, trajectory value function으로 장기 가치를 평가하고, latent space에서 높은 가치의 실현 가능한 trajectory에 확률 질량을 집중시킵니다. 이론적으로도 "action space에서 직접 계획하면 horizon이 길어질수록 feasible trajectory 확률이 지수적으로 떨어진다"는 걸 보여주는데, 이건 VLA 설계에 꽤 근본적인 함의가 있어요.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15281"><strong>R3D: Revisiting 3D Policy Learning</strong></a> <span class="badge badge-cvro">CV/RO</span></div>
-<div class="paper-authors">👥 Z. Hong, S. Wu, H. Cui, et al.</div>
-<p>3D policy learning이 왜 2D보다 training instability가 컸는지를 분석하고, transformer-based 3D perception + diffusion decoder 조합으로 SOTA를 찍은 논문입니다. <strong>"3D policy는 아직 갈 길이 있다"</strong> 를 다시 밀고 올라오는 편인데, 재밌는 건 이게 cs.CV와 cs.RO 양쪽에 걸쳐 올라왔다는 점이에요. 3D manipulation policy의 comeback 신호로 봅니다. 인사이트 1번의 "계층 분리" 흐름 중 3D-heavy 축입니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15215"><strong>A Hierarchical Spatiotemporal Action Tokenizer for In-Context Imitation Learning in Robotics</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 F. J. Fateh, A. S. Ali, M. Popattia, et al.</div>
-<p>Action space를 <strong>계층 vector-quantize</strong> 해서 in-context imitation learning에 쓰는 논문입니다. 위 두 편이랑 합치면 "계층 VLA" 삼각축이 완성되는데, 이쪽은 action representation 축을 끊었고, World-Value-Action은 planning, R3D는 perception을 끊었어요. 세 논문이 같은 날 다른 지점을 공격한 거라 오늘이 "계층 VLA day"인 셈입니다. In-context imitation에서 SOTA라는 주장이고요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15023"><strong>DockAnywhere: Data-Efficient Visuomotor Policy Learning for Mobile Manipulation via Novel Demonstration Generation</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 Z. Shan, Y. Zhou, G. Wu, et al.</div>
-<p>Mobile manipulation은 보통 viewpoint generalization이 안 되는 게 병목인데, 이 논문은 <strong>single demonstration을 lifting해 다양한 docking configuration으로 합성</strong>합니다. Novel demonstration generation이라는 표현이 키 포인트예요. 이번 주 "one demo → many synthetic demos" 계열(Flow with the Force Field 등)의 흐름과 맥을 같이해서, <strong>real-world data bottleneck을 synthesis로 돌파</strong>하는 쪽으로 가닥이 잡히는 듯합니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15013"><strong>DEX-Mouse: A Low-cost Portable and Universal Interface with Force Feedback for Data Collection of Dexterous Robotic Hands</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 J. Koh, H. Jung, N. Kim, et al.</div>
-<p>Calibration-free, $150 이하, force-feedback 포함 — 이 세 조건이 같이 성립한다는 게 재밌어요. Dexterous teleoperation 하드웨어가 "HATO/Dexterity류 고가 장비" 아니면 "부정확한 glove" 의 양극이었는데, 이 가운데 지대를 공략한 접근입니다. HRDexDB와 함께 보면, 이번 주는 <strong>dexterous data collection의 democratization</strong>이 주제인 셈이에요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14944"><strong>HRDexDB: A Large-Scale Dataset of Dexterous Human and Robotic Hand Grasps</strong></a> <span class="badge badge-cvro">CV/RO</span></div>
-<div class="paper-authors">👥 J. Lim, T. Ha, M. Choi, et al.</div>
-<p>1.4K sequence, 다중 뷰 영상 + tactile + kinematic — human/robot 양쪽을 같이 모은 dataset입니다. 이번 주 Hoi!(force-grounded cross-view) 와 병렬 선상에 있어요. Dexterous manipulation 분야는 <strong>"모델이 없어서"가 아니라 "데이터가 없어서"</strong> 막혀있었는데, 이번 주에 둘 다 나와서 이걸로 한동안 benchmarking 흐름이 돌 것 같습니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14125"><strong>HiVLA: A Visual-Grounded-Centric Hierarchical Embodied Manipulation System</strong></a> <span class="badge badge-cvro">CV/RO</span></div>
+<div class="paper-authors">👥 Tianshuo Yang, Guanyu Chen, Yutian Chen, Zhixuan Liang et al.</div>
+<p>End-to-end VLA를 좁은 control 데이터로 fine-tuning하면 VLM이 원래 갖고 있던 추론 능력이 망가진다는 문제를 정면으로 다룹니다. 해법은 VLM planner(태스크 분해 + visual grounding)와 flow-matching Diffusion Transformer action expert를 분리하는 건데, 이러면 VLM의 zero-shot reasoning을 보존하면서도 정밀한 모터 제어가 가능합니다. 특히 long-horizon skill composition과 cluttered scene에서 작은 물체 조작에서 기존 end-to-end 방식을 크게 앞섰다고 해요.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14834"><strong>Switch: Learning Agile Skills Switching for Humanoid Robots</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 Y. Lau, Q. Zhao, Y. Wang, et al.</div>
-<p>Humanoid에서 <strong>skill-to-skill 전환</strong>을 seamless하게 만드는 hierarchical multi-skill system입니다. 지난 주 Tree Learning(multi-skill continual), Touch Dreaming과 이어지는데, humanoid locomotion 쪽이 이제 "한 가지 스킬 잘 하기"에서 "여러 스킬 부드럽게 이어 붙이기"로 넘어가는 중이에요. 이번 분기 humanoid 논문들 다 비슷한 문제 정의를 들고 오니까 이 흐름 주목할 만합니다.</p>
+<div class="paper-authors">👥 Yuen-Fui Lau, Qihan Zhao, Yinhuai Wang, Runyi Yu et al.</div>
+<p>휴머노이드 로봇이 걷기, 뛰기 같은 다양한 스킬 사이를 매끄럽게 전환하는 시스템입니다. 재밌는 건 Skill Graph라는 개념인데, 모션 데이터의 kinematic 유사성을 기반으로 스킬 간 전환 가능성을 사전에 매핑하고, 온라인 그래프 탐색으로 최적 전환 경로를 찾습니다. 이번 주 cs.RO에서 whole-body control 논문이 여러 편 나왔는데, Switch는 그중에서도 가장 실용적인 접근이에요. 안전 문제(전환 중 넘어짐)를 정면으로 다루는 점도 좋습니다.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14344"><strong>CART: Context-Aware Terrain Adaptation using Temporal Sequence Selection for Legged Robots</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 K. Singh, Y. Kim, Y. Turkar, et al.</div>
-<p>ANYmal-C와 SPOT 양쪽에서 테스트한 legged locomotion 논문인데, proprioception + exteroception을 temporal sequence selection으로 엮는 게 특징입니다. Locomotion 쪽은 이미 성숙한 분야지만, "여러 터레인을 한 policy로" 라는 문제 설정에서 데이터 셀렉션이 병목이 되는 걸 정확히 찌른 느낌입니다. 실전 배치 관점에서 의미가 있어요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15281"><strong>R3D: Revisiting 3D Policy Learning</strong></a> <span class="badge badge-cvro">CV/RO</span></div>
+<div class="paper-authors">👥 Zhengdong Hong, Shenrui Wu, Haozhe Cui, Boyi Zhao et al.</div>
+<p>3D 정책 학습이 왜 지금까지 잘 안 됐는지를 체계적으로 진단한 논문이에요. 범인은 의외로 간단했는데, 3D data augmentation이 빠져있었고 Batch Normalization이 해로웠다고 합니다. 이걸 고치고 scalable transformer 3D 인코더 + diffusion 디코더를 결합하니 기존 3D baseline들을 크게 앞섰어요. 3D 정책 학습의 새로운 foundation을 제시한다는 점에서 임팩트가 클 것 같습니다.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14565"><strong>Model-Based Reinforcement Learning Exploits Passive Body Dynamics for High-Performance Biped Robot Locomotion</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 T. Kamimura, H. Washiyama, A. Sano</div>
-<p><strong>Passive mechanical element + model-based RL</strong> 조합입니다. 최근 몇 년 humanoid는 actuator-driven policy 학습이 주류였는데, 이 논문은 "passive dynamics를 써야 진짜 efficient하고 robust하다"는 예전 classical 주장을 MBRL 프레이밍으로 되살렸어요. 개인적으로 이 방향 좋다고 봅니다 — 에너지 효율과 agility를 동시에 요구하는 real-world deployment에서 passive dynamics는 결국 돌아올 수밖에 없어요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15215"><strong>HiST-AT: A Hierarchical Spatiotemporal Action Tokenizer for In-Context Imitation Learning</strong></a> <span class="badge badge-ro">RO</span></div>
+<div class="paper-authors">👥 Fawad Javed Fateh, Ali Shah Ali, Murad Popattia, Usman Nizamani et al.</div>
+<p>In-context imitation learning을 위한 계층적 시공간 action tokenizer입니다. 2단계 벡터 양자화로 action을 세분화된 서브클러스터 → 큰 클러스터로 계층적으로 토큰화하고, 공간 정보뿐 아니라 시간 정보(타임스탬프)까지 활용합니다. 시뮬레이션과 실제 로봇 모두에서 in-context imitation learning SOTA를 달성했다고 하는데, action tokenization이 점점 중요해지는 추세를 잘 보여주는 논문이에요.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14484"><strong>A Nonasymptotic Theory of Gain-Dependent Error Dynamics in Behavior Cloning</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 J. Seo</div>
-<p><strong>BC(behavior cloning) policy의 실패를 PD controller gain 관점에서 분석</strong>하는 이론 논문입니다. BC 실패의 원인이 "compounding error" 라는 건 다들 알지만 gain과의 관계를 nonasymptotic으로 다룬 건 처음 보는 프레이밍이에요. Imitation learning 이론 쪽의 희귀한 논문인데, 이게 되면 policy deploy할 때 "안전 gain 범위"를 계산할 수 있게 되니까 실무적 가치도 있습니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14944"><strong>HRDexDB: A Large-Scale Dataset of Dexterous Human and Robotic Hand Grasps</strong></a> <span class="badge badge-cvro">CV/RO</span></div>
+<div class="paper-authors">👥 Jongbin Lim, Taeyun Ha, Mingi Choi, Jisoo Kim et al.</div>
+<p>인간 손과 다양한 로봇 손의 dexterous grasping을 같은 100개 물체에 대해 멀티모달로 촬영한 대규모 데이터셋입니다. 1.4K 트라이얼에 성공/실패 모두 포함하고, 고해상도 촉각 신호, 동기화된 멀티뷰 비디오, egocentric 비디오까지 제공합니다. Cross-domain dexterous manipulation 연구의 기반이 될 벤치마크로, 같은 물체에 대한 인간-로봇 비교가 가능하다는 게 핵심 가치예요.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14733"><strong>Differentiable Object Pose Connectivity Metrics for Regrasp Sequence Optimization</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 L. Qin, W. Wan, K. Harada</div>
-<p>Regrasp planning을 differentiable pose connectivity metric + energy-based model로 푸는 접근입니다. Classical regrasp planning이 combinatorial하게 터지는 문제를 gradient flow로 완화하는 건데, manipulation의 long-horizon reasoning 쪽에서 꾸준히 나오는 방향이에요. VLA가 high-level policy를 맡으면 이런 low-level regrasp module이 orthogonal하게 필요할 수 있어 둘 다 살아남을 가능성이 큽니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15013"><strong>DEX-Mouse: A Low-cost Portable and Universal Interface with Force Feedback for Dexterous Robotic Hands</strong></a> <span class="badge badge-ro">RO</span></div>
+<div class="paper-authors">👥 Joonho Koh, Haechan Jung, Nayoung Kim, Wook Ko, Changjoo Nam</div>
+<p>150달러짜리 COTS 부품으로 만든 핸드헬드 텔레오퍼레이션 인터페이스입니다. 캘리브레이션 불필요, operator-agnostic, kinesthetic force feedback까지 지원하는데, 로봇 손을 operator 팔에 직접 부착하는 configuration에서 86.67% 태스크 완료율을 달성했어요. 하드웨어/소프트웨어 전부 오픈소스라서 활용도가 높을 것 같습니다. VLA 학습 데이터 수집의 민주화라고 할 수 있겠네요.</p>
+</div>
+
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15023"><strong>DockAnywhere: Data-Efficient Visuomotor Policy Learning for Mobile Manipulation</strong></a> <span class="badge badge-ro">RO</span></div>
+<div class="paper-authors">👥 Ziyu Shan, Yuheng Zhou, Gaoyuan Wu, Ziheng Ji et al.</div>
+<p>Mobile manipulation에서 docking point 변화에 따른 view generalization 문제를 다룹니다. 하나의 데모에서 base motion과 manipulation skill을 분리한 다음, 가능한 docking configuration을 샘플링해서 다양한 시점의 학습 데이터를 증강하는 방식이에요. 3D point cloud 기반으로 observation과 action의 시점 간 일관성을 보장하는 게 핵심입니다. 데이터 효율적인 mobile manipulation의 좋은 해법이에요.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15289"><strong>Abstract Sim2Real through Approximate Information States</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 Y. Deng, Y. Li, J. P. Hanna</div>
-<p>오늘 cs.RO에서 유일한 본격 sim2real 논문이에요. <strong>Coarse simulator → real world transfer</strong>를 state abstraction과 소량의 real data correction으로 하겠다는 접근입니다. 주간 sim2real이 6편밖에 없었던 걸 고려하면, 이 분야는 "데이터 효율적으로 transfer" 방향으로 조용히 심화 중입니다. 요란하진 않지만 실용적으로는 핵심이고요.</p>
+<div class="paper-authors">👥 Yunfu Deng, Yuhao Li, Josiah P. Hanna</div>
+<p>시뮬레이터가 실제 환경의 핵심 디테일을 빠뜨리는 "추상 sim2real" 문제를 형식화한 논문입니다. 핵심 아이디어는 state abstraction 이론을 활용해서, 추상 시뮬레이터의 dynamics를 실제 데이터로 보정하는 건데요. 이때 history를 고려한 grounding이 필요하다는 이론적 통찰이 중요합니다. 시뮬레이터의 충실도를 무한히 올리기보다 "적당히 추상적인 시뮬레이터 + 실세계 보정"이 더 실용적일 수 있다는 메시지가 좋아요.</p>
 </div>
-
-<h4 class="bucket">🚗 Autonomous Driving <span class="count">· 3편</span></h4>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15308"><strong>RAD-2: Scaling Reinforcement Learning in a Generator-Discriminator Framework</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Hao Gao, Shaoyu Chen, et al.</div>
-<p>End-to-end driving planner에 <strong>diffusion-based multimodal future + RL refinement</strong>을 합친 구조입니다. Generator-discriminator 프레이밍이 GAN 냄새를 풍기지만, 실제로는 closed-loop 평가에서 계획 품질을 올리는 용도예요. 지난 주 FeaXDrive(feasibility-aware trajectory-centric diffusion)와 나란히 놓고 보면, <strong>"diffusion planner에 RL refinement를 얹는다"</strong>가 autonomous driving의 새 정석으로 자리잡는 중입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14484"><strong>A Nonasymptotic Theory of Gain-Dependent Error Dynamics in Behavior Cloning</strong></a> <span class="badge badge-ro">RO</span></div>
+<div class="paper-authors">👥 Junghoon Seo</div>
+<p>Behavior cloning에서 PD 컨트롤러 gain이 closed-loop 성능에 미치는 영향에 대한 이론적 분석입니다. 결론이 깔끔해요: compliant-overdamped 세팅이 가장 tight한 failure bound를 주고, stiff-underdamped가 가장 loose합니다. "training loss만으로는 closed-loop 성능을 예측할 수 없다"는 것도 보여주는데, 이건 BC 실험을 설계할 때 꽤 실용적인 가이드라인이 됩니다.</p>
 </div>
+
+<!-- Autonomous Driving -->
+<h4 class="bucket">🚗 Autonomous Driving <span class="count">· 2편</span></h4>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14454"><strong>CooperDrive: Enhancing Driving Decisions Through Cooperative Perception</strong></a> <span class="badge badge-cvro">CV/RO</span></div>
-<div class="paper-authors">👥 D. Qu, Q. Chen, T. Shimizu, et al.</div>
-<p>Occlusion-heavy 상황에서 object-level cooperative perception으로 결정 품질을 올리는 논문이에요. V2X 계열이 이제 raw sharing에서 <strong>"lightweight object-level sharing"</strong>으로 내려오는 중이라 이 방향이 realistic합니다. 다만 이번 주 cooperative perception 논문이 이거 하나라서 단일 편 해석은 조심해야 해요 — 일주일만 더 지켜보면 흐름인지 산발적인지 갈릴 겁니다.</p>
+<div class="paper-authors">👥 Deyuan Qu, Qi Chen, Takayuki Shimizu, Onur Altintas</div>
+<p>Cooperative perception으로 자율주행 의사결정을 개선하는 프레임워크입니다. 재밌는 건 각 차량이 자체 perception/planning 스택을 그대로 유지하면서, 가벼운 object-level 공유만으로 연동된다는 점이에요. BEV feature를 재활용해서 포즈를 추정하고, 확장된 object set으로 충돌을 미리 예측합니다. 실세계 closed-loop 테스트에서 90kbps 대역폭, 89ms 지연으로 작동하는 걸 보여줬는데, 실용성 면에서 눈에 띕니다.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15291"><strong>AD4AD: Benchmarking Visual Anomaly Detection Models for Safer Autonomous Driving</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 F. Genilotti, A. Stropeni, et al.</div>
-<p>AnoVox dataset에서 8개 anomaly detection 방법을 autonomous driving safety 관점으로 벤치마킹합니다. 지난 주 HazardArena(VLA safety)와 나란히 놓고 보면 <strong>"도메인별 safety benchmark"</strong>가 조용히 표준화되는 중이라는 걸 알 수 있어요. Autonomous driving 쪽에서 이런 안전 지향 벤치마크가 꾸준히 나오는 건 regulatory pressure의 반영인 것 같습니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15308"><strong>RAD-2: Scaling Reinforcement Learning in a Generator-Discriminator Framework</strong></a> <span class="badge badge-cv">CV</span></div>
+<div class="paper-authors">👥 Hao Gao, Shaoyu Chen, Yifan Zhu, Yuehao Song et al.</div>
+<p>Diffusion 기반 trajectory generator + RL-optimized discriminator로 자율주행 planning을 하는 프레임워크입니다. Generator가 다양한 trajectory 후보를 만들고, discriminator가 장기 주행 품질로 re-ranking하는 구조예요. BEV-Warp이라는 효율적 시뮬레이션 환경도 제시했고, 강력한 diffusion planner 대비 충돌률 56% 감소를 달성했습니다. Diffusion + RL의 결합이 AD planning에서 꽤 효과적이라는 걸 보여주는 논문이에요.</p>
 </div>
 
-<h4 class="bucket">🧠 Foundation Models <span class="count">· 11편</span></h4>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15280"><strong>Why Do Vision Language Models Struggle To Recognize Human Emotions?</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 M. Agarwal, S. A. Tsaftaris, et al.</div>
-<p>오늘 VLM 진단 논문 네 편 중 가장 응집된 한 편입니다. 감정 인식 데이터셋의 <strong>long-tailed distribution + temporal constraint</strong>가 VLM을 걸고넘어진다는 분석이에요. 예전엔 "감정은 어려운 거"라고 넘겼는데, 이 논문은 왜 어려운지를 데이터 측과 모델 측 양쪽에서 진단합니다. 주간 "VLM의 내부 병리" 흐름의 대표작으로 봐도 됩니다.</p>
-</div>
+<!-- Foundation Models -->
+<h4 class="bucket">🧠 Foundation Models <span class="count">· 5편</span></h4>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14520"><strong>Chain of Modality: From Static Fusion to Dynamic Orchestration in Omni-MLLMs</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Z. Luo, N. Liu, J. Han</div>
-<p>Omni-modal LLM에서 modality를 어떤 순서로 쓸지 dynamic하게 orchestrate하는 프레이밍이에요. 지난 주 "static fusion → adaptive fusion" 흐름이 몇 편 있었는데 이번엔 그걸 chain-of-thought 형태로 펴낸 거라 해석하면 됩니다. 개인적으로 Dynamic orchestration이 과연 static fusion 대비 비용 대비 이점이 있을지는 의문이지만 실험 결과는 괜찮아 보입니다.</p>
+<div class="paper-authors">👥 Ziyang Luo, Nian Liu, Junwei Han</div>
+<p>멀티모달 fusion을 "수동적 concatenation"에서 "동적 오케스트레이션"으로 전환하자는 제안입니다. Direct-Decide(바로 결정)와 Reason-Decide(추론 후 결정) 두 경로를 동적으로 선택하는 Chain of Modality 프레임워크를 제시하는데, 토큰 사용량을 50~90% 줄이면서도 정확도를 유지합니다. 이번 주 VLM 효율화 트렌드의 대표적 논문이에요.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14568"><strong>Learning Adaptive Reasoning Paths for Efficient Visual Reasoning</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Y. Huang, T. Zhu, M. Chen</div>
-<p>Visual reasoning model의 <strong>reasoning chain 길이를 adaptive하게</strong> 조절합니다. 짧게 끝낼 수 있는 문제에 계속 chain을 길게 끌고 가면 비용만 드는데, 그걸 학습해서 자르는 거예요. VLM efficiency 쪽에서 token pruning과 orthogonal한 방향이라 주목할 만합니다. 실전 배치 관점에서 의미가 큽니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14967"><strong>UniDoc-RL: Coarse-to-Fine Visual RAG with Hierarchical Actions and Dense Rewards</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 J. Wang, S. Tan, Z. Sun, et al.</div>
-<p>Document QA를 <strong>sequential decision-making + dense reward RL</strong>로 formulate한 논문입니다. Retrieve → crop → answer로 coarse-to-fine하게 진행하고요. Visual RAG가 이제 "retrieval → generation" pipeline에서 "RL-tuned multi-step agent"로 넘어가는 흐름이 분명해 보입니다. OpenMobile, UniDoc-RL 같은 논문들이 같은 결이에요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14951"><strong>RaTA-Tool: Retrieval-based Tool Selection with Multimodal Large Language Models</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 G. Mattioli, E. Turri, S. Sarto, et al.</div>
-<p>Open-world multimodal tool selection을 retrieval-based로 formulate해서 <strong>새 tool을 retraining 없이 추가</strong>할 수 있게 한 게 핵심입니다. MLLM agent가 practical하게 쓰이려면 tool catalog 확장성이 필수여서 이 방향은 당연한 진화 같아요. 이 논문 혼자 보면 incremental 같지만 OpenMobile, MM-WebAgent 같은 agent 논문들과 합치면 agent infra가 정돈되는 단계인 셈입니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15188"><strong>VisPCO: Visual Token Pruning Configuration Optimization via Budget-Aware Pareto-Frontier Learning for Vision-Language Models</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 H. Ji, Y. Sun, Y. Jin, et al.</div>
-<p>Token pruning을 <strong>Pareto configuration optimization</strong>으로 다시 formulate한 논문입니다. 기존 pruning들은 고정 budget이었는데, 이건 여러 VLM 아키텍처와 pruning 방법에 generalize되는 framework예요. VLM efficiency 연구가 이제 "method 하나"에서 "method family를 optimize하는 meta-level"로 올라가는 느낌입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14568"><strong>AVR: Learning Adaptive Reasoning Paths for Efficient Visual Reasoning</strong></a> <span class="badge badge-cv">CV</span></div>
+<div class="paper-authors">👥 Yixu Huang, Tinghui Zhu, Muhao Chen</div>
+<p>VLM이 질문 난이도에 따라 Full Format, Perception-Only, Direct Answer 세 가지 응답 형식을 동적으로 선택하게 하는 프레임워크입니다. 쉬운 질문에는 바로 답하고 어려운 질문에만 전체 추론을 수행하니까, 토큰 사용이 50~90% 줄어요. Chain of Modality와 비슷한 시기에 나온 건 우연이 아닌 것 같은데, VLM 추론 효율화가 커뮤니티의 핵심 관심사가 된 걸 보여줍니다.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14629"><strong>Switch-KD: Visual-Switch Knowledge Distillation for Vision-Language Models</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 H. Sun, X. Wang, N. Mao, et al.</div>
-<p>VLM knowledge distillation에 <strong>visual-switch 메커니즘</strong>을 도입합니다. 어떤 부분을 distill할지 시각적 조건에 따라 switching하는 건데, 기존 KD가 균일하게 하던 걸 조건부로 바꾼 거예요. Incremental에 가깝긴 하지만, VLM compression 쪽이 꾸준히 나오는 중이라 생태계 한 축으로는 유의미합니다.</p>
+<div class="paper-authors">👥 Haoyi Sun, Xiaoxiao Wang, Ning Mao, Qian Wang et al.</div>
+<p>VLM 지식 증류를 위한 Switch-KD 프레임워크입니다. 공유 text-probability space에서 vision-language 지식 전이를 통합하는 접근인데, TinyLLaVA가 3B teacher로부터 증류 받아 8개 벤치마크에서 평균 3.6점 향상을 보였어요. 작은 VLM을 만들 때 증류가 얼마나 효과적인지 보여주는 실용적인 논문입니다.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14692"><strong>Chain-of-Glimpse: Search-Guided Progressive Object-Grounded Reasoning for Video Understanding</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Z. Wu, Q. Zha, T. Wang, et al.</div>
-<p>Video understanding에서 <strong>object-level grounding을 progressive하게</strong> 쌓아가는 reasoning 패턴 제안입니다. Chain-of-thought의 비디오 변형인데, glimpse 단위로 끊어 보는 게 특징이에요. 비디오 VLM 분야에서 "모든 프레임을 읽지 말고 필요한 것만 보게 하자"는 흐름이 있어서 그 축에 해당합니다.</p>
+<div class="paper-authors">👥 Zhixuan Wu, Quanxing Zha, Teng Wang, Genbao Xu et al.</div>
+<p>비디오 이해를 위한 탐색 기반 progressive reasoning 프레임워크입니다. 각 추론 단계를 시각적 증거 영역에 anchoring하는 게 핵심인데, NExTQA 같은 비디오 QA 벤치마크에서 일관된 성능 향상을 보였어요. 특히 out-of-domain 벤치마크에서도 robustness가 좋다는 게 인상적입니다. VLM의 "환각"을 줄이는 방향으로도 읽을 수 있는 논문이에요.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14363"><strong>The Cost of Language: Centroid Erasure Exposes and Exploits Modal Competition in Multimodal Language Models</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 A. Paruchuri, I. Chatterjee, et al.</div>
-<p>제목대로 <strong>"text representation이 vision을 overshadow"</strong>하는 현상을 centroid erasure 기법으로 노출시키는 진단 논문입니다. 이게 오늘의 인사이트 2번의 핵심 증거 논문이에요. Modality competition이 실험적으로 이렇게 깨끗하게 보이는 결과는 이번 주 들어 처음 봅니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15280"><strong>Why Do Vision Language Models Struggle To Recognize Human Emotions?</strong></a> <span class="badge badge-cv">CV</span></div>
+<div class="paper-authors">👥 Madhav Agarwal, Sotirios A. Tsaftaris, Laura Sevilla-Lara, Steven McDonagh</div>
+<p>VLM이 감정 인식에서 왜 실패하는지 분석한 논문입니다. 두 가지 원인을 지적하는데, 첫째 감정 데이터의 long-tail 분포가 VLM 사전학습으로 증폭되고, 둘째 VLM이 미세표정 같은 시간적 역학을 처리하지 못합니다. 해법으로 중간 프레임을 텍스트 요약으로 변환하는 multi-stage context enrichment를 제안했어요. VLM의 구조적 한계를 구체적으로 진단한다는 점에서 값진 연구입니다.</p>
 </div>
 
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14888"><strong>Reasoning Dynamics and the Limits of Monitoring Modality Reliance in Vision-Language Models</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 D. Sánchez Villegas, S. Lewis-Lim, et al.</div>
-<p>VLM이 초기 답변에 대해 <strong>"answer inertia"</strong> — 이후 reasoning이 바뀌어도 답을 안 바꾸는 현상 — 을 갖는다는 발견이 핵심입니다. Modality reliance monitoring의 한계를 지적하는 건데, 추천 연구주제 3번의 출발점이 되는 논문이에요. 실전에서 "VLM reasoning trace가 믿을 만한가"에 대한 회의가 점점 커지는 신호로 봅니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14799"><strong>Knowing When Not to Answer: Evaluating Abstention in Multimodal Reasoning Systems</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 N. Madhusudhan, V. Yadav, et al.</div>
-<p>MM-AQA benchmark를 제안해 <strong>multimodal uncertainty 하에서 abstention</strong> 능력을 측정합니다. VLM들이 principled abstention에 실패한다는 게 주요 결과고요. 위 세 편의 진단 논문들과 이 평가 논문이 합쳐져서 오늘이 "VLM 진단 day"인 셈입니다. 인사이트 2번의 가장 명시적 근거예요.</p>
-</div>
-
-<h4 class="bucket">🎨 Generation <span class="count">· 15편</span></h4>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15299"><strong>AnimationBench: Are Video Models Good at Character-Centric Animation?</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 L. Wu, P. Fang, et al.</div>
-<p><strong>Animation principles 기반 benchmark</strong>인데, 이게 왜 중요하냐면 지금까지 video generation 평가는 pixel-level PSNR나 FVD였거든요. Character-centric animation 품질을 "principles" 관점에서 평가한다는 발상이 새롭고, closed/open-set 둘 다 있어서 실용적입니다. Industry 쪽에서 video gen을 실제 서비스에 쓰려면 이런 평가 프로토콜이 먼저 굳어야 해요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15310"><strong>TokenLight: Precise Lighting Control in Images using Attribute Tokens</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 S. Chaturvedi, Y. Hold-Geoffroy, et al.</div>
-<p><strong>Attribute token 단위로 lighting attribute를 continuous하게 제어</strong>하는 relighting 모델입니다. 모델이 light-geometry-material 상호작용을 암묵적으로 학습해서 적용 가능해져요. 이번 주 OmniLight(all lighting condition)와 짝으로 보면, lighting control이 hot한 미니토픽으로 떠오르는 중이에요. 포토그래피/AR 쪽 응용이 명확합니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15170"><strong>OmniLight: One Model to Rule All Lighting Conditions</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Y. Oh, J. Park, J. Kwon, et al.</div>
-<p>Low-light/high-light/mixed 등 다양한 illumination을 한 모델로 처리하는 wavelet domain MoE 구조입니다. TokenLight가 "제어"에 초점이라면 이건 "복원"에 초점이에요. 둘 다 같은 날 나왔다는 건 이 분야가 생태계로 움직이기 시작했다는 뜻이고, 내년 상반기에 lighting 관련 downstream task들이 많이 나올 것 같습니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15311"><strong>LeapAlign: Post-Training Flow Matching Models at Any Generation Step by Building Two-Step Trajectories</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Z. Liang, T. Yang, et al.</div>
-<p>Flow matching 모델을 <strong>human preference로 post-training할 때 long trajectory가 gradient propagation을 방해</strong>하는 문제를 two-step으로 축약해 해결합니다. RLHF/DPO를 flow matching에 맞게 다시 짜는 거라 실용적 가치가 커요. Diffusion 쪽에서 DPO/preference alignment가 이제 flow matching 세대로 넘어가는 transition 신호입니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14910"><strong>Reward-Aware Trajectory Shaping for Few-step Visual Generation</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 R. Li, B. Li, Y. Liang, et al.</div>
-<p>RATS framework — <strong>student generator가 teacher를 surpass</strong>할 수 있게 하는 reward-aware distillation입니다. Few-step gen이 원래 teacher를 따라 잡는 게 목표인데 "뛰어넘는다"는 주장까지 나온 거라 눈에 띄어요. LeapAlign이랑 나란히 보면 few-step 생성 쪽은 이제 "quality를 유지하며 빠르게"를 넘어서 "적은 step으로 더 잘" 단계로 들어서는 중입니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14556"><strong>Controllable Video Object Insertion via Multiview Priors</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 X. Qi, P. Cong, Y. Yao, et al.</div>
-<p><strong>Multi-view object prior</strong>로 비디오에 새 객체를 일관되게 삽입하는 프레임워크입니다. Appearance consistency가 기존 video editing 약점이었는데, multi-view prior로 접근한 게 깔끔해요. VFX 쪽 응용이 바로 보여서 산업 임팩트가 있을 것 같아요.</p>
-</div>
+<!-- Generation -->
+<h4 class="bucket">🎨 Generation <span class="count">· 4편</span></h4>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14560"><strong>DVFace: Spatio-Temporal Dual-Prior Diffusion for Video Face Restoration</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Z. Chen, B. Chai, R. Gao, et al.</div>
-<p>Video face restoration을 <strong>one-step diffusion + spatio-temporal dual prior</strong>로 푸는 논문입니다. 얼굴 복원이 학계에서 계속 나오는 소재인데, one-step으로 떨어뜨린 게 실시간 영상 처리 쪽에 의미가 있어요. 지난 주 Q-MambaIR(quantized SSM restoration) 같은 efficiency 계열과 같은 축으로 움직이고 있어요.</p>
+<div class="paper-authors">👥 Zheng Chen, Bowen Chai, Rongjun Gao, Mingtao Nie et al.</div>
+<p>비디오 얼굴 복원을 위한 one-step diffusion 프레임워크입니다. 공간적·시간적 dual-codebook에서 상호보완적인 facial prior를 추출하고 비대칭 fusion으로 합치는 구조예요. One-step이라서 속도도 빠르면서 복원 품질이 기존 multi-step 방법을 앞서는데, 시간 일관성까지 잡은 게 인상적입니다.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14580"><strong>TurboTalk: Progressive Distillation for One-Step Audio-Driven Talking Avatar Generation</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 X. Liu, F. Gao, X. Zhang, et al.</div>
-<p>기존 talking head가 multi-step denoising이라 느렸는데, <strong>progressive distillation으로 one-step</strong>까지 압축합니다. TurboTalk라는 이름에서 의도가 노골적이에요 — 실시간 talking head를 만들겠다는. 주간 내 audio-driven video 쪽에서 efficiency 논문이 하나 더 나온 것(JoyVASA 리플레이스먼트)과 합치면 실시간화가 서서히 현실이 되는 중입니다.</p>
+<div class="paper-authors">👥 Xiangyu Liu, Feng Gao, Xiaomei Zhang, Yong Zhang et al.</div>
+<p>Multi-step diffusion을 2단계 progressive distillation으로 single-step generator로 압축하는 논문입니다. 결과가 놀라운데, 120배 추론 속도 향상을 달성하면서 품질을 유지합니다. 이번 주 diffusion 효율화 연구가 여러 편 나왔는데, 그중 가장 극적인 속도 개선이에요. Diffusion이 실시간 응용으로 갈 수 있다는 걸 보여주는 사례입니다.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14648"><strong>Seen-to-Scene: Keep the Seen, Generate the Unseen for Video Outpainting</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 I. Jeon, M. Lee, S. Lee, et al.</div>
-<p>Video outpainting — 프레임 경계 밖을 확장하는 task에서 <strong>"본 것은 유지, 보지 못한 것만 생성"</strong> 원칙을 명시적으로 분리합니다. 당연해 보이지만 실제로는 기존 video editing들이 본 부분까지 slight하게 regenerate해서 flicker가 생겼거든요. 깔끔한 문제 분할이에요.</p>
+<div class="paper-authors">👥 Inseok Jeon, Minhyeok Lee, Seunghoon Lee, Minseok Kang et al.</div>
+<p>비디오 outpainting에서 propagation(기존 프레임 확장)과 generation(새 영역 생성) 패러다임을 통합한 논문입니다. Flow 기반 propagation으로 알려진 영역을 빠르게 채우고, reference-guided latent propagation으로 모르는 영역을 생성하는 이중 구조예요. 시간적 일관성이 좋으면서도 추론이 효율적이라는 게 장점입니다.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15003"><strong>Flow of Truth: Proactive Temporal Forensics for Image-to-Video Generation</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 Y. Chen, Z. Ma, H. Fang, et al.</div>
-<p>I2V generation에 <strong>learnable template를 proactive하게 심어</strong> 나중에 forensic이 가능하게 하는 프레임워크입니다. Deepfake detection 쪽에서 passive detection의 한계가 보이니까 proactive watermarking 계열로 넘어가는 중인데, I2V-specific하게 나온 건 이게 거의 처음이에요. Regulatory 관점에서 볼 만합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14556"><strong>Controllable Video Object Insertion via Multiview Priors</strong></a> <span class="badge badge-cv">CV</span></div>
+<div class="paper-authors">👥 Xia Qi, Peishan Cong, Yichen Yao, Ziyi Wang et al.</div>
+<p>비디오에 새 객체를 삽입하는 작업에서 multi-view object prior를 활용하는 방법입니다. Dual-path view-consistent conditioning과 quality-aware weighting으로 객체 identity를 안정적으로 유지하면서 비디오에 자연스럽게 삽입하는데, Integration-Aware Consistency Module이 핵심입니다. 비디오 편집 실용화에 한 발 더 다가간 느낌이에요.</p>
+</div>
+
+<!-- Efficiency/Systems -->
+<h4 class="bucket">⚡ Efficiency/Systems <span class="count">· 2편</span></h4>
+
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14563"><strong>SEPatch3D: Revisiting Token Compression for Accelerating ViT-based Sparse Multi-View 3D Object Detectors</strong></a> <span class="badge badge-cv">CV</span></div>
+<div class="paper-authors">👥 Mingqian Ji, Shanshan Zhang, Jian Yang</div>
+<p>ViT 기반 3D 물체 검출기에서 패치 크기를 동적으로 조절하면서 중요한 semantic 정보를 보존하는 SEPatch3D 프레임워크입니다. StreamPETR baseline 대비 57% 빠른 추론을 달성하면서 검출 정확도는 유지했어요. 3D 검출에서 토큰 압축이 얼마나 효과적일 수 있는지 보여주는 깔끔한 결과입니다.</p>
 </div>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15027"><strong>Quality-Aware Calibration for AI-Generated Image Detection in the Wild</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 F. Guillaro, V. De Rosa, D. Cozzolino, et al.</div>
-<p><strong>Near-duplicate들을 joint하게</strong> 처리해 AI-generated image detection을 in-the-wild로 끌고 나오는 논문입니다. "바이럴하면 여러 변형이 동시에 돌아다닌다"는 현실을 detector 설계에 반영한 건데, 이 프레이밍이 실전적이에요. Deepfake detection 쪽 논문이 이번 주 유난히 많았는데 그 중 가장 practical합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15188"><strong>VisPCO: Visual Token Pruning Configuration Optimization via Budget-Aware Pareto-Frontier Learning</strong></a> <span class="badge badge-cv">CV</span></div>
+<div class="paper-authors">👥 Huawei Ji, Yuanhao Sun, Yuan Jin, Cheng Deng et al.</div>
+<p>VLM에서 visual token pruning 설정을 자동으로 최적화하는 프레임워크입니다. 수작업 pruning 대신 Pareto configuration optimization 문제로 정식화하고, continuous relaxation + Augmented Lagrangian으로 gradient 기반 탐색을 수행합니다. 8개 벤치마크에서 exhaustive grid search와 비슷한 결과를 자동으로 달성했는데, "multi-step progressive pruning이 VLM의 계층적 압축 구조를 잡아낸다"는 발견이 흥미롭습니다.</p>
 </div>
 
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14570"><strong>Deepfake Detection Generalization with Diffusion Noise</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 H. Qi, W. Hou, H. Fan, J. Xiao</div>
-<p>Diffusion 기반 synthesis로 detector를 generalize하는 접근입니다. Adversarial한 synthesis로 augment하는 게 훈련에 도움이 된다는 결과인데, detector-generator arms race에서 detector 쪽의 새 탄약 같은 논문이에요.</p>
-</div>
+<!-- Embodied AI -->
+<h4 class="bucket">🏃 Embodied AI <span class="count">· 3편</span></h4>
 
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14591"><strong>Prompt-Guided Image Editing with Masked Logit Nudging in Visual Autoregressive Models</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 A. El-Ghoussani, M. Hölle, et al.</div>
-<p>Visual autoregressive model을 <strong>masked logit nudging</strong>으로 prompt-guided editing에 쓰는 논문입니다. Diffusion 주도 이미지 편집 영역에 VAR(visual autoregressive)이 슬금슬금 들어오는 중인데, 이건 VAR의 inference-time editing을 가능하게 한다는 점에서 의미 있어요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14953"><strong>Prompt-to-Gesture: Measuring the Capabilities of Image-to-Video Deictic Gesture Generation</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 H. Ali, D. Jirak, L. Müller, et al.</div>
-<p>Gesture dataset은 항상 부족해서 synthetic generation으로 채우려는 시도인데, <strong>"video gen 모델이 실제로 deictic gesture를 만들 수 있는가"</strong>를 측정해본 논문이에요. 결과가 deterministic하게 긍정적이진 않은 걸로 보입니다. 그런데 이런 "negative but honest" 평가가 다음 세대 video gen 설계 목표를 만들기 때문에 중요해요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15171"><strong>An Analysis of Regularization and Fokker-Planck Residuals in Diffusion Models for Image Generation</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 O. Niemann, G. Martínez Muñoz, A. Suárez Gonzalez</div>
-<p>Diffusion의 <strong>Fokker-Planck residual 기반 regularization</strong>이 훨씬 낮은 계산 비용으로 같은 효과를 낸다는 분석 논문입니다. 실용적이기보단 이론적인 편인데, 현재 diffusion regularization들이 overkill일 수 있다는 암시라 흥미롭습니다.</p>
-</div>
-
-<h4 class="bucket">⚡ Efficiency/Systems <span class="count">· 2편 (사실상 분산됨)</span></h4>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14724"><strong>HAMSA: Scanning-Free Vision State Space Models via SpectralPulseNet</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 B. N. Patro, V. S. Agneeswaran</div>
-<p>Mamba/VMamba 계열 vision SSM의 <strong>complex scanning strategy를 spectral domain 처리로 대체</strong>하는 논문입니다. Scanning이 사실 비전에는 부자연스러운 inductive bias였어서, 이걸 제거하는 방향은 옳은 것 같아요. Vision SSM 생태계가 여전히 돌아가고 있다는 신호고요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14563"><strong>Revisiting Token Compression for Accelerating ViT-based Sparse Multi-View 3D Object Detectors</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 M. Ji, S. Zhang, J. Yang</div>
-<p>Multi-view 3D object detector의 latency 병목을 <strong>token compression</strong>으로 돌파합니다. Autonomous driving perception 쪽에 바로 꽂히는 기술인데, token pruning이 이제 단독 VLM 이슈가 아니라 <strong>"모든 transformer 기반 perception stack의 공통 최적화 대상"</strong>이 됐음을 보여주는 예입니다.</p>
-</div>
-
-<h4 class="bucket">🏃 Embodied AI <span class="count">· 4편</span></h4>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14399"><strong>SpaceMind: A Modular and Self-Evolving Embodied Vision-Language Agent Framework for Autonomous On-orbit Servicing</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 A. Wu, H. Han, X. Luo, et al.</div>
-<p>우주 on-orbit servicing을 <strong>modular + self-evolving VLA agent</strong>로 푸는 야심찬 프레이밍입니다. Modality랑 skill을 self-evolve하는 설계가 새로운데, 이런 <strong>high-stakes + zero-human-in-the-loop</strong> 설정에서 VLA가 얼마나 동작할지가 관건이에요. Space robotics는 data가 거의 없어서 simulation-heavy가 될 텐데, 이 경계지대가 향후 몇 년 연구 주제가 될 수 있어 보입니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15093"><strong>OpenMobile: Building Open Mobile Agents with Task and Trajectory Synthesis</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 K. Cheng, Z. Li, et al.</div>
-<p>Mobile agent를 <strong>task + trajectory synthesis</strong>로 open-source 개발하는 프레임워크입니다. 이번 주 MM-WebAgent와 함께 보면 agent 생태계가 이제 "open-source 재현"의 단계로 들어가고 있어요. 대형 폐쇄 모델 대비 결과가 경쟁력이 있다는 게 흥미로운 부분입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14399"><strong>SpaceMind: A Modular and Self-Evolving Embodied VLM Agent for Autonomous On-orbit Servicing</strong></a> <span class="badge badge-ro">RO</span></div>
+<div class="paper-authors">👥 Aodi Wu, Haodong Han, Xubo Luo, Ruisuo Wang et al.</div>
+<p>우주 궤도 서비스를 위한 embodied VLM 에이전트 프레임워크입니다. 스킬 모듈, MCP 도구, 추론 모드를 독립적으로 확장 가능한 3차원 구조로 분해하고, Skill Self-Evolution 메커니즘으로 운영 경험을 fine-tuning 없이 스킬 파일에 축적합니다. 192회 closed-loop 실험에서 nominal 조건에서 90~100% 성공률을 보였고, 실세계 로봇에 코드 수정 없이 전이도 성공했어요. 도메인은 특수하지만 self-evolving agent 아키텍처 자체는 일반적으로 적용 가능할 것 같습니다.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14902"><strong>ADAPT: Benchmarking Commonsense Planning under Unspecified Affordance Constraints</strong></a> <span class="badge badge-cvro">CV/RO</span></div>
-<div class="paper-authors">👥 P. Chen, Y. Liang, J. Yeh, et al.</div>
-<p>Embodied agent의 <strong>affordance reasoning 능력을 dynamic하게 측정</strong>하는 benchmark입니다. "object가 여러 방식으로 쓰일 수 있다"는 걸 VLA가 추론할 수 있는가를 구조적으로 물어보는데, 이게 실제 로봇 deploy에서 핵심 실패 모드 중 하나라 valuable해요. HazardArena랑 세트로 자리 잡을 가능성이 있습니다.</p>
+<div class="paper-authors">👥 Pei-An Chen, Yong-Ching Liang, Jia-Fong Yeh, Hung-Ting Su et al.</div>
+<p>Embodied agent가 명시되지 않은 affordance 제약 아래서 상식적 계획을 세울 수 있는지 평가하는 DynAfford 벤치마크와, 기존 planner에 plug-and-play로 affordance reasoning을 추가하는 ADAPT 모듈을 제시합니다. 재밌는 건 LoRA fine-tuned VLM이 GPT-4o보다 affordance 추론에서 더 나았다는 점인데, task-aligned grounding의 중요성을 보여줘요. Embodied AI에서 "instruction을 그냥 따르기 vs. affordance를 먼저 확인하기"의 차이를 잘 보여주는 논문입니다.</p>
 </div>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14965"><strong>POMDP-based Object Search with Growing State Space and Hybrid Action Domain</strong></a> <span class="badge badge-ro">RO</span></div>
-<div class="paper-authors">👥 Y. Chen, H. Wang, S. Huang, et al.</div>
-<p><strong>POMDP + neural process filtering + k-center clustering</strong>이라는 고전/현대 조합으로 indoor object search를 푸는 논문입니다. ObjectNav 계열 접근들이 대부분 VLM-heavy로 갔는데, 이 논문은 classical planning pipeline을 모던 component로 재조립한 느낌이에요. "VLM 없이도 ObjectNav이 된다"는 카운터 주장으로 볼 수도 있고요.</p>
+<div class="paper-authors">👥 Yongbo Chen, Hesheng Wang, Shoudong Huang, Hanna Kurniawati</div>
+<p>복잡한 실내 환경에서 목표 물체를 효율적으로 찾는 문제를 growing state space + hybrid action space의 고차원 POMDP로 정식화한 논문입니다. MCTS 기반 온라인 솔버에 neural process 필터링과 k-center clustering을 결합했는데, 특히 LLM 기반 방법보다 같은 계산 제약에서 더 빠르고 안정적으로 물체를 찾는 게 인상적이에요. POMDP 기반 접근이 LLM 대비 여전히 경쟁력 있다는 걸 보여줍니다.</p>
 </div>
 
-<h4 class="bucket">🛡️ Safety/Alignment <span class="count">· 4편</span></h4>
+<!-- Safety/Alignment -->
+<h4 class="bucket">🛡️ Safety/Alignment <span class="count">· 1편</span></h4>
 
 <div class="paper">
 <div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15221"><strong>Vision-Based Safe Human-Robot Collaboration with Uncertainty Guarantees</strong></a> <span class="badge badge-cvro">CV/RO</span></div>
-<div class="paper-authors">👥 J. Thumm, M. Frei, T. Ni, et al.</div>
-<p>Pose estimation + motion prediction에 <strong>conformal prediction guarantees</strong>를 붙여 HRC의 안전성을 보장하는 프레임워크입니다. VLM safety가 평가(HazardArena) 쪽으로 갔다면 이건 고전적 safety margin 쪽에서 올라온 거예요. 실제 공장 배치할 때는 conformal 같은 formal guarantee가 결국 필요해서, 이 방향도 계속 연구되어야 합니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.15166"><strong>Class Unlearning via Depth-Aware Removal of Forget-Specific Directions</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 A. Hatami, R. Aalishah, I. E. Monosov</div>
-<p>One-shot weight-surgery로 <strong>class unlearning</strong>을 하는 방법입니다. 재훈련 없이 특정 class를 지우는 건데, GDPR/CCPA 같은 규제 대응 관점에서 주목할 만해요. 이번 주 unlearning 관련 논문이 더 있었던 걸 보면 이것도 안정적 미니토픽이에요.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14973"><strong>Robustness of Vision Foundation Models to Common Perturbations</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 H. Liu, Z. Jiang, et al.</div>
-<p><strong>Vision foundation model의 embedding이 흔한 editing에 얼마나 흔들리는가</strong>를 측정하고 fine-tuning으로 robustify합니다. Foundation model 배치 관점에서 실질적으로 중요한 문제예요. 특히 search/retrieval 파이프라인에서 embedding stability는 결정적인데, 이걸 측정해 공개한 건 가치가 큽니다.</p>
-</div>
-
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.14643"><strong>Physically-Induced Atmospheric Adversarial Perturbations: Enhancing Transferability and Robustness in Remote Sensing Image Classification</strong></a> <span class="badge badge-cv">CV</span></div>
-<div class="paper-authors">👥 W. Zhuang, W. Xie, Q. Zhang, et al.</div>
-<p>Remote sensing 쪽의 <strong>physics-based adversarial perturbation</strong>입니다. 기존 adversarial example들이 digital noise였다면 이건 실제 대기 현상을 시뮬레이션한 거라 transferability가 훨씬 높아요. Remote sensing model deploy할 때 weather-related robustness가 ignored되는 경향이 있었는데 그 공백을 메우는 논문이에요.</p>
+<div class="paper-authors">👥 Jakob Thumm, Marian Frei, Tianle Ni, Matthias Althoff, Marco Pavone</div>
+<p>비전 기반 인간 포즈 추정과 모션 예측에 conformal prediction 보장을 결합해서 인증 가능한 안전 human-robot collaboration을 구현합니다. Aleatoric uncertainty 추정과 OOD(Out-of-Distribution) detection을 결합해서 높은 확률적 신뢰도를 확보하는데, 실세계 HRC 세팅에서도 검증했어요. 이번 주 Safety 버킷이 얇은 가운데 유일하게 VLA/perception 레벨의 안전을 다룬 논문이라 더 눈에 띕니다.</p>
 </div>
 
 <hr>
 
+<!-- 참고 링크 -->
 <h2>🔗 참고 링크</h2>
 <ul class="links">
-<li>cs.CV 오늘 공지: <a href="https://arxiv.org/list/cs.CV/new">https://arxiv.org/list/cs.CV/new</a></li>
-<li>cs.RO 오늘 공지: <a href="https://arxiv.org/list/cs.RO/new">https://arxiv.org/list/cs.RO/new</a></li>
-<li>cs.CV 주간: <a href="https://arxiv.org/list/cs.CV/pastweek?skip=0&amp;show=2000">https://arxiv.org/list/cs.CV/pastweek</a></li>
-<li>cs.RO 주간: <a href="https://arxiv.org/list/cs.RO/pastweek?skip=0&amp;show=2000">https://arxiv.org/list/cs.RO/pastweek</a></li>
+<li><a href="https://arxiv.org/list/cs.CV/new">cs.CV/new</a> — 오늘 공지 (2026-04-17 배치)</li>
+<li><a href="https://arxiv.org/list/cs.RO/new">cs.RO/new</a> — 오늘 공지 (2026-04-17 배치)</li>
+<li><a href="https://arxiv.org/list/cs.CV/pastweek?skip=0&show=2000">cs.CV pastweek</a> — 주간 전체</li>
+<li><a href="https://arxiv.org/list/cs.RO/pastweek?skip=0&show=2000">cs.RO pastweek</a> — 주간 전체</li>
 </ul>
 
 <footer>
-생성 시각: 2026-04-18 · Markdown/HTML 버전 동시 생성 · Slack 전송은 GitHub Pages 링크 방식으로 대체 예정
+Generated on 2026-04-18 · Claude Opus 4.6 · arXiv Daily Briefing
 </footer>
 
 </div>
