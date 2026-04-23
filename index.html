@@ -85,7 +85,7 @@ footer a{color:#656d76}
     const cached = lsGet(cacheKey);
     if (cached && Date.now() - cached.t < LIST_TTL_MS) return cached.v;
 
-    const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/`);
+    const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/posts`);
     if (!res.ok) {
       if (cached) return cached.v;
       throw new Error(`GitHub API ${res.status}`);
@@ -105,7 +105,7 @@ footer a{color:#656d76}
     const cached = lsGet(cacheKey);
     if (cached && Date.now() - cached.t < INSIGHT_TTL_MS) return cached.v;
 
-    const res = await fetch(`${date}.html`, { cache: 'no-cache' });
+    const res = await fetch(`posts/${date}.html`, { cache: 'no-cache' });
     if (!res.ok) return [];
     const html = await res.text();
     const doc = new DOMParser().parseFromString(html, 'text/html');
@@ -121,7 +121,7 @@ footer a{color:#656d76}
     li.className = 'archive-item';
     const link = document.createElement('a');
     link.className = 'archive-link';
-    link.href = `${date}.html`;
+    link.href = `posts/${date}.html`;
 
     const dateEl = document.createElement('span');
     dateEl.className = 'archive-date';
