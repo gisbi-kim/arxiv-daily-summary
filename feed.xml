@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>arXiv Daily Briefing — cs.CV · cs.RO</title>
+    <link>https://gisbi-kim.github.io/arxiv-daily-summary/</link>
+    <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
+    <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
+    <language>ko</language>
+    <lastBuildDate>Thu, 23 Apr 2026 10:46:02 +0900</lastBuildDate>
+    <ttl>720</ttl>
+    <item>
+      <title>📄 arXiv Daily Briefing — 2026-04-23 (목)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-23.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-23.html</guid>
+      <pubDate>Thu, 23 Apr 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[이번주 pastweek을 훑어보니 제일 두드러진 건 Foundation Models 버킷입니다. CV 쪽 107편이 몰렸고, 그중 VLM hallucination·token pruning·visual reasoning 쪽이 특히 두꺼워요. 오늘만 해도 LLM-as-Judge로 tone-induced hallucination을 측정하는 논문, zero-cost contrastive editing, STEPSTEM 같은 fine-grained MLLM 평가 벤치마크가 한꺼번에 쏟아졌네요. Generation 도 79편으로 두번째인데 "world model 예측"과 "robot policy"를 엮는 방향이 본격적으로 올라오고 있어요. 오늘의 Mask World Model과 R…]]></description>
+    </item>
+    <item>
+      <title>📄 arXiv Daily Briefing — 2026-04-22 (수)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-22.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-22.html</guid>
+      <pubDate>Wed, 22 Apr 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[이번 주 가장 뜨거운 버킷은 압도적으로 Robot Learning 입니다. cs.RO 전체 109편 중 manipulation 관련만 12편, vision-language 키워드가 9편, grasping 8편이니까 거의 3분의 1이 로봇 학습 관련이에요. 특히 VLA(Vision-Language-Action) 모델이 이번 주에만 10편 이상 쏟아졌는데, 오늘 나온 π₀.₇ (Physical Intelligence)이 결정적입니다. 단순 language command를 넘어 메타데이터, 서브골 이미지, 심지어 실패 데이터까지 conditioning으로 활용해서 "steerable foundation model"을 만들겠다는 건데, 이건 VLA 패러다임을 한 단계 끌어올리는…]]></description>
+    </item>
+    <item>
+      <title>📄 arXiv Daily Briefing — 2026-04-21 (화)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-21.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-21.html</guid>
+      <pubDate>Tue, 21 Apr 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[이번 주 가장 뜨거운 버킷은 또다시 Robot Learning 입니다. 지난주에 이어 VLA(Vision-Language-Action) 모델의 진화가 가속되고 있는데, 오늘 나온 π₀.₇ 이 단연 압권이에요. Physical Intelligence 팀이 만든 이 모델은 언어 조건부 다단계 태스크, 제로샷 크로스-엠바디먼트 일반화, 심지어 에스프레소 머신 조작까지 해내면서 "조종 가능한 범용 로봇 FM"의 가능성을 보여줬습니다. 이와 함께 VLA에 장기 기억을 붙이는 연구(Long-Term Memory for VLA), VLA를 fine-tuning할 때 VQA 능력이 붕괴하는 문제를 잡는 AEGIS, 시뮬레이터 없이 조작 데이터를 생성하는 ShapeGen 등이 한꺼번에…]]></description>
+    </item>
+    <item>
+      <title>📄 arXiv Daily Briefing — 2026-04-18 (금)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-18.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-18.html</guid>
+      <pubDate>Sat, 18 Apr 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[이번 주 제일 뜨거운 버킷은 단연 Robot Learning 이에요. cs.RO 전체 116편 중 조작·학습 관련 논문이 28편으로 거의 4분의 1을 차지했는데, 특히 VLA(Vision-Language-Action) 모델이 단순 action regression을 넘어 world model과 value function을 내장하는 방향으로 진화하는 흐름이 뚜렷합니다. 오늘만 해도 WAV model, HiVLA, R3D 같은 구조적으로 한 단계 올라간 VLA 논문이 한꺼번에 나왔어요. 3D/Scene 버킷도 여전히 강세인데, 3DGS(3D Gaussian Splatting)가 이제 순수 렌더링을 완전히 벗어나서 SLAM, 시뮬레이션, 심지어 4D 레이더까지 침투하고 있습니다…]]></description>
+    </item>
+  </channel>
+</rss>

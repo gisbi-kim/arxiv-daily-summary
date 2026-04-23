@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>arXiv Daily Briefing — Archive</title>
+<link rel="alternate" type="application/rss+xml" title="arXiv Daily Briefing RSS" href="feed.xml">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -26,6 +27,17 @@ h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.
 .archive-summary.placeholder{color:#9aa4af;font-style:italic;padding-left:0}
 .archive-summary.placeholder::before{content:none}
 .archive-summary em.empty{color:#9aa4af;font-style:italic}
+.subscribe{margin:0 0 22px;padding:14px 18px;background:#fff8e1;border:1px solid #f4d58a;border-radius:8px;font-size:13.5px;color:#3b434d;line-height:1.7}
+.subscribe .sub-head{font-weight:700;color:#7a4e00;margin:0 0 6px;font-size:14px}
+.subscribe ul{margin:4px 0 0;padding-left:22px}
+.subscribe li{margin:3px 0}
+.subscribe code{background:#fff4c2;padding:1px 6px;border-radius:4px;font-size:12.5px;word-break:break-all}
+.subscribe a{color:#0969da;font-weight:500}
+.subscribe details{margin-top:8px}
+.subscribe summary{cursor:pointer;color:#7a4e00;font-weight:500;list-style:none}
+.subscribe summary::-webkit-details-marker{display:none}
+.subscribe summary::before{content:"▸ ";font-size:11px}
+.subscribe details[open] summary::before{content:"▾ "}
 footer{margin-top:36px;padding-top:16px;border-top:1px solid #eaeef2;font-size:12px;color:#656d76;text-align:center}
 footer a{color:#656d76}
 @media (max-width:640px){
@@ -43,6 +55,24 @@ footer a{color:#656d76}
 
 <h1>📄 arXiv Daily Briefing</h1>
 <p class="subtitle">cs.CV · cs.RO 매일 요약 아카이브</p>
+
+<div class="subscribe">
+<p class="sub-head">📡 구독하기 / Subscribe</p>
+RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면 매일 자동으로 받아볼 수 있어요.
+<br><code>https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml</code>
+<details>
+<summary>이메일로 받고 싶거나, RSS가 익숙하지 않다면</summary>
+<ul>
+<li><strong>RSS → 이메일 변환 서비스</strong>에 위 RSS 주소를 등록하면 본인 이메일로 자동 배송됩니다 (발행자는 메일 리스트를 운영하지 않아요).
+  <a href="https://blogtrottr.com/" target="_blank" rel="noopener">Blogtrottr</a> ·
+  <a href="https://kill-the-newsletter.com/" target="_blank" rel="noopener">Kill the Newsletter</a> ·
+  <a href="https://feedrabbit.com/" target="_blank" rel="noopener">Feedrabbit</a> 같은 무료 도구 추천.</li>
+<li><strong>GitHub 계정 있는 분</strong>은 <a href="https://github.com/gisbi-kim/arxiv-daily-summary" target="_blank" rel="noopener">repo</a>를 Watch 하거나, 커밋 알림 형태로
+  <a href="https://github.com/gisbi-kim/arxiv-daily-summary/commits/main.atom" target="_blank" rel="noopener">commits/main.atom</a> 을 구독해도 됩니다.</li>
+<li><strong>처음이시라면</strong>: 브라우저에서 <a href="feed.xml">feed.xml</a> 열어보면 어떤 식으로 배송되는지 확인할 수 있어요.</li>
+</ul>
+</details>
+</div>
 
 <div id="status" class="meta">목록을 불러오는 중…</div>
 
