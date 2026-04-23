@@ -1,0 +1,91 @@
+{
+ "date": "2026-04-23",
+ "insights": [
+  {
+   "title": "World model 평가가 픽셀 품질에서 embodied 성공률로 이동",
+   "claim": "video world model의 표준 평가축이 RGB 충실도에서 \"로봇이 그 영상대로 움직였을 때 성공률\"로 옮겨가고 있다. RoboWM-Bench와 Mask World Model이 같은 날 출간된 것이 대표 신호.",
+   "papers": [
+    "https://arxiv.org/abs/2604.19683",
+    "https://arxiv.org/abs/2604.19092"
+   ]
+  },
+  {
+   "title": "VLA가 알고리즘 경쟁에서 훈련 스택·표현 통일의 인프라 경쟁으로 국면 전환",
+   "claim": "VLA 연구의 다음 10x는 알고리즘이 아니라 인프라/표현 통일에서 나올 것. VLA Foundry(통합 스택)와 UniT(human↔humanoid 통합 표현)가 동시에 등장.",
+   "papers": [
+    "https://arxiv.org/abs/2604.19728",
+    "https://arxiv.org/abs/2604.19734",
+    "https://arxiv.org/abs/2604.19710"
+   ]
+  },
+  {
+   "title": "Safety 버킷이 얇은 만큼 \"human-aware\"·\"hierarchical robust\" 같은 새 포지셔닝이 뚫리는 중",
+   "claim": "VLM/VLA의 safety 축은 여전히 공백이 크지만, human-awareness 기반 조정과 계층 robust alignment 같은 구체적 진입점이 나오기 시작.",
+   "papers": [
+    "https://arxiv.org/abs/2604.18627",
+    "https://arxiv.org/abs/2604.18867"
+   ]
+  }
+ ],
+ "research_topics": [
+  {
+   "title": "VLA Foundry 위에 safety head를 plug-in으로 얹기",
+   "claim": "VLA Foundry의 end-to-end 훅 위에 conformal prediction 기반 reject/slowdown head를 붙이면, 인사이트 2와 3의 공백을 동시에 덮는 PR-수준 기여로 시작 가능."
+  },
+  {
+   "title": "Mask 수준 world model을 cross-embodiment RoboWM-Bench로 확장",
+   "claim": "Mask World Model은 single embodiment만 다룸. UniT의 unified latent action과 결합해 cross-embodiment benchmark로 일반화 가능성 점검."
+  },
+  {
+   "title": "Language-driven 3DGS editing을 로봇 시뮬 asset 파이프라인에 결합",
+   "claim": "TransSplat + Unposed-to-3D + CityRAG를 엮으면 \"실세계 스캔 → 3DGS 편집 → 시뮬 asset\"이라는 VLA 학습용 데이터 증강 파이프라인이 가능."
+  }
+ ],
+ "cv_vs_ro_contrast": {
+  "common_keywords": [
+   "vision-language",
+   "VLA",
+   "VLM",
+   "diffusion",
+   "world model",
+   "multimodal"
+  ],
+  "cv_only_keywords": [
+   "segmentation",
+   "detection",
+   "recognition",
+   "video generation",
+   "image editing",
+   "hallucination"
+  ],
+  "ro_only_keywords": [
+   "control",
+   "planning",
+   "trajectory",
+   "dynamics",
+   "humanoid",
+   "quadruped",
+   "bipedal",
+   "manipulation",
+   "grasp",
+   "reinforcement learning"
+  ],
+  "same_word_different_context": [
+   {
+    "word": "world model",
+    "cv": "spatially-grounded video generation (CityRAG)",
+    "ro": "dynamics prediction for policy (Mask WM, RoboWM-Bench)"
+   },
+   {
+    "word": "3DGS / Gaussian",
+    "cv": "editing·rendering efficiency (TransSplat, AdaGScale)",
+    "ro": "SLAM·sensor representation (19216 mobile acquisition)"
+   },
+   {
+    "word": "reasoning",
+    "cv": "MLLM chain-of-thought quality",
+    "ro": "action-level policy exploration (19064 VLN self-improvement)"
+   }
+  ]
+ }
+}
