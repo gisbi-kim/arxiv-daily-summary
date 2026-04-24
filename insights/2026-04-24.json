@@ -1,0 +1,58 @@
+{
+ "date": "2026-04-24",
+ "insights": [
+  {
+   "title": "VLA가 foundation model 단계로 넘어가는 신호",
+   "claim": "같은 날 세 갈래(foundation 규모 JoyAI-RA, pocket-sized PokeVLA, midtrain EmbodiedMidtrain)의 VLA 논문이 동시에 등장해 알고리즘 경쟁에서 규모·계층·훈련절차 3축 경쟁으로 국면 전환 중.",
+   "papers": [
+    "https://arxiv.org/abs/2604.20100",
+    "https://arxiv.org/abs/2604.20834",
+    "https://arxiv.org/abs/2604.20012"
+   ]
+  },
+  {
+   "title": "Tactile/contact가 manipulation의 1차 입력으로 굳어짐",
+   "claim": "하루에 tactile 시뮬(ETac)·센서(FingerEye)·데이터셋(VTouch++)·태스크(Peg-in-Hole)·재구성(UniCon3R) 5편이 터지면서 tactile이 'extra modality'에서 'VLA 기본 입력'으로 이동. 공통 평가 벤치 부재가 선점 기회.",
+   "papers": [
+    "https://arxiv.org/abs/2604.20295",
+    "https://arxiv.org/abs/2604.20689",
+    "https://arxiv.org/abs/2604.20444",
+    "https://arxiv.org/abs/2604.20712",
+    "https://arxiv.org/abs/2604.19923"
+   ]
+  },
+  {
+   "title": "Safety/Certification이 LLM + 고전 제어 하이브리드로 재편",
+   "claim": "LLM-Guided Safety Agent(ISO predicate 번역) + Stochastic Barrier Certificates(formal) + Lexicographic STL(minimum-violation planning)이 같은 날 등장. LLM 단독 가드가 아닌 '형식 보증 레이어'와의 결합이 새 표준으로 자리잡는 중.",
+   "papers": [
+    "https://arxiv.org/abs/2604.20193",
+    "https://arxiv.org/abs/2604.20208",
+    "https://arxiv.org/abs/2604.20428"
+   ]
+  }
+ ],
+ "research_topics": [
+  {
+   "title": "Tactile + Vision 통합 벤치마크 (Open X-Embodiment 스타일의 tactile 확장판)",
+   "claim": "오늘 4편의 tactile 인프라 논문 평가가 제각각 — throughput/phase/데이터규모. 공통 평가 축이 비어 있어 선점 가능."
+  },
+  {
+   "title": "3DGS 'downstream-task aware' 효율화 벤치마크",
+   "claim": "Gaussians on a Diet·GSCompleter·FluSplat이 렌더링 품질만 지표로 씀. 메모리 1GB 제약에서 SLAM·navigation 정확도 유지 측정 벤치가 비어있음."
+  },
+  {
+   "title": "VLA Safety Certification Benchmark (의료·산업 시나리오 + barrier 통과)",
+   "claim": "Endovascular·ultrasound VLA가 나오는데 평가는 성공률 수준. formal safety 측정과 접합한 benchmark가 필요."
+  }
+ ],
+ "cv_ro_contrast": {
+  "shared": ["VLA/vision-language-action", "world-model", "tactile/contact"],
+  "cv_only": ["3dgs_efficiency", "diffusion/flow-matching/t2i", "vlm_evaluation"],
+  "ro_only": ["dexterous/bimanual/tactile_sensing", "barrier/stl/safety_agent", "slam/odometry"],
+  "same_word_diff_context": {
+   "vla": "CV=training pipeline (midtrain) / RO=deployed policy (JoyAI-RA, PokeVLA)",
+   "world_model": "CV=tool-call trajectory (SceneOrchestra) / RO=dynamics prediction (Cortex 2.0, Endovascular)",
+   "tactile": "CV=reconstruction cue (UniCon3R) / RO=sensor input (ETac, FingerEye)"
+  }
+ }
+}
