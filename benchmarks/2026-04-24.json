@@ -1,5 +1,39 @@
 {
- "date": "2026-04-24",
- "results": [],
- "note": "오늘 /new에서 표준 추적 벤치마크(ScanNet/LIBERO/nuScenes/MMMU/VBench 등)의 신규 SOTA 수치 보고 없음. 대신 새 벤치마크 제안이 다수: DistortBench(2604.19966), HumanScore(2604.20157), TactileEval(2604.19829), OVPD dataset(2604.20423), SpaCeFormer-3M(2604.20395)."
+  "date": "2026-04-24",
+  "results": [],
+  "proposed_benchmarks": [
+    {
+      "name": "Immersion v1.0",
+      "paper": "2604.21400",
+      "paper_title": "YOGO: You Only Gaussian Once",
+      "domain": "3DGS indoor ultra-dense",
+      "what": "Ultra-dense viewpoint indoor dataset designed to break the 'sparsity shield' in current 3DGS benchmarks.",
+      "risk_note": "Proposer = evaluator, 자기-벤치마크 위험 있음"
+    },
+    {
+      "name": "WorldMark",
+      "paper": "2604.21686",
+      "paper_title": "WorldMark: Interactive Video World Model Benchmark Suite",
+      "domain": "Interactive video world models (Genie / YUME / HY-World / Matrix-Game 등)",
+      "what": "Previously each system evaluated on private scenes → unified suite for cross-comparison.",
+      "risk_note": "프로토콜 설계 주체의 독립성 확인 필요"
+    },
+    {
+      "name": "VLA Open-World Eval (How VLAs Really Work)",
+      "paper": "2604.21192",
+      "paper_title": "How VLAs (Really) Work In Open-World Environments",
+      "domain": "Open-world manipulation VLA",
+      "what": "Fixed eval suite to compare openvla·pi0·GR00T under matched conditions; identifies which factors actually produce generalization.",
+      "risk_note": "시뮬 기반, real-world gap 있음"
+    }
+  ],
+  "notable_datasets": [
+    {
+      "name": "Open-H-Embodiment",
+      "paper": "2604.21017",
+      "what": "Cross-modality / cross-task / cross-embodiment 의료 로봇 foundation-scale 데이터셋",
+      "risk_note": "IRB 범위·라이선스·demographic coverage 공개 필요"
+    }
+  ],
+  "note": "오늘 표준 벤치(ScanNet / LIBERO / nuScenes / MMMU / VBench 등)에서 새 SOTA 수치 보고 없음. 대신 '새 벤치마크·새 데이터셋 제안' 흐름이 강함."
 }
