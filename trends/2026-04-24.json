@@ -1,40 +1,114 @@
 {
- "date": "2026-04-24",
- "totals": {
-  "cv": 785,
-  "ro": 220,
-  "union": 950,
-  "note": "cv pastweek count estimated similar to 2026-04-23 snapshot; WebFetch summarization returned only a partial sample (~106 CV titles)"
- },
- "buckets": {
-  "3D/Scene": {"cv": 12, "ro": 18, "total": 30, "note": "cv counts from partial sample"},
-  "Robot Learning": {"cv": 4, "ro": 52, "total": 56},
-  "Autonomous Driving": {"cv": 0, "ro": 24, "total": 24},
-  "Foundation Models": {"cv": 16, "ro": 31, "total": 47},
-  "Generation": {"cv": 18, "ro": 19, "total": 37},
-  "Efficiency/Systems": {"cv": 8, "ro": 15, "total": 23},
-  "Embodied AI": {"cv": 5, "ro": 35, "total": 40},
-  "Safety/Alignment": {"cv": 6, "ro": 26, "total": 32}
- },
- "today_new_selected": {
-  "3D/Scene": {"cv": 7, "ro": 2, "total": 9},
-  "Robot Learning": {"cv": 1, "ro": 22, "total": 23},
-  "Autonomous Driving": {"cv": 2, "ro": 2, "total": 4},
-  "Foundation Models": {"cv": 7, "ro": 0, "total": 7},
-  "Generation": {"cv": 7, "ro": 0, "total": 7},
-  "Efficiency/Systems": {"cv": 4, "ro": 1, "total": 5},
-  "Embodied AI": {"cv": 1, "ro": 2, "total": 3},
-  "Safety/Alignment": {"cv": 2, "ro": 3, "total": 5}
- },
- "keywords_cv": [
-  ["video", 42], ["image", 40], ["3d", 28], ["vision-language", 24], ["diffusion", 22],
-  ["segmentation", 20], ["generation", 19], ["detection", 18], ["multimodal", 18],
-  ["reconstruction", 14], ["reasoning", 13], ["hallucination", 11], ["3dgs", 9],
-  ["editing", 9], ["flow-matching", 8], ["embodied", 7], ["tactile", 6]
- ],
- "keywords_ro": [
-  ["vla", 18], ["manipulation", 17], ["vision-language-action", 12], ["tactile", 10],
-  ["world-model", 9], ["humanoid", 8], ["dexterous", 8], ["safety", 8], ["planning", 7],
-  ["bimanual", 6], ["grasping", 6], ["navigation", 6], ["slam", 5], ["reinforcement-learning", 5]
- ]
+  "date": "2026-04-24",
+  "totals": {
+    "selected": 114,
+    "total_scanned": 138,
+    "note": "stdlib parser (scripts/fetch_arxiv.py + scripts/classify.py); cs.CV/new + cs.RO/new listings."
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 13,
+      "cv": 11,
+      "ro": 2,
+      "cvro": 0
+    },
+    "Robot Learning": {
+      "total": 15,
+      "cv": 2,
+      "ro": 12,
+      "cvro": 1
+    },
+    "Autonomous Driving": {
+      "total": 7,
+      "cv": 1,
+      "ro": 6,
+      "cvro": 0
+    },
+    "Foundation Models": {
+      "total": 19,
+      "cv": 19,
+      "ro": 0,
+      "cvro": 0
+    },
+    "Generation": {
+      "total": 20,
+      "cv": 19,
+      "ro": 1,
+      "cvro": 0
+    },
+    "Efficiency/Systems": {
+      "total": 11,
+      "cv": 9,
+      "ro": 2,
+      "cvro": 0
+    },
+    "Embodied AI": {
+      "total": 2,
+      "cv": 0,
+      "ro": 2,
+      "cvro": 0
+    },
+    "Safety/Alignment": {
+      "total": 27,
+      "cv": 23,
+      "ro": 4,
+      "cvro": 0
+    }
+  },
+  "vs_yesterday": {
+    "note": "2026-04-23 대비 Safety 급증(23→27), Robot Learning 소폭 감소, 3D/Scene 유지, Generation 견조.",
+    "up": [
+      "Safety/Alignment",
+      "Generation"
+    ],
+    "down": [
+      "Robot Learning"
+    ],
+    "flat": [
+      "3D/Scene",
+      "Foundation Models"
+    ]
+  },
+  "hottest": [
+    {
+      "topic": "VLA 내부 이해·진단 페이즈",
+      "evidence": [
+        "2604.21192",
+        "2604.21241",
+        "2604.21391",
+        "2604.21741"
+      ],
+      "note": "오픈소스 VLA 해부 + spatial grounding 약점 겨냥 + post-training을 world-model 시뮬에 묶는 흐름이 한 날에 터짐"
+    },
+    {
+      "topic": "의료 로봇 foundation dataset",
+      "evidence": [
+        "2604.21017"
+      ],
+      "note": "Open-H-Embodiment가 Open X-Embodiment의 의료 버전을 표방"
+    },
+    {
+      "topic": "VLM Blind-Spot · 체계적 실패 분석",
+      "evidence": [
+        "2604.21911",
+        "2604.21346",
+        "2604.21160",
+        "2604.21395"
+      ],
+      "note": "Prompt hallucination·Representational bottleneck·Geometric hallucination·이론적 blind spot이 동시 진단"
+    }
+  ],
+  "cooling": [
+    {
+      "topic": "평지 humanoid locomotion (ceiling)",
+      "evidence": [
+        "2604.20990",
+        "2604.21351",
+        "2604.21355",
+        "2604.21541"
+      ],
+      "note": "평지 걷기는 포화, 대신 non-inertial / 무중력 / 격투 / wheel-legged 로 long-tail 분산"
+    }
+  ],
+  "buckets_summary_note": "Safety 27편으로 1위, 그 다음 Generation 20편, Foundation Models 19편, Robot Learning 15편, 3D/Scene 13편, Efficiency/Systems 11편, Autonomous Driving 7편, Embodied AI 2편."
 }

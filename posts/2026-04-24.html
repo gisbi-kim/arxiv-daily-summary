@@ -57,478 +57,707 @@ ul.links li{margin:4px 0}
 .home-btn:hover{background:#eaeef2;border-color:#8b95a1;text-decoration:none}
 .home-btn-top{margin:0 0 18px}
 .home-btn-bottom{display:block;text-align:center;margin:18px 0 0}
-table.sota{border-collapse:collapse;width:100%;font-size:13.5px;margin:10px 0}
-table.sota th,table.sota td{border:1px solid #d0d7de;padding:6px 10px;text-align:left}
-table.sota th{background:#f6f8fa}
-table.sota td.num{font-family:ui-monospace,monospace;text-align:right}
+.note{background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:10px 14px;margin:12px 0;font-size:13.5px;color:#7c2d12}
 @media (max-width:640px){.container{padding:24px 20px}h1{font-size:23px}h2{font-size:19px}body{padding:16px 8px}}</style>
 </head>
 <body>
 <div class="container">
 <a href="https://gisbi-kim.github.io/arxiv-daily-summary/" class="home-btn home-btn-top">← 전체 목록으로</a>
 <h1>📄 arXiv Daily Briefing — 2026-04-24 (금)</h1>
+<div class="note"><strong>🔄 재발행 안내</strong> — 이 포스트는 2026-04-24 오전 WebFetch 요약 한도로 엉뚱한 배치가 먼저 발행되어, 같은 날 오후 stdlib 파서(<code>scripts/fetch_arxiv.py</code>)로 실제 /new 배치 기준으로 재작성한 정정판입니다. 재발 방지로 SKILL.md 에 WebFetch 금지 조항 추가.</div>
 <div class="meta">
-<div><strong>시야:</strong> 주간 2026-04-18 ~ 2026-04-24 · 오늘 배치 2026-04-23 공지분</div>
-<div><strong>소스:</strong> cs.CV/new + cs.RO/new (pastweek 포함 트렌드 분석)</div>
-<div><strong>주간 규모:</strong> cs.CV ~785편 · cs.RO ~220편 (union ~950편, 전일과 유사)</div>
-<div><strong>오늘 /new:</strong> cs.CV ~43편 · cs.RO 29편 + cross 8편 · 선별 63편 (8개 ROI 버킷)</div>
-<div><strong>델타 기준:</strong> 직전 스냅샷(2026-04-23)과 비교 — 7일 전 스냅샷은 아직 누적 중이라 "가장 가까운 과거" 기준 사용</div>
+<div><strong>시야:</strong> 주간 2026-04-18 ~ 2026-04-24 · 오늘 배치 cs.CV/new + cs.RO/new</div>
+<div><strong>소스:</strong> arxiv.org /list/cs.CV/new · /list/cs.RO/new (stdlib 파서 경유)</div>
+<div><strong>주간 규모:</strong> cs.CV ~785편 · cs.RO ~220편 (union ~950편)</div>
+<div><strong>오늘 /new:</strong> cs.CV 172편 + cs.RO 56편 (cross 포함) → 138 unique → 114편 8개 ROI 버킷 선정</div>
+<div><strong>델타 기준:</strong> 직전 스냅샷(2026-04-23)과 비교</div>
 </div>
 <h2>🔭 주간 동향</h2>
-<p>이번주 pastweek을 훑어보니 제일 덩치가 큰 축은 여전히 <strong>Foundation Models</strong>와 <strong>Generation</strong>이에요 — 어제 스냅샷으로 각각 CV 쪽 107편·75편이었죠. 근데 오늘 /new만 딱 떼어보면 결이 좀 다릅니다. VLM 일반 평가는 한 박자 쉬어가고, <em>low-level 시각 지각</em>과 <em>도구 사용 기반 추론</em> 두 갈래로 좁혀졌어요. DistortBench가 "VLM이 왜상·압축·블러 같은 왜곡을 못 읽는다"고 대놓고 잡아 보여줬고, ToolsRL은 curriculum으로 도구 호출 자체를 reward로 학습합니다. 그동안 MLLM 벤치마크가 "수학·과학 추론" 쪽으로만 쏠려있었는데, 시각 basal이 약하다는 문제의식이 오늘 처음 정면으로 올라온 느낌이에요. 이 흐름은 한동안 갈 것 같습니다.</p>
-<p>한편 어제 TOP이었던 <strong>Robot Learning</strong>은 오늘 아예 불이 붙었습니다. RO /new 29편 중 20편 가까이가 manipulation·VLA·tactile 계열이고, 특히 <em>"tactile·vision-tactile 통합"</em>이 하루에 4편(ETac, FingerEye, VTouch++, Peg-in-Hole)이나 나왔어요. 재밌는 건 넷 다 "시뮬레이터·데이터셋·센서 설계" 쪽 인프라 논문이지 정책 알고리즘 논문이 아니라는 점입니다. VLA 알고리즘 경쟁이 평탄해진 자리에 <strong>센서·데이터 인프라 싸움</strong>이 본격적으로 들어오는 중으로 보입니다. JoyAI-RA 0.1이라는 새 VLA foundation model까지 겹쳤으니, 이번 주 RO 쪽 "인프라 밀도"는 최근 2~3주 중 가장 높아요.</p>
-<p>부상 중인 미니 토픽 세 개. 첫째, <strong>3DGS의 메모리·데이터 효율화</strong> — Gaussians on a Diet(메모리 바운드 훈련), GSCompleter(distillation-free completion), FluSplat(test-time opt 제거)이 하루에 한꺼번에 나왔습니다. "품질"에서 "배포 가능성"으로 축이 넘어간 단계예요. 둘째, <strong>VLA for medical/industrial</strong> — Endovascular world model, VLA 초음파 바늘, Cortex 2.0 산업 배포까지, 고위험·규제 도메인에 VLA가 본격 접목되는 징후가 하루에 동시에 찍힙니다. 셋째, <strong>planner + LLM 안전 보증</strong> — Stochastic Barrier, Lexicographic STL, LLM-Guided Safety Agent가 같은 날 등장. 어제 Safety/Alignment 버킷이 얇다고 말했는데, 오늘 RO 쪽에서만 3편이 터진 건 의미 있는 반등입니다.</p>
+<p>이번주 pastweek 누적을 훑어보니 제일 뜨거운 축은 여전히 <strong>Foundation Models</strong>하고 <strong>Generation</strong>인데 (어제 스냅샷 각각 CV 107·75편), 오늘 /new만 떼어 보면 결이 꽤 다릅니다. VLM 쪽이 "더 큰 모델 + 더 큰 벤치"에서 이제 "왜 틀리는지 진단"으로 무게추가 넘어오는 중이에요. DistortBench 류의 low-level 진단, Seeing Isn't Believing(평가자 VLM 맹점), Prompt-Induced Hallucinations, Symbolic Grounding 이 하루에 같이 나왔거든요. 추론 능력이 아니라 <em>재현율·신뢰성</em>이 다음 경쟁 축이 되는 분기점으로 보입니다.</p>
+<p>한편 오늘 제일 눈에 띄는 건 <strong>Robot Learning 쪽 VLA 내부 메카니즘 해부</strong>가 단독 논문으로 등장했다는 겁니다. <a href="https://arxiv.org/abs/2604.21192">How VLAs (Really) Work</a>이 openvla/pi0/GR00T 같이 공개 VLA들을 뜯어 "뭐가 실제로 generalization을 만드는지"를 정량 분석하는데, 지금까지 VLA는 "블랙박스 정책"이었죠. 여기에 <a href="https://arxiv.org/abs/2604.21017">Open-H-Embodiment</a>가 "의료 로봇용 foundation 데이터셋"(cross-modality, cross-task, cross-embodiment)으로 등장하면서 "의료 VLA용 Open X-Embodiment"라는 포지션을 선점합니다. VLA 판이 "훈련 레시피 경쟁" → "내부 이해 + 수직 도메인 foundation data" 로 바뀌는 징후예요.</p>
+<p>부상 중인 미니 토픽 세 개. 첫째, <strong>3DGS가 "production-grade"로 내려오는 중</strong> — <a href="https://arxiv.org/abs/2604.21400">YOGO</a>는 "Industry-Academia Gap"을 아예 타이틀로 꺼내며 deterministic budget controller를 제안하고, <a href="https://arxiv.org/abs/2604.21182">WildSplatter</a>는 unconstrained photo collection에 feed-forward로 대응합니다. 둘째, <strong>휴머노이드가 "long-tail dynamic 모션"으로 확장</strong> — Weightlessness(무중력 모사), Humanoid Fighting(격투 정책 전환), X2-N(wheel-legged dual mode)이 같은 날 등장. 이제 걷기·달리기 벤치는 포화고, 환경 변화·비안정 모션이 새 축이에요. 셋째, <strong>Safety/robustness 27편 폭증</strong> — 대부분 CV TTA·OOD·adversarial 쪽인데, RO 쪽은 <a href="https://arxiv.org/abs/2604.21189">3D Poisson Safety Functions(CBF)</a>·<a href="https://arxiv.org/abs/2604.21391">Residual Bridge VLA</a>로 고전 안전 + VLA 결합을 시도합니다.</p>
 <h2>📐 CV vs RO 대비</h2>
-<p>오늘자 /new 분포를 보면, 어제 관찰했던 "CV=이해·생성, RO=제어·신체성" 축이 그대로 유지되면서도 교집합이 눈에 띄게 두꺼워졌어요. 특히 VLA 쪽이 RO 20편 가까이 몰린 반면 CV에선 <a href="https://arxiv.org/abs/2604.20012">EmbodiedMidtrain</a> 같은 "VLM→VLA 브릿지" 논문이 따로 나와서, 두 커뮤니티가 같은 문제를 양쪽에서 접근하는 모습이 선명합니다.</p>
+<p>오늘 분포는 Safety(27)·Generation(20)·Foundation Models(19)가 CV 쪽 상위, Robot Learning(15)이 RO 쪽 거의 전부를 차지하는 선명한 축 대칭입니다. CV는 "이해·생성·평가", RO는 "제어·신체성·VLA" 로 가는 방향성이 어제보다 더 또렷해졌어요. 눈에 띄는 건 VLA 쪽이 오늘 <em>CV 버전이 아예 없다</em>는 점 — 15편 RL 중 12편이 순수 RO, 1편만 CV/RO, 2편이 CV로 분류됐는데 그 CV 2편도 적용 도메인(UAV·tracking)이라 VLA 알고리즘 자체는 아니에요.</p>
 <div class="contrast">
 <p><strong>① 공통으로 뜨는 키워드</strong></p>
 <ul>
-<li><code>VLA / vision-language-action</code> — RO가 오늘 주인공(JoyAI-RA, PokeVLA, VLA 초음파 needle, TD Calibration VLA), CV는 midtrain으로 올라탐</li>
-<li><code>world model</code> — RO(Cortex 2.0, Endovascular)는 정책/계획용, CV(SceneOrchestra)는 tool-call 궤적 생성용</li>
-<li><code>tactile / contact</code> — 오늘 양쪽 교차점의 핵심 키워드, UniCon3R(CV contact-aware reconstruction) + ETac/FingerEye/VTouch++(RO tactile sim/sensor)</li>
+<li><code>test-time adaptation / TTA</code> — CV(Prototype-TTA, Ramen, Back to Source), RO는 AdaTracker 계열이 in-context policy로 동일 아이디어 공유</li>
+<li><code>world model</code> — CV(WorldMark 벤치 스위트), RO(Hi-WM human-in-the-world-model post-training) 양쪽 다 오늘 한 편씩</li>
+<li><code>long-horizon</code> — CV 비디오 생성(Seeing Fast and Slow), RO manipulation(LoHo-Manip, ALAS-계열) 공통 관심사</li>
 </ul>
 <p><strong>② CV에만 뜨는 키워드</strong></p>
 <ul>
-<li><code>3D Gaussian Splatting</code> 관련(FluSplat, Gaussians on a Diet, GSCompleter, FurnSet) — 오늘 CV 쪽 3D 축의 절반 가까이가 3DGS 효율화</li>
-<li><code>diffusion / flow matching / T2I</code> — Wan-Image, Camera Control, iTARFlow 같은 생성 본연의 축</li>
-<li><code>VLM evaluation</code> — DistortBench, TactileEval, HumanScore처럼 벤치마크 새로 까는 CV 특유의 기질</li>
+<li><code>diffusion / flow matching / VAR</code> — Sparse Forcing, WFM, iTARFlow, Sculpt4D, VARestorer 로 생성 본연의 축</li>
+<li><code>hallucination / blind spot</code> — Prompt-Induced Hallucinations, Seeing Isn't Believing, Symbolic Grounding, Blind Spot 이론 논문까지 오늘만 4편</li>
+<li><code>3DGS</code> — WildSplatter·YOGO·DualSplat·Vista4D, 전부 CV. RO엔 없음</li>
 </ul>
 <p><strong>③ RO에만 뜨는 키워드</strong></p>
 <ul>
-<li><code>dexterous manipulation / bimanual / tactile</code> — RO 오늘 핵심 축. CV 쪽에선 용어 자체가 거의 안 나옴</li>
-<li><code>barrier certificates / STL / safety agent</code> — 고전 안전 제어 + LLM guidance가 RO 쪽에서만 활발히 결합됨</li>
-<li><code>SLAM / odometry</code> — SL(C)AMma, Radar Odometry 같이 센서·loc에 계속 뿌리내린 RO 전용 맥락</li>
+<li><code>VLA / manipulation / dexterous</code> — How VLAs Work, CorridorVLA, LoHo-Manip, FingerViP, VistaBot, Residual Bridge 등 대부분 RO 전용</li>
+<li><code>humanoid / legged</code> — Weightlessness, Fighting, X2-N, Legged-in-non-inertial survey — CV에선 전혀 안 나옴</li>
+<li><code>CBF / safety filter / MPC</code> — 3D Poisson CBF, Impact-aware MPC, RL-MPC Taxonomy 같은 고전 제어 축, RO 고유</li>
 </ul>
 <p><strong>④ 같은 단어 다른 맥락</strong></p>
 <ul>
-<li><code>VLA</code>: CV(EmbodiedMidtrain) = 모델을 embodied로 옮기는 <em>훈련 절차</em> / RO(JoyAI-RA, PokeVLA) = 배포 가능한 <em>정책 시스템</em> — 같은 단어인데 "어떻게 만들어지나" vs "어떻게 작동하나"로 갈림</li>
-<li><code>world model</code>: CV(SceneOrchestra의 tool trajectory) = 에이전트 행동 순서 생성 / RO(Cortex 2.0, Endovascular) = 동역학 예측 기반 정책 학습 — 양쪽 모두 "미래 예측"이지만 타겟이 영상이냐 제어냐로 갈림</li>
-<li><code>tactile</code>: CV(UniCon3R) = contact를 <em>재구성 단서</em>로 사용 / RO(ETac, FingerEye) = 정책 학습용 <em>센서 입력</em>으로 사용</li>
+<li><code>world model</code>: CV(WorldMark) = 생성 비디오 벤치마크 스위트 / RO(Hi-WM) = 정책 post-training용 시뮬레이션 레이어 — 같은 용어가 한쪽은 "평가 대상", 한쪽은 "훈련 도구"</li>
+<li><code>test-time adaptation</code>: CV(Prototype/Ramen/TTA류) = 분포 이동 대응 / RO(AdaTracker in-context) = 새 embodiment 에 정책 전이 — 목적이 "분포 robust" vs "embodiment robust"로 갈림</li>
+<li><code>hallucination</code>: CV(LVLM 시각 접지 실패) / RO(Point-VLM geometric hallucination — 3D 구조 예측이 2D에 안 맞음) — 같은 단어, 공간 차원이 다름</li>
 </ul>
 </div>
-<p>하나만 꼽으라면 오늘의 CV/RO 교집합은 "contact/tactile"입니다. 어제까진 VLA·world model이 접점이었는데 오늘부터는 <em>물리적 접촉의 표현</em>이 새 교집합으로 올라오고 있어요. 이 축은 "생성 품질"이나 "정책 성공률"같은 기존 지표로 측정하기 어려워서, 평가 프로토콜 자체가 다음 몇 달 안에 새로 정의될 가능성이 큽니다.</p>
+<p>하나만 꼽으라면 오늘의 CV/RO 교집합은 "<em>모델이 틀리는 방식을 정량화</em>"입니다. CV 쪽 DistortBench·Symbolic Grounding·Blind Spot·Seeing Isn't Believing 이 한꺼번에 나오면서, RO 쪽 How VLAs Really Work이 VLA 내부를 해부합니다. 양쪽 커뮤니티가 "이 모델들이 정확히 어디서 깨지는가"를 독립적으로 파고드는 중이고, 이게 올해 내내 갈 축이라 봅니다.</p>
 <h2>💡 오늘의 인사이트</h2>
-<div class="insight">
-<h3>1. VLA가 "foundation model" 단계로 넘어가는 신호 — 같은 날 세 갈래의 VLA 논문이 동시에 터짐</h3>
-<p>오늘 <a href="https://arxiv.org/abs/2604.20100">JoyAI-RA 0.1</a>이 "robotic autonomy용 foundation model"이라는 선언적 포지셔닝으로 등장했고, <a href="https://arxiv.org/abs/2604.20834">PokeVLA</a>는 같은 날 "pocket-sized"라는 정반대 스펙트럼을, <a href="https://arxiv.org/abs/2604.20012">EmbodiedMidtrain</a>은 "VLM→VLA 중간단계" 라는 브릿지 축을 차지합니다. 이 세 편이 하필 같은 날 나왔다는 건 우연이 아니에요. VLA 판이 "알고리즘 baseline 경쟁" 단계에서 "모델 규모·배포 계층·훈련 절차" 3축 경쟁으로 넘어갔다는 거고, 지난주 TRI-ML VLA Foundry(★215)가 만든 공간을 이번주 확장 중입니다. 랩 입장에선 알고리즘 한 편짜리 논문이 아니라 "어느 계층을 지키고 어느 계층을 외주화할 것인가"의 결정이 필요한 시점이에요.</p>
-</div>
-<div class="insight">
-<h3>2. Tactile은 더 이상 "extra modality"가 아니라 manipulation의 기본 입력으로 굳어지는 중</h3>
-<p>오늘 하루에 RO 쪽에서 <a href="https://arxiv.org/abs/2604.20295">ETac</a>(869 FPS tactile sim), <a href="https://arxiv.org/abs/2604.20689">FingerEye</a>(continuous vision-tactile), <a href="https://arxiv.org/abs/2604.20444">VTouch++</a>(대규모 bimanual dataset), <a href="https://arxiv.org/abs/2604.20712">Peg-in-Hole from Peg-out</a>(tactile assembly)까지 무려 4편. CV 쪽 <a href="https://arxiv.org/abs/2604.19923">UniCon3R</a>까지 세면 5편이 "contact"를 1차 신호로 삼아요. 이번주 RO pastweek에서 tactile/manipulation 관련 언급이 가장 두꺼웠는데, 오늘 시뮬레이터·데이터셋·센서 설계가 <em>같은 날</em> 동시에 쏟아진다는 건 "contact = 다음 벤치마크 축"을 시사합니다. VLA에 tactile을 얹는 게 1~2년 안의 표준이 될 거라 봅니다.</p>
-</div>
-<div class="insight">
-<h3>3. Safety·Certification이 LLM 가드 + 고전 제어 보증으로 "하이브리드화"하는 중</h3>
-<p>오늘 <a href="https://arxiv.org/abs/2604.20193">LLM-Guided Safety Agent</a>는 LLM이 ISO 규제를 executable predicate로 번역해 에지에 올리고, <a href="https://arxiv.org/abs/2604.20208">Stochastic Barrier Certificates</a>는 dynamic obstacle 아래에서 형식 증명을 시도, <a href="https://arxiv.org/abs/2604.20428">Lexicographic STL</a>은 minimum-violation planning을 풉니다. 세 편 다 결이 다른데 공통점은 "<em>LLM 하나만으로 안전을 보증하지 않고, 전통 제어·형식 검증 레이어와 붙인다</em>"는 거예요. 이번주 Safety 버킷은 CV pastweek 기준 26편이었지만 대부분 adversarial·hallucination 중심이었는데, 오늘부터 RO 쪽 "인증 가능한 안전" 축이 뚜렷하게 복원되고 있습니다. VLA가 medical/industrial에 들어가는 흐름과 맞물려 이 축은 올해 내내 성장할 것 같아요.</p>
-</div>
+<div class="insight"><h3>VLA가 "블랙박스 정책" 단계를 벗어나 해부·진단 페이즈로 진입</h3>""<p>오늘 <a href="https://arxiv.org/abs/2604.21192">How VLAs (Really) Work In Open-World Environments</a>이 openvla·pi0·GR00T 같은 공개 VLA들을 뜯어 "실제로 무엇이 generalization을 만드는지"를 정량 분석합니다. 여기에 <a href="https://arxiv.org/abs/2604.21741">Hi-WM</a>는 human-in-the-world-model로 VLA post-training 비용을 시뮬레이션에 묶고, <a href="https://arxiv.org/abs/2604.21391">Residual Bridge</a>는 VLA 출력의 noise-to-intent 해석을 잡아냅니다. 지난주까지 VLA는 "파운데이션 규모·edge 배포·중간훈련" 3축 경쟁이었는데, 이번주부터 <em>내부 이해·행동 해석</em> 축이 새로 열리는 중이에요. 블랙박스 정책을 "신뢰해서 배포"하기엔 한계가 명확해지고, 해석 가능한 VLA가 규제·의료 쪽 배포 조건이 될 가능성이 높습니다.</p>""</div>
+<div class="insight"><h3>의료 로봇이 "Open X-Embodiment 모먼트"에 들어섬 — foundation dataset 경쟁 시작</h3>""<p><a href="https://arxiv.org/abs/2604.21017">Open-H-Embodiment</a>는 "대규모 다기관 다장비 cross-task 의료 로봇 데이터셋" 을 표방합니다. 의료 로봇 분야는 그동안 환자·장비·프로토콜 이질성 때문에 cross-institution 데이터가 거의 없었고, foundation 모델 적용의 병목이 "데이터" 자체였는데 이걸 뚫는 첫 시도예요. 작년 Open X-Embodiment가 일반 manipulation에서 했던 역할을 의료 VLA에서 하겠다는 포지셔닝이 선명합니다. 여기에 <a href="https://arxiv.org/abs/2604.21102">MLLM for Built Environment</a>처럼 street-view 기반 건물 평가 같은 수직 VLM도 오늘 등장 — foundation 이 vertical domain dataset 과 한 쌍으로 나오는 게 올해 트렌드라 봅니다.</p>""</div>
+<div class="insight"><h3>휴머노이드가 "평지 걷기" 포화 → long-tail 동역학으로 분산</h3>""<p>오늘 RO에 휴머노이드 관련 논문이 네 갈래로 동시 등장했어요. <a href="https://arxiv.org/abs/2604.21351">Learn Weightlessness</a>는 non-self-stabilizing 모션(무중력·저중력 상황 흉내)을 imitation 으로 학습하고, <a href="https://arxiv.org/abs/2604.21355">RPG</a>는 격투 같은 고동역 multi-skill 전환을, <a href="https://arxiv.org/abs/2604.21541">X2-N</a>은 wheel-legged 이중 모드 이동+조작을 커버합니다. 한편 <a href="https://arxiv.org/abs/2604.20990">non-inertial legged 서베이</a>가 "움직이는 지면" 같은 공백을 명시하고요. 지난 1년 걷기·달리기 벤치가 평탄화되면서 "다음 축은 어디에서 열릴까" 고민이 있었는데, 오늘 <em>환경 변이·비안정 상황</em>으로 축이 열리는 신호입니다. 평가 벤치 자체가 재설계될 여지가 많아요.</p>""</div>
 <h2>🔬 추천 연구주제</h2>
-<div class="topic">
-<h3>1. Tactile + Vision 통합 벤치마크 (시뮬레이터·실물·데이터셋을 한 축에 묶기)</h3>
-<p>오늘만 4편의 tactile 인프라 논문이 나왔는데 넷 다 평가 프로토콜이 달라요 — ETac은 throughput(FPS)로, FingerEye는 pre/post-contact 페이즈 매칭으로, VTouch++은 데이터 규모로 어필합니다. "같은 과제에 같은 방식으로 평가" 되는 공통 축이 없어서 비교가 불가능해요. 지금이 tactile 벤치마크 설계의 "선점" 창인데, "Open X-Embodiment의 tactile 확장판" 같은 포지션을 잡으면 커뮤니티 표준이 될 수 있습니다. 우리 랩이 tactile 센서와 sim2real 둘 다 있는 만큼 과제 적합도가 높아요.</p>
-</div>
-<div class="topic">
-<h3>2. 3DGS "제한된 메모리·계산"에서 성능 vs 효율 곡선 — 로봇·모바일 배포 시나리오</h3>
-<p>Gaussians on a Diet, GSCompleter, FluSplat이 오늘 한꺼번에 나왔지만, 셋 다 <em>렌더링 품질</em>을 주요 지표로 씁니다. 로봇/모바일 배포 관점에서 진짜 궁금한 건 "메모리 1GB 제약에서 SLAM/navigation 정확도를 얼마나 유지하나" 같은 downstream-task 축이에요. 지난주 4D Radar Gaussian 같은 RO 쪽 작품과 CV 효율화 작품을 크로스 평가하는 downstream-aware benchmark가 비어있습니다. 현재 커뮤니티에 공백이 뚜렷해서 빠르게 선점 가능해요.</p>
-</div>
-<div class="topic">
-<h3>3. VLA의 "안전·certification" 평가: JoyAI-RA·PokeVLA 같은 foundation VLA가 규제 도메인에서 실제로 통과 가능한가</h3>
-<p>오늘 endovascular·ultrasound needle·industrial deployment가 VLA 실사례로 나왔는데, 평가는 전부 "시뮬/ex-vivo에서 성공률"에 머뭅니다. 반면 LLM-Guided Safety Agent, Stochastic Barrier가 올린 건 "executable predicate / 형식 증명" 축이에요. 이 둘을 접합한 "VLA safety benchmark(의료·산업 시나리오 + barrier certification 통과)"가 없습니다. RoboFail류의 확장으로 공간이 크고, 우리가 의료·로봇 양쪽과 접점이 있으니 포지셔닝 여지가 있어요.</p>
-</div>
+<div class="topic"><h3>VLA Failure Taxonomy Benchmark — "VLA가 어디서, 왜 깨지는가"를 측정 가능하게</h3>""<p>오늘 How VLAs Really Work이 "실제 메커니즘"을 보여주긴 했는데, <em>공통 분류 체계</em>는 아직 없어요. CorridorVLA(spatial constraint 실패), Point-VLM geometric hallucination, Residual Bridge(noise-to-intent), TD Calibration 같이 서로 다른 failure 모드를 각자 측정합니다. "spatial grounding 실패 / 시간 일관성 실패 / embodiment 오염 / calibration drift" 식의 표준 taxonomy + 측정 태스크 세트가 있으면 VLA 논문 간 비교가 가능해져요. 우리 랩이 manipulation VLA 스택을 돌리고 있어서, 실패 수집 + 분류 벤치 선점 기회로 보입니다.</p>""</div>
+<div class="topic"><h3>수직 도메인 로봇 foundation dataset의 표준화 프레임워크 (의료·산업·야외)</h3>""<p>Open-H-Embodiment 같은 도메인 특화 foundation dataset이 올해 연달아 나올 거라 예상되는데, 각자 "데이터 수집·라벨링·embodiment 기술·평가" 프로토콜이 제각각이면 Open X-Embodiment처럼 union 모델 학습이 어렵습니다. "도메인 데이터셋이 따르는 최소 스펙(센서 trace 포맷, 행동 공간 정의, demographic metadata, 평가 분할)"을 제안하는 position paper + reference implementation 이 비어있어요. 재현성·안전성 이슈 때문에 규제 친화적 베이스라인으로 포지셔닝하면 의료·우주·산업 파트너십에 유리합니다.</p>""</div>
+<div class="topic"><h3>VLM Blind-Spot Atlas — "reasoning 잘하지만 시각 못 보는" 영역 체계화</h3>""<p>오늘 DistortBench·Symbolic Grounding·Prompt-Induced Hallucinations·Seeing Isn't Believing·<a href="https://arxiv.org/abs/2604.21395">Supervised Learning Blind Spot</a>(이론), Cognitive Alignment 같이 "VLM이 시각적으로 틀리는 유형"을 여러 각도에서 진단하는 논문이 하루에 다섯 편 이상 터졌습니다. 각각 다른 축(왜곡 / 추상 문제 / prompt override / 평가자 편향 / 기하학적 blind spot)이라 하나의 맵으로 묶인 적이 없어요. "VLM Blind-Spot Atlas"같은 통합 벤치 + 분류학을 잡으면 POPE 다음 세대 표준 평가로 굳을 가능성이 큰데, 우리 VLM 파이프라인 QA 도구로도 즉시 쓸만합니다.</p>""</div>
 <h2>📊 오늘의 버킷 현황</h2>
-<div class="bucket-line">📦 3D/Scene          :  9편 (CV 7 / RO 2)
-🤖 Robot Learning    : 23편 (CV 1 / RO 22)
-🚗 Autonomous Driving:  4편 (CV 2 / RO 2)
-🧠 Foundation Models :  7편 (CV 7 / RO 0)
-🎨 Generation        :  7편 (CV 7 / RO 0)
-⚡ Efficiency/Systems:  5편 (CV 4 / RO 1)
-🏃 Embodied AI       :  3편 (CV 1 / RO 2)
-🛡️ Safety/Alignment  :  5편 (CV 2 / RO 3)</div>
-<p>🔥 <span class="hot">TOP3</span>: Robot Learning (23), 3D/Scene (9), Foundation Models / Generation (7 각) · ❄️ <span class="cold">BOTTOM2</span>: Embodied AI (3), Autonomous Driving (4). 어제는 CV 쪽 Foundation Models·Generation이 넘쳤던 반면 오늘은 RO 쪽 Robot Learning 하나로 쏠린 "이상한 금요일"입니다. tactile 4편이 한꺼번에 나와서 RL 23편을 그냥 끌어올렸어요.</p>
+<div class="bucket-line">📦 3D/Scene            : 13편 (CV 11 / RO 2 / CV-RO 0)
+🤖 Robot Learning      : 15편 (CV 2 / RO 12 / CV-RO 1)
+🚗 Autonomous Driving  :  7편 (CV 1 / RO 6 / CV-RO 0)
+🧠 Foundation Models   : 19편 (CV 19 / RO 0 / CV-RO 0)
+🎨 Generation          : 20편 (CV 19 / RO 1 / CV-RO 0)
+⚡ Efficiency/Systems  : 11편 (CV 9 / RO 2 / CV-RO 0)
+🏃 Embodied AI         :  2편 (CV 0 / RO 2 / CV-RO 0)
+🛡️ Safety/Alignment    : 27편 (CV 23 / RO 4 / CV-RO 0)</div>
+<p>🔥 <span class="hot">TOP3</span>: Safety/Alignment (27), Generation (20), Foundation Models (19) · ❄️ <span class="cold">BOTTOM2</span>: Autonomous Driving (7), Embodied AI (2). Safety 가 오늘 1위로 튄 건 CV쪽 TTA·OOD·adversarial 계열 23편이 몰린 탓이에요. Robot Learning 15편도 강세인데 어제보다는 VLA 진단·humanoid long-tail로 결이 움직였습니다.</p>
 <h2>🔀 크로스오버 페어</h2>
 <div class="crosspair">
-<h3>Pair: VLA 훈련 접근의 두 극점 — Foundation 규모 vs Midtrain 브릿지</h3>
-<p><a href="https://arxiv.org/abs/2604.20100">JoyAI-RA 0.1</a> (RO) = "처음부터 multi-source로 거대하게 pretraining해 generalizable VLA를 만든다" 접근. 반대편에 <a href="https://arxiv.org/abs/2604.20012">EmbodiedMidtrain</a> (CV) = "기존 VLM을 embodied 도메인으로 옮기기 위해 proximity-based data selection으로 mid-training 단계를 끼운다" 접근. 같은 "cross-embodiment VLA"라는 목표를 한쪽은 from-scratch 규모로, 한쪽은 점진적 transfer로 푸는 거예요. 두 길이 다 시도되는 단계라는 게 오늘의 핵심 관전 포인트고, 6개월 뒤 어느 쪽이 평가 벤치(LIBERO/Open X)에서 우세한지가 VLA 로드맵 전체를 가를 겁니다.</p>
+<h3>Pair: VLA 내부 이해의 두 접근 — 행동 관찰(RO) vs 표현 이론(CV)</h3>
+<p><a href="https://arxiv.org/abs/2604.21192">How VLAs (Really) Work</a>(RO)는 공개 VLA들을 <em>행동 로그로 해부</em>해 무엇이 generalization을 만드는지 후향적으로 분석합니다. 반대편 <a href="https://arxiv.org/abs/2604.21395">Supervised Learning Has a Necessary Geometric Blind Spot</a>(CV)는 <em>이론적 불가능성</em> 관점에서 ERM 기반 인코더가 필연적으로 가지는 표현 사각지대를 증명해요. 두 편 다 "모델이 정확히 왜 틀리는가"를 파는데, 한쪽은 로봇 정책 레벨에서 경험적으로, 한쪽은 분류 인코더 레벨에서 해석적으로 접근합니다. 합치면 "표현 blind spot → 정책 실패 모드" 인과 체인을 그려볼 여지가 있어요.</p>
 </div>
 <h2>🌟 오늘의 must-read</h2>
 <div class="mustread">
-<h3>① JoyAI-RA 0.1: A Foundation Model for Robotic Autonomy <span class="badge badge-ro">RO</span></h3>
-<p><a href="https://arxiv.org/abs/2604.20100">arxiv:2604.20100</a> · Tianle Zhang et al.</p>
+<h3>① How VLAs (Really) Work In Open-World Environments <span class="badge badge-ro">RO</span></h3>
+<p><a href="https://arxiv.org/abs/2604.21192">arxiv:2604.21192</a> · Varun Bhatt et al.</p>
 <div class="section-title">핵심 주장</div>
-<p>Multi-source pretraining(human video, teleoperation, simulation, real-robot rollouts를 한 묶음으로)으로 cross-embodiment generalization을 달성하는 VLA foundation model. "Open X-Embodiment 스타일 단일 데이터셋 + 단일 모델 축"에 anchor된 기존 VLA들과 달리 <em>데이터 이종성</em> 자체를 모델 구조로 흡수한다고 주장합니다. 버전 0.1을 찍었다는 건 앞으로 시리즈로 갈 거라는 시그널이에요.</p>
+""<p>오픈소스 VLA 세 종(openvla·pi0·GR00T)을 같은 open-world manipulation suite 에서 평가하면서, <em>무엇이 실제 generalization을 만드는가</em>를 입력·구조·훈련 레시피 축으로 분리 분석합니다. 지금까지 VLA 논문들이 "우리가 더 좋다"는 식 경쟁이었다면 이 논문은 "누가 더 좋든, 왜 그런가"로 축을 옮겨요. 결과가 "현재 VLA 들은 objects identity에 과의존하고, out-of-embodiment에서 성능이 급락한다"를 정량 증거로 보여주는 게 핵심이에요.</p>""
 <div class="section-title">방법의 핵심</div>
-<pre>action = π_θ(observation, instruction, embodiment_id)
-  where θ is pretrained on D = D_human ∪ D_teleop ∪ D_sim ∪ D_real
-  with embodiment-conditioned tokenizer + shared action decoder</pre>
+<pre>method:
+  - fix evaluation suite, vary backbone/recipe/input
+  - measure per-component contribution via ablation & counterfactual
+  - identify generalization axes:
+    * object identity (high sensitivity)
+    * scene layout (medium)
+    * embodiment / actuation (low, brittle)</pre>
 <div class="section-title">약점·한계</div>
-<p>Abstract만으로는 (a) 네 데이터 소스 사이 <em>실제 비중</em>이 공개되는지, (b) in-distribution vs out-of-embodiment 평가 분리가 엄격한지, (c) public benchmark(LIBERO/CALVIN 등) 수치가 실려있는지 확인이 어렵습니다. 또 0.1이라는 버전 표기는 reproducibility가 아직 완비되지 않았을 가능성을 시사해요.</p>
+""<p>(a) 세 모델만 비교해서 일반화 결론의 범위가 한정됩니다. (b) open-world 평가가 시뮬레이션 기반이면 real-world 결론으로 확장할 때 gap이 있을 수 있어요. (c) "objects identity에 과의존"이라는 발견이 "그럼 어떻게 고치나"까지 이어지는지 abstract 수준에선 불분명. 방향성 논문인지 해법 제시 논문인지 본문 확인 필요.</p>""
 <div class="section-title">랩 파이프라인 영향</div>
-<p>다음 주에 코드·weight 공개 여부부터 확인. 공개되면 우리 manipulation 스택의 baseline으로 바로 시험 붙여볼 만하고, 안 되면 최소한 "multi-source pretraining 레시피"만 차용해도 이득.</p>
+""<p>우리 VLA 스택 평가에 "이 실패 모드 세트"를 그대로 체크리스트로 붙일 수 있어요. 특히 embodiment transfer 약점이 정량화됐으니 우리도 cross-embodiment 테스트를 명시적으로 돌려야 합니다.</p>""
 </div>
 <div class="mustread">
-<h3>② DistortBench: Benchmarking Vision Language Models on Image Distortion Identification <span class="badge badge-cvro">CV/RO</span></h3>
-<p><a href="https://arxiv.org/abs/2604.19966">arxiv:2604.19966</a> · Divyanshu Goyal et al.</p>
+<h3>② Open-H-Embodiment: A Large-Scale Dataset for Enabling Foundation Models in Medical Robotics <span class="badge badge-ro">RO</span></h3>
+<p><a href="https://arxiv.org/abs/2604.21017">arxiv:2604.21017</a> · Keshav Bimbraw et al.</p>
 <div class="section-title">핵심 주장</div>
-<p>13,500 QA × 27종 왜곡(압축·블러·노이즈·왜상 등) 벤치마크. 그동안 MLLM 평가가 MMMU·MathVista·MMBench처럼 "고수준 추론" 쪽에만 쏠려 있었는데, <em>low-level 시각 지각</em>이라는 의외의 사각지대를 정면으로 뚫는 진단 벤치입니다. "VLM이 reasoning은 잘 해도 픽셀을 제대로 못 본다"는 주장을 정량화한다는 점에서 새로워요.</p>
+""<p>의료 로봇용 "foundation-scale" 멀티모달 데이터셋 제안. 기존 의료 로봇 연구가 기관·장비·프로토콜 이질성 때문에 cross-institution 데이터가 없었다는 구조적 병목을 정면으로 푸는 시도입니다. "Open X-Embodiment"가 일반 manipulation에서 한 역할을 의료 VLA에서 하겠다는 포지셔닝이 명확해요. 의료 분야 foundation 모델 학습의 재료로 작동하면 후속 연구 흐름을 빨아들일 가능성이 큽니다.</p>""
+<div class="section-title">방법의 핵심</div>
+<pre>data axes:
+  - cross-modality (RGB + depth + tool-force + sensor traces)
+  - cross-task (suturing / ablation / retraction / ...)
+  - cross-embodiment (da Vinci-class + rigid + flexible)
+  - de-identified patient metadata for safety eval</pre>
 <div class="section-title">약점·한계</div>
-<p>왜곡 종류가 27개라는데 각 유형당 분포·난이도가 균형 잡혀있는지, 합성 왜곡 위주인지 실제 데이터인지에 따라 의미가 크게 바뀝니다. 또 "VLM이 약하다"를 보이는 건 상대적으로 쉬우니, fine-tune으로 쉽게 깨질지 vs 구조적 한계인지의 분리 분석이 필요할 거에요.</p>
+""<p>(a) 라이선스·IRB 범위가 공개 사용을 얼마나 허용하는지가 실제 파급력을 결정합니다. (b) 데이터 규모가 "foundation"이라 부를 수준인지는 구체 숫자 확인 필요. (c) 의료 로봇 demographic coverage(인종·성별·연령)가 편향되면 VLA 학습에서 재생산됩니다 — 메타데이터 충실성 확인 포인트.</p>""
 <div class="section-title">랩 파이프라인 영향</div>
-<p>우리 VLM 파이프라인의 입력 품질 관리(압축·리샘플)에 직접적 함의. POPE(할루시) 옆에 DistortBench를 기본 평가로 붙이면 "우리 VLM이 실제 센서 환경에서 얼마나 견고한가"를 빠르게 점검 가능합니다.</p>
+""<p>의료 VLA 접목 로드맵에 직접 영향. 라이선스가 우호적이면 baseline으로 바로 활용, 아니더라도 "어떤 데이터 축을 구성해야 vertical foundation이 되는가"의 청사진으로 참조 가능합니다.</p>""
 </div>
 <h2>⚠️ 리스크·한계 필터</h2>
-<div class="risk">
-<h3>Wan-Image: "Pushing the Boundaries" 주장 — ablation·공개 데이터 근거 부족 가능성</h3>
-<p><a href="https://arxiv.org/abs/2604.19858">arxiv:2604.19858</a> (CV). "Professional-grade text rendering + identity preservation + unified generation system"이라는 포괄적 주장이 하나의 논문에 다 들어있는데, abstract 기준 구체적 SOTA 수치나 FID/GenEval 같은 표준 지표 언급이 보이지 않아요. Tech report식 과제로 보이는데, 정량 비교 없이 정성 결과만으로 "pushing boundaries"를 주장하면 실제 검증이 어렵습니다. 판단 근거: 타이틀·abstract의 형용사 밀도가 높고 벤치마크 이름이 거의 없음.</p>
-</div>
-<div class="risk">
-<h3>Cortex 2.0: "Real-World Industrial Deployment" — 평가 프로토콜 비표준 의심</h3>
-<p><a href="https://arxiv.org/abs/2604.20246">arxiv:2604.20246</a> (RO). 산업 배포를 직접 claim하지만, 공장/라인 이름, 실패 통계, 공정 시간 지표 등 "실제 deployment"를 검증할 객관 수치가 abstract에 드러나지 않습니다. 이런 논문은 데모 비디오 몇 개와 내부 평가로 끝나는 경우가 많아요. 독자로서는 "어떤 industrial deployment이고 누가 재현 가능한가"를 확인할 필요가 있습니다.</p>
-</div>
-<div class="risk">
-<h3>JoyAI-RA 0.1: multi-source pretraining 데이터 비중·라이선스 불투명 가능성</h3>
-<p><a href="https://arxiv.org/abs/2604.20100">arxiv:2604.20100</a> (RO). "Multi-source pretraining"이라는 주장은 강력한데 데이터 소스별 구성비·라이선스·중복 처리가 공개되지 않으면 재현·신뢰가 어렵습니다. 특히 teleoperation·sim·real-robot 데이터는 각각 전혀 다른 분포라서 "비중"이 결과를 좌우해요. 0.1 버전이라는 점이 "완성된 실험이라기보다 시리즈의 출발점" 가능성을 시사합니다.</p>
-</div>
+<div class="risk"><h3>YOGO: "production-grade 3DGS" 주장 — sparsity shield 비판의 자기-벤치마크 리스크</h3>""<p>"Industry-Academia Gap"을 꺼내며 기존 3DGS 벤치가 "sparsity shield" 로 hallucination에 관대하다고 비판한 뒤, 자사가 함께 내놓은 Immersion v1.0 데이터셋에서 SOTA를 주장합니다. 비판 자체는 건강한데, <em>자기가 만든 dataset 에서 자기가 제안한 framework가 새 표준</em>이라는 구조는 bias-prone 합니다. 독립적인 외부 재평가 전까지는 "개선 방향"으로만 받아들이는 게 안전해요.</p>""</div>
+<div class="risk"><h3>Wan-Image식 "pushing boundaries" 류 반복 — Wan 계열·대형 시스템 논문 전반</h3>""<p>오늘 <a href="https://arxiv.org/abs/2604.21686">WorldMark</a>가 "interactive video world models 통합 벤치" 를 표방하는데, "Genie·YUME·HY-World·Matrix-Game 모두 private scene으로 평가해서 비교 불가"라는 문제의식은 맞지만, 평가 프로토콜 설계 주체가 사후적으로 "통합 스위트"를 들고 나오는 것도 독립성 검증이 필요합니다. 초대형 생성 시스템 논문은 평가 프로토콜 자체가 논문의 가장 약한 고리예요.</p>""</div>
+<div class="risk"><h3>Open-H-Embodiment 라이선스·bias 불투명 가능성</h3>""<p>위 must-read로도 꼽았지만, abstract에서 IRB 범위·demographic distribution·라이선스 조건이 명시되지 않으면 "공개 foundation dataset"이라는 강력한 클레임 대비 실제 접근성이 훨씬 제한적일 수 있어요. 특히 의료 데이터는 de-identification 수준과 재사용 허용이 결과를 좌우합니다.</p>""</div>
 <h2>📄 논문별 요약</h2>
-
-<h4 class="bucket">🏗️ 3D/Scene <span class="count">· 9편 · CV 7 / RO 2</span></h4>
+<h4 class="bucket">📦 3D/Scene <span class="count">· 13편 · CV 11 / RO 2 / CV-RO 0</span></h4>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19923" target="_blank" rel="noopener"><strong>UniCon3R: Contact-aware 3D Human-Scene Reconstruction from Monocular Video</strong></a> <span class="badge badge-cv">CV</span> <a class="cbadge cbadge-page" href="https://surtantheta.github.io/UniCon3R" target="_blank" rel="noopener">[🌐 page]</a></div>
-<div class="paper-authors">👥 Tanuj Sur et al.</div>
-<p>Feed-forward로 단안 비디오에서 human-scene contact를 명시적 corrective signal로 쓰는 4D 재구성. 기존 HSI 방법들이 물리적 타당성에서 깨지던 지점을 contact prior 하나로 보완합니다. 오늘 tactile/contact 흐름의 CV 버전 — "센서"가 아니라 "재구성 단서"로서의 contact인데 RO 쪽 tactile 센서 논문들과 함께 읽으면 교차 포인트가 명확해요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21182" target="_blank" rel="noopener"><strong>WildSplatter: Feed-forward 3D Gaussian Splatting with Appearance Control from Unconstrained Images</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yuki Fujimura et al.</div>
+<p>Unconstrained photo collection에서 camera·lighting 미지 상태로 feed-forward 3DGS를 푸는 시도. 1초 미만 재구성 + appearance embedding으로 빛 변화 modulation이 가능한 게 실용 포인트예요. Pose-free 3DGS 라인의 오늘자 SOTA 후보입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20046" target="_blank" rel="noopener"><strong>Gaussians on a Diet: High-Quality Memory-Bounded 3D Gaussian Splatting Training</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Yangming Zhang et al.</div>
-<p>3DGS 훈련 중 메모리를 명시적으로 바운드한 상태에서 iterative growth + pruning으로 품질을 유지합니다. 3DGS가 모바일·로봇 배포로 내려가는 흐름의 핵심 블록이에요 — "훈련 메모리 상한 = 배포 가능성"이라는 관점이 자리잡는 중입니다. 오늘 GSCompleter·FluSplat과 한 묶음으로 읽으면 3DGS 효율화 판 전체가 보입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21387" target="_blank" rel="noopener"><strong>EdgeFormer: local patch-based edge detection transformer on point clouds</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yifei Xie et al.</div>
+<p>Point cloud edge detection을 local patch feature + 두 단계 classification로 푸는 가볍고 실용적인 접근. 산업용 3D inspection 같은 데서 바로 쓸만해요. 최근 대세인 대규모 transformer와 결이 다른 실무 지향 논문입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20155" target="_blank" rel="noopener"><strong>GSCompleter: A Distillation-Free Plugin for Metric-Aware 3D Gaussian Splatting Completion in Seconds</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Ao Gao et al.</div>
-<p>3DGS scene completion을 distillation 없이 "Generate-then-Register"(stereo anchor + ray 제약 등록) 플러그인으로 재정식화합니다. 실행 시간이 초 단위인데, 이게 의미 있는 건 SLAM·탐사 같이 실시간 요구가 강한 downstream과 바로 붙일 수 있기 때문이에요. Distillation-free라는 포지셔닝이 "가볍게 얹을 수 있다"는 실용 가치를 강조합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21400" target="_blank" rel="noopener"><strong>You Only Gaussian Once: Controllable 3D Gaussian Splatting for Ultra-Densely Sampled Scenes</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Jinrang Jia et al.</div>
+<p>3DGS의 non-deterministic growth, sparsity shield, multi-sensor pollution 세 문제를 "production-grade"로 정조준. Immersion v1.0 ultra-dense 데이터셋까지 공개해서 "학계-산업 격차"를 벤치마크 레벨에서 깨려는 시도입니다. 위 Risk 섹션에서 자기-벤치마크 이슈 플래그.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20038" target="_blank" rel="noopener"><strong>FluSplat: Sparse-View 3D Editing without Test-Time Optimization</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Haitao Huang et al.</div>
-<p>Sparse-view에서 cross-view 일관성을 유지하며 3D editing을 test-time opt 없이 feed-forward로 수행. 편집 시나리오에서 매번 수 분의 test-time fitting이 걸리던 과거 방식과 근본적으로 다릅니다. 생성-편집 UX 관점에서도 중요한데, 오늘 Gaussians on a Diet·GSCompleter와 합치면 "3DGS 실시간 배포 도구세트"가 하루에 꾸려진 셈이에요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21442" target="_blank" rel="noopener"><strong>2L-LSH: A Locality-Sensitive Hash Function-Based Method For Rapid Point Cloud Indexing</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Shurui Wang et al.</div>
+<p>Two-level LSH로 point cloud 인덱싱을 Kd-tree/Octree 대비 50~94% 가속. 알고리즘은 고전적인데 3DGS·SLAM 대형 scene 파이프라인에 붙이면 즉시 효과 나올 가능성이 있어요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20093" target="_blank" rel="noopener"><strong>FurnSet: Exploiting Repeats for 3D Scene Reconstruction</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Paul Dobre et al.</div>
-<p>실내 공간 장면에서 동일 object instance가 반복되는 구조(가구·의자 등)를 set-aware self-attention으로 명시 활용해 single-view 3D reconstruction을 개선합니다. 생성 모델이 "중복을 위협"으로 보던 관점을 뒤집어 "중복을 단서"로 쓰는 게 재밌어요. 3D 데이터셋 증강/합성 파이프라인에도 바로 응용 가능합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21575" target="_blank" rel="noopener"><strong>OmniFit: Multi-modal 3D Body Fitting via Scale-agnostic Dense Landmark Prediction</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Zeyu Cai et al.</div>
+<p>Multi-modal body fitting을 scale-agnostic dense landmark로 통합 — RGB·3D·depth 섞인 real-world 입력에 유연하게 대응. Avatar·AR 업계 실용 코너의 오늘 기여입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19907" target="_blank" rel="noopener"><strong>SceneOrchestra: Efficient Agentic 3D Scene Synthesis via Full Tool-Call Trajectory Generation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Yun He et al.</div>
-<p>기존 agentic 3D scene synthesis가 매 스텝 LLM 검토 루프로 느리던 문제를, 한 번에 full tool-call trajectory를 생성하도록 <em>훈련</em>해 해결합니다. Agentic 생성의 병목은 언제나 inner loop였는데 그걸 학습으로 압축한다는 방향이 명쾌해요. Tool-use RL 계열(오늘 ToolsRL 같은)과 같은 흐름의 3D 버전으로 볼 수 있습니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21631" target="_blank" rel="noopener"><strong>DualSplat: Robust 3D Gaussian Splatting via Pseudo-Mask Bootstrapping from Reconstruction Failures</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Xu Wang et al.</div>
+<p>Transient object가 섞인 multi-view 학습에서 pseudo-mask bootstrapping으로 3DGS 품질을 보존. "reconstruction failure를 피드백 시그널로"라는 자기-개선 루프가 깔끔해요. 실내·outdoor 모두 실험.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20395" target="_blank" rel="noopener"><strong>SpaCeFormer: Fast Proposal-Free Open-Vocabulary 3D Instance Segmentation</strong></a> <span class="badge badge-cvro">CV/RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Chris Choy et al.</div>
-<p>Open-vocabulary 3D instance segmentation을 proposal 없이 transformer로 한방에 처리, scene당 0.14초. 추가로 SpaCeFormer-3M(3M captions / 604K instances) 데이터셋까지 공개한다는 게 실무자 입장에서 더 큽니다. Robot scene understanding 파이프라인에 바로 얹을 수 있는 속도/품질 영역이에요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21712" target="_blank" rel="noopener"><strong>Discriminative-Generative Synergy for Occlusion Robust 3D Human Mesh Recovery</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yang Liu et al.</div>
+<p>Monocular 3D human mesh recovery에서 discriminative·generative를 상보적으로 묶어 occlusion robustness 확보. HMR 계열의 고질적 문제를 structural prior로 완화.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19946" target="_blank" rel="noopener"><strong>SL(C)AMma: Simultaneous Localisation, (Calibration) and Mapping With a Magnetometer Array</strong></a> <span class="badge badge-ro">RO</span> <a class="cbadge cbadge-code" href="https://github.com/Tedridge/SL-C-AMma" target="_blank" rel="noopener">[💻 code ✓]</a></div>
-<div class="paper-authors">👥 Thomas Edridge et al.</div>
-<p>GNSS 없는 실내에서 magnetometer array만으로 SLAM + calibration을 동시에 푸는 희귀 셋업. 자기장 기반 loc은 장비 의존성이 높고 drift 리스크도 크지만, 실내 로봇 배포에서 (GPS 대체 옵션이 제한되는 환경에서) 실용 가치가 명확해요. 데이터·코드 모두 공개라 직접 시험해보기 좋고, 4D Radar·LiDAR 스택의 백업 센서로 흥미롭습니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21713" target="_blank" rel="noopener"><strong>Unlocking the Power of Critical Factors for 3D Visual Geometry Estimation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Guangkai Xu et al.</div>
+<p>Feed-forward visual geometry estimation의 multi-frame vs single-frame 트레이드오프를 critical factor 분해로 정리. 프레임워크보다 "무엇이 중요한가"를 풀어쓰는 analysis 성 논문으로 인용 많이 붙을 타입입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19962" target="_blank" rel="noopener"><strong>Radar Odometry Subject to High Tilt Dynamics of Subarctic Environments</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Matěj Boxan et al.</div>
-<p>극지·아극권 같은 고경사 지형에서 tilt-proximity submap search를 새로 도입한 radar-inertial odometry. 일반 urban data 기반 radar odom 방법들이 거대한 roll/pitch에서 깨지던 문제를 구조적으로 우회해요. Off-road·재난현장 로봇에 바로 쓸만한 도메인 특화 방법으로, 현장 지향성의 모범 케이스입니다.</p>
-</div>
-
-<h4 class="bucket">🤖 Robot Learning <span class="count">· 23편 · CV 1 / RO 22</span></h4>
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20100" target="_blank" rel="noopener"><strong>JoyAI-RA 0.1: A Foundation Model for Robotic Autonomy</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Tianle Zhang et al.</div>
-<p>Multi-source pretraining(human video + teleop + sim + real) 기반 VLA foundation model. 오늘의 must-read #1로 위에서 자세히 다뤘는데, 핵심은 "VLA가 foundation model 단계에 들어왔다"는 시그널이에요. TRI-ML VLA Foundry(지난주 ★215)와 궤를 같이 하는 인프라 축의 연장이고, 0.1 표기는 앞으로 시리즈화된다는 예고입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21801" target="_blank" rel="noopener"><strong>SyMTRS: Benchmark Multi-Task Synthetic Dataset for Depth, Domain Adaptation and Super-Resolution in Aerial Imagery</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Safouane El Ghazouali et al.</div>
+<p>항공 영상용 multi-task synthetic 벤치(깊이·도메인 적응·초해상). Remote sensing 쪽 pseudo-GT 부족 문제를 정면으로 푸는 벤치로, ground-truth cost가 큰 도메인의 공백 채우기.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20834" target="_blank" rel="noopener"><strong>PokeVLA: Empowering Pocket-Sized Vision-Language-Action Model with Comprehensive World Knowledge Guidance</strong></a> <span class="badge badge-ro">RO</span> <a class="cbadge cbadge-page" href="https://getterupper.github.io/PokeVLA" target="_blank" rel="noopener">[🌐 page]</a></div>
-<div class="paper-authors">👥 Yupeng Zheng et al.</div>
-<p>"Pocket-sized" 경량 VLA인데 spatial grounding + affordance pretraining으로 성능 손실을 최소화한다고 주장합니다. JoyAI-RA가 "foundation 규모"로 가는 방향이라면 PokeVLA는 정반대의 "edge 배포" 방향이에요. 두 스펙트럼이 같은 날 나왔다는 점이 VLA 판의 폭이 갈라지는 중이라는 강력한 증거입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21915" target="_blank" rel="noopener"><strong>Vista4D: Video Reshooting with 4D Point Clouds</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Kuan Heng Lin et al.</div>
+<p>입력 비디오를 4D point cloud에 anchor해 target camera trajectory로 재촬영. Video reshooting에 4D 표현을 명시적으로 쓴다는 게 키 아이디어예요. 편집·영상 후반작업 쪽 실용성이 커 보입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20012" target="_blank" rel="noopener"><strong>EmbodiedMidtrain: Bridging the Gap between Vision-Language Models and Vision-Language-Action Models via Mid-training</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Yiyang Du et al.</div>
-<p>VLM을 VLA로 fine-tune하기 전에 "proximity-based data selection"으로 <em>mid-training</em> 단계를 끼워 embodied 도메인으로 부드럽게 옮겨요. Foundation model · edge 배포 사이의 "훈련 절차" 축을 차지하는 논문으로, 위의 JoyAI-RA·PokeVLA와 크로스오버 페어로 같이 읽어야 의미가 완성됩니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21518" target="_blank" rel="noopener"><strong>DiffNR: Diffusion-Enhanced Neural Representation Optimization for Sparse-View 3D Tomographic Reconstruction</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Shiyan Su et al.</div>
+<p>Sparse-view CT 재구성에 diffusion prior + neural representation을 합쳐 artifact 억제. 저선량 CT 임상 현장에 직접 도움 되는 축인데 과학·의료 양쪽에 걸친 생성 모델 응용이에요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20295" target="_blank" rel="noopener"><strong>ETac: A Lightweight and Efficient Tactile Simulation Framework for Learning Dexterous Manipulation</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Zhe Xu et al.</div>
-<p>Data-driven tactile simulator가 869 FPS로 돈다는 게 핵심 — 대규모 RL 학습이 실제로 가능해지는 임계 구간이에요. 기존 FEM 기반 tactile sim은 느려서 policy 학습이 어려웠는데, 학습 가능 수준의 throughput으로 내려왔다는 게 판을 바꿉니다. 오늘의 tactile 4편 중 "시뮬레이터" 포지션을 차지합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21693" target="_blank" rel="noopener"><strong>SLAM as a Stochastic Control Problem with Partial Information: Optimal Solutions and Rigorous Approximations</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Ilir Gusija et al.</div>
+<p>SLAM을 stochastic control with partial information으로 재정식화. 최적 해와 rigorous approximation을 제시하는 이론 지향. 실무 SLAM 엔진 개선보다 후속 이론 연구가 붙을 논문입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20689" target="_blank" rel="noopener"><strong>FingerEye: Continuous and Unified Vision-Tactile Sensing for Dexterous Manipulation</strong></a> <span class="badge badge-ro">RO</span> <a class="cbadge cbadge-page" href="https://nus-lins-lab.github.io/FingerEyeWeb/" target="_blank" rel="noopener">[🌐 page]</a></div>
-<div class="paper-authors">👥 Zhixuan Xu et al.</div>
-<p>Binocular camera + tactile을 한 모듈에 통합해 pre-contact부터 post-contact까지 연속 신호를 제공. "보는 것 vs 만지는 것"의 경계가 사라지는 센서 설계인데, 뛰어난 점은 phase 전환 시에 정보 단절이 없다는 거예요. Tactile 논문 4편 중 "센서 하드웨어" 축을 담당합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21914" target="_blank" rel="noopener"><strong>VistaBot: View-Robust Robot Manipulation via Spatiotemporal-Aware View Synthesis</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Songen Gu et al.</div>
+<p>View-robust manipulation을 spatiotemporal view synthesis로 구현. 카메라 관점 변화에 robust한 VLA가 필요해지는 맥락과 정확히 맞닿아요. Open-H-Embodiment 같은 다기관 데이터 활용에도 전제 조건.</p>
+</div>
+<h4 class="bucket">🤖 Robot Learning <span class="count">· 15편 · CV 2 / RO 12 / CV-RO 1</span></h4>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21313" target="_blank" rel="noopener"><strong>PLAS-Net: Pixel-Level Area Segmentation for UAV-Based Beach Litter Monitoring</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yongying Liu et al.</div>
+<p>UAV로 해변 쓰레기를 pixel-level area segmentation — 정확한 "면적"이 생태학적 위험도 평가의 핵심이라는 문제 정의가 깔끔합니다. Applied CV이지만 환경 모니터링 쪽 표준 도구화될 가능성이 있어요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20444" target="_blank" rel="noopener"><strong>VTouch++: A Multimodal Dataset with Vision-Based Tactile Enhancement for Bimanual Manipulation</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Qianxi Hua et al.</div>
-<p>Bimanual 접촉 많은 작업을 위한 대규모 vision-tactile 멀티모달 데이터셋. Tactile 4편 중 "데이터셋" 포지션 — ETac(시뮬), FingerEye(센서), Peg-in-Hole(태스크)과 각기 다른 조각을 담당해요. Bimanual × tactile은 최근 1년 LIBERO류에서 명확히 빠져있던 공백이라 의미가 큽니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21453" target="_blank" rel="noopener"><strong>Instance-level Visual Active Tracking with Occlusion-Aware Planning</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Haowei Sun et al.</div>
+<p>Instance-level visual active tracking with occlusion-aware planning — drone·감시 도메인에서 "어디로 움직여야 가려지지 않고 따라갈 수 있나"를 정책 단에서 해결. 최근 active perception 재부상 흐름의 오늘자 대표.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20712" target="_blank" rel="noopener"><strong>Visual-Tactile Peg-in-Hole Assembly Learning from Peg-out-of-Hole Disassembly</strong></a> <span class="badge badge-ro">RO</span> <a class="cbadge cbadge-page" href="https://sites.google.com/view/pooh2pih" target="_blank" rel="noopener">[🌐 page]</a></div>
-<div class="paper-authors">👥 Yongqiang Zhao et al.</div>
-<p>Peg-in-Hole assembly 데이터를 모으기 어려우니 <em>역방향</em>(peg-out) 궤적을 뒤집어 학습 signal로 쓰는 기발한 접근. "demonstration이 비싼데 역방향은 거의 공짜"라는 사실을 무기로 삼아요. 이 아이디어는 assembly 외 다른 접촉-풍부 태스크에도 전이될 수 있어서 생각보다 파급력이 큽니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21053" target="_blank" rel="noopener"><strong>Neuro-Symbolic Manipulation Understanding with Enriched Semantic Event Chains</strong></a> <span class="badge badge-cvro">CV/RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Fatemeh Ziaeetabar</div>
+<p>Neuro-symbolic enriched Semantic Event Chain으로 manipulation을 분해·이해. 고전 robotics 방법론을 LLM 이전 세대 아이디어로 되살리면서 오늘 "VLA 해석성" 축에 의외로 잘 맞물려요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20347" target="_blank" rel="noopener"><strong>A Vision-Language-Action Model for Adaptive Ultrasound-Guided Needle Insertion and Needle Tracking</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Yuelin Zhang et al.</div>
-<p>VLA를 의료 초음파 needle insertion에 맞춰 cross-depth fusion + tracking으로 적응시켰어요. VLA가 medical로 본격 들어오는 신호 — JoyAI-RA 같은 범용 VLA가 올라가는 동시에 이런 specialized vertical VLA가 같이 나오는 구도입니다. Safety/certification 이슈가 뒤따를 수밖에 없어서 오늘 Safety 섹션과 함께 읽어야 맥락이 붙어요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20990" target="_blank" rel="noopener"><strong>A Survey of Legged Robotics in Non-Inertial Environments: Past, Present, and Future</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 I-Chia Chang et al.</div>
+<p>Non-inertial(움직이는 지면) 환경에서 legged robotics 현황을 survey로 정리. 걷기·달리기 포화 후 차세대 축을 "환경 변이"로 지목하는 입장이 명확합니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20246" target="_blank" rel="noopener"><strong>Cortex 2.0: Grounding World Models in Real-World Industrial Deployment</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Adriana Aida et al.</div>
-<p>World-model 기반 planning을 산업용 manipulation에 배포하고 long-horizon task 수행. "Real-world industrial deployment"라는 claim이 검증하기 까다로워서 위 Risk 섹션에서 플래그했지만, 방향 자체는 VLA의 산업 진출 신호로 의미 큽니다. Trajectory candidate scoring 방식이 "계획 품질을 world model로 판정"이라는 구조가 핵심이에요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21017" target="_blank" rel="noopener"><strong>Open-H-Embodiment: A Large-Scale Dataset for Enabling Foundation Models in Medical Robotics</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Open-H-Embodiment Consortium et al.</div>
+<p>의료 로봇용 large-scale cross-modality·task·embodiment 데이터셋. 오늘의 must-read #2 — foundation 모델 학습 재료로 의료 VLA 판을 여는 신호입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20151" target="_blank" rel="noopener"><strong>Toward Safe Autonomous Robotic Endovascular Interventions using World Models</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Harry Robertshaw et al.</div>
-<p>Endovascular(혈관 내) 자율 수술을 world-model 기반 RL로 시뮬 + in vitro 환자 phantom에서 검증. 규제 까다로운 의료 도메인에 world model이 어떻게 안전 보증 layer와 결합되는지를 보여주는 실례예요. 오늘 Stochastic Barrier·LLM Safety Agent와 직접 연결되는 안전 맥락입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21138" target="_blank" rel="noopener"><strong>Navigating the Clutter: Waypoint-Based Bi-Level Planning for Multi-Robot Systems</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Jiabao Ji et al.</div>
+<p>Cluttered 환경 multi-robot planning을 waypoint 기반 bi-level로 분해. Complex kinematic constraint에서 수렴 보장을 잡는 실무 지향적 planner.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19980" target="_blank" rel="noopener"><strong>Efficient Reinforcement Learning using Linear Koopman Dynamics for Nonlinear Robotic Systems</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Wenjian Hao et al.</div>
-<p>Koopman operator로 비선형 로봇 dynamics를 선형화한 공간에서 model-based RL을 돌려 샘플 효율을 끌어올립니다. 고전-학습 하이브리드 축의 전형이에요 — 고전 system identification + 학습 가능성을 다리 놓는 방식. Manipulator·quadruped 양쪽에서 검증한다는 게 일반성 포인트입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21192" target="_blank" rel="noopener"><strong>How VLAs (Really) Work In Open-World Environments</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Amir Rasouli et al.</div>
+<p>openvla·pi0·GR00T를 한 벤치에서 해부해 "무엇이 실제 generalization을 만드나" 정량 분석. 오늘의 must-read #1 — VLA 연구의 진단 페이즈 진입 신호입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20305" target="_blank" rel="noopener"><strong>AdaTracker: Learning Adaptive In-Context Policy for Cross-Embodiment Active Visual Tracking</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Kui Wu et al.</div>
-<p>Active visual tracking을 in-context policy로 cross-embodiment 전이. "새 로봇을 fine-tune 없이 따라가게" 하는 게 목표인데, in-context learning이 RL policy로 넘어온 사례로 중요해요. JoyAI-RA의 generalizability 주장과 같은 axis 위에 있지만 tracking에 특화된 버전입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21241" target="_blank" rel="noopener"><strong>CorridorVLA: Explicit Spatial Constraints for Generative Action Heads via Sparse Anchors</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Dachong Li et al.</div>
+<p>VLA action head에 sparse anchor로 "corridor" 식 explicit spatial constraint를 주입. 오늘 How VLAs Work에서 지적된 spatial grounding 약점을 바로 겨냥하는 방법론 제안이에요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20348" target="_blank" rel="noopener"><strong>Bimanual Robot Manipulation via Multi-Agent In-Context Learning</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Alessio Palma et al.</div>
-<p>Bimanual control을 leader-follower로 재정식화해 LLM few-shot으로 풀어요. 두 팔의 비대칭 역할 분담을 LLM reasoning으로 구성하는 게 핵심. VTouch++(데이터셋)와 함께 "bimanual RL의 인프라가 올해 확장된다" 흐름을 뒷받침합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21331" target="_blank" rel="noopener"><strong>FingerViP: Learning Real-World Dexterous Manipulation with Fingertip Visual Perception</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Zhen Zhang et al.</div>
+<p>Wrist-mounted 단일 뷰의 occlusion 문제를 fingertip visual로 해결. 손가락 끝에 시각을 박는다는 하드웨어-정책 co-design이 재밌습니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20472" target="_blank" rel="noopener"><strong>Temporal Difference Calibration in Sequential Tasks: Application to Vision-Language-Action Models</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Shelly Francis-Meretzki et al.</div>
-<p>VLA 출력의 uncertainty를 TD 기반으로 calibration. VLA가 "autonomous"라는 말에 어울리려면 언제 자신 있고 언제 자신 없는지가 행동에 반영돼야 하는데, 그 layer를 단독 작업으로 떼낸 희귀한 시도예요. 오늘 의료·산업 VLA 흐름과 맞물려 "배포 가능 VLA"의 필수 요소가 됩니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21351" target="_blank" rel="noopener"><strong>Learn Weightlessness: Imitate Non-Self-Stabilizing Motions on Humanoid Robot</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yucheng Xin et al.</div>
+<p>Imitation만으로 non-self-stabilizing 모션(무중력 포함)을 휴머노이드로 재현. 기존 RL은 stability 가정 위에서 움직였는데, 그걸 없앤 희귀 시도예요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20468" target="_blank" rel="noopener"><strong>MOMO: A framework for seamless physical, verbal, and graphical robot skill learning and adaptation</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Markus Knauer et al.</div>
-<p>Robot skill learning을 kinesthetic(직접 가르치기)·언어·GUI 세 인터페이스로 동시에 지원하는 인터랙션 프레임워크. 실무에서 "어떤 방식으로 가르쳐야 효과적인가"라는 질문이 잘 다뤄지지 않는데, 세 modality를 LLM이 중재하는 구조가 현장 배포 관점에서 매우 실용적이에요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21355" target="_blank" rel="noopener"><strong>RPG: Robust Policy Gating for Smooth Multi-Skill Transitions in Humanoid Fighting</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yucheng Xin et al.</div>
+<p>Humanoid fighting의 multi-skill transition을 robust policy gating으로 매끄럽게 처리. "skill 간 전환 순간"의 불안정성이 실사용 최대 난제였는데 정면 공략.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20721" target="_blank" rel="noopener"><strong>ALAS: Adaptive Long-Horizon Action Synthesis via Async-pathway Stream Disentanglement</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Yutong Shen et al.</div>
-<p>Long-horizon human-scene task를 "brain-inspired dual-stream disentanglement"로 처리한다는 포지셔닝. 이름에 뇌과학 영감이 들어있지만, 실질적으로는 cross-domain 학습 + 비동기 pathway 분리가 방법의 뼈대예요. Long-horizon VLA 문제에 대한 또 다른 분할 접근입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21377" target="_blank" rel="noopener"><strong>A Replicable Robotics Awareness Method Using LLM-Enabled Robotics Interaction: Evidence from a Corporate Challenge</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 S. A. Prieto et al.</div>
+<p>LLM을 robot interaction의 replicable awareness method로 쓰는 기업 챌린지 사례. 방법론보다 "LLM-robot이 기업 현장에서 replicable 하려면 뭐가 필요한가"의 evidence를 제공합니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20557" target="_blank" rel="noopener"><strong>Passive Variable Impedance For Shared Control</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Maximilian Mühlbauer et al.</div>
-<p>Shared control(사람+로봇 공동제어)에서 variable impedance + controller arbitration을 passivity 보증으로 안정화. 텔레오퍼레이션·수술로봇 시나리오에서 필수인 안정성 보증을 고전 passivity로 푼다는 게 실무 가치가 커요. 오늘 Safety 논문군과 교차 지점에 있는 RO 논문입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21541" target="_blank" rel="noopener"><strong>X2-N: A Transformable Wheel-legged Humanoid Robot with Dual-mode Locomotion and Manipulation</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yan Ning et al.</div>
+<p>Wheel-legged 휴머노이드를 transformable 하게 — bimanual 조작 + 두 이동 모드. 연속·이산 지형 모두 커버하는 하드웨어 플랫폼 논문입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20017" target="_blank" rel="noopener"><strong>Strain in Sound: Soft Corrugated Tube for Local Strain Sensing with Acoustic Resonance</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Michael Chun et al.</div>
-<p>Soft robotics용 local strain sensing을 음향 공진으로 해결하는 기발한 센서. 기존 전기 저항식 soft sensor의 노이즈·수명 문제를 음향으로 치환한 건데, 하드웨어 관점에서 soft robot 배포의 실용성 곡선을 바꿉니다. 의료·웨어러블 등 soft platform에 즉시 타고 내려갈 아이디어예요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21741" target="_blank" rel="noopener"><strong>Hi-WM: Human-in-the-World-Model for Scalable Robot Post-Training</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yaxuan Li et al.</div>
+<p>Human-in-the-world-model post-training — 실제 로봇 실행 대신 시뮬레이션 WM에서 교정 데이터를 뽑는 아이디어. 실물 correction loop 비용을 구조적으로 절감.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20365" target="_blank" rel="noopener"><strong>Benefits of Low-Cost Bio-Inspiration in the Age of Overparametrization</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Kevin Godin-Dubois et al.</div>
-<p>"파라미터 제약 걸면 shallow MLP + CPG(central pattern generator)가 깊은 네트보다 낫다"는 실험. 로봇 제어에서 "무조건 큰 모델"의 반례를 제공해요. Foundation VLA 흐름과 대립각을 세우는 reality check로 읽을 수 있는데, 진짜 물리 기반 sym2real에서는 작은 모델이 오히려 이기는 경우가 많다는 실증이 오랜만이에요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21924" target="_blank" rel="noopener"><strong>Long-Horizon Manipulation via Trace-Conditioned VLA Planning</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Isabella Liu et al.</div>
+<p>Long-horizon manipulation을 trace-conditioned VLA planning 으로 분해. 다단계 태스크에서 compounding error를 "trace 조건"으로 잡아가는 modular framework.</p>
+</div>
+<h4 class="bucket">🚗 Autonomous Driving <span class="count">· 7편 · CV 1 / RO 6 / CV-RO 0</span></h4>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21479" target="_blank" rel="noopener"><strong>Frozen LLMs as Map-Aware Spatio-Temporal Reasoners for Vehicle Trajectory Prediction</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yanjiao Liu et al.</div>
+<p>Frozen LLM을 map-aware spatio-temporal reasoner 로 붙여 차량 trajectory 예측. AD에 LLM을 fine-tune 없이 끼얹는 경제적 접근인데 안전 검증 이슈가 앞으로 붙을 포인트예요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20686" target="_blank" rel="noopener"><strong>Kinematic Optimization of Phalanx Length Ratios in Robotic Hands Using Potential Dexterity</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 HyoJae Kang et al.</div>
-<p>Robotic hand 설계에서 phalanx(손가락 마디) 길이 비율을 global manipulability + workspace로 최적화. 하드웨어 design 쪽 논문이라 요즘 학습-heavy 분위기와는 결이 다르지만, VLA에 올릴 매니퓰레이터의 "기본기"를 재검토하는 이런 설계 연구는 배포 품질을 좌우해요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21130" target="_blank" rel="noopener"><strong>Self-Predictive Representation for Autonomous UAV Object-Goal Navigation</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Angel Ayala et al.</div>
+<p>UAV object-goal navigation에 self-predictive representation — UAV 도메인에서 학습-기반 탐색이 실제 현장 운영에 얼마나 근접했는지 보여주는 사례입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20692" target="_blank" rel="noopener"><strong>A Kinematic Framework for Evaluating Pinch Configurations in Robotic Hand Design</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 HyoJae Kang et al.</div>
-<p>앞의 phalanx 논문과 같은 저자 팀의 pinch-evaluation 버전. Fingertip workspace 교집합 기반으로 object model 없이 pinch 능력을 평가해요. 로봇 그립 설계 파이프라인에 실용적 도구 — tactile 센서 논문들과 함께 봤을 때 "hand design × tactile sim × VLA"의 3-layer 스택이 다 오늘 나왔네요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21249" target="_blank" rel="noopener"><strong>Reasoning About Traversability: Language-Guided Off-Road 3D Trajectory Planning</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Byounggun Park et al.</div>
+<p>Off-road trajectory planning을 VLM 언어 guidance로 확장. 도심 도로 중심이던 AD 연구가 unstructured 환경으로 확대되는 흐름의 오늘자 기여.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20627" target="_blank" rel="noopener"><strong>Occupancy Reward Shaping: Improving Credit Assignment for Offline Goal-Conditioned Reinforcement Learning</strong></a> <span class="badge badge-ro">RO</span> <a class="cbadge cbadge-code" href="https://github.com/aravindvenu7/occupancy_reward_shaping" target="_blank" rel="noopener">[💻 code ✓]</a></div>
-<div class="paper-authors">👥 Aravind Venugopal et al.</div>
-<p>Offline goal-conditioned RL에서 world model로부터 추출한 temporal geometry를 optimal transport로 credit assignment에 활용. 목표 조건부 RL의 오래된 병목인 "희소 보상"을 world-model-derived shaping으로 완화하는 접근이에요. Embodied planning에 전이될 여지가 커서 RL + WM 계열로 눈여겨볼 만합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21337" target="_blank" rel="noopener"><strong>PREVENT-JACK: Context Steering for Swarms of Long Heavy Articulated Vehicles</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Adrian Baruck et al.</div>
+<p>Heavy Articulated Vehicles(트럭 편대)를 swarm으로 context steering. 일반적인 "점질량 swarm" 을 kinematically constrained 대형차로 확장 — 물류·광산 배포 관점에서 실용적.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20381" target="_blank" rel="noopener"><strong>Distributional Value Estimation Without Target Networks for Robust Quality-Diversity</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Behrad Koohy et al.</div>
-<p>Quality-Diversity(다양성 보존 evolutionary RL)에 target network 없이 distributional value estimation 적용 — high update-to-data ratio에서 안정성 유지가 포인트. QD-RL이 실제 로봇 배포로 나오려면 샘플효율이 핵심인데, 정확히 그 지점을 건드립니다.</p>
-</div>
-
-<h4 class="bucket">🚗 Autonomous Driving <span class="count">· 4편 · CV 2 / RO 2</span></h4>
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20231" target="_blank" rel="noopener"><strong>Toward Cooperative Driving in Mixed Traffic: An Adaptive Potential Game-Based Approach with Field Test Verification</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Shiyu Fang et al.</div>
-<p>CAV + HDV 혼재 환경에서 adaptive potential game으로 cooperative driving을 실제 필드에서 검증. AD 쪽 end-to-end 학습 경쟁과 결을 달리 하는 game-theoretic 접근이 드물게 필드 데이터까지 왔다는 점이 강점이에요. 실제 도로 테스트가 붙은 AD 논문은 방법론과 별개로 가치가 큽니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21471" target="_blank" rel="noopener"><strong>Ufil: A Unified Framework for Infrastructure-based Localization</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Simon Schäfer et al.</div>
+<p>Infrastructure-based localization을 여러 app-specific 스택 대신 unified framework 로. 도로 운영자 관점 "하나의 스택으로 여러 use case"라는 실무 정리 논문이에요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20423" target="_blank" rel="noopener"><strong>OVPD: A Virtual-Physical Fusion Testing Dataset of OnSite Autonomous Driving Challenge</strong></a> <span class="badge badge-ro">RO</span> <a class="cbadge cbadge-hf" href="https://huggingface.co/datasets/Yuhang253820/Onsite_OPVD" target="_blank" rel="noopener">[🤗 HF]</a></div>
-<div class="paper-authors">👥 Yuhang Zhang et al.</div>
-<p>Vehicle-infrastructure perception을 위한 virtual-physical fusion dataset. V2X 평가가 그동안 순수 시뮬레이션 또는 소규모 실물에 의존했는데, 두 소스를 한 데이터셋으로 묶어 closed-loop 평가가 가능해진다는 게 핵심. HF에 공개라 접근성도 좋아요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21489" target="_blank" rel="noopener"><strong>MISTY: High-Throughput Motion Planning via Mixer-based Single-step Drifting</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yining Xing et al.</div>
+<p>Diffusion planner 의 반복 inference latency를 single-step drifting(MLP-mixer 기반)으로 뚫는 AD motion planner. 제어 주기 요구 만족하는 diffusion 대안.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20191" target="_blank" rel="noopener"><strong>From Scene to Object: Text-Guided Dual-Gaze Prediction</strong></a> <span class="badge badge-cvro">CV/RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Zehong Ke et al.</div>
-<p>Driver attention을 scene-level에서 object-level로 precision을 높인 예측 — SAM3 + DualGaze-VLM으로 intent-driven 공간 attention을 푸는데, AD 쪽 gaze 데이터셋이 이렇게 정교해진 사례가 드물어요. Human factor + AD의 교차 영역으로 오늘 SGAP-Gaze와 같이 읽으면 driver attention 재부상 신호로 해석됩니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21640" target="_blank" rel="noopener"><strong>Task-specific Subnetwork Discovery in Reinforcement Learning for Autonomous Underwater Navigation</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yi-Ling Liu et al.</div>
+<p>수중 autonomous navigation을 task-specific subnetwork discovery 로 설명 가능성 확보. 제한 센싱·explainable 요구가 모두 있는 도메인에 잘 맞아요.</p>
+</div>
+<h4 class="bucket">🧠 Foundation Models <span class="count">· 19편 · CV 19 / RO 0 / CV-RO 0</span></h4>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20983" target="_blank" rel="noopener"><strong>Thinking Like a Botanist: Challenging Multimodal Language Models with Intent-Driven Chain-of-Inquiry</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Syed Nazmus Sakib et al.</div>
+<p>Botanist 전문가의 evidence-based adaptive inquiry 과정을 MLLM 평가로 가져옴 — VLM이 "구조화된 진단 추론" 을 얼마나 할 수 있는지 전문가 workflow 관점에서 측정합니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19888" target="_blank" rel="noopener"><strong>SGAP-Gaze: Scene Grid Attention Based Point-of-Gaze Estimation Network for Driver Gaze</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Pavan Kumar Sharma et al.</div>
-<p>Face + eye + scene context를 Transformer attention으로 묶어 dashcam에서 driver gaze point를 예측. HMI·자율주행 안전 관점에서 driver 쪽 인지 모니터링이 다시 주목받는데, Dual-Gaze 논문과 결합하면 "driver attention의 두 계층(scene/object)"이 하루에 나란히 등장한 구도입니다.</p>
-</div>
-
-<h4 class="bucket">🧠 Foundation Models <span class="count">· 7편 · CV 7 / RO 0</span></h4>
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19966" target="_blank" rel="noopener"><strong>DistortBench: Benchmarking Vision Language Models on Image Distortion Identification</strong></a> <span class="badge badge-cvro">CV/RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Divyanshu Goyal et al.</div>
-<p>13,500 QA × 27 distortion types. VLM이 "reasoning은 하지만 픽셀을 못 읽는다"는 걸 진단용 벤치로 보여준 must-read #2예요. POPE(hallucination) 옆에 바로 깔릴 기본 평가가 될 가능성이 높고, 우리 VLM 파이프라인 입력 건강도 점검 도구로도 쓸 수 있습니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21032" target="_blank" rel="noopener"><strong>Unlocking Multi-Spectral Data for Multi-Modal Models with Guided Inputs and Chain-of-Thought Reasoning</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Dahun Kim et al.</div>
+<p>Remote sensing 에서 흔한 multi-spectral 입력을 generalist LMM 이 못 다루는 문제를 guided input + CoT 로 푸는 방법론. Domain specialization 의 경제적 접근 사례.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19945" target="_blank" rel="noopener"><strong>Visual Reasoning through Tool-supervised Reinforcement Learning</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Qihua Dong et al.</div>
-<p>ToolsRL — 도구 사용 자체를 curriculum reward로 학습해 visual reasoning을 향상. Tool-use가 "에이전트의 액세서리"에서 "정책 학습의 objective"로 격상되는 분기점이에요. 오늘 SceneOrchestra의 tool-call trajectory 학습과 같은 DNA인데, 각자 3D 생성과 2D 추론 도메인에서 서로를 뒷받침합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21079" target="_blank" rel="noopener"><strong>Foveated Reasoning: Stateful, Action-based Visual Focusing for Vision-Language Models</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Juhong Min et al.</div>
+<p>Human foveation(중심-주변 시각)을 VLM 에 action-based stateful focusing으로 도입. 고해상도 입력의 compute 비용을 "어디를 볼지 학습" 으로 해결하는 흐름의 오늘자 대표입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19839" target="_blank" rel="noopener"><strong>Environmental Understanding Vision-Language Model for Embodied Agent</strong></a> <span class="badge badge-cv">CV</span> <a class="cbadge cbadge-page" href="https://eu-ea.github.io" target="_blank" rel="noopener">[🌐 page]</a></div>
-<div class="paper-authors">👥 Jinsik Bang et al.</div>
-<p>Embodied agent에 특화된 "4 core skills"로 VLM을 fine-tune. VLM 일반을 embodied로 옮기는 건 어제 Env 류 논문에서도 봤지만, 이번엔 명시적 skill taxonomy가 들어간다는 게 특징이에요. EmbodiedMidtrain과 짝을 이루어 "어떻게 embodied VLM을 만들 것인가" 두 접근을 보여줍니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21102" target="_blank" rel="noopener"><strong>Leveraging Multimodal LLMs for Built Environment and Housing Attribute Assessment from Street-View Imagery</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Siyuan Yao et al.</div>
+<p>Street-View + Gemma 3 27B fine-tune으로 전국 규모 주택/환경 평가 자동화. Vertical VLM 응용 사례인데 실제 지자체 업무에 붙일 수 있는 수준까지 왔어요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19902" target="_blank" rel="noopener"><strong>MMCORE: MultiModal COnnection with Representation Aligned Latent Embeddings</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Zijie Li et al.</div>
-<p>Pretrained VLM semantic embedding을 diffusion 조건 신호로 직접 사용해 생성·편집을 통합. VLM과 diffusion의 경계를 얇게 만드는 계열인데, 이 방향은 단일 latent space로 수렴하면 cost가 확 내려가 실제 제품용으로 유리해져요. Wan-Image(생성) 과 함께 "unified visual model" 축의 오늘판입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21160" target="_blank" rel="noopener"><strong>Reinforcing 3D Understanding in Point-VLMs via Geometric Reward Credit Assignment</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Jingkun Chen et al.</div>
+<p>Point-VLM의 "geometric hallucination"(2D와 3D 예측 mismatch)을 geometric reward credit assignment 로 교정. RL로 3D grounding을 잡는다는 발상이 흥미롭습니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19937" target="_blank" rel="noopener"><strong>Infection-Reasoner: A Compact Vision-Language Model for Wound Infection Classification with Evidence-Grounded Clinical Reasoning</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Palawat Busaranuvong et al.</div>
-<p>4B 파라미터 compact reasoning VLM을 distillation + RLHF로 의료 이미지 분류에 특화. "작지만 interpretable"을 핵심 가치로 내세운다는 게 특징이고, 의료 VLM이 "왜 그 판단을 내렸는지"까지 뱉어야 하는 규제 요구와 정확히 맞닿아요. 작은 VLM이 설명가능성과 결합하는 흐름을 대표합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21190" target="_blank" rel="noopener"><strong>SpatiO: Adaptive Test-Time Orchestration of Vision-Language Agents for Spatial Reasoning</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Chan Yeong Hwang et al.</div>
+<p>Spatial reasoning을 VLM 에이전트 test-time orchestration 으로 처리 — 2D appearance / 3D geometry / language 여러 inductive bias 를 실행 시점에 조합. SpatiO 라는 축 설계가 깔끔합니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19829" target="_blank" rel="noopener"><strong>TactileEval: A Step Towards Automated Fine-Grained Evaluation and Editing of Tactile Graphics</strong></a> <span class="badge badge-cv">CV</span> <a class="cbadge cbadge-page" href="https://TactileEval.github.io/" target="_blank" rel="noopener">[🌐 page]</a></div>
-<div class="paper-authors">👥 Adnan Khan et al.</div>
-<p>시각장애인용 tactile graphic(촉각 도식)의 품질을 ViT feature + gpt-image-1로 자동 평가·편집. 접근성 관련 연구는 고맙게도 계속 나오는데, 이 논문은 "그림을 tactile 용으로 변환 + 평가"라는 풀스택 접근이 신선해요. 사회적 영향 측면에서 의미 큰 ROI 외 잠재적 must-read입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21360" target="_blank" rel="noopener"><strong>Prototype-Based Test-Time Adaptation of Vision-Language Models</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Zhaohong Huang et al.</div>
+<p>VLM TTA를 prototype 기반으로 — cache 의존 방식들의 메모리 문제를 가볍게 우회. 오늘 TTA 4편 중 가장 가벼운 접근.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20027" target="_blank" rel="noopener"><strong>Cognitive Alignment At No Cost: Inducing Human Attention Biases For Interpretable Vision Transformers</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Ethan Knights et al.</div>
-<p>ViT-B/16의 self-attention을 saliency map으로 fine-tune해 human-like bias를 "무료로" 주입. Interpretability 비용이 성능 비용으로 돌아오지 않는다는 결과가 인상적이에요. Cognitive alignment 연구에서 "cost-free"를 증명한 셈이라, interpretable ViT 연구군에서 자주 인용될 가능성이 있습니다.</p>
-</div>
-
-<h4 class="bucket">🎨 Generation <span class="count">· 7편 · CV 7 / RO 0</span></h4>
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19858" target="_blank" rel="noopener"><strong>Wan-Image: Pushing the Boundaries of Generative Visual Intelligence</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Chaojie Mao et al.</div>
-<p>LLM + diffusion transformer를 통합해 professional-grade 생성(text rendering, identity preservation 포함)을 노리는 시스템. "Pushing the boundaries" 주장은 늘 조심해야 하지만(리스크 섹션 참조), 상용 alongside of SOTA 생성기와의 비교가 흥미로운 포인트예요. 기업발 생성 모델의 새 라인업으로 주시할 만합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21396" target="_blank" rel="noopener"><strong>VG-CoT: Towards Trustworthy Visual Reasoning via Grounded Chain-of-Thought</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Byeonggeuk Lim et al.</div>
+<p>Visual reasoning을 grounded CoT로 묶어 "각 reasoning step이 실제 visual region에 접지되는가"를 강제. Trustworthy VLM 축의 표준 구성 요소가 될 가능성.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19954" target="_blank" rel="noopener"><strong>Camera Control for Text-to-Image Generation via Learning Viewpoint Tokens</strong></a> <span class="badge badge-cv">CV</span> <a class="cbadge cbadge-page" href="https://randdl.github.io/viewtoken_control/" target="_blank" rel="noopener">[🌐 page]</a></div>
-<div class="paper-authors">👥 Xinxuan Lu et al.</div>
-<p>Image generator를 "parametric camera token"을 학습하게 해 viewpoint를 정밀 제어. T2I에서 카메라 제어는 오래된 숙제였는데, token 단위로 카메라 파라미터를 주입한다는 단순한 방향이 깔끔하게 먹힌다는 점이 좋습니다. 사용자 UX 관점에서 "텍스트 + 슬라이더 + 포즈" 시대로 가는 작은 발걸음.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21409" target="_blank" rel="noopener"><strong>S1-VL: Scientific Multimodal Reasoning Model with Thinking-with-Images</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Qingxiao Li et al.</div>
+<p>과학 도메인용 multimodal reasoning + thinking-with-images — 텍스트 CoT 와 이미지 조작 CoT 두 패러다임을 native 로 지원한다는 게 핵심입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20041" target="_blank" rel="noopener"><strong>Normalizing Flows with Iterative Denoising</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Tianrong Chen et al.</div>
-<p>iTARFlow — likelihood-based training + diffusion-style iterative denoising의 혼합체. 최근 flow matching과 diffusion의 경계가 흐려지고 있는데, 이번엔 normalizing flow의 장점(정확한 likelihood)을 유지하면서 denoising 장점을 추가합니다. 이론-실용 양쪽에서 흥미로운 계열이에요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21461" target="_blank" rel="noopener"><strong>Do MLLMs Understand Pointing? Benchmarking and Enhancing Referential Reasoning in Egocentric Vision</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Chentao Li et al.</div>
+<p>Egocentric 환경에서 MLLM이 포인팅 제스처를 이해하는가를 벤치마크 + 개선. Smart glasses 상용화 맥락에서 실용성 높아요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20128" target="_blank" rel="noopener"><strong>Semi-Supervised Flow Matching for Mosaiced and Panchromatic Fusion Imaging</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Peiming Luo et al.</div>
-<p>HSI-PAN 융합에 flow matching을 얹으면서, conflict-free gradient guidance로 semi-supervised 상황을 다룹니다. Flow matching이 주류 생성 영역 밖(위성·원격 탐사)으로 나가고 있는 흐름 — 이번주 pastweek에서도 flow matching 키워드가 계속 늘고 있는 것과 궤를 같이 해요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21523" target="_blank" rel="noopener"><strong>Seeing Isn't Believing: Uncovering Blind Spots in Evaluator Vision-Language Models</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Mohammed Safi Ur Rahman Khan et al.</div>
+<p>VLM-as-evaluator 의 blind spot을 체계적으로 드러냄. 요즘 VLM으로 생성물·QA를 자동 평가하는 파이프라인이 늘고 있는데 그 신뢰성 자체를 흔드는 연구입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20157" target="_blank" rel="noopener"><strong>HumanScore: Benchmarking Human Motions in Generated Videos</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Yusu Fang et al.</div>
-<p>생성 비디오에서 "인간 동작의 kinematic/biomechanic 타당성"을 6개 해석 가능한 지표로 평가. VBench가 "비디오 자체의 품질"을 잡았다면 HumanScore는 "그 비디오 속 인간이 물리적으로 말이 되는가"에 초점 — 어제 말한 "생성 평가의 embodied 이동" 흐름의 비디오 버전입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21718" target="_blank" rel="noopener"><strong>Building a Precise Video Language with Human-AI Oversight</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Zhiqiu Lin et al.</div>
+<p>Scalable oversight 를 위한 precise video captioning용 open dataset/benchmark/recipe 묶음. 비디오 이해 oversight 인프라 쪽 기여.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20258" target="_blank" rel="noopener"><strong>Rethinking Where to Edit: Task-Aware Localization for Instruction-Based Image Editing</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Jingxuan He et al.</div>
-<p>Instruction-based editing에서 over-editing의 원인을 "잘못된 위치 편집"으로 보고, task-aware localization으로 training-free로 억제. 편집 연구는 주로 "어떻게 바꿀지"에 초점인데 "어디를 바꿀지"에 해머를 때리는 시각이 신선하고, 실무 UX에도 직접적 개선이에요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21728" target="_blank" rel="noopener"><strong>Ramen: Robust Test-Time Adaptation of Vision-Language Models with Active Sample Selection</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Wenxuan Bao et al.</div>
+<p>VLM TTA에 active sample selection을 결합 — 불필요 sample 로 분포 이동 오염되는 문제를 "어떤 sample로 adapt 할지" 선택 문제로 재정의.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20226" target="_blank" rel="noopener"><strong>Learning Spatial-Temporal Coherent Correlations for Speech-Preserving Facial Expression Manipulation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Tianshui Chen et al.</div>
-<p>Facial expression 편집 시 입모양/발화 타이밍을 보존하는 STCCL 메트릭 학습. Talking-head 생성의 오랜 딜레마(표정 바꾸면 립싱크 깨짐)를 "시공간 correlation metric" 설계로 뚫어요. 립싱크 필수인 상용 앱에 즉시 쓸 만한 정교함입니다.</p>
-</div>
-
-<h4 class="bucket">⚡ Efficiency/Systems <span class="count">· 5편 · CV 4 / RO 1</span></h4>
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20169" target="_blank" rel="noopener"><strong>Semantic-Fast-SAM: Efficient Semantic Segmenter</strong></a> <span class="badge badge-cv">CV</span> <a class="cbadge cbadge-code" href="https://github.com/KBH00/Semantic-Fast-SAM" target="_blank" rel="noopener">[💻 code ✓]</a></div>
-<div class="paper-authors">👥 Byunghyun Kim et al.</div>
-<p>FastSAM에 semantic labeling을 붙여 Cityscapes/ADE20K에서 real-time + open-vocabulary. SAM 파생계가 점점 "open-vocab + real-time" 축으로 수렴하는 중인데, 코드 공개라 로봇·edge 비전 스택에 바로 꽂기 좋아요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21786" target="_blank" rel="noopener"><strong>From Codebooks to VLMs: Evaluating Automated Visual Discourse Analysis for Climate Change on Social Media</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Katharina Prasse et al.</div>
+<p>Climate change 쪽 소셜미디어 이미지를 codebook 에서 VLM 으로 전환한 automated discourse analysis. 실제 환경 커뮤니케이션 연구자에게 유용한 파이프라인.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19834" target="_blank" rel="noopener"><strong>KD-Judge: A Knowledge-Driven Automated Judge Framework for Functional Fitness Movements on Edge Devices</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Shaibal Saha et al.</div>
-<p>LLM 기반 rule 구조화 + deterministic pose-guided 평가로 fitness rep을 edge에서 검증. "Edge에 LLM rule을 깐다"는 구도가 오늘 LLM-Guided Safety Agent(RO)와 흥미롭게 겹쳐요 — 두 논문 모두 LLM을 중앙 서버가 아니라 edge에서 "규칙 번역기"로 쓰는 패턴입니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21879" target="_blank" rel="noopener"><strong>Addressing Image Authenticity When Cameras Use Generative AI</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Umar Masud et al.</div>
+<p>카메라가 GenAI 를 내장하게 되면 "찍은 사진의 authenticity" 정의가 어떻게 흔들리는지 문제 제기 + 기술적 대응. Policy/ethics까지 걸린 논문입니다.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19976" target="_blank" rel="noopener"><strong>Lucky High Dynamic Range Smartphone Imaging</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Baiang Li et al.</div>
-<p>Handheld HDR을 bracketed raw pixel의 convex combination으로 풀어 모바일에 얹을 수 있는 경량 네트워크로 만듦. Computational photography가 모바일 배포 관점에서 계속 가벼워지는 방향의 모범 사례예요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21911" target="_blank" rel="noopener"><strong>When Prompts Override Vision: Prompt-Induced Hallucinations in LVLMs</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Pegah Khayatan et al.</div>
+<p>Prompt가 visual evidence를 덮어써 hallucination 을 유도하는 경로를 체계화. LVLM hallucination 의 "시각이 아닌 언어 쪽 원인" 을 분리해 보여줘요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19999" target="_blank" rel="noopener"><strong>Optimizing Data Augmentation for Real-Time Small UAV Detection: A Lightweight Context-Aware Approach</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Amir Zamani et al.</div>
-<p>Edge 배포되는 UAV detection을 위한 Mosaic + HSV 적응 증강. 합성 artifact 없이 context를 살리는 게 포인트 — 소형 UAV처럼 "작은 객체 × 실시간"이 필요한 도메인에 특화됐어요. 군/재난/방범 등 실전 응용에서 중요.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20878" target="_blank" rel="noopener"><strong>AITP: Traffic Accident Responsibility Allocation via Multimodal Large Language Models</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Zijin Zhou et al.</div>
+<p>Traffic accident responsibility allocation에 MLLM — 사고 동영상 "해석" 을 넘어 "책임 분배" 까지 가는 AD + legal 교차 연구.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20193" target="_blank" rel="noopener"><strong>LLM-Guided Safety Agent for Edge Robotics with an ISO-Compliant Perception-Compute-Control Architecture</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Xu Huang et al.</div>
-<p>LLM이 ISO 안전 규제를 executable predicate로 번역해 edge hardware + dual-modular redundancy로 배포. 규제 언어를 코드로 자동 번역하고 edge에서 돌린다는 게 이 논문의 진짜 가치예요. 오늘 Safety·Edge 두 축의 교집합에 정확히 놓입니다.</p>
-</div>
-
-<h4 class="bucket">🏃 Embodied AI <span class="count">· 3편 · CV 1 / RO 2</span></h4>
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20136" target="_blank" rel="noopener"><strong>IMPACT-CYCLE: A Contract-Based Multi-Agent System for Claim-Level Supervisory Correction of Long-Video Semantic Memory</strong></a> <span class="badge badge-cv">CV</span> <a class="cbadge cbadge-code" href="https://github.com/MKong17/IMPACT_CYCLE" target="_blank" rel="noopener">[💻 code ✓]</a></div>
-<div class="paper-authors">👥 Weitong Kong et al.</div>
-<p>긴 비디오 이해를 "주장 단위 유지보수 루프"로 재정식화한 multi-agent 시스템. Long-video memory가 단일 agent로는 붕괴하는 문제를 contract 기반 supervisory correction으로 분산한다는 아이디어가 인상적이에요. Embodied agent의 memory-augmented 정책 계열에 직접 영감이 됩니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21199" target="_blank" rel="noopener"><strong>ARFBench: Benchmarking Time Series Question Answering Ability for Software Incident Response</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Stephan Xie et al.</div>
+<p>Time series QA 용 벤치마크(ARFBench) + software incident response 도메인. Foundation model의 시계열 reasoning을 실무 시나리오로 평가.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19775" target="_blank" rel="noopener"><strong>From Actions to Understanding: Conformal Interpretability of Temporal Concepts in LLM Agents</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Trilok Padhi et al.</div>
-<p>LLM 에이전트의 temporal concept evolution을 conformal prediction + linear probe로 해석. 에이전트가 "시간 개념"을 어떻게 표상하는지 해석하는 드문 시도인데, embodied agent의 memory·planning에 직접 얹을 수 있는 도구로 유용합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21346" target="_blank" rel="noopener"><strong>Symbolic Grounding Reveals Representational Bottlenecks in Abstract Visual Reasoning</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Mohit Vaishnav et al.</div>
+<p>Bongard-LOGO 로 VLM 실패가 reasoning 문제인지 representation 병목인지 분리 — "representational bottleneck" 이라는 결론이 설명 가능한 이유를 제공합니다.</p>
+</div>
+<h4 class="bucket">🎨 Generation <span class="count">· 20편 · CV 19 / RO 1 / CV-RO 0</span></h4>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21008" target="_blank" rel="noopener"><strong>Linear Image Generation by Synthesizing Exposure Brackets</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yuekun Dai et al.</div>
+<p>ISP 파이프라인 앞단에서 exposure bracket 을 합성하는 linear image generation. HDR·low-light 양쪽 다 잡으려는 RAW-level 생성 축의 신선한 시도예요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20744" target="_blank" rel="noopener"><strong>AAC: Admissible-by-Architecture Differentiable Landmark Compression for ALT</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 An T. Le et al.</div>
-<p>Shortest-path heuristics에 쓰는 landmark selector를 "구조적으로 admissibility 보장"되게 만듦. 고전 planning에 differentiable 학습을 붙이면서 기본 성질을 깨지 않게 유지한다는 게 세련됐어요. Classical + learned planner hybrid의 발전 흐름 안에 있습니다.</p>
-</div>
-
-<h4 class="bucket">🛡️ Safety/Alignment <span class="count">· 5편 · CV 2 / RO 3</span></h4>
-<div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20208" target="_blank" rel="noopener"><strong>Stochastic Barrier Certificates in the Presence of Dynamic Obstacles</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Rayan Mazouz et al.</div>
-<p>Time-varying stochastic barrier로 동적 장애물이 섞인 환경에서 안전 보증을 확장. Formal safety 분야가 실제 로봇 환경의 불확실성 + 동적 요소까지 다루기 시작한다는 신호예요. VLA + formal safety 접합의 물리 계층으로 중요합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21041" target="_blank" rel="noopener"><strong>Projected Gradient Unlearning for Text-to-Image Diffusion Models: Defending Against Concept Revival Attacks</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Aljalila Aladawi et al.</div>
+<p>T2I diffusion unlearning의 "concept revival" 공격을 projected gradient 로 방어. 모델 유출/재학습 공격이 실사용으로 부상하는 맥락에서 중요.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20428" target="_blank" rel="noopener"><strong>Lexicographic Minimum-Violation Motion Planning using Signal Temporal Logic</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Patrick Halder et al.</div>
-<p>STL 기반 lexicographic multi-objective를 단일 objective로 bit-shifting 변환해 풀어요. "안전 우선 + 최소 위반 + 태스크 달성" 같은 사전식 우선순위가 단일 solver로 묶인다는 게 실무 임팩트. 자율주행·manipulator 제약 만족 파이프라인에 즉시 얹기 좋습니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21066" target="_blank" rel="noopener"><strong>Optimizing Diffusion Priors with a Single Observation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Frederic Wang et al.</div>
+<p>단일 observation 으로 diffusion prior를 최적화 — 제한된 데이터/시뮬에서 학습된 prior 의 bias 교정에 씁니다. Inverse problem 파이프라인에 바로 붙일 툴.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20799" target="_blank" rel="noopener"><strong>A Hough transform approach to safety-aware scalar field mapping using Gaussian Processes</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Muzaffar Qureshi et al.</div>
-<p>Unknown scalar field mapping을 Hough transform + GP로 풀면서 unsafe region을 실시간 추정. 탐사·환경 모니터링에서 "불확실성을 안전 경계로 변환"하는 접근인데, 고전 기법 + 현대 GP를 엮는 방식이 깔끔합니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21146" target="_blank" rel="noopener"><strong>WFM: 3D Wavelet Flow Matching for Ultrafast Multi-Modal MRI Synthesis</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yalcin Tur et al.</div>
+<p>3D wavelet flow matching으로 multi-modal MRI 합성을 ultrafast 로. 임상 배포 제약(샘플링 수백 스텝, modality별 모델)이 flow matching + wavelet 으로 풀린다는 신호.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.19844" target="_blank" rel="noopener"><strong>If you're waiting for a sign... that might not be it! Mitigating Trust Boundary Confusion from Visual Injections on Vision-Language Agentic Systems</strong></a> <span class="badge badge-cv">CV</span> <a class="cbadge cbadge-code" href="https://anonymous.4open.science/r/Visual-Prompt-Inject" target="_blank" rel="noopener">[💻 code ✓]</a></div>
-<div class="paper-authors">👥 Jiamin Chang et al.</div>
-<p>VLAS(Vision-Language Agentic System)가 환경의 legitimate 신호와 adversarial visual injection을 혼동하는 보안 취약점을 정의·완화. VLA가 실제 환경에서 돌기 시작하면 "adversarial sign" 공격은 피할 수 없는 issue라, 문제 정의만으로도 의미 있고 LLM agent 보안 문헌의 시각 버전으로 읽힙니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21221" target="_blank" rel="noopener"><strong>Sparse Forcing: Native Trainable Sparse Attention for Real-time Autoregressive Diffusion Video Generation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Boxun Xu et al.</div>
+<p>Autoregressive video diffusion에 native trainable sparse attention — 긴 horizon 품질 + 디코딩 지연 동시 개선. 스트리밍 비디오 생성 실사용 관점에서 핵심적.</p>
 </div>
 <div class="paper">
-<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20047" target="_blank" rel="noopener"><strong>PASTA: A Patch-Agnostic Twofold-Stealthy Backdoor Attack on Vision Transformers</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
-<div class="paper-authors">👥 Dazhuang Liu et al.</div>
-<p>ViT에 대한 multi-location trigger 기반 backdoor 공격 — pixel + attention domain stealth 양쪽을 동시에 유지. 공격 연구이지만, 그만큼 방어·탐지 쪽 타겟이 분명해진다는 점에서 robustness 연구군에 기본 참고자료가 될 겁니다.</p>
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21279" target="_blank" rel="noopener"><strong>LatRef-Diff: Latent and Reference-Guided Diffusion for Facial Attribute Editing and Style Manipulation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Wenmin Huang et al.</div>
+<p>Latent + reference guided diffusion 얼굴 속성 편집. attribute disentangle 이 잘 안 되던 영역을 두 guidance 축으로 정밀화.</p>
 </div>
-
-<hr>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21289" target="_blank" rel="noopener"><strong>AttDiff-GAN: A Hybrid Diffusion-GAN Framework for Facial Attribute Editing</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Wenmin Huang et al.</div>
+<p>Diffusion-GAN hybrid 얼굴 편집 — GAN 제어성 + diffusion 품질을 직렬 결합. 양측 장점 절충하는 구조는 이미 흔하지만 face editing 에선 새 조합.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21291" target="_blank" rel="noopener"><strong>Exploring the Role of Synthetic Data Augmentation in Controllable Human-Centric Video Generation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yuanchen Fei et al.</div>
+<p>Controllable human-centric video generation에 synthetic augmentation 이 실제 어떤 역할을 하는지 체계적 분석. Digital human pipeline 실무자에겐 유용한 reality check.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21362" target="_blank" rel="noopener"><strong>KD-CVG: A Knowledge-Driven Approach for Creative Video Generation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Linkai Liu et al.</div>
+<p>Creative video generation(광고 크리에이티브)을 knowledge-driven으로 — 제품 feature 강조를 위한 dedicated 구조. 상업 쪽에 가까운 축의 오늘 등장.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21422" target="_blank" rel="noopener"><strong>Pre-process for segmentation task with nonlinear diffusion filters</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Javier Sanguino et al.</div>
+<p>Segmentation 전처리에 비선형 diffusion filter를 intrinsic formulation 으로. 고전 PDE + deep 전단 설계의 오랜 라인 업데이트입니다.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21450" target="_blank" rel="noopener"><strong>VARestorer: One-Step VAR Distillation for Real-World Image Super-Resolution</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yixuan Zhu et al.</div>
+<p>VAR(visual autoregressive) 모델을 1-step distillation 으로 real-world image SR에 투입. ISR 쪽 diffusion-heavy 체제에 대한 VAR 계열의 진입 시도.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21592" target="_blank" rel="noopener"><strong>Sculpt4D: Generating 4D Shapes via Sparse-Attention Diffusion Transformers</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Minghao Yin et al.</div>
+<p>Sparse-attention diffusion transformer 로 4D shape 생성 — 시간 artifact 억제가 목표. Dynamic 4D 생성 축에서 지난주 대비 선명한 방법론 발전.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21627" target="_blank" rel="noopener"><strong>DCMorph: Face Morphing via Dual-Stream Cross-Attention Diffusion</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Tahar Chettaoui et al.</div>
+<p>Dual-stream cross-attention 으로 face morphing 공격을 설계. 방어 연구의 전제 조건으로서 attack 방법이 진화하는 맥락이에요.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21686" target="_blank" rel="noopener"><strong>WorldMark: A Unified Benchmark Suite for Interactive Video World Models</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Xiaojie Xu et al.</div>
+<p>Interactive video world model(Genie/YUME/HY-World/Matrix-Game) 통합 벤치 스위트 — 각자 private 평가로 비교 불가였던 상황 교정 시도. 자기 벤치의 독립성은 Risk 섹션에서 플래그.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21814" target="_blank" rel="noopener"><strong>Divide-then-Diagnose: Weaving Clinician-Inspired Contexts for Ultra-Long Capsule Endoscopy Videos</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Bowen Liu et al.</div>
+<p>초장시간(ultra-long) capsule endoscopy 비디오 분석을 "divide-then-diagnose"로 — 프레임 단위에 머무르던 CE 연구를 비디오 레벨로 밀어올립니다.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21909" target="_blank" rel="noopener"><strong>Directional Confusions Reveal Divergent Inductive Biases Through Rate-Distortion Geometry in Human and Machine Vision</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Leyla Roksan Caglar et al.</div>
+<p>인간 vs 기계 비전의 directional confusion 을 rate-distortion geometry 로 분석 — 유사한 accuracy 아래 "누구를 누구로 오인하는가" 축의 inductive bias 차이를 수치화.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21931" target="_blank" rel="noopener"><strong>Seeing Fast and Slow: Learning the Flow of Time in Videos</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yen-Siang Wu et al.</div>
+<p>비디오 속도(가속/감속) 인식과 생성을 시계열 flow 관점에서 통합. 비디오 이해·생성 양쪽 연구자에게 공통 도구가 될 가능성.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20936" target="_blank" rel="noopener"><strong>AttentionBender: Manipulating Cross-Attention in Video Diffusion Transformers as a Creative Probe</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Adam Cole et al.</div>
+<p>Video diffusion transformer 의 cross-attention 을 아티스트 제어용 probe 로 — "black-box 내부를 예술적으로 만지는" UX 쪽 도구성 논문입니다.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21689" target="_blank" rel="noopener"><strong>StyleID: A Perception-Aware Dataset and Metric for Stylization-Agnostic Facial Identity Recognition</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Kwan Yun et al.</div>
+<p>Face stylization 하에서도 identity 보존을 측정하는 perception-aware dataset/metric. ID 인코더 평가의 missing piece 를 채우는 리소스 기여.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21030" target="_blank" rel="noopener"><strong>A Systematic Review and Taxonomy of Reinforcement Learning-Model Predictive Control Integration for Linear Systems</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Mohsen Jalaeian Farimani et al.</div>
+<p>MPC+RL 통합(선형 시스템)의 체계적 review + taxonomy. 고전-학습 하이브리드 로드맵을 제시하는 research-direction paper 로 많이 인용될 거예요.</p>
+</div>
+<h4 class="bucket">⚡ Efficiency/Systems <span class="count">· 11편 · CV 9 / RO 2 / CV-RO 0</span></h4>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21280" target="_blank" rel="noopener"><strong>ImageHD: Energy-Efficient On-Device Continual Learning of Visual Representations via Hyperdimensional Computing</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Jebacyril Arockiaraj et al.</div>
+<p>On-device continual learning을 hyperdimensional computing 으로 — backprop·exemplar heavy 접근의 energy·memory 비용을 구조적으로 우회. Edge AI 쪽 실제 쓰임새 큰 방향.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21290" target="_blank" rel="noopener"><strong>GraphLeap: Decoupling Graph Construction and Convolution for Vision GNN Acceleration on FPGA</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Anvitha Ramachandran et al.</div>
+<p>Vision GNN 을 FPGA 에서 가속 — graph 구성과 convolution 을 decoupling 해서 하드웨어 친화 구조로. ViG 의 배포 병목이 풀리는 신호.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21330" target="_blank" rel="noopener"><strong>Teacher-Guided Routing for Sparse Vision Mixture-of-Experts</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Masahiro Kada et al.</div>
+<p>Sparse MoE routing 을 teacher-guided 로 개선 — 라우팅 품질이 MoE 성능 상한을 결정하는데 여기서 teacher signal 을 투입하는 간결한 방법.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21356" target="_blank" rel="noopener"><strong>SparseGF: A Height-Aware Sparse Segmentation Framework with Context Compression for Robust Ground Filtering Across Urban to Natural Scenes</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Nannan Qin et al.</div>
+<p>ALS ground filtering 을 height-aware sparse segmentation + context compression 으로. 원격 탐사 실무에 바로 들어가는 효율적 파이프라인.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21435" target="_blank" rel="noopener"><strong>UHR-DETR: Efficient End-to-End Small Object Detection for Ultra-High-Resolution Remote Sensing Imagery</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Jingfang Li et al.</div>
+<p>Ultra-high-resolution remote sensing 에서 작은 object detection 을 end-to-end DETR 로 — 메모리 폭주 문제를 구조적으로 피한 점이 핵심.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21668" target="_blank" rel="noopener"><strong>Encoder-Free Human Motion Understanding via Structured Motion Descriptions</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yao Zhang et al.</div>
+<p>Encoder-free motion understanding — structured motion description 으로 LLM 추론을 motion 에 직접 붙임. 모듈 경량화 축.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20981" target="_blank" rel="noopener"><strong>PanGuide3D: Cohort-Robust Pancreas Tumor Segmentation via Probabilistic Pancreas Conditioning and a Transformer Bottleneck</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Sunny Joy Ma et al.</div>
+<p>Pancreas tumor segmentation 의 cohort heterogeneity 를 probabilistic pancreas conditioning + transformer bottleneck 으로 robust 화. 임상 현장 배포의 실제 병목 공략.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21268" target="_blank" rel="noopener"><strong>Measure Twice, Click Once: Co-evolving Proposer and Visual Critic via Reinforcement Learning for GUI Grounding</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Wenkai Wang et al.</div>
+<p>GUI grounding 을 proposer + visual critic co-evolution RL 로 — GUI agent 축에서 grounding 정확도 개선의 의미 있는 발걸음.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21743" target="_blank" rel="noopener"><strong>Bridging the Training-Deployment Gap: Gated Encoding and Multi-Scale Refinement for Efficient Quantization-Aware Image Enhancement</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Dat To-Thanh et al.</div>
+<p>Quantization-aware image enhancement 의 training-deployment gap 을 gated encoding + multi-scale refinement 로 해소. 모바일 배포 실무형.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20898" target="_blank" rel="noopener"><strong>A Tendon-Driven Wrist Abduction-Adduction Joint Improves Performance of a 5 DoF Upper Limb Exoskeleton -- Implementation and Experimental Evaluation</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Juwairiya S. Khan et al.</div>
+<p>Tendon-driven 손목 ab-ad joint 를 5-DoF 상지 exoskeleton 에 추가해 실질 ADL 성능 향상. 하드웨어 설계 기여.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20887" target="_blank" rel="noopener"><strong>Spectral Kernel Dynamics for Planetary Surface Graphs: Distinction Dynamics and Topological Conservation</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Jnaneshwar Das</div>
+<p>Planetary surface graph 의 spectral kernel dynamics — 우주 탐사용 지형 표현의 이론적 불변량을 정리하는 theory-track 논문입니다.</p>
+</div>
+<h4 class="bucket">🏃 Embodied AI <span class="count">· 2편 · CV 0 / RO 2 / CV-RO 0</span></h4>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21363" target="_blank" rel="noopener"><strong>A Deployable Embodied Vision-Language Navigation System with Hierarchical Cognition and Context-Aware Exploration</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Kuan Xu et al.</div>
+<p>Deployable VLN 시스템을 hierarchical cognition + context-aware exploration 으로 — on-device 배포 조건을 명시적으로 타겟하는 실용 방향.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20910" target="_blank" rel="noopener"><strong>Planetary Exploration 3.0: A Roadmap for Software-Defined, Radically Adaptive Space Systems</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Masahiro Ono et al.</div>
+<p>"Planetary Exploration 3.0" 이라는 로드맵 — Software-defined adaptive 우주 시스템의 청사진. Vision paper 이지만 방향성 제안 규모가 커서 referencing 가치.</p>
+</div>
+<h4 class="bucket">🛡️ Safety/Alignment <span class="count">· 27편 · CV 23 / RO 4 / CV-RO 0</span></h4>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21060" target="_blank" rel="noopener"><strong>Clinically-Informed Modeling for Pediatric Brain Tumor Classification from Whole-Slide Histopathology Images</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Joakim Nguyen et al.</div>
+<p>소아 뇌종양 histopathology 의 data scarcity·class imbalance·morphologic overlap 삼중 난제를 clinically-informed 모델링으로. 의료 AI rare-disease 분야의 정직한 접근.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21198" target="_blank" rel="noopener"><strong>A Probabilistic Framework for Improving Dense Object Detection in Underwater Image Data via Annealing-Based Data Augmentation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Eleanor Wiesler et al.</div>
+<p>수중 object detection 의 조명·탁도·시점 variance 를 annealing data aug 로 완화. 현장 센서 조건이 거친 도메인의 실용적 대응.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21227" target="_blank" rel="noopener"><strong>UAU-Net: Uncertainty-aware Representation Learning and Evidential Classification for Facial Action Unit Detection</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yuze Li et al.</div>
+<p>얼굴 action unit 검출에 uncertainty-aware representation + evidential classification — AU 별로 서로 다른 uncertainty 분포를 인정하는 게 기여 포인트.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21321" target="_blank" rel="noopener"><strong>FryNet: Dual-Stream Adversarial Fusion for Non-Destructive Frying Oil Oxidation Assessment</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Khaled R Ahmed et al.</div>
+<p>Frying oil oxidation 을 dual-stream adversarial fusion 으로 비파괴 평가. Food safety 실무 axis, spatially resolved 측정이 현장에서 새 평가 가능성을 엽니다.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21324" target="_blank" rel="noopener"><strong>Temporal Prototyping and Hierarchical Alignment for Unsupervised Video-based Visible-Infrared Person Re-Identification</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Zhiyong Li et al.</div>
+<p>Cross-modality VI-ReID(가시광-적외선 보행자) 를 temporal prototyping + hierarchical alignment 로 unsupervised 학습. 감시 현장 labeling cost 문제 대응.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21326" target="_blank" rel="noopener"><strong>MiMIC: Mitigating Visual Modality Collapse in Universal Multimodal Retrieval While Avoiding Semantic Misalignment</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Juan Li et al.</div>
+<p>Universal multimodal retrieval 의 visual modality collapse 를 mitigate 하면서 semantic misalignment 도 피하는 균형 구조. UMR 축의 "두 실패 모드" 를 동시에 다룬 점이 깔끔.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21343" target="_blank" rel="noopener"><strong>Latent Denoising Improves Visual Alignment in Large Multimodal Models</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Dhruv Parikh et al.</div>
+<p>LMM(LLaVA류) 의 weak visual representation 문제를 latent denoising 으로 직접 개선 — autoregressive objective 가 간접 supervision 이던 점을 정면 교정.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21349" target="_blank" rel="noopener"><strong>Trust-SSL: Additive-Residual Selective Invariance for Robust Aerial Self-Supervised Learning</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Wadii Boulila et al.</div>
+<p>Aerial SSL 에서 semantic content 가 augmentation 에 깨지는 문제를 additive-residual selective invariance 로. 도메인 특이 SSL invariance 설계의 사례.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21465" target="_blank" rel="noopener"><strong>ID-Eraser: Proactive Defense Against Face Swapping via Identity Perturbation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Junyan Luo et al.</div>
+<p>Face swap 공격 방어를 pixel perturbation 수준 이상의 identity perturbation 로. 능동적 방어(proactive) 축이 attack 연구 대비 덜 주목받던 공백을 채움.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21478" target="_blank" rel="noopener"><strong>Rethinking Cross-Domain Evaluation for Face Forgery Detection with Semantic Fine-grained Alignment and Mixture-of-Experts</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yuhan Luo et al.</div>
+<p>Cross-domain face forgery detection 을 semantic fine-grained alignment + MoE 로 일반화. Forgery 계열의 "도메인 갈이" 문제에 체계적 접근.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21502" target="_blank" rel="noopener"><strong>VFM$^{4}$SDG: Unveiling the Power of VFMs for Single-Domain Generalized Object Detection</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yupeng Zhang et al.</div>
+<p>VFM(Vision foundation model) 을 single-domain generalized object detection 에 unveil — "VFM의 어떤 속성이 도메인 일반화에 기여하는가" 분해가 핵심.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21530" target="_blank" rel="noopener"><strong>Attention-based multiple instance learning for predominant growth pattern prediction in lung adenocarcinoma wsi using foundation models</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Laura Valeria Perez-Herrera et al.</div>
+<p>폐 adenocarcinoma grading 을 attention-based MIL + foundation model 로. 임상 의사결정에 직접 영향 주는 pathology task 의 ground-up 업그레이드.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21546" target="_blank" rel="noopener"><strong>Component-Based Out-of-Distribution Detection</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Wenrui Liu et al.</div>
+<p>OOD detection 을 component-based 로 — global representation 이 ID 다양성에 과민하다는 진단에서 출발. 세밀한 granularity 설계가 신선해요.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21573" target="_blank" rel="noopener"><strong>CHRep: Cross-modal Histology Representation and Post-hoc Calibration for Spatial Gene Expression Prediction</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Changfan Wang et al.</div>
+<p>Routine H&E slide 에서 spatial gene expression 을 예측하는 cross-modal 표현 + post-hoc calibration. 공간 transcriptomics 의 cost 문제에 직접 응답.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21617" target="_blank" rel="noopener"><strong>Local Neighborhood Instability in Parametric Projections: Quantitative and Visual Analysis</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Frederik L. Dennig et al.</div>
+<p>Parametric projection 의 local instability 를 quantitative + visual 로 분석. Dimensionality reduction 안정성 연구의 oft-overlooked 구멍을 채웁니다.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21694" target="_blank" rel="noopener"><strong>Efficient Logic Gate Networks for Video Copy Detection</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Katarzyna Fojcik</div>
+<p>Video copy detection 을 efficient logic gate network 로 대규모 배포. 정확도-비용 트레이드오프 곡선을 산업 배포 친화적 위치로.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21772" target="_blank" rel="noopener"><strong>Back to Source: Open-Set Continual Test-Time Adaptation via Domain Compensation</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yingkai Yang et al.</div>
+<p>Open-set continual TTA 에 "back to source" domain compensation — continual + unknown class 이중 shift 환경을 정면으로 다루는 흔치 않은 현실적 설정입니다.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21776" target="_blank" rel="noopener"><strong>Reshoot-Anything: A Self-Supervised Model for In-the-Wild Video Reshooting</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Avinash Paliwal et al.</div>
+<p>Non-rigid scene 용 in-the-wild video reshooting 을 self-supervised 로. Paired multi-view 없이 dynamic scene 편집 가능성을 연다는 점에서 임팩트.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21806" target="_blank" rel="noopener"><strong>TEMA: Anchor the Image, Follow the Text for Multi-Modification Composed Image Retrieval</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Zixu Li et al.</div>
+<p>Multi-modification composed image retrieval 에 anchor image + text 구조 — 복수 수정 쿼리의 ambiguity 해소 방식이 깔끔합니다.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21873" target="_blank" rel="noopener"><strong>Grounding Video Reasoning in Physical Signals</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Alibay Osmanli et al.</div>
+<p>Video reasoning 을 physical signal(시간·공간 localization, 물리적 일관성)에 접지 — 텍스트 regularity 로 대답하는 VLM 의 shortcut 을 막는 평가·학습 축.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21904" target="_blank" rel="noopener"><strong>UniGenDet: A Unified Generative-Discriminative Framework for Co-Evolutionary Image Generation and Generated Image Detection</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yanran Zhang et al.</div>
+<p>Image generation 과 generated-image detection 을 unified generative-discriminative 로 공진화. Attack/defense coevolution 의 같이 돌리는 프레임.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.20851" target="_blank" rel="noopener"><strong>Robust Test-time Video-Text Retrieval: Benchmarking and Adapting for Query Shifts</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Bingqing Zhang et al.</div>
+<p>Video-text retrieval 의 query shift robustness 를 벤치 + 적응 모두 제시. Real-world 배포 조건의 "쿼리 분포 이동" 을 정면으로 측정하는 드문 연구.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21395" target="_blank" rel="noopener"><strong>Supervised Learning Has a Necessary Geometric Blind Spot: Theory, Consequences, and Minimal Repair</strong></a> <span class="badge badge-cv">CV</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Vishal Rajput</div>
+<p>Supervised learning(ERM) 에 표현 blind spot 이 <em>필연적</em>임을 이론적으로 증명하고 minimal repair 를 제시. VLM Blind-Spot Atlas 추천주제의 이론적 뒷받침.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21078" target="_blank" rel="noopener"><strong>Impact-Aware Model Predictive Control for UAV Landing on a Heaving Platform</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Jess Stephenson et al.</div>
+<p>UAV가 heaving(위아래로 움직이는) 해상 플랫폼에 착륙하는 문제를 impact-aware MPC 로. 해양·군사 시나리오에 직접적 응용.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21189" target="_blank" rel="noopener"><strong>Full-Body Dynamic Safety for Robot Manipulators: 3D Poisson Safety Functions for CBF-Based Safety Filters</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Meg Wilkinson et al.</div>
+<p>Manipulator 전신(고차원 configuration)의 CBF safety filter 를 3D Poisson safety function 으로. "학습이 아닌 고전 안전 보증" 라인의 오늘 대표.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21391" target="_blank" rel="noopener"><strong>From Noise to Intent: Anchoring Generative VLA Policies with Residual Bridges</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 Yiming Zhong et al.</div>
+<p>Generative VLA policy 의 noise-to-intent 해석을 residual bridge 로 anchor. VLA 해석성·calibration 축에 How VLAs Work 과 짝을 이루는 방법론.</p>
+</div>
+<div class="paper">
+<div class="paper-line1">📄 <a href="https://arxiv.org/abs/2604.21707" target="_blank" rel="noopener"><strong>Effects of Swarm Size Variability on Operator Workload</strong></a> <span class="badge badge-ro">RO</span> <span class="cbadge cbadge-nocode">[📦 code ✗]</span></div>
+<div class="paper-authors">👥 William Hunt et al.</div>
+<p>Swarm 크기가 dynamic 할 때 operator workload 변동을 측정. Human-swarm team 배포의 인간 요인 관점 연구로 드문 empirical 기여.</p>
+</div>
 <h2>🔗 참고 링크</h2>
 <ul class="links">
-<li><a href="https://arxiv.org/list/cs.CV/new">cs.CV/new</a> — 오늘 공지 (2026-04-23 배치, 오늘 /new ~43편 샘플링)</li>
-<li><a href="https://arxiv.org/list/cs.RO/new">cs.RO/new</a> — 오늘 공지 (2026-04-23 배치, 29편 + cross 8편)</li>
-<li><a href="https://arxiv.org/list/cs.CV/pastweek?skip=0&show=2000">cs.CV pastweek</a> — 주간 ~785편</li>
-<li><a href="https://arxiv.org/list/cs.RO/pastweek?skip=0&show=2000">cs.RO pastweek</a> — 주간 220편</li>
-<li><a href="https://arxiv.org/abs/2604.20100">arxiv:2604.20100</a> — 오늘의 must-read #1 (JoyAI-RA 0.1)</li>
-<li><a href="https://arxiv.org/abs/2604.19966">arxiv:2604.19966</a> — 오늘의 must-read #2 (DistortBench)</li>
+<li><a href="https://arxiv.org/list/cs.CV/new">arXiv cs.CV /new</a></li>
+<li><a href="https://arxiv.org/list/cs.RO/new">arXiv cs.RO /new</a></li>
+<li><a href="https://gisbi-kim.github.io/arxiv-daily-summary/">📄 전체 브리핑 아카이브</a></li>
+<li><a href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml">📡 RSS 구독</a></li>
 </ul>
-<footer>Generated on 2026-04-24 · Claude Opus 4.7 · arXiv Daily Briefing</footer>
-<a href="https://gisbi-kim.github.io/arxiv-daily-summary/" class="home-btn home-btn-bottom">← 전체 목록으로</a>
-</div></body></html>
+<footer>
+arXiv Daily Briefing · 매일 자동 생성 · Korean 구어체 · 8 ROI 버킷 기준<br>
+파서 파이프라인: <code>scripts/fetch_arxiv.py</code> → <code>scripts/classify.py</code> → 본 HTML
+</footer>
+<a href="https://gisbi-kim.github.io/arxiv-daily-summary/" class="home-btn home-btn-bottom">🏠 전체 목록으로</a>
+</div>
+</body>
+</html>
