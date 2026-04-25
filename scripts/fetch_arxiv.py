@@ -63,6 +63,10 @@ def classify_section(title: str) -> str:
         return "replace"
     if "new submission" in t:
         return "new"
+    # /pastweek pages use date-formatted h3 like "Fri, 24 Apr 2026 (showing ...)".
+    # Treat as a new-listing block for parser purposes.
+    if re.match(r"^(mon|tue|wed|thu|fri|sat|sun),\s+\d", t):
+        return "new"
     return "other"
 
 
