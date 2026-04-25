@@ -1,0 +1,54 @@
+{
+ "date": "2026-04-25",
+ "iso_week": "2026-W17",
+ "week_start": "2026-04-19",
+ "week_end": "2026-04-25",
+ "predictions": [
+  {
+   "title": "VLA 회로 분해 follow-up이 다음주에만 3편+ 떨어진다",
+   "claim": "How VLAs Really Work이 mechanistic 분해라는 새 평가 격자를 깔았기 때문에, W18 안에 같은 분해를 다른 VLA에 적용하거나 V-L 정렬 강화 모듈을 제안하거나 분해 메트릭 자체를 비판하는 후속이 빠르게 나온다.",
+   "rationale": "이 흐름이 안 나오면 단발 시그널로 fluke 처리. 3편 이상 누적되면 ✅."
+  },
+  {
+   "title": "Open-H-Embodiment 패턴을 따라 산업·조립 vertical 데이터셋이 1편 이상 등장",
+   "claim": "의료가 먼저 깃발 꽂은 만큼 산업·조립 cross-institution 데이터셋이 W18 안에 발표될 가능성. 안 나오면 vertical 흐름이 의료 한정 단발.",
+   "rationale": "AgiBot 후속 또는 industrial cross-institution 형태 둘 중 하나라도 나오면 ✅."
+  },
+  {
+   "title": "Generation 버킷에서 video world model + policy 결합 논문이 5편 이상",
+   "claim": "world model 평가가 픽셀에서 embodied 성공률로 이동했다는 시그널이 강하므로, W18 generation/world model 논문은 거의 다 policy 결합 형태로 나온다.",
+   "rationale": "video gen 단독 논문이 줄고 결합 논문이 늘면 추세 검증."
+  }
+ ],
+ "themes": [
+  {
+   "title": "VLA가 진단 페이즈로 진입 — 알고리즘 경쟁이 인프라 경쟁으로",
+   "summary": "How VLAs Really Work, VLA Foundry, Residual Bridge가 같은 주에 떨어짐. 단발 SOTA 경쟁이 끝나고 학습 파이프라인 표준화 경쟁으로 이동."
+  },
+  {
+   "title": "Vertical foundation dataset 경쟁 시작 — 의료가 Open-X 모먼트",
+   "summary": "Open-H-Embodiment + MLLM for Built Environment. 다음 1~2분기에 산업·조립·실험실 도메인이 같은 패턴 따라올 가능성."
+  },
+  {
+   "title": "Safety가 부풀고 있다 — VLA 배포 직전 단계의 신호",
+   "summary": "Safety 50편으로 평소보다 굵음. hierarchical robust·human-aware·CBF 같은 새 포지셔닝이 한꺼번에 등장."
+  }
+ ],
+ "top5": [
+  {"title": "How VLAs (Really) Work In Open-World Environments", "arxiv": "https://arxiv.org/abs/2604.21192"},
+  {"title": "VLA Foundry: A Unified Framework for Training Vision-Language-Action Models", "arxiv": "https://arxiv.org/abs/2604.19728"},
+  {"title": "Open-H-Embodiment: Cross-Institution Cross-Embodiment Medical Robot Dataset", "arxiv": "https://arxiv.org/abs/2604.21017"},
+  {"title": "Mask World Model: Embodied Success Rate as the New Pixel Quality", "arxiv": "https://arxiv.org/abs/2604.19683"},
+  {"title": "π₀.₇: Scaling Robot Foundation Models with Open Data", "arxiv": "https://arxiv.org/abs/2604.15483"}
+ ],
+ "deep_dive": {
+  "title": "How VLAs (Really) Work In Open-World Environments",
+  "arxiv": "https://arxiv.org/abs/2604.21192",
+  "claim": "VLA의 generalization 병목은 V-L 정렬에 있고 action decoder는 학습 분포 안에서 robust. 평가 격자가 task SR 한 줄에서 V/L/A 회로별 drop으로 확장되는 변곡점."
+ },
+ "buckets_summary": {
+  "3D/Scene": 52, "Robot Learning": 67, "Autonomous Driving": 22,
+  "Foundation Models": 68, "Generation": 93, "Efficiency/Systems": 50,
+  "Embodied AI": 27, "Safety/Alignment": 50
+ }
+}

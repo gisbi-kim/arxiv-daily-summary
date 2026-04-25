@@ -34,7 +34,7 @@ FEED_LANG = "ko"
 MAX_ITEMS = 60  # newest N posts
 KST = timezone(timedelta(hours=9))
 
-DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})\.html$")
+DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})(-weekly)?\.html$")
 
 
 def strip_tags(s: str) -> str:
@@ -76,11 +76,11 @@ def rfc822(dt: datetime) -> str:
     return f"{day}, {dt.day:02d} {mon} {dt.year} {dt.hour:02d}:{dt.minute:02d}:{dt.second:02d} +0900"
 
 
-def build_item(date_str: str, title: str, summary: str) -> str:
+def build_item(date_str: str, title: str, summary: str, suffix: str = "") -> str:
     y, m, d = map(int, date_str.split("-"))
     # Publish "time" pinned to 09:00 KST on that date (matches daily briefing schedule).
     pub = datetime(y, m, d, 9, 0, 0, tzinfo=KST)
-    url = f"{SITE_URL}/posts/{date_str}.html"
+    url = f"{SITE_URL}/posts/{date_str}{suffix}.html"
     desc_body = summary if summary else f"arXiv Daily Briefing {date_str}"
     # CDATA to let HTML entities pass through readers cleanly
     desc_cdata = f"<![CDATA[{desc_body}]]>"
@@ -95,24 +95,26 @@ def build_item(date_str: str, title: str, summary: str) -> str:
     )
 
 
-def collect_posts(repo_root: Path) -> list[tuple[str, str, str]]:
+def collect_posts(repo_root: Path) -> list[tuple[str, str, str, str]]:
     posts_dir = repo_root / "posts"
     if not posts_dir.is_dir():
         return []
-    entries: list[tuple[str, str, str]] = []
+    entries: list[tuple[str, str, str, str]] = []
     for p in posts_dir.iterdir():
         m = DATE_RE.match(p.name)
         if not m:
             continue
         date_str = m.group(1)
+        suffix = m.group(2) or ""
         try:
             doc = p.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             doc = p.read_text(encoding="utf-8", errors="replace")
         title = extract_title(doc) or f"arXiv Daily Briefing — {date_str}"
         summary = extract_summary(doc)
-        entries.append((date_str, title, summary))
-    entries.sort(key=lambda x: x[0], reverse=True)
+        entries.append((date_str, title, summary, suffix))
+    # Sort by date (desc), weekly suffix wins on tie (so weekly entry of same date comes before daily — though we don't expect both)
+    entries.sort(key=lambda x: (x[0], x[3]), reverse=True)
     return entries[:MAX_ITEMS]
 
 
@@ -153,7 +155,8 @@ def main() -> int:
         return 0
 
     out = repo / "feed.xml"
-    out.write_text(feed, encoding="utf-8", newline="\n")
+    with open(out, "w", encoding="utf-8", newline="\n") as f:
+        f.write(feed)
     print(f"[build_feed] wrote {out} with {count} items")
     return 0
 

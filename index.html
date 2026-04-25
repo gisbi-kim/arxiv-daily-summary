@@ -21,6 +21,7 @@ h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.
 .archive-link:hover .archive-date{color:#0969da}
 .archive-date{display:inline-block;font-size:16px;font-weight:700;color:#0d1117;letter-spacing:-.005em;margin-bottom:4px;font-variant-numeric:tabular-nums}
 .archive-dow{font-size:13px;font-weight:400;color:#656d76;margin-left:2px}
+.archive-weekly-badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-left:8px;vertical-align:middle;background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);color:#78350f;border:1px solid #f59e0b;letter-spacing:.02em}
 .archive-summary{display:block;color:#3b434d;font-size:14px;line-height:1.6;margin:4px 0 0;padding:0;list-style:none}
 .archive-summary li{position:relative;padding-left:14px;margin:2px 0}
 .archive-summary li::before{content:"•";position:absolute;left:2px;color:#8b95a1}
@@ -88,7 +89,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 (async () => {
   const OWNER = 'gisbi-kim';
   const REPO = 'arxiv-daily-summary';
-  const DATE_RE = /^(\d{4}-\d{2}-\d{2})\.html$/;
+  const DATE_RE = /^(\d{4}-\d{2}-\d{2})(-weekly)?\.html$/;
   const DOW = ['일','월','화','수','목','금','토'];
   const LIST_TTL_MS = 10 * 60 * 1000;
   const INSIGHT_TTL_MS = 24 * 60 * 60 * 1000;
@@ -121,45 +122,59 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
       throw new Error(`GitHub API ${res.status}`);
     }
     const files = await res.json();
-    const dates = files
+    const entries = files
       .filter(f => f.type === 'file' && DATE_RE.test(f.name))
-      .map(f => f.name.match(DATE_RE)[1])
-      .sort()
-      .reverse();
-    lsSet(cacheKey, dates);
-    return dates;
+      .map(f => {
+        const m = f.name.match(DATE_RE);
+        return { date: m[1], suffix: m[2] || '' };
+      })
+      .sort((a, b) => {
+        if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+        return a.suffix < b.suffix ? 1 : -1;
+      });
+    lsSet(cacheKey, entries);
+    return entries;
   }
 
-  async function loadInsights(date) {
-    const cacheKey = `arxiv-archive:insight:${date}`;
+  async function loadInsights(entry) {
+    const slug = entry.date + entry.suffix;
+    const cacheKey = `arxiv-archive:insight:${slug}`;
     const cached = lsGet(cacheKey);
     if (cached && Date.now() - cached.t < INSIGHT_TTL_MS) return cached.v;
 
-    const res = await fetch(`posts/${date}.html`, { cache: 'no-cache' });
+    const res = await fetch(`posts/${slug}.html`, { cache: 'no-cache' });
     if (!res.ok) return [];
     const html = await res.text();
     const doc = new DOMParser().parseFromString(html, 'text/html');
-    const titles = Array.from(doc.querySelectorAll('.insight h3'))
+    // weekly pages use .theme-card h3, daily pages use .insight h3 — pick whichever exists
+    const selector = entry.suffix === '-weekly' ? '.theme-card h3' : '.insight h3';
+    const titles = Array.from(doc.querySelectorAll(selector))
       .map(el => el.textContent.replace(/^\s*\d+\.\s*/, '').trim())
       .filter(Boolean);
     lsSet(cacheKey, titles);
     return titles;
   }
 
-  function renderRow(date) {
+  function renderRow(entry) {
     const li = document.createElement('li');
     li.className = 'archive-item';
     const link = document.createElement('a');
     link.className = 'archive-link';
-    link.href = `posts/${date}.html`;
+    link.href = `posts/${entry.date}${entry.suffix}.html`;
 
     const dateEl = document.createElement('span');
     dateEl.className = 'archive-date';
-    dateEl.textContent = date;
+    dateEl.textContent = entry.date;
     const dow = document.createElement('span');
     dow.className = 'archive-dow';
-    dow.textContent = ` (${dowOf(date)})`;
+    dow.textContent = ` (${dowOf(entry.date)})`;
     dateEl.appendChild(dow);
+    if (entry.suffix === '-weekly') {
+      const wk = document.createElement('span');
+      wk.className = 'archive-weekly-badge';
+      wk.textContent = '🗓 주간 회고';
+      dateEl.appendChild(wk);
+    }
 
     const summary = document.createElement('ul');
     summary.className = 'archive-summary placeholder';

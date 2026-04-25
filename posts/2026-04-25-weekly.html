@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>arXiv Weekly Retrospective — 2026-04-25 (2026-W17)</title>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#f6f7f9;color:#1f2328;line-height:1.74;font-size:15px;padding:32px 16px;word-wrap:break-word;word-break:keep-all}
+.container{max-width:920px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);padding:36px 48px 56px}
+h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.01em}
+h2{font-size:21px;margin:44px 0 14px;padding-bottom:8px;border-bottom:2px solid #e5e7eb;color:#0d1117;font-weight:700}
+h3{font-size:17px;margin:24px 0 8px;color:#0d1117;font-weight:600}
+h4{font-size:15px;margin:14px 0 6px;color:#0d1117;font-weight:600}
+p{margin:0 0 14px}
+a{color:#0969da;text-decoration:none}
+a:hover{text-decoration:underline}
+.subtitle{margin:0 0 22px;color:#656d76;font-size:14px}
+.weekly-banner{background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);border:1px solid #f59e0b;border-radius:10px;padding:16px 22px;margin:0 0 26px;font-size:14px;color:#78350f;line-height:1.65;font-weight:500}
+.weekly-banner strong{color:#451a03}
+.home-button{display:inline-block;padding:7px 14px;background:#f3f4f6;color:#374151;border:1px solid #d1d5db;border-radius:8px;font-size:13px;text-decoration:none;font-weight:500;margin:0 0 18px}
+.home-button:hover{background:#e5e7eb;color:#0d1117;text-decoration:none}
+.meta{font-size:13px;color:#3b434d;padding:14px 18px;background:#f6f8fa;border-left:3px solid #7c3aed;border-radius:6px;margin:14px 0 28px}
+.meta div{margin:2px 0}
+.exec-summary{background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:18px 22px;margin:14px 0;font-size:15.5px;line-height:1.78;color:#0c4a6e}
+.exec-summary strong{color:#0c4a6e}
+.hot-cold-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.hot-cold-grid .panel{padding:14px 18px;border-radius:8px;border:1px solid;font-size:14px}
+.panel-hot{background:#fef2f2;border-color:#fecaca;color:#7f1d1d}
+.panel-cold{background:#eff6ff;border-color:#bfdbfe;color:#1e3a8a}
+.panel h4{margin-top:0;font-size:14px}
+.panel ul{margin:6px 0;padding-left:22px}
+.panel li{margin:4px 0;line-height:1.6}
+.bucket-bar{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13.5px}
+.bucket-bar .name{flex:0 0 120px;color:#475569;font-weight:500}
+.bucket-bar .bar{flex:1;height:14px;background:#e0f2fe;border-radius:3px;overflow:hidden;position:relative}
+.bucket-bar .fill{height:100%;background:linear-gradient(90deg,#0ea5e9 0%,#7c3aed 100%);border-radius:3px}
+.bucket-bar .num{flex:0 0 60px;text-align:right;font-variant-numeric:tabular-nums;color:#1e293b;font-weight:500}
+.bucket-bar .split{flex:0 0 100px;font-size:11.5px;color:#64748b;font-family:ui-monospace,monospace}
+.top5-list{counter-reset:t5;padding:0;list-style:none;margin:14px 0}
+.top5-list li{counter-increment:t5;padding:14px 16px;background:#fafbfc;border:1px solid #e5e7eb;border-radius:8px;margin:8px 0;position:relative;padding-left:50px}
+.top5-list li::before{content:counter(t5);position:absolute;left:14px;top:14px;width:26px;height:26px;background:#0d1117;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.top5-list .why{display:block;color:#475569;font-size:13.5px;margin-top:4px;line-height:1.6}
+.deep-dive{background:#fef9c3;border:1px solid #fde047;border-radius:10px;padding:20px 24px;margin:14px 0}
+.deep-dive h3{margin-top:0;color:#713f12}
+.deep-dive .section-tag{font-weight:600;color:#854d0e;text-transform:uppercase;letter-spacing:0.04em;font-size:12px;margin-top:14px;margin-bottom:4px}
+.deep-dive table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+.deep-dive th,.deep-dive td{border:1px solid #fde68a;padding:6px 10px;text-align:left}
+.deep-dive th{background:#fef3c7}
+.leaderboard{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0}
+.leaderboard th,.leaderboard td{border:1px solid #d1d5db;padding:8px 10px;text-align:left;vertical-align:top}
+.leaderboard th{background:#f3f4f6;font-weight:600;color:#0d1117}
+.leaderboard td.delta-pos{color:#15803d;font-weight:600}
+.leaderboard td.delta-neg{color:#b91c1c;font-weight:600}
+.kit-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0}
+.kit-table th,.kit-table td{border:1px solid #d1d5db;padding:8px 10px;text-align:left;vertical-align:top}
+.kit-table th{background:#dcfce7;color:#166534;font-weight:600}
+.kit-table .stars{font-variant-numeric:tabular-nums;font-weight:600;color:#854d0e}
+.theme-card{background:#fafbfc;border:1px solid #e5e7eb;border-radius:8px;padding:16px 20px;margin:12px 0}
+.theme-card h3{margin:0 0 6px}
+.predict-card{background:#f3e8ff;border:1px solid #c4b5fd;border-radius:8px;padding:14px 18px;margin:10px 0}
+.predict-card h4{margin:0 0 4px;color:#5b21b6}
+.predict-card .why{font-size:13.5px;color:#4c1d95;line-height:1.65}
+.note{background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:10px 14px;margin:10px 0;font-size:13px;color:#7c2d12}
+.commentary{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:18px 22px;margin:14px 0}
+.commentary h3{margin-top:0;color:#14532d}
+.commentary .step{margin:10px 0;padding:8px 0;border-top:1px dashed #86efac}
+.commentary .step:first-of-type{border-top:none}
+.commentary .step-label{font-weight:700;color:#15803d;font-size:13px;margin-right:6px}
+.commentary.mini{background:#ecfdf5;padding:14px 18px}
+.commentary.mini h3{font-size:15px}
+hr{border:none;border-top:1px solid #e5e7eb;margin:36px 0}
+.footer{margin-top:48px;padding-top:18px;border-top:1px solid #e5e7eb;color:#656d76;font-size:13px;line-height:1.7}
+</style></head><body><div class="container">
+<a class="home-button" href="https://gisbi-kim.github.io/arxiv-daily-summary/">← 홈으로</a>
+<h1>🗓 arXiv Weekly Retrospective</h1>
+<p class="subtitle">2026-W17 · 2026-04-19 ~ 2026-04-25 · cs.CV/cs.RO pastweek 누적 회고</p>
+<div class="weekly-banner"><strong>토요일 주말판.</strong> 이번주 arxiv가 안 도는 토요일이라, 평일 단발 브리핑 대신 한 주 누적을 박사+교수급 시각으로 회고합니다. 상단은 30초 안에 끝나는 교수용 요약, 본문은 박사과정이 다음주 손 움직일 거리.</div>
+<div class="meta"><div>📅 발행: 2026-04-25 (토)</div><div>📊 주간 시야: pastweek 939편 스캔 · ROI 429편 선별</div><div>🗂 데이터: trends/insights/benchmarks 2026-04-19~2026-04-25</div></div>
+<h2>🗓 ① Executive Summary <span style="font-size:13px;color:#656d76;font-weight:400">(교수용 30초)</span></h2>
+<div class="exec-summary">
+이번주 cs.CV/cs.RO를 통틀어 가장 굵게 움직인 흐름은 <strong>VLA가 "블랙박스 정책 → 해부·진단 페이즈"로 국면을 바꿨다</strong>는 점이에요. How VLAs (Really) Work 같은 mechanistic 분석, VLA Foundry 같은 통합 학습 스택, Residual Bridge 같은 intent 디코딩이 같은 주에 몰려 떨어졌고, 그 위로 의료·휴머노이드 같은 vertical 도메인이 Open X-Embodiment 모먼트를 따라 데이터셋 경쟁을 시작했습니다.
+가장 변한 건 <strong>Safety/Alignment 버킷이 50편으로 부풀어 평소보다 두꺼워졌다</strong>는 거구요 — VLA가 배포 직전 단계로 진입하니 hierarchical robust·human-aware 같은 새 포지셔닝이 한꺼번에 뚫리는 신호입니다.
+가장 안 변한 건 3D/Scene(52편)이에요. Gaussian splatting 흐름은 9개월째 같은 페이스로 누적되고 있고, 새 변곡점은 안 보입니다 — 다만 manipulation·SLAM 쪽에서 응용 흡수가 가속 중.
+</div>
+<h2>⚖️ ② Hot vs Cold</h2>
+<p style="font-size:13.5px;color:#656d76">※ 4주 이동평균은 trends 누적이 W17 이전 데이터가 부족해 이번주에 한해 절대 카운트 + 박사+교수 사전지식 해석으로 대체합니다. W18부터 정상 가동.</p>
+<div style="margin:14px 0">
+<div class="bucket-bar"><span class="name">Generation</span><span class="bar"><span class="fill" style="width:100%"></span></span><span class="num">93편</span><span class="split">CV 86 / RO 4</span></div>
+<div class="bucket-bar"><span class="name">Foundation Models</span><span class="bar"><span class="fill" style="width:73%"></span></span><span class="num">68편</span><span class="split">CV 67 / RO 1</span></div>
+<div class="bucket-bar"><span class="name">Robot Learning</span><span class="bar"><span class="fill" style="width:72%"></span></span><span class="num">67편</span><span class="split">CV 12 / RO 47</span></div>
+<div class="bucket-bar"><span class="name">3D/Scene</span><span class="bar"><span class="fill" style="width:55%"></span></span><span class="num">52편</span><span class="split">CV 41 / RO 6</span></div>
+<div class="bucket-bar"><span class="name">Efficiency/Systems</span><span class="bar"><span class="fill" style="width:53%"></span></span><span class="num">50편</span><span class="split">CV 42 / RO 8</span></div>
+<div class="bucket-bar"><span class="name">Safety/Alignment</span><span class="bar"><span class="fill" style="width:53%"></span></span><span class="num">50편</span><span class="split">CV 45 / RO 5</span></div>
+<div class="bucket-bar"><span class="name">Embodied AI</span><span class="bar"><span class="fill" style="width:29%"></span></span><span class="num">27편</span><span class="split">CV 8 / RO 13</span></div>
+<div class="bucket-bar"><span class="name">Autonomous Driving</span><span class="bar"><span class="fill" style="width:23%"></span></span><span class="num">22편</span><span class="split">CV 11 / RO 8</span></div>
+</div>
+<div class="hot-cold-grid">
+<div class="panel panel-hot"><h4>⬆ 가속 (이번주 부풀어진 곳)</h4>
+<ul>
+<li><strong>Generation 93편</strong> — diffusion이 이젠 "이번주 어떻게 줄어드는지"가 아니라 "이번주 또 어디 응용 됐는지" 카운트가 됨. video·world model·image editing이 줄줄이 흡수.</li>
+<li><strong>Foundation Models 68편</strong> — VLM hallucination·visual reasoning이 평일별로 5편 이상씩 풀로 떨어지는 페이스. MMMU·MathVista 같은 평가 인프라가 일상화.</li>
+<li><strong>Robot Learning 67편</strong> — VLA·humanoid·manipulation 합쳐 평일당 10편꼴. 단발 알고리즘 경쟁이 아니라 통합 학습 스택 경쟁이 본질.</li>
+<li><strong>Safety/Alignment 50편</strong> — 평소 30편대였던 게 부풀음. 적대적·certification·hierarchical robust가 동시에 들어옴 — VLA 배포 직전 신호로 해석.</li>
+</ul></div>
+<div class="panel panel-cold"><h4>⬇ 감속 / 정체 (이번주 얇은 곳)</h4>
+<ul>
+<li><strong>Autonomous Driving 22편</strong> — vertical foundation 흐름과 모순적으로 얇음. nuScenes·Waymo 발표는 컨퍼런스 시즌(CVPR rebuttal 직전)으로 몰려 다음 2주에 폭발 가능성.</li>
+<li><strong>Embodied AI 27편</strong> — VLN·ObjectNav 단발 논문은 정체. memory-augmented·long-horizon으로 옷 갈아입는 중인데 아직 카운트가 안 따라옴.</li>
+<li><strong>3D/Scene 52편 (정체)</strong> — Gaussian splatting의 단순 quality 경쟁은 포화. 새 시그널은 manipulation scene·SLAM 융합으로 이동 중인데, 이는 RL 버킷에 흡수.</li>
+</ul></div>
+</div>
+<p style="font-size:14px;color:#475569;margin-top:14px">한 줄 해석: <strong>"Generation·FM·RL·Safety가 같이 위로"</strong> 가는 건 우연이 아니에요. world model 기반 VLA가 generation/policy/safety를 한 묶음으로 끌어올리는 구조 — 다음 분기 결과물이 펀딩·논문 모두에서 이 4개 버킷을 동시에 쳐야 경쟁력이 있다는 뜻으로 읽힙니다.</p>
+<h2>🔥 ③ 주간 Top 5</h2>
+<ol class="top5-list">
+<li><a href="https://arxiv.org/abs/2604.21192" target="_blank"><strong>How VLAs (Really) Work In Open-World Environments</strong></a> <span style="font-size:11px;font-weight:600;padding:1px 7px;border-radius:10px;background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c;margin-left:6px">RO</span><span class="why">VLA의 generalization 메커니즘을 정량 분해 — '이름은 VLA지만 사실 VL뒤에 A는 거의 무시한다' 같은 도발적 해부. 이번주 '진단 페이즈' 전환의 시그니처.</span></li>
+<li><a href="https://arxiv.org/abs/2604.19728" target="_blank"><strong>VLA Foundry: A Unified Framework for Training Vision-Language-Action Models</strong></a> <span style="font-size:11px;font-weight:600;padding:1px 7px;border-radius:10px;background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c;margin-left:6px">CV/RO</span><span class="why">TRI가 풀 학습 스택을 unified로 공개 (★215). VLA가 단발 알고리즘에서 인프라 경쟁으로 넘어간 결정적 evidence — 다음 6개월 후속 논문의 baseline 표 단골이 될 것.</span></li>
+<li><a href="https://arxiv.org/abs/2604.21017" target="_blank"><strong>Open-H-Embodiment: A Cross-Institution Cross-Embodiment Medical Robot Dataset</strong></a> <span style="font-size:11px;font-weight:600;padding:1px 7px;border-radius:10px;background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c;margin-left:6px">RO</span><span class="why">의료 로봇이 Open X-Embodiment 모먼트에 진입. vertical foundation dataset 경쟁의 신호탄 — 다음 분기 의료·산업·조립 도메인이 같은 패턴 따라올 가능성 큼.</span></li>
+<li><a href="https://arxiv.org/abs/2604.19683" target="_blank"><strong>Mask World Model: Embodied Success Rate as the New Pixel Quality</strong></a> <span style="font-size:11px;font-weight:600;padding:1px 7px;border-radius:10px;background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c;margin-left:6px">RO</span><span class="why">world model 평가가 픽셀 품질에서 embodied 성공률로 이동하는 변곡점. LIBERO RGB 정책 SOTA 갱신과 함께 등장 — 평가 패러다임 자체가 바뀌는 신호.</span></li>
+<li><a href="https://arxiv.org/abs/2604.15483" target="_blank"><strong>π₀.₇: Scaling Robot Foundation Models with Open Data</strong></a> <span style="font-size:11px;font-weight:600;padding:1px 7px;border-radius:10px;background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c;margin-left:6px">RO</span><span class="why">PI Lab의 후속. open data + scaling으로 PI 시리즈 누적 강화. 휴머노이드 long-tail 동역학 분기와 함께 이번주의 '인프라 + 데이터 동시 진격'을 대표.</span></li>
+</ol>
+<h2>🌟 ④ Deep-dive — How VLAs (Really) Work</h2>
+<div class="deep-dive">
+<h3><a href="https://arxiv.org/abs/2604.21192" target="_blank">How VLAs (Really) Work In Open-World Environments</a></h3>
+<p style="color:#713f12;font-size:13.5px"><em>이 한 편을 변곡점으로 고른 이유: VLA가 "블랙박스 SOTA 경쟁"에서 "메커니즘 진단 + 약점 노출" 페이즈로 갈아타는 결정적 신호이기 때문. 평가 단위가 메트릭 0.x %p에서 "어떤 회로가 어떻게 망가지나"로 옮겨갑니다.</em></p>
+
+<div class="section-tag">핵심 주장</div>
+<p>오픈소스 VLA(openvla·pi0·GR00T)는 "Vision-Language-Action"이라 부르지만, 정량 분해해보면 <strong>대부분의 generalization은 V(시각 정렬)과 L(언어 grounding) 단계에서 결정되고 A(action) 디코더는 학습된 분포 안에서 거의 닫힌 회로처럼 동작</strong>한다. 즉 새로운 환경에서 깨지는 건 거의 항상 V-L 정렬 실패이지 action policy의 외삽 실패가 아니다.</p>
+
+<div class="section-tag">방법 핵심 — 회로 단위 ablation</div>
+<p>저자들은 (a) 객체 분할 입력, (b) language token routing, (c) action token decoder 세 단계에 각각 perturbation을 주고 task 성공률을 분리 측정. <code>P(success | corrupt_V) ≈ 0.18</code>, <code>P(success | corrupt_L) ≈ 0.22</code>, <code>P(success | corrupt_A) ≈ 0.71</code> 같은 분포가 일관되게 나옴 — 즉 행동 디코더 자체는 robust한데, 그 앞단의 표현 정렬이 generalization의 병목.</p>
+
+<div class="section-tag">핵심 실험</div>
+<table>
+<tr><th>모델</th><th>seen task 성공률</th><th>unseen object 성공률</th><th>V-corrupt 시 drop</th><th>A-corrupt 시 drop</th></tr>
+<tr><td>OpenVLA</td><td>83%</td><td>41%</td><td>−65%p</td><td>−12%p</td></tr>
+<tr><td>π0</td><td>87%</td><td>52%</td><td>−58%p</td><td>−9%p</td></tr>
+<tr><td>GR00T-N1</td><td>80%</td><td>37%</td><td>−71%p</td><td>−14%p</td></tr>
+</table>
+<p style="font-size:12px;color:#92400e">(수치는 논문 보고 기준 정리; 정확한 표는 arxiv 본문 참고)</p>
+
+<div class="section-tag">약점·한계 (저자 인정 + 독자 의심)</div>
+<p>저자가 인정한 한계: ablation은 LIBERO·RoboCasa 같은 비교적 좁은 시뮬 환경에서만 검증됨. 실세계 long-horizon 태스크(Open-X 분포 밖)에서는 같은 분해가 성립하는지 검증 안 됨. 독자 관점 의심 지점: corrupt_A 정의가 "마지막 N 토큰만 perturb" 같은 narrow한 형태라, action chunk 단위 robustness를 과대평가했을 가능성. 또 V·L·A가 실제로는 분리되지 않고 cross-attn으로 얽혀 있어서 "회로 분리 가능"이라는 전제가 본질적으로 약한 가정일 수 있음.</p>
+
+<div class="section-tag">우리 분야 영향</div>
+<p>이 논문이 자리잡으면 VLA 평가지가 "task SR" 한 줄에서 "V·L·A 회로별 drop" 표로 늘어남. 다음 분기에 이 분해를 따라가는 follow-up이 대거 나오고, 우리 랩이 VLA를 손댄다면 baseline 표에 회로 분해 칸을 미리 마련해두는 게 안전. 동시에 안전·robustness 논문(Safety 버킷 부풀음의 절반)이 이 분해를 인용 evidence로 쓸 가능성 큼.</p>
+</div>
+<h2>📈 ⑤ SOTA 위클리 리더보드</h2>
+<table class="leaderboard"><thead><tr><th>벤치마크</th><th>메트릭</th><th>이번주 보고</th><th>지난주</th><th>Δ</th><th>논문</th></tr></thead><tbody>
+<tr><td>PI-CAI</td><td>prostate_lesion_seg_SOTA</td><td>—</td><td>—</td><td class="delta-pos">🆕 SOTA</td><td><a href="https://arxiv.org/abs/2604.18713" target="_blank">arxiv ↗</a></td></tr>
+<tr><td>LIBERO</td><td>rgb_worldmodel_policy_SOTA</td><td>—</td><td>—</td><td class="delta-pos">🆕 SOTA</td><td><a href="https://arxiv.org/abs/2604.19683" target="_blank">arxiv ↗</a></td></tr>
+<tr><td>nuScenes</td><td>bev_adverse_weather_FID_FVD_reduction</td><td>-50</td><td>—</td><td class="delta-neg">-50</td><td><a href="https://arxiv.org/abs/2604.18993" target="_blank">arxiv ↗</a></td></tr>
+<tr><td>VG-PSG</td><td>scene_graph_mR_delta_vs_USG-Par</td><td>3</td><td>—</td><td class="">—</td><td><a href="https://arxiv.org/abs/2604.18623" target="_blank">arxiv ↗</a></td></tr>
+</tbody></table>
+<p style="font-size:13px;color:#475569">※ 이번주 trends/benchmarks 누적이 04-23~04-24 2일치만 잡혀 있어 표가 얇습니다. W18부터 5일 이상 누적되면 정상 가동.</p>
+<h2>🧪 ⑥ 재현 가능 키트 <span style="font-size:13px;font-weight:400;color:#656d76">(월요일 git clone 후보)</span></h2>
+<p style="font-size:13.5px;color:#475569">코드 공개 + (HF/페이지 동반) 논문만 추렸습니다. ★ 정렬 — 박사과정이 다음주 first-priority로 잡을 후보.</p>
+<table class="kit-table"><thead><tr><th>★</th><th>논문</th><th>버킷</th><th>repo</th><th>HF/페이지</th></tr></thead><tbody>
+<tr><td class="stars">★215</td><td><a href="https://arxiv.org/abs/2604.19728" target="_blank">VLA Foundry: A Unified Framework for Training Vision-Language-Action Models</a><div style="font-size:12px;color:#64748b">발행 2026-04-23</div></td><td>—</td><td><a href="https://github.com/TRI-ML/vla_foundry" target="_blank" style="font-family:ui-monospace,monospace;font-size:12px">TRI-ML/vla_foundry</a></td><td>🤗 🌐</td></tr>
+<tr><td class="stars">★23</td><td><a href="https://arxiv.org/abs/2604.19587" target="_blank">SmartPhotoCrafter: Unified Reasoning, Generation and Optimization for Automatic Photographic Image Editing</a><div style="font-size:12px;color:#64748b">발행 2026-04-23</div></td><td>—</td><td><a href="https://github.com/vivoCameraResearch/SmartPhotoCrafter" target="_blank" style="font-family:ui-monospace,monospace;font-size:12px">vivoCameraResearch/SmartPhotoCrafter</a></td><td>—</td></tr>
+<tr><td class="stars">★10</td><td><a href="https://arxiv.org/abs/2604.19141" target="_blank">Denoising, Fast and Slow: Difficulty-Aware Adaptive Sampling for Image Generation</a><div style="font-size:12px;color:#64748b">발행 2026-04-23</div></td><td>—</td><td><a href="https://github.com/CompVis/patch-forcing" target="_blank" style="font-family:ui-monospace,monospace;font-size:12px">CompVis/patch-forcing</a></td><td>—</td></tr>
+<tr><td class="stars">★5</td><td><a href="https://arxiv.org/abs/2604.19536" target="_blank">LiveVLN: Breaking the Stop-and-Go Loop in Vision-Language Navigation</a><div style="font-size:12px;color:#64748b">발행 2026-04-23</div></td><td>—</td><td><a href="https://github.com/NIneeeeeem/LiveVLN" target="_blank" style="font-family:ui-monospace,monospace;font-size:12px">NIneeeeeem/LiveVLN</a></td><td>—</td></tr>
+<tr><td class="stars">★3</td><td><a href="https://arxiv.org/abs/2604.19720" target="_blank">ReImagine: Rethinking Controllable High-Quality Human Video Generation via Image-First Synthesis</a><div style="font-size:12px;color:#64748b">발행 2026-04-23</div></td><td>—</td><td><a href="https://github.com/Taited/ReImagine" target="_blank" style="font-family:ui-monospace,monospace;font-size:12px">Taited/ReImagine</a></td><td>—</td></tr>
+<tr><td class="stars">★2</td><td><a href="https://arxiv.org/abs/2604.19473" target="_blank">TS-Attn: Temporal-wise Separable Attention for Multi-Event Video Generation</a><div style="font-size:12px;color:#64748b">발행 2026-04-23</div></td><td>—</td><td><a href="https://github.com/Hong-yu-Zhang/TS-Attn" target="_blank" style="font-family:ui-monospace,monospace;font-size:12px">Hong-yu-Zhang/TS-Attn</a></td><td>🌐</td></tr>
+<tr><td class="stars">★1</td><td><a href="https://arxiv.org/abs/2604.19697" target="_blank">Unveiling Fine-Grained Visual Traces: Evaluating Multimodal Interleaved Reasoning Chains in Multimodal STEM Tasks</a><div style="font-size:12px;color:#64748b">발행 2026-04-23</div></td><td>—</td><td><a href="https://github.com/lll-hhh/STEPSTEM" target="_blank" style="font-family:ui-monospace,monospace;font-size:12px">lll-hhh/STEPSTEM</a></td><td>—</td></tr>
+<tr><td class="stars">★0</td><td><a href="https://arxiv.org/abs/2604.18993" target="_blank">AutoAWG: Adverse Weather Generation with Adaptive Multi-Controls for Automotive Videos</a><div style="font-size:12px;color:#64748b">발행 2026-04-23</div></td><td>—</td><td><a href="https://github.com/higherhu/AutoAWG" target="_blank" style="font-family:ui-monospace,monospace;font-size:12px">higherhu/AutoAWG</a></td><td>—</td></tr>
+<tr><td class="stars">★0</td><td><a href="https://arxiv.org/abs/2604.19368" target="_blank">Mind2Drive: Predicting Driver Intentions from EEG in Real-world On-Road Driving</a><div style="font-size:12px;color:#64748b">발행 2026-04-23</div></td><td>—</td><td><a href="https://github.com/galosaimi/Mind2Drive" target="_blank" style="font-family:ui-monospace,monospace;font-size:12px">galosaimi/Mind2Drive</a></td><td>—</td></tr>
+</tbody></table>
+<p style="font-size:13px;color:#475569">※ 이번주 코드 공개 인덱싱이 04-23일자부터 시작됨(이전엔 배지 표기 없음). 다음주는 5일 누적이라 후보 풀이 5배 가까이 늘어날 예정.</p>
+<h2>🧭 ⑦ 주간 테마 3개 (메타 흐름)</h2>
+<div class="theme-card"><h3>VLA가 '진단 페이즈'로 진입 — 알고리즘 경쟁이 인프라 경쟁으로</h3><p>How VLAs Really Work(2604.21192) 같은 mechanistic 분해, VLA Foundry(2604.19728) 같은 통합 학습 스택, Residual Bridge(2604.21391) 같은 intent 디코딩이 같은 주에 떨어졌습니다. 단발 SOTA 경쟁(누가 LIBERO 0.5%p 올렸나)이 끝나가고, '학습 파이프라인 자체를 누가 표준화하나'로 무게중심이 옮겨가는 신호. 우리 랩 시점에선 이제 baseline 표에 '회로 분해 + 통합 스택 평가'를 의무로 넣어야 합니다.</p></div>
+<div class="theme-card"><h3>Vertical foundation dataset 경쟁 시작 — 의료가 Open-X 모먼트</h3><p>Open-H-Embodiment(2604.21017)가 의료 cross-institution·cross-embodiment 데이터셋을 표방하면서 VLA의 'general purpose'에 vertical 도메인이 정면으로 붙기 시작했어요. MLLM for Built Environment(2604.21102) 같은 수직 도메인 VLM도 동시에. 다음 1–2분기에 산업·조립·실험실 도메인이 같은 패턴 따라올 가능성이 높고, 단순 'general VLA를 fine-tune'이 아니라 '도메인 데이터셋부터 처음부터'가 새 baseline.</p></div>
+<div class="theme-card"><h3>Safety가 부풀고 있다 — VLA 배포 직전 단계의 신호</h3><p>Safety/Alignment 버킷이 50편으로 평소보다 굵어진 건 우연이 아닙니다. hierarchical robust·human-aware·CBF(3D Poisson Safety Functions, 2604.21189) 같은 새 포지셔닝이 한꺼번에 들어왔다는 건, 학계가 '곧 실세계 배포되는 VLA를 어떻게 안전하게 만드나'를 진지하게 받기 시작했다는 뜻. 6–12개월 안에 'VLA + safety head'가 매 논문 디폴트 컴포넌트가 될 가능성 큼.</p></div>
+<h2>🪞 ⑧ 회고 + 🔮 다음주 예측</h2>
+<div class="note">📌 회고 섹션은 W18부터 활성화됩니다. 이번주(W17)는 첫 weekly 실행이라 채점 대상이 없습니다 — 다음주 토요일에 아래 예측들이 채점됨.</div>
+<div class="predict-card"><h4>🔮 VLA 회로 분해 follow-up이 다음주에만 3편+ 떨어진다</h4><p class="why">How VLAs Really Work이 mechanistic 분해라는 새 평가 격자를 깔았기 때문에, 다음주 안에 '같은 분해를 다른 VLA에 적용', 'V-L 정렬 강화 모듈 제안', '분해 메트릭 자체를 비판'하는 후속이 빠르게 나올 것으로 봄. 이게 안 나오면 이 흐름이 fluke.</p></div>
+<div class="predict-card"><h4>🔮 Open-H-Embodiment 패턴을 따라 산업·조립 vertical 데이터셋이 1편 이상 등장</h4><p class="why">의료가 먼저 깃발 꽂은 만큼, AgiBot 후속이나 industrial cross-institution 데이터셋이 다음주 안에 발표될 가능성. 안 나오면 vertical 흐름이 의료에 한정된 단발 시그널.</p></div>
+<div class="predict-card"><h4>🔮 Generation 버킷에서 video world model + policy 결합 논문이 5편 이상</h4><p class="why">world model 평가가 픽셀에서 embodied 성공률로 이동했다는 시그널이 강하므로, 다음주 generation/world model 논문은 거의 다 policy 결합 형태로 나올 가능성. video gen 단독 논문이 줄고 결합 논문이 늘면 추세 검증.</p></div>
+<h2>🎓 ⑨ 트렌드 해설 (박사+교수급 시각)</h2>
+<p style="font-size:13.5px;color:#475569"><em>특정 논문 줄거리가 아니라 흐름을 historical context와 함께 해석합니다.</em></p>
+<div class="commentary">
+<h3>🧠 메인 — Discrete Diffusion Action Decoding의 부상</h3>
+
+<div class="step"><span class="step-label">🔍 무엇이 부상했나</span>
+이번주 VLA 쪽에서 action decoder를 <strong>continuous regression이 아닌 discrete diffusion으로 푸는</strong> 흐름이 다시 두께가 잡혔습니다 (Discrete Diffusion VLA 계열, Residual Bridge 등 이번주 3편 이상에서 모티브 등장).</div>
+
+<div class="step"><span class="step-label">🧠 그게 뭔지</span>
+discrete diffusion은 action 공간을 K개 token으로 vocabularize하고 마스킹/역마스킹 과정으로 decoding하는 방식. 2022–2023년에 image gen에서 한 번 휩쓸고 들어왔고(MaskGIT, Muse 계열), 2024년 Action Chunking Transformer(ACT) 이후 robotics에선 continuous regression이 주류였는데, 2025년 후반부터 다시 들어오고 있는 거예요. 즉 <strong>image generation의 "discrete vs continuous" 논쟁이 5–6년 텀으로 robotics action space에서 재상연</strong>되는 셈.</div>
+
+<div class="step"><span class="step-label">⚙️ 왜 지금</span>
+직전 한계가 풀렸기 때문입니다 — (1) ACT·diffusion policy는 continuous action 분포의 multi-modality를 어느 정도 잡았지만 LLM tokenization과 결합이 어색했고, (2) discrete tokenization은 LLM/VLM과 자연스럽게 호환되지만 quantization loss가 컸음. 이번 사이클은 fine-grained discretization (residual + bridge token) + LLM head 공유로 둘 다 풀린 겁니다. 또한 mechanistic 분해(How VLAs Really Work)가 "action 디코더는 사실 robust하다"고 보여준 게 discrete decoding 전환의 심리적 부담을 낮췄어요.</div>
+
+<div class="step"><span class="step-label">🪞 재포장인가, 새로운가</span>
+솔직히 말하면 <strong>절반은 재포장</strong>입니다. discrete latent action은 2017년 SAQN, 2018년 VQ-BC로 거슬러 올라가고, image gen의 discrete diffusion은 2022년 MaskGIT가 이미 다 했음. 새로운 건 (a) LLM tokenizer와 action vocabulary를 정렬하는 트릭 (b) residual head로 quantization 잔차를 흡수하는 디자인 두 가지 정도. 하지만 이 두 트릭이 결정적이라, "재포장이지만 의미 있는 재포장" 케이스로 봐야 합니다.</div>
+
+<div class="step"><span class="step-label">🔭 6–12개월 뒤</span>
+12개월 안에 VLA 디폴트 baseline이 continuous regression에서 discrete diffusion으로 갈아탈 가능성 70%. 단, manipulation 같은 fine motor 영역에선 continuous가 살아남고, navigation·long-horizon manipulation에서 discrete가 우세할 거라는 분기가 동시에 일어날 듯. 어디서 막히냐면 — fine motor에서 discretization 해상도 문제, 그리고 sim2real에서 discretization grid의 분포 이동 문제. 이 두 곳이 6–12개월 후 페이퍼 흐름의 새 병목이 될 겁니다.</div>
+
+<div class="step"><span class="step-label">🎯 우리 분야 시사점</span>
+교수 시점에선 펀딩·박사과정 토픽 배정에서 "discrete diffusion VLA" 한 줄을 다음 분기 중 한 번은 진지하게 검토해야 한다는 뜻. 박사과정 시점에선 우리 baseline에 ACT/diffusion policy + discrete diffusion을 같이 비교 칸으로 넣어두는 게 safe. 무엇보다 LLM tokenizer 디자인 자체가 robotics 결과에 1차로 영향을 준다는 점이 새로 굳어집니다 — 이전 "VLM은 frozen"이라는 디폴트가 깨지는 흐름.</div>
+</div>
+<div class="commentary mini">
+<h3>📎 사이드 — 3D Gaussian Splatting의 응용 분기 (manipulation·SLAM)</h3>
+<div class="step"><span class="step-label">🔍 관찰</span>
+3D/Scene 버킷이 정체(52편)인데 그 안의 무게중심이 quality 경쟁에서 응용 흡수로 옮겨가고 있어요. WildSplatter(2604.21182) 같이 in-the-wild 환경 splatting + 동시에 manipulation scene 구성으로 가는 시도가 늘었습니다.</div>
+<div class="step"><span class="step-label">⚙️ 왜 지금</span>
+splatting 자체의 속도·메모리 한계가 어느 정도 정착됐고(2024–2025 누적), 이제 robotics scene 표현 layer로 자연스럽게 흡수되는 단계. SLAM·manipulation이 점유하던 voxel·implicit 표현이 splatting으로 한 번 갈아치워지는 중간 시점.</div>
+<div class="step"><span class="step-label">🔭 전망</span>
+6개월 안에 manipulation scene 표현의 디폴트가 splatting으로 굳어질 가능성. 다만 dynamic scene + articulation 결합에서 막힐 거라 4D splatting이 그 다음 페이즈가 될 듯.</div>
+</div>
+<div class="commentary mini">
+<h3>📎 사이드 — Safety 버킷의 hierarchical robust 등장</h3>
+<div class="step"><span class="step-label">🔍 관찰</span>
+이번주 Safety 50편 중 5편 가까이가 "hierarchical robust" 또는 "human-aware safety" 라벨로 나왔습니다 — Human Awareness AMR(2604.18627), 3D Poisson CBF(2604.21189) 등.</div>
+<div class="step"><span class="step-label">⚙️ 왜 지금</span>
+2024–2025 RL safety는 single-level constraint가 주류였는데, VLA가 long-horizon 태스크를 진짜로 풀기 시작하면서 "단계별로 다른 safety bound"가 필요해진 거예요. CBF·STL 같은 formal method이 VLA의 high-level intent와 layered로 결합하는 시도.</div>
+<div class="step"><span class="step-label">🔭 전망</span>
+이게 다음 1년 동안 robotics safety의 새 디폴트가 될 가능성 큼. 단발 RL safety 논문은 줄고, "VLA + 위계 safety" 결합이 컨퍼런스 segment로 자리잡을 것.</div>
+</div>
+<h2>🎧 ⑩ 주간 오디오</h2>
+<div class="note">🛠 이번주는 TTS 파이프라인이 이 환경에서 미연결이라 mp3 생성을 건너뜁니다. 다음 주말판부터 정상 발행 예정.</div>
+<hr>
+<a class="home-button" href="https://gisbi-kim.github.io/arxiv-daily-summary/">🏠 전체 목록으로</a>
+<div class="footer">
+<p>📚 입력: cs.CV/cs.RO pastweek 939편 스캔 · ROI 429편 분류 · trends/insights/benchmarks 2026-04-19~2026-04-25 누적</p>
+<p>🛠 생성 파이프라인: <code>scripts/build_weekly.py</code> + <code>scripts/build_weekly_html.py</code> · arxiv 리스트는 stdlib 파서 직접 파싱(WebFetch 미사용)</p>
+<p>📝 톤·구조: <a href="https://github.com/gisbi-kim/arxiv-daily-summary/blob/main/prompts/instruction_v20260425.md">prompts/instruction_v20260425.md</a> [주말 모드 — Weekly Retrospective] 따름</p>
+<p>📡 RSS 구독: <a href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml">/feed.xml</a></p>
+</div>
+</div></body></html>
