@@ -1,0 +1,46 @@
+{
+  "date": "2026-04-26",
+  "insights": [
+    {
+      "title": "Safety/Alignment +87% 폭증의 정체는 robustness 인프라 정리, 새 안전 패러다임 아님",
+      "claim": "기존 TTA/OOD/face forgery/adversarial robustness 라인의 동시 정비. policy/alignment 안전과 분리해 봐야 함.",
+      "papers": [
+        "https://arxiv.org/abs/2604.21772",
+        "https://arxiv.org/abs/2604.21478",
+        "https://arxiv.org/abs/2604.21465"
+      ]
+    },
+    {
+      "title": "VLA 패러다임 전환: 규모 경쟁 → 해부+모듈화+명시적 제약",
+      "claim": "How VLAs Really Work / CorridorVLA / LoHo-Manip / Residual Bridge가 동시에 등장하면서 VLA가 'big policy'에서 modular 해석 가능 시스템으로 옮겨가는 분기점.",
+      "papers": [
+        "https://arxiv.org/abs/2604.21192",
+        "https://arxiv.org/abs/2604.21241",
+        "https://arxiv.org/abs/2604.21924",
+        "https://arxiv.org/abs/2604.21391"
+      ]
+    },
+    {
+      "title": "World Model이 평가 대상(CV) vs 훈련 도구(RO)로 양분된 채 고착화",
+      "claim": "WorldMark는 'world model을 평가', Hi-WM은 'world model에서 학습'. 같은 단어 다른 용도가 두 커뮤니티 단절을 키움.",
+      "papers": [
+        "https://arxiv.org/abs/2604.21686",
+        "https://arxiv.org/abs/2604.21741"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "VLA Failure Atlas — 실패 모드 표준 분류 + 측정 벤치",
+      "claim": "identity 의존 / out-of-embodiment / spatial guidance / view shift / temporal drift 표준 taxonomy + 측정 task. POPE가 LVLM에 한 일을 VLA에서."
+    },
+    {
+      "title": "World Model 통합 평가 — CV 평가 메트릭 + RO 정책 메트릭을 한 모델에 동시 적용",
+      "claim": "한 video world model 위에 visual fidelity와 policy success를 같이 측정해 'good video model = good policy training ground' 가설을 검증."
+    },
+    {
+      "title": "VLM Blind-Spot Atlas — 다축 진단 논문들을 통합 벤치+분류학으로",
+      "claim": "prompt override / 평가자 편향 / 추상 reasoning / ERM 한계 / grounding 부재 5축을 통합 측정. POPE 다음 세대 표준 자리."
+    }
+  ]
+}
