@@ -1,0 +1,45 @@
+{
+  "date": "2026-04-27",
+  "insights": [
+    {
+      "title": "VLA가 분해+제약 페이즈 다음 — memory·intent·safety 세 축이 한 날 동시 점화",
+      "claim": "CodeGraphVLP(persistent semantic graph) / GazeVLA(human gaze를 intent proxy로 transfer) / RedVLA(physical red teaming)가 같은 날 등장하면서 VLA 다음 6개월 main axis 셋이 동시에 표시된 셈.",
+      "papers": [
+        "https://arxiv.org/abs/2604.22238",
+        "https://arxiv.org/abs/2604.22615",
+        "https://arxiv.org/abs/2604.22591"
+      ]
+    },
+    {
+      "title": "World Model의 세 번째 용도 — 평가 매개체(dWorldEval)가 본격 데뷔",
+      "claim": "지난주 'CV는 평가 대상, RO는 훈련 도구'로 양분된 World Model에 'evaluation surrogate'라는 제3 용도가 추가. CV의 diffusion 인프라가 RO 평가 파이프라인으로 직접 흘러들어옴 — calibration 검증되면 OpenX-Embodiment 류 비교의 게임 체인저.",
+      "papers": [
+        "https://arxiv.org/abs/2604.22152",
+        "https://arxiv.org/abs/2604.22240"
+      ]
+    },
+    {
+      "title": "Long-horizon memory가 CV·RO 양쪽 공통 합류 지점으로 굳음",
+      "claim": "SpaMEM(CV: 10M-image action-conditioned belief 진단)과 CodeGraphVLP(RO: persistent semantic graph 처방)가 같은 날 등장. MLLM·VLA 모두 'short-context 한계'를 공통 인식으로 받아들였다는 신호. 'memory architecture' 자체가 향후 4~6주 인용 허브.",
+      "papers": [
+        "https://arxiv.org/abs/2604.22409",
+        "https://arxiv.org/abs/2604.22238",
+        "https://arxiv.org/abs/2604.22226"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "VLA Memory Bench — non-Markovian VLA 메모리 축 표준 측정",
+      "claim": "early-occluded evidence / distractor noise / subtask boundary / context length scaling 같이 표준 axis + 진단 task. POPE가 LVLM hallucination에 한 일을 VLA memory에서."
+    },
+    {
+      "title": "World Model 평가 Calibration — dWorldEval surrogate가 real eval과 얼마나 align되나",
+      "claim": "discrete diffusion이 만든 rollout으로 평가한 정책 순위 vs 실제 robot 평가 순위 spearman correlation을 측정하는 calibration study. OpenX-Embodiment 정도 인프라 있으면 빠르게 출판 가능."
+    },
+    {
+      "title": "Physical Safety Atlas — VLA·detection·medical reasoning 안전 통합 벤치",
+      "claim": "adversarial input · physical actuation risk · medical decision audit · cross-domain robustness 4축으로 표준 벤치. RedVLA·TriPatch·Sum-of-Checks·Useful nonrobust features가 도메인마다 흩어진 자리를 통합."
+    }
+  ]
+}
