@@ -1,0 +1,48 @@
+{
+  "date": "2026-04-28",
+  "insights": [
+    {
+      "title": "VLA 분야가 'failure mode catalog' 단계로 진입 — Lock-in·Safety Survey·Data Survey가 한 날 동시 등장",
+      "claim": "어제까지 'memory·intent·safety'에 각자 처방이 나왔다면 오늘은 Lock-in이 새 failure mode를 명명하고, VLA Safety Survey가 threats·challenges·evaluations·mechanisms를 통합 매핑하며, VLA Data Survey가 'data infrastructure가 진짜 bottleneck' 클레임. VLA community가 개별 시도들의 catalog 단계에 진입한 신호.",
+      "papers": [
+        "https://arxiv.org/abs/2604.23121",
+        "https://arxiv.org/abs/2604.23775",
+        "https://arxiv.org/abs/2604.23001"
+      ]
+    },
+    {
+      "title": "Diffusion이 generation을 떠나 perception/control backbone으로 흡수되는 흐름이 본격화",
+      "claim": "Diffusion-as-Generalist-Segmentation-Learner가 denoising trajectory를 segmentation prior로, V-GRPO가 'denoising RL이 생각보다 쉽다'를, Score-Induced GVF가 robotic path following에 score-based diffusion을 사용. 어제 dWorldEval/OccDirector의 직접 후속으로, 'diffusion = generation'의 1차 정의가 빠르게 무너짐.",
+      "papers": [
+        "https://arxiv.org/abs/2604.24575",
+        "https://arxiv.org/abs/2604.23380",
+        "https://arxiv.org/abs/2604.24487"
+      ]
+    },
+    {
+      "title": "VLM의 '못 하는 것' 카탈로그 정량화 — POPE 패턴이 새 axis로 반복 재현",
+      "claim": "PushupBench(counting 42%), Dynamic Gauges(진동 계기판 실패), SOU(small object blank), ReVSI(VLM 3D 평가 invalid), SycoPhantasy(evaluator sycophancy)가 같은 날 동시 등장. POPE가 hallucination에 한 일을 5개 axis에서 동시 반복 — 다음 단계는 통합 'VLM Failure Atlas'.",
+      "papers": [
+        "https://arxiv.org/abs/2604.23407",
+        "https://arxiv.org/abs/2604.22829",
+        "https://arxiv.org/abs/2604.22884",
+        "https://arxiv.org/abs/2604.24300",
+        "https://arxiv.org/abs/2604.24346"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "VLM Failure Atlas — VLM의 시계열 failure mode를 단일 벤치로 통합",
+      "claim": "오늘 PushupBench·Dynamic Gauges·SOU·ReVSI·SycoPhantasy가 흩어진 axis에 각자 벤치를 출시했는데 통합 프레임이 비어 있어요. 'counting·temporal vibration·small object·spatial reasoning·evaluator bias' 5축으로 표준 진단 task를 묶으면 POPE-급 인용 허브 가능."
+    },
+    {
+      "title": "VLA Lock-in 정량화 + 회복 메커니즘 — low-data post-training의 silent killer 정조준",
+      "claim": "Lock-in 페이퍼가 현상은 명명했지만 'lock-in scaling law' + 'recovery mechanism (replay·diverse instruction warmup·KL anchor) 비교'가 비어 있어요. VLA fine-tuning 데이터가 있다면 빠르게 측정 가능한 자리."
+    },
+    {
+      "title": "Diffusion Backbone Audit — generation/perception/control 통합 학습이 실제로 효율적인가",
+      "claim": "Diffusion-as-Segmentation·V-GRPO·Score Vector Field 동시 등장 — 'single diffusion backbone이 multiple downstream task'의 multi-task transfer benchmark가 비어 있어요. Generation 인프라를 운영하는 랩이 4~6주 안에 community standard 결을 출판할 수 있는 자리."
+    }
+  ]
+}
