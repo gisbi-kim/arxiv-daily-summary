@@ -1,0 +1,49 @@
+{
+  "date": "2026-04-29",
+  "insights": [
+    {
+      "title": "VLA가 학습 paradigm 다음으로 'execution paradigm'을 재정의하는 단계 진입 — 비동기·dual-system·discrete diffusion 셋이 한 날 동시 등장",
+      "claim": "Libra-VLA(dual-system asynchronous coarse-to-fine), DiscreteRTC(discrete diffusion as natural asynchronous executor), Privileged Foresight Distillation(world action model의 future branch 재해석)가 같은 날 동시 등장. 어제까지 VLA failure mode 진단 단계였다면 오늘은 paradigm 자체를 다시 짠다는 다음 단계 — manipulation 스택의 inference 디자인 audit 시점.",
+      "papers": [
+        "https://arxiv.org/abs/2604.24921",
+        "https://arxiv.org/abs/2604.25050",
+        "https://arxiv.org/abs/2604.25859"
+      ]
+    },
+    {
+      "title": "VLM 평가가 '무엇이 깨지나' 단계에서 '어떻게 측정해야 신뢰할 만한가' 메타-단계로 이동",
+      "claim": "VLM Judges Can Rank but Cannot Score(conformal prediction 기반 진단), XTC-Bench(unified MM cross-task consistency), SIEVES(selective prediction visual evidence scoring), Prefill-Time Intervention(decoding 아닌 prefill에서 hallucination), Foundation Segmentation Robustness(SAM 의료 도메인 shift audit)가 한 날 동시 등장. 어제 PushupBench·DO-Bench·ReVSI가 'single axis failure'였다면 오늘은 '평가 framework 자체의 calibration'으로 한 단계 메타-위로.",
+      "papers": [
+        "https://arxiv.org/abs/2604.25235",
+        "https://arxiv.org/abs/2604.25072",
+        "https://arxiv.org/abs/2604.25855",
+        "https://arxiv.org/abs/2604.25642",
+        "https://arxiv.org/abs/2604.25685"
+      ]
+    },
+    {
+      "title": "Safety/Alignment 6일 만에 +116% 폭증 — production-deployment 라인이 한 주 단위로 분기점",
+      "claim": "이번주 누적 67편(31편 → 67편, 6일 시야). 의료 영상 robustness audit, embedding-guided typographic perturbation, home-service mobile manipulation closed-loop physical grounding(ANCHOR), threat-oriented digital twinning이 한 주 내내 누적되면서 production deployment를 막는 silent killer를 정조준한 결들이 한꺼번에 등장. 향후 4~6주 동안 'deployment audit'이 evaluation을 이어 다음 community 표준이 될 가능성이 큼.",
+      "papers": [
+        "https://arxiv.org/abs/2604.25685",
+        "https://arxiv.org/abs/2604.25102",
+        "https://arxiv.org/abs/2604.25323",
+        "https://arxiv.org/abs/2604.25757"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "VLA Asynchronous Execution Atlas — paradigm 셋의 정량 비교 + 실시간 hardware audit",
+      "claim": "Libra-VLA(dual-system) · DiscreteRTC(discrete diffusion) · Privileged Foresight Distillation(world action correction) 셋이 모두 'VLA 비동기 실행'을 다른 각도에서 다루지만 단일 hardware/task 통합 비교 결은 비어 있음. '세 paradigm × 동일 task × 실 inference latency/jitter/throughput' 측 벤치를 만들면 4~6주 안에 community standard 후보."
+    },
+    {
+      "title": "VLM Meta-Eval Calibration Suite — Judge·Score·Consistency·Selective·Prefill 다섯 axis 통합",
+      "claim": "VLM-Judges-Cannot-Score · XTC-Bench · SIEVES · Prefill-Time Intervention · Foundation Segmentation Robustness가 흩어진 axis에서 각자 evaluation calibration 결을 내놨는데 통합 framework 비어 있음. 5축으로 표준 진단을 묶으면 POPE·MMMU가 한 일을 'meta-eval' 축에서 반복 가능."
+    },
+    {
+      "title": "Physical Reasoning as a New Eval Category — KinDER를 community 표준으로 굳히는 후속",
+      "claim": "KinDER(25 envs + 13 baselines)가 'physical reasoning'을 새 평가 카테고리로 정의했지만 LIBERO·CALVIN·RLBench와의 정량 호환·차별 분해는 비어 있음. 4~6주 내 community standard 굳을지 여부 결정될 가능성 큼."
+    }
+  ]
+}

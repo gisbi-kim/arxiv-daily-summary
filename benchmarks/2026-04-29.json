@@ -1,0 +1,70 @@
+{
+  "date": "2026-04-29",
+  "results": [],
+  "proposed_benchmarks": [
+    {
+      "name": "KinDER",
+      "paper": "2604.25788",
+      "paper_title": "KinDER: A Physical Reasoning Benchmark for Robot Learning and Planning",
+      "domain": "Embodied physical reasoning (kinematic + dynamic constraints)",
+      "what": "25 procedurally generated environments + Gymnasium-compatible Python library + 13 baselines spanning task and motion planning, imitation learning. Targets reasoning over embodiment / environment / task constraints.",
+      "risk_note": "13 baseline coverage of paradigms (TAMP / IL / LLM-based) needs balance check; community standard adoption uncertain."
+    },
+    {
+      "name": "XTC-Bench",
+      "paper": "2604.25072",
+      "paper_title": "Beyond Accuracy: Benchmarking Cross-Task Consistency in Unified Multimodal Models",
+      "domain": "Unified Multimodal Models cross-task semantic consistency",
+      "what": "Scene-graph-grounded evaluation framework that derives both generation prompts and understanding queries from the same scene graph, measuring whether unified MM stays semantically consistent across understanding/generation tasks for the same visual concept.",
+      "risk_note": "Scene-graph derivation pipeline biases evaluation toward graph-amenable concepts; coverage of free-form generation unclear."
+    },
+    {
+      "name": "M3-VQA",
+      "paper": "2604.25122",
+      "paper_title": "M$^3$-VQA: A Benchmark for Multimodal, Multi-Entity, Multi-Hop Visual Question Answering",
+      "domain": "Multi-hop multi-entity multimodal QA",
+      "what": "VQA bench requiring reasoning across multiple entities and multimodal evidence chains, beyond single-image/single-entity QA.",
+      "risk_note": "Multi-hop chain construction quality and shortcut prevention need scrutiny."
+    },
+    {
+      "name": "FCMBench-Video",
+      "paper": "2604.25186",
+      "paper_title": "FCMBench-Video: Benchmarking Document Video Intelligence",
+      "domain": "Document-centric video understanding",
+      "what": "Targets video documents (slides, lectures, screencasts) where temporal + structural document layout matters jointly.",
+      "risk_note": "Niche but well-defined domain; representativeness across document types needs check."
+    },
+    {
+      "name": "DRAGON",
+      "paper": "2604.25231",
+      "paper_title": "DRAGON: A Benchmark for Evidence-Grounded Visual Reasoning over Diagrams",
+      "domain": "Evidence-grounded diagram reasoning",
+      "what": "Forces models to ground reasoning steps in specific diagram regions/elements rather than free-form text reasoning.",
+      "risk_note": "Evidence-grounding annotation cost limits scale; may favor models with explicit attention/grounding heads."
+    },
+    {
+      "name": "OmniVTG",
+      "paper": "2604.25276",
+      "paper_title": "OmniVTG: A Large-Scale Dataset and Training Paradigm for Open-World Video Temporal Grounding",
+      "domain": "Open-world video temporal grounding",
+      "what": "Large-scale dataset + training paradigm for grounding text queries to video temporal segments in open-world scenarios.",
+      "risk_note": "Open-world claim requires demonstration of generalization beyond training distribution."
+    },
+    {
+      "name": "QCalEval",
+      "paper": "2604.25884",
+      "paper_title": "QCalEval: Benchmarking Vision-Language Models for Quantum Calibration Plot Understanding",
+      "domain": "Scientific plot understanding (quantum calibration)",
+      "what": "Targets a niche scientific evaluation domain — VLM ability to read and reason about quantum calibration plots.",
+      "risk_note": "Very narrow domain; valuable for scientific VLM but limited generalization signal."
+    }
+  ],
+  "notable_datasets": [
+    {
+      "name": "OmniVTG",
+      "paper": "2604.25276",
+      "what": "Large-scale open-world video temporal grounding dataset paired with new training paradigm."
+    }
+  ],
+  "note": "이번주 추적 벤치(ScanNet++·LIBERO·nuScenes·MMMU·VBench 등)에서 새 SOTA 수치 보고는 잡힌 게 없음. 대신 '새 평가 framework·새 카테고리 정의' 흐름이 강함 — KinDER(physical reasoning), XTC-Bench(unified MM cross-task), M3-VQA(multi-hop multimodal), DRAGON(diagram evidence-grounding) 등이 한 날 나란히 등장. 평가 인프라가 새 카테고리로 분기하는 단계."
+}
