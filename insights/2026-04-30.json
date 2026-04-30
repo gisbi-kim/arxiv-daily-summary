@@ -1,0 +1,49 @@
+{
+  "date": "2026-04-30",
+  "insights": [
+    {
+      "title": "World model이 foundation layer로 굳는 단계 — action·VLM·spatial reasoning 세 축 동시 등장",
+      "claim": "X-WAM(robot action), STARRY(VLA), World2VLM(VLM dynamic spatial reasoning), Lifting Embodied World Models 4편이 한 날 서로 다른 axis로 world model을 substrate로 삼는 paradigm 동시 점화. VLA execution paradigm 다음 단계로 world model 자체가 foundation layer.",
+      "papers": [
+        "https://arxiv.org/abs/2604.26694",
+        "https://arxiv.org/abs/2604.26848",
+        "https://arxiv.org/abs/2604.26934",
+        "https://arxiv.org/abs/2604.26182"
+      ]
+    },
+    {
+      "title": "VLM 평가가 calibration 다음 단계로 epistemic honesty(무엇을 아는가/모르는가)로 이동",
+      "claim": "Delineating Knowledge Boundaries · MedSynapse-V · CheXthought · State Beyond Appearance · Beyond Shortcuts(VLM Illusions) 5편이 한 날 epistemic honesty를 새 axis로 정조준. 어제 VLM-Judges-Cannot-Score · XTC-Bench의 calibration 흐름의 한 단계 깊이.",
+      "papers": [
+        "https://arxiv.org/abs/2604.26419",
+        "https://arxiv.org/abs/2604.26283",
+        "https://arxiv.org/abs/2604.26288",
+        "https://arxiv.org/abs/2604.26614",
+        "https://arxiv.org/abs/2604.26250"
+      ]
+    },
+    {
+      "title": "3DGS deployment 라인이 렌더링 quality 다음으로 production cost를 community focal point로",
+      "claim": "EnerGS(partial LiDAR + energy formulation) · MesonGS++(post-train compression HP search) · SAND(implicit query 가속) 3편 동시 등장. 3D/Scene 버킷 +16% 누적 위에서 cost 측 결이 동시 표면화.",
+      "papers": [
+        "https://arxiv.org/abs/2604.26238",
+        "https://arxiv.org/abs/2604.26799",
+        "https://arxiv.org/abs/2604.25936"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "World Model Atlas — VLM·VLA·embodied 세 axis × 같은 backbone 통합 비교",
+      "claim": "X-WAM·STARRY·World2VLM·Lifting Embodied가 모두 world model substrate를 쓰지만 같은 backbone × 세 downstream의 trade-off 통합 비교 부재. 4~6주 안에 community standard 후보."
+    },
+    {
+      "title": "VLM Epistemic Honesty Suite — Hallucination·Knowledge-Boundary·State-Consistency·Calibration 4 axis 통합",
+      "claim": "오늘 4편 + 어제 calibration 결들을 4 axis로 묶은 표준 진단. POPE가 hallucination에 한 일을 epistemic honesty 축에서 반복할 자리."
+    },
+    {
+      "title": "3DGS Production Cost Atlas — Compression·Energy·Quantization × 표준 벤치마크",
+      "claim": "MesonGS++·EnerGS·SAND가 cost 측 axis를 다 다르게 정조준했지만 ScanNet++/Mip-NeRF 360 위 통합 trade-off 비교 부재. 3DGS deployment 측 가장 빠르게 인용 모을 자리."
+    }
+  ]
+}
