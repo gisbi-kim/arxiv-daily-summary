@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-01",
+  "insights": [
+    {
+      "title": "VLA reasoning paradigm shift — 'linguistic CoT' → 'physical latent reasoning + RL'이 한 날 3편으로 표면화",
+      "claim": "VLA의 reasoning 표현 layer가 explicit linguistic CoT에서 physical latent CoT + joint RL 최적화로 이동. LaST-R1·MotuBrain·PRTS가 같은 날 다른 axis에서 정조준.",
+      "papers": [
+        "https://arxiv.org/abs/2604.28192",
+        "https://arxiv.org/abs/2604.27792",
+        "https://arxiv.org/abs/2604.27472"
+      ]
+    },
+    {
+      "title": "3D/Scene이 'production cost' → 'sparse view robustness'로 focus 한 단계 이동",
+      "claim": "일주일 13→20편(+54%) surge 중 sparse-view 3DGS 4편 동시 등장. cost가 'rendering 측'에서 'data 측'으로 이동.",
+      "papers": [
+        "https://arxiv.org/abs/2604.27106",
+        "https://arxiv.org/abs/2604.27422",
+        "https://arxiv.org/abs/2604.27552",
+        "https://arxiv.org/abs/2604.28193"
+      ]
+    },
+    {
+      "title": "LLM-controlled robot의 'architectural threat surface'가 처음 통합 lens로 분석",
+      "claim": "STRIDE-per-interaction을 LLM-enabled robot의 6 boundary point에 적용해 cross-boundary attack chain 3가지를 trace. LLM-as-controller의 silent risk를 architectural lens로 본 첫 결.",
+      "papers": [
+        "https://arxiv.org/abs/2604.27267"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "VLA Reasoning Atlas — Linguistic CoT vs Latent CoT vs Continuous Latent × LIBERO/CALVIN/RoboCasa",
+      "claim": "오늘 LaST-R1·MotuBrain·PRTS가 다른 reasoning paradigm을 정조준했지만 통합 비교 부재. 4 paradigm × 3 표준 벤치 atlas가 community standard 후보."
+    },
+    {
+      "title": "Sparse-View 3DGS Robustness Suite — In-the-Wild × Generalizable × Domain-Transfer atlas",
+      "claim": "오늘 sparse-view 4편이 각자 다른 'sparse'를 정조준. 4 axis 통합 robustness suite 부재. ScanNet++/Mip-NeRF 360 위 통합 평가가 공백."
+    },
+    {
+      "title": "LLM-Robot Threat Audit Framework — STRIDE × DFD × 우리 랩 LLM-controlled robot",
+      "claim": "Prompt-to-Actuation의 framework는 정의됐지만 실제 lab system case study는 비어 있음. 우리 시스템에 적용한 audit이 향후 1년 robotics safety 첫 표준 후보."
+    }
+  ]
+}
