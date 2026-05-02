@@ -1,0 +1,64 @@
+{
+  "date": "2026-05-02",
+  "kind": "weekly",
+  "iso_week": "2026-W18",
+  "week_start": "2026-04-26",
+  "week_end": "2026-05-02",
+  "insights": [
+    {
+      "title": "VLA paradigm 풀스택 shift — 한 주 안에 분해·실행·추론·안전 4 layer 동시 점화",
+      "claim": "Breaking Lock-In(failure mode) → Libra-VLA·DiscreteRTC·AsyncShield(execution paradigm) → LaST-R1(latent reasoning) → VLA Safety Survey + From Prompt to Physical Actuation(architectural threat)이 한 주 안에서 4 layer paradigm shift를 동시에 그림. W17의 진단 페이즈 다음 단계.",
+      "papers": [
+        "https://arxiv.org/abs/2604.23121",
+        "https://arxiv.org/abs/2604.24921",
+        "https://arxiv.org/abs/2604.25050",
+        "https://arxiv.org/abs/2604.24086",
+        "https://arxiv.org/abs/2604.28192",
+        "https://arxiv.org/abs/2604.23775",
+        "https://arxiv.org/abs/2604.27267"
+      ]
+    },
+    {
+      "title": "World Model의 'asset → environment → evaluator' 3단계 진화 완성",
+      "claim": "dWorldEval이 'WM을 policy eval surrogate로 사용'을 명시 점화. HERMES++가 driving WM의 understanding+generation 통합. Visual Generation in the New Era가 5-level taxonomy 정리. WM 활용이 표현 asset → RL training env → evaluation substrate 3단계 stepwise 진화.",
+      "papers": [
+        "https://arxiv.org/abs/2604.22152",
+        "https://arxiv.org/abs/2604.28196",
+        "https://arxiv.org/abs/2604.28185",
+        "https://arxiv.org/abs/2604.26934",
+        "https://arxiv.org/abs/2604.26848",
+        "https://arxiv.org/abs/2604.26182"
+      ]
+    },
+    {
+      "title": "Autonomous Driving이 8개 버킷 중 단독 riser (+27%) — VLA의 첫 vertical 흡수처",
+      "claim": "AD 22→28편(+27%). HERMES++(WM) + Judge Then Drive(critic-VLA) + ProDrive(proactive) + Dreaming Across Towns(closed-loop CARLA) + SwarmDrive(V2V) + LLM Decision-Making이 한 주 안에서 4 axis 동시. nuScenes/Waymo/CARLA 인프라가 갖춰진 driving이 'general VLA의 첫 vertical 흡수처'가 된 자연스러운 결과.",
+      "papers": [
+        "https://arxiv.org/abs/2604.28196",
+        "https://arxiv.org/abs/2604.27366",
+        "https://arxiv.org/abs/2604.25329",
+        "https://arxiv.org/abs/2604.27994",
+        "https://arxiv.org/abs/2604.22852",
+        "https://arxiv.org/abs/2604.23513"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "Latent CoT VLA의 다른 벤치 검증 atlas — LIBERO 외 CALVIN/RoboCasa/RLBench 통합",
+      "claim": "LaST-R1이 LIBERO 99.8% 찍은 게 LIBERO-overfitting인지 진짜 generalization인지가 다음 community reality check. CALVIN·RoboCasa·RLBench에서 같은 분해를 검증 + 정량 비교."
+    },
+    {
+      "title": "Sync vs Async VLA Execution Hardware-Profile Ablation",
+      "claim": "Libra-VLA·DiscreteRTC·AsyncShield 셋이 'async가 답'이라는 가정 공유. 정작 sync 대비 async hardware-profile(control hz, latency, CPU/GPU usage)의 정량 비교 ablation은 부재. 이 공백을 채우는 게 paradigm을 fluke에서 trend로 굳히는 결정적 결."
+    },
+    {
+      "title": "World Model Eval Calibration — dWorldEval surrogate가 real eval과 얼마나 align되나",
+      "claim": "WM이 evaluation substrate가 됐는데, 그 substrate가 real-world deployment eval과 얼마나 align되는지가 다음 검증 layer. dWorldEval calibration suite가 설계되면 WM-as-evaluator 라인이 실 적용 단계로 넘어감."
+    },
+    {
+      "title": "LLM-Robot Threat Audit Framework",
+      "claim": "From Prompt to Physical Actuation의 STRIDE-per-interaction을 우리 랩 LLM-controlled robot에 직접 적용. boundary diagram + cross-modal validation + provider tool-use mediation 3 axis audit."
+    }
+  ]
+}
