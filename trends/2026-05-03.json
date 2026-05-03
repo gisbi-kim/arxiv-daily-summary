@@ -1,0 +1,334 @@
+{
+  "date": "2026-05-03",
+  "totals": {
+    "selected": 107,
+    "total_scanned": 132,
+    "note": "Sunday — same Friday May 1 batch (arxiv has no weekend listings); pastweek window rolled to 2026-04-27 ~ 2026-05-03."
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 20,
+      "cv": 15,
+      "ro": 3,
+      "cvro": 2
+    },
+    "Robot Learning": {
+      "total": 17,
+      "cv": 3,
+      "ro": 11,
+      "cvro": 3
+    },
+    "Autonomous Driving": {
+      "total": 11,
+      "cv": 5,
+      "ro": 6,
+      "cvro": 0
+    },
+    "Foundation Models": {
+      "total": 16,
+      "cv": 16,
+      "ro": 0,
+      "cvro": 0
+    },
+    "Generation": {
+      "total": 15,
+      "cv": 14,
+      "ro": 1,
+      "cvro": 0
+    },
+    "Efficiency/Systems": {
+      "total": 11,
+      "cv": 10,
+      "ro": 1,
+      "cvro": 0
+    },
+    "Embodied AI": {
+      "total": 3,
+      "cv": 3,
+      "ro": 0,
+      "cvro": 0
+    },
+    "Safety/Alignment": {
+      "total": 14,
+      "cv": 11,
+      "ro": 2,
+      "cvro": 1
+    }
+  },
+  "buckets_pastweek": {
+    "3D/Scene": {
+      "total": 52,
+      "cv": 39,
+      "ro": 13
+    },
+    "Robot Learning": {
+      "total": 56,
+      "cv": 8,
+      "ro": 48
+    },
+    "Autonomous Driving": {
+      "total": 31,
+      "cv": 10,
+      "ro": 21
+    },
+    "Foundation Models": {
+      "total": 38,
+      "cv": 38,
+      "ro": 0
+    },
+    "Generation": {
+      "total": 63,
+      "cv": 57,
+      "ro": 6
+    },
+    "Efficiency/Systems": {
+      "total": 39,
+      "cv": 35,
+      "ro": 4
+    },
+    "Embodied AI": {
+      "total": 15,
+      "cv": 6,
+      "ro": 9
+    },
+    "Safety/Alignment": {
+      "total": 38,
+      "cv": 33,
+      "ro": 5
+    }
+  },
+  "vs_7d_prior": {
+    "baseline_date": "2026-04-26",
+    "baseline_note": "Same 1-day /new unit on previous Sunday (mirrored arxiv batch from previous week's Friday).",
+    "today_buckets_delta_pct": {
+      "Autonomous Driving": "+57%",
+      "3D/Scene": "+54%",
+      "Embodied AI": "+50%",
+      "Robot Learning": "+13%",
+      "Efficiency/Systems": "+0%",
+      "Foundation Models": "-16%",
+      "Generation": "-25%",
+      "Safety/Alignment": "-48%"
+    }
+  },
+  "hottest": [
+    {
+      "topic": "VLA reasoning paradigm shift — latent CoT + RL",
+      "evidence": [
+        "2604.28192",
+        "2604.27792",
+        "2604.27472"
+      ],
+      "note": "LaST-R1 + MotuBrain + PRTS 셋이 다른 axis로 같은 paradigm 정조준; 일요일까지도 후속 ablation 결 미등장"
+    },
+    {
+      "topic": "Sparse-View 3DGS 4-fold surge",
+      "evidence": [
+        "2604.27106",
+        "2604.27422",
+        "2604.27552",
+        "2604.28193"
+      ],
+      "note": "한 날에 4편이 모두 다른 'sparse' 정의로 정조준; 통합 robustness suite 자리가 비어있음"
+    },
+    {
+      "topic": "Driving WM unified understanding+generation",
+      "evidence": [
+        "2604.28196"
+      ],
+      "note": "HERMES++가 'generation-only'에서 'understanding+generation 통합'으로 paradigm shift 첫 분명한 결"
+    },
+    {
+      "topic": "LLM-controlled robot architectural threat modeling",
+      "evidence": [
+        "2604.27267"
+      ],
+      "note": "From Prompt to Physical Actuation — STRIDE-per-interaction을 LLM-enabled robot에 처음 적용한 통합 lens"
+    }
+  ],
+  "cooling": [
+    {
+      "topic": "Safety/Alignment burst 종료",
+      "evidence": [
+        "2604.27343",
+        "2604.27357",
+        "2604.27654"
+      ],
+      "note": "27→14편 -48% cooling; 안에서도 진짜 'AI safety' 결은 1~2편, 나머지는 medical/forensics 키워드 잡음"
+    },
+    {
+      "topic": "Foundation Models 소폭 -16%",
+      "evidence": [],
+      "note": "지난주 양강 중 한 축이 cooling; deployment 측 결로 무게중심 이동 신호"
+    }
+  ],
+  "buckets_summary_note": "3D/Scene 20편 단독 1위(7일 전 13→오늘 20), RL 17편(15→17), FM 16편, Generation 15편, Safety 14편(-48%), AD 11편(+57%), Eff 11편, Embodied 3편. 'deployment-heavy 3축(3D+RL+AD)' 무게중심 이동.",
+  "keywords_cv": [
+    [
+      "video",
+      47
+    ],
+    [
+      "diffusion",
+      35
+    ],
+    [
+      "robust",
+      28
+    ],
+    [
+      "transformer",
+      19
+    ],
+    [
+      "gaussian splat",
+      15
+    ],
+    [
+      "splatting",
+      15
+    ],
+    [
+      "vlm",
+      14
+    ],
+    [
+      "vision-language model",
+      13
+    ],
+    [
+      "alignment",
+      12
+    ],
+    [
+      "distillation",
+      12
+    ],
+    [
+      "sparse",
+      10
+    ],
+    [
+      "grounding",
+      8
+    ],
+    [
+      "world model",
+      5
+    ],
+    [
+      "reinforcement learning",
+      5
+    ],
+    [
+      "scene reconstruction",
+      4
+    ],
+    [
+      "vla",
+      4
+    ],
+    [
+      "autonomous driving",
+      4
+    ],
+    [
+      "slam",
+      3
+    ],
+    [
+      "manipulation",
+      3
+    ],
+    [
+      "navigation",
+      3
+    ]
+  ],
+  "keywords_ro": [
+    [
+      "manipulation",
+      13
+    ],
+    [
+      "navigation",
+      9
+    ],
+    [
+      "robust",
+      8
+    ],
+    [
+      "vla",
+      7
+    ],
+    [
+      "vision-language-action",
+      7
+    ],
+    [
+      "reinforcement learning",
+      7
+    ],
+    [
+      "tactile",
+      6
+    ],
+    [
+      "humanoid",
+      5
+    ],
+    [
+      "autonomous driving",
+      5
+    ],
+    [
+      "slam",
+      4
+    ],
+    [
+      "diffusion",
+      4
+    ],
+    [
+      "video",
+      3
+    ],
+    [
+      "world model",
+      3
+    ],
+    [
+      "dexterous",
+      3
+    ],
+    [
+      "gaussian splat",
+      2
+    ],
+    [
+      "splatting",
+      2
+    ],
+    [
+      "distillation",
+      2
+    ],
+    [
+      "sparse",
+      2
+    ],
+    [
+      "scene reconstruction",
+      1
+    ],
+    [
+      "vision-language model",
+      1
+    ]
+  ],
+  "pastweek_total": {
+    "cv": 598,
+    "ro": 187
+  }
+}

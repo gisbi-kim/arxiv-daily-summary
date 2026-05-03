@@ -1,0 +1,43 @@
+{
+  "date": "2026-05-03",
+  "results": [
+    {
+      "benchmark": "LIBERO",
+      "metric": "average success rate",
+      "value": 99.8,
+      "value_str": "99.8%",
+      "paper": "https://arxiv.org/abs/2604.28192",
+      "paper_title": "LaST-R1: Reinforcing Action via Adaptive Physical Latent Reasoning for VLA Models",
+      "note": "Average across LIBERO suite — task-by-task breakdown unverified; 'LIBERO solved' claim pending CALVIN/RoboCasa cross-check"
+    },
+    {
+      "benchmark": "real-world manipulation (4 task)",
+      "metric": "improvement vs warm-up",
+      "value": 44.0,
+      "value_str": "+44%",
+      "paper": "https://arxiv.org/abs/2604.28192",
+      "paper_title": "LaST-R1",
+      "note": "Single-arm + dual-arm; dual-arm collaboration depth from abstract unclear"
+    },
+    {
+      "benchmark": "SAM3D-style sparse reconstruction",
+      "metric": "geometric quality",
+      "value": 30.1,
+      "value_str": "+30.1%",
+      "paper": "https://arxiv.org/abs/2604.27106",
+      "paper_title": "RecGen: Reconstruction by Generation",
+      "note": "80% less training mesh; pose estimation +33.9% same paper"
+    },
+    {
+      "benchmark": "real-time VLA inference",
+      "metric": "speedup vs UniDiffuser baseline",
+      "value": 50.0,
+      "value_str": "50x",
+      "paper": "https://arxiv.org/abs/2604.27792",
+      "paper_title": "MotuBrain",
+      "note": "Baseline definition (naive vs accelerated diffusion) needs verification — see risk filter"
+    }
+  ],
+  "proposed_benchmarks": [],
+  "note": "Same SOTA reports as Friday May 1 batch (Sunday's pastweek view unchanged); ScanNet++/Mip-NeRF 360 측 새 SOTA 보고는 안 잡힘."
+}
