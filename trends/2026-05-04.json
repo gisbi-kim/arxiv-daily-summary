@@ -1,0 +1,329 @@
+{
+  "date": "2026-05-04",
+  "totals": {
+    "selected": 84,
+    "total_scanned": 104,
+    "note": "Monday — fresh /new batch (cs.CV 81 new+cross + cs.RO 26 new+cross), pastweek window 2026-04-28 ~ 2026-05-04. Retrospective loop active vs 2026-04-23 insights (closest available; 04-20 not snapshotted)."
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 13,
+      "cv": 11,
+      "ro": 1,
+      "cvro": 1
+    },
+    "Robot Learning": {
+      "total": 12,
+      "cv": 0,
+      "ro": 8,
+      "cvro": 4
+    },
+    "Autonomous Driving": {
+      "total": 9,
+      "cv": 5,
+      "ro": 2,
+      "cvro": 2
+    },
+    "Foundation Models": {
+      "total": 8,
+      "cv": 8,
+      "ro": 0,
+      "cvro": 0
+    },
+    "Generation": {
+      "total": 17,
+      "cv": 16,
+      "ro": 1,
+      "cvro": 0
+    },
+    "Efficiency/Systems": {
+      "total": 14,
+      "cv": 12,
+      "ro": 1,
+      "cvro": 1
+    },
+    "Embodied AI": {
+      "total": 3,
+      "cv": 0,
+      "ro": 2,
+      "cvro": 1
+    },
+    "Safety/Alignment": {
+      "total": 8,
+      "cv": 8,
+      "ro": 0,
+      "cvro": 0
+    }
+  },
+  "buckets_pastweek": {
+    "3D/Scene": {
+      "total": 53,
+      "cv": 41,
+      "ro": 12
+    },
+    "Robot Learning": {
+      "total": 64,
+      "cv": 13,
+      "ro": 51
+    },
+    "Autonomous Driving": {
+      "total": 33,
+      "cv": 12,
+      "ro": 21
+    },
+    "Foundation Models": {
+      "total": 40,
+      "cv": 40,
+      "ro": 0
+    },
+    "Generation": {
+      "total": 65,
+      "cv": 58,
+      "ro": 7
+    },
+    "Efficiency/Systems": {
+      "total": 44,
+      "cv": 39,
+      "ro": 5
+    },
+    "Embodied AI": {
+      "total": 13,
+      "cv": 5,
+      "ro": 8
+    },
+    "Safety/Alignment": {
+      "total": 37,
+      "cv": 32,
+      "ro": 5
+    }
+  },
+  "vs_7d_prior": {
+    "baseline_date": "2026-04-27",
+    "baseline_note": "Prior Monday pastweek snapshot — week-over-week comparison of 7-day rolling window.",
+    "pastweek_buckets_delta_pct": {
+      "3D/Scene": "+15%",
+      "Robot Learning": "-10%",
+      "Autonomous Driving": "+267%",
+      "Foundation Models": "-64%",
+      "Generation": "-38%",
+      "Efficiency/Systems": "+100%",
+      "Embodied AI": "-59%",
+      "Safety/Alignment": "-27%"
+    }
+  },
+  "hottest": [
+    {
+      "topic": "VLA latent reasoning paradigm 2주차 — pixel-free world-action models 정착",
+      "evidence": [
+        "2605.00078",
+        "2605.00080",
+        "2605.00412"
+      ],
+      "note": "Being-H0.7가 'pixel-space prediction은 비효율적' 정조준 + Hamiltonian WM이 'physically meaningful' 측 paradigm 제안 + WM Survey가 정리. LaST-R1(지난주) 후속 결로 paradigm 단단해지는 모양새."
+    },
+    {
+      "topic": "Autonomous Driving evaluation methodology — open vs closed-loop 격차 정량화",
+      "evidence": [
+        "2605.00066",
+        "2605.00050"
+      ],
+      "note": "NAVSIM PDM ↔ Bench2Drive 8-method 페어링 분석으로 'open-loop은 closed-loop 예측에 한계' 정량화 + 사고 reconstruction이 새 substrate."
+    },
+    {
+      "topic": "Visual modality safety surface — VLM jailbreak 측정 가능해진 자리",
+      "evidence": [
+        "2605.00583",
+        "2605.00326"
+      ],
+      "note": "Visual cipher 40.9% ASR(Claude-Haiku-4.5)·prompt-induced score variance가 'safety = text-only training이 vision으로 전이 안 됨' 정조준."
+    },
+    {
+      "topic": "3DGS RL-based density control 등장",
+      "evidence": [
+        "2605.00408"
+      ],
+      "note": "LeGS가 heuristic density control을 RL policy로 대체 + Mip-NeRF 360/Tanks Temples/Deep Blending 3개 표준 벤치 통과. 'RL이 3DGS 학습 stack에 들어오는' 첫 결."
+    }
+  ],
+  "cooling": [
+    {
+      "topic": "Tactile/Contact-rich 측은 이번주 조용 (지난주 burst)",
+      "evidence": [],
+      "note": "지난주 DOT-Sim·FlexiTac·KernelSOS 등 4편 burst 후 이번주 /new에는 tactile 측 결 0편 — Generation·FM은 keyword 잡음 큰 반면 hard manipulation 자리는 일시 cool."
+    },
+    {
+      "topic": "Embodied AI 단일일 3편 — Monday 배치 치고 적음",
+      "evidence": [],
+      "note": "프라이데이 배치(5/1 일요일 회고 시점) 대비도 비슷한 자리, Monday 치고는 가장 조용. 한 주 더 봐야 진짜 cooling vs 일시 분포 변동 판단 가능."
+    }
+  ],
+  "buckets_summary_note": "Generation 17편 · Efficiency 14편 · 3D/Scene 13편 · RL 12편 · AD 9편 · FM 8편 · Safety 8편 · Embodied 3편. Generation·Efficiency 양강 + 3D/RL 중간 + Embodied 단독 cold. Generation은 medical imaging·remote sensing 응용 잡음이 많아 라벨 vs substantive 결 분리 필요.",
+  "keywords_cv": [
+    [
+      "video",
+      48
+    ],
+    [
+      "diffusion",
+      34
+    ],
+    [
+      "robust",
+      26
+    ],
+    [
+      "transformer",
+      19
+    ],
+    [
+      "vlm",
+      16
+    ],
+    [
+      "vision-language model",
+      16
+    ],
+    [
+      "gaussian splat",
+      15
+    ],
+    [
+      "splatting",
+      15
+    ],
+    [
+      "alignment",
+      14
+    ],
+    [
+      "distillation",
+      13
+    ],
+    [
+      "grounding",
+      10
+    ],
+    [
+      "sparse",
+      8
+    ],
+    [
+      "world model",
+      6
+    ],
+    [
+      "manipulation",
+      6
+    ],
+    [
+      "autonomous driving",
+      5
+    ],
+    [
+      "reinforcement learning",
+      5
+    ],
+    [
+      "scene reconstruction",
+      4
+    ],
+    [
+      "vla",
+      4
+    ],
+    [
+      "navigation",
+      3
+    ],
+    [
+      "moe",
+      3
+    ]
+  ],
+  "keywords_ro": [
+    [
+      "manipulation",
+      14
+    ],
+    [
+      "navigation",
+      9
+    ],
+    [
+      "robust",
+      9
+    ],
+    [
+      "reinforcement learning",
+      8
+    ],
+    [
+      "vla",
+      6
+    ],
+    [
+      "vision-language-action",
+      6
+    ],
+    [
+      "autonomous driving",
+      6
+    ],
+    [
+      "tactile",
+      6
+    ],
+    [
+      "world model",
+      5
+    ],
+    [
+      "humanoid",
+      5
+    ],
+    [
+      "diffusion",
+      4
+    ],
+    [
+      "video",
+      4
+    ],
+    [
+      "slam",
+      3
+    ],
+    [
+      "dexterous",
+      3
+    ],
+    [
+      "distillation",
+      2
+    ],
+    [
+      "sparse",
+      2
+    ],
+    [
+      "transformer",
+      2
+    ],
+    [
+      "gaussian splat",
+      1
+    ],
+    [
+      "splatting",
+      1
+    ],
+    [
+      "scene reconstruction",
+      1
+    ]
+  ],
+  "pastweek_total": {
+    "cv": 613,
+    "ro": 183
+  }
+}

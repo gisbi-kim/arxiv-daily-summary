@@ -1,0 +1,49 @@
+{
+  "date": "2026-05-04",
+  "results": [
+    {
+      "benchmark": "Mip-NeRF 360 + Tanks & Temples + Deep Blending",
+      "metric": "PSNR/SSIM (3 datasets aggregate)",
+      "value_str": "SOTA across 3",
+      "paper": "https://arxiv.org/abs/2605.00408",
+      "paper_title": "LeGS: Beyond Heuristics — Learnable Density Control for 3DGS via RL",
+      "note": "Reward function for density control via RL — claim covers all 3 standard 3DGS benches; per-scene breakdown unverified from abstract."
+    },
+    {
+      "benchmark": "long-horizon manipulation (sim)",
+      "metric": "average success rate",
+      "value": 95.5,
+      "value_str": "95.5%",
+      "paper": "https://arxiv.org/abs/2605.00438",
+      "paper_title": "IVLR: Interleaved Vision-Language Reasoning Traces",
+      "note": "Avg across simulated long-horizon benches; specific suite (LIBERO-Long?) needs verification — see risk filter"
+    },
+    {
+      "benchmark": "fleet manipulation (16 dual-arm robots, 8 tasks)",
+      "metric": "single generalist policy uplift",
+      "value_str": "improves vs pretrained baseline",
+      "paper": "https://arxiv.org/abs/2605.00416",
+      "paper_title": "LWD: Learning While Deploying — Fleet-Scale RL for VLA",
+      "note": "Real-world 16-robot fleet, 8 tasks incl. semantic grocery + 3-5min long-horizon; abstract uplift quantification ambiguous"
+    },
+    {
+      "benchmark": "Claude-Haiku-4.5 visual cipher attack",
+      "metric": "Attack Success Rate",
+      "value": 40.9,
+      "value_str": "40.9%",
+      "paper": "https://arxiv.org/abs/2605.00583",
+      "paper_title": "Jailbreaking VLMs through the Visual Modality",
+      "note": "vs 10.7% for equivalent textual cipher — cross-modality safety gap quantified for the first time on frontier VLMs"
+    },
+    {
+      "benchmark": "Vulkan 3DGS training (cross-vendor GPU)",
+      "metric": "speed/VRAM vs CUDA+PyTorch",
+      "value_str": "3.3× speed, -33% VRAM",
+      "paper": "https://arxiv.org/abs/2605.00219",
+      "paper_title": "VkSplat: High-Performance 3DGS in Vulkan",
+      "note": "First fully-Vulkan 3DGS training pipeline — cross-vendor GPU compatibility(AMD/Intel/NVIDIA)"
+    }
+  ],
+  "proposed_benchmarks": [],
+  "note": "Monday batch — 5 substantive SOTA reports across 3D/RL/Safety/Eff. ScanNet++/Mip-NeRF 360 측 새 SOTA 분명히 등장(LeGS), VLA fleet RL 측 LWD 첫 large-scale 결, VLM safety 측 frontier-model attack 측정 첫 결."
+}
