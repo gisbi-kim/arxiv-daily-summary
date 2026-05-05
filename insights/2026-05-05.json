@@ -1,0 +1,48 @@
+{
+  "date": "2026-05-05",
+  "insights": [
+    {
+      "title": "VLA paradigm shift 3주차 — 'monitoring + safety + test-time compute' 운영 layer가 한 batch에 표면화",
+      "claim": "어제까지가 'pixel-free latent' substrate 측 paradigm shift였다면 오늘은 그 위에 얹는 운영 layer가 한 번에 표면화. Sentinel-VLA(metacognitive on-demand reasoning) + VLA-ATTC(test-time compute via Relative Action Critic) + TAIL-Safe(Lipschitz Q safe set) + To Do or Not To Do(execution guarantee) + Latent Bridge(VLM call 50-75% 절감) + Anticipation-VLA(adaptive subgoal) + MolmoAct2(fully open) — 한 날 7+편이 같은 'VLA를 deploy 가능하게' 결로 누적. 단순 burst가 아니라 '학습 paradigm은 정착 → 운영 layer 표준화' 단계로 community가 진입한 신호.",
+      "papers": [
+        "https://arxiv.org/abs/2605.01191",
+        "https://arxiv.org/abs/2605.01194",
+        "https://arxiv.org/abs/2605.01195",
+        "https://arxiv.org/abs/2605.01201",
+        "https://arxiv.org/abs/2605.02739",
+        "https://arxiv.org/abs/2605.01772",
+        "https://arxiv.org/abs/2605.02881"
+      ]
+    },
+    {
+      "title": "Active Perception VLM이 'formal framework + emergent capability' 양쪽에서 동시 정착",
+      "claim": "Active Reasoning VLM via S-BOED가 active perception을 sequential Bayesian optimal experimental design으로 formal하게 정의하고, 같은 날 Act2See(SFT로 emergent active frame interleaving) + VAP(training-free 5.6x frame efficiency)이 practical instantiation으로 등장. Formal framework + practical method가 한 날 나란히 표면화한 건 paradigm 측면 가장 강한 정착 신호. 어제까지 'long-horizon VLA'가 IVLR 95.5%로 임계 통과한 자리에서, 오늘은 VLM의 long-form video reasoning이 같은 'sequential acquisition' 메타로 통합되는 자리.",
+      "papers": [
+        "https://arxiv.org/abs/2605.01345",
+        "https://arxiv.org/abs/2605.01657",
+        "https://arxiv.org/abs/2605.01662"
+      ]
+    },
+    {
+      "title": "Robot Navigation DRL의 'collision = episode end' 수십 년 관행에 첫 정조준 도전",
+      "claim": "Multi-Collision reset Budget이 single collision으로 episode 전체 reset하는 standard convention 자체에 정면 도전 — local termination과 global reset을 분리, 같은 episode 안에서 어려운 obstacle config을 retry. Embodied AI 버킷이 한 주 내내 5-15편으로 cold한 자리에서 한 편이 흐름 흔들 수 있는 케이스. methodology-level convention 흔들기라 단순 응용 결이 아니고, 향후 navigation RL training framework가 표준 변경될 가능성.",
+      "papers": [
+        "https://arxiv.org/abs/2605.02192"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "VLA Monitoring/TestTime/Safety Atlas — 3축 head-to-head benchmark",
+      "claim": "Sentinel-VLA(monitoring)·VLA-ATTC(test-time compute)·TAIL-Safe(safety set) 3축이 같은 LIBERO·RoboCasa 상에서 head-to-head로 비교된 적이 없음. 같은 backbone + 같은 task에서 'monitoring overhead vs safety guarantee vs test-time compute' Pareto atlas로 묶으면 향후 6주 내 community가 합의할 'VLA 운영 layer' 표준 후보."
+    },
+    {
+      "title": "Active Perception VLM의 'cost-quality Pareto + formal characterization' 통합",
+      "claim": "S-BOED(formal) vs Act2See/VAP(emergent)이 같은 video QA에서 어디까지 align하는가 정량화. EgoSchema·NExT-QA·ActivityNet-QA·IntentQA 4 bench × {S-BOED greedy, S-BOED look-ahead, Act2See SFT, VAP training-free} 4 method × frame budget {1,4,16,64}로 4D Pareto atlas. 'Active perception의 optimal vs heuristic 격차'를 정량화한 첫 결이 community standard 후보."
+    },
+    {
+      "title": "Navigation RL Training Convention Audit — collision/reset budget의 cross-platform Pareto",
+      "claim": "MCB가 'collision = episode reset' convention에 도전한 자리에서 다음 단계는 어떤 reset budget이 어떤 environment에서 optimal한지 정량화. Habitat·iGibson·Issac Lab 3 platform × {budget 0(standard)·1·3·∞} × {indoor home·warehouse·outdoor terrain} 3 environment cross-Pareto. methodology-level convention 변경의 실증 audit이 default training framework 표준 후보."
+    }
+  ]
+}

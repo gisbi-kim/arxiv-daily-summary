@@ -1,0 +1,47 @@
+{
+  "date": "2026-05-05",
+  "results": [
+    {
+      "benchmark": "LIBERO 4-suite + RoboCasa 24 + ALOHA",
+      "metric": "performance retention with reduced VLM call",
+      "value": "95-100% retention / 50-75% VLM call reduction / 1.65-1.73x speedup",
+      "paper": "https://arxiv.org/abs/2605.02739",
+      "title": "Latent Bridge: Feature Delta Prediction for Efficient Dual-System VLA"
+    },
+    {
+      "benchmark": "EgoSchema/NExT-QA/ActivityNet-QA/IntentQA/CLEVRER",
+      "metric": "zero-shot SOTA + frame efficiency vs GPT-4o/Gemini 1.5 Pro/LLaVA-OV",
+      "value": "SOTA + 5.6x frame efficiency",
+      "paper": "https://arxiv.org/abs/2605.01662",
+      "title": "Video Active Perception (VAP)"
+    },
+    {
+      "benchmark": "BimanualYAM (open bimanual teleop)",
+      "metric": "open dataset scale",
+      "value": "720 hours teleoperated bimanual (largest open)",
+      "paper": "https://arxiv.org/abs/2605.02881",
+      "title": "MolmoAct2: Action Reasoning Models for Real-world Deployment"
+    },
+    {
+      "benchmark": "ISIC 2018 (skin lesion)",
+      "metric": "dangerous non-human error reduction",
+      "value": "-34.1% (90.41% super-class diagnostic safety)",
+      "paper": "https://arxiv.org/abs/2605.02544",
+      "title": "Improving Model Safety by Targeted Error Correction"
+    },
+    {
+      "benchmark": "SICAPv2 (prostate histopath)",
+      "metric": "dangerous non-human error reduction",
+      "value": "-12.57% (92.13% super-class diagnostic safety)",
+      "paper": "https://arxiv.org/abs/2605.02544",
+      "title": "Improving Model Safety by Targeted Error Correction"
+    },
+    {
+      "benchmark": "navigation DRL (multi-platform sim+real)",
+      "metric": "SR / efficiency vs single-collision-reset baseline",
+      "value": "improves both with small collision budget",
+      "paper": "https://arxiv.org/abs/2605.02192",
+      "title": "Multi-Collision Budget Reset"
+    }
+  ]
+}

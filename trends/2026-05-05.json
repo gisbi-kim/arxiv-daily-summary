@@ -1,0 +1,241 @@
+{
+  "date": "2026-05-05",
+  "totals": {
+    "selected": 261,
+    "total_scanned": 329,
+    "note": "Tuesday — fresh /new batch (cs.CV 390 + cs.RO 132 = 522 candidates, 329 dedupe, 261 ROI matched into 8 buckets). Pastweek window 2026-04-29 ~ 2026-05-05. No retrospective loop today (Tuesday — only Mondays activate)."
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 23,
+      "cv": 14,
+      "ro": 7,
+      "cvro": 2
+    },
+    "Robot Learning": {
+      "total": 44,
+      "cv": 5,
+      "ro": 34,
+      "cvro": 5
+    },
+    "Autonomous Driving": {
+      "total": 22,
+      "cv": 13,
+      "ro": 8,
+      "cvro": 1
+    },
+    "Foundation Models": {
+      "total": 39,
+      "cv": 38,
+      "ro": 1,
+      "cvro": 0
+    },
+    "Generation": {
+      "total": 54,
+      "cv": 51,
+      "ro": 3,
+      "cvro": 0
+    },
+    "Efficiency/Systems": {
+      "total": 36,
+      "cv": 33,
+      "ro": 2,
+      "cvro": 1
+    },
+    "Embodied AI": {
+      "total": 5,
+      "cv": 2,
+      "ro": 2,
+      "cvro": 1
+    },
+    "Safety/Alignment": {
+      "total": 38,
+      "cv": 31,
+      "ro": 5,
+      "cvro": 2
+    }
+  },
+  "buckets_pastweek": {
+    "3D/Scene": {
+      "total": 47,
+      "cv": 36,
+      "ro": 6
+    },
+    "Robot Learning": {
+      "total": 60,
+      "cv": 4,
+      "ro": 46
+    },
+    "Autonomous Driving": {
+      "total": 27,
+      "cv": 9,
+      "ro": 14
+    },
+    "Foundation Models": {
+      "total": 36,
+      "cv": 35,
+      "ro": 1
+    },
+    "Generation": {
+      "total": 76,
+      "cv": 66,
+      "ro": 9
+    },
+    "Efficiency/Systems": {
+      "total": 46,
+      "cv": 42,
+      "ro": 3
+    },
+    "Embodied AI": {
+      "total": 15,
+      "cv": 3,
+      "ro": 10
+    },
+    "Safety/Alignment": {
+      "total": 36,
+      "cv": 30,
+      "ro": 5
+    }
+  },
+  "vs_7d_prior": {
+    "baseline_date": "2026-04-28",
+    "baseline_note": "Prior Tuesday pastweek snapshot — week-over-week comparison of 7-day rolling window. Note: 04-28 used legacy schema where 'buckets' field stored pastweek totals (verified by magnitude consistency).",
+    "pastweek_buckets_delta_pct": {
+      "3D/Scene": "-2%",
+      "Robot Learning": "-6%",
+      "Autonomous Driving": "-16%",
+      "Foundation Models": "-31%",
+      "Generation": "+6%",
+      "Efficiency/Systems": "+15%",
+      "Embodied AI": "0%",
+      "Safety/Alignment": "-8%"
+    }
+  },
+  "hottest": [
+    {
+      "topic": "VLA paradigm shift 3주차 — monitoring/safety/test-time compute 운영 layer 표면화",
+      "evidence": [
+        "2605.01191",
+        "2605.01194",
+        "2605.01195",
+        "2605.01201",
+        "2605.02739",
+        "2605.01772",
+        "2605.02881"
+      ],
+      "note": "어제 'pixel-free latent substrate' shift 위에 7+편 한 batch로 운영 layer 누적 — 단순 burst 아닌 community standardization 신호."
+    },
+    {
+      "topic": "Active Perception VLM — formal framework + practical instantiation 동시 정착",
+      "evidence": [
+        "2605.01345",
+        "2605.01657",
+        "2605.01662"
+      ],
+      "note": "S-BOED(formal) + Act2See(SFT emergent) + VAP(training-free 5.6×) — same-day 등장은 paradigm 정착 강한 신호."
+    },
+    {
+      "topic": "Robot Navigation methodology convention 흔들기 — collision/reset budget 표준 도전",
+      "evidence": [
+        "2605.02192"
+      ],
+      "note": "MCB가 'collision = episode end' 수십 년 관행에 정면 도전 — cold bucket(Embodied 5편)에서 paradigm-level 단일 결."
+    }
+  ],
+  "cooling": [
+    {
+      "topic": "Foundation Models -31% 한 주 더 cooling",
+      "note": "한 주 전 -64% surge cool 이후 -31% 추가 수렴 — 'foundation model 거대화'에서 'efficient generation infra'로 무게중심 이동 정착 단계."
+    },
+    {
+      "topic": "Autonomous Driving -16% — '+267% surge' 후 정상화",
+      "note": "어제까지 NAVSIM correlation·CISS-REC 등 evaluation methodology surge가 한 주 정점 후 자연 cooling. Methodology 결은 한 주 안에 정착."
+    }
+  ],
+  "buckets_summary_note": "오늘 분포 Generation(54)·RL(44)·FM(39)·Safety(38)·Eff(36) 양강 분리, Embodied 5편으로 cold. Substantive 기준으론 RL 44편이 'VLA monitoring/safety' dense하게 몰린 게 paradigm 측면 가장 의미 강한 자리.",
+  "keywords_cv": [
+    [
+      "video",
+      51
+    ],
+    [
+      "detection",
+      50
+    ],
+    [
+      "3d",
+      49
+    ],
+    [
+      "generation",
+      45
+    ],
+    [
+      "benchmark",
+      35
+    ],
+    [
+      "segmentation",
+      35
+    ],
+    [
+      "diffusion",
+      33
+    ],
+    [
+      "reasoning",
+      26
+    ],
+    [
+      "gaussian",
+      20
+    ],
+    [
+      "attention",
+      19
+    ]
+  ],
+  "keywords_ro": [
+    [
+      "rl",
+      16
+    ],
+    [
+      "manipulation",
+      15
+    ],
+    [
+      "navigation",
+      14
+    ],
+    [
+      "planning",
+      12
+    ],
+    [
+      "reinforcement learning",
+      9
+    ],
+    [
+      "autonomous",
+      9
+    ],
+    [
+      "vla",
+      8
+    ],
+    [
+      "vehicle",
+      8
+    ],
+    [
+      "grasp",
+      7
+    ],
+    [
+      "humanoid",
+      5
+    ]
+  ],
+  "pastweek_total": 343
+}
