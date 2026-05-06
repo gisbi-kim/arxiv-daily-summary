@@ -1,0 +1,330 @@
+{
+  "date": "2026-05-06",
+  "totals": {
+    "selected": 90,
+    "total_scanned": 114,
+    "note": "Wednesday — cs.CV 129 new+cross + cs.RO 50 new+cross dedup → 114, 90 selected to ROI buckets. Pastweek window 2026-04-30 ~ 2026-05-06."
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 9,
+      "cv": 8,
+      "ro": 1,
+      "cvro": 0
+    },
+    "Robot Learning": {
+      "total": 11,
+      "cv": 0,
+      "ro": 11,
+      "cvro": 0
+    },
+    "Autonomous Driving": {
+      "total": 3,
+      "cv": 2,
+      "ro": 1,
+      "cvro": 0
+    },
+    "Foundation Models": {
+      "total": 19,
+      "cv": 19,
+      "ro": 0,
+      "cvro": 0
+    },
+    "Generation": {
+      "total": 16,
+      "cv": 15,
+      "ro": 1,
+      "cvro": 0
+    },
+    "Efficiency/Systems": {
+      "total": 16,
+      "cv": 15,
+      "ro": 1,
+      "cvro": 0
+    },
+    "Embodied AI": {
+      "total": 0,
+      "cv": 0,
+      "ro": 0,
+      "cvro": 0
+    },
+    "Safety/Alignment": {
+      "total": 16,
+      "cv": 10,
+      "ro": 5,
+      "cvro": 1
+    }
+  },
+  "buckets_pastweek": {
+    "3D/Scene": {
+      "total": 54,
+      "cv": 44,
+      "ro": 10
+    },
+    "Robot Learning": {
+      "total": 62,
+      "cv": 12,
+      "ro": 50
+    },
+    "Autonomous Driving": {
+      "total": 29,
+      "cv": 12,
+      "ro": 17
+    },
+    "Foundation Models": {
+      "total": 37,
+      "cv": 36,
+      "ro": 1
+    },
+    "Generation": {
+      "total": 76,
+      "cv": 66,
+      "ro": 10
+    },
+    "Efficiency/Systems": {
+      "total": 46,
+      "cv": 42,
+      "ro": 4
+    },
+    "Embodied AI": {
+      "total": 18,
+      "cv": 6,
+      "ro": 12
+    },
+    "Safety/Alignment": {
+      "total": 37,
+      "cv": 31,
+      "ro": 6
+    }
+  },
+  "vs_7d_prior": {
+    "baseline_date": "2026-04-29",
+    "baseline_note": "Same weekday(Wed) pastweek snapshot 7 days ago — week-over-week comparison of 7-day rolling window.",
+    "pastweek_buckets_delta_pct": {
+      "3D/Scene": "+46%",
+      "Robot Learning": "+17%",
+      "Autonomous Driving": "+81%",
+      "Foundation Models": "-27%",
+      "Generation": "+15%",
+      "Efficiency/Systems": "+84%",
+      "Embodied AI": "+20%",
+      "Safety/Alignment": "-45%"
+    }
+  },
+  "hottest": [
+    {
+      "topic": "World Model evaluation이 'reward alignment + interactive bench' 양축으로 동시 표면화",
+      "evidence": [
+        "2605.03821",
+        "2605.03941",
+        "2603.28489"
+      ],
+      "note": "RoboAlign-R1이 reconstruction loss 대신 6-dim multimodal reward 정렬로 robot video WM을 post-train + iWorld-Bench가 14 representative WM에 6 task type 통합 평가 + Video Gen as WM survey가 efficiency 측 paradigm 정리 — '학습 시그널 + 평가 프로토콜' 양쪽이 한 batch에 표면화한 자리."
+    },
+    {
+      "topic": "VLM의 'understanding-generation gap'이 처음 formal하게 정의됨",
+      "evidence": [
+        "2605.04040"
+      ],
+      "note": "UniReasoner가 'unified VLM이 prompt를 verify는 잘 하지만 generation에서는 fail'한다는 내재적 모순을 새 paradigm 이름(understanding-generation gap)으로 명시화. LLM을 universal reasoner로 두고 visual draft → critique → diffusion guidance 3-step framework — visual generation이 reasoning loop 안에 들어온 자리."
+    },
+    {
+      "topic": "Embodied AI safety가 survey-level synthesis 단계 진입",
+      "evidence": [
+        "2605.02900"
+      ],
+      "note": "400+ papers 통합한 multi-level taxonomy로 embodied AI 측 perception·cognition·planning·action·interaction 5축 attack/defense 정리 — 'embodied 측 safety 결이 문헌으로 쏟아지지만 paradigm 측 통합은 없다'는 자리에 처음 메타 정리. 어제 TAIL-Safe·Online Safety Filter 결이 표면화한 그 흐름의 메타-layer."
+    },
+    {
+      "topic": "Efficiency/Systems의 sustained surge — DiT LoRA·KV·NPU 측 결 동시 등장",
+      "evidence": [
+        "2605.03252",
+        "2605.03680",
+        "2605.03555",
+        "2605.03999"
+      ],
+      "note": "Ortho-Hydra(DiT LoRA orthogonal experts) + Mobile NPU denoising distillation + MILE(continual segmentation MoE) + RD-ViT(recurrent-depth ViT) — efficiency가 어제 +15% surge 후 한 batch 더 dense하게 누적, deployment-side optimization이 한 주 내내 단독 1위 흐름."
+    }
+  ],
+  "cooling": [
+    {
+      "topic": "Embodied AI 버킷 '0편'으로 한 주 내내 cold trough 깊어짐",
+      "evidence": [],
+      "note": "어제 5편(MCB 등) → 오늘 0편으로 단숨에 dry-up. 어제 'cold bucket이지만 paradigm-level 한 편으로 흐름 흔들기 가능' 진단했는데, 오늘은 그 한 편마저 안 등장. 한 주 평균 15편 유지지만 일별 진폭이 가장 큰 자리 — 다음주 회복 여부 관찰 필요."
+    },
+    {
+      "topic": "Autonomous Driving이 3편으로 가장 cold(전주 16편 대비 -16% 가속)",
+      "evidence": [],
+      "note": "AD가 어제까지 22편이었던 자리에서 오늘 단 3편 — single-day shrink로 한 주 내내 -16% trend가 더 명확. NAVSIM/Bench2Drive 기반 evaluation methodology 흐름 외에는 결이 안 도착하는 자리."
+    }
+  ],
+  "buckets_summary_note": "Foundation Models 19편 · Generation 16편 · Efficiency 16편 · Safety 16편 · Robot Learning 11편 · 3D/Scene 9편 · Autonomous Driving 3편 · Embodied AI 0편. FM·Gen·Eff·Safety 4편 단단한 4-way + RL 11편이 'world model post-training + dexterous + cross-embodiment' 측 substantive 지속, AD/Embodied 단독 cold trough.",
+  "keywords_cv": [
+    [
+      "video",
+      54
+    ],
+    [
+      "diffusion",
+      34
+    ],
+    [
+      "transformer",
+      25
+    ],
+    [
+      "vision-language model",
+      22
+    ],
+    [
+      "robust",
+      22
+    ],
+    [
+      "distillation",
+      18
+    ],
+    [
+      "alignment",
+      15
+    ],
+    [
+      "splatting",
+      14
+    ],
+    [
+      "gaussian splat",
+      13
+    ],
+    [
+      "vlm",
+      13
+    ],
+    [
+      "grounding",
+      13
+    ],
+    [
+      "sparse",
+      12
+    ],
+    [
+      "world model",
+      9
+    ],
+    [
+      "autonomous driving",
+      6
+    ],
+    [
+      "reinforcement learning",
+      6
+    ],
+    [
+      "manipulation",
+      5
+    ],
+    [
+      "navigation",
+      5
+    ],
+    [
+      "slam",
+      3
+    ],
+    [
+      "moe",
+      3
+    ],
+    [
+      "3dgs",
+      2
+    ]
+  ],
+  "keywords_ro": [
+    [
+      "manipulation",
+      15
+    ],
+    [
+      "navigation",
+      14
+    ],
+    [
+      "robust",
+      12
+    ],
+    [
+      "video",
+      9
+    ],
+    [
+      "vla",
+      9
+    ],
+    [
+      "reinforcement learning",
+      8
+    ],
+    [
+      "world model",
+      6
+    ],
+    [
+      "humanoid",
+      5
+    ],
+    [
+      "diffusion",
+      4
+    ],
+    [
+      "slam",
+      3
+    ],
+    [
+      "vision-language-action",
+      3
+    ],
+    [
+      "dexterous",
+      3
+    ],
+    [
+      "tactile",
+      3
+    ],
+    [
+      "alignment",
+      3
+    ],
+    [
+      "imitation",
+      3
+    ],
+    [
+      "distillation",
+      2
+    ],
+    [
+      "sparse",
+      2
+    ],
+    [
+      "grounding",
+      2
+    ],
+    [
+      "gaussian splat",
+      1
+    ],
+    [
+      "splatting",
+      1
+    ]
+  ],
+  "pastweek_total": {
+    "cv": 636,
+    "ro": 197
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "date": "2026-05-06",
+  "insights": [
+    {
+      "title": "World Model 평가가 'reconstruction loss → reward alignment + interactive eval' paradigm으로 전환",
+      "claim": "RoboAlign-R1이 robot video WM을 'reward-aligned post-training + Sliding Window Re-encoding'으로 정조준하고, 같은 날 iWorld-Bench가 'interactive WM 14-model + 6-task action gen' 통합 eval을 도입 — 둘이 한 batch에 표면화한 건 'WM eval이 reconstruction/perceptual similarity 측 low-level에서 reward + interaction 측 capability-aligned로' paradigm 전환 분명한 신호. 동시에 Video Gen as WM survey가 efficiency 측 paradigm 정리 — 학습 시그널·평가 프로토콜·efficiency 3축이 한 날 통합 표면화. 우리 랩이 WM follow한다면 'pixel reconstruction'을 default substrate로 두는 setup 자체가 paradigm 측 audit 대상.",
+      "papers": [
+        "https://arxiv.org/abs/2605.03821",
+        "https://arxiv.org/abs/2605.03941",
+        "https://arxiv.org/abs/2603.28489"
+      ]
+    },
+    {
+      "title": "VLM의 'understanding-generation gap'이 첫 formal 정의 단계 진입",
+      "claim": "UniReasoner가 'unified VLM이 prompt를 verify(understand)는 잘 하지만 prompt-faithful generation은 fail'한다는 내재적 모순을 새 paradigm 이름(understanding-generation gap)으로 명시화하고, LLM을 universal reasoner로 두는 3-step framework(visual draft → self-critique → diffusion guidance)를 처음 systematic하게 정조준. 어제 'active perception'·'long-horizon VLA'에서 본 'sequential acquisition' 메타가 visual generation에 직접 들어온 자리 — 'verifying capability를 generation guidance로 변환한다'는 paradigm은 향후 6주 image gen 측 표준 후보. 우리 랩이 T2I generation 측면 follow한다면 understanding-generation 격차 측정 자체가 새 audit 대상.",
+      "papers": [
+        "https://arxiv.org/abs/2605.04040"
+      ]
+    },
+    {
+      "title": "Embodied AI safety가 'paper burst → survey synthesis' 단계 진입 + 일별 진폭 최대",
+      "claim": "Embodied AI Safety Survey가 400+ papers 통합한 multi-level taxonomy로 perception/cognition/planning/action/interaction 5축 attack/defense 정리 — 어제 TAIL-Safe·Online Safety Filter 등 결이 일주일 burst 한 자리에서 'paper 단계 → meta-synthesis' 단계로 진입한 분명한 신호. 동시에 Embodied AI 버킷이 0편 dry-up — 어제 5편이 paradigm 흔들었지만 오늘은 0편으로 일별 진폭 가장 큰 자리. 'cold bucket의 substrate-level 정리는 survey가 마무리하고 다음 paper batch로 넘어가는 자리'라는 패턴이 표면화한 자리예요.",
+      "papers": [
+        "https://arxiv.org/abs/2605.02900"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "Robot WM Reward-Alignment Atlas — 6-dim reward 축에서 SR-vs-WM-quality Pareto 첫 측정",
+      "claim": "RoboAlign-R1이 6-dim reward(instruction following, manipulation success, physical plausibility 등)를 도입한 자리에서 다음 단계는 'reward 축이 SR로 transfer되는 정도' 정량화. RobotWorldBench(10K 쌍) × {RoboAlign-R1, baseline reconstruction WM, perceptual similarity WM} 3 paradigm × {LIBERO, RoboCasa, OGBench} 3 IL/RL bench 조합으로 'reward dimension별 SR transfer Pareto' atlas. 'WM이 정확히 어디서 robot decision-making을 돕는가' 측면 첫 정량 결과 — 향후 6주 community standard 후보. 우리 랩이 robot WM follow한다면 즉시 sprint 가치."
+    },
+    {
+      "title": "Understanding-Generation Gap의 cross-modality 측정 표준 — VLM·VLA·VLN에서 동일 격차 측정",
+      "claim": "UniReasoner가 T2I image gen에서 격차를 정의한 자리에서 다음 단계는 'VLM이 verify는 잘 하지만 generate/act는 못 한다'는 격차가 다른 modality에서도 보이는지 측정. {T2I generation, VLA action prediction, VLN navigation prediction} × {GPT-4V, Gemini, LLaVA-OV, MolmoER} matrix로 'verifying SR vs generating SR' 격차 atlas. 격차가 modality-invariant라면 paradigm 측 의미 강하고 'critique-then-generate' 메타가 universal solution이 될 가능성. 우리 랩이 multimodal 인프라 굴린다면 즉시 audit 가치."
+    },
+    {
+      "title": "Cross-Embodiment Video Editing의 IL pipeline 통합 — 'human video → robot policy' end-to-end 측정",
+      "claim": "Bridging the Embodiment Gap이 disentangled cross-embodiment video editing을 정조준한 자리에서 다음 단계는 '편집된 robot video가 정말 IL training data로 작동하는지' end-to-end 측정. {human video → editor → robot video → IL policy → real robot SR} pipeline에서 vanilla teleop data 대비 SR 격차 측정 — 'video editing as data engine'이 정말 작동하는가 question에 첫 정량 답. 어제 BifrostUMI(robot-free demo)와 같이 보면 'data democratization' 측 두 갈래(human video editing vs sparse keypoint UMI)가 동시 정착. 우리 랩이 humanoid IL 굴린다면 6주 audit 가치."
+    }
+  ],
+  "retrospective": {
+    "active": false,
+    "note": "수요일 실행 — 회고는 월요일 실행에서만 활성화. 다음 회고는 2026-05-11(월) 예정."
+  }
+}

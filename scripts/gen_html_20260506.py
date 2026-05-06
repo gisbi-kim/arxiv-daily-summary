@@ -1,0 +1,435 @@
+#!/usr/bin/env python3
+"""Generate the 2026-05-06 (Wed) arXiv daily briefing HTML."""
+import io
+import json
+import os
+import sys
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+
+DATE = "2026-05-06"
+WEEKDAY = "수"
+PASTWEEK_START = "2026-04-30"
+PASTWEEK_END = "2026-05-06"
+
+CLASSIFIED = json.load(open("out/classified.json", encoding="utf-8"))
+
+
+# Curated paper commentary (ROI-relevant ones get manual write-up; rest auto-summarised).
+PAPER_SUMMARIES = {
+    # ============== 3D/Scene ==============
+    "2605.03337": "4D Gaussian Splatting의 'gain은 분명한데 driver는 안 보인다'는 진단에서, FreeTimeGS를 controlled baseline으로 재구성한 뒤 fundamental axis별 ablation으로 'Gaussian duration 측 emergent temporal partitioning'·'photometric fidelity vs spatiotemporal consistency' 격차 같은 hidden factor를 정량 분리해요. FreeTimeGS++가 gated marginalization + neural velocity field로 run-to-run variance까지 줄임 — 4DGS 라인의 '왜 작동하는가' 측 첫 systematic 결입니다.",
+    "2605.03432": "Sparse 3D MRI에서 multi-kernel residual framework로 texture-aware refinement — 응용 측 결이지만 '단일 kernel이 anisotropic structure 못 잡는다'는 진단을 multi-kernel head로 처방. Medical 3D 측 결.",
+    "2605.03437": "Multi-scale level-of-detail feature에서 discriminative SDF 학습 — 'SDF 학습이 high-frequency 측 detail 잃는다'는 진단을 multi-scale supervision으로 보강. Mesh reconstruction 측 결.",
+    "2605.03463": "Indoor reconstruction에서 'shape 학습 → meaning 학습' 단계 분리 — geometry/semantics joint 학습이 conflict 일으킨다는 진단으로 stage-wise 처방. Indoor scene 측 paradigm 결.",
+    "2605.03610": "Satellite image의 high-resolution shadow removal을 physics-aware data creation으로 — '실제 그림자 GT 부재' 자리에서 physical haze model로 supervised triplet 자동 생성. Remote sensing 측 결.",
+    "2605.03639": "Dynamic point cloud pretraining의 두 가지 한계 — 'GT tube center를 decoder positional embedding에 주입해 spatio-temporal positional leakage' + 'deterministic proxy target이 multimodal trajectory를 conditional mean으로 collapse' — 를 동시 처방한 DiMP. Diffusion-based masked pretraining으로 distributional structure 보존. 4D point cloud 측 substrate paradigm 결이에요.",
+    "2605.04035": "Large-scale multi-camera setup에서 feed-forward 3D Gaussian head reconstruction 'HeadsUp'. UV-parameterized Gaussian이 input image 수·해상도와 decouple돼 high-resolution training 가능 — 'Gaussian count vs view count' 측 long-standing trade-off를 architecture로 풀어낸 첫 결.",
+    "2605.04044": "2D-2D·2D-3D·3D-3D 세 가지 correspondence를 shared weight Transformer 하나로 통일한 첫 모델 UniCorrn. Dual-stream decoder가 appearance/positional feature를 분리해 cross-modal attention naturally 작동 — '같은 문제 구조인데 task-specific design 분리'를 정조준한 paradigm 측 결이에요.",
+    "2605.03678": "GPS-denied + degraded 환경 UAV navigation 측 robust visual SLAM — multi-particle 측 응용 결.",
+    # ============== Robot Learning ==============
+    "2605.03075": "Compositional diffusion planning이 'short-horizon segment를 score composition으로 stitching'하는 자리에서 local distribution이 multimodal일 때 'mode-averaging' 일어나는 문제를 정조준해요. RCD(Refining Compositional Diffusion)는 pretrained diffusion의 self-reconstruction error를 'composed plan의 log-density proxy'로 두고 overlap consistency term을 추가 — training-free guidance로 high-density coherent plan에 sampling 집중. OGBench(locomotion·manipulation·pixel)에서 baseline 일관 outperform — long-horizon planning 측 'composition geometry가 mode를 averaging한다'는 진단을 처음 정량 처방한 자리예요.",
+    "2605.03269": "VLA가 broad scene understanding은 inherit하지만 'motion awareness · memory-aware decision · physical sensing' 측에서 fail한다는 진단을 동시 처방한 RLDX-1. Multi-Stream Action Transformer(MSAT)가 modality-specific stream + cross-modal joint self-attention으로 heterogeneous modality 통합 + rare scenario synthetic data + human-like manipulation specialized learning + real-time inference optimization까지 묶음 — 어제 MolmoAct2의 'community democratization' 흐름의 직접 후속이에요.",
+    "2605.03290": "Risk-aware domain randomization이 contact-rich sampling-based planning에서 의외로 효과적이라는 'surprising effect' 정조준 — 'risk가 randomization budget의 sweet spot을 만든다'는 직관이 정량 결과로 표면화한 자리. Sampling-based planner 측 결.",
+    "2605.03363": "Reactive dexterous grasping을 task-space RL planner + joint-space QP controller 2계층으로 명시적 분리한 hybrid hierarchical framework. Multi-agent RL이 arm/hand agent로 specialize되어 task-space velocity 명령 생성 → GPU-parallelized QP가 kinematic limit + collision avoidance 강제하면서 joint velocity로 변환. 학습 수렴 가속 + 'safety margin을 retraining 없이 dynamically 조정'하는 zero-shot steerability 가능 — 어제 'IL safety'·'execution guarantee' 라인과 paradigm 자체가 같은 'task-action 분리 + verification layer' 메타예요.",
+    "2605.03452": "UMI에서 영감 받은 robot-free 측 humanoid whole-body 데이터 수집 framework BifrostUMI. Lightweight VR로 sparse keypoint trajectory + wrist-mounted vision 동시 capture → high-level keypoint trajectory policy + retargeting + whole-body controller로 humanoid에 mapping. 어제 MolmoAct2의 'low-cost teleop' 흐름과 같은 'VLA data democratization'의 humanoid 측 결로 paradigm 의미 강해요.",
+    "2605.03637": "Human video → robot manipulation IL의 distribution shift 문제를 'task-relevant info와 human-specific kinematics가 entangle'한다는 진단으로 정조준. Dual contrastive objective(MI minimize + intra-space consistency maximize)로 task/embodiment 두 latent space를 명시적으로 disentangle한 뒤, parameter-efficient adapter가 frozen video diffusion에 inject — paired cross-embodiment data 없이 human demo 한 편에서 robot execution video 합성. 어제 BifrostUMI(humanoid)·MolmoAct2(open VLA)와 함께 'data democratization' 흐름의 video-editing 측 결이에요.",
+    "2605.03666": "Cable-suspended payload quadrotor의 sensorless state estimation + agile transport — formal control 측 결로 응용 의미.",
+    "2605.03821": "Robot video world model이 reconstruction loss + perceptual similarity 같은 low-level objective로 학습돼 'instruction following · manipulation success · physical plausibility' 같은 robot decision-making 측 capability와 mismatch한다는 진단에서 출발해요. RoboAlign-R1은 RobotWorldBench(10K annotated video-instruction 쌍, 4 robot data source) + 6-dim multimodal teacher judge → distilled student reward로 RL post-training, 추가로 Sliding Window Re-encoding으로 long-horizon rollout drift 처방. WM 학습 시그널이 'pixel reconstruction' → 'reward alignment'로 paradigm 전환하는 첫 정조준 결이에요.",
+    "2605.03846": "Open-world quadrupedal loco-manipulation의 'exteroception sample inefficiency · sim2real gap · vision-control frequency mismatch' 3축 한계를 동시 처방한 SigLoMa. 'Sigma Points'(lightweight geometric exteroception representation) + ego-centric Kalman Filter(slow perception ↔ fast control bridging) + Active Sampling Curriculum + Hint Pose 통한 visual blind spot 보강 — 'fully onboard ego-centric' 정조준. 어제 'fully open VLA' 흐름의 quadruped 측 결.",
+    "2605.03065": "Generative control policy(diffusion·flow-based)의 sample-efficient full finetuning 측 OGPO. Off-policy critic으로 data reuse 극대화 + modified PPO objective로 generative process 전체에 gradient 전파 — 'critic을 terminal reward로 사용'하는 깔끔한 design. Manipulation task에서 SOTA — generative control의 RL-finetuning 측 표준 후보예요.",
+    "2605.03842": "Robotic Mobile Fulfillment System의 order allocation + robot scheduling을 real-time joint optimization으로 — 'isolated decomposition 측 sub-optimality vs global model의 expense' 양극 사이 균형 정조준한 응용 결. 응용 결이지만 RMFS 측 표준 후보.",
+    # ============== Autonomous Driving ==============
+    "2605.03260": "MPPI controller의 'nominal dynamics fidelity' 한계를 Input Concomitant Neural ODE로 residual dynamics 학습으로 처방. Discrete-time learner와 달리 prediction horizon 동안 physical consistency + temporal continuity 유지 — vehicle path tracking 측 robust framework. AD/control 측 결.",
+    "2605.03365": "Synthetic → real domain gap을 두 foundation model(분리된 source/target encoder) 협력으로 좁히는 unsupervised domain adaptation. Driving segmentation 측 결.",
+    "2605.02942": "Fetal ultrasound의 intersectional bias를 disentangle — image quality(acquisition·operator·BMI)와 demographic feature가 correlated된 자리에서 어떻게 분리하나 framework 결. Application 측이지만 'bias = representation 부족' 가정에 도전한 결이라 의미.",
+    # ============== Foundation Models ==============
+    "2605.02912": "Video anomaly detection을 reasoning-guided grounding으로 — 단순 detection 대신 MLLM이 evidence chain 제공. 'why anomaly'까지 함께 출력하는 paradigm 결.",
+    "2605.03189": "Sentinel-2 SAR + medium-resolution sensor 측 multimodal captioning 데이터셋 — RS 측 데이터 결.",
+    "2605.03259": "농업 phenotyping bottleneck 측 open-set crop analysis VLM CropVLM — 응용 결이지만 plant 측 'open-set + domain-adapted VLM' 표준 후보.",
+    "2605.03351": "Video VLM의 'visual state recomputation' 낭비를 정조준한 training-free framework. 'factory wall은 안 움직였는데 dense RGB frame을 다시 hand'한다는 진단으로, validation이 state survive 신호 주면 reuse하고 변할 때만 fresh evidence 구입. Frozen Qwen2.5-VL-7B-4bit + 93-query VideoMME에서 follow-up latency 14.90-35.92× 줄이면서 paired choice + correctness 보존. 어제 'Latent Bridge'(VLM call 50-75% 절감)와 같은 'inference cost' 흐름의 video VLM 측 결로 paradigm 자체가 같은 자리.",
+    "2605.03352": "MLLM이 'pathologic movement'(seizure 등) 이해할 수 있는가 pilot study — medical video understanding 측 결.",
+    "2605.03398": "Video Temporal Grounding의 cross-modal semantic gap을 training-time MLLM-aided 처방으로 — event-level description + temporal span으로 'background feature가 query에 잘못 align'되는 문제 직접 정조준. Training-time MLLM textual prior가 inference-time active perception(어제 Act2See/VAP 라인)과 paradigm 다르고 layer가 다른 결.",
+    "2605.03403": "VLM의 test-time visual tuning을 GRPO 기반 RL로 — fine-grained reward로 inference-time adaptation. 어제 'VLA test-time compute' 라인의 VLM 측 결.",
+    "2605.03475": "Generative video model 측 multi-dimensional benchmark WorldJen — interactive WM 라인의 일반 video gen 측 결.",
+    "2605.03485": "Multidimensional human perception/reasoning bench MHPR — individual·multi-person·HOI 3축 통합 평가. 'Captioned Raw → SFT → RL' 3단 데이터 디자인이 흥미.",
+    "2605.03544": "Digital pathology AI copilot 측 multicentric open benchmark DALPHIN — 1236 image, 300 case, 130 diagnoses, 6 country, 14 subspecialty + 31 pathologist 비교. 'foundation model이 pathologist 대체 가능한가' 정량 측정 첫 substantive 자리.",
+    "2605.03547": "LVLM의 multimodal copyright unlearning bench(persona + lore) — '캐릭터 + 로고' 측 visual copyright 측면 unlearning 첫 systematic 결.",
+    "2605.03642": "Open-vocabulary object detection의 VLM이 'full-image pre-trained 측 region detail 부재'라는 한계를 self-supervised lightweight adaptation으로 처방한 DAT. VLM 측 region-level 보강.",
+    "2605.03749": "Astronomical image SR 측 conservative flow matching FluxFlow — domain 결이지만 flow matching 측 안정성 결.",
+    "2605.03759": "LVLM unlearning 측 'foundational learning failure' revisit — 어제 LVLM 측 unlearning 결과 함께 보면 unlearning 측 'metric unreliability'가 두 paper로 명시화된 자리.",
+    "2605.03790": "VQA를 chain-of-question retrieval로 — 'question을 분해하고 retrieve를 chain하는' 메타 paradigm 결.",
+    "2605.03848": "Multi-view proficiency estimation parameter-efficient — discriminative classification → generative feedback paradigm 전환. SkillFormer 등 통합 정리.",
+    "2605.03927": "VLM의 'numerical reasoning bottleneck'(object detection·state localization 측 regression 약함) 정조준한 StateVLM. Box decoder output에 Auxiliary Regression Loss 도입 + open-source benchmark 동반 — VLM이 'graspable region'까지 perception하는 affordance 라인의 결로 어제 'StateVLM'(같은 이름 다른 그룹)·VAP/Act2See 흐름과 분기.",
+    "2605.03245": "I-JEPA의 'masked feature prediction이 visual uncertainty 때문에 의미 학습 fail'한다는 진단을 text condition으로 처방한 TC-JEPA. Image caption이 sparse cross-attention text conditioner를 통해 patch feature predict 안내 — 'self-supervised uncertainty를 caption guidance로'라는 paradigm 결.",
+    "2605.03863": "VLM으로 human visual exposome 측정 — 2674 participant ecological momentary assessment 결합. 응용 결이지만 'mental health × VLM' 측 substantive substrate 결.",
+    # ============== Generation ==============
+    "2605.02908": "Stable Diffusion의 memorization을 input token 4종(<sot>, <prompt>, <eot>, <pad>)별로 분해해서 'CLIP embedding 측 특정 자리에 disproportionate dependency'가 있다는 발견. T2I memorization을 prompt 측에서 본 게 아니라 embedding-level 측에서 본 자리 — 'CLIP이 memorization driver'라는 새 진단. Diffusion safety/IP 측 paradigm 결이에요.",
+    "2605.03053": "Organoid image segmentation에서 인간 수준 정확도 도달 — 응용 결.",
+    "2605.03221": "Long-tail medical(skin) classification 측 synthetic data 활용 — diffusion-based long-tail 측 결.",
+    "2605.03317": "Diffusion Transformer training 측 representation alignment를 'fixed supervision target/granularity'로 두는 게 suboptimal하다는 진단으로 adaptive hierarchical prior alignment 도입. Timestep-aware granularity가 새 substrate 결.",
+    "2605.03343": "Multi-domain medical image SR 측 deep learning framework — 응용 결.",
+    "2605.03359": "Feed-forward reconstruction + generative 3D prior를 joint multi-view alignment에 mix한 Mix3R — 3D generation 측 hybrid paradigm 결.",
+    "2605.03652": "Tencent HY Team의 anime video gen — 'physics 대신 art'로 reasoning한다는 콘셉트의 AniMatrix. Stylization gen 측 결.",
+    "2605.03830": "Contactless fingerprint의 identity-consistent multi-pose generation — 응용 결.",
+    "2605.03849": "Streaming video diffusion의 distribution matching distillation을 'inter-reliability + reward axis'로 차등화한 Stream-R1. 'every rollout/frame/pixel을 equally reliable로 두는' 기존 distillation 한계 직접 처방 — efficient streaming gen의 표준 보강책.",
+    "2605.03877": "Train-free dataset distillation을 diffusion model의 semantic-distribution matching으로 — '추가 finetune 없이' 측면이 paradigm 의미.",
+    "2605.03941": "Interactive world model의 통합 평가가 비어 있다는 진단에서 출발해 iWorld-Bench를 도입 — 330k clip → 2.1k high-quality + Action Generation Framework로 6 task type(distance perception, memory 등) × 4.9k test sample. 14 representative WM 평가 + public leaderboard 동반. 같은 batch에 등장한 RoboAlign-R1(robot video WM의 reward alignment)과 함께 보면 'WM eval이 reconstruction → interaction-aware'로 paradigm 전환되는 자리.",
+    "2605.04040": "Unified VLM(LLM backbone이 visual understand + generation 동시 처리)이 prompt verify는 잘 하지만 generation에서 prompt-faithful 못 하다는 모순을 'understanding-generation gap'으로 처음 명시화한 UniReasoner. LLM을 universal reasoner로 두고 (1) coarse visual draft as discrete vision token (2) self-critique with grounded textual evaluation (3) prompt + draft + evaluation으로 diffusion conditional generation. 'verifying capability를 generation guidance로 변환'이라는 paradigm은 향후 6주 image gen 측 표준 후보.",
+    "2605.04045": "Audio-Visual Intelligence(AVI) 측 large foundation model survey — Meta MovieGen·Google Veo-3 등 industrial advance 정리. AV joint modeling 측 understanding + controllable gen + reasoning 메타-survey로 paradigm 정리 측 결.",
+    "2603.28489": "Video gen이 world simulator 가능성을 시사하지만 'spatiotemporal modeling의 heavy compute' 한 자리에 멈춘다는 진단에서 출발한 efficiency 측 survey. Efficient modeling paradigm + architecture + inference algorithm 3축 taxonomy + AD/embodied/game sim 응용 직접 연결. 'efficiency가 video → world simulator 진화의 prerequisite'라는 메타 진단.",
+    "2605.03919": "Pix2Geomodel의 facies property bidirectional translation 측 robustness/transferability 분석 — 응용 결.",
+    "2605.03855": "Generative model을 emergent representation으로 평가하는 human-like collaboration 측 결 — HRI 측 응용.",
+    # ============== Efficiency/Systems ==============
+    "2605.03252": "DiT LoRA의 'multi-style data 측 style bleed' 문제(single low-rank residual이 several artist fingerprint 못 표현)를 'expert가 permutation-symmetric하게 evolve'한다는 root cause로 진단. Ortho-Hydra가 expert를 orthogonalize해 router gradient diversification 촉진 — 'MoE LoRA가 single rank로 collapse'하는 자리에 직접 처방.",
+    "2605.03680": "Mobile NPU에서 image denoising을 'tiled-memory architecture'와 'NPU-native primitive(3x3 conv)' 기준으로 hardware-algorithm co-design한 결. KD로 high-capacity teacher가 lightweight student supervise — 'NPU operator incompatibility' 직접 처방한 deployment 측 결.",
+    "2605.03555": "Continual semantic segmentation 측 dynamic expansion(scalability 부족) vs parameter isolation(adaptation 부족) 양극 사이를 Mixture of Incremental LoRA Experts로 — modular + parameter-efficient. Multi-domain · multi-modal continual seg 측 표준 후보.",
+    "2605.03999": "Vision Transformer의 'unique-per-layer parameter 측 large training data' 한계를 RD-ViT(Recurrent-Depth ViT)가 'single shared block을 T번 loop'로 처방. LTI-stable state injection + Adaptive Computation으로 dense prediction 일반화 — efficient ViT 측 paradigm 결.",
+    "2605.03294": "Counterfactual training-free test-time adaptation을 open-vocabulary object detection에 — TTA 측 결.",
+    "2605.03364": "Long-tail incremental learning에서 dynamic distillation + gradient consistency 결합 — long-tail × continual 측 결.",
+    "2605.03390": "Talking head forgery detection 측 training-free dual-system framework — efficiency × forensics 결.",
+    "2605.03438": "Mamba-native tuning이 3D point cloud foundation model에 efficient하다는 결과 — '3D PC × SSM' tuning 측 결.",
+    "2605.03456": "Memory-guided visual prior 활용 open-world object detection VL-SAM-v3 — open-world detection 측 결.",
+    "2605.03509": "Butterfly + Firefly optimized retinex enhancement BFORE — low-light 응용 결.",
+    "2605.03615": "Face video 기반 engagement estimation 측 prior-guided framework — 응용 결.",
+    "2605.03716": "Multi-modal tracking(RGB+X)을 dual MoE로 통합한 OneTrackerV2 — 'modality 별 separate model'이 inefficient하다는 진단으로 unified end-to-end. Tracking × MoE × multimodal 측 표준 후보.",
+    "2605.03764": "3D porous microstructure 측 GeoTopoDiff — geometry-topology graph prior가 sparse-slice CT에 작동하도록 boundary-constrained mixed diffusion. 'fully observed CT 의존성 break' 측면 의미.",
+    "2605.03968": "Aerial imagery에서 school detection을 weakly supervised pretraining + label-efficient로 — 응용 결.",
+    "2605.03686": "LLM을 fine-tune해서 NN performance classification — 'code → prediction'이라는 paradigm 결.",
+    "2605.03111": "Edge device용 social robot 측 25 open-source LLM benchmark — inference efficiency · general knowledge · pedagogical capability 3축 평가. Edge LLM 측 결.",
+    # ============== Safety/Alignment ==============
+    "2605.02900": "Embodied AI safety를 perception · cognition · planning · action · interaction 5축 전체 pipeline에 걸쳐 attack/defense 정리한 첫 systematic survey. 400+ paper에서 multi-level taxonomy로 fragmented 결을 통합 + vision/language/multimodal foundation model의 더 넓은 결과 연결. Embodied 측 'paper burst → meta-synthesis' 단계 진입을 가장 분명히 보이는 자리예요.",
+    "2605.03098": "CT/MRI cross-domain 3D spine segmentation 측 efficient data augmentation — 'one sequence to segment them all'이라는 콘셉트의 응용 결.",
+    "2605.03144": "Nuclear instance segmentation의 robust evaluation framework NucEval — 응용 측 결.",
+    "2605.03175": "DINOv3로 RS imagery의 open-vocabulary semantic segmentation — DINO 라인의 RS 적용 결.",
+    "2605.03371": "Hyperspectral cross-scene single-stage open-set DA 측 SoDa2 — 응용 결.",
+    "2605.03405": "Semantic segmentation의 adversarial attack 측 PGD를 Tsallis cross-entropy로 일반화. 'pixel-wise CE가 already-misclassified pixel을 over-emphasize'한다는 진단으로 adaptive gradient weighting — adversarial robustness 측 segmentation 측 결.",
+    "2605.03490": "Brain tumor classification multi-modal MRI orientation-aware UDA — 응용 결.",
+    "2605.03784": "Leaf segmentation 측 cross-domain/species benchmark ReLeaf — 응용 결.",
+    "2605.03787": "Medical image classification 측 RKHS-MMD 활용 robust UDA — 응용 결.",
+    "2605.03820": "Multimodal learning의 'low-quality data(modality imbalance + noisy corruption) 측 reliability'를 conformal predictive self-calibration으로 통합 처방한 CPSC. 'predictive uncertainty가 양 issue의 공통 root'라는 진단이 깔끔하고, modality-level + instance-level uncertainty 양쪽에 self-calibration. Multimodal × safety × uncertainty 측 표준 후보.",
+    "2605.03203": "Row-convex polyomino 측 partition-based generating function — combinatorial 결로 ROI 외 연결 약함.",
+    "2605.03288": "Equilibrium constraint 측 adjoint learning을 통한 neural control — 형식적 결.",
+    "2605.03641": "Mixed criticality robotics에서 isolation(automotive hypervisor의 hardware-enforced safety)과 customization(end-user의 behavior modification 가능성) 사이 격차를 해결한 Jiao. Safe IO Cell + 추가 component로 'expertise asymmetry' 직접 처방 — 'consumer robotics 측 safety + customization' 양립의 첫 architecture 측 결.",
+    "2605.03662": "Hybrid 측 motion planning 측 STL 만족 + feasibility-aware control. Formal method 측 결.",
+    "2509.20102": "Adversarial scenario gen이 'fixed adversariality vs realism trade-off'에 묶이는 자리에서 multi-objective preference alignment로 reframe한 SAGE. Test-time 측 fine-grained control(retraining 없이 trade-off 조정) — hierarchical group-based preference optimization으로 hard feasibility constraint와 soft preference 분리 + 두 expert(adversarial-leaning + realism-leaning) test-time 합성. AD 측 evaluation infra의 'configurability' 차원 결.",
+    "2605.03788": "UAV swarm 측 mission-agnostic agent-enhanced LLM framework — natural language mission 받아 Web-of-Drones에서 closed-loop execution. 'LLM을 cyber-physical system high-level reasoner로'라는 흐름의 swarm-level 결.",
+}
+
+
+def html_escape(s):
+    return (s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+             .replace('"', "&quot;").replace("'", "&#39;"))
+
+
+def auto_summary(p):
+    """Fallback summary for papers without curated commentary."""
+    abs_ = p.get("abstract", "")
+    first_sent = abs_.split(". ")[0][:200]
+    return f"{first_sent}. (자동 요약 — 본문 정독 권장)"
+
+
+def badge_html(badge):
+    if badge == "CV":
+        return '<span class="badge badge-cv">CV</span>'
+    elif badge == "RO":
+        return '<span class="badge badge-ro">RO</span>'
+    elif badge == "CV/RO":
+        return '<span class="badge badge-cvro">CV/RO</span>'
+    return f'<span class="badge">{html_escape(badge)}</span>'
+
+
+def render_paper(p):
+    aid = p["arxiv_id"]
+    title = html_escape(p["title"])
+    badge = badge_html(p["badge"])
+    author = html_escape(p.get("first_author", "")) or "(unknown)"
+    summary = PAPER_SUMMARIES.get(aid) or auto_summary(p)
+    summary = html_escape(summary).replace("&#39;", "'")
+    cbadge = '<span class="cbadge cbadge-nocode">[📦 code ✗]</span>'
+    return (
+        f'<div class="paper"><div class="paper-line1">📄 '
+        f'<a href="https://arxiv.org/abs/{aid}" target="_blank" rel="noopener">'
+        f'<strong>{title}</strong></a> {badge} {cbadge}</div>'
+        f'<div class="paper-authors">👥 {author} et al.</div>'
+        f'<p>{summary}</p></div>'
+    )
+
+
+# ----- Header CSS / shell -----
+HEAD = '''<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>arXiv Daily Briefing — 2026-05-06</title>
+<style>*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#f6f7f9;color:#1f2328;line-height:1.72;font-size:15px;padding:32px 16px;word-wrap:break-word;word-break:keep-all}
+.container{max-width:860px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);padding:40px 48px}
+h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.01em}
+h2{font-size:21px;margin:40px 0 14px;padding-bottom:8px;border-bottom:2px solid #e5e7eb;color:#0d1117;font-weight:700}
+h3{font-size:17px;margin:22px 0 10px;color:#0d1117;font-weight:600}
+h4.bucket{margin:40px 0 16px;padding:10px 0 8px;border-top:3px solid #0d1117;border-bottom:1px solid #eaeef2;font-size:19px;font-weight:700;color:#0d1117}
+h4.bucket .count{font-size:13px;font-weight:400;color:#656d76;font-style:italic;margin-left:8px}
+p{margin:0 0 14px}
+a{color:#0969da;text-decoration:none}
+a:hover{text-decoration:underline}
+.meta{font-size:13px;color:#3b434d;padding:14px 18px;background:#f6f8fa;border-left:3px solid #0969da;border-radius:6px;margin:14px 0 28px}
+.meta div{margin:2px 0}
+.bucket-line{font-family:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:10px 14px;font-size:13px;color:#24292f;margin:10px 0;overflow-x:auto;white-space:pre}
+.paper{padding:16px 0;border-top:1px solid #eaeef2}
+.paper:first-of-type{border-top:none}
+.paper-line1{margin-bottom:4px}
+.paper-line1 a{font-weight:600}
+.paper-authors{font-style:italic;color:#656d76;font-size:14px;margin:2px 0 10px}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;font-family:ui-monospace,monospace;letter-spacing:.02em}
+.badge-cv{background:#ddf4ff;color:#0550ae;border:1px solid #54aeff}
+.badge-ro{background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c}
+.badge-cvro{background:#ffe5d9;color:#9a3412;border:1px solid #f59e0b}
+.cbadge{display:inline-block;font-size:10.5px;font-weight:500;padding:1px 7px;border-radius:10px;margin-left:4px;vertical-align:middle;font-family:ui-monospace,monospace}
+.cbadge-code{background:#dcfce7;color:#166534;border:1px solid #86efac;text-decoration:none}
+.cbadge-hf{background:#fef9c3;color:#854d0e;border:1px solid #fde047;text-decoration:none}
+.cbadge-page{background:#e0f2fe;color:#075985;border:1px solid #7dd3fc;text-decoration:none}
+.cbadge-nocode{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db}
+.insight,.topic{background:#fafbfc;border:1px solid #eaeef2;border-radius:8px;padding:14px 18px;margin:12px 0}
+.insight h3,.topic h3{margin-top:0}
+.contrast{background:#fdf6ff;border:1px solid #e9d5ff;border-radius:8px;padding:14px 18px;margin:12px 0}
+.contrast ul{margin:6px 0;padding-left:22px}
+.contrast li{margin:3px 0}
+.crosspair{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:14px 18px;margin:12px 0}
+.crosspair h3{margin:0 0 6px 0;font-size:15px}
+.mustread{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:16px 20px;margin:14px 0}
+.mustread h3{margin-top:0}
+.mustread .section-title{font-weight:600;color:#92400e;margin-top:12px;margin-bottom:4px;font-size:13.5px;text-transform:uppercase;letter-spacing:0.02em}
+.mustread pre{background:#fff;border:1px solid #fde68a;border-radius:4px;padding:10px;font-size:12.5px;overflow-x:auto}
+.risk{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:14px 18px;margin:12px 0}
+.risk h3{margin:0 0 6px 0;font-size:15px;color:#991b1b}
+blockquote{border-left:3px solid #d0d7de;margin:10px 0;padding:6px 14px;color:#656d76;background:#f6f8fa;border-radius:0 6px 6px 0;font-size:13.5px}
+.hot{font-weight:600;color:#b91c1c}
+.cold{font-weight:600;color:#0369a1}
+hr{border:none;border-top:1px solid #eaeef2;margin:28px 0}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:12px;color:#656d76;text-align:center}
+ul.links{padding-left:20px}
+ul.links li{margin:4px 0}
+.home-btn{display:inline-block;padding:6px 14px;font-size:13px;font-weight:500;color:#0969da;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;text-decoration:none;transition:background-color .12s ease,border-color .12s ease}
+.home-btn:hover{background:#eaeef2;border-color:#8b95a1;text-decoration:none}
+.home-btn-top{margin:0 0 18px}
+.home-btn-bottom{display:block;text-align:center;margin:18px 0 0}
+@media (max-width:640px){.container{padding:24px 20px}h1{font-size:23px}h2{font-size:19px}body{padding:16px 8px}}</style>
+</head>
+<body>
+<div class="container">
+<a href="https://gisbi-kim.github.io/arxiv-daily-summary/" class="home-btn home-btn-top">← 전체 목록으로</a>
+<h1>📄 arXiv Daily Briefing — 2026-05-06 (수)</h1>
+<div class="meta">
+<div><strong>시야:</strong> 주간 2026-04-30 ~ 2026-05-06 · 오늘 배치 cs.CV/new + cs.RO/new (Wed 5/6 listing)</div>
+<div><strong>소스:</strong> arxiv.org /list/cs.CV/new · /list/cs.RO/new (stdlib 파서 경유)</div>
+<div><strong>주간 규모:</strong> cs.CV 636편 · cs.RO 197편 (union 833편 후보)</div>
+<div><strong>오늘 /new:</strong> cs.CV 129 + cs.RO 50 → 114 dedup → 90편 8개 ROI 버킷 선정</div>
+<div><strong>델타 기준:</strong> 7일 전 동급 pastweek 스냅샷(2026-04-29)과 비교 (week-over-week 7-day rolling)</div>
+</div>
+'''
+
+# ----- Body sections (manually authored) -----
+BODY = '''
+<h2>🔭 주간 동향</h2>
+<p>이번주 가장 분명한 흐름은 <strong>"World Model 평가가 'reconstruction loss → reward alignment + interactive bench'로 paradigm 전환"</strong>한 거예요. 어제까지가 VLA의 'monitoring·safety·test-time compute' 운영 layer 표면화였다면, 오늘은 그 substrate인 World Model 측에서 한 번에 두 결이 나란히 등장 — <a href="https://arxiv.org/abs/2605.03821">RoboAlign-R1</a>이 robot video WM을 'reconstruction loss + perceptual similarity' 같은 low-level objective 대신 'instruction following · manipulation success · physical plausibility' 6-dim multimodal reward로 post-train(RobotWorldBench 10K 쌍 + Sliding Window Re-encoding)하고, 같은 batch에 <a href="https://arxiv.org/abs/2605.03941">iWorld-Bench</a>가 14 representative WM에 대해 6 task type(distance/memory/trajectory)을 통합 평가하는 unified Action Generation Framework를 도입. 추가로 <a href="https://arxiv.org/abs/2603.28489">Video Gen as WM</a> survey가 efficiency 측 paradigm을 정리 — 학습 시그널·평가 프로토콜·efficiency 3축이 한 batch에 누적되는 건 단순 burst가 아니에요. 어제 '운영 layer 표준화' 흐름의 한 단계 아래 substrate인 WM 측에서 같은 'capability-aligned' 메타가 직접 표면화한 자리고, 우리 랩이 WM follow한다면 'pixel reconstruction'을 default로 두는 setup 자체를 paradigm 측 audit해야 할 시점입니다.</p>
+<p>두 번째로 두드러지는 건 <strong>VLM의 'understanding-generation gap'이 처음 formal하게 정의된 것</strong>이에요. <a href="https://arxiv.org/abs/2605.04040">UniReasoner</a>가 'unified VLM이 prompt를 verify는 잘 하지만 prompt-faithful generation은 fail'한다는 내재적 모순을 새 paradigm 이름(understanding-generation gap)으로 명시화하고, LLM을 universal reasoner로 두는 3-step framework — visual draft(discrete vision token) → self-critique(grounded textual evaluation) → diffusion conditional gen(prompt + draft + evaluation)을 처음 systematic하게 정조준. 어제 'active perception VLM'(Act2See·VAP·S-BOED)의 'sequential acquisition' 메타가 video reasoning에서 표면화한 자리였는데, 오늘은 같은 메타가 visual generation에 직접 들어왔어요. 'verifying capability를 generation guidance로 변환'이라는 방식은 향후 6주 image gen 측 표준 후보 자리. 동시 batch에 <a href="https://arxiv.org/abs/2605.02908">Memorization in SD via CLIP</a>이 'CLIP embedding 측 disproportionate dependency'로 generation safety를 정조준해, 'understanding 측 모델이 generation을 어떻게 control하는가' 측면 두 결이 paradigm 의미 강하게 누적.</p>
+<p>한편 <strong>Embodied AI 버킷이 '5 → 0편'으로 단숨에 dry-up</strong>한 자리에서 <a href="https://arxiv.org/abs/2605.02900">Embodied AI Safety Survey</a>가 400+ paper를 multi-level taxonomy로 통합한 게 표면화 — 'paper burst → meta-synthesis' 단계 진입 분명한 신호예요. pastweek 델타로 보면 ⚡ Efficiency <span class="hot">+84%</span>(25→46) · 🚗 AD <span class="hot">+81%</span>(16→29) · 📦 3D/Scene <span class="hot">+46%</span>(37→54)로 deployment-side 라인이 급가속하고, 🛡️ Safety <span class="cold">-45%</span>(67→37) · 🧠 FM <span class="cold">-27%</span>(51→37)로 conceptual·foundation 라인은 한 주 더 cool. '학습 paradigm 정착 → deployment optimization race'로 무게중심이 한 주 더 단단해진 자리고, 우리 랩이 어떤 라인을 follow하든 deployment-side 결이 향후 6주 dominant 흐름이 될 가능성 높습니다.</p>
+
+<h2>📐 CV vs RO 대비</h2>
+<p>오늘 분포는 Foundation Models(19) · Generation(16) · Efficiency(16) · Safety(16) · Robot Learning(11) · 3D/Scene(9) · Autonomous Driving(3) · Embodied AI(0). FM·Gen·Eff·Safety 4-way 단단한 mid 버킷 + RL 11편 substantive + AD/Embodied collapsed cold trough. pastweek 시야에선 CV 636편 / RO 197편(3.2:1)로 CV 우세 유지지만, RL의 RO 비중 11/11(100%) + 3D/Scene CV 비중 8/9(89%) — '학습 paradigm 측 CV / closed-loop activation 측 RO'라는 한 주 노동 분업이 오늘도 그대로 단단합니다.</p>
+<div class="contrast">
+<p><strong>① 공통으로 뜨는 키워드</strong></p>
+<ul>
+<li><code>World Model + reward / interactive eval</code> — RO(<a href="https://arxiv.org/abs/2605.03821">RoboAlign-R1</a>) + CV(<a href="https://arxiv.org/abs/2605.03941">iWorld-Bench</a>·<a href="https://arxiv.org/abs/2605.03475">WorldJen</a>·<a href="https://arxiv.org/abs/2603.28489">Video Gen as WM</a>) — WM 측 'reward post-training + interactive eval'이 양쪽에서 동시 표면화. 어제 paradigm 흐름의 직접 후속.</li>
+<li><code>Cross-embodiment data</code> — RO(<a href="https://arxiv.org/abs/2605.03452">BifrostUMI</a>·<a href="https://arxiv.org/abs/2605.03269">RLDX-1</a>) + CV(<a href="https://arxiv.org/abs/2605.03637">Cross-Embodiment Video Editing</a>) — humanoid demo 수집·VLA generalist policy·video editing 3 layer가 모두 같은 'data democratization' 메타에 정렬.</li>
+<li><code>Diffusion + alignment</code> — CV(<a href="https://arxiv.org/abs/2605.03317">AHPA</a>·<a href="https://arxiv.org/abs/2605.03877">DMGD</a>·<a href="https://arxiv.org/abs/2605.03252">Ortho-Hydra</a>) + RO(<a href="https://arxiv.org/abs/2605.03075">RCD</a>) — diffusion training·distillation·planning 3 layer에 'alignment/representation/distribution' 측 보강 결.</li>
+</ul>
+<p><strong>② CV에만 뜨는 키워드</strong></p>
+<ul>
+<li><code>medical/clinical foundation</code> — <a href="https://arxiv.org/abs/2605.03544">DALPHIN</a>·<a href="https://arxiv.org/abs/2605.03259">CropVLM</a>·<a href="https://arxiv.org/abs/2605.03490">Brain Tumor UDA</a>·<a href="https://arxiv.org/abs/2605.03098">CT/MRI 3D Spine</a>·<a href="https://arxiv.org/abs/2605.03787">Medical UDA RKHS-MMD</a> — Foundation·Safety·Generation 3 버킷 합쳐 7+편이 medical/agriculture 응용. CV의 'application long tail'이 한 주 내내 dense.</li>
+<li><code>understanding-generation gap</code> — <a href="https://arxiv.org/abs/2605.04040">UniReasoner</a>가 'verifying capability를 generation guidance로'라는 paradigm 결로 단독 등장 — VLM이 자기 verification을 generation에 fold-back하는 메타.</li>
+<li><code>VLM efficiency / cache reuse</code> — <a href="https://arxiv.org/abs/2605.03351">VLMaxxing FrameMogging</a>(14.90-35.92× follow-up latency 절감)이 어제 'Latent Bridge'와 같은 'inference cost' 흐름의 video VLM 측 결로 등장.</li>
+</ul>
+<p><strong>③ RO에만 뜨는 키워드</strong></p>
+<ul>
+<li><code>robot WM reward alignment</code> — <a href="https://arxiv.org/abs/2605.03821">RoboAlign-R1</a>의 6-dim reward post-training은 RO 단독 자리. 어제 'pixel-free latent WAM' 다음 단계로 'reward-aligned WM'이 직접 등장.</li>
+<li><code>open-world quadruped / dexterous</code> — <a href="https://arxiv.org/abs/2605.03846">SigLoMa</a>(open-world quadruped loco-manipulation) + <a href="https://arxiv.org/abs/2605.03363">Reactive Dexterous Grasping</a> — 모두 RO 단독.</li>
+<li><code>generative control / OGPO</code> — <a href="https://arxiv.org/abs/2605.03065">OGPO</a>가 generative control policy(diffusion·flow-based)의 sample-efficient finetune 측 결로 RO 단독, '어제 pixel-free WAM 측 IL safety 라인' 옆에 'generative policy를 RL로 finetune'이라는 새 결.</li>
+<li><code>mixed criticality robotics</code> — <a href="https://arxiv.org/abs/2605.03641">Jiao</a>가 'isolation vs customization' 격차를 정조준한 architecture 측 결로 RO 단독.</li>
+</ul>
+<p><strong>④ 같은 단어 다른 맥락</strong></p>
+<ul>
+<li><code>alignment</code>: CV는 'representation alignment'(AHPA·MASRA — diffusion training feature alignment) / RO는 'reward alignment + behavior alignment'(RoboAlign-R1 — task capability) — 한쪽은 학습 시그널 측 representation, 한쪽은 학습 시그널 측 reward로 layer 정반대.</li>
+<li><code>self-supervised</code>: CV는 'TC-JEPA·DAT — masked reconstruction + caption guidance' / RO는 'BifrostUMI — robot-free demo 측 self-supervision은 아니지만 human movement를 sparse keypoint로 reduce해 자체 supervisory signal 생성' — '데이터 측 self-supervision'이라는 같은 메타지만 substrate가 image vs human action으로 분리.</li>
+<li><code>world model</code>: CV는 'video generation as world simulator'(WorldJen·Video Gen Survey — efficient video gen substrate) / RO는 'robot decision-making 측 reward-aligned WM'(RoboAlign-R1 — capability-aligned post-training) — 같은 단어가 한쪽에선 'visual generative substrate', 한쪽에선 'reward-aligned closed-loop substrate'로 layer 정반대.</li>
+</ul>
+</div>
+<p>지난주부터 본 패턴이 오늘 'world model'·'alignment'에서 같은 문법으로 반복 — <em>한 단어가 paradigm shift 단계에서 layer 분화를 거치는 게 standard pattern</em>이라는 메타 관찰이 한 주 더 굳어진 자리예요. 'WM이 robot reward와 video gen 양쪽에서 동시 paradigm 전환'한 건 두 layer가 곧 통합될 가능성을 시사 — RO 측 reward-aligned WM이 video gen substrate를 차용해 evaluation 표준을 합치는 자리가 향후 6주 가장 분명한 통합 후보.</p>
+
+<h2>💡 오늘의 인사이트</h2>
+<div class="insight"><h3>World Model 평가가 'reconstruction loss → reward alignment + interactive bench'로 paradigm 전환</h3><p>어제까지가 VLA의 'monitoring·safety·test-time compute' 운영 layer 표면화였다면, 오늘은 그 substrate인 World Model 측에서 한 번에 두 결이 표면화한 자리예요. <a href="https://arxiv.org/abs/2605.03821">RoboAlign-R1</a>이 robot video WM을 'reconstruction loss + perceptual similarity'에서 'instruction following·manipulation success·physical plausibility' 6-dim multimodal reward로 post-training 전환(RobotWorldBench 10K + Sliding Window Re-encoding)하고, 같은 batch에 <a href="https://arxiv.org/abs/2605.03941">iWorld-Bench</a>가 14 representative WM에 대한 6 task type 통합 eval을 도입 + <a href="https://arxiv.org/abs/2603.28489">Video Gen as WM</a> survey가 efficiency 측 paradigm 정리. 셋이 한 batch에 누적된 건 'WM eval이 low-level reconstruction에서 capability-aligned로' paradigm 전환 분명한 신호고, 'pixel reconstruction'을 default substrate로 두는 setup은 즉시 audit 대상. 우리 랩이 WM follow한다면 RobotWorldBench reward axis 6 dim이 곧 community standard가 될 가능성에 미리 포지션.</p></div>
+<div class="insight"><h3>VLM의 'understanding-generation gap'이 첫 formal 정의 단계 진입 — verify capability를 generation guidance로 변환</h3><p><a href="https://arxiv.org/abs/2605.04040">UniReasoner</a>가 'unified VLM이 prompt를 verify는 잘 하지만 prompt-faithful generation은 fail'한다는 내재적 모순을 처음 paradigm name(understanding-generation gap)으로 명시화. LLM을 universal reasoner로 두고 visual draft → self-critique → diffusion conditional gen 3-step framework — 어제 본 'active perception VLM'의 sequential acquisition 메타가 video reasoning에서 표면화한 자리였는데, 오늘은 같은 메타가 visual generation에 직접 들어왔어요. 'verifying capability를 generation guidance로 변환'이라는 paradigm은 향후 6주 image gen 측 표준 후보. 동시 batch에 <a href="https://arxiv.org/abs/2605.02908">Memorization in SD via CLIP</a>이 'CLIP embedding 측 disproportionate dependency'로 generation safety를 정조준 — 'understanding model이 generation을 어떻게 control하는가' 측면 두 결이 paradigm 의미 강하게 누적. 우리 랩이 T2I 측면 follow한다면 understanding-generation gap 측정 자체가 새 audit 대상.</p></div>
+<div class="insight"><h3>Embodied AI: 'paper burst → meta-synthesis' 단계 진입 + 일별 진폭 최대 (5 → 0편 dry-up)</h3><p><a href="https://arxiv.org/abs/2605.02900">Embodied AI Safety Survey</a>가 400+ paper를 perception/cognition/planning/action/interaction 5축 multi-level taxonomy로 통합하면서 vision/language/multimodal foundation의 더 넓은 결과까지 연결 — 어제 TAIL-Safe·Online Safety Filter 등 결이 일주일 burst한 자리에서 'paper 단계 → meta-synthesis' 단계로 진입한 분명한 신호예요. 동시에 Embodied AI 버킷이 0편 dry-up — 어제 5편(MCB 등)이 paradigm 흔든 자리에서 오늘 단숨에 0편. 일별 진폭이 가장 큰 자리고, 'cold bucket의 substrate-level 정리는 survey가 마무리하고 다음 paper batch로 넘어가는' 패턴이 표면화한 모양이에요. 우리 랩이 Embodied AI safety follow한다면 이 survey가 향후 6개월 referenced 정리 자리 — 자체 시스템의 perception/cognition/planning/action/interaction layer 측 attack surface 매핑이 즉시 가치.</p></div>
+
+<h2>🔬 추천 연구주제</h2>
+<div class="topic"><h3>Robot WM Reward-Alignment Atlas — 6-dim reward 축에서 SR-vs-WM-quality Pareto 첫 측정</h3><p><a href="https://arxiv.org/abs/2605.03821">RoboAlign-R1</a>이 6-dim reward(instruction following·manipulation success·physical plausibility 등)를 도입한 자리에서 다음 단계는 'reward 축이 SR로 transfer되는 정도' 정량화. RobotWorldBench × {RoboAlign-R1, baseline reconstruction WM, perceptual similarity WM} 3 paradigm × {LIBERO, RoboCasa, OGBench} 3 IL/RL bench 조합으로 'reward dimension별 SR transfer Pareto' atlas. 'WM이 정확히 어디서 robot decision-making을 돕는가' 측면 첫 정량 결과 — 향후 6주 community standard 후보. 우리 랩이 robot WM follow한다면 즉시 sprint 가치.</p></div>
+<div class="topic"><h3>Understanding-Generation Gap의 cross-modality 측정 표준 — VLM·VLA·VLN에서 동일 격차 측정</h3><p><a href="https://arxiv.org/abs/2605.04040">UniReasoner</a>가 T2I image gen에서 격차를 정의한 자리에서 다음 단계는 'VLM이 verify는 잘 하지만 generate/act는 못 한다'는 격차가 다른 modality에서도 보이는지 측정. {T2I generation, VLA action prediction, VLN navigation prediction} × {GPT-4V, Gemini, LLaVA-OV, MolmoER} matrix로 'verifying SR vs generating SR' 격차 atlas. 격차가 modality-invariant라면 paradigm 측 의미 강하고 'critique-then-generate' 메타가 universal solution이 될 가능성. 우리 랩이 multimodal 인프라 굴린다면 즉시 audit 가치.</p></div>
+<div class="topic"><h3>Cross-Embodiment Data Pipeline의 end-to-end SR 측정 — 'human video → robot policy' three-way 비교</h3><p><a href="https://arxiv.org/abs/2605.03637">Cross-Embodiment Video Editing</a>이 disentangled video editing을 정조준한 자리에서 다음 단계는 '편집된 robot video가 정말 IL training data로 작동하는지' end-to-end 측정. {teleoperation(MolmoAct2 720h), sparse keypoint UMI(BifrostUMI), human video editing(이번주 결)} 3 data source × {humanoid bimanual, dexterous hand, quadruped loco-manipulation} 3 platform으로 'data democratization paradigm Pareto'. 'video editing as data engine'이 정말 작동하는가에 첫 정량 답. 우리 랩이 humanoid IL 굴린다면 6주 audit 가치.</p></div>
+
+<h2>📊 오늘의 버킷 현황</h2>
+<div class="bucket-line">📦 3D/Scene            :  9편 (CV  8 / RO  1 / CV-RO 0)
+🤖 Robot Learning      : 11편 (CV  0 / RO 11 / CV-RO 0)
+🚗 Autonomous Driving  :  3편 (CV  2 / RO  1 / CV-RO 0)
+🧠 Foundation Models   : 19편 (CV 19 / RO  0 / CV-RO 0)
+🎨 Generation          : 16편 (CV 15 / RO  1 / CV-RO 0)
+⚡ Efficiency/Systems  : 16편 (CV 15 / RO  1 / CV-RO 0)
+🏃 Embodied AI         :  0편
+🛡️ Safety/Alignment    : 16편 (CV 10 / RO  5 / CV-RO 1)</div>
+<p>🔥 <span class="hot">TOP3</span>: Foundation Models (19), Generation (16), Efficiency/Systems (16) · ❄️ <span class="cold">BOTTOM2</span>: Autonomous Driving (3), Embodied AI (0). FM 19편이 단독 1위지만 medical/agriculture 응용 ~7편 빼면 substantive ~12편으로 줄여 봐야 정확. RL 11편이 'WM reward alignment + dexterous + cross-embodiment + open-world quadruped'로 dense하게 substantive — 적어 보이지만 paradigm 측 weight 강해요. AD 3편 + Embodied 0편이 한 batch 가장 cold.</p>
+<p>📈 <strong>주간 델타(2026-04-29 → 2026-05-06, 7일 rolling pastweek 단위)</strong>: ⚡ Efficiency/Systems <span class="hot">+84%</span> (25→46), 🚗 Autonomous Driving <span class="hot">+81%</span> (16→29), 📦 3D/Scene <span class="hot">+46%</span> (37→54), 🏃 Embodied AI <span class="hot">+20%</span> (15→18), 🤖 Robot Learning <span class="hot">+17%</span> (53→62), 🎨 Generation <span class="hot">+15%</span> (66→76), 🧠 Foundation Models <span class="cold">-27%</span> (51→37), 🛡️ Safety/Alignment <span class="cold">-45%</span> (67→37). <em>가장 분명한 신호는 Efficiency +84%·AD +81%·3D +46%로 deployment-side 라인이 한 주 더 가속</em>한 것 + Safety가 -45%로 큰 폭 cool. 어제 본 'foundation model 거대화에서 efficient generation infra로' 무게중심 이동이 한 주 더 단단해졌고, Safety가 일주일 burst 후 paradigm-synthesis 단계 진입한 영향(survey 등 통합 결로 결 자리가 좁아짐).</p>
+
+<h2>📈 벤치마크 SOTA 추이</h2>
+<table style="border-collapse:collapse;width:100%;font-size:13.5px;margin:12px 0">
+<thead><tr style="background:#f6f8fa;border-bottom:1px solid #d0d7de"><th style="text-align:left;padding:8px">벤치마크</th><th style="text-align:left;padding:8px">메트릭</th><th style="text-align:right;padding:8px">이번주 최고</th><th style="text-align:left;padding:8px;padding-left:14px">논문</th></tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #eaeef2"><td style="padding:8px"><strong>RobotWorldBench (10K, 4 robot src)</strong></td><td style="padding:8px">6-dim reward axis (instr/manip/physics)</td><td style="padding:8px;text-align:right;font-family:ui-monospace,monospace">first reward-aligned WM bench</td><td style="padding:8px;padding-left:14px"><a href="https://arxiv.org/abs/2605.03821">RoboAlign-R1</a></td></tr>
+<tr style="border-bottom:1px solid #eaeef2"><td style="padding:8px"><strong>iWorld-Bench (14 WM, 6 task)</strong></td><td style="padding:8px">interactive ability (distance/memory)</td><td style="padding:8px;text-align:right;font-family:ui-monospace,monospace">first unified interactive WM bench</td><td style="padding:8px;padding-left:14px"><a href="https://arxiv.org/abs/2605.03941">iWorld-Bench</a></td></tr>
+<tr style="border-bottom:1px solid #eaeef2"><td style="padding:8px"><strong>VideoMME breadth (93-query)</strong></td><td style="padding:8px">follow-up latency reduction</td><td style="padding:8px;text-align:right;font-family:ui-monospace,monospace">14.90-35.92× faster</td><td style="padding:8px;padding-left:14px"><a href="https://arxiv.org/abs/2605.03351">VLMaxxing FrameMogging</a></td></tr>
+<tr style="border-bottom:1px solid #eaeef2"><td style="padding:8px"><strong>OGBench (long-horizon)</strong></td><td style="padding:8px">compositional plan SR (multimodal)</td><td style="padding:8px;text-align:right;font-family:ui-monospace,monospace">consistently outperforms baselines</td><td style="padding:8px;padding-left:14px"><a href="https://arxiv.org/abs/2605.03075">RCD</a></td></tr>
+<tr><td style="padding:8px"><strong>DALPHIN (1236 img, 31 pathologists)</strong></td><td style="padding:8px">AI copilot vs human pathologist</td><td style="padding:8px;text-align:right;font-family:ui-monospace,monospace">first multicentric open bench</td><td style="padding:8px;padding-left:14px"><a href="https://arxiv.org/abs/2605.03544">DALPHIN</a></td></tr>
+</tbody></table>
+<p>5건의 substantive bench 보고가 한 batch에 등장 — 가장 paradigm 측 의미 강한 결은 RobotWorldBench(robot video WM의 6-dim reward eval)와 iWorld-Bench(interactive WM의 unified action eval). 둘이 같은 batch에 등장한 건 'WM eval이 reconstruction loss → capability-aligned'로 paradigm 전환 분명한 신호. VLMaxxing FrameMogging의 '14.90-35.92× follow-up latency 절감'이 어제 Latent Bridge(50-75% VLM call ↓ + 95-100% retention)와 같은 'inference cost' 흐름의 video VLM 측 instantiation. 모두 향후 6개월 standard 후보 자리.</p>
+
+<h2>🔀 크로스오버 페어</h2>
+<div class="crosspair"><h3>같은 "World Model evaluation", 다른 layer — RoboAlign-R1(RO) vs iWorld-Bench(CV)</h3><p><a href="https://arxiv.org/abs/2605.03821">RoboAlign-R1</a>(RO)이 robot video WM을 'reward-aligned post-training + Sliding Window Re-encoding'으로 정조준해 <em>학습 시그널 측 capability alignment</em>를 도입했고, 같은 날 <a href="https://arxiv.org/abs/2605.03941">iWorld-Bench</a>(CV)가 14 representative WM에 대해 6 task type(distance perception·memory·trajectory) 통합 eval을 도입해 <em>평가 프로토콜 측 unified action gen framework</em>를 정조준. 둘 다 'WM eval이 reconstruction loss를 넘어야 한다'는 같은 메타에서 출발하지만, RoboAlign-R1는 "post-training 측 reward alignment"이고 iWorld-Bench는 "test-time 측 interaction eval"이라 layer가 정반대 — 동시에 굴리면 'reward-aligned WM이 interactive bench에서 baseline WM 대비 SR이 어디서 어떻게 향상되는가' 측정 가능. 향후 6주 WM eval 표준의 가장 분명한 통합 자리예요. 우리 랩이 WM follow한다면 두 결을 같이 audit하는 게 paradigm 측 정렬의 가장 빠른 길.</p></div>
+<div class="crosspair"><h3>같은 "cross-embodiment data democratization", 다른 substrate — Cross-Embodiment Video Editing(RO) vs MolmoAct2 720h(어제 RO)</h3><p><a href="https://arxiv.org/abs/2605.03637">Cross-Embodiment Video Editing</a>(RO·오늘)이 disentangled latent로 human demo 한 편을 robot execution video로 합성하는 <em>video editing 측 data engine</em>을 정조준하고, 어제 <a href="https://arxiv.org/abs/2605.02881">MolmoAct2</a>(RO)가 720h bimanual teleoperated dataset + OpenFAST tokenizer로 <em>teleoperation 측 fully-open data</em>를 정조준. 같은 'data democratization' 메타지만 한쪽은 "human video → robot edit"이고 한쪽은 "human teleop → robot raw"라 substrate가 정반대 — 동시 굴리면 'human kinematics를 어떻게 robot action으로 ground하는가' 두 갈래의 SR 격차 직접 측정 가능. 추가로 오늘 <a href="https://arxiv.org/abs/2605.03452">BifrostUMI</a>가 sparse keypoint VR data로 humanoid 측 third path 표면화 — 'video editing vs sparse keypoint vs full teleop' 3-way 비교 자리가 향후 6주 community 표준 후보예요.</p></div>
+
+<h2>🌟 오늘의 must-read</h2>
+<div class="mustread">
+<h3>① RoboAlign-R1: Distilled Multimodal Reward Alignment for Robot Video World Models <span class="badge badge-ro">RO</span></h3>
+<p><a href="https://arxiv.org/abs/2605.03821">arxiv:2605.03821</a> · 저자 Hao Wu et al. · abstract 기반</p>
+<div class="section-title">핵심 주장</div>
+<p>현재 robot video world model이 'reconstruction loss + perceptual similarity' 같은 low-level training objective로 학습돼 robot decision-making 측면 capability(instruction following·manipulation success·physical plausibility)와 mismatch한다는 진단에서 출발해요. RoboAlign-R1은 두 갈래 처방을 동시 — (1) 학습 시그널 측면 'reward alignment post-training': RobotWorldBench(10K annotated video-instruction pair, 4 robot data source) + 6-dim multimodal teacher judge(RoboAlign-Judge) → distilled lightweight student reward → RL post-training으로 'WM이 robot capability에 정렬된 video를 생성하도록' 학습. (2) inference 측면 'Sliding Window Re-encoding(SWR)': training-free strategy로 generation context를 periodically refresh, long-horizon autoregressive prediction의 error accumulation 처방. 어제 IVLR(95.5%)·Being-H0.7가 'pixel-free latent WAM'이라는 substrate paradigm을 정조준한 자리에서, RoboAlign-R1은 그 substrate의 <em>학습 시그널 자체를 reward로 전환</em>하는 한 단계 더 깊은 paradigm 결입니다.</p>
+<div class="section-title">방법의 핵심 (직관)</div>
+<pre># 기존 robot video WM: low-level pixel target
+loss = ||generated_video - gt_video||_pixel_or_perceptual
+
+# RoboAlign-R1: 6-dim reward + RL post-training
+RobotWorldBench = 10K (video, instruction, 6-dim reward annotation)
+teacher_judge   = train_multimodal_LLM_judge(RobotWorldBench)
+student_reward  = distill(teacher_judge, lightweight)
+WM_aligned      = RL_finetune(WM_pretrained, reward=student_reward)
+
+# inference-time long-horizon stabilization (training-free)
+def generate_long_horizon(WM, init_state, T):
+    ctx = init_state
+    for t in range(T):
+        frame_t = WM(ctx)
+        ctx = append(ctx, frame_t)
+        if t % SWR_period == 0:
+            ctx = re_encode(ctx)   # error accumulation refresh</pre>
+<div class="section-title">핵심 실험 (abstract 기반)</div>
+<p>RobotWorldBench: 10K annotated video-instruction pairs from 4 robot data sources (수치는 abstract 그대로). 6-dim teacher judge가 fine-grained evaluation 제공 → distilled student reward로 RL post-training이 baseline reconstruction-loss WM 대비 instruction following + manipulation success + physical plausibility 향상. SWR이 long-horizon rollout drift 추가 처방. 정확한 SR/uplift 수치는 본문 정독 필요하지만 'reward-aligned WM eval bench + reward distillation pipeline + training-free SWR'이 한 paper에 묶인 게 paradigm 측 가장 강한 신호.</p>
+<div class="section-title">약점·한계</div>
+<p>(a) 6-dim reward axis가 정확히 무엇무엇인지 abstract에서 약함 — 'instruction following · manipulation success · physical plausibility' 외 나머지 3 dim이 무엇인지 본문 필수. 6 dim이 subjective vs objective 비율, axis 사이 correlation 측면 정직한 보고 필요. (b) RobotWorldBench의 4 robot data source가 LIBERO·RoboCasa·Open X-Embodiment 류인지·domain coverage가 어느 정도인지 abstract엔 약함 — 'narrow source에서 학습된 reward가 unseen embodiment로 transfer되는가' 정량 ablation 필수. (c) Sliding Window Re-encoding의 'periodic refresh' period 측면 hyperparameter sensitivity ablation이 본문 정독 필수 — period가 너무 짧으면 cost overhead, 너무 길면 drift refresh 효과 약화. (d) Distilled student reward의 fidelity vs teacher reward 측 정량 격차도 abstract엔 약함 — student가 teacher 대비 reward fidelity를 얼마나 보존하는가가 'distillation 측 paradigm validity'의 핵심 metric인데 명시 필수.</p>
+<div class="section-title">랩 파이프라인 영향</div>
+<p>WM 인프라를 굴리는 랩이라면 즉각 paradigm 검토 후보. 특히 우리 랩이 어제까지 'pixel-free latent WAM'을 follow했다면, 그 substrate의 <em>학습 시그널 자체</em>를 reward로 전환하는 한 단계 더 깊은 paradigm 결이 표면화한 자리예요. RobotWorldBench의 6-dim reward axis가 곧 community standard가 될 가능성이 있어, 우리 측 WM 평가 protocol에 즉시 6-dim reward eval을 추가하는 게 향후 6주 sprint로 가장 효율적. 추가로 같은 batch의 iWorld-Bench(interactive WM eval)와 cross-validate해 'reward-aligned WM이 interactive bench에서 baseline 대비 어디서 SR 향상하는가' 측정이 paradigm 측 정렬의 가장 빠른 길.</p>
+</div>
+<div class="mustread">
+<h3>② UniReasoner: Large Language Models are Universal Reasoners for Visual Generation <span class="badge badge-cv">CV</span></h3>
+<p><a href="https://arxiv.org/abs/2605.04040">arxiv:2605.04040</a> · 저자 Sucheng Ren et al. · abstract 기반</p>
+<div class="section-title">핵심 주장</div>
+<p>Unified VLM(LLM backbone이 visual understand + generation 동시 처리)이 'prompt를 verify는 정확하지만 prompt-faithful generation은 fail'한다는 내재적 모순을 처음 paradigm name(<em>understanding-generation gap</em>)으로 명시화한 자리예요. UniReasoner는 LLM의 understanding strength를 generation guidance로 직접 변환하는 3-step framework — (1) prompt → coarse visual draft as discrete vision token (LLM이 visual sketch 생성), (2) self-critique by evaluating draft for prompt consistency → grounded textual evaluation (어디가 어떻게 잘못됐는지 명시), (3) prompt + draft + evaluation으로 diffusion conditional gen (explicit corrective signal). 어제 'active perception VLM'(Act2See·VAP·S-BOED)의 sequential acquisition 메타가 video reasoning에서 표면화한 자리에서, 오늘은 같은 메타가 visual generation에 직접 들어왔어요. 'verifying capability를 generation guidance로 변환'이라는 paradigm은 향후 6주 image gen 측 표준 후보 자리.</p>
+<div class="section-title">방법의 핵심 (직관)</div>
+<pre># 기존 unified VLM: understanding과 generation 분리, gap 무시
+draft = unified_VLM.generate(prompt)        # 종종 prompt 위반
+verify = unified_VLM.verify(draft, prompt)  # 정확하지만 generation에 fold-back 안 됨
+
+# UniReasoner: critique-then-generate
+draft     = LLM.generate_coarse(prompt)        # discrete vision tokens
+critique  = LLM.self_critique(draft, prompt)   # grounded textual evaluation
+final_img = diffusion(prompt, draft, critique) # 3-way conditional gen
+# 'verify가 generation을 직접 안내하는' 메타</pre>
+<div class="section-title">핵심 실험 (abstract 기반)</div>
+<p>각 corrective signal이 specific failure mode 처방한다는 ablation 약속(abstract). T2I gen 측 prompt fidelity 향상이 메인 metric — 정확한 수치는 본문 정독 필수지만 'understanding-generation gap을 처음 정의 + 처방' 자체가 paradigm 측 가장 강한 신호. Diffusion model + LLM joint conditioning이 unified VLM 대비 prompt 위반 줄임.</p>
+<div class="section-title">약점·한계</div>
+<p>(a) 'self-critique'가 LLM 자기 모델로 생성한 draft를 self-evaluate하는 자리라 'closed loop bias'가 위험 — LLM이 자기 출력을 over-trust해 critique 단계가 surface가 될 가능성. Critique가 정말 외부 ground truth와 일치하는지 정량 분석 필수. (b) 'discrete vision token으로 draft' 표현이 정확히 어떤 vocabulary 사용하는지 (VQ-VAE? diffusion latent? text token alignment?) abstract엔 약함 — token granularity가 critique fidelity에 직접 영향이라 본문 필수. (c) 3-step pipeline이 inference cost를 어느 정도 늘리는지 abstract엔 약함 — '간단한 prompt에서 draft + critique + diffusion'이 single-step diffusion 대비 cost overhead가 크다면 deployment 측 가치 약화. (d) Multilingual·complex prompt(spatial reasoning, count, occlusion) 측 fidelity 향상 정도가 simple prompt 대비 어느 정도 큰지 정량 ablation 필요 — 'understanding-generation gap'이 가장 큰 자리는 complex prompt이고 그 자리에서의 향상이 paradigm 가치의 핵심.</p>
+<div class="section-title">랩 파이프라인 영향</div>
+<p>T2I generation 측면 follow하는 랩이라면 즉시 paradigm 검토 후보. 특히 우리 랩이 unified VLM·diffusion 인프라 굴린다면 'critique-then-generate' 메타를 일반 generation pipeline에 inject하는 게 비교적 저비용 — diffusion model을 retraining 없이 conditional layer만 추가하면 가능. 추가로 'understanding-generation gap'이라는 paradigm name이 community에 정착하면 우리 측 generation infra의 critique layer가 곧 표준 보강책 후보. UniReasoner의 paradigm을 video gen·VLA action gen·VLN navigation gen으로 일반화한 measurement(추천 연구주제 ②)가 향후 6주 가장 효율적인 follow-up sprint이에요.</p>
+</div>
+
+<h2>⚠️ 리스크·한계 필터</h2>
+<div class="risk"><h3>RoboAlign-R1 "6-dim multimodal reward" — reward axis spec + cross-embodiment transfer 측 의심</h3><p><a href="https://arxiv.org/abs/2605.03821">RoboAlign-R1</a>의 6-dim reward axis가 'instruction following·manipulation success·physical plausibility' 외 나머지 3 dim이 무엇인지 abstract엔 약하고, 6 dim 사이 correlation·subjective vs objective 비율도 정량화 안 됨. 'capability-aligned reward'라는 paradigm 측 의미는 강하지만 reward axis 자체가 narrow 또는 redundant하면 'WM이 6-dim 평균에 over-fit'되는 silent failure 가능. 또한 RobotWorldBench의 4 robot data source(LIBERO·RoboCasa·Open X-Embodiment 류로 추정)가 narrow일 경우 'reward distillation이 source-specific spurious correlation을 capture'하는 risk — unseen embodiment로 transfer 정량 ablation 본문 필수. Sliding Window Re-encoding의 period hyperparameter도 sensitivity ablation 필수예요.</p></div>
+<div class="risk"><h3>iWorld-Bench "14 WM unified eval" — task type design + leaderboard cherry-pick 측 의심</h3><p><a href="https://arxiv.org/abs/2605.03941">iWorld-Bench</a>의 6 task type(distance perception·memory 등)이 정확히 어떤 dimension을 cover하는지 abstract엔 일부만 명시 — '14 representative WM'이 어떻게 선정됐는지(open-source 우선? 최근 1년? specific paradigm 편향?)에 따라 leaderboard ranking이 크게 달라질 수 있어요. 또한 330k clip → 2.1k 'high-quality sample' 선별의 quality criterion이 명시 안 되면 'specific task type에 over-curated된 bench가 특정 WM을 favorable하게 평가'할 silent risk. 4.9k test sample이 6 task type에 어떻게 분포됐는지(균등? heavy-tail?), 'Action Generation Framework'가 unified해야 할 14 WM의 native action space 차이를 어떻게 alignment했는지 본문 정독 필수. Public leaderboard 동반은 paradigm 측 가치 강하지만 launch 직후 cherry-pick 위험 인지 필요.</p></div>
+<div class="risk"><h3>UniReasoner "understanding-generation gap" — self-critique closed loop bias 측 의심</h3><p><a href="https://arxiv.org/abs/2605.04040">UniReasoner</a>의 3-step framework에서 'self-critique'가 LLM이 자기 모델로 생성한 draft를 self-evaluate하는 자리라 'LLM이 자기 출력을 over-trust해 critique 단계가 surface가 되는' closed loop bias 위험이 분명. Critique step이 정말 prompt 위반을 식별하는가 vs LLM의 systematic blind spot을 그대로 transfer하는가의 분리가 abstract엔 약해요. Cross-model critique(다른 LLM이 critique)와 비교 ablation이 본문 필수. 또한 'discrete vision token'의 vocabulary 정의 + draft + critique + diffusion 3-step pipeline의 inference cost overhead가 정직하게 보고돼야 deployment 측 가치 정확. Complex prompt(spatial reasoning, count, occlusion)에서 향상 정도가 simple prompt 대비 큰지 정량 ablation 없으면 'understanding-generation gap이 큰 자리에서의 처방' 주장이 약화돼요.</p></div>
+<div class="risk"><h3>VLMaxxing FrameMogging "14.90-35.92× follow-up latency 절감" — adaptive policy의 fail mode 측 의심</h3><p><a href="https://arxiv.org/abs/2605.03351">VLMaxxing FrameMogging</a>이 14.90-35.92× 큰 폭 절감을 보고하지만, 'adaptive same-video follow-up reuse'가 정확히 어떤 condition에서 cache reuse하고 어떤 condition에서 fresh evidence 구입하는지의 boundary가 abstract에서 약해요. 'dense-answer-anchored prompt variation에서 conservative fixed K=1 repair 대비 aggressive policy가 drift'한다는 stress test 결과가 정확히 어디까지 robust한지 본문 정독 필수. 14.90-35.92×라는 range가 best vs worst인지(bestcase는 35×, worstcase는 14×) 또는 task-specific인지 명확화 필요. 또한 'training-free anti-recomputation'이라는 paradigm name 자체는 강력하지만, dynamic scene(factory wall이 실제로 움직이는 자리)에서 cache reuse가 silent fail로 빠질 위험 — 본문에서 dynamic scenario coverage 정량 보고 필수.</p></div>
+'''
+
+# ----- Generate per-bucket paper sections -----
+EMOJI_MAP = {
+    "3D/Scene": "📦",
+    "Robot Learning": "🤖",
+    "Autonomous Driving": "🚗",
+    "Foundation Models": "🧠",
+    "Generation": "🎨",
+    "Efficiency/Systems": "⚡",
+    "Embodied AI": "🏃",
+    "Safety/Alignment": "🛡️",
+}
+
+
+def render_buckets(d):
+    out = ['<h2>📄 논문별 요약</h2>']
+    for bname, b in d["buckets"].items():
+        emoji = EMOJI_MAP.get(bname, "📄")
+        cv = b["cv"]
+        ro = b["ro"]
+        cvro = b["cvro"]
+        total = b["total"]
+        if total == 0:
+            out.append(
+                f'<h4 class="bucket">{emoji} {html_escape(bname)} '
+                f'<span class="count">· 0편 · 오늘 batch에 ROI 일치 결 없음</span></h4>'
+            )
+            out.append('<p style="color:#656d76;font-style:italic;margin:10px 0 0">한 batch 가장 cold trough — 어제 5편(MCB 등)에서 단숨에 dry-up. 일별 진폭 가장 큰 자리. 다만 같은 날 <a href="https://arxiv.org/abs/2605.02900">Embodied AI Safety Survey</a>(400+ paper meta-synthesis)가 Safety/Alignment 버킷에 등장 — paradigm 측 정리 결로 layer 자체는 활발히 진행 중. 다음 batch 회복 여부 관찰 필요.</p>')
+            continue
+        out.append(
+            f'<h4 class="bucket">{emoji} {html_escape(bname)} '
+            f'<span class="count">· {total}편 · CV {cv} / RO {ro} / CV-RO {cvro}</span></h4>'
+        )
+        for p in b["papers"]:
+            out.append(render_paper(p))
+    return "\n".join(out)
+
+
+FOOTER = '''
+<h2>🔗 참고 링크</h2>
+<ul class="links">
+<li><a href="https://arxiv.org/list/cs.CV/new">arxiv.org/list/cs.CV/new</a></li>
+<li><a href="https://arxiv.org/list/cs.RO/new">arxiv.org/list/cs.RO/new</a></li>
+<li><a href="https://arxiv.org/list/cs.CV/pastweek">cs.CV/pastweek</a> · <a href="https://arxiv.org/list/cs.RO/pastweek">cs.RO/pastweek</a></li>
+<li><a href="https://gisbi-kim.github.io/arxiv-daily-summary/">📚 전체 브리핑 아카이브</a></li>
+<li><a href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml">📡 RSS feed</a></li>
+</ul>
+<a href="https://gisbi-kim.github.io/arxiv-daily-summary/" class="home-btn home-btn-bottom">🏠 전체 목록으로</a>
+<footer>Generated 2026-05-06 · stdlib parser → classify.py → curated commentary · arXiv Daily Briefing</footer>
+</div>
+</body>
+</html>
+'''
+
+
+def main():
+    pieces = [HEAD, BODY, render_buckets(CLASSIFIED), FOOTER]
+    html = "\n".join(pieces)
+    os.makedirs("posts", exist_ok=True)
+    with open(f"posts/{DATE}.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    sys.stderr.write(f"Wrote posts/{DATE}.html ({len(html)} chars)\n")
+
+
+if __name__ == "__main__":
+    main()

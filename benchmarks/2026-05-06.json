@@ -1,0 +1,58 @@
+{
+  "date": "2026-05-06",
+  "results": [
+    {
+      "benchmark": "RobotWorldBench (10K video-instruction pairs)",
+      "metric": "6-dim reward (instruction follow / manipulation / physics / etc.)",
+      "value_str": "first reward-aligned WM bench introduced",
+      "paper": "https://arxiv.org/abs/2605.03821",
+      "paper_title": "RoboAlign-R1: Distilled Multimodal Reward Alignment for Robot Video World Models",
+      "note": "10,000 annotated pairs from 4 robot data sources + 6-dim teacher judge → distilled student reward. Sliding Window Re-encoding for long-horizon drift. Quantitative SR vs baseline WM(no reward align) needs body read."
+    },
+    {
+      "benchmark": "iWorld-Bench (interactive WM, 14 models, 6 task types)",
+      "metric": "interaction ability (distance / memory / trajectory)",
+      "value_str": "first unified interactive WM benchmark",
+      "paper": "https://arxiv.org/abs/2605.03941",
+      "paper_title": "A Benchmark for Interactive World Models with a Unified Action Generation Framework",
+      "note": "330k clips → 2.1k high-quality samples + 4.9k action gen test samples. 14 representative WM evaluated. Public leaderboard."
+    },
+    {
+      "benchmark": "VideoMME breadth (93-query)",
+      "metric": "follow-up latency reduction (cache reuse)",
+      "value_str": "14.90-35.92× faster (Qwen2.5-VL-7B-4bit, frozen)",
+      "paper": "https://arxiv.org/abs/2605.03351",
+      "paper_title": "VLMaxxing through FrameMogging: Training-Free Anti-Recomputation for Video VLMs",
+      "note": "Adaptive same-video follow-up reuse preserves correctness on 93-query VideoMME breadth + 50-turn repeated-question schedules. First cold query unchanged; win on subsequent reuse."
+    },
+    {
+      "benchmark": "OGBench (long-horizon: locomotion/manipulation/pixel)",
+      "metric": "compositional plan success (multimodal regimes)",
+      "value_str": "consistently outperforms compositional diffusion baselines",
+      "paper": "https://arxiv.org/abs/2605.03075",
+      "paper_title": "Refining Compositional Diffusion for Reliable Long-Horizon Planning",
+      "note": "Training-free guidance using self-reconstruction error as log-density proxy + overlap consistency. Mode-averaging mitigated. Numerical SR vs baselines requires body read."
+    },
+    {
+      "benchmark": "VideoMME / temporal grounding (open VLM eval)",
+      "metric": "training-time MLLM-aided alignment improvement",
+      "value_str": "MASRA improves over query-moment matching baselines",
+      "paper": "https://arxiv.org/abs/2605.03398",
+      "paper_title": "MASRA: MLLM-Assisted Semantic-Relational Consistent Alignment for Video Temporal Grounding",
+      "note": "Training-time MLLM textual priors(event-level + relational) for VTG — orthogonal to inference-time active-perception line."
+    }
+  ],
+  "proposed_benchmarks": [
+    {
+      "name": "RobotWorldBench",
+      "paper": "https://arxiv.org/abs/2605.03821",
+      "note": "10K video-instruction pairs · 6-dim reward axis · 4 robot data sources — robot WM 측 reward-aligned eval의 첫 표준 후보."
+    },
+    {
+      "name": "iWorld-Bench",
+      "paper": "https://arxiv.org/abs/2605.03941",
+      "note": "Interactive WM 측 14-model leaderboard + 6-task action gen — physical interaction capability eval 표준 후보."
+    }
+  ],
+  "note": "Wednesday batch — 5 substantive bench/SOTA reports. 가장 paradigm 측 의미 강한 결은 RobotWorldBench(robot video WM의 reward alignment eval) + iWorld-Bench(interactive WM의 unified action eval). 둘이 같은 batch에 등장한 건 'WM eval이 reconstruction loss → reward + interaction'으로 paradigm 전환 분명한 신호."
+}
