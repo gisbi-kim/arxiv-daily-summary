@@ -1,0 +1,340 @@
+{
+  "date": "2026-05-07",
+  "totals": {
+    "selected": 123,
+    "total_scanned": 146,
+    "note": "Thursday — cs.CV 190 new+cross + cs.RO 65 new+cross dedup → 146 unique, 123 selected to ROI buckets. Pastweek window 2026-05-01 ~ 2026-05-07."
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 15,
+      "cv": 13,
+      "ro": 2,
+      "cvro": 0
+    },
+    "Robot Learning": {
+      "total": 14,
+      "cv": 2,
+      "ro": 10,
+      "cvro": 2
+    },
+    "Autonomous Driving": {
+      "total": 13,
+      "cv": 9,
+      "ro": 2,
+      "cvro": 2
+    },
+    "Foundation Models": {
+      "total": 18,
+      "cv": 17,
+      "ro": 1,
+      "cvro": 0
+    },
+    "Generation": {
+      "total": 26,
+      "cv": 24,
+      "ro": 2,
+      "cvro": 0
+    },
+    "Efficiency/Systems": {
+      "total": 18,
+      "cv": 18,
+      "ro": 0,
+      "cvro": 0
+    },
+    "Embodied AI": {
+      "total": 4,
+      "cv": 1,
+      "ro": 3,
+      "cvro": 0
+    },
+    "Safety/Alignment": {
+      "total": 15,
+      "cv": 10,
+      "ro": 4,
+      "cvro": 1
+    }
+  },
+  "buckets_pastweek": {
+    "3D/Scene": {
+      "total": 56,
+      "cv": 46,
+      "ro": 10
+    },
+    "Robot Learning": {
+      "total": 64,
+      "cv": 14,
+      "ro": 50
+    },
+    "Autonomous Driving": {
+      "total": 38,
+      "cv": 18,
+      "ro": 20
+    },
+    "Foundation Models": {
+      "total": 42,
+      "cv": 40,
+      "ro": 2
+    },
+    "Generation": {
+      "total": 84,
+      "cv": 73,
+      "ro": 11
+    },
+    "Efficiency/Systems": {
+      "total": 50,
+      "cv": 47,
+      "ro": 3
+    },
+    "Embodied AI": {
+      "total": 15,
+      "cv": 5,
+      "ro": 10
+    },
+    "Safety/Alignment": {
+      "total": 35,
+      "cv": 28,
+      "ro": 7
+    }
+  },
+  "vs_7d_prior": {
+    "baseline_date": "2026-04-30",
+    "baseline_note": "Same weekday(Thu) pastweek snapshot 7 days ago — week-over-week comparison of 7-day rolling window.",
+    "pastweek_buckets_delta_pct": {
+      "3D/Scene": "+30%",
+      "Robot Learning": "+31%",
+      "Autonomous Driving": "+90%",
+      "Foundation Models": "-9%",
+      "Generation": "+11%",
+      "Efficiency/Systems": "+150%",
+      "Embodied AI": "-6%",
+      "Safety/Alignment": "+35%"
+    }
+  },
+  "hottest": [
+    {
+      "topic": "VLA의 'latent action supervision' formulation이 처음 systematic 정리됨 — image-based vs action-based 구분",
+      "evidence": [
+        "2605.04678",
+        "2605.05126",
+        "2605.05092"
+      ],
+      "note": "From Pixels to Tokens가 latent action supervision을 (i) image-based(trajectory regularization) vs (ii) action-based(target unification) 두 갈래로 정리하고, formulation-task correspondence를 처음 정량 측정 — image-based는 long-horizon reasoning + scene generalization, action-based는 motor coordination에 강함. 'discrete latent action token으로 직접 VLM 감독'이 가장 효과적. 같은 batch에 ConsisVLA-4D(spatiotemporal consistency for 4D-reasoning manipulation) + Driver-WM(driver-centric latent WM)이 동시 등장 — VLA latent substrate 측 paradigm이 한 batch에 단단해진 자리."
+    },
+    {
+      "topic": "4D World Model 평가의 첫 표준 정착 — LoViF 2026 PhyScore challenge",
+      "evidence": [
+        "2605.05187",
+        "2605.04527",
+        "2605.04435",
+        "2605.05163"
+      ],
+      "note": "LoViF 2026 PhyScore가 1554 videos × 7 generative models × 26 physics-relevant categories(dynamics·optics·thermodynamics)로 4D WM의 holistic quality(Video Quality·Physical Realism·Condition-Video Alignment·Temporal Consistency)와 anomaly localization 평가를 도입. Velox(4D geometry+appearance representation) + Ground4D(off-road feedforward 4D recon) + PhysForge(physics-grounded 3D assets via VLM physical architect) 동시 등장 — 어제 iWorld-Bench(interactive WM)에 이어 4D substrate의 평가 표준이 한 주 만에 완성형 자리."
+    },
+    {
+      "topic": "Diffusion alignment paradigm이 BT model 측 가정 깬 game-theoretic 정의로 이동",
+      "evidence": [
+        "2605.04494",
+        "2605.05204",
+        "2605.04647"
+      ],
+      "note": "Diff-NPO가 'Bradley-Terry preference model이 human preference 복잡성을 못 잡는다'는 진단으로 diffusion alignment를 game-theoretic Nash Equilibrium으로 reframe — current policy가 자기 자신과 play해 self-improvement. 같은 batch에 D-OPSD(on-policy self-distillation for step-distilled diffusion) + ReflectDrive-2(RL-aligned self-editing for discrete diffusion driving) — 'self-play / self-distillation / self-editing'이라는 self-referential alignment paradigm이 한 batch에 3 layer 누적."
+    },
+    {
+      "topic": "Generation 버킷이 26편으로 단독 1위 surge — TTS·flow matching·preference·outlier token 결 총집결",
+      "evidence": [
+        "2605.04461",
+        "2605.04590",
+        "2605.05206",
+        "2605.04412",
+        "2605.04494",
+        "2605.04566"
+      ],
+      "note": "Stream-T1(streaming video gen TTS) + From Diffusion to Rectified Flow(text-based seg paradigm 재정의) + Taming Outlier Tokens in DiT + DiLAST(structured 3D latents · 2D diffusion teacher · OOD style) + Diff-NPO + Open-Source Image Editing as Zero-Shot Vision Learners — Generation이 한 batch에 26편으로 다른 버킷의 1.5배. 어제 TOP3(FM·Gen·Eff)가 오늘 Gen 단독 1위로 굳어진 자리."
+    }
+  ],
+  "cooling": [
+    {
+      "topic": "Embodied AI 4편 — 어제 0편 dry-up에서 미세 회복했지만 substantive는 1편(PhysForge)뿐",
+      "evidence": [
+        "2605.05163",
+        "2605.05017"
+      ],
+      "note": "어제 0편에서 4편으로 미세 회복했지만 substantive paradigm 결은 PhysForge 한 편이 사실상 전부. 나머지 3편은 underwater AUV navigation·low-thrust rendezvous·privacy position paper로 specialized. Embodied 측 'paradigm-defining paper batch 부재'가 일주일 더 이어지는 자리."
+    },
+    {
+      "topic": "Autonomous Driving 13편 — 회복했지만 deployment-side 일색, paradigm 결 약함",
+      "evidence": [],
+      "note": "어제 3편 cold trough에서 13편으로 회복. 다만 substantive paradigm 결은 ReflectDrive-2(RL-aligned discrete diffusion driving) + Driver-WM(driver-centric latent WM) + CRAFT(counterfactual-to-interactive RL fine-tune) 정도. 나머지는 sensor fusion·scenario gen·mmWave beam mgmt 등 응용 결로 deployment optimization 라인이 dominant — Wayve/Tesla 등 industry-driven paradigm 흐름 약화 신호."
+    }
+  ],
+  "buckets_summary_note": "Generation 26 · Foundation Models 18 · Efficiency/Systems 18 · 3D/Scene 15 · Safety/Alignment 15 · Robot Learning 14 · Autonomous Driving 13 · Embodied AI 4. Generation 단독 1위(다른 버킷 1.5배) + 4-way mid(FM·Eff·3D·Safety) + RO 측 RL/AD substantive layer + Embodied 4편 dry-up 지속.",
+  "keywords_cv": [
+    [
+      "video",
+      53
+    ],
+    [
+      "diffusion",
+      38
+    ],
+    [
+      "transformer",
+      28
+    ],
+    [
+      "vision-language model",
+      23
+    ],
+    [
+      "distillation",
+      21
+    ],
+    [
+      "robust",
+      20
+    ],
+    [
+      "splatting",
+      16
+    ],
+    [
+      "gaussian splat",
+      15
+    ],
+    [
+      "alignment",
+      14
+    ],
+    [
+      "sparse",
+      12
+    ],
+    [
+      "vlm",
+      11
+    ],
+    [
+      "grounding",
+      11
+    ],
+    [
+      "4d",
+      10
+    ],
+    [
+      "world model",
+      9
+    ],
+    [
+      "autonomous driving",
+      7
+    ],
+    [
+      "manipulation",
+      6
+    ],
+    [
+      "reinforcement learning",
+      6
+    ],
+    [
+      "hallucination",
+      6
+    ],
+    [
+      "navigation",
+      4
+    ],
+    [
+      "vision-language-action",
+      3
+    ]
+  ],
+  "keywords_ro": [
+    [
+      "manipulation",
+      16
+    ],
+    [
+      "robust",
+      13
+    ],
+    [
+      "navigation",
+      12
+    ],
+    [
+      "reinforcement learning",
+      11
+    ],
+    [
+      "vla",
+      9
+    ],
+    [
+      "video",
+      8
+    ],
+    [
+      "diffusion",
+      6
+    ],
+    [
+      "world model",
+      6
+    ],
+    [
+      "humanoid",
+      5
+    ],
+    [
+      "tactile",
+      5
+    ],
+    [
+      "vision-language-action",
+      4
+    ],
+    [
+      "slam",
+      3
+    ],
+    [
+      "dexterous",
+      3
+    ],
+    [
+      "alignment",
+      3
+    ],
+    [
+      "imitation",
+      3
+    ],
+    [
+      "4d",
+      3
+    ],
+    [
+      "vlm",
+      2
+    ],
+    [
+      "sparse",
+      2
+    ],
+    [
+      "grounding",
+      2
+    ],
+    [
+      "preference",
+      2
+    ]
+  ],
+  "pastweek_total": {
+    "cv": 659,
+    "ro": 204
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "date": "2026-05-07",
+  "results": [
+    {
+      "benchmark": "LoViF 2026 PhyScore Challenge (1554 videos, 7 WM, 26 categories)",
+      "metric": "Holistic 4D WM QA: Video Quality + Physical Realism + Condition-Video Alignment + Temporal Consistency + anomaly localization",
+      "value_str": "first holistic 4D WM QA challenge with physics-relevant categories (dynamics/optics/thermodynamics)",
+      "paper": "https://arxiv.org/abs/2605.05187",
+      "paper_title": "LoViF 2026: First Challenge on Holistic Quality Assessment for 4D World Model (PhyScore)",
+      "note": "1,554 videos × 7 representative WM × 26 categories(physics dynamics·optics·thermodynamics + creative content). 3 tracks(text-2D, image-to-4D, video-to-4D). Composite eval = TimeStamp_IOU + SRCC/PLCC. Trained human annotation + auto QC. iWorld-Bench(interaction)와 LoViF(physics)의 4D WM eval 양축이 한 주 만에 정착."
+    },
+    {
+      "benchmark": "ConsisVLA-4D on robotic manipulation (multi-view 4D reasoning)",
+      "metric": "Manipulation success uplift via spatiotemporal consistency (CV-Aligner + CO-Fuser + CS-Thinker)",
+      "value_str": "+21.6% and +41.5% improvement (two evaluation regimes)",
+      "paper": "https://arxiv.org/abs/2605.05126",
+      "paper_title": "ConsisVLA-4D: Advancing Spatiotemporal Consistency in Efficient 3D-Perception and 4D-Reasoning for Robotic Manipulation",
+      "note": "VLA의 2D→action 측 spatial/temporal 한계(extra sensor + future-frame prediction이 instruction-grounded scene 측 alignment 결여)를 cross-view consistency + cross-object consistency + cross-scene consistency 3축으로 처방. Latent compact representation으로 'extra sensor 없이' 측 efficiency. From Pixels to Tokens(image-based latent action) line의 4D extension."
+    },
+    {
+      "benchmark": "ELVIS on DeepMind Control Suite (14 visual tasks)",
+      "metric": "Long-horizon visual MPC success vs TD-MPC2/DreamerV3",
+      "value_str": "SOTA across 14 tasks + zero-shot real-world transfer",
+      "paper": "https://arxiv.org/abs/2605.04709",
+      "paper_title": "ELVIS: Ensemble-Calibrated Latent Imagination for Long-Horizon Visual MPC",
+      "note": "Dreamer-style RSSM + GMM-MPPI(unimodal MPPI 대신 multimodal hypothesis 유지) + ensemble UCB λ-return으로 'compounding model error in deep imagination' 처방. Zero-shot real-world sand-spraying task에 transfer까지 보고. RoboAlign-R1(reward-aligned WM)·Dream-MPC(gradient-based latent MPC) 라인의 long-horizon visual control 측 결."
+    },
+    {
+      "benchmark": "Q2RL on D4RL + robomimic (manipulation, contact-rich, high-precision)",
+      "metric": "Offline-to-online success rate / time-to-convergence",
+      "value_str": "100% SR on pipe assembly+kitting · 3.75× improvement vs BC · 1-2 hours on-robot",
+      "paper": "https://arxiv.org/abs/2605.05172",
+      "paper_title": "When Life Gives You BC, Make Q-functions: Extracting Q-values from Behavior Cloning for On-Robot RL",
+      "note": "BC policy에서 Q-function을 'few interaction step'으로 추출 + Q-Gating으로 BC/RL action switching → 'distribution mismatch로 good action 잃는' offline→online 전환 측 표준 문제 처방. On-robot 1-2시간 학습으로 contact-rich manipulation 100% SR. From Pixels to Tokens(VLA latent action)·ConsisVLA-4D(4D consistency) 라인의 'offline-to-online' 측 결."
+    },
+    {
+      "benchmark": "PhysForge / PhysDB (150,000 assets · 4-tier physical annotation)",
+      "metric": "Physics-grounded 3D asset gen with VLM 'physical architect' planner",
+      "value_str": "first large-scale physically-annotated 3D asset dataset for embodied AI",
+      "paper": "https://arxiv.org/abs/2605.05163",
+      "paper_title": "PhysForge: Generating Physics-Grounded 3D Assets for Interactive Virtual World",
+      "note": "VLM이 hierarchical physical blueprint(material/functional/kinematic constraint) plan → physics-grounded diffusion model이 KineVoxel Injection(KVI)으로 geometry + kinematic param 동시 합성. Embodied AI 측 'static geometry → functional/kinematic asset' paradigm 전환의 첫 large-scale dataset 자리."
+    },
+    {
+      "benchmark": "Real-world dermatology MLLM benchmark-to-bedside gap",
+      "metric": "Top-3 diagnostic accuracy (real-world consultation cohort 5811 cases / 46405 images)",
+      "value_str": "public bench 26.55-42.25% → real-world image-only 1.50-13.35% (open) / 24.65% (GPT-4.1)",
+      "paper": "https://arxiv.org/abs/2605.04098",
+      "paper_title": "Are Multimodal LLMs Ready for Clinical Dermatology? A Real-World Evaluation",
+      "note": "어제 DALPHIN(pathology multicentric bench) 라인의 dermatology 측 결. Public bench 대비 real-world에서 top-3 acc가 GPT-4.1조차 ~42% → ~25%로 declined. 'benchmark performance가 real-world capability를 substantially overestimate'한다는 정량 결과 — clinical FM의 deployment readiness 측 negative result."
+    }
+  ],
+  "proposed_benchmarks": [
+    {
+      "name": "LoViF 2026 PhyScore",
+      "paper": "https://arxiv.org/abs/2605.05187",
+      "note": "1554 videos × 7 WM × 26 physics-relevant categories — 4D WM의 holistic quality + anomaly localization 표준 후보. iWorld-Bench와 함께 4D WM eval 양축."
+    },
+    {
+      "name": "PhysDB",
+      "paper": "https://arxiv.org/abs/2605.05163",
+      "note": "150K assets × 4-tier physical annotation — embodied AI interactive asset generation의 첫 large-scale data substrate."
+    }
+  ],
+  "note": "Thursday batch — 6 substantive bench reports. 가장 paradigm 측 의미 강한 결은 LoViF 2026 PhyScore(4D WM holistic quality 첫 표준) + ConsisVLA-4D(VLA 4D consistency uplift +21.6/+41.5%) + Q2RL(BC→on-robot RL 1-2h SR 100%). 어제 RobotWorldBench/iWorld-Bench(WM eval reward+interaction)에 이어 4D WM eval 표준이 한 주 만에 완성된 자리."
+}
