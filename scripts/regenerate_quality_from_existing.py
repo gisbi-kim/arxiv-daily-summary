@@ -61,8 +61,98 @@ def clean_text(s: str) -> str:
     return s.strip()
 
 
+def naturalize_ko(s: str) -> str:
+    """Reduce internal memo / translationese phrasing in old curated notes."""
+    s = clean_text(s)
+    replacements = [
+        ("둘이 한 batch에 표면화한 건", "두 논문이 같은 날 나온 건"),
+        ("한 batch에 표면화한 건", "같은 날 함께 나온 건"),
+        ("같은 batch에 표면화", "같은 날 같이 등장"),
+        ("동시 표면화", "같이 드러남"),
+        ("batch에 동시", "하루치 안에 같이"),
+        ("batch에", "하루치에"),
+        ("batch", "하루치"),
+        ("정조준하고", "직접 다루고"),
+        ("정조준한", "직접 다룬"),
+        ("정조준해요", "직접 다룹니다"),
+        ("정조준", "직접 다룸"),
+        ("표면화한", "드러난"),
+        ("표면화한 자리", "흐름이 드러난 대목"),
+        ("표면화한 모양", "드러난 모습"),
+        ("표면화했습니다", "드러났습니다"),
+        ("표면화했어요", "드러났어요"),
+        ("표면화", "드러남"),
+        ("실험적인 압력이 걸려 있습니다", "실험 쪽 비중이 더 큽니다"),
+        ("실험적 압력이 걸려 있습니다", "실험 쪽 비중이 더 큽니다"),
+        ("압력이 걸려 있습니다", "비중이 큽니다"),
+        ("paradigm-defining", "흐름을 바꿀 만한"),
+        ("World Model evaluation", "World Model 평가"),
+        ("World Model 평가이", "World Model 평가가"),
+        ("interactive bench", "interactive 벤치마크"),
+        ("systematic study", "체계적 비교"),
+        ("formulation-task correspondence", "문제 설정과 작업 종류의 대응 관계"),
+        ("formulation이", "문제 설정이"),
+        ("formulation", "문제 설정"),
+        ("처음 체계적인 정리됨", "처음 체계적으로 정리됨"),
+        ("단계 진입", "단계에 들어섬"),
+        ("단계에 들어섬 —", "단계에 들어섰고,"),
+        ("연구 흐름으로 전환", "연구 흐름으로 전환됐다는 것"),
+        ("처음 정량", "처음 정량화됐다는 것"),
+        ("current policy가 자기 자신과 play해 self-improvement", "현재 policy가 자기 자신과 경쟁하면서 개선되는 방식"),
+        ("current policy가 자기와 play해 self-improvement", "현재 policy가 자기 자신과 경쟁하면서 개선되는 방식"),
+        ("game-theoretic", "게임 이론 기반"),
+        ("reframe", "다시 정의"),
+        ("surge", "증가"),
+        ("formal하게", "명시적으로"),
+        ("formal", "명시적"),
+        ("systematic", "체계적인"),
+        ("paradigm 측", "연구 흐름상"),
+        ("paradigm", "연구 흐름"),
+        ("substrate 측", "기반 구조 쪽"),
+        ("substrate", "기반 구조"),
+        ("audit 대상", "점검해야 할 지점"),
+        ("audit 가치", "점검 가치"),
+        ("audit", "점검"),
+        ("layer", "층위"),
+        ("strict win", "분명히 이기는지"),
+        ("reference로", "기준점으로"),
+        ("reference가", "기준점이"),
+        ("community standard", "커뮤니티 표준"),
+        ("메타가 같은", "큰 문제의식이 같은"),
+        ("메타에서", "큰 문제의식에서"),
+        ("메타를", "큰 흐름을"),
+        ("메타", "큰 흐름"),
+        ("측 결이에요", "쪽에서 의미가 있습니다"),
+        ("측 결입니다", "쪽에서 의미가 있습니다"),
+        ("측 결", "쪽 관찰점"),
+        ("응용 결처럼", "응용 논문처럼"),
+        ("응용 결이지만", "응용 논문이지만"),
+        ("응용 결", "응용 논문"),
+        ("결 총집결", "논문이 몰림"),
+        ("BT model 측 가정 깬", "BT 모델의 가정을 넘어서려는"),
+        ("측 가정", "의 가정"),
+        ("측면 첫", "측면에서 첫"),
+        ("결이에요", "대목이에요"),
+        ("결입니다", "대목입니다"),
+        ("자리예요", "대목이에요"),
+        ("자리입니다", "대목입니다"),
+        ("자리.", "대목."),
+        ("SR", "success rate"),
+    ]
+    for old, new in replacements:
+        s = s.replace(old, new)
+    s = re.sub(r"\breference\b", "기준점", s)
+    s = re.sub(r"\bcommunity\b", "연구 커뮤니티", s)
+    s = re.sub(r"\baudit\b", "점검", s)
+    s = s.replace("연구 흐름으로 전환라는", "연구 흐름으로 전환됐다는")
+    s = s.replace("정량화됐다는 것라는", "정량화됐다는")
+    s = s.replace("평가이", "평가가")
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+
 def sentence_split(text: str) -> list[str]:
-    text = clean_text(text)
+    text = naturalize_ko(text)
     if not text:
         return []
     parts = re.split(r"(?<=[.!?。])\s+|(?<=요\.)\s+|(?<=다\.)\s+|(?<=임\.)\s+", text)
@@ -102,15 +192,19 @@ def parse_published_post(date: str) -> dict[str, list[dict]]:
     path = ROOT / "posts" / f"{date}.html"
     raw = path.read_text(encoding="utf-8")
     if '<div class="paper">' not in raw:
-        try:
-            raw = subprocess.check_output(
-                ["git", "show", f"HEAD:posts/{date}.html"],
-                cwd=ROOT,
-                text=True,
-                encoding="utf-8",
-            )
-        except Exception:
-            pass
+        for ref in ["HEAD", "HEAD~1", "HEAD~2", "HEAD~3"]:
+            try:
+                candidate = subprocess.check_output(
+                    ["git", "show", f"{ref}:posts/{date}.html"],
+                    cwd=ROOT,
+                    text=True,
+                    encoding="utf-8",
+                )
+            except Exception:
+                continue
+            if '<div class="paper">' in candidate:
+                raw = candidate
+                break
     result = {b: [] for b in BUCKETS}
     for i, bucket in enumerate(BUCKETS):
         marker = re.search(rf"<h4[^>]*>(?:(?!</h4>).)*{re.escape(bucket)}(?:(?!</h4>).)*</h4>", raw, re.S)
@@ -254,7 +348,7 @@ def appendix_bullets(p: dict, bucket: str, priority: str) -> list[str]:
     title = p.get("title", "")
     issue = sentence_with(
         text,
-        ["문제", "한계", "fail", "gap", "mismatch", "bottleneck", "부재", "진단", "shift", "bias"],
+        ["문제", "한계", "fail", "gap", "mismatch", "bottleneck", "부재", "진단", "shift", "bias", "직접 다룸", "다룬"],
         0,
     )
     method = sentence_with(
@@ -274,22 +368,22 @@ def appendix_bullets(p: dict, bucket: str, priority: str) -> list[str]:
         if any(k in low for k in ["benchmark", "dataset", "leaderboard"]):
             method = "저자들은 failure mode가 드러나도록 데이터 구성, 평가 프로토콜, 비교 축을 새로 잡았습니다."
         elif any(k in low for k in ["4d", "3d", "gaussian", "splat", "reconstruction"]):
-            method = "저자들은 3D/4D 표현, geometry prior, multi-view signal을 결합해 기존 reconstruction pipeline을 보강했습니다."
+            method = "저자들은 3D/4D 표현, geometry prior, multi-view signal을 결합해 기존 재구성 과정을 보강했습니다."
         elif any(k in low for k in ["vla", "robot", "manipulation", "policy", "control"]):
             method = "저자들은 policy가 바로 action을 내기보다 latent/action/reward 구조를 분리해 학습과 실행을 안정화합니다."
         elif any(k in low for k in ["diffusion", "flow", "generation", "video"]):
-            method = "저자들은 diffusion·flow·generation 과정의 조건부 제어, distillation, reward feedback 중 하나를 새 조정 축으로 넣었습니다."
+            method = "저자들은 diffusion·flow·generation 과정에 조건부 제어, distillation, reward feedback 중 하나를 새 조정 축으로 넣었습니다."
         else:
-            method = "저자들은 기존 pipeline의 병목을 분리하고, 중간 표현이나 평가축을 추가해 그 병목을 직접 조정합니다."
+            method = "저자들은 기존 처리 과정의 병목을 분리하고, 중간 표현이나 평가축을 추가해 그 병목을 직접 조정합니다."
     if meaning in {issue, method} and bucket:
-        meaning = f"{bucket} 흐름 안에서는 단독 성능보다 오늘 배치의 반복 신호를 보강하는 evidence로 읽는 게 맞습니다."
+        meaning = f"{bucket} 흐름 안에서는 단독 성능보다 오늘 하루치 논문에서 반복해서 보이는 신호를 보강하는 근거로 읽는 게 맞습니다."
     bullets = [
         f"문제: {issue}",
         f"방법: {method}",
         f"의미: {meaning}",
     ]
     if priority == "Skim-only":
-        bullets.append("주의: ROI에는 걸리지만 오늘 핵심 클러스터와의 연결은 약해서 우선순위는 낮게 둡니다.")
+        bullets.append("주의: ROI에는 걸리지만 오늘 핵심 묶음과의 연결은 약해서 우선순위는 낮게 둡니다.")
     elif any(k in f"{title} {text}".lower() for k in ["benchmark", "dataset", "sota", "state-of-the-art"]):
         bullets.append("주의: 데이터 split, baseline 강도, metric 정의를 본문에서 확인하기 전까지 일반화 claim은 보류합니다.")
     else:
@@ -328,9 +422,10 @@ def render_cluster_table(trends: dict, insights: dict, all_papers: dict[str, dic
         note = item.get("note") or item.get("claim") or ""
         conf = "High" if len(ids) >= 2 else "Medium"
         lab = "평가축·baseline·failure case를 먼저 표로 고정"
+        topic = naturalize_ko(item.get("topic", ""))
         rows.append(
             "<tr>"
-            f"<td><strong>{esc(item.get('topic',''))}</strong></td>"
+            f"<td><strong>{esc(topic)}</strong></td>"
             f"<td>{reps}</td>"
             f"<td>{esc(first_sentence(note, 260))}</td>"
             f"<td><span class='conf {conf}'>{conf}</span></td>"
@@ -349,17 +444,17 @@ def render_trends(trends: dict) -> str:
     cool = trends.get("cooling", [])
     p1 = "오늘 단일 배치에서는 " + ", ".join(f"{k} {v.get('total',0)}편" for k, v in top_today) + "이 제일 두꺼웠습니다. "
     if hot:
-        p1 += f"근데 숫자보다 중요한 건 {hot[0]['topic']} 쪽이에요. {first_sentence(hot[0].get('note',''), 360)}"
+        p1 += f"근데 숫자보다 중요한 건 {naturalize_ko(hot[0]['topic'])} 쪽이에요. {first_sentence(hot[0].get('note',''), 360)}"
     p2 = "주간 rolling window로 보면 "
     if past:
         top_past = sorted(past.items(), key=lambda kv: kv[1].get("total", 0), reverse=True)[:3]
         p2 += ", ".join(f"{k} {v.get('total',0)}편" + (f" ({delta.get(k)})" if delta.get(k) else "") for k, v in top_past)
         p2 += "이 상위권입니다. "
     if cool:
-        p2 += f"반대로 조용한 쪽은 {cool[0]['topic']}인데, 이건 공백이라기보다 다음 배치에서 튀어오를 수 있는 진폭으로 보는 게 맞겠습니다."
-    p3 = "오늘 논문들을 그 맥락 위에 놓으면, 개별 SOTA보다 평가 프로토콜·latent substrate·배포 안정성처럼 실험판 자체를 다시 짜는 논문들이 더 중요해 보여요. "
+        p2 += f"반대로 조용한 쪽은 {naturalize_ko(cool[0]['topic'])}인데, 이건 완전히 비었다기보다 다음 묶음에서 다시 올라올 수 있는 흔들림으로 보는 게 맞겠습니다."
+    p3 = "오늘 논문들을 그 맥락 위에 놓으면, 개별 SOTA보다 평가 프로토콜·latent 기반 구조·배포 안정성처럼 실험판 자체를 다시 짜는 논문들이 더 중요해 보여요. "
     if len(hot) > 1:
-        p3 += f"특히 {hot[1]['topic']} 흐름은 후속 2~4주 동안 reference로 남을 가능성이 큽니다."
+        p3 += f"특히 {naturalize_ko(hot[1]['topic'])} 흐름은 후속 2~4주 동안 기준점으로 남을 가능성이 큽니다."
     return f"<p>{esc(p1)}</p><p>{esc(p2)}</p><p>{esc(p3)}</p>"
 
 
@@ -369,7 +464,7 @@ def render_cv_ro(trends: dict) -> str:
     common = [x for x, _ in cv if x in {y for y, _ in ro}]
     cv_only = [x for x, _ in cv if x not in common][:3]
     ro_only = [x for x, _ in ro if x not in common][:3]
-    p = "CV와 RO를 나눠 보면, CV는 여전히 video·diffusion·VLM 쪽 어휘가 두껍고 RO는 manipulation·navigation·robustness 쪽으로 더 실험적인 압력이 걸려 있습니다. "
+    p = "CV와 RO를 나눠 보면, CV는 여전히 video·diffusion·VLM 쪽 어휘가 두껍고 RO는 manipulation·navigation·robustness처럼 실제 로봇 실험과 배포에 가까운 단어가 더 자주 보입니다. "
     p += "재밌는 건 공통 키워드라도 CV에서는 표현·생성·평가 문제로, RO에서는 policy·control·deployment 문제로 번역된다는 점이에요."
     rows = [
         f"<li><strong>공통으로 뜨는 단어:</strong> {esc(', '.join(common) or 'robust / video 계열')}</li>",
@@ -387,14 +482,14 @@ def render_insights(insights: dict, all_papers: dict[str, dict]) -> str:
         for u in obj.get("papers", []):
             aid = u.rstrip("/").split("/")[-1]
             links.append(link(aid, paper_label(aid, all_papers)))
-        cards.append(f"<div class='card'><h3>{esc(obj.get('title',''))}</h3><p>{esc(obj.get('claim',''))}</p><p class='small'>{' · '.join(links)}</p></div>")
+        cards.append(f"<div class='card'><h3>{esc(naturalize_ko(obj.get('title','')))}</h3><p>{esc(naturalize_ko(obj.get('claim','')))}</p><p class='small'>{' · '.join(links)}</p></div>")
     return "\n".join(cards)
 
 
 def render_topics(insights: dict) -> str:
     cards = []
     for obj in insights.get("research_topics", []):
-        cards.append(f"<div class='card topic'><h3>{esc(obj.get('title',''))}</h3><p>{esc(obj.get('claim',''))}</p></div>")
+        cards.append(f"<div class='card topic'><h3>{esc(naturalize_ko(obj.get('title','')))}</h3><p>{esc(naturalize_ko(obj.get('claim','')))}</p></div>")
     return "\n".join(cards)
 
 
@@ -405,9 +500,9 @@ def render_benchmarks(benchmarks: dict) -> str:
         aid = paper.rstrip("/").split("/")[-1] if paper else ""
         rows.append(
             "<tr>"
-            f"<td>{esc(r.get('benchmark',''))}</td>"
-            f"<td>{esc(r.get('metric') or r.get('value_str',''))}</td>"
-            f"<td>{esc(r.get('value') or r.get('value_str',''))}</td>"
+            f"<td>{esc(naturalize_ko(r.get('benchmark','')))}</td>"
+            f"<td>{esc(naturalize_ko(r.get('metric') or r.get('value_str','')))}</td>"
+            f"<td>{esc(naturalize_ko(r.get('value') or r.get('value_str','')))}</td>"
             f"<td>{link(aid, r.get('paper_title') or aid) if aid else ''}</td>"
             "</tr>"
         )
@@ -432,7 +527,7 @@ def render_appendix(papers_by_bucket: dict[str, list[dict]], important_ids: set[
         papers = papers_by_bucket.get(b, [])
         chunks.append(f"<details><summary>{EMOJI[b]} {esc(b)} · {len(papers)}편</summary>")
         if not papers:
-            chunks.append("<p class='small'>오늘 batch에 ROI 일치 결이 없습니다.</p>")
+            chunks.append("<p class='small'>오늘 하루치에는 ROI와 맞는 논문이 없습니다.</p>")
         for p in papers:
             pr = priority_for(p, b, important_ids)
             tag = tag_for(p, b)
@@ -473,9 +568,18 @@ def page(date: str) -> str:
     total = sum(len(v) for v in papers_by_bucket.values())
     top_bucket = max(trends.get("buckets", {"": {"total": 0}}).items(), key=lambda kv: kv[1].get("total", 0))[0]
     first_insight = (insights.get("insights") or [{}])[0]
+    thesis_point = naturalize_ko(first_insight.get("title", "평가축과 배포 조건이 동시에 바뀌는 흐름"))
+    if thesis_point.endswith("으로 전환"):
+        thesis_phrase = thesis_point[: -len("으로 전환")] + "으로 전환됐다는 점이에요"
+    elif thesis_point.endswith("다는 것"):
+        thesis_phrase = thesis_point[: -len(" 것")] + " 점이에요"
+    elif thesis_point.endswith("것"):
+        thesis_phrase = thesis_point + "이라는 점이에요"
+    else:
+        thesis_phrase = thesis_point + "라는 점이에요"
     thesis = (
-        f"{date} 배치는 {top_bucket}가 가장 두껍지만, 진짜 포인트는 "
-        f"{first_insight.get('title', '평가축과 배포 조건이 동시에 바뀌는 흐름')}입니다. "
+        f"{date} 배치에서 가장 두꺼운 버킷은 {top_bucket}입니다. 그래도 진짜 포인트는 "
+        f"{thesis_phrase}. "
         "기존 리포트에 실렸던 논문 집합을 고정한 채 다시 읽어보면, 개별 논문을 길게 나열하기보다 "
         "어떤 클러스터가 다음 실험 설계를 바꾸는지 먼저 보는 편이 훨씬 선명합니다."
     )
