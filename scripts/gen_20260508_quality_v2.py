@@ -55,6 +55,186 @@ def short_abs(p, n=1, limit=260) -> str:
     return out
 
 
+def priority_for(aid: str, bucket: str, p) -> str:
+    if aid in {"2605.06667", "2605.05714", "2605.05848", "2605.05810", "2605.05328"}:
+        return "Must-read"
+    text = (p.get("title", "") + " " + p.get("abstract", "")).lower()
+    strong = [
+        "benchmark", "dataset", "world model", "vla", "vision-language-action",
+        "calibration", "uncertainty", "real-time", "routing", "navigation",
+        "gaussian", "diffusion", "safety", "ood", "backdoor"
+    ]
+    if sum(k in text for k in strong) >= 2:
+        return "Read"
+    if bucket in {"Generation", "Efficiency/Systems", "Safety/Alignment"} and sum(k in text for k in strong) >= 1:
+        return "Read"
+    return "Skim-only"
+
+
+def tag_for(bucket: str, p) -> str:
+    text = (p.get("title", "") + " " + p.get("abstract", "")).lower()
+    tags = []
+    if any(k in text for k in ["benchmark", "dataset", "framework", "infrastructure", "toolkit", "platform"]):
+        tags.append("인프라")
+    if any(k in text for k in ["failure", "risk", "safety", "uncertainty", "calibration", "ood", "adversarial", "backdoor", "robust"]):
+        tags.append("경고신호")
+    if any(k in text for k in ["new", "reformulat", "towards", "rethinking", "what makes", "when to trust", "why"]):
+        tags.append("문제정의")
+    if any(k in text for k in ["adaptive", "routing", "decomposition", "distillation", "flow matching", "diffusion", "experts", "relational", "token"]):
+        tags.append("방법전환")
+    if not tags:
+        if bucket in {"3D/Scene", "Embodied AI"}:
+            tags.append("인프라")
+        else:
+            tags.append("방법전환")
+    return " ".join(f"[{t}]" for t in tags[:2])
+
+
+def joined_text(p) -> str:
+    return (p.get("title", "") + " " + p.get("abstract", "")).lower()
+
+
+def is_video_generation(text: str) -> bool:
+    return any(
+        k in text
+        for k in [
+            "video generation",
+            "video-to-video",
+            "image-to-video",
+            "text-to-video",
+            "i2v",
+            "camera-controlled",
+            "video diffusion",
+            "long video generation",
+        ]
+    )
+
+
+def is_3d_scene_text(text: str) -> bool:
+    return any(
+        k in text
+        for k in [
+            "3d",
+            "gaussian",
+            "splat",
+            "lidar",
+            "cad",
+            "reconstruction",
+            "visual localisation",
+            "visual localization",
+            "novel view",
+            "terrain traversability",
+        ]
+    )
+
+
+def issue_bullet(bucket: str, p) -> str:
+    text = joined_text(p)
+    if "vla" in text or "vision-language-action" in text:
+        return "VLA가 unseen scene/object나 robot control task에서 일반화·실행 안정성을 잃는 병목을 겨냥."
+    if is_video_generation(text):
+        return "video generation이 quality 중심 평가에서 camera/motion 제어와 긴 시퀀스 안정성으로 넘어가는 병목을 겨냥."
+    if bucket == "3D/Scene" and is_3d_scene_text(text):
+        return "3D scene 표현이 sparse view, semantic consistency, geometry fidelity, deployment shift에서 흔들리는 문제를 겨냥."
+    if "uncertainty" in text or "calibration" in text:
+        return "distribution shift에서 모델 confidence가 실제 위험도를 제대로 반영하지 못하는 문제를 겨냥."
+    if "benchmark" in text:
+        return "기존 평가가 특정 failure mode나 도메인 난점을 충분히 분리하지 못하는 공백을 겨냥."
+    if "dataset" in text:
+        return "해당 도메인에서 real-world·multi-modal·cross-view 데이터가 부족한 공백을 메우려는 논문."
+    if "navigation" in text or "objectnav" in text or "vln" in text:
+        return "navigation을 step-by-step reactive policy로만 풀 때 생기는 누적 오류와 ambiguity를 겨냥."
+    if "diffusion" in text or "flow matching" in text:
+        return "생성 모델의 sampling 비용, 제어성, few-step 품질 저하 중 하나를 핵심 병목으로 잡음."
+    if "medical" in text or "clinical" in text or "x-ray" in text or "retinal" in text:
+        return "의료 VLM/vision 모델이 benchmark와 실제 임상 조건 사이에서 깨지는 지점을 겨냥."
+    if is_3d_scene_text(text):
+        return "3D scene 표현이나 multi-view sensing이 sparse capture와 실제 배치 조건에서 흔들리는 문제를 겨냥."
+    if bucket == "Efficiency/Systems":
+        return "모델 성능보다 latency, memory, token budget, edge deployment가 병목이 되는 구간을 겨냥."
+    if bucket == "Safety/Alignment":
+        return "모델이 배포 조건에서 공격·분포 변화·misalignment에 취약해지는 지점을 겨냥."
+    return f"{bucket} 버킷 안에서 기존 접근이 놓친 구체적 실패 조건이나 응용 공백을 겨냥."
+
+
+def method_bullet(p) -> str:
+    text = joined_text(p)
+    if "triadic" in text or "relational" in text:
+        return "object·hand·task 같은 관계 구조를 중간 표현으로 꺼내 action이나 reasoning에 직접 연결."
+    if "expert" in text or "routing" in text or "router" in text:
+        return "고정 압축/단일 adapter 대신 expert나 router가 입력·query별로 계산 경로를 나누게 함."
+    if "camera" in text and "control" in text:
+        return "pose/depth/camera 조건을 생성 과정에 넣어 frame별 시점과 motion을 함께 제어."
+    if is_3d_scene_text(text):
+        return "multi-view geometry나 3D 표현에 memory, semantic feature, surface constraint, novel-view synthesis 요소를 결합."
+    if "uncertainty" in text or "calibration" in text:
+        return "feature/query density나 uncertainty signal을 이용해 confidence와 regression 신뢰도를 다시 보정."
+    if "benchmark" in text:
+        return "특정 failure mode를 드러내는 질문/프로토콜/데이터 분할을 새로 구성해 모델을 압박."
+    if "dataset" in text:
+        return "새 센서 조합·도메인·viewpoint를 포함한 데이터셋을 만들어 기존 평가 범위를 넓힘."
+    if "diffusion" in text or "flow matching" in text or "bridge" in text:
+        return "diffusion/bridge/flow 계열 생성 과정을 조건부 제어, distillation, sampling 개선 쪽으로 재구성."
+    if "navigation" in text or "map" in text:
+        return "egocentric step policy 대신 map, factor graph, goal label, comparative judgment를 planning에 사용."
+    if "distillation" in text:
+        return "teacher signal이나 self-distillation으로 큰 모델 지식을 더 가볍거나 안정적인 표현에 옮김."
+    if "low-rank" in text or "quantization" in text or "compression" in text:
+        return "low-rank, quantization, compression-friendly 설계로 계산량과 메모리 병목을 줄임."
+    return "기존 pipeline의 한 단계를 분리하거나 새 intermediate representation을 넣어 병목을 직접 조정."
+
+
+def meaning_bullet(bucket: str, p) -> str:
+    text = joined_text(p)
+    if "vla" in text or "vision-language-action" in text:
+        return "VLA 논점을 모델 크기 경쟁에서 구조·실행 신뢰도·fine-tuning recipe 비교로 옮기는 evidence."
+    if is_video_generation(text):
+        return "video generation cluster에서 controllability와 latency를 새 lab action으로 끌어올리는 논문."
+    if bucket == "3D/Scene" and is_3d_scene_text(text):
+        return "3D/Scene 흐름에서 표현 품질보다 실제 capture 조건과 downstream 사용성을 같이 봐야 한다는 근거."
+    if "uncertainty" in text or "calibration" in text or "ood" in text:
+        return "reliability-aware deployment cluster의 근거로, 안전을 후처리가 아니라 pipeline 설계 문제로 만든다."
+    if "benchmark" in text:
+        return "당장 방법보다 평가축 자체를 넓히는 가치가 커서 후속 논문들의 reference가 될 수 있음."
+    if "dataset" in text:
+        return "새 데이터 substrate를 제공하므로 당장 SOTA보다 다음 실험의 출발점으로 의미가 큼."
+    if bucket == "Generation":
+        return "Generation 버킷의 양적 증가를 실제 제어성·효율성·world-model substrate로 해석하게 해주는 근거."
+    if bucket == "Efficiency/Systems":
+        return "큰 모델을 실제로 굴릴 때 필요한 routing·compression·edge execution 논점에 직접 연결."
+    if bucket == "Safety/Alignment":
+        return "성능 향상보다 failure mode 노출과 deployment audit 측 가치가 더 큰 후보."
+    if bucket == "Embodied AI":
+        return "navigation/embodied agent를 단순 policy가 아니라 map·memory·interaction 문제로 재정의하는 데 기여."
+    return f"{bucket} 흐름 안에서 대표 논문보다는 보조 evidence로 읽는 것이 적절."
+
+
+def caution_bullet(p, priority: str) -> str:
+    text = (p.get("title", "") + " " + p.get("abstract", "")).lower()
+    if "benchmark" in text or "dataset" in text:
+        return "주의: 데이터 구성, split, baseline coverage를 본문에서 확인 전까지 일반화 claim은 보류."
+    if "real-time" in text or "edge" in text or "latency" in text:
+        return "주의: latency·memory 수치가 실제 deployment 환경에서 측정됐는지 확인 필요."
+    if "sota" in text or "state-of-the-art" in text:
+        return "주의: SOTA claim은 metric 선택과 baseline 강도에 민감하므로 표를 직접 확인해야 함."
+    if priority == "Skim-only":
+        return "주의: ROI에는 걸리지만 오늘 핵심 클러스터와의 연결은 약해 우선순위는 낮음."
+    return "주의: abstract 기반 판단이므로 핵심 ablation과 failure case는 본문 확인 필요."
+
+
+def appendix_bullets(p, bucket: str) -> list[str]:
+    pr = priority_for(p["arxiv_id"], bucket, p)
+    bullets = [
+        f"문제: {issue_bullet(bucket, p)}",
+        f"방법: {method_bullet(p)}",
+        f"의미: {meaning_bullet(bucket, p)}",
+    ]
+    # Add one selective evidence/caution/priority bullet to keep 4 bullets per paper.
+    bullets.append(caution_bullet(p, pr))
+    bullets.append(f"우선순위: {pr}.")
+    return bullets
+
+
 def badge(b: str) -> str:
     cls = {"CV": "cv", "RO": "ro", "CV/RO": "cvro"}.get(b, "x")
     return f'<span class="badge {cls}">{esc(b)}</span>'
@@ -167,7 +347,7 @@ h1{font-size:28px;margin:0 0 6px;color:#0d1117}h2{font-size:21px;margin:40px 0 1
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.paper-card{border-left:4px solid #0ea5e9}.risk{border-left:4px solid #ef4444;background:#fef2f2}.topic{border-left:4px solid #22c55e;background:#f0fdf4}.skim{border-left:4px solid #94a3b8;background:#f8fafc}
 .bucket-line{font-family:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:10px 14px;font-size:13px;white-space:pre;overflow-x:auto}
 .badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;font-family:ui-monospace,monospace}.cv{background:#ddf4ff;color:#0550ae;border:1px solid #54aeff}.ro{background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c}.cvro{background:#ffe5d9;color:#9a3412;border:1px solid #f59e0b}.x{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db}
-details{border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;margin:10px 0;background:#fff}summary{cursor:pointer;font-weight:700;color:#334155}.mini-paper{padding:9px 0;border-top:1px solid #edf2f7}.mini-paper:first-of-type{border-top:none}.why{display:block;color:#475569;font-size:13.5px;margin-top:4px}
+details{border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;margin:10px 0;background:#fff}summary{cursor:pointer;font-weight:700;color:#334155}.mini-paper{padding:12px 0;border-top:1px solid #edf2f7}.mini-paper:first-of-type{border-top:none}.mini-paper ul{margin:7px 0 0;padding-left:20px}.mini-paper li{margin:3px 0;line-height:1.55}.why{display:block;color:#475569;font-size:13.5px;margin-top:4px}
 footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:12px;color:#656d76;text-align:center}
 @media(max-width:760px){.container{padding:24px 20px}.grid{grid-template-columns:1fr}.cluster-table{font-size:12.5px}}
 """
@@ -199,9 +379,13 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:1
         rows = [f"<details><summary>{EMOJI.get(b,'')} {esc(b)} · {info['total']}편</summary>"]
         for p in info["papers"]:
             aid = p["arxiv_id"]
+            pr = priority_for(aid, b, p)
+            tag = tag_for(b, p)
+            bullets = "".join(f"<li>{esc(x)}</li>" for x in appendix_bullets(p, b))
             rows.append(
-                f"<div class='mini-paper'>{link(aid, p['title'])} {badge(p.get('badge','?'))}"
-                f"<span class='why'>{esc(authors(p))} · {esc(short_abs(p, 1, 220))}</span></div>"
+                f"<div class='mini-paper'><strong>{link(aid, p['title'])}</strong> {badge(p.get('badge','?'))} "
+                f"<span class='tag'>{esc(tag)} [{esc(pr)}]</span>"
+                f"<span class='why'>{esc(authors(p))}</span><ul>{bullets}</ul></div>"
             )
         rows.append("</details>")
         appendix.append("\n".join(rows))
