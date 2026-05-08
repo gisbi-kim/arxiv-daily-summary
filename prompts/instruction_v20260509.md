@@ -214,28 +214,167 @@ python scripts/fetch_arxiv.py new cs.CV | Set-Content -Encoding UTF8 out/cv_new.
 
 ---
 
+## [8.5. 리포트 품질 업그레이드 — 판단의 위계]
+
+좋은 리포트의 목적은 "많이 요약"이 아니라 "무엇이 중요한지 판단의 위계를 보여주는 것"이다.
+따라서 daily/weekly 모두 아래 품질 규칙을 따른다.
+
+### 8.5.1 오늘의 thesis
+
+리포트 상단에 1~2문장짜리 thesis를 둔다.
+
+```text
+오늘의 결론:
+이번 배치는 video generation이 "생성 품질"에서 "camera/motion controllability"로 넘어가는 날이고,
+VLA는 모델 크기보다 내부 구조를 노출하는 쪽으로 이동했다.
+```
+
+thesis는 단순 요약이 아니라 editorial judgment여야 한다.
+- "오늘 뭐가 제일 중요했나"
+- "어제/지난주와 뭐가 달라졌나"
+- "우리 랩이 어디를 봐야 하나"
+
+를 한 번에 잡아준다.
+
+### 8.5.2 버킷보다 클러스터 우선
+
+8개 ROI 버킷은 저장/분류용이다. 해석은 "오늘의 클러스터"를 먼저 제시한다.
+
+예:
+1. Controllable video generation
+2. VLA structure exposure
+3. Reliability-aware deployment
+4. Medical/clinical VLM failure modes
+5. 3D/robotics calibration under shift
+
+각 클러스터는 최소 2편 이상의 논문으로 evidence를 둔다. 단발 논문이면 cluster가 아니라 "관찰 중"으로 표시한다.
+
+### 8.5.3 대표 클러스터 표
+
+Daily 상단 또는 주간 동향 직후에 아래 표를 넣는다.
+
+```text
+| Cluster | 대표 논문 | 왜 중요? | Confidence | Lab action |
+|---|---|---|---|---|
+| VLA structure | TriRelVLA, VLA-GSE | VLA 일반화를 relation/expert 구조로 재정의 | High | LIBERO/RoboCasa ablation |
+| Video control | ActCam, RealCam | camera+motion 제어 평가축 부상 | Medium | controllability metric 설계 |
+```
+
+표는 독자가 30초 안에 "읽을 것 / 실험할 것 / 보류할 것"을 나누게 해주는 장치다.
+
+### 8.5.4 중요도 태그
+
+대표 논문과 클러스터에는 아래 태그 중 하나 이상을 붙인다.
+
+```text
+[문제정의] 새 평가축/문제 자체를 만든 논문
+[방법전환] 기존 병목을 다른 formulation으로 푼 논문
+[인프라] dataset/tool/framework/benchmark를 만든 논문
+[경고신호] negative result, failure mode, safety/deployment risk를 드러낸 논문
+```
+
+예:
+- CXR-ContraBench → `[경고신호]`
+- VideoRouter → `[방법전환] [인프라]`
+- From Pixels to Tokens → `[방법전환]`
+- GA3T → `[인프라]`
+
+### 8.5.5 Confidence와 evidence strength
+
+인사이트마다 confidence를 붙인다.
+
+```text
+Confidence: High
+근거: 같은 주제 논문 5편 이상 + 서로 다른 기관 + benchmark/dataset 동반
+
+Confidence: Medium
+근거: 오늘 2~4편 동시 등장했지만 아직 abstract 기반
+
+Confidence: Low
+근거: 흥미로운 단발 논문, 후속 관찰 필요
+```
+
+강한 주장과 약한 추측을 같은 문체로 쓰지 않는다.
+
+### 8.5.6 어제/지난주와 달라진 점
+
+Daily에는 가능하면 "어제/지난주와 달라진 점"을 짧게 넣는다.
+
+```text
+🧭 어제와 달라진 점
+- 어제는 VLA latent substrate였고, 오늘은 VLA execution/reliability로 이동.
+- 지난주에는 4D world model 평가가 중심이었고, 오늘은 controllable video generation으로 확장.
+```
+
+이 섹션은 매일 보는 독자에게 시간축을 제공한다.
+
+### 8.5.7 Lab action은 1주 실행 protocol까지
+
+추천 연구주제는 아이디어 수준에서 끝내지 않는다. 각 주제마다 가능한 경우 아래를 붙인다.
+
+```text
+실행 1주차:
+- 대상 논문/코드 3편 clone
+- 공통 benchmark: LIBERO + RoboCasa
+- 비교축: success rate / latency / failure taxonomy
+- 실패해도 남는 결과: negative result 또는 workshop short
+```
+
+좋은 연구주제는 "월요일에 학생이 바로 시작할 수 있는 형태"여야 한다.
+
+### 8.5.8 리스크 taxonomy
+
+리스크·한계 필터는 느낌으로 쓰지 말고 유형을 붙인다.
+
+```text
+[Metric risk] 수치가 실제 능력을 대표하지 않음
+[Dataset risk] 분포가 좁거나 cherry-pick 가능
+[Baseline risk] 비교군이 약함
+[Deployment risk] latency/cost/safety 누락
+[Claim risk] abstract 표현이 본문 증거보다 강함
+```
+
+### 8.5.9 Skim-only 후보
+
+좋은 브리핑은 무엇을 읽을지도 말하지만, 무엇을 굳이 깊게 읽지 않아도 되는지도 알려준다.
+
+```text
+🧊 Skim-only 후보
+- ROI에는 걸리지만 incremental한 논문
+- 응용 도메인만 바뀐 논문
+- benchmark/claim 확인 전까지 보류할 논문
+```
+
+표현은 공격적으로 하지 않는다. "읽지 말라"가 아니라 "깊게 읽기 전 우선순위를 낮춘다"는 의미다.
+
+---
+
 ## [9. 논문 요약 품질 계층]
 
 하루에 100편 이상 잡히는 날이 많으므로 모든 논문을 같은 깊이로 쓰지 않는다.
 
-### Tier A — must-read 1~2편
+### Tier A — 판을 바꾸는 논문 3~5편
 깊게 쓴다.
 - 핵심 주장
 - 방법의 핵심 수식/아키텍처 또는 직관
 - 핵심 실험/벤치마크
 - 약점·한계
 - 우리 랩 파이프라인 영향
+- 중요도 태그 `[문제정의] [방법전환] [인프라] [경고신호]`
+- Confidence와 evidence strength
 
 ### Tier B — 인사이트 대표 논문 8~12편
 3문장 이내로 쓴다.
 - 문제
 - 기존 방식과 차이
 - 왜 오늘/이번주 흐름에서 중요한지
+- 어떤 클러스터의 evidence인지
 
 ### Tier C — 나머지 ROI 논문
 abstract 기반 짧은 요약.
 - 초록에 없는 수치나 코드 공개 여부를 지어내지 않는다.
 - 불확실하면 "abstract 기준", "본문 확인 필요"라고 명시한다.
+- peripheral하면 Skim-only 후보로 표시 가능
 
 ---
 
@@ -245,19 +384,23 @@ abstract 기반 짧은 요약.
 
 1. 상단 홈 버튼
 2. 메타 정보
-3. 🎧 오디오 브리핑 — 있을 때만
-4. 🔭 주간 동향
-5. 📐 CV vs RO 대비
-6. 💡 오늘의 인사이트
-7. 🔬 추천 연구주제
-8. 🧭 예측 회고 루프 — 월요일만
-9. 📊 오늘의 버킷 현황
-10. 📈 벤치마크 SOTA 추이 — 있으면
-11. 🔀 크로스오버 페어 — 있으면
-12. 🌟 오늘의 must-read
-13. ⚠️ 리스크·한계 필터 — 있으면
-14. 📄 논문별 요약
-15. 🔗 참고 링크 + 하단 홈 버튼
+3. 오늘의 thesis — 1~2문장 editorial conclusion
+4. 🎧 오디오 브리핑 — 있을 때만
+5. 🔭 주간 동향
+6. 🧭 어제/지난주와 달라진 점
+7. 🧩 오늘의 클러스터 + 대표 클러스터 표
+8. 📐 CV vs RO 대비
+9. 💡 오늘의 인사이트 — 각 항목에 Confidence 포함
+10. 🔬 추천 연구주제 — 각 항목에 1주 실행 protocol 포함
+11. 🧭 예측 회고 루프 — 월요일만
+12. 📊 오늘의 버킷 현황
+13. 📈 벤치마크 SOTA 추이 — 있으면
+14. 🔀 크로스오버 페어 — 있으면
+15. 🌟 오늘의 must-read — Tier A 3~5편 중 1~2편 deep dive
+16. ⚠️ 리스크·한계 필터 — risk taxonomy 태그 포함
+17. 🧊 Skim-only 후보 — 있으면
+18. 📄 논문별 요약
+19. 🔗 참고 링크 + 하단 홈 버튼
 
 필수 파일:
 - `posts/YYYY-MM-DD.html`
@@ -274,16 +417,19 @@ abstract 기반 짧은 요약.
 
 1. 상단 홈 버튼
 2. 🗓 Executive Summary
-3. 🔭 주간 동향 — RSS 요약 추출을 위해 반드시 이 h2 포함
-4. ⚖️ Hot vs Cold
-5. 📐 CV vs RO 키워드
-6. 🔥 주간 Top 5
-7. 🌟 Deep-dive 1편
-8. 🧭 주간 테마 3개 — 각 카드에 `.theme-card` 클래스 사용
-9. 🪞 지난 예측 채점 — 있으면
-10. 🔮 다음주 예측
-11. 🎧 주간 오디오 — 있으면
-12. 참고 링크 + 하단 홈 버튼
+3. 주간 thesis — 이번주 판세를 1~2문장으로 선언
+4. 🔭 주간 동향 — RSS 요약 추출을 위해 반드시 이 h2 포함
+5. ⚖️ Hot vs Cold
+6. 🧩 주간 클러스터 표 — Cluster / Papers / Why / Confidence / Lab action
+7. 📐 CV vs RO 키워드
+8. 🔥 주간 Top 5 — 각 항목에 중요도 태그
+9. 🌟 Deep-dive 1편
+10. 🧭 주간 테마 3개 — 각 카드에 `.theme-card` 클래스 사용, confidence 포함
+11. 🪞 지난 예측 채점 — 있으면
+12. 🔮 다음주 예측
+13. 🧊 Skim-only / Watch-only 흐름 — 있으면
+14. 🎧 주간 오디오 — 있으면
+15. 참고 링크 + 하단 홈 버튼
 
 필수 파일:
 - `posts/YYYY-MM-DD-weekly.html`
