@@ -1,0 +1,46 @@
+{
+  "date": "2026-05-08",
+  "insights": [
+    {
+      "title": "Video generation is moving from pretty clips to controllable cinematography",
+      "claim": "ActCam and RealCam both target camera-controlled video generation, but from different sides: zero-shot actor/camera transfer and real-time interactive camera control. Together they suggest that video generation is being judged less by single-sample quality and more by controllability under production constraints.",
+      "papers": [
+        "https://arxiv.org/abs/2605.06667",
+        "https://arxiv.org/abs/2605.06051"
+      ]
+    },
+    {
+      "title": "VLA adaptation is splitting into relation structure, expert routing, and imagination trust",
+      "claim": "TriRelVLA, VLA-GSE, and When to Trust Imagination all avoid treating VLA as a monolithic policy. The common move is to expose the hidden structure: object-hand-task relations, generalized/specialized experts, and future-reality verification for action chunks.",
+      "papers": [
+        "https://arxiv.org/abs/2605.05714",
+        "https://arxiv.org/abs/2605.06175",
+        "https://arxiv.org/abs/2605.06222"
+      ]
+    },
+    {
+      "title": "Reliability is no longer a side section; it is becoming the deployment substrate",
+      "claim": "Query2Uncertainty, CXR-ContraBench, VideoRouter, and open-set ID fraud detection all point to the same bottleneck: models must know when evidence is missing, shifted, negated, or too expensive to process. This week reliability is not just safety rhetoric; it is appearing as calibration, routing, and benchmark design.",
+      "papers": [
+        "https://arxiv.org/abs/2605.05328",
+        "https://arxiv.org/abs/2605.05810",
+        "https://arxiv.org/abs/2605.05848",
+        "https://arxiv.org/abs/2605.05215"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "Camera-control stress test for video generation",
+      "claim": "Evaluate ActCam/RealCam-like systems on the same actor-motion plus camera trajectory grid, separating identity preservation, geometry consistency, latency, and controllability."
+    },
+    {
+      "title": "VLA structure ablation matrix",
+      "claim": "Cross TriRelVLA-style relation graphs, VLA-GSE-style expert routing, and WAM future-reality verification on manipulation suites to see which structure actually transfers."
+    },
+    {
+      "title": "Reliability-aware long-video and medical VLM audit",
+      "claim": "Use query-adaptive routing and contradiction benchmarks together: does saving compute amplify negated-option or missing-evidence failures?"
+    }
+  ]
+}

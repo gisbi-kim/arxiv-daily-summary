@@ -1,0 +1,69 @@
+{
+  "date": "2026-05-09",
+  "iso_week": "2026-W19",
+  "week_start": "2026-05-03",
+  "week_end": "2026-05-09",
+  "predictions": [
+    {
+      "title": "VLA structure ablation이 다음주에도 3편 이상 이어진다",
+      "claim": "latent action, relation graph, expert routing, WAM verifier가 한 주에 동시에 나왔기 때문에 다음 배치는 이 구조들 간 비교나 hybrid가 나올 가능성이 큽니다.",
+      "rationale": "나오지 않으면 이번 주 VLA cluster는 단발 burst로 볼 수 있습니다."
+    },
+    {
+      "title": "Controllable video generation 벤치가 camera path fidelity를 분리 측정하기 시작한다",
+      "claim": "ActCam/RealCam류 논문이 동시에 등장해 controllability의 정량 기준이 필요해졌습니다.",
+      "rationale": "identity preservation, camera trajectory error, latency를 분리한 표가 다음 자연스러운 후속입니다."
+    },
+    {
+      "title": "Reliability-aware routing과 medical/3D calibration이 한 논문 안에서 만난다",
+      "claim": "VideoRouter의 compute routing과 CXR-ContraBench/Query2Uncertainty의 reliability 축이 아직 따로 움직입니다.",
+      "rationale": "배포에서는 효율과 안전이 분리되지 않으므로, 이 둘을 동시에 보는 논문이 곧 나올 가능성이 높습니다."
+    }
+  ],
+  "themes": [
+    {
+      "title": "Generation이 주간 최대 버킷으로 재가속",
+      "summary": "Generation이 101편으로 가장 두꺼웠습니다. 핵심은 diffusion 논문 수 자체보다 camera control, long-video generation, atmospheric world model, robotic world model latent 같은 '조종 가능한 생성' 쪽으로 이동했다는 점입니다."
+    },
+    {
+      "title": "VLA는 monolithic policy에서 구조 노출 단계로 이동",
+      "summary": "From Pixels to Tokens, TriRelVLA, VLA-GSE, When to Trust Imagination이 모두 VLA 내부를 분해합니다. latent action, relation graph, expert routing, future-reality verification이 서로 다른 이름으로 같은 질문을 던지는 셈입니다."
+    },
+    {
+      "title": "Reliability가 배포 파이프라인의 중심축으로 부상",
+      "summary": "Query2Uncertainty, CXR-ContraBench, VideoRouter, open-set ID fraud discovery가 한 주에 같이 두꺼워졌습니다. 이제 안전은 별도 섹션이 아니라 calibration/routing/benchmark 설계의 기본층으로 들어오고 있습니다."
+    }
+  ],
+  "top5": [
+    {
+      "title": "ActCam: Zero-Shot Joint Camera and 3D Motion Control for Video Generation",
+      "arxiv": "https://arxiv.org/abs/2605.06667"
+    },
+    {
+      "title": "From Pixels to Tokens: A Systematic Study of Latent Action Supervision for VLA Models",
+      "arxiv": "https://arxiv.org/abs/2605.04678"
+    },
+    {
+      "title": "TriRelVLA: Triadic Relational Structure for Generalizable Embodied Manipulation",
+      "arxiv": "https://arxiv.org/abs/2605.05714"
+    },
+    {
+      "title": "VideoRouter: Query-Adaptive Dual Routing for Efficient Long-Video Understanding",
+      "arxiv": "https://arxiv.org/abs/2605.05848"
+    },
+    {
+      "title": "CXR-ContraBench: Benchmarking Negated-Option Attraction in Medical VLMs",
+      "arxiv": "https://arxiv.org/abs/2605.05810"
+    }
+  ],
+  "buckets_summary": {
+    "3D/Scene": 44,
+    "Robot Learning": 52,
+    "Autonomous Driving": 30,
+    "Foundation Models": 45,
+    "Generation": 101,
+    "Efficiency/Systems": 54,
+    "Embodied AI": 16,
+    "Safety/Alignment": 37
+  }
+}
