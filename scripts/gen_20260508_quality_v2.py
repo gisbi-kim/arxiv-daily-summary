@@ -1,0 +1,275 @@
+#!/usr/bin/env python3
+"""Generate a quality-upgraded comparison version of the 2026-05-08 briefing."""
+from __future__ import annotations
+
+import html
+import io
+import json
+import os
+import re
+import sys
+
+if hasattr(sys.stdout, "buffer"):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+
+DATE = "2026-05-08"
+OUT = "posts/2026-05-08-quality-v2.html"
+
+EMOJI = {
+    "3D/Scene": "📦",
+    "Robot Learning": "🤖",
+    "Autonomous Driving": "🚗",
+    "Foundation Models": "🧠",
+    "Generation": "🎨",
+    "Efficiency/Systems": "⚡",
+    "Embodied AI": "🏃",
+    "Safety/Alignment": "🛡️",
+}
+
+
+def esc(s) -> str:
+    return html.escape(str(s), quote=False)
+
+
+def load(path: str):
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def clean(s: str) -> str:
+    return re.sub(r"\s+", " ", s or "").strip()
+
+
+def link(aid: str, label: str | None = None) -> str:
+    return f'<a href="https://arxiv.org/abs/{aid}" target="_blank" rel="noopener">{esc(label or aid)}</a>'
+
+
+def short_abs(p, n=1, limit=260) -> str:
+    text = clean(p.get("abstract", ""))
+    if not text:
+        return "abstract가 비어 있어 제목 기준으로만 판단 필요."
+    parts = re.split(r"(?<=[.!?])\s+", text)
+    out = " ".join(parts[:n])
+    if len(out) > limit:
+        out = out[: limit - 1].rstrip() + "…"
+    return out
+
+
+def badge(b: str) -> str:
+    cls = {"CV": "cv", "RO": "ro", "CV/RO": "cvro"}.get(b, "x")
+    return f'<span class="badge {cls}">{esc(b)}</span>'
+
+
+def paper_map(classified):
+    out = {}
+    bucket_of = {}
+    for b, info in classified["buckets"].items():
+        for p in info["papers"]:
+            out[p["arxiv_id"]] = p
+            bucket_of[p["arxiv_id"]] = b
+    return out, bucket_of
+
+
+def authors(p):
+    a = p.get("authors", [])
+    if not a:
+        return p.get("first_author", "")
+    return ", ".join(a[:3]) + (" et al." if len(a) > 3 else "")
+
+
+def main():
+    cl = load("out/classified.json")
+    cv = load("out/cv_new.json")
+    ro = load("out/ro_new.json")
+    pm, bucket_of = paper_map(cl)
+
+    clusters = [
+        {
+            "name": "Controllable video generation",
+            "tag": "[문제정의] [방법전환]",
+            "papers": ["2605.06667", "2605.06051", "2605.06509"],
+            "why": "video generation의 평가축이 visual quality에서 camera path, actor motion, realtime control로 이동.",
+            "confidence": "High",
+            "evidence": "오늘 3편 + pastweek video generation 12회 이상 + 서로 다른 제어축",
+            "lab": "camera path fidelity / identity drift / latency metric grid 설계",
+        },
+        {
+            "name": "VLA structure exposure",
+            "tag": "[방법전환]",
+            "papers": ["2605.05714", "2605.06175", "2605.06222", "2605.04678"],
+            "why": "VLA를 더 키우기보다 relation, expert, latent action, WAM verifier로 내부 구조를 노출.",
+            "confidence": "High",
+            "evidence": "오늘 3편 + 주간 핵심 From Pixels to Tokens와 직접 연결",
+            "lab": "LIBERO/RoboCasa에서 relation/expert/verifier ablation",
+        },
+        {
+            "name": "Reliability-aware deployment",
+            "tag": "[경고신호] [인프라]",
+            "papers": ["2605.05328", "2605.05810", "2605.05848", "2605.05215"],
+            "why": "calibration, contradiction, routing, open-set discovery가 한 방향으로 수렴.",
+            "confidence": "High",
+            "evidence": "3개 이상 도메인에서 같은 failure-management 질문 등장",
+            "lab": "efficiency routing이 calibration/contradiction failure를 키우는지 audit",
+        },
+        {
+            "name": "Navigation as map-level decision",
+            "tag": "[문제정의] [인프라]",
+            "papers": ["2605.06317", "2605.06223", "2605.05960"],
+            "why": "VLN/ObjectNav가 step-by-step policy보다 top-down/global/ambiguous-query planning으로 이동.",
+            "confidence": "Medium",
+            "evidence": "오늘 3편이지만 대부분 abstract 기반, benchmark 확산은 아직 관찰 필요",
+            "lab": "R2R-TopDown과 ObjectNav ambiguity set을 묶은 navigation stress test",
+        },
+        {
+            "name": "3D/robotics calibration under shift",
+            "tag": "[경고신호] [인프라]",
+            "papers": ["2605.05328", "2605.06478", "2605.05897"],
+            "why": "3D perception은 이제 reconstruction보다 uncertainty, cross-view dataset, V2X deployment가 병목.",
+            "confidence": "Medium",
+            "evidence": "3D/Scene 12편 중 deployment/data/calibration 결이 상위에 위치",
+            "lab": "GA3T + Query2Uncertainty 스타일 shift calibration protocol",
+        },
+    ]
+
+    tier_a = [
+        ("2605.06667", "[문제정의] [방법전환]", "video generation을 camera+motion controllable production tool로 재정의"),
+        ("2605.05714", "[방법전환]", "VLA 일반화를 object-hand-task relation으로 재정의"),
+        ("2605.05848", "[인프라] [방법전환]", "long-video VLM의 token budget을 query-aware routing 문제로 바꿈"),
+        ("2605.05810", "[경고신호] [인프라]", "medical VLM의 negated-option attraction을 독립 failure mode로 벤치마크화"),
+        ("2605.05328", "[경고신호] [방법전환]", "distribution shift에서 3D detector confidence calibration을 다시 묻는 결"),
+    ]
+
+    skim = [
+        ("2605.05402", "도시 CCTV/urban design 응용은 흥미롭지만 ROI 핵심 방법론 전환은 약함"),
+        ("2605.05875", "cephalopod-inspired robot은 특이하지만 랩 ROI 일반화성은 낮음"),
+        ("2605.06042", "flapping-wing MAV tracking은 응용 특화성이 강해 skim 우선"),
+        ("2605.06380", "decision-region topology는 이론적으로 흥미롭지만 오늘 클러스터와는 약하게 연결"),
+        ("2605.05367", "sign-language avatar는 asset 응용 가치가 있으나 오늘 핵심 흐름과는 주변부"),
+    ]
+
+    bucket_lines = []
+    for b, info in cl["buckets"].items():
+        bucket_lines.append(
+            f"{EMOJI.get(b,'')} {b:<20}: {info['total']:>2}편 (CV {info['cv']:>2} / RO {info['ro']:>2} / CV-RO {info['cvro']})"
+        )
+
+    css = """
+*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#f6f7f9;color:#1f2328;line-height:1.72;font-size:15px;padding:32px 16px;word-break:keep-all}
+.container{max-width:980px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);padding:40px 48px}
+h1{font-size:28px;margin:0 0 6px;color:#0d1117}h2{font-size:21px;margin:40px 0 14px;padding-bottom:8px;border-bottom:2px solid #e5e7eb}h3{font-size:17px;margin:18px 0 8px}p{margin:0 0 14px}a{color:#0969da;text-decoration:none}
+.home{display:inline-block;padding:6px 14px;font-size:13px;color:#0969da;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;text-decoration:none;margin:0 0 18px}
+.meta{font-size:13px;color:#3b434d;padding:14px 18px;background:#f6f8fa;border-left:3px solid #0969da;border-radius:6px;margin:14px 0 22px}.meta div{margin:2px 0}
+.thesis{background:#0f172a;color:#f8fafc;border-radius:10px;padding:18px 22px;margin:16px 0 28px;font-size:16px}.thesis strong{color:#fef08a}
+.cluster-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0 18px}.cluster-table th,.cluster-table td{border:1px solid #d0d7de;padding:9px;vertical-align:top}.cluster-table th{background:#f6f8fa;color:#0d1117}.tag{font-family:ui-monospace,monospace;color:#7c2d12;font-size:12px}
+.conf{font-weight:700}.conf.High{color:#15803d}.conf.Medium{color:#a16207}.conf.Low{color:#b91c1c}
+.card{background:#fafbfc;border:1px solid #e5e7eb;border-radius:8px;padding:14px 18px;margin:12px 0}.card h3{margin-top:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.paper-card{border-left:4px solid #0ea5e9}.risk{border-left:4px solid #ef4444;background:#fef2f2}.topic{border-left:4px solid #22c55e;background:#f0fdf4}.skim{border-left:4px solid #94a3b8;background:#f8fafc}
+.bucket-line{font-family:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:10px 14px;font-size:13px;white-space:pre;overflow-x:auto}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;font-family:ui-monospace,monospace}.cv{background:#ddf4ff;color:#0550ae;border:1px solid #54aeff}.ro{background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c}.cvro{background:#ffe5d9;color:#9a3412;border:1px solid #f59e0b}.x{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db}
+details{border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;margin:10px 0;background:#fff}summary{cursor:pointer;font-weight:700;color:#334155}.mini-paper{padding:9px 0;border-top:1px solid #edf2f7}.mini-paper:first-of-type{border-top:none}.why{display:block;color:#475569;font-size:13.5px;margin-top:4px}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:12px;color:#656d76;text-align:center}
+@media(max-width:760px){.container{padding:24px 20px}.grid{grid-template-columns:1fr}.cluster-table{font-size:12.5px}}
+"""
+
+    cluster_rows = []
+    for c in clusters:
+        papers = ", ".join(link(aid, pm[aid]["title"].split(":")[0]) if aid in pm else aid for aid in c["papers"])
+        cluster_rows.append(
+            f"<tr><td><strong>{esc(c['name'])}</strong><br><span class='tag'>{esc(c['tag'])}</span></td>"
+            f"<td>{papers}</td><td>{esc(c['why'])}</td>"
+            f"<td><span class='conf {c['confidence']}'>{c['confidence']}</span><br><span class='why'>{esc(c['evidence'])}</span></td>"
+            f"<td>{esc(c['lab'])}</td></tr>"
+        )
+
+    tier_a_html = []
+    for aid, tag, why in tier_a:
+        p = pm[aid]
+        tier_a_html.append(
+            f"<div class='card paper-card'><h3>{link(aid, p['title'])} {badge(p.get('badge','?'))}</h3>"
+            f"<p><span class='tag'>{esc(tag)}</span></p>"
+            f"<p><strong>왜 A급인가:</strong> {esc(why)}.</p>"
+            f"<p><strong>핵심:</strong> {esc(short_abs(p, 2, 520))}</p>"
+            f"<p><strong>읽을 때 볼 것:</strong> metric이 실제 deployment 능력을 대표하는지, ablation이 핵심 claim을 분리하는지 확인.</p>"
+            f"</div>"
+        )
+
+    appendix = []
+    for b, info in cl["buckets"].items():
+        rows = [f"<details><summary>{EMOJI.get(b,'')} {esc(b)} · {info['total']}편</summary>"]
+        for p in info["papers"]:
+            aid = p["arxiv_id"]
+            rows.append(
+                f"<div class='mini-paper'>{link(aid, p['title'])} {badge(p.get('badge','?'))}"
+                f"<span class='why'>{esc(authors(p))} · {esc(short_abs(p, 1, 220))}</span></div>"
+            )
+        rows.append("</details>")
+        appendix.append("\n".join(rows))
+
+    html_doc = f"""<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>arXiv Daily Briefing — {DATE} Quality v2</title><style>{css}</style></head><body><div class="container">
+<a class="home" href="https://gisbi-kim.github.io/arxiv-daily-summary/">← 전체 목록으로</a>
+<h1>📄 arXiv Daily Briefing — {DATE} (금) · Quality v2</h1>
+<div class="meta">
+<div><strong>목적:</strong> 기존 2026-05-08 브리핑과 품질 비교용으로 만든 v2. 기존 파일은 덮어쓰지 않음.</div>
+<div><strong>소스:</strong> stdlib parser · cs.CV/new {len(cv)}편 + cs.RO/new {len(ro)}편 → {cl['total']} dedup → {cl['selected']} ROI 선정</div>
+<div><strong>핵심 개선:</strong> thesis · cluster table · confidence · lab action · risk taxonomy · skim-only · compressed appendix</div>
+</div>
+
+<div class="thesis"><strong>오늘의 결론:</strong> 금요일 배치는 Generation이 36편으로 가장 두꺼웠지만, 진짜 변화는 “생성 품질”이 아니라 <strong>조종 가능한 video/camera system</strong>으로 평가축이 바뀌는 데 있습니다. 동시에 VLA는 더 큰 end-to-end policy보다 relation/expert/verifier처럼 <strong>내부 구조를 노출하는 방향</strong>으로 이동했고, reliability는 안전 부록이 아니라 배포 파이프라인의 기본층으로 들어왔습니다.</div>
+
+<h2>🧩 오늘의 클러스터 지도</h2>
+<table class="cluster-table"><thead><tr><th>Cluster</th><th>대표 논문</th><th>왜 중요?</th><th>Confidence</th><th>Lab action</th></tr></thead><tbody>
+{''.join(cluster_rows)}
+</tbody></table>
+
+<h2>🔭 주간 동향</h2>
+<p>기존 리포트와 같은 관찰에서 출발하지만, v2에서는 결론의 위계를 먼저 세웁니다. <strong>Generation 36편</strong>은 단순히 양이 많은 버킷이 아니라 ActCam·RealCam·FreeSpec으로 이어지는 “controllable video generation” 클러스터입니다. 여기서 중요한 건 FID류 품질 점수보다 camera trajectory, actor identity, realtime latency 같은 새 평가축이에요.</p>
+<p>두 번째로 <strong>Robot Learning 19편</strong>은 VLA 구조 노출 쪽으로 읽어야 합니다. TriRelVLA는 relation을, VLA-GSE는 expert routing을, When to Trust Imagination은 WAM rollout의 신뢰도를 꺼냅니다. 같은 문제를 세 표현으로 찌르는 셈이라 confidence를 High로 둬도 괜찮아 보입니다.</p>
+<p>세 번째로 <strong>Efficiency 27편·Safety 24편·Foundation Models 21편</strong>은 하나의 deployment cluster로 묶입니다. VideoRouter는 계산 예산을, Query2Uncertainty는 confidence를, CXR-ContraBench는 medical VLM contradiction을 다룹니다. 모델이 더 똑똑해지는 것보다 “언제 믿고, 언제 계산하고, 언제 의심할지”가 오늘 더 중요한 질문입니다.</p>
+
+<h2>🧭 어제/지난주와 달라진 점</h2>
+<div class="card"><p><strong>어제까지의 흐름:</strong> 4D world model 평가, latent action supervision, VLA substrate 정리가 중심이었습니다.</p><p><strong>오늘의 이동:</strong> substrate 논의가 실제 사용 조건으로 내려왔습니다. video는 camera control·latency로, VLA는 relation/expert/verifier로, VLM은 contradiction/routing/calibration으로 옮겨왔습니다.</p></div>
+
+<h2>🌟 Tier A — 판을 바꾸는 논문 5편</h2>
+{''.join(tier_a_html)}
+
+<h2>💡 인사이트와 Confidence</h2>
+<div class="card"><h3>1. Controllable video generation은 새 평가축을 요구한다 <span class="conf High">High</span></h3><p>ActCam과 RealCam은 둘 다 video generation을 창작용 조작 시스템으로 봅니다. 다음 벤치는 visual quality보다 camera path fidelity, identity drift, latency를 분리해야 합니다.</p></div>
+<div class="card"><h3>2. VLA 일반화의 다음 축은 모델 크기가 아니라 구조 노출이다 <span class="conf High">High</span></h3><p>TriRelVLA, VLA-GSE, When to Trust Imagination, From Pixels to Tokens가 같은 주제의 서로 다른 층을 찌릅니다. relation, expert, latent action, verifier를 한 matrix에서 비교하는 follow-up 가치가 큽니다.</p></div>
+<div class="card"><h3>3. Reliability와 efficiency는 한 파이프라인에서 봐야 한다 <span class="conf Medium">Medium</span></h3><p>VideoRouter와 CXR-ContraBench를 같이 보면 계산을 아끼는 routing이 negation/contradiction failure를 악화시킬 가능성도 열립니다. 이 연결은 아직 직접 논문은 아니지만, 실험 질문으로는 꽤 날카롭습니다.</p></div>
+
+<h2>🔬 추천 연구주제 — 1주 실행 protocol 포함</h2>
+<div class="card topic"><h3>Camera-Control Stress Test</h3><p><strong>실행 1주차:</strong> ActCam·RealCam 계열 데모/코드를 모으고, 동일 source video에 대해 camera path 5종, actor motion 5종을 grid로 평가합니다. 비교축은 camera trajectory error, identity drift, geometry consistency, latency. 실패해도 “controllability metric proposal” workshop short가 남습니다.</p></div>
+<div class="card topic"><h3>VLA Structure Ablation Matrix</h3><p><strong>실행 1주차:</strong> LIBERO/RoboCasa에서 relation graph(TriRelVLA), expert routing(VLA-GSE), WAM verifier를 독립 축으로 두고 success rate·latency·failure taxonomy를 비교합니다. 핵심은 어느 구조가 어떤 task family에서만 이기는지 Pareto를 그리는 겁니다.</p></div>
+<div class="card topic"><h3>Reliability-Aware Routing Audit</h3><p><strong>실행 1주차:</strong> VideoRouter류 query-adaptive compression을 medical VLM negation benchmark(CXR-ContraBench 스타일)에 얹어 봅니다. token budget을 줄일수록 contradiction failure가 늘어나는지 측정하면 효율-안전 trade-off가 바로 보입니다.</p></div>
+
+<h2>⚠️ 리스크·한계 필터</h2>
+<div class="card risk"><h3>[Metric risk] Camera-control claims</h3><p>ActCam/RealCam의 “control”이 실제 camera path error와 identity preservation을 분리해 측정하지 않으면 demo quality가 control quality처럼 보일 수 있습니다.</p></div>
+<div class="card risk"><h3>[Dataset risk] VLA relation/expert 일반화</h3><p>TriRelVLA/VLA-GSE gain이 특정 simulator나 relation extractor에 묶이면 real-world generalization claim은 약해집니다. unseen object보다 unseen relation composition을 봐야 합니다.</p></div>
+<div class="card risk"><h3>[Deployment risk] Efficient routing</h3><p>VideoRouter는 latency/memory를 줄이지만, query가 애매하거나 evidence가 sparse할 때 중요한 frame을 버리는 failure가 생길 수 있습니다. reliability benchmark와 함께 평가해야 합니다.</p></div>
+
+<h2>🧊 Skim-only 후보</h2>
+{''.join(f'<div class="card skim"><p>{link(aid, pm[aid]["title"]) if aid in pm else esc(aid)}<span class="why">{esc(reason)}</span></p></div>' for aid, reason in skim)}
+
+<h2>📊 버킷 현황</h2>
+<div class="bucket-line">{esc(chr(10).join(bucket_lines))}</div>
+
+<h2>📄 Appendix — 전체 ROI 논문 압축 목록</h2>
+<p>비교를 위해 coverage는 유지하되, v2에서는 본문 판단 구조를 해치지 않도록 전체 논문을 압축 appendix로 내립니다.</p>
+{''.join(appendix)}
+
+<a class="home" href="https://gisbi-kim.github.io/arxiv-daily-summary/">🏠 전체 목록으로</a>
+<footer>Generated {DATE} · quality comparison v2 · parser-grounded · WebFetch 미사용</footer>
+</div></body></html>
+"""
+
+    os.makedirs("posts", exist_ok=True)
+    with open(OUT, "w", encoding="utf-8", newline="\n") as f:
+        f.write(html_doc)
+    sys.stderr.write(f"wrote {OUT}\n")
+
+
+if __name__ == "__main__":
+    main()
