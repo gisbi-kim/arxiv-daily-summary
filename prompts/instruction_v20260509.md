@@ -376,6 +376,46 @@ abstract 기반 짧은 요약.
 - 불확실하면 "abstract 기준", "본문 확인 필요"라고 명시한다.
 - peripheral하면 Skim-only 후보로 표시 가능
 
+### 압축 부록 — 전체 ROI 논문 목록
+
+전체 ROI 논문 목록은 영어 abstract를 그대로 줄이거나 번역투로 붙이지 않는다.
+각 논문을 한국어로 재해석해 3~5개 bullet로 작성한다.
+
+각 bullet은 가능한 한 한 줄을 넘기지 않는다.
+목표는 "이 논문을 깊게 읽을지 말지 10초 안에 판단"하게 하는 것이다.
+
+필수 bullet:
+
+```text
+- 문제: 이 논문이 겨냥한 병목/공백
+- 방법: 기존 방식과 다른 핵심 아이디어
+- 의미: 왜 이 버킷/클러스터에서 볼 가치가 있는지
+```
+
+선택 bullet:
+
+```text
+- 근거: abstract에 나온 벤치마크/데이터셋/수치
+- 주의: 본문 확인 전 보류할 claim, metric/dataset/baseline/deployment risk
+- 우선순위: Must-read / Read / Skim-only
+```
+
+금지:
+- 영어 abstract 첫 문장을 그대로 복사하거나 직역하지 않는다.
+- "성능을 향상했다", "효율적이다" 같은 일반 문장만 쓰지 않는다.
+- abstract에 없는 수치, 코드 공개 여부, SOTA claim을 만들지 않는다.
+- 모든 논문에 같은 템플릿 문장을 반복하지 않는다.
+
+예시:
+
+```text
+TriRelVLA: Triadic Relational Structure for Generalizable Embodied Manipulation [CV/RO] [방법전환] [Read]
+- 문제: 기존 VLA가 unseen object/scene에서 appearance와 layout에 과적합됨.
+- 방법: object-hand-task 관계를 중간 표현으로 분리해 action prediction에 넣음.
+- 의미: VLA 일반화 논점을 모델 크기보다 구조 노출로 옮기는 결.
+- 주의: relation extractor 품질과 clutter scene robustness는 본문 확인 필요.
+```
+
 ---
 
 ## [10. Daily 산출물]
@@ -399,7 +439,7 @@ abstract 기반 짧은 요약.
 15. 🌟 오늘의 must-read — Tier A 3~5편 중 1~2편 deep dive
 16. ⚠️ 리스크·한계 필터 — risk taxonomy 태그 포함
 17. 🧊 Skim-only 후보 — 있으면
-18. 📄 논문별 요약
+18. 📄 부록 — 전체 ROI 논문 압축 목록
 19. 🔗 참고 링크 + 하단 홈 버튼
 
 필수 파일:
