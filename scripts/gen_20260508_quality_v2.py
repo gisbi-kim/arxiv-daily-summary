@@ -13,7 +13,7 @@ if hasattr(sys.stdout, "buffer"):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 DATE = "2026-05-08"
-OUT = "posts/2026-05-08-quality-v2.html"
+OUT = "posts/2026-05-08.html"
 
 EMOJI = {
     "3D/Scene": "📦",
@@ -208,13 +208,12 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:1
 
     html_doc = f"""<!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>arXiv Daily Briefing — {DATE} Quality v2</title><style>{css}</style></head><body><div class="container">
+<title>arXiv Daily Briefing — {DATE}</title><style>{css}</style></head><body><div class="container">
 <a class="home" href="https://gisbi-kim.github.io/arxiv-daily-summary/">← 전체 목록으로</a>
-<h1>📄 arXiv Daily Briefing — {DATE} (금) · Quality v2</h1>
+<h1>📄 arXiv Daily Briefing — {DATE} (금)</h1>
 <div class="meta">
-<div><strong>목적:</strong> 기존 2026-05-08 브리핑과 품질 비교용으로 만든 v2. 기존 파일은 덮어쓰지 않음.</div>
 <div><strong>소스:</strong> stdlib parser · cs.CV/new {len(cv)}편 + cs.RO/new {len(ro)}편 → {cl['total']} dedup → {cl['selected']} ROI 선정</div>
-<div><strong>핵심 개선:</strong> thesis · cluster table · confidence · lab action · risk taxonomy · skim-only · compressed appendix</div>
+<div><strong>구성:</strong> thesis · cluster table · confidence · lab action · risk taxonomy · skim-only · 압축 부록</div>
 </div>
 
 <div class="thesis"><strong>오늘의 결론:</strong> 금요일 배치는 Generation이 36편으로 가장 두꺼웠지만, 진짜 변화는 “생성 품질”이 아니라 <strong>조종 가능한 video/camera system</strong>으로 평가축이 바뀌는 데 있습니다. 동시에 VLA는 더 큰 end-to-end policy보다 relation/expert/verifier처럼 <strong>내부 구조를 노출하는 방향</strong>으로 이동했고, reliability는 안전 부록이 아니라 배포 파이프라인의 기본층으로 들어왔습니다.</div>
@@ -225,7 +224,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:1
 </tbody></table>
 
 <h2>🔭 주간 동향</h2>
-<p>기존 리포트와 같은 관찰에서 출발하지만, v2에서는 결론의 위계를 먼저 세웁니다. <strong>Generation 36편</strong>은 단순히 양이 많은 버킷이 아니라 ActCam·RealCam·FreeSpec으로 이어지는 “controllable video generation” 클러스터입니다. 여기서 중요한 건 FID류 품질 점수보다 camera trajectory, actor identity, realtime latency 같은 새 평가축이에요.</p>
+<p>이번 리포트에서는 결론의 위계를 먼저 세웁니다. <strong>Generation 36편</strong>은 단순히 양이 많은 버킷이 아니라 ActCam·RealCam·FreeSpec으로 이어지는 “controllable video generation” 클러스터입니다. 여기서 중요한 건 FID류 품질 점수보다 camera trajectory, actor identity, realtime latency 같은 새 평가축이에요.</p>
 <p>두 번째로 <strong>Robot Learning 19편</strong>은 VLA 구조 노출 쪽으로 읽어야 합니다. TriRelVLA는 relation을, VLA-GSE는 expert routing을, When to Trust Imagination은 WAM rollout의 신뢰도를 꺼냅니다. 같은 문제를 세 표현으로 찌르는 셈이라 confidence를 High로 둬도 괜찮아 보입니다.</p>
 <p>세 번째로 <strong>Efficiency 27편·Safety 24편·Foundation Models 21편</strong>은 하나의 deployment cluster로 묶입니다. VideoRouter는 계산 예산을, Query2Uncertainty는 confidence를, CXR-ContraBench는 medical VLM contradiction을 다룹니다. 모델이 더 똑똑해지는 것보다 “언제 믿고, 언제 계산하고, 언제 의심할지”가 오늘 더 중요한 질문입니다.</p>
 
@@ -256,12 +255,12 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:1
 <h2>📊 버킷 현황</h2>
 <div class="bucket-line">{esc(chr(10).join(bucket_lines))}</div>
 
-<h2>📄 Appendix — 전체 ROI 논문 압축 목록</h2>
-<p>비교를 위해 coverage는 유지하되, v2에서는 본문 판단 구조를 해치지 않도록 전체 논문을 압축 appendix로 내립니다.</p>
+<h2>📄 부록 — 전체 ROI 논문 압축 목록</h2>
+<p>coverage는 유지하되, 본문 판단 구조를 해치지 않도록 전체 논문을 압축 부록으로 내립니다.</p>
 {''.join(appendix)}
 
 <a class="home" href="https://gisbi-kim.github.io/arxiv-daily-summary/">🏠 전체 목록으로</a>
-<footer>Generated {DATE} · quality comparison v2 · parser-grounded · WebFetch 미사용</footer>
+<footer>Generated {DATE} · quality-upgraded briefing · parser-grounded · WebFetch 미사용</footer>
 </div></body></html>
 """
 
