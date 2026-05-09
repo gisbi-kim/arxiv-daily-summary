@@ -787,3 +787,77 @@ Backup prompt vYYYYMMDD (sanitized)
 3. `latent action supervision`, `world model`, `alignment`, `controllability`, `benchmark` 같은 용어는 첫 등장 문단에서 직관을 붙인다.
 4. 핵심 요약은 "문제 → 바뀐 기준/방법 → 왜 중요한지" 순서로 쓴다. 기술어 나열은 이 순서를 대체할 수 없다.
 5. 독자가 "그래서 그게 무슨 말인데?"라고 되물을 만한 문장이 보이면 실패로 간주하고 다시 쓴다.
+
+### 압축어 해설 few-shot
+
+아래 예시의 "좋은 예" 수준으로 풀어쓴다. 제목·thesis·클러스터 설명·인사이트 첫 문단에서 특히 중요하다.
+
+**예시 1 — World Model 평가**
+
+나쁜 예:
+```text
+World Model 평가가 reconstruction loss → reward alignment + interactive eval로 전환입니다.
+```
+
+좋은 예:
+```text
+예전에는 World Model을 "미래 영상을 얼마나 그럴듯하게 복원하거나 예측하느냐"로 많이 평가했는데,
+이제는 "그 예측이 로봇 행동 성공에 실제로 도움이 되느냐"와
+"상호작용 상황에서 계속 쓸 수 있느냐"가 더 중요해지고 있다는 뜻입니다.
+```
+
+**예시 2 — Latent Action Supervision**
+
+나쁜 예:
+```text
+VLA의 latent action supervision이 image-based vs action-based formulation-task correspondence를 처음 정량화했습니다.
+```
+
+좋은 예:
+```text
+VLA를 학습시킬 때 행동을 그대로 맞히게 할지, 아니면 이미지 변화 속에 숨어 있는 행동 단서를 먼저 배우게 할지의 차이를
+본격적으로 비교하기 시작했다는 뜻입니다. 쉽게 말하면 "로봇에게 정답 행동을 외우게 할 것인가,
+장면이 어떻게 변해야 하는지를 먼저 이해하게 할 것인가"를 나눠 보기 시작한 겁니다.
+```
+
+**예시 3 — Controllable Video Generation**
+
+나쁜 예:
+```text
+Video generation의 평가축이 visual quality에서 controllability와 latency로 이동했습니다.
+```
+
+좋은 예:
+```text
+예전에는 생성된 영상이 얼마나 그럴듯하고 예쁜지를 주로 봤다면,
+이제는 원하는 카메라 경로와 움직임을 얼마나 안정적으로 조종할 수 있는지가 중요해졌습니다.
+즉 "보기 좋은 샘플"보다 "실제로 원하는 장면을 만들 수 있는 도구인가"를 묻는 쪽으로 평가 기준이 바뀌는 겁니다.
+```
+
+**예시 4 — Diffusion Alignment**
+
+나쁜 예:
+```text
+Diffusion alignment가 BT preference model에서 game-theoretic self-referential alignment로 이동했습니다.
+```
+
+좋은 예:
+```text
+diffusion 모델을 사람 취향에 맞추는 방식이 단순한 선호도 점수 맞추기에서 벗어나고 있다는 뜻입니다.
+이제는 모델이 여러 후보를 서로 비교하고, 스스로 더 나은 방향을 찾게 만드는 쪽으로
+평가와 학습 방식이 옮겨가고 있습니다.
+```
+
+**예시 5 — Benchmark / SOTA**
+
+나쁜 예:
+```text
+LoViF가 4D World Model holistic QA benchmark를 제안했습니다.
+```
+
+좋은 예:
+```text
+4D World Model을 볼 때 단순히 영상이 예쁜지보다,
+시간에 따라 물리적으로 말이 되는지와 입력 조건을 잘 따르는지를 함께 평가하려는 흐름입니다.
+즉 "그럴듯한 동영상"이 아니라 "물리적으로 믿을 수 있는 시뮬레이션"인지 묻는 쪽으로 가고 있습니다.
+```
