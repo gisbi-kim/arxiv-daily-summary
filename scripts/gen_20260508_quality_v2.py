@@ -189,7 +189,7 @@ def meaning_bullet(bucket: str, p) -> str:
     if "vla" in text or "vision-language-action" in text:
         return "VLA 논점을 모델 크기 경쟁에서 구조·실행 신뢰도·fine-tuning recipe 비교로 옮기는 evidence."
     if is_video_generation(text):
-        return "video generation cluster에서 controllability와 latency를 새 lab action으로 끌어올리는 논문."
+        return "video generation을 예쁜 샘플 생성이 아니라, 원하는 카메라 움직임과 장면 변화를 안정적으로 조종하는 시스템으로 봐야 한다는 근거."
     if bucket == "3D/Scene" and is_3d_scene_text(text):
         return "3D/Scene 흐름에서 표현 품질보다 실제 capture 조건과 downstream 사용성을 같이 봐야 한다는 근거."
     if "uncertainty" in text or "calibration" in text or "ood" in text:
@@ -197,13 +197,13 @@ def meaning_bullet(bucket: str, p) -> str:
     if "benchmark" in text:
         return "당장 방법보다 평가축 자체를 넓히는 가치가 커서 후속 논문들의 reference가 될 수 있음."
     if "dataset" in text:
-        return "새 데이터 substrate를 제공하므로 당장 SOTA보다 다음 실험의 출발점으로 의미가 큼."
+        return "새 데이터 기반을 제공하므로 당장 SOTA보다 다음 실험의 출발점으로 의미가 큼."
     if bucket == "Generation":
-        return "Generation 버킷의 양적 증가를 실제 제어성·효율성·world-model substrate로 해석하게 해주는 근거."
+        return "Generation 버킷의 양적 증가를 실제 제어성·효율성·world-model 기반 구조 문제로 해석하게 해주는 근거."
     if bucket == "Efficiency/Systems":
         return "큰 모델을 실제로 굴릴 때 필요한 routing·compression·edge execution 논점에 직접 연결."
     if bucket == "Safety/Alignment":
-        return "성능 향상보다 failure mode 노출과 deployment audit 측 가치가 더 큰 후보."
+        return "성능 향상보다 실패 양상을 드러내고 배포 전에 점검할 지점을 알려주는 가치가 더 큰 후보."
     if bucket == "Embodied AI":
         return "navigation/embodied agent를 단순 policy가 아니라 map·memory·interaction 문제로 재정의하는 데 기여."
     return f"{bucket} 흐름 안에서 대표 논문보다는 보조 evidence로 읽는 것이 적절."
@@ -268,10 +268,10 @@ def main():
             "name": "Controllable video generation",
             "tag": "[문제정의] [방법전환]",
             "papers": ["2605.06667", "2605.06051", "2605.06509"],
-            "why": "video generation의 평가축이 visual quality에서 camera path, actor motion, realtime control로 이동.",
+            "why": "예전에는 생성된 영상이 얼마나 그럴듯하고 예쁜지를 주로 봤다면, 이제는 원하는 카메라 경로와 움직임을 얼마나 안정적으로 조종할 수 있는지가 중요해졌습니다.",
             "confidence": "High",
             "evidence": "오늘 3편 + pastweek video generation 12회 이상 + 서로 다른 제어축",
-            "lab": "camera path fidelity / identity drift / latency metric grid 설계",
+            "lab": "카메라 경로 오차 / 대상 정체성 흔들림 / 지연시간 metric grid 설계",
         },
         {
             "name": "VLA structure exposure",
@@ -289,7 +289,7 @@ def main():
             "why": "calibration, contradiction, routing, open-set discovery가 한 방향으로 수렴.",
             "confidence": "High",
             "evidence": "3개 이상 도메인에서 같은 failure-management 질문 등장",
-            "lab": "efficiency routing이 calibration/contradiction failure를 키우는지 audit",
+            "lab": "효율을 위해 routing을 넣을 때 calibration/contradiction failure가 커지는지 점검",
         },
         {
             "name": "Navigation as map-level decision",
@@ -312,7 +312,7 @@ def main():
     ]
 
     tier_a = [
-        ("2605.06667", "[문제정의] [방법전환]", "video generation을 camera+motion controllable production tool로 재정의"),
+        ("2605.06667", "[문제정의] [방법전환]", "video generation을 원하는 카메라와 움직임을 조종하는 제작 도구로 재정의"),
         ("2605.05714", "[방법전환]", "VLA 일반화를 object-hand-task relation으로 재정의"),
         ("2605.05848", "[인프라] [방법전환]", "long-video VLM의 token budget을 query-aware routing 문제로 바꿈"),
         ("2605.05810", "[경고신호] [인프라]", "medical VLM의 negated-option attraction을 독립 failure mode로 벤치마크화"),
@@ -400,7 +400,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:1
 <div><strong>구성:</strong> thesis · cluster table · confidence · lab action · risk taxonomy · skim-only · 압축 부록</div>
 </div>
 
-<div class="thesis"><strong>오늘의 결론:</strong> 금요일 배치는 Generation이 36편으로 가장 두꺼웠지만, 진짜 변화는 “생성 품질”이 아니라 <strong>조종 가능한 video/camera system</strong>으로 평가축이 바뀌는 데 있습니다. 동시에 VLA는 더 큰 end-to-end policy보다 relation/expert/verifier처럼 <strong>내부 구조를 노출하는 방향</strong>으로 이동했고, reliability는 안전 부록이 아니라 배포 파이프라인의 기본층으로 들어왔습니다.</div>
+<div class="thesis"><strong>오늘의 결론:</strong> 금요일 배치는 Generation이 36편으로 가장 두꺼웠지만, 진짜 변화는 “영상을 얼마나 예쁘게 만드느냐”가 아니라 <strong>원하는 카메라 움직임과 장면 변화를 얼마나 안정적으로 조종하느냐</strong>로 평가 기준이 옮겨가는 데 있습니다. 동시에 VLA는 더 큰 end-to-end policy 하나로 밀어붙이기보다, 관계 구조·전문가 모듈·검증기를 밖으로 드러내서 어디서 실패하는지 보려는 방향으로 가고 있습니다. reliability도 이제 안전 부록이 아니라 배포 파이프라인의 기본층으로 들어왔습니다.</div>
 
 <h2>🧩 오늘의 클러스터 지도</h2>
 <table class="cluster-table"><thead><tr><th>Cluster</th><th>대표 논문</th><th>왜 중요?</th><th>Confidence</th><th>Lab action</th></tr></thead><tbody>
@@ -408,28 +408,28 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:1
 </tbody></table>
 
 <h2>🔭 주간 동향</h2>
-<p>이번 리포트에서는 결론의 위계를 먼저 세웁니다. <strong>Generation 36편</strong>은 단순히 양이 많은 버킷이 아니라 ActCam·RealCam·FreeSpec으로 이어지는 “controllable video generation” 클러스터입니다. 여기서 중요한 건 FID류 품질 점수보다 camera trajectory, actor identity, realtime latency 같은 새 평가축이에요.</p>
+<p>이번 리포트에서는 결론의 위계를 먼저 세웁니다. <strong>Generation 36편</strong>은 단순히 양이 많은 버킷이 아니라 ActCam·RealCam·FreeSpec으로 이어지는 “조종 가능한 video generation” 클러스터입니다. 여기서 중요한 건 FID류 품질 점수보다, 원하는 카메라 궤적을 따라가는지, 대상의 정체성이 흔들리지 않는지, 실시간으로 쓸 만큼 지연시간이 낮은지 같은 새 평가축이에요.</p>
 <p>두 번째로 <strong>Robot Learning 19편</strong>은 VLA 구조 노출 쪽으로 읽어야 합니다. TriRelVLA는 relation을, VLA-GSE는 expert routing을, When to Trust Imagination은 WAM rollout의 신뢰도를 꺼냅니다. 같은 문제를 세 표현으로 찌르는 셈이라 confidence를 High로 둬도 괜찮아 보입니다.</p>
 <p>세 번째로 <strong>Efficiency 27편·Safety 24편·Foundation Models 21편</strong>은 하나의 deployment cluster로 묶입니다. VideoRouter는 계산 예산을, Query2Uncertainty는 confidence를, CXR-ContraBench는 medical VLM contradiction을 다룹니다. 모델이 더 똑똑해지는 것보다 “언제 믿고, 언제 계산하고, 언제 의심할지”가 오늘 더 중요한 질문입니다.</p>
 
 <h2>🧭 어제/지난주와 달라진 점</h2>
-<div class="card"><p><strong>어제까지의 흐름:</strong> 4D world model 평가, latent action supervision, VLA substrate 정리가 중심이었습니다.</p><p><strong>오늘의 이동:</strong> substrate 논의가 실제 사용 조건으로 내려왔습니다. video는 camera control·latency로, VLA는 relation/expert/verifier로, VLM은 contradiction/routing/calibration으로 옮겨왔습니다.</p></div>
+<div class="card"><p><strong>어제까지의 흐름:</strong> 4D world model을 어떻게 평가할지, VLA가 행동 단서를 어떤 형태로 배울지, VLA 내부 구조를 어떻게 나눌지가 중심이었습니다.</p><p><strong>오늘의 이동:</strong> 그 논의가 실제 사용 조건으로 내려왔습니다. video는 카메라 제어와 지연시간으로, VLA는 관계 구조·전문가 모듈·검증기로, VLM은 contradiction benchmark와 uncertainty로 이어집니다.</p></div>
 
 <h2>🌟 Tier A — 판을 바꾸는 논문 5편</h2>
 {''.join(tier_a_html)}
 
 <h2>💡 인사이트와 Confidence</h2>
-<div class="card"><h3>1. Controllable video generation은 새 평가축을 요구한다 <span class="conf High">High</span></h3><p>ActCam과 RealCam은 둘 다 video generation을 창작용 조작 시스템으로 봅니다. 다음 벤치는 visual quality보다 camera path fidelity, identity drift, latency를 분리해야 합니다.</p></div>
+<div class="card"><h3>1. 조종 가능한 video generation은 새 평가축을 요구한다 <span class="conf High">High</span></h3><p>ActCam과 RealCam은 둘 다 video generation을 창작용 조작 시스템으로 봅니다. 다음 벤치는 “보기 좋은 영상인가”만 묻지 말고, 카메라 경로를 얼마나 정확히 따르는지, 대상 정체성이 얼마나 유지되는지, 지연시간이 실제 사용 가능한지까지 분리해서 봐야 합니다.</p></div>
 <div class="card"><h3>2. VLA 일반화의 다음 축은 모델 크기가 아니라 구조 노출이다 <span class="conf High">High</span></h3><p>TriRelVLA, VLA-GSE, When to Trust Imagination, From Pixels to Tokens가 같은 주제의 서로 다른 층을 찌릅니다. relation, expert, latent action, verifier를 한 matrix에서 비교하는 follow-up 가치가 큽니다.</p></div>
 <div class="card"><h3>3. Reliability와 efficiency는 한 파이프라인에서 봐야 한다 <span class="conf Medium">Medium</span></h3><p>VideoRouter와 CXR-ContraBench를 같이 보면 계산을 아끼는 routing이 negation/contradiction failure를 악화시킬 가능성도 열립니다. 이 연결은 아직 직접 논문은 아니지만, 실험 질문으로는 꽤 날카롭습니다.</p></div>
 
 <h2>🔬 추천 연구주제 — 1주 실행 protocol 포함</h2>
-<div class="card topic"><h3>Camera-Control Stress Test</h3><p><strong>실행 1주차:</strong> ActCam·RealCam 계열 데모/코드를 모으고, 동일 source video에 대해 camera path 5종, actor motion 5종을 grid로 평가합니다. 비교축은 camera trajectory error, identity drift, geometry consistency, latency. 실패해도 “controllability metric proposal” workshop short가 남습니다.</p></div>
+<div class="card topic"><h3>Camera-Control Stress Test</h3><p><strong>실행 1주차:</strong> ActCam·RealCam 계열 데모/코드를 모으고, 동일 source video에 대해 카메라 경로 5종, actor motion 5종을 grid로 평가합니다. 비교축은 카메라 궤적 오차, 대상 정체성 흔들림, geometry consistency, 지연시간입니다. 실패해도 “제어 가능성 metric proposal” workshop short가 남습니다.</p></div>
 <div class="card topic"><h3>VLA Structure Ablation Matrix</h3><p><strong>실행 1주차:</strong> LIBERO/RoboCasa에서 relation graph(TriRelVLA), expert routing(VLA-GSE), WAM verifier를 독립 축으로 두고 success rate·latency·failure taxonomy를 비교합니다. 핵심은 어느 구조가 어떤 task family에서만 이기는지 Pareto를 그리는 겁니다.</p></div>
-<div class="card topic"><h3>Reliability-Aware Routing Audit</h3><p><strong>실행 1주차:</strong> VideoRouter류 query-adaptive compression을 medical VLM negation benchmark(CXR-ContraBench 스타일)에 얹어 봅니다. token budget을 줄일수록 contradiction failure가 늘어나는지 측정하면 효율-안전 trade-off가 바로 보입니다.</p></div>
+<div class="card topic"><h3>Reliability-Aware Routing 점검</h3><p><strong>실행 1주차:</strong> VideoRouter류 query-adaptive compression을 medical VLM negation benchmark(CXR-ContraBench 스타일)에 얹어 봅니다. token budget을 줄일수록 contradiction failure가 늘어나는지 측정하면 효율-안전 trade-off가 바로 보입니다.</p></div>
 
 <h2>⚠️ 리스크·한계 필터</h2>
-<div class="card risk"><h3>[Metric risk] Camera-control claims</h3><p>ActCam/RealCam의 “control”이 실제 camera path error와 identity preservation을 분리해 측정하지 않으면 demo quality가 control quality처럼 보일 수 있습니다.</p></div>
+<div class="card risk"><h3>[Metric risk] Camera-control claims</h3><p>ActCam/RealCam의 “control”이 실제 카메라 경로 오차와 대상 정체성 유지 정도를 따로 측정하지 않으면, 단순히 보기 좋은 데모를 제어가 잘 된 결과로 착각할 수 있습니다.</p></div>
 <div class="card risk"><h3>[Dataset risk] VLA relation/expert 일반화</h3><p>TriRelVLA/VLA-GSE gain이 특정 simulator나 relation extractor에 묶이면 real-world generalization claim은 약해집니다. unseen object보다 unseen relation composition을 봐야 합니다.</p></div>
 <div class="card risk"><h3>[Deployment risk] Efficient routing</h3><p>VideoRouter는 latency/memory를 줄이지만, query가 애매하거나 evidence가 sparse할 때 중요한 frame을 버리는 failure가 생길 수 있습니다. reliability benchmark와 함께 평가해야 합니다.</p></div>
 

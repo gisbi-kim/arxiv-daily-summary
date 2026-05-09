@@ -235,7 +235,7 @@ def parse_published_post(date: str) -> dict[str, list[dict]]:
     path = ROOT / "posts" / f"{date}.html"
     raw = path.read_text(encoding="utf-8")
     if '<div class="paper">' not in raw:
-        for ref in ["HEAD", "HEAD~1", "HEAD~2", "HEAD~3"]:
+        for ref in ["HEAD"] + [f"HEAD~{i}" for i in range(1, 12)]:
             try:
                 candidate = subprocess.check_output(
                     ["git", "show", f"{ref}:posts/{date}.html"],
