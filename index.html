@@ -59,15 +59,16 @@ h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.
 .range-controls button{appearance:none;border:1px solid #d0d7de;background:#f6f8fa;color:#24292f;border-radius:6px;padding:5px 10px;font:12.5px/1.3 inherit;cursor:pointer}
 .range-controls button:hover{background:#eef2f6}
 .range-controls button.active{background:#0969da;border-color:#0969da;color:#fff;font-weight:600}
-.weekday-chart{display:grid;gap:10px}
-.weekday-row{display:grid;grid-template-columns:34px minmax(0,1fr) 70px;gap:10px;align-items:center}
-.weekday-name{font-weight:700;color:#0d1117;text-align:right}
-.bar-stack{display:grid;gap:4px}
-.bar-line{height:18px;background:#f6f8fa;border-radius:5px;overflow:hidden;border:1px solid #e5e7eb}
-.bar-fill{height:100%;min-width:2px;border-radius:4px;transition:width .18s ease}
+.weekday-chart{display:grid;grid-template-columns:44px minmax(0,1fr);grid-template-rows:220px auto;gap:8px 10px;padding:4px 0 0}
+.y-axis{grid-column:1;grid-row:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;font:12px/1.2 ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;color:#6b7280;padding:0 0 20px}
+.plot-area{grid-column:2;grid-row:1;position:relative;height:220px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;padding:0 6px 20px;border-left:1px solid #d0d7de;border-bottom:1px solid #d0d7de;background:linear-gradient(to top,#eaeef2 1px,transparent 1px) 0 0/100% 25%}
+.day-group{height:100%;display:flex;align-items:flex-end;justify-content:center;gap:4px;position:relative;z-index:1}
+.bar-fill{width:min(22px,38%);min-height:2px;border-radius:5px 5px 0 0;transition:height .18s ease}
 .bar-cv{background:#54aeff}
 .bar-ro{background:#f2cc60}
-.weekday-value{font:12px/1.35 ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;color:#475569}
+.x-axis{grid-column:2;grid-row:2;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;padding:0 6px}
+.x-tick{text-align:center;color:#0d1117;font-weight:700}
+.x-value{display:block;margin-top:2px;font:11.5px/1.25 ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;color:#6b7280;font-weight:400}
 .legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;color:#475569;font-size:12.5px}
 .legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 .legend .cv-dot::before{background:#54aeff}.legend .ro-dot::before{background:#f2cc60}
@@ -83,7 +84,11 @@ footer a{color:#656d76}
   .archive-summary{font-size:13.5px}
   .stats-head{display:block}
   .stats-source{text-align:left;margin-top:8px}
-  .weekday-row{grid-template-columns:28px minmax(0,1fr) 58px;gap:8px}
+  .weekday-chart{grid-template-columns:36px minmax(0,1fr);grid-template-rows:180px auto}
+  .plot-area{height:180px;gap:4px;padding-left:3px;padding-right:3px}
+  .x-axis{gap:4px;padding-left:3px;padding-right:3px}
+  .bar-fill{width:min(18px,42%)}
+  .x-value{font-size:10.5px}
 }
 </style>
 </head>
@@ -125,7 +130,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 <div class="stats-head">
   <div>
     <p class="stats-title" id="weekday-stats-title">요일별 /new 논문 수</p>
-    <p class="stats-note">repo에 저장된 일간 리포트 메타데이터만 사용합니다. 업데이트/replacement가 아니라 당일 /new 배치에 기록된 cs.CV · cs.RO 수를 봅니다.</p>
+    <p class="stats-note">x축은 요일, y축은 논문 수입니다. repo에 저장된 일간 리포트 메타데이터만 사용하고, 업데이트/replacement가 아니라 당일 /new 배치에 기록된 cs.CV · cs.RO 수를 봅니다.</p>
   </div>
   <div class="stats-source" id="weekday-stats-meta">데이터 불러오는 중…</div>
 </div>
@@ -235,40 +240,49 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
       g.days += 1;
     });
 
-    const maxValue = Math.max(1, ...Array.from(groups.values()).flatMap(g => [g.cv, g.ro]));
+    const rawMax = Math.max(1, ...Array.from(groups.values()).flatMap(g => [g.cv, g.ro]));
+    const step = rawMax > 500 ? 100 : rawMax > 200 ? 50 : rawMax > 80 ? 20 : 10;
+    const maxValue = Math.ceil(rawMax / step) * step;
     weekdayChart.textContent = '';
+    const yAxis = document.createElement('div');
+    yAxis.className = 'y-axis';
+    [maxValue, Math.round(maxValue / 2), 0].forEach(tick => {
+      const label = document.createElement('span');
+      label.textContent = tick;
+      yAxis.appendChild(label);
+    });
+    const plotArea = document.createElement('div');
+    plotArea.className = 'plot-area';
+    const xAxis = document.createElement('div');
+    xAxis.className = 'x-axis';
+
     WEEKDAY_ORDER.forEach(w => {
       const g = groups.get(w.idx);
-      const row = document.createElement('div');
-      row.className = 'weekday-row';
-
-      const name = document.createElement('div');
-      name.className = 'weekday-name';
-      name.textContent = w.label;
-
-      const stack = document.createElement('div');
-      stack.className = 'bar-stack';
+      const group = document.createElement('div');
+      group.className = 'day-group';
       [['cv', 'bar-cv'], ['ro', 'bar-ro']].forEach(([key, cls]) => {
-        const line = document.createElement('div');
-        line.className = 'bar-line';
         const fill = document.createElement('div');
         fill.className = `bar-fill ${cls}`;
-        fill.style.width = `${Math.round((g[key] / maxValue) * 100)}%`;
+        fill.style.height = `${Math.round((g[key] / maxValue) * 100)}%`;
         fill.title = `${w.label}요일 ${key.toUpperCase()} ${g[key]}편`;
-        line.appendChild(fill);
-        stack.appendChild(line);
+        group.appendChild(fill);
       });
 
-      const value = document.createElement('div');
-      value.className = 'weekday-value';
+      const tick = document.createElement('div');
+      tick.className = 'x-tick';
+      tick.textContent = w.label;
+      const value = document.createElement('span');
+      value.className = 'x-value';
       value.textContent = `${g.cv}/${g.ro}`;
       value.title = `repo 저장 날짜 ${g.days}개`;
+      tick.appendChild(value);
 
-      row.appendChild(name);
-      row.appendChild(stack);
-      row.appendChild(value);
-      weekdayChart.appendChild(row);
+      plotArea.appendChild(group);
+      xAxis.appendChild(tick);
     });
+    weekdayChart.appendChild(yAxis);
+    weekdayChart.appendChild(plotArea);
+    weekdayChart.appendChild(xAxis);
 
     const totalCv = filtered.reduce((sum, row) => sum + Number(row.cv || 0), 0);
     const totalRo = filtered.reduce((sum, row) => sum + Number(row.ro || 0), 0);
