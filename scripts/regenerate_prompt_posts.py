@@ -624,6 +624,71 @@ def fallback_cluster_specs(id_map: dict[str, tuple[str, dict]]) -> list[dict]:
     return specs
 
 
+BUCKET_CLUSTER = {
+    "3D/Scene": (
+        "3D reconstruction and mapping under real constraints",
+        "3D/Scene 논문들은 단순히 더 예쁜 재구성을 만드는 데서 끝나지 않고, sparse view, 동적 장면, SLAM처럼 실제 센서 조건에서 장면 표현이 얼마나 버티는지를 묻습니다. 그래서 렌더링 품질 점수만 보지 말고, 시점 변화와 시간 변화에서 geometry가 얼마나 안정적인지 같이 봐야 합니다.",
+        "Mip-NeRF 360/Replica류 재구성 점수와 view-shift 실패 사례를 같은 표로 비교",
+    ),
+    "Robot Learning": (
+        "Robot policy learning beyond single-task demos",
+        "Robot Learning 논문들은 policy가 한 데모나 한 환경에서만 잘하는지, 다른 물체와 다른 장면에서도 행동으로 이어지는지를 묻습니다. 중요한 건 모델 이름보다 어떤 데이터로 배웠고 어떤 실패 상황에서 무너지는지입니다.",
+        "LIBERO/RoboCasa/CALVIN에서 같은 task family로 success rate와 failure taxonomy 비교",
+    ),
+    "Autonomous Driving": (
+        "Driving perception tied to planning conditions",
+        "Autonomous Driving 쪽은 perception 점수만 높이는 것보다 그 인식이 실제 계획과 제어에 도움이 되는지를 더 자주 묻습니다. 따라서 detection이나 segmentation 숫자와 함께 closed-loop 조건에서 어떤 오류가 누적되는지 봐야 합니다.",
+        "nuScenes/Waymo 지표와 CARLA 또는 nuPlan closed-loop 실패를 나란히 비교",
+    ),
+    "Foundation Models": (
+        "VLM reasoning and reliability under harder prompts",
+        "Foundation Model 논문들은 모델이 그럴듯하게 말하는지를 넘어서, 근거를 제대로 보고 답했는지와 어려운 프롬프트에서 일관성을 유지하는지를 묻습니다. 그래서 정답률 하나보다 hallucination, grounding, calibration을 같이 확인해야 합니다.",
+        "MMBench/POPE류 지표와 evidence-grounding 실패 사례를 같은 sheet로 정리",
+    ),
+    "Generation": (
+        "Controllable generation as an evaluation problem",
+        "Generation 논문들은 샘플이 예쁜지보다 사용자가 원하는 조건을 얼마나 안정적으로 따르는지를 더 많이 다룹니다. 카메라 경로, identity 유지, 시간 일관성 같은 조건을 따로 재야 실제 도구로 쓸 수 있습니다.",
+        "camera path error, identity preservation, temporal consistency를 분리한 metric grid 작성",
+    ),
+    "Efficiency/Systems": (
+        "Deployment-side efficiency and routing",
+        "Efficiency/Systems 논문들은 단순히 모델을 작게 만드는 것이 아니라, 어떤 입력과 하드웨어 조건에서 계산을 아낄지를 다룹니다. 그래서 속도만 보지 말고 품질 저하, 메모리, latency를 함께 봐야 합니다.",
+        "latency, memory, quality drop을 같은 입력 세트에서 측정하는 비교표 작성",
+    ),
+    "Embodied AI": (
+        "Embodied navigation, memory, and instruction grounding",
+        "Embodied AI 논문들은 지시를 바로 실행하는 문제보다, 현재 관측이 충분한지와 목표를 제대로 이해했는지를 함께 묻습니다. 즉 navigation과 memory는 행동 이전의 확인 과정까지 포함하는 문제로 바뀌고 있습니다.",
+        "R2R/ObjectNav에 ambiguous instruction과 memory ablation 조건 추가",
+    ),
+    "Safety/Alignment": (
+        "Safety and reliability as deployment gates",
+        "Safety/Alignment 논문들은 성능이 높은 모델도 배포 조건에서 틀릴 수 있다는 점을 다룹니다. 중요한 건 공격 이름을 외우는 것이 아니라, 어떤 입력 변화와 실패 유형에서 모델을 믿으면 안 되는지 분리하는 일입니다.",
+        "OOD, adversarial, calibration failure를 같은 taxonomy로 태깅",
+    ),
+}
+
+
+def bucket_fallback_specs(papers: dict[str, list[dict]], seen: set[str]) -> list[dict]:
+    specs = []
+    for bucket in sorted(papers, key=lambda b: len(papers[b]), reverse=True):
+        ps = papers.get(bucket, [])
+        if not ps or bucket not in BUCKET_CLUSTER:
+            continue
+        name, why, lab_action = BUCKET_CLUSTER[bucket]
+        if name in seen:
+            continue
+        specs.append({
+            "name": name,
+            "ids": [p["arxiv_id"] for p in ps[:4]],
+            "why": why,
+            "confidence": "Medium" if len(ps) >= 2 else "Low",
+            "confidence_note": f"{bucket} 저장 스냅샷 {len(ps)}편 기반",
+            "lab_action": lab_action,
+            "tags": ["문제정의"],
+        })
+    return specs
+
+
 def render_cluster_map(trends: dict, insights: dict, id_map: dict[str, tuple[str, dict]], papers: dict[str, list[dict]]) -> str:
     raw_rows = []
     for obj in insights.get("insights", []):
@@ -682,6 +747,25 @@ def render_cluster_map(trends: dict, insights: dict, id_map: dict[str, tuple[str
             )
             seen.add(spec["name"])
             if len(rows) >= 5:
+                break
+    if len(rows) < 3:
+        for spec in bucket_fallback_specs(papers, seen):
+            links = []
+            for aid in spec["ids"]:
+                if aid in id_map:
+                    links.append(arxiv_link(aid, short_title(id_map[aid][1]["title"], 34)))
+            tags = " ".join(f"<span class='tag'>[{esc(tag)}]</span>" for tag in spec["tags"])
+            rows.append(
+                "<tr>"
+                f"<td><strong>{esc(spec['name'])}</strong><br>{tags}</td>"
+                f"<td>{', '.join(links)}</td>"
+                f"<td>{esc(spec['why'])}</td>"
+                f"<td><strong class='conf {esc(spec['confidence'])}'>{esc(spec['confidence'])}</strong><br><span class='small'>{esc(spec['confidence_note'])}</span></td>"
+                f"<td>{esc(spec['lab_action'])}</td>"
+                "</tr>"
+            )
+            seen.add(spec["name"])
+            if len(rows) >= 3:
                 break
     if not rows:
         return "<p>저장된 인사이트/트렌드 자료가 부족해 클러스터 표를 만들지 못했습니다.</p>"
@@ -923,7 +1007,7 @@ def render_weekly(path: Path) -> str:
     top5 = data.get("top5", [])
     buckets = data.get("buckets_summary", {})
     theme_html = "\n".join(
-        f"<div class='card'><h3>{esc(topic_title_ko(t.get('title','') + ' ' + t.get('summary','')))}</h3><p>{esc(explain_claim(t.get('title','') + ' ' + t.get('summary','')))}</p></div>"
+        f"<div class='card theme-card'><h3>{esc(topic_title_ko(t.get('title','') + ' ' + t.get('summary','')))}</h3><p>{esc(explain_claim(t.get('title','') + ' ' + t.get('summary','')))}</p></div>"
         for t in themes[:5]
     )
     pred_html = "\n".join(
@@ -945,6 +1029,7 @@ def render_weekly(path: Path) -> str:
                 bucket_lines.append(f"{k}: {v.get('total', v.get('count', 0))}편")
             else:
                 bucket_lines.append(f"{k}: {v}편")
+    cluster_html = render_weekly_cluster_map(themes, top5)
     return f"""<!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title><style>{CSS}</style></head><body><div class="container">
@@ -952,6 +1037,7 @@ def render_weekly(path: Path) -> str:
 <h1>📄 arXiv Weekly Briefing — {esc(date_str)} ({weekday(date_str)})</h1>
 <div class="meta"><div><strong>주간 시야:</strong> {esc(data.get('week_start',''))} ~ {esc(data.get('week_end',''))}</div><div><strong>재생성 방식:</strong> repo에 저장된 {esc(path.name)} 기반</div></div>
 <div class="thesis"><strong>이번 주 결론:</strong> 이번 주 요약은 기술 이름을 길게 나열하기보다, 어떤 평가 기준과 실패 조건이 새로 중요해졌는지를 중심으로 다시 썼습니다. 독자가 다시 묻지 않도록 각 주장 뒤에는 그 말이 실제로 뜻하는 바를 한 문장 더 붙였습니다.</div>
+<h2>🧩 주간 클러스터 표</h2>{cluster_html}
 <h2>🔭 주간 동향</h2>{theme_html or '<p>저장된 주간 theme 자료가 없습니다.</p>'}
 <h2>💡 다음 주 예측</h2>{pred_html or '<p>저장된 예측 자료가 없습니다.</p>'}
 <h2>🌟 주간 핵심 논문</h2><ul>{top_html}</ul>
@@ -960,6 +1046,52 @@ def render_weekly(path: Path) -> str:
 <footer>Regenerated from committed local materials. <a class="home" href="https://gisbi-kim.github.io/arxiv-daily-summary/">← 홈으로</a></footer>
 </div></body></html>
 """
+
+
+def render_weekly_cluster_map(themes: list[dict], top5: list[dict]) -> str:
+    rows = []
+    used = set()
+    papers = []
+    for item in top5 or []:
+        url = str(item.get("arxiv") or item.get("paper") or "")
+        aid_m = re.search(r"([0-9]{4}\.[0-9]{4,5})", url)
+        aid = str(item.get("arxiv_id") or (aid_m.group(1) if aid_m else "")).strip()
+        title = clean(item.get("title", aid))
+        if aid or title:
+            papers.append((aid, title))
+
+    for idx, theme in enumerate(themes[:5]):
+        text = f"{theme.get('title','')} {theme.get('summary','')}"
+        name = cluster_name(text)
+        if name in used:
+            name = short_title(topic_title_ko(text), 46)
+        used.add(name)
+        start = min(idx, max(len(papers) - 1, 0))
+        linked = papers[start:start + 2] or papers[:2]
+        links = []
+        for aid, title in linked:
+            links.append(arxiv_link(aid, short_title(title, 34)) if aid else esc(short_title(title, 34)))
+        confidence = "High" if len(linked) >= 2 else "Medium"
+        confidence_note = "주간 theme와 대표 논문을 함께 연결" if linked else "theme 기반, 대표 논문 추가 확인 필요"
+        tags = " ".join(f"<span class='tag'>[{esc(tag)}]</span>" for tag in cluster_tags(text))
+        rows.append(
+            "<tr>"
+            f"<td><strong>{esc(name)}</strong><br>{tags}</td>"
+            f"<td>{', '.join(links) or '대표 논문 확인 필요'}</td>"
+            f"<td>{esc(explain_claim(text))}</td>"
+            f"<td><strong class='conf {confidence}'>{confidence}</strong><br><span class='small'>{esc(confidence_note)}</span></td>"
+            f"<td>{esc(lab_action_for(text))}</td>"
+            "</tr>"
+        )
+    if not rows:
+        return "<p>저장된 주간 theme가 부족해 클러스터 표를 만들지 못했습니다.</p>"
+    return (
+        "<table class='cluster-table'><thead><tr>"
+        "<th>Cluster</th><th>대표 논문</th><th>왜 중요?</th><th>Confidence</th><th>Lab action</th>"
+        "</tr></thead><tbody>"
+        + "\n".join(rows)
+        + "</tbody></table>"
+    )
 
 
 def render_weekly_from_post(path: Path) -> str:
@@ -976,10 +1108,13 @@ def render_weekly_from_post(path: Path) -> str:
     headings = [clean(x) for x in re.findall(r"<h[23][^>]*>(.*?)</h[23]>", source, re.S)]
     themes = [h for h in headings if h and "참고" not in h and "링크" not in h][:5]
     theme_html = "\n".join(
-        f"<div class='card'><h3>{esc(topic_title_ko(t))}</h3><p>{esc(explain_claim(t))}</p></div>"
+        f"<div class='card theme-card'><h3>{esc(topic_title_ko(t))}</h3><p>{esc(explain_claim(t))}</p></div>"
         for t in themes
     )
     top_html = "\n".join(f"<li>{arxiv_link(aid, title)}</li>" for aid, title in links[:12])
+    pseudo_themes = [{"title": t, "summary": t} for t in themes]
+    pseudo_top5 = [{"title": title, "arxiv": f"https://arxiv.org/abs/{aid}"} for aid, title in links[:5]]
+    cluster_html = render_weekly_cluster_map(pseudo_themes, pseudo_top5)
     return f"""<!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>arXiv Weekly Briefing — {date_str}</title><style>{CSS}</style></head><body><div class="container">
@@ -987,6 +1122,7 @@ def render_weekly_from_post(path: Path) -> str:
 <h1>📄 arXiv Weekly Briefing — {date_str} ({weekday(date_str)})</h1>
 <div class="meta"><div><strong>재생성 방식:</strong> repo에 저장된 {esc(path.name)} HTML에서 제목과 논문 링크를 스냅샷으로 추출</div><div><strong>주의:</strong> 해당 주간의 별도 weekly JSON은 repo에 없어, 기존 weekly HTML을 원천 재료로 고정했습니다.</div></div>
 <div class="thesis"><strong>이번 주 결론:</strong> 이 주간 회고는 남아 있는 HTML 스냅샷만으로 다시 만들었습니다. 그래서 새 논문을 추가로 찾지는 않고, 기존에 공개됐던 논문 링크와 주제 제목을 기준으로 문장을 더 설명적으로 풀었습니다.</div>
+<h2>🧩 주간 클러스터 표</h2>{cluster_html}
 <h2>🔭 주간 동향</h2>{theme_html or '<p>기존 HTML에서 추출 가능한 주간 제목이 많지 않아, 아래 핵심 논문 목록 중심으로 읽으면 됩니다.</p>'}
 <h2>🌟 주간 핵심 논문</h2><ul>{top_html}</ul>
 <h2>🔗 참고 링크</h2><ul><li><a href="https://gisbi-kim.github.io/arxiv-daily-summary/">전체 목록</a></li></ul>
