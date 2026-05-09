@@ -39,6 +39,17 @@ h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.
 .subscribe summary::-webkit-details-marker{display:none}
 .subscribe summary::before{content:"▸ ";font-size:11px}
 .subscribe details[open] summary::before{content:"▾ "}
+.prompt-panel{margin:0 0 22px;padding:14px 18px;background:#f6f8fa;border:1px solid #d0d7de;border-radius:8px;font-size:13.5px;color:#3b434d;line-height:1.65}
+.prompt-panel summary{cursor:pointer;font-weight:700;color:#0d1117;list-style:none;display:flex;align-items:center;gap:8px}
+.prompt-panel summary::-webkit-details-marker{display:none}
+.prompt-panel summary::before{content:"▸";font-size:11px;color:#0969da}
+.prompt-panel[open] summary::before{content:"▾"}
+.prompt-note{margin:8px 0 10px;color:#656d76}
+.prompt-actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.prompt-actions a{display:inline-block;padding:5px 10px;border:1px solid #d0d7de;border-radius:6px;background:#fff;color:#0969da;text-decoration:none;font-size:12.5px;font-weight:500}
+.prompt-actions a:hover{background:#f6f8fa;text-decoration:none}
+.prompt-view{max-height:520px;overflow:auto;margin:10px 0 0;padding:14px;background:#fff;border:1px solid #d0d7de;border-radius:6px;white-space:pre-wrap;word-break:break-word;font:12.5px/1.6 ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;color:#24292f}
+.prompt-view.loading{color:#656d76;font-family:inherit}
 footer{margin-top:36px;padding-top:16px;border-top:1px solid #eaeef2;font-size:12px;color:#656d76;text-align:center}
 footer a{color:#656d76}
 @media (max-width:640px){
@@ -75,6 +86,16 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 </details>
 </div>
 
+<details class="prompt-panel" id="prompt-panel">
+<summary>이 요약은 어떤 프롬프트로 만들어지나요?</summary>
+<p class="prompt-note">아래는 공개 repo에 저장된 sanitized 실행 프롬프트입니다. 개인 경로와 Slack 채널 정보는 변수로만 남겨두었습니다.</p>
+<div class="prompt-actions">
+  <a href="prompts/instruction_v20260509.md" target="_blank" rel="noopener">프롬프트 파일 열기</a>
+  <a href="https://github.com/gisbi-kim/arxiv-daily-summary/blob/main/prompts/instruction_v20260509.md" target="_blank" rel="noopener">GitHub에서 보기</a>
+</div>
+<pre id="prompt-view" class="prompt-view loading">토글을 열면 프롬프트를 불러옵니다…</pre>
+</details>
+
 <div id="status" class="meta">목록을 불러오는 중…</div>
 
 <ul id="archive" class="archive-list"></ul>
@@ -96,6 +117,8 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 
   const status = document.getElementById('status');
   const archive = document.getElementById('archive');
+  const promptPanel = document.getElementById('prompt-panel');
+  const promptView = document.getElementById('prompt-view');
 
   const lsGet = (k) => {
     try {
@@ -110,6 +133,28 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   };
 
   const dowOf = (ymd) => DOW[new Date(ymd + 'T00:00:00').getDay()];
+
+  async function loadPromptOnce() {
+    if (!promptPanel || !promptView || promptView.dataset.loaded) return;
+    promptView.dataset.loaded = '1';
+    try {
+      const res = await fetch('prompts/instruction_v20260509.md', { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      promptView.classList.remove('loading');
+      promptView.textContent = text;
+    } catch (err) {
+      promptView.classList.add('loading');
+      promptView.textContent = '프롬프트를 불러오지 못했습니다: ' + err.message;
+      delete promptView.dataset.loaded;
+    }
+  }
+
+  if (promptPanel) {
+    promptPanel.addEventListener('toggle', () => {
+      if (promptPanel.open) loadPromptOnce();
+    });
+  }
 
   async function listDates() {
     const cacheKey = `arxiv-archive:list`;
