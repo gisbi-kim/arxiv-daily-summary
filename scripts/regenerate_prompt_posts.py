@@ -394,6 +394,117 @@ def render_cv_ro(trends: dict) -> str:
     return f"<p>{esc(p)}</p><ul>{''.join(items)}</ul>"
 
 
+def cluster_name(text: str) -> str:
+    low = text.lower()
+    if "video" in low and ("camera" in low or "controll" in low):
+        return "Controllable video generation"
+    if "vla" in low and ("relation" in low or "expert" in low or "latent" in low or "structure" in low):
+        return "VLA structure exposure"
+    if "reliab" in low or "uncertainty" in low or "calibration" in low or "contradiction" in low:
+        return "Reliability-aware deployment"
+    if "navigation" in low or "objectnav" in low or "vln" in low:
+        return "Navigation as map-level decision"
+    if "world model" in low or "4d" in low:
+        return "World Model evaluation shift"
+    if "diffusion" in low or "generation" in low:
+        return "Generation under stronger control"
+    if "efficien" in low or "routing" in low or "token" in low:
+        return "Efficient evidence routing"
+    return short_title(clean(text), 42)
+
+
+def cluster_tags(text: str) -> list[str]:
+    low = text.lower()
+    tags = []
+    if any(x in low for x in ["benchmark", "dataset", "evaluation", "eval"]):
+        tags.append("평가축")
+    if any(x in low for x in ["structure", "relation", "latent", "expert", "routing", "architecture"]):
+        tags.append("방법전환")
+    if any(x in low for x in ["safety", "reliab", "uncertainty", "calibration", "contradiction", "threat"]):
+        tags.append("경고신호")
+    if any(x in low for x in ["infrastructure", "data", "system", "deployment", "efficient"]):
+        tags.append("인프라")
+    if not tags:
+        tags.append("문제정의")
+    return tags[:2]
+
+
+def lab_action_for(text: str) -> str:
+    low = text.lower()
+    if "video" in low and ("camera" in low or "controll" in low):
+        return "카메라 경로 오차, 대상 정체성 유지, 지연시간을 분리한 metric grid 설계"
+    if "vla" in low and ("relation" in low or "expert" in low or "latent" in low or "structure" in low):
+        return "LIBERO/RoboCasa에서 relation, expert, latent action, verifier를 같은 표로 ablation"
+    if "reliab" in low or "uncertainty" in low or "calibration" in low or "contradiction" in low:
+        return "효율을 높일 때 calibration이나 contradiction 실패가 커지는지 같이 점검"
+    if "navigation" in low or "objectnav" in low or "vln" in low:
+        return "R2R/ObjectNav에 ambiguous-query와 map-level planning stress test 추가"
+    if "world model" in low or "4d" in low:
+        return "영상 복원 점수와 robot success rate를 같은 rollout에서 비교"
+    if "3d" in low or "lidar" in low:
+        return "view shift와 sensor shift를 나눠 calibration protocol 작성"
+    return "대표 논문 2~3편을 같은 입력, 같은 실패 기준, 같은 ablation 표로 재비교"
+
+
+def evidence_ids_from_obj(obj: dict) -> list[str]:
+    ids = []
+    for key in ["papers", "evidence"]:
+        for value in obj.get(key, []) or []:
+            m = re.search(r"([0-9]{4}\.[0-9]{4,5})", str(value))
+            if m and m.group(1) not in ids:
+                ids.append(m.group(1))
+    return ids
+
+
+def render_cluster_map(trends: dict, insights: dict, id_map: dict[str, tuple[str, dict]], papers: dict[str, list[dict]]) -> str:
+    raw_rows = []
+    for obj in insights.get("insights", []):
+        raw_rows.append((f"{obj.get('title','')} {obj.get('claim','')}", evidence_ids_from_obj(obj), obj.get("claim", "")))
+    for obj in trends.get("hottest", []):
+        raw_rows.append((f"{obj.get('topic','')} {obj.get('note','')}", evidence_ids_from_obj(obj), obj.get("note", "")))
+
+    rows = []
+    seen = set()
+    for text, ids, claim in raw_rows:
+        name = cluster_name(text)
+        if name in seen:
+            continue
+        seen.add(name)
+        if not ids:
+            for bucket in sorted(papers, key=lambda b: len(papers[b]), reverse=True):
+                ids = [p["arxiv_id"] for p in papers[bucket][:3]]
+                break
+        links = []
+        for aid in ids[:4]:
+            if aid in id_map:
+                links.append(arxiv_link(aid, short_title(id_map[aid][1]["title"], 34)))
+            else:
+                links.append(arxiv_link(aid, aid))
+        confidence = "High" if len(ids) >= 2 else "Medium"
+        why = explain_claim(claim or text)
+        tags = " ".join(f"<span class='tag'>[{esc(tag)}]</span>" for tag in cluster_tags(text))
+        rows.append(
+            "<tr>"
+            f"<td><strong>{esc(name)}</strong><br>{tags}</td>"
+            f"<td>{', '.join(links) or '대표 논문 추출 없음'}</td>"
+            f"<td>{esc(why)}</td>"
+            f"<td><strong class='conf {confidence}'>{confidence}</strong><br><span class='small'>{esc('대표 논문 ' + str(len(ids)) + '편 이상 연결' if ids else '근거 논문 추가 확인 필요')}</span></td>"
+            f"<td>{esc(lab_action_for(text))}</td>"
+            "</tr>"
+        )
+        if len(rows) >= 5:
+            break
+    if not rows:
+        return "<p>저장된 인사이트/트렌드 자료가 부족해 클러스터 표를 만들지 못했습니다.</p>"
+    return (
+        "<table class='cluster-table'><thead><tr>"
+        "<th>Cluster</th><th>대표 논문</th><th>왜 중요?</th><th>Confidence</th><th>Lab action</th>"
+        "</tr></thead><tbody>"
+        + "\n".join(rows)
+        + "</tbody></table>"
+    )
+
+
 def important_ids(insights: dict, trends: dict, papers: dict[str, list[dict]]) -> list[str]:
     ids = []
     for obj in insights.get("insights", []):
@@ -579,6 +690,9 @@ def render_daily(date_str: str, source_name: str | None = None) -> str:
 <h1>📄 arXiv Daily Briefing — {date_str} ({weekday(date_str)})</h1>
 <div class="meta"><div><strong>재생성 방식:</strong> repo에 저장된 {esc(source_name)} 논문 스냅샷 + trends/insights/benchmarks JSON 기반</div><div><strong>주의:</strong> 과거 날짜의 원본 out/*.json은 repo에 없어, 논문 집합은 저장된 HTML에서 고정했습니다. arXiv /new·/pastweek는 다시 긁지 않았습니다.</div></div>
 <div class="thesis"><strong>오늘의 결론:</strong> {esc(thesis)}</div>
+
+<h2>🧩 오늘의 클러스터 지도</h2>
+{render_cluster_map(trends, insights, id_map, papers)}
 
 <h2>🔭 주간 동향</h2>
 {render_trends(date_str, trends, papers)}
