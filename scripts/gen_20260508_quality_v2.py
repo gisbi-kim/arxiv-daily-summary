@@ -315,9 +315,16 @@ def main():
         ("2605.06667", "[문제정의] [방법전환]", "video generation을 원하는 카메라와 움직임을 조종하는 제작 도구로 재정의"),
         ("2605.05714", "[방법전환]", "VLA 일반화를 object-hand-task relation으로 재정의"),
         ("2605.05848", "[인프라] [방법전환]", "long-video VLM의 token budget을 query-aware routing 문제로 바꿈"),
-        ("2605.05810", "[경고신호] [인프라]", "medical VLM의 negated-option attraction을 독립 failure mode로 벤치마크화"),
+        ("2605.05810", "[경고신호] [인프라]", "medical VLM의 negated-option attraction을 독립 실패 유형으로 벤치마크화"),
         ("2605.05328", "[경고신호] [방법전환]", "distribution shift에서 3D detector confidence calibration을 다시 묻는 결"),
     ]
+    tier_a_core = {
+        "2605.06667": "예쁜 영상을 생성하는 데서 멈추지 않고, 배우의 움직임과 카메라 궤적을 같이 지정해 새 장면으로 옮기는 방법입니다. driving video에서 캐릭터 motion을 가져오고 frame별 카메라 파라미터를 조절해, video generation을 편집 가능한 촬영 시스템처럼 쓰게 만듭니다.",
+        "2605.05714": "VLA가 훈련에서 본 task는 잘하지만 새로운 장면과 물체에서는 약해지는 이유를, object appearance·background·scene layout이 뒤섞인 내부 표현 문제로 봅니다. 그래서 object-hand-task 관계를 명시적으로 드러내, 일반화를 모델 크기 문제가 아니라 구조 표현 문제로 다시 잡습니다.",
+        "2605.05848": "긴 비디오는 visual token이 너무 많아져 memory와 latency가 급격히 커집니다. VideoRouter는 모든 프레임을 같은 방식으로 압축하지 않고, 질문에 필요한 시각 근거가 어디에 있는지에 따라 routing을 달리해 계산량을 줄이려는 논문입니다.",
+        "2605.05810": "흉부 X-ray에 consolidation이 보이는데도 선택지에 끌려 'No consolidation'처럼 반대 의미의 답을 내는 문제를 따로 떼어낸 벤치마크입니다. 단순 오답이 아니라 영상 근거와 문장 극성이 뒤집히는 의료 VLM의 위험한 실패 유형을 측정합니다.",
+        "2605.05328": "3D object detector가 자신감 있게 낸 점수가 실제 위험을 잘 반영하지 못하는 문제를 다룹니다. 특히 학습 분포와 다른 환경에서는 기존 post-hoc calibration이 약해지기 때문에, query와 feature density를 이용해 confidence를 다시 보정하려는 접근입니다.",
+    }
 
     skim = [
         ("2605.05402", "도시 CCTV/urban design 응용은 흥미롭지만 ROI 핵심 방법론 전환은 약함"),
@@ -369,7 +376,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:1
             f"<div class='card paper-card'><h3>{link(aid, p['title'])} {badge(p.get('badge','?'))}</h3>"
             f"<p><span class='tag'>{esc(tag)}</span></p>"
             f"<p><strong>왜 A급인가:</strong> {esc(why)}.</p>"
-            f"<p><strong>핵심:</strong> {esc(short_abs(p, 2, 520))}</p>"
+            f"<p><strong>핵심:</strong> {esc(tier_a_core.get(aid, short_abs(p, 2, 520)))}</p>"
             f"<p><strong>읽을 때 볼 것:</strong> metric이 실제 deployment 능력을 대표하는지, ablation이 핵심 claim을 분리하는지 확인.</p>"
             f"</div>"
         )
