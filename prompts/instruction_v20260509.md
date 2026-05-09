@@ -774,7 +774,8 @@ Backup prompt vYYYYMMDD (sanitized)
 2. "A와 B가 한 batch에 표면화"라고 쓰지 말고, "A와 B가 같은 날 같이 나왔다는 점이 중요합니다"처럼 말한다.
 3. "실험적인 압력"처럼 한국어 독자가 바로 이해하기 어려운 추상 표현은 금지한다. "실제 로봇 실험과 배포에 가까운 단어가 더 자주 보입니다"처럼 관찰 가능한 말로 바꾼다.
 4. 논문별 부록의 `문제/방법/의미` 불릿도 같은 게이트를 적용한다. 내부 메모체를 보존하지 말고, 교수에게 구두로 설명해도 어색하지 않은 문장으로 재작성한다.
-5. 저장 전 `정조준|표면화|batch|압력이 걸려|paradigm|substrate|audit|측 결|응용 결` 문자열 검색을 수행하고, 논문 제목이나 고유명사가 아닌 본문 매치는 수정한다.
+5. survey나 taxonomy 논문을 묶을 때 `failure mode catalog`, `unified mapping`, `data infrastructure bottleneck` 같은 라벨만 나열하지 않는다. 각 라벨이 실제로 무슨 현상을 뜻하는지 한 문장씩 풀어 쓴다.
+6. 저장 전 `정조준|표면화|batch|압력이 걸려|paradigm|substrate|audit|측 결|응용 결|catalog 단계|통합 매핑|진짜 bottleneck` 문자열 검색을 수행하고, 논문 제목이나 고유명사가 아닌 본문 매치는 수정한다.
 
 ### 압축어 해설 게이트
 
@@ -860,4 +861,21 @@ LoViF가 4D World Model holistic QA benchmark를 제안했습니다.
 4D World Model을 볼 때 단순히 영상이 예쁜지보다,
 시간에 따라 물리적으로 말이 되는지와 입력 조건을 잘 따르는지를 함께 평가하려는 흐름입니다.
 즉 "그럴듯한 동영상"이 아니라 "물리적으로 믿을 수 있는 시뮬레이션"인지 묻는 쪽으로 가고 있습니다.
+```
+
+**예시 6 — Survey / Catalog / Bottleneck**
+
+나쁜 예:
+```text
+오늘은 Lock-in이 새 failure mode를 명명하고, VLA Safety Survey가 threats·challenges·evaluations·mechanisms를 통합 매핑하며,
+VLA Data Survey가 'data infrastructure가 진짜 bottleneck' 클레임. VLA community가 개별 시도들의 catalog 단계에 진입한 신호.
+```
+
+좋은 예:
+```text
+어제까지는 VLA 논문들이 memory, intent, safety 같은 문제를 각각 따로 고치는 분위기였다면,
+오늘은 그 문제들이 왜 생기고 어떻게 분류되는지를 정리하는 쪽으로 넘어갔습니다.
+Lock-in은 적은 데모로 VLA를 추가학습했을 때 새 명령을 잘 못 따라가고 예전에 본 행동만 반복하는 현상을 이름 붙였고,
+VLA Safety Survey는 어떤 위협을 걱정해야 하는지와 어떻게 평가·방어할지를 한 장의 지도처럼 묶습니다.
+VLA Data Survey는 성능을 막는 병목이 모델 구조 하나가 아니라 데이터 수집·정리·벤치마크 파이프라인에 있다고 봅니다.
 ```

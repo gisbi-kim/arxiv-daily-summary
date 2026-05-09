@@ -2,8 +2,8 @@
   "date": "2026-04-28",
   "insights": [
     {
-      "title": "VLA 분야가 'failure mode catalog' 단계로 진입 — Lock-in·Safety Survey·Data Survey가 한 날 동시 등장",
-      "claim": "어제까지 'memory·intent·safety'에 각자 처방이 나왔다면 오늘은 Lock-in이 새 failure mode를 명명하고, VLA Safety Survey가 threats·challenges·evaluations·mechanisms를 통합 매핑하며, VLA Data Survey가 'data infrastructure가 진짜 bottleneck' 클레임. VLA community가 개별 시도들의 catalog 단계에 진입한 신호.",
+      "title": "VLA가 개별 처방에서 실패 유형 정리 단계로 이동",
+      "claim": "어제까지는 VLA 논문들이 memory, intent, safety 같은 문제를 각각 따로 고치는 분위기였다면, 오늘은 그 문제들이 왜 생기고 어떻게 분류되는지를 정리하는 쪽으로 넘어갔습니다. Lock-in은 적은 데모로 VLA를 추가학습했을 때 새 명령을 잘 못 따라가고 예전에 본 행동만 반복하는 현상을 이름 붙였고, VLA Safety Survey는 어떤 위협을 걱정해야 하는지와 어떻게 평가·방어할지를 한 장의 지도처럼 묶습니다. VLA Data Survey는 성능을 막는 병목이 모델 구조 하나가 아니라 데이터 수집·정리·벤치마크 파이프라인에 있다고 봅니다. 그래서 오늘 신호는 새 방법 하나가 아니라, VLA 분야가 자기 실패 유형과 인프라 병목을 목록화하기 시작했다는 점입니다.",
       "papers": [
         "https://arxiv.org/abs/2604.23121",
         "https://arxiv.org/abs/2604.23775",
@@ -37,7 +37,7 @@
       "claim": "오늘 PushupBench·Dynamic Gauges·SOU·ReVSI·SycoPhantasy가 흩어진 axis에 각자 벤치를 출시했는데 통합 프레임이 비어 있어요. 'counting·temporal vibration·small object·spatial reasoning·evaluator bias' 5축으로 표준 진단 task를 묶으면 POPE-급 인용 허브 가능."
     },
     {
-      "title": "VLA Lock-in 정량화 + 회복 메커니즘 — low-data post-training의 silent killer 정조준",
+      "title": "VLA Lock-in 정량화 + 회복 메커니즘 — low-data post-training의 silent killer 정면으로 다룸",
       "claim": "Lock-in 페이퍼가 현상은 명명했지만 'lock-in scaling law' + 'recovery mechanism (replay·diverse instruction warmup·KL anchor) 비교'가 비어 있어요. VLA fine-tuning 데이터가 있다면 빠르게 측정 가능한 자리."
     },
     {

@@ -91,7 +91,7 @@ SUMMARIES = {
 '2604.23551': "Underwater 3DGS에 caustics·flickering·attenuation·backscattering 같은 spatiotemporal degradation을 명시적으로 모델링. '기존 3DGS는 깨끗한 air 환경 가정'이라는 한계를 한 단계 끊는 결로, 해양 inspection 응용에 직접 영향.",
 '2604.23604': "3D LiDAR 도메인의 anomaly segmentation — known class와 unseen object를 명시적으로 구별. 자율주행 perception에서 OOD 처리가 의외로 비어있던 자리를 메우는 결입니다. CV/RO 양쪽 카테고리에 동시 등록.",
 '2604.23704': "Multi-camera bundle adjustment에서 feature redundancy를 pose-only geometric constraint로 정리. SfM/3DGS 파이프라인 backend의 효율 결로, large-scale reconstruction 사람들에게 곧장 가치 있어요.",
-'2604.23803': "Egocentric 비디오의 dynamic 3DGS — rapid camera motion + scene dynamic이 동시 발생하는 가장 어려운 setting을 정조준한 평가 자료. AR/robotic vision 측 baseline 정리에 도움.",
+'2604.23803': "Egocentric 비디오의 dynamic 3DGS — rapid camera motion + scene dynamic이 동시 발생하는 가장 어려운 setting을 정면으로 다룬 평가 자료. AR/robotic vision 측 baseline 정리에 도움.",
 '2604.24053': "Low-light 환경 360° 3DGS. 노이즈 amplification + view-dependent photometric inconsistency를 multi-scale explicit prior로 풀어요. 야간 자율주행·실내 dim-light 측 응용에 들어갈 수 있는 결.",
 '2604.24169': "Custom CUDA operator 의존도를 없앤 portable point cloud transformer. AMD/embedded 같은 비-NVIDIA 환경 deployment 라인의 결로, edge robotics에 직접 영향.",
 '2604.24187': "Multivariate Gaussian NeRF로 wide field-of-view 초음파 재구성. Convex probe의 diverging acoustic beam이라는 도메인 특수성에 NeRF 표현이 자연스럽게 fit. 의료 영상 inverse problem에 NeRF 도메인 확장.",
@@ -109,17 +109,17 @@ SUMMARIES = {
 '2604.24707': "RGB-D VSLAM에서 doorway/passage를 명시적으로 구조 요소로 다루는 passage-aware mapping. 실내 navigation 응용 결로 'door가 SLAM에서 underexplored'라는 직관적 motivating이 좋아요.",
 
 # === Robot Learning ===
-'2604.23387': "Event camera로 동적 객체의 6-DoF pose tracking — motion blur·sensor noise·low-light 한계를 keypoint-based로 정조준. Manipulation의 'object pose가 fast-moving일 때 망가진다'는 패턴을 event sensor로 우회.",
+'2604.23387': "Event camera로 동적 객체의 6-DoF pose tracking — motion blur·sensor noise·low-light 한계를 keypoint-based로 정면으로 다룸. Manipulation의 'object pose가 fast-moving일 때 망가진다'는 패턴을 event sensor로 우회.",
 '2604.24426': "AI 비디오 조작 검출용 spatial+spectral+temporal multi-domain 프레임워크. Robot learning 버킷에 분류됐지만 실제론 deepfake 검출 결 — keyword 매칭 결과 범위 외라 incremental.",
 '2604.24622': "Flow-based VLA의 'multi-step inference 부담' 한계를 coarse-to-fine action 생성으로 줄이는 CF-VLA. VLA inference latency 라인의 대표 결로, edge deployment 측에 직접 가치.",
 '2604.23121': "Low-data demonstration으로 VLA를 post-training하면 새 instruction에 반응을 멈추는 'lock-in' 현상을 진단하고 처방. VLA practitioner라면 반드시 봐야 할 failure mode 분석. 오늘자 must-read에서 자세히.",
 '2604.22911': "Humanoid recovery policy를 contact-aware end-to-end로. Disturbance에서 회복하는 능력을 contact event 인식 + 모드 switching으로 구현. Humanoid의 'fall recovery'가 학습 가능 목표로 굳어가는 흐름.",
-'2604.23000': "Behavioral cloning 데이터 quality를 smoothness-driven metric으로 측정 — operator skill 차이로 trajectory quality가 들쭉날쭉한 real-world dataset의 silent killer를 정조준. BC 데이터 큐레이션의 표준 도구가 될 수 있는 결.",
+'2604.23000': "Behavioral cloning 데이터 quality를 smoothness-driven metric으로 측정 — operator skill 차이로 trajectory quality가 들쭉날쭉한 real-world dataset의 silent killer를 정면으로 다룸. BC 데이터 큐레이션의 표준 도구가 될 수 있는 결.",
 '2604.23001': "VLA 다음 진보는 architecture가 아니라 'data infrastructure에서 온다'는 강한 클레임의 survey. Open-X 이후 데이터 엔진 라인 정리로, 우리 manipulation 스택의 데이터 파이프라인 재정비에 reference로 들어옵니다. 오늘자 must-read에서 자세히.",
 '2604.23039': "Hierarchical QP로 control barrier function을 풀어 physical human-robot interaction의 safety를 보장. 재활 로봇용 결로, CBF 라인이 hierarchical 구조와 결합되는 흐름.",
 '2604.23249': "Human video → robot action transfer를 unified tool-target affordance로 풀기. Affordance가 인간/로봇 embodiment gap을 잇는 표준 인터페이스로 굳어가는 흐름의 또 다른 결.",
 '2604.23272': "VLA에 vision 외 physical sensory(force/tactile)를 modular하게 통합. 기존 VLA의 'vision-only' 한계를 sensor-side에서 끊는 결로, contact-rich manipulation에 직접 영향.",
-'2604.23360': "LfD에 failure awareness를 명시적으로 추가 — demonstration이 successful behavior에만 치우쳐 unsafe state coverage가 부족한 한계를 정조준. Safe robot navigation 라인의 데이터 측 보강.",
+'2604.23360': "LfD에 failure awareness를 명시적으로 추가 — demonstration이 successful behavior에만 치우쳐 unsafe state coverage가 부족한 한계를 정면으로 다룸. Safe robot navigation 라인의 데이터 측 보강.",
 '2604.23570': "Real-world human task의 large-scale egocentric dataset EgoLive. Teleoperation/UMI 같은 기존 데이터 수집 방식의 한계를 우회 — 인간 일상 활동을 그대로 학습 신호로 끌어옵니다. VLA 데이터 인프라 라인의 새 자원.",
 '2604.23609': "Visual + tactile reactive policy via tube diffusion — contact uncertainty와 external disturbance에 적응. Tactile feedback이 imitation learning에 흡수되는 흐름의 정량 사례.",
 '2604.23620': "Manipulation을 'coarse relocation(move) + contact-critical interaction(operate)' 두 phase로 명시 분리한 VLA. 어제 LoHo-Manip 같은 phasing 결과의 연장선으로, behavior decomposition 라인이 굳어갑니다.",
@@ -137,72 +137,72 @@ SUMMARIES = {
 '2604.22235': "공장 production 환경에서 수 시간 단위로 굴러간 learning-augmented manipulation 보고서. Lab demo와 deployment 사이 갭을 정량화하는 reference 자료로, industrial 측 사람들에게 가치 있어요.",
 '2604.22251': "Variable impedance MPC가 first-order actuator dynamics 하에서 'physically realizable 보다 큰 feasibility set'을 갖는 formulation error를 지적. Legged locomotion 제어 이론의 silent bug 명시화.",
 '2604.22363': "가정 환경 deformable object manipulation 시뮬레이터 LeHome. Open-X-Embodiment가 한 일을 deformable 도메인에서 시뮬 인프라부터 다시 깔겠다는 포지셔닝.",
-'2604.22526': "Calibration-free magnetic localization — information-theoretic geometry 최적화 + physics-aware learning. 의료 인터벤션용 occlusion-free guidance 응용으로 sim2real gap 정조준.",
+'2604.22526': "Calibration-free magnetic localization — information-theoretic geometry 최적화 + physics-aware learning. 의료 인터벤션용 occlusion-free guidance 응용으로 sim2real gap 정면으로 다룸.",
 
 # === Autonomous Driving ===
-'2604.22824': "악천후 자율주행 segmentation을 dual teacher-student weight-sharing + class-aware semi-supervised로 풀기. 'AD perception은 청명한 day에서만 잘된다'는 고질병 정조준 결.",
+'2604.22824': "악천후 자율주행 segmentation을 dual teacher-student weight-sharing + class-aware semi-supervised로 풀기. 'AD perception은 청명한 day에서만 잘된다'는 고질병 정면으로 다룸 결.",
 '2604.22835': "End-to-end autonomous parking을 위한 structured simulation dataset ParkingScenes. Niche지만 parking은 production AV가 막상 막히는 자리라 응용 가치가 높아요.",
 '2604.22856': "YOLOv8n에 Ghost Module + CBAM + Deformable Conv 조합으로 vehicle detection 강화. Incremental engineering 결이지만 ITS 측 응용에 즉시 들어갈 수 있어요.",
 '2604.22872': "Resource-constrained AV에서 lane following + traffic sign 인식. Embedded platform deployment 결로, low-cost AV 라인 결.",
 '2604.23018': "Web-scale 3D asset이 metric scale·pivot·forward axis가 제각각이라 deployment 안 된다는 진단으로 'spatially+semantically aligned' 10K dataset을 출시. Embodied AI 시뮬레이션 측 데이터 큐레이션 결입니다.",
-'2604.23019': "UAV 이미지의 tropical tree species 분류 — close-up과 UAV 해상도 사이 representation gap을 정조준. Remote sensing 측 결이지만 'scale gap'이라는 일반 문제 자체가 흥미로워요.",
+'2604.23019': "UAV 이미지의 tropical tree species 분류 — close-up과 UAV 해상도 사이 representation gap을 정면으로 다룸. Remote sensing 측 결이지만 'scale gap'이라는 일반 문제 자체가 흥미로워요.",
 '2604.23247': "Avatar fingerprinting(누가 driving 하는지 검증)을 micro-expression-aware로 — frame 간 feature differencing이 핵심. Face reenactment 인증 라인 결로, deepfake defense 응용.",
 '2604.23532': "Emotion-conditioned 짧은 호라이즌 human pose forecasting. 기존 trajectory 모델이 geometric cue에만 매달려 emotional signal을 무시한다는 진단에서 출발.",
-'2604.23685': "Low-light scene text recognition. AV·smart surveillance 응용에서 'illumination이 망가지면 OCR이 망가진다'는 silent killer를 정조준한 결.",
+'2604.23685': "Low-light scene text recognition. AV·smart surveillance 응용에서 'illumination이 망가지면 OCR이 망가진다'는 silent killer를 정면으로 다룬 결.",
 '2604.23728': "Pedestrian intention prediction을 energy-based spatiotemporal interaction-aware로. 기존 모델이 단일 axis에만 매달리는 한계를 multi-modal 합성으로 우회.",
 '2604.24044': "Camera-radar fusion에 contrastive learning + LiDAR-augmented pretraining. 'LiDAR가 너무 비싸다'와 'radar는 sparse하다' 사이의 cost-effective 자리를 노리는 결.",
 '2604.24119': "Driving scene topology reasoning을 hierarchical centerline 표현으로 cyclic하게. MLP 기반 topology head의 한계를 끊는 결로, HD map 자동 생성 측에 영향.",
 '2604.24353': "HSV 변환 camera 이미지를 attention-based rasterized encoding으로 HD map 위상 추정. HD map 라인의 cost-down 결로, AV deployment 측 가치.",
-'2604.24419': "발전도상국 도시 CCTV의 BMD-45 vehicle detection 데이터셋. 기존 벤치가 highly organized highway 위주라는 한계를 정조준 — global ITS 측 데이터 인프라.",
+'2604.24419': "발전도상국 도시 CCTV의 BMD-45 vehicle detection 데이터셋. 기존 벤치가 highly organized highway 위주라는 한계를 정면으로 다룸 — global ITS 측 데이터 인프라.",
 '2604.24616': "도로변 인프라 + 차량 통신으로 road crack 검출. V2X가 'safety-critical 차원'을 넘어 'maintenance' 측에 적용되는 흐름의 결.",
-'2604.22973': "Multi-agent trajectory prediction을 late fusion으로 — occlusion·sensing 한계 robustness 정조준. Trajectory forecasting 라인의 collaborative perception 결.",
+'2604.22973': "Multi-agent trajectory prediction을 late fusion으로 — occlusion·sensing 한계 robustness 정면으로 다룸. Trajectory forecasting 라인의 collaborative perception 결.",
 '2604.23513': "고-conflict mixed-traffic에서 LLM-based interactive decision-making. 기존 AV가 overly conservative하다는 진단에서 출발해 LLM이 negotiation을 돕게 함. AV의 'social intelligence' 라인 결.",
 '2604.23960': "Multi-robot motion planning을 SIMD 병렬화로 milliseconds 단위로 가속. VAMP 프레임워크 확장으로, 큰 swarm scenario에 직접 영향.",
-'2604.24064': "Tractor-semitrailer 같은 articulated commercial vehicle용 MPCC trajectory planning. Passenger car에 잘 맞던 MPCC가 articulated 차량엔 안 맞는 한계 정조준.",
+'2604.24064': "Tractor-semitrailer 같은 articulated commercial vehicle용 MPCC trajectory planning. Passenger car에 잘 맞던 MPCC가 articulated 차량엔 안 맞는 한계 정면으로 다룸.",
 '2604.24242': "Mobility scooter 기반 ROS2 self-driving 연구 플랫폼 OpenPodcar2. Open-source AV 인프라로 학계 reproducibility에 기여.",
 '2604.24295': "'Projected attainable speed space' 라는 instantaneous driving efficiency 메트릭 — 보수적 yielding을 정량 평가. AV deployment의 social acceptance 측 결.",
 '2604.24384': "Pedestrian이 AV를 상대로 'chicken' 게임을 한다는 freezing-robot 문제 분석. Yield-always design choice의 사회적 부작용을 정량화하는 결.",
-'2604.24606': "Trailer 시스템의 reverse parking을 hybrid A* 기반으로 — multi-body 시스템의 unintuitive control 문제 정조준.",
+'2604.24606': "Trailer 시스템의 reverse parking을 hybrid A* 기반으로 — multi-body 시스템의 unintuitive control 문제 정면으로 다룸.",
 '2604.22815': "Classical vehicle dynamics의 흔한 misconception을 mechanical framework로 명시적으로 반박. AV 학계가 고전 control 가정을 무비판 차용하는 패턴에 대한 검증 자료.",
 '2604.22068': "CARLA에서 실제 사고의 topology를 그대로 재구성해 AV evaluation에 사용. 기존 합성 conflict가 abstract만 잡던 한계를 끊는 결로, AV eval 인프라가 'real accident 모양'으로 옮겨가는 흐름.",
 
 # === Foundation Models ===
-'2604.22805': "AR 시스템의 privacy 위험을 semantic context-aware로 검출. 기존 framework가 visual content의 의미를 모르는 한계를 정조준 — AR/MR deployment의 audit-가능 측 결.",
+'2604.22805': "AR 시스템의 privacy 위험을 semantic context-aware로 검출. 기존 framework가 visual content의 의미를 모르는 한계를 정면으로 다룸 — AR/MR deployment의 audit-가능 측 결.",
 '2604.22822': "VLM의 object hallucination을 perceptual error vs reasoning error로 분리해 attribute하는 DO-Bench. 기존 벤치는 aggregate accuracy만 보던 한계를 진단 축으로 분해. Hallucination 진단 인프라의 한 단계.",
 '2604.22823': "Heterogeneous multimodal pretraining을 post-alignment model merging으로 — pivot-based 결합. 단일 model로 합치는 비용을 줄이는 라인 결입니다.",
-'2604.22829': "VLM이 진동하는 dynamic gauge(아날로그 계기판)를 못 읽는다는 정직한 negative result. Industrial robotics 응용에서 VLM이 막상 production에 못 들어가는 자리를 정조준.",
+'2604.22829': "VLM이 진동하는 dynamic gauge(아날로그 계기판)를 못 읽는다는 정직한 negative result. Industrial robotics 응용에서 VLM이 막상 production에 못 들어가는 자리를 정면으로 다룸.",
 '2604.22851': "VLM의 'ego-motion physics 이해'를 진단하는 EgoDyn-Bench. 자율주행 reasoning에서 'high-level 추론은 잘 하는데 underlying physics는 모른다'는 silent killer 측정.",
-'2604.22855': "Remote sensing image captioning 평가에서 manual reference text 의존이 model을 'human annotation style 흉내'로 내모는 한계 정조준. Caption 평가 메트릭 자체에 대한 결입니다.",
+'2604.22855': "Remote sensing image captioning 평가에서 manual reference text 의존이 model을 'human annotation style 흉내'로 내모는 한계 정면으로 다룸. Caption 평가 메트릭 자체에 대한 결입니다.",
 '2604.22875': "VLM이 sketch/annotation으로 reasoning을 표현할 수 있게 — text-only 응답의 'verifiability 부재' 한계 우회. Modal output 확장이라는 흐름의 결.",
 '2604.22884': "MLLM의 small object understanding 공백을 SOU 벤치로 정량화. 'MLLM이 큰 객체엔 강하지만 작은 객체엔 blank'라는 명백한 실패 모드를 측정.",
-'2604.22989': "의료 multimodal foundation model을 unified generative pretraining으로 — CLIP-LLaVA 분리 학습이 만드는 projection 왜곡 정조준. CheXmix가 medical MLLM의 표준 처방 후보.",
+'2604.22989': "의료 multimodal foundation model을 unified generative pretraining으로 — CLIP-LLaVA 분리 학습이 만드는 projection 왜곡 정면으로 다룸. CheXmix가 medical MLLM의 표준 처방 후보.",
 '2604.23079': "Diabetic retinopathy grading을 CNN+Transformer로 풀고 explainable하게. 의료 영상 모델의 '왜 그렇게 판단했나' 측면을 명시화 — clinical adoption 측에 가치.",
 '2604.23145': "VideoQA에서 implicit multi-step reasoning을 modular framework로 explicit하게 분해. 어제 SpaMEM/CodeGraphVLP의 long-horizon 진단/처방 흐름과 같은 라인.",
 '2604.23195': "Analog circuit retrieval에 cross-modal representation. SPICE netlist·schematic·functional description 사이의 heterogeneous matching이 niche지만 명확한 산업 응용.",
 '2604.23276': "PDF visual element parsing을 lightweight production-ready로. Multimodal RAG 인프라의 silent bottleneck 결.",
 '2604.23282': "Text-based person anomaly search에 cascade pose-semantic gap 보정. Surveillance 측 결이지만 'pose-aware retrieval'의 일반 패턴 가치.",
-'2604.23344': "Open-vocabulary object detection에서 hierarchical consistency + unbiased objectness. VLM이 'language prior로 hallucinate' 하는 OVD의 silent killer 정조준.",
-'2604.23348': "Emotion transition을 multimodal로 이해/예측하는 EmoTrans 벤치. Social robot/HCI 측 결로 'static emotion만 보던 한계' 정조준.",
+'2604.23344': "Open-vocabulary object detection에서 hierarchical consistency + unbiased objectness. VLM이 'language prior로 hallucinate' 하는 OVD의 silent killer 정면으로 다룸.",
+'2604.23348': "Emotion transition을 multimodal로 이해/예측하는 EmoTrans 벤치. Social robot/HCI 측 결로 'static emotion만 보던 한계' 정면으로 다룸.",
 '2604.23407': "VLM이 푸쉬업을 못 센다는 PushupBench — frontier 모델조차 42% 정확도. 'recognize what'은 잘 해도 'count how many'에는 무력한 명백한 실패 모드를 정량 입증.",
 '2604.23665': "CLIP을 hyperbolic geometry로 parameter-efficient하게 adapt. Hyperbolic representation 라인의 또 다른 사례, hierarchical 데이터 측 가치.",
 '2604.23724': "Expressway 비디오에서 far-field anomaly detection을 zoom-in reason-out으로. VLM이 멀리 있는 작은 객체를 못 보는 한계를 활성 zoom으로 우회.",
-'2604.23729': "OOD label set이 fixed면 미리 못 본 OOD에 망가진다는 한계를 dynamic prototype evolution으로 보정. OOD detection의 'closed-set assumption' 정조준.",
-'2604.23788': "Multi-figure painting의 micro-interaction을 evidence-centric으로 탐색. VLM이 'figure 사이의 미세한 시선·gesture·spatial 관계'를 못 잡는 한계 정조준 — 예술 도메인이지만 social reasoning 일반 가치.",
+'2604.23729': "OOD label set이 fixed면 미리 못 본 OOD에 망가진다는 한계를 dynamic prototype evolution으로 보정. OOD detection의 'closed-set assumption' 정면으로 다룸.",
+'2604.23788': "Multi-figure painting의 micro-interaction을 evidence-centric으로 탐색. VLM이 'figure 사이의 미세한 시선·gesture·spatial 관계'를 못 잡는 한계 정면으로 다룸 — 예술 도메인이지만 social reasoning 일반 가치.",
 '2604.23813': "Shredded document fragments에서 의미 복원 — 'pristine document만 평가'하던 VRDU 벤치 외연 확장. Document AI의 robustness 측 결.",
 '2604.23860': "Egocentric video의 audio hallucination 측정 — sound가 visual occlusion 시 critical cue인데 audio-visual model이 hallucinate. Audio modality에서도 hallucination을 명시화.",
-'2604.23909': "Video → audio assistive feedback을 motion-aware로 적응. 시각 장애인용 navigation aid 결로, cognitive overload 정조준.",
+'2604.23909': "Video → audio assistive feedback을 motion-aware로 적응. 시각 장애인용 navigation aid 결로, cognitive overload 정면으로 다룸.",
 '2604.23935': "Audio-driven video object segmentation 챌린지 결. ASR-SaSaSa2VA 시스템 — niche 챌린지지만 audio-visual fusion 디자인 측 reference.",
-'2604.23996': "MoE-VLM의 expert routing을 modality-guided soft하게. Hand-crafted/modality-agnostic routing의 한계 정조준 — efficiency 측 결.",
+'2604.23996': "MoE-VLM의 expert routing을 modality-guided soft하게. Hand-crafted/modality-agnostic routing의 한계 정면으로 다룸 — efficiency 측 결.",
 '2604.24029': "Species identification에 retrieval-augmented multimodal — 알려진 종 인식 + 알 수 없는 종 발견을 통합. Biodiversity 도메인의 'open-world recognition' 결.",
 '2604.24036': "Crowded scene에서 occluded/small object grounding 강화. 어제 grounding 라인의 robustness 측 보강.",
 '2604.24123': "Versatile video codec용 feature-distance-based generic quality metric. UHD/HDR 시대의 평가 측 결.",
 '2604.24191': "Audio-visual deliberative reasoning을 deep nested deduction으로. 기존 sequential/parallel rollout의 한계를 nested 구조로 우회 — long-horizon reasoning 라인의 또 다른 결.",
-'2604.24300': "VLM 3D 평가의 'modern setting에서 systematic invalidity'를 정조준 — point cloud 기반 QA가 VLM에 unfair하다는 진단. ReVSI는 spatial intelligence 평가 인프라 결.",
-'2604.24339': "Low-level visual cue + visual feedback으로 VLM reasoning 강화. RL 기반 VLM의 'low-level 정보 부재' 한계 정조준.",
+'2604.24300': "VLM 3D 평가의 'modern setting에서 systematic invalidity'를 정면으로 다룸 — point cloud 기반 QA가 VLM에 unfair하다는 진단. ReVSI는 spatial intelligence 평가 인프라 결.",
+'2604.24339': "Low-level visual cue + visual feedback으로 VLM reasoning 강화. RL 기반 VLM의 'low-level 정보 부재' 한계 정면으로 다룸.",
 '2604.24346': "작은 open-weight VLM의 sycophancy(아첨) + hallucination 정량화. VLM-as-evaluator 라인의 신뢰성 silent killer 측정.",
 '2604.24396': "Object hallucination을 positive-and-negative decoding으로 — training-free intervention. Adaptive grounding이 hallucination mitigation의 inference-time 표준이 될 수 있어요.",
 '2604.24441': "GUI agent용 multi-modal functionality understanding 벤치 AutoGUI-v2. 'reactive matching → predictive mental model' 전환 측정으로, agentic AI 라인의 평가 인프라.",
-'2604.24583': "Perception-centric process reward model로 VLM RLVR 강화 — outcome-level supervision의 'reasoning chain 진단 부재' 한계 정조준.",
+'2604.24583': "Perception-centric process reward model로 VLM RLVR 강화 — outcome-level supervision의 'reasoning chain 진단 부재' 한계 정면으로 다룸.",
 '2604.24602': "Modality-specific corruption 하의 VLM TTA를 majorization-guided로. Entropy-based TTA가 unreliable modality에서 망가지는 silent killer 결.",
 '2604.24696': "Neuroimaging agentic AI — sMRI/fMRI/dMRI/EEG 다 modal pipeline을 자동화. 의료 영상 워크플로우 자동화 측 결.",
 '2604.24763': "Pixel embedding이 vision encoder를 이긴다는 unified MLLM Tuna-2. End-to-end pixel-from-scratch 학습이 understanding+generation 양쪽에서 SOTA를 노리는 결로, vision encoder 의존도가 흔들리는 신호.",
@@ -210,7 +210,7 @@ SUMMARIES = {
 '2604.23701': "농업 pest 진단을 training-free explainable framework로. 의료 영상 explainability 라인이 농업으로 이식되는 결.",
 
 # === Generation ===
-'2604.22828': "World-scale 3D generation MetaEarth3D — bounded 환경 한계를 넘어 spatially scalable. 기존 3D generation이 'object/room 규모'에 갇혀있던 한계 정조준, embodied AI 시뮬레이션·게임 인프라에 영향.",
+'2604.22828': "World-scale 3D generation MetaEarth3D — bounded 환경 한계를 넘어 spatially scalable. 기존 3D generation이 'object/room 규모'에 갇혀있던 한계 정면으로 다룸, embodied AI 시뮬레이션·게임 인프라에 영향.",
 '2604.22832': "Imaging phenomics + perturbation의 multiscale representation learning — drug discovery에서 transcriptomics 비용을 우회하는 결. Industrial pharmacology 응용.",
 '2604.22836': "Sa2VA + agent 역할 분담의 Ref-VOS 챌린지 보고서. Agent loop가 segmentation hypothesis를 accept/revise/refine — 챌린지 결이지만 agentic 디자인 패턴 가치.",
 '2604.22847': "Minecraft 환경의 voxel-resolution dataset Dream-Cubed + cube-based generative model. Embodied AI 시뮬 환경의 procedural generation 인프라.",
@@ -220,34 +220,34 @@ SUMMARIES = {
 '2604.22990': "Subtle visual anomaly(헤어라인 균열)의 active learning을 generative + symbolic으로. Industrial inspection 데이터 큐레이션 결.",
 '2604.23010': "In-the-wild 데이터로 GenAssets — 3D asset latent-space generation. AV multi-sensor simulation 인프라로, 'asset 다양성 + realism 동시'를 노리는 결.",
 '2604.23264': "Text-to-motion을 hierarchical flow matching으로. 어제 PoseFM과 같이 flow matching이 motion 도메인으로 확산하는 흐름.",
-'2604.23325': "Talking head에 emotion-aware spatial refinement + temporal coherence. 기존 'simple emotion label' 한계 정조준 — production talking head 측 결.",
+'2604.23325': "Talking head에 emotion-aware spatial refinement + temporal coherence. 기존 'simple emotion label' 한계 정면으로 다룸 — production talking head 측 결.",
 '2604.23481': "Spatial transcriptomics를 nuclei segmentation의 manual annotation 대안으로 사용. 의료 영상의 annotation cost 우회 결.",
 '2604.23508': "Burst image super-resolution에 generative prior 추가. Mobile camera 측 응용에 직접 영향.",
-'2604.23536': "Diffusion CFG에 zigzag trajectory를 zero-cost로 — 기존 CFG가 instantaneous gradient만 보고 manifold 곡률을 무시하는 한계 정조준. T2I 측 무료 점심.",
+'2604.23536': "Diffusion CFG에 zigzag trajectory를 zero-cost로 — 기존 CFG가 instantaneous gradient만 보고 manifold 곡률을 무시하는 한계 정면으로 다룸. T2I 측 무료 점심.",
 '2604.23540': "Initial Gaussian noise가 layout의 structural seed라는 직관 — semantic spherical alignment를 oracle로 빠르게. 어제 noise-as-prior 라인의 또 다른 사례.",
 '2604.23574': "Image-to-video에 depth-aware physics layered animation. 기존 I2V의 '2D planar motion 한계' + physics 결합 라인.",
 '2604.23584': "MRAG 시스템의 사람 얼굴 익명화를 identity-decoupled로. RAG의 privacy silent killer 결.",
 '2604.23586': "Talking audio-video joint generation을 autoregressive diffusion으로. 'pervasive attention' 대신 high-level 의미와 low-level 디테일 분리 — joint AV generation 라인 결.",
 '2604.23612': "PDE-based image despeckling 비교 연구 — niche이지만 PDE 측 측면 가치.",
-'2604.23636': "Source-free TTA를 discriminator-guided adaptive diffusion으로. 'image corruption(blur·weather·digital artifact)' shift 정조준.",
+'2604.23636': "Source-free TTA를 discriminator-guided adaptive diffusion으로. 'image corruption(blur·weather·digital artifact)' shift 정면으로 다룸.",
 '2604.23651': "In-bed pose estimation을 geometry-conditioned diffusion으로. Blanket occlusion 데이터 부족을 generative augmentation으로 우회 — 의료 측 응용.",
 '2604.23688': "초상권 보호용 protective perturbation이 real-world image transformation에 망가지는지 검증 — 실제 production deployment의 silent failure 측정. Privacy attack 측 결.",
 '2604.23709': "Single image dehazing의 zero-inference diffusion prior decoupling. CNN의 prior 한계와 diffusion 비용 사이 절충 결.",
-'2604.23763': "Mask-free local editing에 region-aware adapter — DiT의 'global instruction은 잘 따르나 local edit이 leak'한다는 silent failure 정조준. Production 도구 후보.",
+'2604.23763': "Mask-free local editing에 region-aware adapter — DiT의 'global instruction은 잘 따르나 local edit이 leak'한다는 silent failure 정면으로 다룸. Production 도구 후보.",
 '2604.23789': "Multi-shot subject-to-video 챌린지 데이터셋 MuSS — 영화적 narrative logic + spatiotemporal coherence를 단일 시야로 측정. Cinematic AI 측 결.",
 '2604.23814': "Extreme viewing angle license plate 인식의 recoverability mapping. ATM/CCTV opportunistic sensing 응용.",
 '2604.23858': "Video latent의 inter-frame redundancy를 training-free pruning으로. Video diffusion 측 효율 결로 traditional codec 직관 + AI 결합.",
-'2604.24136': "One-step diffusion으로 real-world super-resolution. Restoration vs generation manifold를 잇는 결로, perception-distortion trade-off 정조준.",
-'2604.24146': "3D chest CT 분석을 explainable anomaly-aware foundation model로. 의료 volumetric AI의 'scan-level prediction 한계' 정조준.",
+'2604.24136': "One-step diffusion으로 real-world super-resolution. Restoration vs generation manifold를 잇는 결로, perception-distortion trade-off 정면으로 다룸.",
+'2604.24146': "3D chest CT 분석을 explainable anomaly-aware foundation model로. 의료 volumetric AI의 'scan-level prediction 한계' 정면으로 다룸.",
 '2604.24193': "Container loss at sea를 CV로 조기 검출. 해운 industry 응용 결로, 'maritime AI'가 점점 늘어가는 신호.",
 '2604.24407': "Banner relighting을 training-free illumination translation으로. Personalized ads 라인의 production 결.",
 '2604.24459': "Layout-aware text rendering 데이터셋 TextGround4M. T2I의 'text rendering이 망가진다' 라인의 데이터 측 보강.",
 '2604.24493': "Cross-attention guided identity-conditional diffusion으로 face swapping. Identity preservation 측 결, dual-use risk 동시.",
 '2604.24575': "Diffusion 모델을 segmentation learner로 직접 사용 — denoising trajectory가 spatial prior를 encode. T2I diffusion이 perception backbone으로 활용되는 흐름의 표준 결.",
 '2604.24625': "Image editing CoT의 granularity/generalization을 meta-CoT로 향상. Unified understanding/generation 결의 fine-tuning 측 결.",
-'2604.24719': "Source-free + few-shot medical segmentation에 diffusion-based prompt-free SAM2. SAM의 'natural-image bias' 한계 정조준.",
+'2604.24719': "Source-free + few-shot medical segmentation에 diffusion-based prompt-free SAM2. SAM의 'natural-image bias' 한계 정면으로 다룸.",
 '2604.24764': "Text-to-video generation에 3D constraint를 RL로 강화한 World-R1. Video gen의 geometric inconsistency를 architecture 변경 없이 RL post-training으로 해결.",
-'2604.22894': "Pediatric PET의 CT-free attenuation correction. 의료 영상의 radiation dose 절감 측 결로, generalization 정조준.",
+'2604.22894': "Pediatric PET의 CT-free attenuation correction. 의료 영상의 radiation dose 절감 측 결로, generalization 정면으로 다룸.",
 '2604.22905': "Whole-body PET registration의 voxel-wise spatially-varying regularization. 의료 영상 measurement 측 결.",
 '2604.23016': "AI image의 digitally signed content-encoding watermark. 'AI image trust' 라인의 cryptographic 측 결로 watermark 라인의 또 다른 진영.",
 '2604.23380': "Online RL이 denoising generative model에 'easier than you think' — V-GRPO. Denoising RL의 intractable likelihood 문제를 우회. Diffusion alignment 측의 surprising 결.",
@@ -262,21 +262,21 @@ SUMMARIES = {
 '2604.22839': "Skeleton-based PES + few-shot — 체육 분야 fine-grained event spotting 측 결.",
 '2604.22846': "Pathology foundation model의 fragmented tile-level representation을 unified slide-level로 통합. 의료 측 다중 foundation model 결합 결.",
 '2604.22857': "Additive manufacturing surface crack을 IoT-enhanced CNN으로. Industrial 측 incremental.",
-'2604.22885': "Federated cross-modal retrieval에 missing modality + non-IID 동시 처리. FL+CMR의 silent challenge 정조준.",
+'2604.22885': "Federated cross-modal retrieval에 missing modality + non-IID 동시 처리. FL+CMR의 silent challenge 정면으로 다룸.",
 '2604.23094': "Portrait relighting에 hybrid domain knowledge fusion — synthetic + OLAT + real을 결합. Production 측 도메인 갭 결.",
 '2604.23268': "Hexadeca-Bayer sensor용 multi-frame super-resolution. CIS 도메인 특화 efficient 결.",
-'2604.23271': "WBC 분류의 hierarchical ensemble — domain shift robustness 정조준. Clinical deployment 측 결.",
+'2604.23271': "WBC 분류의 hierarchical ensemble — domain shift robustness 정면으로 다룸. Clinical deployment 측 결.",
 '2604.23314': "SAM의 noisy prompt에 saliency-guided distillation. Medical SAM 측 'prompt가 부정확하면 망가진다'는 silent killer 결.",
 '2604.23320': "Kolmogorov-Arnold convolutional network. KAN이 classification에 응용되는 라인의 결로 — 'CNN 다음 후보'에 대한 또 한 신호. 결과는 ablation 봐야 판단.",
 '2604.23375': "Medical image의 hierarchical spatio-channel clustering으로 model compression. CNN 압축 라인의 의료 측 보강.",
-'2604.23415': "RGB와 optical flow에 다른 backbone을 쓰는 heterogeneous two-stream. 'same backbone for both'라는 통념 정조준.",
+'2604.23415': "RGB와 optical flow에 다른 backbone을 쓰는 heterogeneous two-stream. 'same backbone for both'라는 통념 정면으로 다룸.",
 '2604.23426': "Non-IID FL의 privacy + communication efficiency를 adaptive 양쪽으로. FL 시스템 측 결.",
-'2604.23442': "UAV-based weed detection을 edge device deployment 정조준. Agricultural AI deployment 측 결.",
-'2604.23632': "Real-time joint AV avatar generation에 asynchronous dual-stream. Talking head streaming 측 결로 latency 정조준.",
+'2604.23442': "UAV-based weed detection을 edge device deployment 정면으로 다룸. Agricultural AI deployment 측 결.",
+'2604.23632': "Real-time joint AV avatar generation에 asynchronous dual-stream. Talking head streaming 측 결로 latency 정면으로 다룸.",
 '2604.23899': "Mammographic lesion segmentation을 lightweight model로. 의료 측 incremental.",
-'2604.23941': "GUI element grounding을 lightweight하게 — mobile phone deployment 정조준. Agentic AI on-device 측 결.",
-'2604.23950': "VLM의 attention-based token pruning을 rethink — naive pruning이 reasoning을 망가뜨린다는 진단. LearnPruner는 pruning이 'attention만 보면 안 된다'는 silent finding을 정조준.",
-'2604.24149': "Remote sensing image dehazing을 unified로. 'sequential pipeline 한계' 정조준.",
+'2604.23941': "GUI element grounding을 lightweight하게 — mobile phone deployment 정면으로 다룸. Agentic AI on-device 측 결.",
+'2604.23950': "VLM의 attention-based token pruning을 rethink — naive pruning이 reasoning을 망가뜨린다는 진단. LearnPruner는 pruning이 'attention만 보면 안 된다'는 silent finding을 정면으로 다룸.",
+'2604.24149': "Remote sensing image dehazing을 unified로. 'sequential pipeline 한계' 정면으로 다룸.",
 '2604.24167': "Implicit neural representation의 high-dimensional projection을 PEPS로 효율화. INR 측 코어 결.",
 '2604.22939': "LLM의 self knowledge re-expression — fully local task adaptation. NTP의 sequential 한계를 intrinsic knowledge로 우회.",
 '2604.23012': "Thumb-sized microcontroller에서 vision training + deployment + inference 전부. 가격 \\$15-40 USD — TinyML extreme 결.",
@@ -288,7 +288,7 @@ SUMMARIES = {
 '2604.23074': "UAV multirotor가 tilting platform에 toggleable adhesion으로 착륙. Maritime UAV 라인 결.",
 '2604.23327': "Mobile robotics active perception의 efficient beam search. 정보획득 + 이동 비용 동시 최적화 결.",
 '2604.23693': "Heterogeneous multi-robot collaborative exploration을 decentralized로. 멀티 로봇 협력 측 결.",
-'2604.24447': "VLA를 다양한 XPU(GPU/NPU/edge) 환경에서 characterize. 'desktop GPU evaluation의 한계' 정조준 — VLA deployment의 hardware reality 정량화. 우리 deployment 라인이라면 reference.",
+'2604.24447': "VLA를 다양한 XPU(GPU/NPU/edge) 환경에서 characterize. 'desktop GPU evaluation의 한계' 정면으로 다룸 — VLA deployment의 hardware reality 정량화. 우리 deployment 라인이라면 reference.",
 '2604.24661': "Visual RL의 dynamic perturbation robustness를 agent-centric으로. RL 측 robustness 결.",
 '2604.23402': "Robotic touch design에 'otherness' 라는 새 quality 제안. HRI 사회적 측면의 디자인 철학 결.",
 
@@ -298,49 +298,49 @@ SUMMARIES = {
 '2604.23970': "Floor plan image → structured retrievable knowledge로 LLM agent를 통해 변환. BLV(시각장애인) navigation 측 결로, 'per-building 인프라 비용' 우회.",
 '2604.22896': "Magnetic indoor localization을 CNN regression + rotation invariance로. GNSS-denied 환경 측 결.",
 '2604.23580': "3D scene physics-aware symbolic simulation 벤치 PhysCodeBench. LLM이 physics 묘사를 executable simulation으로 변환하는 능력 측정 — embodied AI 측 데이터 인프라.",
-'2604.24391': "VLN 모델의 token caching을 frequency-guided adaptive로. VLN의 'high computational overhead' 정조준 — embodied agent의 deployment 측 결.",
+'2604.24391': "VLN 모델의 token caching을 frequency-guided adaptive로. VLN의 'high computational overhead' 정면으로 다룸 — embodied agent의 deployment 측 결.",
 
 # === Safety/Alignment ===
 '2604.22837': "Long occlusion·fast motion·viewpoint change 하의 SAM-tracker fragility를 dense memory + selective update로 보강. PVUW MOSE 챌린지 결로 video tracking robustness 측 결.",
 '2604.22841': "Face image quality assessment에 attention-based interpretable 모델. 'multiple forward pass + backprop' 비용 우회 — face recognition 측 결.",
-'2604.22853': "Fast Adversarial Training의 'fair comparison 부재' 정조준 벤치 FastAT. Adversarial robustness 라인 인프라 결.",
+'2604.22853': "Fast Adversarial Training의 'fair comparison 부재' 정면으로 다룸 벤치 FastAT. Adversarial robustness 라인 인프라 결.",
 '2604.22899': "RGB+3D 산업 anomaly detection의 ambiguous cross-modal alignment 보정. Industrial QC 측 결.",
 '2604.23105': "AD object detection에 transferable physical-world adversarial patch. AV safety 측 위협 정량화 — 어제 TriPatch와 같은 라인의 또 다른 결. Risk 섹션 참고.",
-'2604.23125': "Long-tailed + high-noise label에서 robust visual recognition. 'imperfect text guidance' 활용으로 noise-image mismatch 정조준.",
+'2604.23125': "Long-tailed + high-noise label에서 robust visual recognition. 'imperfect text guidance' 활용으로 noise-image mismatch 정면으로 다룸.",
 '2604.23274': "Semi-supervised medical image segmentation에 generative dual-distribution alignment. Annotation 비용 우회.",
 '2604.23335': "Knee osteoarthritis grading을 hierarchical semi+self-supervised fusion으로. 의료 측 annotation 부족 결.",
 '2604.23452': "ViT가 'classification만 학습'했어도 spatial structure를 어떻게 encode하는지 layerwise probing. Transfer learning 이론 결로, 'spatial supervision 없이도 spatial 정보를 얻는다'는 흥미로운 진단.",
 '2604.23655': "Low-light + underwater video enhancement에 visual state-space model. SSM의 vision 응용 측 결.",
 '2604.23662': "Solar PV 결함 분류 데이터셋 SolarFCD. Energy 측 응용 데이터 인프라.",
-'2604.23670': "DINO를 many-to-many association으로 zero-shot deployment. DINO feature의 generalization 한계 정조준.",
+'2604.23670': "DINO를 many-to-many association으로 zero-shot deployment. DINO feature의 generalization 한계 정면으로 다룸.",
 '2604.23706': "Ulcerative colitis Nancy index의 weakly supervised 채점 — foundation model이 의료 grading을 자동화하는 사례.",
 '2604.23718': "Caries DETR + tooth structure prior + lesion-aware loss. Dental imaging 측 결.",
 '2604.23839': "Fetal ultrasound nuchal translucency 측정의 ROI-aware refinement. 'global metric이 clinical fidelity의 unreliable proxy'라는 진단이 healthy.",
-'2604.23875': "Medical image classification의 label noise를 risk-aware로. Clinical risk 정조준 결.",
+'2604.23875': "Medical image classification의 label noise를 risk-aware로. Clinical risk 정면으로 다룸 결.",
 '2604.23957': "Layered audio-visual anti-tampering watermarking. Deepfake 검출 + localization 측 결.",
 '2604.23977': "Low-resource biomedical classification을 multi-view synergistic + VL로. 의료 도메인 데이터 부족 결.",
 '2604.23982': "Histopathology multimodal MIL의 hierarchical prototype-based domain prior. 디지털 병리 측 결.",
 '2604.24023': "Real-world commercial design 프로젝트 평가 벤치 ServImage. Image gen이 academic vs paid production 갭 측정.",
-'2604.24024': "Multi-projector calibration을 embedded camera로 — sequential pattern projection의 scalability 한계 정조준.",
+'2604.24024': "Multi-projector calibration을 embedded camera로 — sequential pattern projection의 scalability 한계 정면으로 다룸.",
 '2604.24109': "Medical image segmentation의 annotation efficiency를 SemiSAM-O1으로 push. Foundation model + SSL 결합 결.",
 '2604.24125': "Object-level + scene-level label 통합 open-vocabulary segmentation. RS 측 결.",
 '2604.24163': "NTIRE 2026 deepfake detection robustness 챌린지 보고서. Image degradation 하의 deepfake 검출 측 인프라.",
 '2604.24171': "Visual text generation의 text-accuracy vs aesthetic trade-off를 Pareto-optimal curriculum alignment로. T2I rendering 측 결.",
 '2604.24230': "Skull-base meningioma의 volumetric response 예측을 radiomics+clinical로. Stereotactic radiosurgery 측 결.",
 '2604.24234': "Laser powder bed fusion in-situ inspection의 graph-augmented segmentation. Additive manufacturing 측 결.",
-'2604.24328': "Monocular depth에 algebraic group + ring 구조를 학습 가능 파라미터로. 'Euclidean grid generic regression' 한계 정조준.",
+'2604.24328': "Monocular depth에 algebraic group + ring 구조를 학습 가능 파라미터로. 'Euclidean grid generic regression' 한계 정면으로 다룸.",
 '2604.24331': "Affordable wearable stereo eye-tracking 플랫폼. HCI 측 인프라 결.",
 '2604.24492': "Spaceborne edge AI용 deployment-aligned low-precision NAS. Edge accelerator 측 결로 hardware-aware design.",
 '2604.24524': "SPECT MPI + CTA registration을 point cloud로. 의료 multimodal fusion 결.",
 '2604.24543': "RGB-T crowd counting에 reliability-aware crowd anchor. Cross-modal feature fusion 측 robustness 결.",
-'2604.24642': "CLIP의 360° panoramic 이해 정량 — 'pretrain은 perspective image, 평가는 360° generation'이라는 evaluator 갭 정조준.",
+'2604.24642': "CLIP의 360° panoramic 이해 정량 — 'pretrain은 perspective image, 평가는 360° generation'이라는 evaluator 갭 정면으로 다룸.",
 '2604.22904': "Hepatobiliary phase liver MRI 합성 — prolonged post-contrast delay 우회. 의료 측 결.",
 '2604.24236': "Biofouling 환경의 dissolved oxygen 측정에 deep learning. 해양 모니터링 측 응용.",
 '2604.23179': "Multi-agent informative sensing으로 dynamic indoor 모니터링. Mobile robot team coordination 측 결.",
 '2604.23696': "Wrist-mounted F/T sensor의 non-contact force compensation. Haptic-enabled robotic surgery 측 deployment 결.",
 '2604.23775': "VLA safety의 threats·challenges·evaluations·mechanisms를 unified survey로. RedVLA 같은 개별 시도들이 systematic mapping을 받는 시점 — 우리 manipulation 스택의 safety roadmap 작성에 reference. 오늘자 must-read에서 자세히.",
 '2604.23863': "Safety value-constrained MPC로 performance + safety co-optimization. State/input constraint 하의 MPC 측 결.",
-'2604.24188': "임의 material pair의 friction coefficient를 proxy interaction으로 일반화. Robotics + digital fabrication 측 결로 'pairwise testing의 quadratic 비용' 정조준.",
+'2604.24188': "임의 material pair의 friction coefficient를 proxy interaction으로 일반화. Robotics + digital fabrication 측 결로 'pairwise testing의 quadratic 비용' 정면으로 다룸.",
 '2604.24518': "Sliding mode control로 moving obstacle avoidance + trajectory tracking. Mobile robot control 측 결.",
 }
 
@@ -394,7 +394,7 @@ def main():
     # 주간 동향
     parts.append('<h2>🔭 주간 동향</h2>')
     parts.append('<p>이번주 pastweek 누적의 가장 큰 신호는 <strong>Autonomous Driving</strong>이 13편 → 32편으로 <span class="hot">+146%</span> 폭증했다는 점이에요. 어제까지 \'AD가 perception 단독 결을 줄이고 큰 모델 안으로 흡수된다\'고 보던 흐름이 이번주 다시 반전 — V2X coordination(SwarmDrive), 4D occupancy directing(OccDirector, 어제 결), end-to-end parking(ParkingScenes), pedestrian intention prediction(ESIA), trajectory planning + LLM negotiation 같은 결들이 동시에 쌓이면서 AD가 \'단순 perception\'에서 \'social-aware decision\'으로 무게중심이 옮겨가는 모양새입니다. 한편 <strong>Efficiency/Systems</strong>가 28→40편(<span class="hot">+43%</span>), <strong>Safety/Alignment</strong>가 31→39편(<span class="hot">+26%</span>) 늘어난 것도 \'production-deployment\' 라인이 함께 굵어진다는 신호로 봅니다. 반대로 <strong>Foundation Models</strong>가 112→52편(<span class="cold">-54%</span>), <strong>Embodied AI</strong>가 30→15편(<span class="cold">-50%</span>) 빠진 건 어제 폭증한 후의 자연스러운 호흡 같아요 — 다만 두 버킷이 동시에 절반으로 빠진 건 우연이 아니라, 어제 한 날에 몰렸던 신규 결들이 한꺼번에 빠지는 패턴이라 평균 회귀로 보는 게 맞아 보입니다.</p>')
-    parts.append('<p>오늘 /new에서 제일 눈에 띄는 건 <strong>VLA 라인이 \'문제 정의\' 단계에 진입했다는 신호 셋</strong>이에요. 어제 \'memory·intent·safety\' 세 축 동시 점화를 짚었는데, 오늘은 <a href="https://arxiv.org/abs/2604.23121">Lock-in</a>(low-data post-training 후 instruction-following이 멈춘다는 새 failure mode), <a href="https://arxiv.org/abs/2604.23001">VLA Data Survey</a>(architecture가 아니라 data infrastructure가 진짜 bottleneck이라는 강한 클레임), <a href="https://arxiv.org/abs/2604.23775">VLA Safety Survey</a>(threats·evaluations·mechanisms 통합 매핑)가 같은 날 등장했습니다. 어제는 \'각자 다른 axis에 처방\'이었다면 오늘은 \'communities-wide 진단/매핑\' 단계 — VLA 분야가 한 분기 안에 sub-disciplines가 분기점에 들어가는 패턴이 명확해요. 솔직히 이건 한동안 갈 것 같습니다.</p>')
+    parts.append('<p>오늘 /new에서 제일 눈에 띄는 건 <strong>VLA 라인이 개별 처방에서 실패 유형 정리 단계로 넘어갔다는 신호</strong>예요. 어제까지는 memory·intent·safety 같은 문제를 각각 따로 고치는 논문들이 많았다면, 오늘은 <a href="https://arxiv.org/abs/2604.23121">Lock-in</a>이 적은 데모로 추가학습한 VLA가 새 명령을 잘 못 따라가고 예전에 본 행동만 반복하는 현상을 이름 붙였습니다. <a href="https://arxiv.org/abs/2604.23775">VLA Safety Survey</a>는 어떤 위협을 걱정해야 하는지와 어떻게 평가·방어할지를 한 장의 지도처럼 묶고, <a href="https://arxiv.org/abs/2604.23001">VLA Data Survey</a>는 성능을 막는 병목이 모델 구조 하나가 아니라 데이터 수집·정리·벤치마크 파이프라인에 있다고 봅니다. 이건 새 알고리즘 하나가 나온 날이라기보다, VLA 분야가 자기 실패 유형과 인프라 병목을 목록화하기 시작한 날에 가깝습니다.</p>')
     parts.append('<p>부상 중인 미니 토픽 두 개. 첫째, <strong>Diffusion이 perception backbone으로 본격 흡수</strong>되는 흐름 — <a href="https://arxiv.org/abs/2604.24575">Diffusion as Generalist Segmentation Learner</a>가 denoising trajectory를 segmentation prior로 직접 사용하고, <a href="https://arxiv.org/abs/2604.23380">V-GRPO</a>가 \'denoising RL은 생각보다 쉽다\'는 surprising 결을 내놨습니다. Generation 인프라가 perception/RL post-training 양쪽에 동시에 흘러드는 패턴이에요. 둘째, <strong>VLM이 못 푸는 작은 실패 모드 정량화</strong>가 catalogue 단계 — <a href="https://arxiv.org/abs/2604.23407">PushupBench</a>(VLM이 푸쉬업 카운트를 못 함, frontier 42%), <a href="https://arxiv.org/abs/2604.22829">Dynamic Gauges</a>(진동하는 계기판을 못 읽음), <a href="https://arxiv.org/abs/2604.22884">Small Object Understanding</a>(SOU 자체가 blank), <a href="https://arxiv.org/abs/2604.24300">ReVSI</a>(VLM 3D 평가 자체가 systematically invalid)가 한 날에 나란히 등장. \'어디서 깨지는가\'를 명시화하는 단계라, hallucination/POPE가 한 일을 다른 axis에서 반복하는 패턴이 보입니다.</p>')
 
     # CV vs RO
@@ -426,18 +426,18 @@ def main():
     parts.append('<li><code>memory / context</code>: CV(Audio Hallucination, EgoDyn-Bench ego-motion grounding) / RO(Lock-in low-data fine-tuning) — CV는 \'평가\'·RO는 \'failure mode 명명\'</li>')
     parts.append('</ul>')
     parts.append('</div>')
-    parts.append('<p>오늘의 CV/RO 교집합은 \'<em>VLM/VLA가 어디서 깨지는가\'를 systematic mapping</em>하는 단계입니다. CV쪽 PushupBench·DO-Bench·ReVSI가 vision 모델의 누락된 능력을 명시화하고, RO쪽 Lock-in·VLA Safety Survey가 VLA 모델의 미래 failure mode를 통합 매핑해요. 어제까지 \'각 axis에 처방\'이었다면 오늘은 \'전체 분야가 무엇이 무너질 수 있는지\'를 동시에 정리하는 단계 — community가 maturity를 한 단계 올리는 신호로 봅니다.</p>')
+    parts.append('<p>오늘의 CV/RO 교집합은 <em>VLM/VLA가 어디서 깨지는지 정리하는 단계</em>입니다. CV쪽 PushupBench·DO-Bench·ReVSI는 vision 모델이 놓치는 능력을 하나씩 드러내고, RO쪽 Lock-in·VLA Safety Survey는 VLA가 어떤 상황에서 멈추거나 위험해질 수 있는지를 분류합니다. 어제까지 “각 문제에 대한 처방”이 나왔다면, 오늘은 “무엇이 무너질 수 있는지부터 목록화하자”는 쪽으로 분위기가 이동한 셈입니다.</p>')
 
     # 인사이트
     parts.append('<h2>💡 오늘의 인사이트</h2>')
-    parts.append('<div class="insight"><h3>VLA 분야가 \'failure mode catalog\' 단계로 진입 — Lock-in·Safety Survey·Data Survey가 한 날 동시 등장</h3><p>어제까지 \'memory·intent·safety\'에 각자 처방이 나왔다면, 오늘은 <a href="https://arxiv.org/abs/2604.23121">Lock-in</a>이 \'low-data post-training 후 instruction-following이 멈추는\' 새 failure mode를 명명하고, <a href="https://arxiv.org/abs/2604.23775">VLA Safety</a>가 threats·challenges·evaluations·mechanisms를 통합 매핑하며, <a href="https://arxiv.org/abs/2604.23001">VLA Data Survey</a>가 \'architecture 진보가 아니라 data infrastructure가 진짜 bottleneck\'이라는 강한 클레임을 내놨습니다. 한 날에 셋이 동시에 등장하는 건 우연이 아니라, VLA community가 \'개별 시도들의 catalog\' 단계에 진입했다는 신호. 우리 manipulation 스택을 짤 때도 \'어디에 들어갈지\'에서 \'어떤 failure mode를 회피할지\'로 사고 프레임이 옮겨가야 할 시점입니다.</p></div>')
+    parts.append('<div class="insight"><h3>VLA가 개별 처방에서 실패 유형 정리 단계로 이동</h3><p>어제까지는 VLA 논문들이 memory, intent, safety 같은 문제를 각각 따로 고치는 분위기였다면, 오늘은 그 문제들이 왜 생기고 어떻게 분류되는지를 정리하는 쪽으로 넘어갔습니다. <a href="https://arxiv.org/abs/2604.23121">Lock-in</a>은 적은 데모로 VLA를 추가학습했을 때 새 명령을 잘 못 따라가고 예전에 본 행동만 반복하는 현상을 이름 붙였고, <a href="https://arxiv.org/abs/2604.23775">VLA Safety</a>는 어떤 위협을 걱정해야 하는지와 어떻게 평가·방어할지를 한 장의 지도처럼 묶습니다. <a href="https://arxiv.org/abs/2604.23001">VLA Data Survey</a>는 성능을 막는 병목이 모델 구조 하나가 아니라 데이터 수집·정리·벤치마크 파이프라인에 있다고 봅니다. 우리 manipulation 스택을 짤 때도 “무엇을 더 붙일까”보다 “어떤 실패를 먼저 피해야 하나”를 먼저 물어야 할 시점입니다.</p></div>')
     parts.append('<div class="insight"><h3>Diffusion이 generation을 떠나 perception/control backbone으로 흡수되는 흐름이 본격화</h3><p>오늘 <a href="https://arxiv.org/abs/2604.24575">Diffusion as Generalist Segmentation Learner</a>가 denoising trajectory의 spatial prior를 segmentation에 직접 사용하고, <a href="https://arxiv.org/abs/2604.23380">V-GRPO</a>는 \'denoising generative model의 online RL이 생각보다 쉽다\'는 surprising 결을 내놓고, <a href="https://arxiv.org/abs/2604.24487">Score-Induced Guiding Vector Field</a>가 robotic path following에 score-based diffusion을 사용합니다. 어제 dWorldEval(diffusion → policy 평가), OccDirector(diffusion → AD scenario directing) 라인의 직접 후속이고, \'diffusion = generation\' 1차 정의가 빠르게 무너지고 있어요. 다음 4~6주 동안 generative와 discriminative의 경계 자체가 재정의될 가능성이 큽니다.</p></div>')
     parts.append('<div class="insight"><h3>VLM의 \'못 하는 것\' 카탈로그 정량화 — POPE 패턴이 새 axis로 반복 재현</h3><p><a href="https://arxiv.org/abs/2604.23407">PushupBench</a>(counting 42%), <a href="https://arxiv.org/abs/2604.22829">Dynamic Gauges</a>(진동 계기판 읽기 실패), <a href="https://arxiv.org/abs/2604.22884">Small Object Understanding</a>(blank), <a href="https://arxiv.org/abs/2604.24300">ReVSI</a>(VLM 3D 평가 자체가 invalid), <a href="https://arxiv.org/abs/2604.24346">SycoPhantasy</a>(VLM evaluator의 sycophancy)가 같은 날 동시 등장. POPE가 hallucination에 한 일을 \'counting\'·\'temporal vibration\'·\'small object\'·\'spatial reasoning\'·\'evaluator bias\' 다섯 axis에서 동시에 반복하는 패턴이에요. 다음 단계는 이걸 통합 \'VLM Failure Atlas\'로 묶는 paper일 가능성이 높고, 우리가 그 자리를 선점할 수 있는 좋은 기회입니다.</p></div>')
 
     # 추천 연구주제
     parts.append('<h2>🔬 추천 연구주제</h2>')
     parts.append('<div class="topic"><h3>VLM Failure Atlas — VLM의 시계열 failure mode를 단일 벤치로 통합</h3><p>오늘 PushupBench·Dynamic Gauges·SOU·ReVSI·SycoPhantasy가 흩어진 axis에 각자 벤치를 출시했는데, 통합 프레임이 비어 있어요. \'counting·temporal vibration·small object·spatial reasoning·evaluator bias\' 5축으로 표준 진단 task를 묶어 reproducible eval suite를 만들면, POPE가 hallucination에 한 일을 더 큰 scope에서 반복할 수 있습니다. 우리 랩이 VLM evaluation 인프라를 갖췄다면 빠르게 출판 가능한 자리고, 4~6주 안에 \'first-mover\' 위치를 잡을 수 있어요.</p></div>')
-    parts.append('<div class="topic"><h3>VLA Lock-in 정량화 + 회복 메커니즘 — low-data post-training의 silent killer 정조준</h3><p>오늘 Lock-in 페이퍼가 \'low-data post-training 후 instruction-following이 멈추는\' 현상을 처음 명명했지만, 정량 다이얼(데이터 양 vs lock-in 강도, instruction diversity 영향, 회복 가능성 측정)이 비어 있어요. 우리 랩이 VLA fine-tuning 데이터를 갖고 있다면 \'lock-in scaling law\' + \'recovery mechanism (replay·diverse instruction warmup·KL anchor)\' 비교를 빠르게 measure할 수 있습니다. VLA practitioner라면 실용적으로 가장 즉각적 가치 있는 자리.</p></div>')
+    parts.append('<div class="topic"><h3>VLA Lock-in 정량화 + 회복 메커니즘 — low-data post-training의 silent killer 정면으로 다룸</h3><p>오늘 Lock-in 페이퍼가 \'low-data post-training 후 instruction-following이 멈추는\' 현상을 처음 명명했지만, 정량 다이얼(데이터 양 vs lock-in 강도, instruction diversity 영향, 회복 가능성 측정)이 비어 있어요. 우리 랩이 VLA fine-tuning 데이터를 갖고 있다면 \'lock-in scaling law\' + \'recovery mechanism (replay·diverse instruction warmup·KL anchor)\' 비교를 빠르게 measure할 수 있습니다. VLA practitioner라면 실용적으로 가장 즉각적 가치 있는 자리.</p></div>')
     parts.append('<div class="topic"><h3>Diffusion Backbone Audit — generation/perception/control 통합 학습이 실제로 효율적인가</h3><p>오늘 Diffusion-as-Segmentation, V-GRPO, Score Vector Field 같이 diffusion이 perception/control로 흡수되는 사례가 동시 등장했지만, \'단일 diffusion backbone이 multiple downstream task를 동시 수행\'하는 multi-task transfer benchmark는 아직 없어요. Generation backbone을 perception/control로 transfer할 때 효율 vs accuracy trade-off를 systematic하게 측정하는 결이 비어 있어, generative AI 인프라를 운영하는 랩이라면 빠르게 출판할 수 있는 자리입니다. 4~6주 안에 community standard로 굳을 가능성이 큰 첫 결이 나올 만한 자리.</p></div>')
 
     # 회고 — 자료 부족 안내 (오늘은 화요일이라 회고 섹션 자체 생략)
@@ -466,8 +466,8 @@ def main():
 
     # 크로스오버 페어
     parts.append('<h2>🔀 크로스오버 페어</h2>')
-    parts.append('<div class="crosspair"><h3>VLM/VLA의 \'못 하는 것\'을 정량화 — Counting(CV) vs Lock-in(RO)</h3><p><a href="https://arxiv.org/abs/2604.23407">PushupBench</a>(CV)는 frontier VLM이 푸쉬업을 42%만 카운트한다는 명백한 실패 모드를 정량화합니다. 같은 날 <a href="https://arxiv.org/abs/2604.23121">Lock-in</a>(RO)은 low-data post-training 후 VLA가 새 instruction에 반응을 멈추는 \'lock-in\' 현상을 처음 명명. 양쪽 모두 \'프론티어 모델이 사람 눈에는 너무나 당연해 보이는 일에서 망가진다\'를 정조준한 결인데, CV쪽은 \'evaluation 측\' RO쪽은 \'training dynamics 측\'에서 접근. 두 편 같이 읽으면 \'foundation model이 어디서 깨지나\'의 진단 그림이 한층 선명해집니다.</p></div>')
-    parts.append('<div class="crosspair"><h3>Data Infrastructure as Bottleneck — World-scale Generation(CV) vs VLA Data Survey(RO)</h3><p><a href="https://arxiv.org/abs/2604.22828">MetaEarth3D</a>(CV)는 \'기존 3D generation이 bounded 환경에 갇혀있다\'며 spatially scalable world-scale generation을 시도. 같은 날 <a href="https://arxiv.org/abs/2604.23001">VLA Survey</a>(RO)는 \'VLA의 진짜 bottleneck은 architecture가 아니라 data infrastructure\'라는 강한 클레임. 둘 다 \'모델보다 데이터/공간 인프라가 한계\'라는 같은 문제 인식을 공유하지만, CV는 \'생성용 데이터 인프라\' RO는 \'학습용 데이터 인프라\' 측을 정조준. 같은 진단이 두 community에서 동시 표면화하는 건 \'데이터 인프라\'가 향후 6개월 양쪽 공통 키워드가 될 신호로 봅니다.</p></div>')
+    parts.append('<div class="crosspair"><h3>VLM/VLA의 \'못 하는 것\'을 정량화 — Counting(CV) vs Lock-in(RO)</h3><p><a href="https://arxiv.org/abs/2604.23407">PushupBench</a>(CV)는 frontier VLM이 푸쉬업을 42%만 카운트한다는 명백한 실패 모드를 정량화합니다. 같은 날 <a href="https://arxiv.org/abs/2604.23121">Lock-in</a>(RO)은 low-data post-training 후 VLA가 새 instruction에 반응을 멈추는 \'lock-in\' 현상을 처음 명명. 양쪽 모두 \'프론티어 모델이 사람 눈에는 너무나 당연해 보이는 일에서 망가진다\'를 정면으로 다룬 결인데, CV쪽은 \'evaluation 측\' RO쪽은 \'training dynamics 측\'에서 접근. 두 편 같이 읽으면 \'foundation model이 어디서 깨지나\'의 진단 그림이 한층 선명해집니다.</p></div>')
+    parts.append('<div class="crosspair"><h3>Data Infrastructure as Bottleneck — World-scale Generation(CV) vs VLA Data Survey(RO)</h3><p><a href="https://arxiv.org/abs/2604.22828">MetaEarth3D</a>(CV)는 기존 3D generation이 작은 장면 안에 갇혀 있다는 문제를 잡고, 더 넓은 공간을 만들 수 있는 데이터·생성 인프라를 시도합니다. 같은 날 <a href="https://arxiv.org/abs/2604.23001">VLA Survey</a>(RO)는 VLA 성능을 막는 핵심이 모델 구조 하나가 아니라 로봇 데이터의 수집·정리·평가 파이프라인이라고 봅니다. 둘 다 “모델만 키우면 된다”가 아니라 “쓸 수 있는 데이터와 공간 인프라가 먼저 필요하다”는 같은 문제의식을 공유합니다.</p></div>')
 
     # Must-read
     parts.append('<h2>🌟 오늘의 must-read</h2>')
@@ -500,7 +500,7 @@ def main():
     # 리스크 필터
     parts.append('<h2>⚠️ 리스크·한계 필터</h2>')
     parts.append('<div class="risk"><h3>Transferable Physical-World Adversarial Patches — \'physical-world\' 클레임의 lab vs 야외 갭</h3><p><a href="https://arxiv.org/abs/2604.23105">Transferable Physical-World Adversarial Patches Against Object Detection</a>가 multi-stage AD detection 파이프라인 동시 교란 + appearance robustness를 클레임. 어제 TriPatch와 동일 라인의 결이지만, \'physical-world\' 단어가 실세계 다양 조명·각도·거리·운동에서 평균 성공률을 낮추는 게 이 라인 고질병이에요. 통제된 lab vs 야외 다양 시나리오 효과 차가 abstract만으론 안 잡혀, weather/distance/motion ablation 표 정독 전엔 \'production AV 위협\' 강한 클레임은 보류.</p></div>')
-    parts.append('<div class="risk"><h3>VLA Survey의 \'data infrastructure가 진짜 bottleneck\' 클레임 — 검증 가능한 prediction인가</h3><p><a href="https://arxiv.org/abs/2604.23001">VLA Survey</a>의 \'architecture가 아니라 data infrastructure가 진짜 bottleneck\'이라는 클레임은 강력하지만 검증 가능 prediction으로 분해되지 않으면 narrative에 그칠 위험. 예컨대 \'데이터 양 N배 vs architecture 개선 X% 시 어느 쪽이 더 큰 SOTA gain\' 같은 정량 비교가 없으면 시각이 healthy해도 행동 가이드로는 약합니다. Survey 본문에서 retrospective 정량 비교가 충분히 보고되는지 확인 필요.</p></div>')
+    parts.append('<div class="risk"><h3>VLA Survey의 데이터 병목 주장 — 검증 가능한 예측인가</h3><p><a href="https://arxiv.org/abs/2604.23001">VLA Survey</a>는 VLA 발전을 막는 핵심이 모델 구조보다 데이터 수집·정리·평가 파이프라인에 있다고 봅니다. 이 주장은 설득력이 있지만, “데이터를 N배 늘렸을 때”와 “모델 구조를 바꿨을 때” 어느 쪽이 성능을 더 올리는지 같은 비교로 쪼개지 않으면 좋은 구호에 머물 수 있습니다. Survey 본문에서 이런 retrospective 정량 비교가 충분히 있는지 확인해야 합니다.</p></div>')
     parts.append('<div class="risk"><h3>PushupBench·Dynamic Gauges 류 \'failure mode\' 벤치 — single-task 스코어가 frontier 차이를 가르나</h3><p><a href="https://arxiv.org/abs/2604.23407">PushupBench</a>(VLM이 푸쉬업 42% 카운트), <a href="https://arxiv.org/abs/2604.22829">Dynamic Gauges</a>(진동 계기판 읽기 실패) 같은 single-task failure 벤치는 진단 가치는 있지만, frontier VLM 사이의 \'어느 모델이 진짜 더 나은가\'를 single-task로 결정하면 cherry-pick 인센티브가 작용합니다. 향후 evaluators가 이 single-task 벤치를 frontier 비교에 쓰지 않도록 \'배경 진단\'으로만 사용하는 게 안전 — 통합 atlas로 묶기 전엔 \'X 모델이 Y 모델보다 낫다\' 강한 결론은 보류.</p></div>')
     parts.append('<div class="risk"><h3>Tuna-2의 \'Pixel Embeddings Beat Vision Encoders\' 클레임 — fair comparison인가</h3><p><a href="https://arxiv.org/abs/2604.24763">Tuna-2</a>가 \'pixel embedding이 vision encoder를 이긴다\'는 강한 클레임을 unified MLLM 측에서. End-to-end pixel-from-scratch가 가능하다는 결 자체는 흥미롭지만, vision encoder 경쟁자가 같은 학습 token budget·compute로 비교됐는지가 핵심. End-to-end 측이 더 큰 compute로 학습됐으면 \'win\' 클레임은 fair comparison이 아닐 수 있어요. 본문의 compute-matched ablation 테이블 정독 전엔 \'vision encoder 시대 끝\' 강한 결론은 잠정 보류가 안전.</p></div>')
 
