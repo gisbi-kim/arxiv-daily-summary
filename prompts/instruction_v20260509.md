@@ -249,18 +249,27 @@ thesis는 단순 요약이 아니라 editorial judgment여야 한다.
 
 각 클러스터는 최소 2편 이상의 논문으로 evidence를 둔다. 단발 논문이면 cluster가 아니라 "관찰 중"으로 표시한다.
 
-### 8.5.3 대표 클러스터 표
+### 8.5.3 대표 클러스터 표 — daily/weekly 모두 필수
 
-Daily 상단 또는 주간 동향 직후에 아래 표를 넣는다.
+Daily와 weekly에는 반드시 클러스터 지도 표를 넣는다. 카드형 인사이트나 버킷 현황으로 대체하지 않는다.
+
+- Daily: thesis 바로 뒤, `🔭 주간 동향`보다 앞에 `🧩 오늘의 클러스터 지도` h2로 배치한다.
+- Weekly: thesis 또는 `🔭 주간 동향` 직후에 `🧩 주간 클러스터 표` h2로 배치한다.
+- 표가 빠진 HTML은 미완성 산출물로 간주한다. 논문 수가 적어도 최소 3개 클러스터를 만들고, 정말 근거가 부족한 행은 Confidence를 Low로 둔다.
+- 각 행은 “읽을 클러스터 / 대표 논문 / 왜 중요한가 / 얼마나 확실한가 / 우리 랩이 무엇을 해볼까”를 30초 안에 보여주는 역할을 한다.
+- `왜 중요?` 칸은 영어식 라벨이나 압축 구문으로 끝내지 않는다. “그게 실제로 무슨 뜻인지”와 “기존 방식과 무엇이 달라지는지”를 2~3문장 한국어로 풀어쓴다.
+- `Lab action` 칸은 “follow-up”, “audit”, “metric 설계” 같은 추상어만 쓰지 말고, 어떤 benchmark·dataset·ablation·stress test를 할지 구체적으로 적는다.
+
+표 스키마는 daily/weekly 모두 동일하다.
 
 ```text
 | Cluster | 대표 논문 | 왜 중요? | Confidence | Lab action |
 |---|---|---|---|---|
-| VLA structure | TriRelVLA, VLA-GSE | VLA 일반화를 relation/expert 구조로 재정의 | High | LIBERO/RoboCasa ablation |
-| Video control | ActCam, RealCam | camera+motion 제어 평가축 부상 | Medium | controllability metric 설계 |
+| VLA structure exposure | TriRelVLA, VLA-GSE, When to Trust Imagination | VLA를 큰 policy 하나로 보면 왜 성공하고 실패하는지 설명하기 어렵다. 이 클러스터는 relation, expert, verifier처럼 내부 역할을 나눠 보자는 흐름이라, 모델 크기보다 어떤 구조가 일반화에 기여하는지 비교할 수 있게 해준다. | High | LIBERO/RoboCasa에서 relation/expert/verifier를 같은 task family로 ablation |
+| Controllable video generation | ActCam, RealCam, FreeSpec | 예전에는 생성 영상이 얼마나 그럴듯한지 봤다면, 이제는 원하는 카메라 경로와 대상 움직임을 얼마나 안정적으로 조종하는지가 중요해졌다. 즉 video generation이 감상용 샘플러에서 제작 도구로 넘어가는 신호다. | High | 카메라 경로 오차, 대상 정체성 유지, 지연시간을 분리한 controllability metric 설계 |
 ```
 
-표는 독자가 30초 안에 "읽을 것 / 실험할 것 / 보류할 것"을 나누게 해주는 장치다.
+표는 독자가 30초 안에 "읽을 것 / 실험할 것 / 보류할 것"을 나누게 해주는 장치다. 따라서 모든 daily/weekly HTML 생성 직후 `Cluster</th>`, `대표 논문`, `왜 중요?`, `Confidence`, `Lab action` 문자열이 실제 HTML에 존재하는지 검증한다.
 
 ### 8.5.4 중요도 태그
 
@@ -460,7 +469,7 @@ TriRelVLA: Triadic Relational Structure for Generalizable Embodied Manipulation 
 3. 주간 thesis — 이번주 판세를 1~2문장으로 선언
 4. 🔭 주간 동향 — RSS 요약 추출을 위해 반드시 이 h2 포함
 5. ⚖️ Hot vs Cold
-6. 🧩 주간 클러스터 표 — Cluster / Papers / Why / Confidence / Lab action
+6. 🧩 주간 클러스터 표 — 필수. Daily의 `오늘의 클러스터 지도`와 같은 5열 표를 사용한다: Cluster / 대표 논문(Papers) / 왜 중요?(Why) / Confidence / Lab action. 카드 목록이나 Top 5로 대체 금지.
 7. 📐 CV vs RO 키워드
 8. 🔥 주간 Top 5 — 각 항목에 중요도 태그
 9. 🌟 Deep-dive 1편
