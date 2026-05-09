@@ -456,6 +456,53 @@ def evidence_ids_from_obj(obj: dict) -> list[str]:
     return ids
 
 
+def fallback_cluster_specs(id_map: dict[str, tuple[str, dict]]) -> list[dict]:
+    candidates = [
+        {
+            "name": "Navigation as map-level decision",
+            "keywords": ["navone", "navigation", "objectnav", "label map", "ambiguous user queries", "top-down maps"],
+            "exclude": ["mri", "slice navigation", "image pretraining"],
+            "why": (
+                "VLN/ObjectNav가 지시문을 한 단계씩 따라가는 문제에서, 전체 지도와 애매한 목표를 함께 판단하는 문제로 이동하고 있습니다. "
+                "즉 로봇이 바로 움직이기보다, 현재 목표가 무엇인지와 어느 후보가 더 맞는지를 먼저 비교해야 한다는 뜻입니다."
+            ),
+            "confidence": "Medium",
+            "confidence_note": "navigation 관련 논문 2편 이상 연결, benchmark 확산은 추가 확인 필요",
+            "lab_action": "R2R/ObjectNav에 ambiguous-query와 top-down map planning stress test를 묶어 평가",
+            "tags": ["문제정의", "인프라"],
+        },
+        {
+            "name": "3D/robotics calibration under shift",
+            "keywords": ["query2uncertainty", "ga3t", "roadside lidar", "distribution shift", "traversability", "novel view synthesis"],
+            "why": (
+                "3D perception은 재구성 품질만으로는 부족하고, 센서 위치나 환경이 바뀌었을 때 confidence가 얼마나 믿을 만한지가 중요해지고 있습니다. "
+                "그래서 3D/Scene 흐름도 렌더링 품질에서 deployment shift와 calibration을 같이 보는 쪽으로 넓어집니다."
+            ),
+            "confidence": "Medium",
+            "confidence_note": "3D/Scene 안에서 uncertainty·V2X·traversability 논문이 함께 등장",
+            "lab_action": "GA3T와 Query2Uncertainty 스타일 shift calibration protocol을 같은 표로 정리",
+            "tags": ["경고신호", "인프라"],
+        },
+    ]
+    specs = []
+    for spec in candidates:
+        scored_ids = []
+        for aid, (_, paper) in id_map.items():
+            blob = lower_blob(aid, paper.get("title", ""), paper.get("authors", ""))
+            if any(k in blob for k in spec.get("exclude", [])):
+                continue
+            score = sum(1 for k in spec["keywords"] if k in blob)
+            if score:
+                scored_ids.append((score, aid))
+        scored_ids.sort(key=lambda x: (-x[0], x[1]))
+        ids = [aid for _, aid in scored_ids]
+        if len(ids) >= 2:
+            enriched = dict(spec)
+            enriched["ids"] = ids[:4]
+            specs.append(enriched)
+    return specs
+
+
 def render_cluster_map(trends: dict, insights: dict, id_map: dict[str, tuple[str, dict]], papers: dict[str, list[dict]]) -> str:
     raw_rows = []
     for obj in insights.get("insights", []):
@@ -494,6 +541,27 @@ def render_cluster_map(trends: dict, insights: dict, id_map: dict[str, tuple[str
         )
         if len(rows) >= 5:
             break
+    if len(rows) < 5:
+        for spec in fallback_cluster_specs(id_map):
+            if spec["name"] in seen:
+                continue
+            links = []
+            for aid in spec["ids"]:
+                if aid in id_map:
+                    links.append(arxiv_link(aid, short_title(id_map[aid][1]["title"], 34)))
+            tags = " ".join(f"<span class='tag'>[{esc(tag)}]</span>" for tag in spec["tags"])
+            rows.append(
+                "<tr>"
+                f"<td><strong>{esc(spec['name'])}</strong><br>{tags}</td>"
+                f"<td>{', '.join(links)}</td>"
+                f"<td>{esc(spec['why'])}</td>"
+                f"<td><strong class='conf {esc(spec['confidence'])}'>{esc(spec['confidence'])}</strong><br><span class='small'>{esc(spec['confidence_note'])}</span></td>"
+                f"<td>{esc(spec['lab_action'])}</td>"
+                "</tr>"
+            )
+            seen.add(spec["name"])
+            if len(rows) >= 5:
+                break
     if not rows:
         return "<p>저장된 인사이트/트렌드 자료가 부족해 클러스터 표를 만들지 못했습니다.</p>"
     return (
