@@ -151,6 +151,49 @@ def naturalize_ko(s: str) -> str:
     return s
 
 
+def explain_plain(s: str) -> str:
+    """Rewrite dense research shorthand into a self-contained Korean explanation."""
+    text = naturalize_ko(s)
+    low = text.lower()
+    if (
+        ("world model" in low or "wm eval" in low or "robot video wm" in low)
+        and (
+            "reconstruction loss" in low
+            or "reconstruction/perceptual" in low
+            or "reward alignment" in low
+            or "reward-aligned" in low
+            or "interactive" in low
+        )
+    ):
+        return (
+            "예전에는 World Model을 '미래 영상을 얼마나 그럴듯하게 복원하거나 예측하느냐'로 많이 평가했는데, "
+            "이제는 '그 예측이 로봇 행동 성공에 실제로 도움이 되느냐'와 "
+            "'상호작용 상황에서 계속 쓸 수 있느냐'가 더 중요해지고 있다는 뜻입니다."
+        )
+    if "latent action supervision" in low or "image-based vs action-based" in low:
+        return (
+            "VLA를 학습시킬 때 행동을 그대로 맞히게 할지, 아니면 이미지 변화 속에 숨어 있는 행동 단서를 먼저 배우게 할지의 차이를 "
+            "본격적으로 비교하기 시작했다는 뜻입니다. 쉽게 말하면 '로봇에게 정답 행동을 외우게 할 것인가, "
+            "장면이 어떻게 변해야 하는지를 먼저 이해하게 할 것인가'를 나눠 보기 시작한 겁니다."
+        )
+    if "diffusion alignment" in low and ("nash" in low or "bt" in low or "preference" in low):
+        return (
+            "diffusion 모델을 사람 취향에 맞추는 방식이 단순한 선호도 점수 맞추기에서 벗어나고 있다는 뜻입니다. "
+            "이제는 모델이 여러 후보를 서로 비교하고 스스로 더 나은 방향을 찾게 만드는 쪽으로 평가와 학습 방식이 옮겨가고 있습니다."
+        )
+    if "4d world model" in low or "lovif" in low or "physcore" in low:
+        return (
+            "4D World Model을 볼 때 단순히 영상이 예쁜지보다, 시간에 따라 물리적으로 말이 되는지와 조건을 잘 따르는지를 "
+            "함께 평가하려는 흐름입니다. 즉 '그럴듯한 동영상'이 아니라 '물리적으로 믿을 수 있는 시뮬레이션'인지 묻는 쪽으로 가고 있습니다."
+        )
+    if "understanding-generation gap" in low:
+        return (
+            "VLM이 이미지를 이해하거나 틀린 점을 지적하는 능력은 꽤 좋은데, 정작 그 이해를 바탕으로 원하는 이미지를 정확히 생성하는 데는 "
+            "아직 간극이 있다는 뜻입니다. 그래서 '잘 보는 모델'을 '잘 만드는 모델'로 어떻게 연결할지가 핵심 문제가 됩니다."
+        )
+    return text
+
+
 def sentence_split(text: str) -> list[str]:
     text = naturalize_ko(text)
     if not text:
@@ -423,11 +466,12 @@ def render_cluster_table(trends: dict, insights: dict, all_papers: dict[str, dic
         conf = "High" if len(ids) >= 2 else "Medium"
         lab = "평가축·baseline·failure case를 먼저 표로 고정"
         topic = naturalize_ko(item.get("topic", ""))
+        why = explain_plain(item.get("note") or item.get("claim") or item.get("topic", ""))
         rows.append(
             "<tr>"
             f"<td><strong>{esc(topic)}</strong></td>"
             f"<td>{reps}</td>"
-            f"<td>{esc(first_sentence(note, 260))}</td>"
+            f"<td>{esc(why)}</td>"
             f"<td><span class='conf {conf}'>{conf}</span></td>"
             f"<td>{esc(lab)}</td>"
             "</tr>"
@@ -444,7 +488,7 @@ def render_trends(trends: dict) -> str:
     cool = trends.get("cooling", [])
     p1 = "오늘 단일 배치에서는 " + ", ".join(f"{k} {v.get('total',0)}편" for k, v in top_today) + "이 제일 두꺼웠습니다. "
     if hot:
-        p1 += f"근데 숫자보다 중요한 건 {naturalize_ko(hot[0]['topic'])} 쪽이에요. {first_sentence(hot[0].get('note',''), 360)}"
+        p1 += f"근데 숫자보다 중요한 건 {naturalize_ko(hot[0]['topic'])} 쪽이에요. {explain_plain(hot[0].get('note') or hot[0].get('topic',''))}"
     p2 = "주간 rolling window로 보면 "
     if past:
         top_past = sorted(past.items(), key=lambda kv: kv[1].get("total", 0), reverse=True)[:3]
@@ -482,7 +526,7 @@ def render_insights(insights: dict, all_papers: dict[str, dict]) -> str:
         for u in obj.get("papers", []):
             aid = u.rstrip("/").split("/")[-1]
             links.append(link(aid, paper_label(aid, all_papers)))
-        cards.append(f"<div class='card'><h3>{esc(naturalize_ko(obj.get('title','')))}</h3><p>{esc(naturalize_ko(obj.get('claim','')))}</p><p class='small'>{' · '.join(links)}</p></div>")
+        cards.append(f"<div class='card'><h3>{esc(naturalize_ko(obj.get('title','')))}</h3><p>{esc(explain_plain(obj.get('claim') or obj.get('title','')))}</p><p class='small'>{' · '.join(links)}</p></div>")
     return "\n".join(cards)
 
 
@@ -568,18 +612,10 @@ def page(date: str) -> str:
     total = sum(len(v) for v in papers_by_bucket.values())
     top_bucket = max(trends.get("buckets", {"": {"total": 0}}).items(), key=lambda kv: kv[1].get("total", 0))[0]
     first_insight = (insights.get("insights") or [{}])[0]
-    thesis_point = naturalize_ko(first_insight.get("title", "평가축과 배포 조건이 동시에 바뀌는 흐름"))
-    if thesis_point.endswith("으로 전환"):
-        thesis_phrase = thesis_point[: -len("으로 전환")] + "으로 전환됐다는 점이에요"
-    elif thesis_point.endswith("다는 것"):
-        thesis_phrase = thesis_point[: -len(" 것")] + " 점이에요"
-    elif thesis_point.endswith("것"):
-        thesis_phrase = thesis_point + "이라는 점이에요"
-    else:
-        thesis_phrase = thesis_point + "라는 점이에요"
+    thesis_phrase = explain_plain(first_insight.get("claim") or first_insight.get("title", "평가축과 배포 조건이 동시에 바뀌는 흐름"))
     thesis = (
         f"{date} 배치에서 가장 두꺼운 버킷은 {top_bucket}입니다. 그래도 진짜 포인트는 "
-        f"{thesis_phrase}. "
+        f"{thesis_phrase} "
         "기존 리포트에 실렸던 논문 집합을 고정한 채 다시 읽어보면, 개별 논문을 길게 나열하기보다 "
         "어떤 클러스터가 다음 실험 설계를 바꾸는지 먼저 보는 편이 훨씬 선명합니다."
     )

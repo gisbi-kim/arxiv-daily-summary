@@ -6,7 +6,7 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 09 May 2026 08:55:07 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 09 May 2026 09:01:27 +0900</lastBuildDate>
     <ttl>720</ttl>
     <item>
       <title>🗓 arXiv Weekly Retrospective</title>
@@ -27,14 +27,14 @@
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-07.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-07.html</guid>
       <pubDate>Thu, 07 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Generation 26편, Foundation Models 18편, Efficiency/Systems 18편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA의 'latent action supervision' 문제 설정이 처음 체계적인 정리됨 — image-based vs action-based 구분 쪽이에요. From Pixels to Tokens가 latent action supervision을 (i) image-based(trajectory regularization) vs (ii) action-based(target unification) 두 갈래로 정리하고, 문제 설정과 작업 종류의 대응 관계를 처음 정량화됐다는 것 측정 — imag…]]></description>
+      <description><![CDATA[오늘 단일 배치에서는 Generation 26편, Foundation Models 18편, Efficiency/Systems 18편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA의 'latent action supervision' 문제 설정이 처음 체계적인 정리됨 — image-based vs action-based 구분 쪽이에요. VLA를 학습시킬 때 행동을 그대로 맞히게 할지, 아니면 이미지 변화 속에 숨어 있는 행동 단서를 먼저 배우게 할지의 차이를 본격적으로 비교하기 시작했다는 뜻입니다. 쉽게 말하면 '로봇에게 정답 행동을 외우게 할 것인가, 장면이 어떻게 변해야 하는지를 먼저 이해하게 할 것인가'를 나눠 보기 시작한 겁니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-06 (수)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-06.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-06.html</guid>
       <pubDate>Wed, 06 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Foundation Models 19편, Generation 16편, Efficiency/Systems 16편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 World Model 평가가 'reward alignment + interactive 벤치마크' 양축으로 같이 드러남 쪽이에요. RoboAlign-R1이 reconstruction loss 대신 6-dim multimodal reward 정렬로 robot video WM을 post-train + iWorld-Bench가 14 representative WM에 6 task type 통합 평가 + Video Gen as WM survey가 efficiency 측 연구 흐름 정리 — '학습 시그널 +…]]></description>
+      <description><![CDATA[오늘 단일 배치에서는 Foundation Models 19편, Generation 16편, Efficiency/Systems 16편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 World Model 평가가 'reward alignment + interactive 벤치마크' 양축으로 같이 드러남 쪽이에요. 예전에는 World Model을 '미래 영상을 얼마나 그럴듯하게 복원하거나 예측하느냐'로 많이 평가했는데, 이제는 '그 예측이 로봇 행동 성공에 실제로 도움이 되느냐'와 '상호작용 상황에서 계속 쓸 수 있느냐'가 더 중요해지고 있다는 뜻입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-05 (화)</title>
