@@ -315,6 +315,7 @@ Daily와 weekly에는 반드시 클러스터 지도 표를 넣는다. 카드형 
 ### 8.5.4 중요도 태그
 
 대표 논문과 클러스터에는 아래 태그 중 하나 이상을 붙인다.
+단, 화면에서 한 논문/클러스터에 붙이는 태그는 핵심 2~3개로 제한한다. 태그를 많이 붙이는 것보다 "왜 봐야 하는지"가 바로 보이는 조합을 우선한다.
 
 ```text
 [문제정의] 새 문제나 연구 질문 자체를 세운 논문
@@ -322,6 +323,13 @@ Daily와 weekly에는 반드시 클러스터 지도 표를 넣는다. 카드형 
 [방법전환] 기존 병목을 다른 formulation으로 푼 논문
 [인프라] dataset/tool/framework/benchmark를 만든 논문
 [경고신호] negative result, failure mode, safety/deployment risk를 드러낸 논문
+[통합정리] survey/review/taxonomy/map처럼 흩어진 흐름을 한 장의 지도로 묶는 논문
+[스케일업] 모델·데이터·embodiment·실험 규모를 키워 새 현상이나 한계를 보려는 논문
+[실사용전환] latency, real-time, on-device, hardware, closed-loop, field deployment를 겨냥한 논문
+[데이터전환] 병목을 모델 구조보다 데이터 수집·정제·합성·라벨링 방식에서 찾는 논문
+[해부분석] 모델 내부 표현, mechanism, ablation, probing으로 왜 되는지/왜 실패하는지 뜯어보는 논문
+[표준후보] 후속 논문들이 계속 쓸 만한 task, metric, protocol, dataset, benchmark를 제안하는 논문
+[위험보류] 아이디어는 흥미롭지만 baseline, split, ablation, 데이터 공개성 때문에 claim 확인이 필요한 논문
 ```
 
 예:
@@ -330,6 +338,10 @@ Daily와 weekly에는 반드시 클러스터 지도 표를 넣는다. 카드형 
 - From Pixels to Tokens → `[방법전환]`
 - GA3T → `[인프라]`
 - iWorld-Bench → `[평가축] [인프라]`
+- VLA Safety Survey → `[통합정리] [경고신호]`
+- LWD fleet-scale RL → `[스케일업] [실사용전환]`
+- How VLAs Work → `[해부분석] [방법전환]`
+- 새 데이터 엔진/teleoperation 논문 → `[데이터전환] [인프라]`
 
 ### 8.5.5 Confidence와 evidence strength
 
@@ -412,7 +424,7 @@ Daily에는 가능하면 "어제/지난주와 달라진 점"을 짧게 넣는다
 - 핵심 실험/벤치마크
 - 약점·한계
 - 우리 랩 파이프라인 영향
-- 중요도 태그 `[문제정의] [방법전환] [인프라] [경고신호]`
+- 중요도 태그 `[문제정의] [평가축] [방법전환] [인프라] [경고신호] [통합정리] [스케일업] [실사용전환] [데이터전환] [해부분석] [표준후보] [위험보류]`
 - Confidence와 evidence strength
 
 ### Tier B — 인사이트 대표 논문 8~12편

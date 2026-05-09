@@ -140,15 +140,22 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 
 <details class="label-panel">
 <summary>리포트 라벨은 어떻게 읽나요?</summary>
-<p class="label-intro">논문 제목 옆의 <strong>[CV]</strong>, <strong>[RO]</strong>, <strong>[CV/RO]</strong>는 arXiv 카테고리 출처입니다. 클러스터 표와 논문 요약에 붙는 갈색 라벨은 “이 논문을 왜 봐야 하는가”를 빠르게 표시하는 의미 태그이고, 현재 5개를 씁니다.</p>
+<p class="label-intro">논문 제목 옆의 <strong>[CV]</strong>, <strong>[RO]</strong>, <strong>[CV/RO]</strong>는 arXiv 카테고리 출처입니다. 클러스터 표와 논문 요약에 붙는 갈색 라벨은 “이 논문을 왜 봐야 하는가”를 빠르게 표시하는 의미 태그이고, 현재 12개를 씁니다.</p>
 <div class="label-grid">
   <div class="label-card"><span class="label-badge">[문제정의]</span><p>새로운 문제나 연구 질문을 세웁니다. “무엇을 풀어야 하는가” 자체를 바꾸는 논문입니다.</p></div>
   <div class="label-card"><span class="label-badge">[평가축]</span><p>성능을 재는 기준을 바꿉니다. 정확도 하나보다 실패 조건, 제어 가능성, calibration처럼 무엇을 봐야 하는지 제안합니다.</p></div>
   <div class="label-card"><span class="label-badge">[방법전환]</span><p>같은 병목을 다른 formulation이나 구조로 풉니다. 예전 접근을 더 키우는 대신 문제를 나눠 보거나 학습 방식을 바꿉니다.</p></div>
   <div class="label-card"><span class="label-badge">[인프라]</span><p>데이터셋, 벤치마크, 툴, 프레임워크, 평가 파이프라인을 만듭니다. 후속 실험의 바닥재가 되는 논문입니다.</p></div>
   <div class="label-card"><span class="label-badge">[경고신호]</span><p>failure mode, negative result, safety/deployment risk를 드러냅니다. “이 조건에서는 믿으면 안 된다”를 알려주는 논문입니다.</p></div>
+  <div class="label-card"><span class="label-badge">[통합정리]</span><p>survey, taxonomy, map처럼 흩어진 시도를 한 장의 지도로 묶습니다. 분야의 현재 좌표를 잡는 논문입니다.</p></div>
+  <div class="label-card"><span class="label-badge">[스케일업]</span><p>모델, 데이터, embodiment, 실험 수를 크게 늘려 새 현상이나 한계를 보려는 논문입니다.</p></div>
+  <div class="label-card"><span class="label-badge">[실사용전환]</span><p>latency, real-time, on-device, hardware, closed-loop처럼 실제 배포 조건을 직접 겨냥합니다.</p></div>
+  <div class="label-card"><span class="label-badge">[데이터전환]</span><p>성능 병목을 모델 구조보다 데이터 수집, 정제, 합성, 라벨링 방식에서 찾습니다.</p></div>
+  <div class="label-card"><span class="label-badge">[해부분석]</span><p>모델이 왜 되는지, 어디서 실패하는지 내부 표현·mechanism·ablation으로 뜯어봅니다.</p></div>
+  <div class="label-card"><span class="label-badge">[표준후보]</span><p>후속 논문들이 계속 쓸 만한 task, metric, protocol, dataset, benchmark를 제안합니다.</p></div>
+  <div class="label-card"><span class="label-badge">[위험보류]</span><p>아이디어는 흥미롭지만 baseline, split, ablation, 데이터 공개성 때문에 claim 확인이 필요한 논문입니다.</p></div>
 </div>
-<p class="label-note">한 논문에 라벨이 2개 붙을 수 있습니다. 예를 들어 새 벤치마크가 특정 실패 유형을 드러내면 <span class="label-badge">[인프라]</span>와 <span class="label-badge">[경고신호]</span>가 같이 붙습니다.</p>
+<p class="label-note">한 논문에 라벨이 여러 개 붙을 수 있지만, 화면에서는 보통 핵심 2~3개만 남깁니다. 예를 들어 새 벤치마크가 특정 실패 유형을 드러내면 <span class="label-badge">[표준후보]</span>, <span class="label-badge">[평가축]</span>, <span class="label-badge">[경고신호]</span>가 같이 붙을 수 있습니다.</p>
 </details>
 
 <section class="stats-panel" aria-labelledby="weekday-stats-title">

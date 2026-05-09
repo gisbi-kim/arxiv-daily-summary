@@ -528,20 +528,39 @@ def cluster_name(text: str) -> str:
     return short_title(clean(text), 42)
 
 
-def cluster_tags(text: str) -> list[str]:
-    low = text.lower()
+def semantic_tags(text: str, bucket: str = "") -> list[str]:
+    low = lower_blob(text, bucket)
     tags = []
-    if any(x in low for x in ["benchmark", "dataset", "evaluation", "eval"]):
-        tags.append("평가축")
-    if any(x in low for x in ["structure", "relation", "latent", "expert", "routing", "architecture"]):
-        tags.append("방법전환")
-    if any(x in low for x in ["safety", "reliab", "uncertainty", "calibration", "contradiction", "threat"]):
-        tags.append("경고신호")
-    if any(x in low for x in ["infrastructure", "data", "system", "deployment", "efficient"]):
-        tags.append("인프라")
+
+    def add(tag: str, *needles: str):
+        if tag not in tags and any(n in low for n in needles):
+            tags.append(tag)
+
+    add("통합정리", "survey", "review", "taxonomy", "roadmap", "landscape", "comprehensive", "systematic map")
+    add("해부분석", "how ", "work", "mechanistic", "interpret", "probing", "ablation", "diagnos", "analysis", "dissect")
+    add("데이터전환", "data", "dataset", "demonstration", "teleoperation", "human video", "robot-free", "synthetic", "label", "curation")
+    add("실사용전환", "real-world", "real time", "real-time", "on-device", "hardware", "closed-loop", "deployment", "latency", "field", "production")
+    add("표준후보", "benchmark", "leaderboard", "protocol", "metric", "suite", "standard", "evaluation", "eval")
+    add("스케일업", "large-scale", "scalable", "scaling", "fleet", "million", "10m", "100k", "1m", "foundation")
+    add("경고신호", "safety", "risk", "threat", "attack", "failure", "hallucination", "uncertainty", "calibration", "contradiction", "ood", "negative")
+    add("평가축", "metric", "evaluation", "eval", "benchmark", "calibration", "closed-loop", "failure condition", "controllability")
+    add("방법전환", "formulation", "structure", "relation", "latent", "expert", "routing", "architecture", "distillation", "rl", "policy")
+    add("인프라", "infrastructure", "framework", "tool", "platform", "simulator", "dataset", "benchmark", "system")
+    add("위험보류", "private", "unverified", "limited", "weak baseline", "baseline", "cherry", "claim", "no code", "closed data")
+    add("문제정의", "new task", "problem", "gap", "challenge", "redefine", "definition")
+
     if not tags:
         tags.append("문제정의")
-    return tags[:2]
+    return tags[:3]
+
+
+def cluster_tags(text: str) -> list[str]:
+    return semantic_tags(text)
+
+
+def paper_tags(paper: dict, bucket: str) -> list[str]:
+    blob = lower_blob(paper.get("title", ""), bucket, " ".join(paper.get("old_bullets", [])))
+    return semantic_tags(blob, bucket)[:2]
 
 
 def lab_action_for(text: str) -> str:
@@ -954,9 +973,10 @@ def render_paper_summaries(papers: dict[str, list[dict]], important: set[str]) -
             problem, method, meaning, caution = paper_template(p, bucket)
             pr = "Must-read" if p["arxiv_id"] in important else ("Read" if len(ps) <= 20 else "Skim")
             core = CORE_OVERRIDES.get(p["arxiv_id"]) or f"{problem} {method} {meaning}"
+            tags = " ".join(f"<span class='tag'>[{esc(tag)}]</span>" for tag in paper_tags(p, bucket))
             chunks.append(
                 "<div class='mini-paper'>"
-                f"<h3>{arxiv_link(p['arxiv_id'], p['title'])} {badge_html(p.get('badge', '?'))} <span class='priority'>{esc(pr)}</span></h3>"
+                f"<h3>{arxiv_link(p['arxiv_id'], p['title'])} {badge_html(p.get('badge', '?'))} {tags} <span class='priority'>{esc(pr)}</span></h3>"
                 f"<p class='authors'>{esc(p.get('authors', ''))}</p>"
                 f"<p>{esc(core)}</p>"
                 "<ul>"
@@ -1251,6 +1271,7 @@ h1{font-size:28px;margin:0 0 6px;color:#0d1117}h2{font-size:21px;margin:40px 0 1
 .cluster-table,.mini-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0 18px}.cluster-table th,.cluster-table td,.mini-table th,.mini-table td{border:1px solid #d0d7de;padding:9px;vertical-align:top}.cluster-table th,.mini-table th{background:#f6f8fa;color:#0d1117}
 .bucket-line{font-family:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:10px 14px;font-size:13px;white-space:pre;overflow-x:auto}
 .badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;font-family:ui-monospace,monospace}.cv{background:#ddf4ff;color:#0550ae;border:1px solid #54aeff}.ro{background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c}.cvro{background:#ffe5d9;color:#9a3412;border:1px solid #f59e0b}.x{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db}
+.tag{display:inline-block;font-family:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;font-size:12px;color:#7c2d12;background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:1px 7px;margin:2px 3px 2px 0}
 .mini-paper{padding:14px 0;border-top:1px solid #edf2f7}.mini-paper:first-of-type{border-top:none}.mini-paper h3{margin:0 0 4px}.mini-paper ul{margin:7px 0 0;padding-left:20px}.mini-paper li{margin:3px 0;line-height:1.55}.authors,.small{display:block;color:#475569;font-size:13.5px;margin-top:4px}.priority{font-size:12px;color:#7c2d12;margin-left:6px}
 pre{background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:10px;overflow-x:auto;font-size:13px}
 footer{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:12px;color:#656d76;text-align:center}
