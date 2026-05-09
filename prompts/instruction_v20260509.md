@@ -271,6 +271,47 @@ Daily와 weekly에는 반드시 클러스터 지도 표를 넣는다. 카드형 
 
 표는 독자가 30초 안에 "읽을 것 / 실험할 것 / 보류할 것"을 나누게 해주는 장치다. 따라서 모든 daily/weekly HTML 생성 직후 `Cluster</th>`, `대표 논문`, `왜 중요?`, `Confidence`, `Lab action` 문자열이 실제 HTML에 존재하는지 검증한다.
 
+### 8.5.3.a 클러스터 표의 "느낌" — 이 표가 리포트의 두뇌다
+
+이 표는 장식용 요약 표가 아니다. 리포트 전체에서 가장 중요한 editorial artifact다. 독자가 긴 논문별 요약을 읽기 전에, 이 표만 보고도 "오늘/이번주 연구판이 어디로 움직였는지"를 감 잡아야 한다.
+
+원하는 느낌은 아래와 같다.
+
+1. **Cluster 칸**은 버킷명이 아니라 해석된 흐름명이다.
+   - 나쁜 예: `Generation`, `Robot Learning`, `Safety`
+   - 좋은 예: `Controllable video generation`, `VLA structure exposure`, `Reliability-aware deployment`, `Navigation as map-level decision`, `3D/robotics calibration under shift`
+
+2. **대표 논문 칸**은 한 흐름을 구성하는 evidence set이다.
+   - 2~4편을 넣는다.
+   - insight JSON에 3개 클러스터만 있어도 거기서 멈추지 않는다.
+   - `classified.json`, daily paper snapshot, bucket별 paper list를 다시 훑어 2편 이상 묶이는 보조 클러스터를 찾아 표를 5행 안팎으로 채운다.
+   - 단, 제목 키워드가 우연히 겹치는 논문은 제외한다. 예를 들어 `navigation`이라는 단어가 있어도 MRI slice navigation처럼 로봇/VLN/ObjectNav 맥락이 아니면 `Navigation as map-level decision`에 넣지 않는다.
+
+3. **왜 중요? 칸**은 "전문가의 압축 메모"가 아니라 "독자가 되물을 필요 없는 해석"이어야 한다.
+   - 나쁜 예: `VLA를 relation, expert, latent action, WAM verifier로 내부 구조를 노출.`
+   - 좋은 예: `VLA를 하나의 거대한 policy로만 보면 왜 성공하고 왜 실패하는지 설명하기가 어렵습니다. 이번 흐름은 object-hand-task 관계, expert routing, latent action, verifier처럼 내부 역할을 나눠서 보는 쪽입니다. 즉 모델 크기를 더 키우기 전에 어떤 구조가 어떤 작업에서 실제로 도움이 되는지 비교할 수 있는 발판이 생긴다는 뜻입니다.`
+   - 나쁜 예: `VLN/ObjectNav가 step-by-step policy보다 top-down/global/ambiguous-query planning으로 이동.`
+   - 좋은 예: `VLN/ObjectNav가 지시문을 한 단계씩 따라가는 문제에서, 전체 지도와 애매한 목표를 함께 판단하는 문제로 이동하고 있습니다. 즉 로봇이 바로 움직이기보다, 현재 목표가 무엇인지와 어느 후보가 더 맞는지를 먼저 비교해야 한다는 뜻입니다.`
+
+4. **Confidence 칸**은 감이 아니라 근거 수준이다.
+   - `High`: 서로 다른 논문 3편 이상, 서로 다른 저자군/기관, 같은 평가축 또는 같은 실패 조건이 반복됨.
+   - `Medium`: 2~3편이 같은 방향을 보이지만 benchmark 확산이나 독립 검증은 아직 부족함.
+   - `Low`: 신호는 있으나 단발이거나 제목/abstract 기반 연결이 강하지 않음.
+   - Confidence 아래에는 반드시 한 줄 근거를 붙인다. 예: `대표 논문 4편 이상 연결`, `navigation 관련 논문 2편 이상 연결, benchmark 확산은 추가 확인 필요`.
+
+5. **Lab action 칸**은 회의에서 바로 일감으로 바꿀 수 있어야 한다.
+   - 나쁜 예: `추가 확인`, `follow-up`, `metric 설계`
+   - 좋은 예: `LIBERO/RoboCasa에서 relation, expert, latent action, verifier를 같은 표로 ablation`
+   - 좋은 예: `R2R/ObjectNav에 ambiguous-query와 top-down map planning stress test를 묶어 평가`
+   - 좋은 예: `카메라 경로 오차, 대상 정체성 유지, 지연시간을 분리한 controllability metric grid 설계`
+
+6. **행 수 원칙**
+   - daily는 기본 5행을 목표로 한다.
+   - 정말 5행을 만들 근거가 없으면 3~4행도 가능하지만, 그때는 meta나 표 아래에 "보조 클러스터 근거 부족으로 N행만 표시"라고 적는다.
+   - `insights`가 3개라고 표도 3행으로 끝내면 안 된다. 인사이트는 시작점이고, 표는 전체 paper snapshot을 다시 훑어 만드는 판세 지도다.
+
+이 표를 잘 만들면 이후 `주간 동향`, `인사이트`, `추천 연구주제`, `must-read`는 이 표를 풀어쓴 것이다. 반대로 이 표가 약하면 리포트 전체가 약해진 것으로 본다.
+
 ### 8.5.4 중요도 태그
 
 대표 논문과 클러스터에는 아래 태그 중 하나 이상을 붙인다.
