@@ -567,6 +567,25 @@ weekly에서는 `insights/YYYY-MM-DD.json`을 만들지 않는다.
 
 ## [12. 벤치마크와 인사이트 JSON]
 
+`trends/YYYY-MM-DD.json`에는 홈페이지 통계용 일간 `/new` 원천 수를 구조화해 둔다.
+이 값은 `out/cv_new.json`, `out/ro_new.json`에서 `section == "new"` 또는 `section == "cross"`인 항목만 세며,
+`section == "replace"`는 절대 포함하지 않는다. 즉 업데이트/replacement가 아니라 당일 신규 공지량만 본다.
+
+```json
+{
+  "date": "YYYY-MM-DD",
+  "daily_new_counts": {
+    "cv": 229,
+    "ro": 68,
+    "scope": "new+cross",
+    "exclude": "replace"
+  }
+}
+```
+
+과거처럼 note 문자열에만 `cs.CV N + cs.RO M`을 남기지 말고, 위 구조화 필드를 함께 저장한다.
+홈페이지의 요일별 막대 차트는 `scripts/build_weekday_counts.py`가 repo에 저장된 이 필드와 과거 note를 읽어 생성한다.
+
 `benchmarks/YYYY-MM-DD.json`:
 
 ```json
@@ -696,6 +715,7 @@ Weekly:
 - HTML에 h1 존재
 - weekly는 '🔭 주간 동향' h2와 .theme-card 존재
 - scripts/build_feed.py --check 통과
+- stats/weekday_counts.json 존재, `daily`가 repo에 저장된 `/new` 카운트만 포함
 - git diff --check 통과
 - out/, __pycache__ 등 임시 파일은 commit하지 않음
 ```
@@ -707,11 +727,13 @@ Weekly:
 ```bash
 cd {WORKDIR}
 python scripts/build_feed.py
+python scripts/build_weekday_counts.py
 git add posts/YYYY-MM-DD.html \
         trends/YYYY-MM-DD.json \
         benchmarks/YYYY-MM-DD.json \
         insights/YYYY-MM-DD.json \
-        feed.xml
+        feed.xml \
+        stats/weekday_counts.json
 git commit -m "Add YYYY-MM-DD briefing"
 git push origin main
 ```

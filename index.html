@@ -50,6 +50,28 @@ h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.
 .prompt-actions a:hover{background:#f6f8fa;text-decoration:none}
 .prompt-view{max-height:520px;overflow:auto;margin:10px 0 0;padding:14px;background:#fff;border:1px solid #d0d7de;border-radius:6px;white-space:pre-wrap;word-break:break-word;font:12.5px/1.6 ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;color:#24292f}
 .prompt-view.loading{color:#656d76;font-family:inherit}
+.stats-panel{margin:0 0 22px;padding:16px 18px;background:#fff;border:1px solid #d0d7de;border-radius:8px;font-size:13.5px;color:#3b434d}
+.stats-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
+.stats-title{margin:0;font-weight:700;color:#0d1117;font-size:15px}
+.stats-note{margin:3px 0 0;color:#656d76;line-height:1.55}
+.stats-source{font-size:12px;color:#6b7280;text-align:right;line-height:1.45;min-width:180px}
+.range-controls{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.range-controls button{appearance:none;border:1px solid #d0d7de;background:#f6f8fa;color:#24292f;border-radius:6px;padding:5px 10px;font:12.5px/1.3 inherit;cursor:pointer}
+.range-controls button:hover{background:#eef2f6}
+.range-controls button.active{background:#0969da;border-color:#0969da;color:#fff;font-weight:600}
+.weekday-chart{display:grid;gap:10px}
+.weekday-row{display:grid;grid-template-columns:34px minmax(0,1fr) 70px;gap:10px;align-items:center}
+.weekday-name{font-weight:700;color:#0d1117;text-align:right}
+.bar-stack{display:grid;gap:4px}
+.bar-line{height:18px;background:#f6f8fa;border-radius:5px;overflow:hidden;border:1px solid #e5e7eb}
+.bar-fill{height:100%;min-width:2px;border-radius:4px;transition:width .18s ease}
+.bar-cv{background:#54aeff}
+.bar-ro{background:#f2cc60}
+.weekday-value{font:12px/1.35 ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;color:#475569}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;color:#475569;font-size:12.5px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.legend .cv-dot::before{background:#54aeff}.legend .ro-dot::before{background:#f2cc60}
+.stats-empty{padding:14px;background:#f6f8fa;border:1px dashed #d0d7de;border-radius:6px;color:#656d76}
 footer{margin-top:36px;padding-top:16px;border-top:1px solid #eaeef2;font-size:12px;color:#656d76;text-align:center}
 footer a{color:#656d76}
 @media (max-width:640px){
@@ -59,6 +81,9 @@ footer a{color:#656d76}
   .archive-link{padding:16px 2px}
   .archive-date{font-size:15px}
   .archive-summary{font-size:13.5px}
+  .stats-head{display:block}
+  .stats-source{text-align:left;margin-top:8px}
+  .weekday-row{grid-template-columns:28px minmax(0,1fr) 58px;gap:8px}
 }
 </style>
 </head>
@@ -96,6 +121,19 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 <pre id="prompt-view" class="prompt-view loading">토글을 열면 프롬프트를 불러옵니다…</pre>
 </details>
 
+<section class="stats-panel" aria-labelledby="weekday-stats-title">
+<div class="stats-head">
+  <div>
+    <p class="stats-title" id="weekday-stats-title">요일별 /new 논문 수</p>
+    <p class="stats-note">repo에 저장된 일간 리포트 메타데이터만 사용합니다. 업데이트/replacement가 아니라 당일 /new 배치에 기록된 cs.CV · cs.RO 수를 봅니다.</p>
+  </div>
+  <div class="stats-source" id="weekday-stats-meta">데이터 불러오는 중…</div>
+</div>
+<div class="range-controls" id="weekday-window-controls" aria-label="집계 기간 선택"></div>
+<div class="weekday-chart" id="weekday-chart"></div>
+<div class="legend"><span class="cv-dot">cs.CV</span><span class="ro-dot">cs.RO</span></div>
+</section>
+
 <div id="status" class="meta">목록을 불러오는 중…</div>
 
 <ul id="archive" class="archive-list"></ul>
@@ -112,6 +150,15 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   const REPO = 'arxiv-daily-summary';
   const DATE_RE = /^(\d{4}-\d{2}-\d{2})(-weekly)?\.html$/;
   const DOW = ['일','월','화','수','목','금','토'];
+  const WEEKDAY_ORDER = [
+    { idx: 1, label: '월' },
+    { idx: 2, label: '화' },
+    { idx: 3, label: '수' },
+    { idx: 4, label: '목' },
+    { idx: 5, label: '금' },
+    { idx: 6, label: '토' },
+    { idx: 0, label: '일' },
+  ];
   const LIST_TTL_MS = 10 * 60 * 1000;
   const INSIGHT_TTL_MS = 24 * 60 * 60 * 1000;
 
@@ -119,6 +166,9 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   const archive = document.getElementById('archive');
   const promptPanel = document.getElementById('prompt-panel');
   const promptView = document.getElementById('prompt-view');
+  const weekdayMeta = document.getElementById('weekday-stats-meta');
+  const weekdayControls = document.getElementById('weekday-window-controls');
+  const weekdayChart = document.getElementById('weekday-chart');
 
   const lsGet = (k) => {
     try {
@@ -155,6 +205,113 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
       if (promptPanel.open) loadPromptOnce();
     });
   }
+
+  function isoShift(ymd, daysBack) {
+    const date = new Date(ymd + 'T00:00:00');
+    date.setDate(date.getDate() - daysBack);
+    return date.toISOString().slice(0, 10);
+  }
+
+  function renderWeekdayStats(payload, selectedDays) {
+    if (!weekdayChart || !weekdayMeta) return;
+    const rows = Array.isArray(payload.daily) ? payload.daily.slice() : [];
+    if (!rows.length) {
+      weekdayChart.innerHTML = '<div class="stats-empty">아직 repo에 저장된 일간 /new 카운트가 없습니다.</div>';
+      weekdayMeta.textContent = '0개 날짜';
+      return;
+    }
+
+    rows.sort((a, b) => a.date.localeCompare(b.date));
+    const latest = rows[rows.length - 1].date;
+    const start = isoShift(latest, selectedDays - 1);
+    const filtered = rows.filter(row => row.date >= start && row.date <= latest);
+    const groups = new Map(WEEKDAY_ORDER.map(w => [w.idx, { cv: 0, ro: 0, days: 0 }]));
+
+    filtered.forEach(row => {
+      const idx = new Date(row.date + 'T00:00:00').getDay();
+      const g = groups.get(idx);
+      g.cv += Number(row.cv || 0);
+      g.ro += Number(row.ro || 0);
+      g.days += 1;
+    });
+
+    const maxValue = Math.max(1, ...Array.from(groups.values()).flatMap(g => [g.cv, g.ro]));
+    weekdayChart.textContent = '';
+    WEEKDAY_ORDER.forEach(w => {
+      const g = groups.get(w.idx);
+      const row = document.createElement('div');
+      row.className = 'weekday-row';
+
+      const name = document.createElement('div');
+      name.className = 'weekday-name';
+      name.textContent = w.label;
+
+      const stack = document.createElement('div');
+      stack.className = 'bar-stack';
+      [['cv', 'bar-cv'], ['ro', 'bar-ro']].forEach(([key, cls]) => {
+        const line = document.createElement('div');
+        line.className = 'bar-line';
+        const fill = document.createElement('div');
+        fill.className = `bar-fill ${cls}`;
+        fill.style.width = `${Math.round((g[key] / maxValue) * 100)}%`;
+        fill.title = `${w.label}요일 ${key.toUpperCase()} ${g[key]}편`;
+        line.appendChild(fill);
+        stack.appendChild(line);
+      });
+
+      const value = document.createElement('div');
+      value.className = 'weekday-value';
+      value.textContent = `${g.cv}/${g.ro}`;
+      value.title = `repo 저장 날짜 ${g.days}개`;
+
+      row.appendChild(name);
+      row.appendChild(stack);
+      row.appendChild(value);
+      weekdayChart.appendChild(row);
+    });
+
+    const totalCv = filtered.reduce((sum, row) => sum + Number(row.cv || 0), 0);
+    const totalRo = filtered.reduce((sum, row) => sum + Number(row.ro || 0), 0);
+    weekdayMeta.textContent = `${start} ~ ${latest} · 저장 날짜 ${filtered.length}개 · CV ${totalCv} / RO ${totalRo}`;
+  }
+
+  async function loadWeekdayStats() {
+    if (!weekdayChart || !weekdayControls || !weekdayMeta) return;
+    try {
+      const res = await fetch('stats/weekday_counts.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const payload = await res.json();
+      const windows = payload.windows || [
+        { label: '1개월', days: 31 },
+        { label: '3개월', days: 92 },
+        { label: '6개월', days: 183 },
+        { label: '1년', days: 366 },
+        { label: '2년', days: 731 },
+        { label: '3년', days: 1096 },
+      ];
+
+      weekdayControls.textContent = '';
+      windows.forEach((win, i) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = win.label;
+        button.dataset.days = String(win.days);
+        if (i === 0) button.classList.add('active');
+        button.addEventListener('click', () => {
+          weekdayControls.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+          button.classList.add('active');
+          renderWeekdayStats(payload, Number(button.dataset.days));
+        });
+        weekdayControls.appendChild(button);
+      });
+      renderWeekdayStats(payload, Number(windows[0].days));
+    } catch (err) {
+      weekdayMeta.textContent = '통계 데이터 없음';
+      weekdayChart.innerHTML = `<div class="stats-empty">요일별 통계를 불러오지 못했습니다: ${err.message}</div>`;
+    }
+  }
+
+  loadWeekdayStats();
 
   async function listDates() {
     const cacheKey = `arxiv-archive:list`;
