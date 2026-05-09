@@ -199,6 +199,16 @@ def short_title(title: str, limit: int = 58) -> str:
 
 def topic_title_ko(text: str) -> str:
     low = text.lower()
+    if "understanding-generation gap" in low or ("understanding" in low and "generation" in low and "vlm" in low):
+        return "VLM은 이해한 것을 그대로 생성으로 옮기지 못하는 간극을 재기 시작했습니다"
+    if "embodied ai safety" in low or ("safety" in low and "embodied" in low):
+        return "Embodied AI 안전성은 개별 방어가 아니라 전체 실패 지도로 정리되고 있습니다"
+    if "world model" in low or "robot wm" in low or "wm reward" in low or "wm-quality" in low or "4d" in low:
+        return "World Model 평가는 영상이 그럴듯한지보다 행동에 도움이 되는지를 묻기 시작했습니다"
+    if "cross-embodiment" in low or "bifrostumi" in low or "robot-free" in low or ("human video" in low and "robot" in low):
+        return "로봇 데이터 부족 문제는 사람 영상과 로봇 행동을 잇는 변환 문제로 바뀌고 있습니다"
+    if "efficiency" in low and ("lora" in low or "npu" in low or "kv" in low or "dit" in low):
+        return "효율화는 모델 압축보다 배포 조건별 최적화 문제로 바뀌고 있습니다"
     if "video" in low and ("camera" in low or "controll" in low):
         return "비디오 생성은 이제 '예쁜 샘플'보다 '원하는 대로 조종되는가'를 봅니다"
     if "vla" in low and ("relation" in low or "expert" in low or "latent" in low or "structure" in low):
@@ -221,6 +231,36 @@ def topic_title_ko(text: str) -> str:
 def explain_claim(text: str) -> str:
     raw = clean(text)
     low = raw.lower()
+    if "understanding-generation gap" in low or ("understanding" in low and "generation" in low and ("vlm" in low or "unireasoner" in low)):
+        return (
+            "VLM이 이미지를 보고 설명하거나 답을 검증하는 능력과, 그 이해를 바탕으로 원하는 이미지를 정확히 생성하는 능력은 같은 것이 아닙니다. "
+            "UniReasoner류 논문은 이 간극을 이름 붙이고, 초안 생성 뒤 스스로 비판한 다음 diffusion guidance로 고치는 루프를 제안합니다. "
+            "즉 '이해하는 모델'을 바로 '잘 만드는 모델'로 믿으면 안 되고, 이해 결과를 생성 과정에 어떻게 전달할지 따로 평가해야 한다는 뜻입니다."
+        )
+    if "embodied ai safety" in low or ("safety" in low and "embodied" in low):
+        return (
+            "Embodied AI 안전성은 이제 한두 개 공격이나 방어 기법으로 설명하기 어려운 단계에 왔습니다. "
+            "perception, cognition, planning, action, interaction처럼 로봇 파이프라인의 여러 층에서 실패가 생기기 때문에, survey가 이 실패 지도를 정리하는 역할을 합니다. "
+            "우리 입장에서는 안전성 논문을 볼 때 '어떤 층의 실패를 막는가'를 먼저 태깅해야 비교가 가능해진다는 뜻입니다."
+        )
+    if ("world model" in low and ("reconstruction" in low or "reward" in low or "interactive" in low)) or "robot wm" in low or "wm reward" in low or "wm-quality" in low:
+        return (
+            "예전에는 World Model을 미래 영상을 얼마나 그럴듯하게 복원하거나 예측하느냐로 많이 평가했습니다. "
+            "이번 묶음은 그 기준을 '그 예측이 로봇 행동 성공에 실제로 도움이 되는가'와 '상호작용 상황에서도 계속 쓸 수 있는가'로 옮기고 있습니다. "
+            "그래서 보기 좋은 예측보다 행동을 더 잘하게 만드는 예측이 중요한지, 같은 rollout 안에서 영상 점수와 성공률을 함께 재야 한다는 뜻입니다."
+        )
+    if "cross-embodiment" in low or "bifrostumi" in low or "robot-free" in low or ("human video" in low and "robot" in low):
+        return (
+            "로봇 imitation learning에서 제일 비싼 병목은 좋은 demonstration을 많이 모으는 일입니다. "
+            "BifrostUMI나 cross-embodiment video editing 쪽은 사람 영상, 로봇 없는 데모, 다른 몸체의 영상을 로봇이 학습할 수 있는 형태로 바꾸려는 흐름입니다. "
+            "성공하면 데이터 수집 비용을 줄이는 데서 끝나지 않고, 어떤 인간 행동을 어떤 로봇 embodiment로 옮길 수 있는지 자체가 새로운 평가 문제가 됩니다."
+        )
+    if "efficiency" in low and ("lora" in low or "npu" in low or "kv" in low or "dit" in low or "moe" in low):
+        return (
+            "효율화 논문들이 단순히 파라미터를 줄이는 방향에서 벗어나고 있습니다. "
+            "DiT LoRA, mobile NPU, MoE segmentation, recurrent-depth ViT처럼 각 배포 조건에 맞춰 어느 부분을 가볍게 만들지 나누는 흐름입니다. "
+            "그래서 앞으로는 '작아졌나'보다 '어떤 하드웨어와 어떤 작업에서 품질 손실 없이 빨라졌나'가 더 중요한 비교축이 됩니다."
+        )
     if "vla" in low and ("relation" in low or "expert" in low or "latent" in low or "structure" in low or "supervision" in low):
         return (
             "VLA를 하나의 거대한 policy로만 보면 왜 성공하고 왜 실패하는지 설명하기가 어렵습니다. "
@@ -289,8 +329,8 @@ def explain_claim(text: str) -> str:
         )
     if raw:
         return (
-            "이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. "
-            "그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다."
+            "여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. "
+            "따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다."
         )
     return "오늘 논문들은 성능 숫자보다 평가 조건과 실패 조건을 더 분명히 하려는 방향으로 묶입니다."
 
@@ -370,7 +410,8 @@ def render_trends(date_str: str, trends: dict, papers: dict[str, list[dict]]) ->
     hot_count = top[0][1].get("total", 0) if top else 0
     hot_claim = ""
     if trends.get("hottest"):
-        hot_claim = explain_claim(trends["hottest"][0].get("note") or trends["hottest"][0].get("topic", ""))
+        first_hot = trends["hottest"][0]
+        hot_claim = explain_claim(f"{first_hot.get('topic', '')} {first_hot.get('note', '')}")
     else:
         hot_claim = explain_claim(hot_name)
     p1 = (
@@ -420,6 +461,16 @@ def render_cv_ro(trends: dict) -> str:
 
 def cluster_name(text: str) -> str:
     low = text.lower()
+    if "understanding-generation gap" in low or ("understanding" in low and "generation" in low and "vlm" in low):
+        return "VLM understanding-generation gap"
+    if "embodied ai safety" in low or ("safety" in low and "embodied" in low):
+        return "Embodied AI safety synthesis"
+    if "world model" in low or "robot wm" in low or "wm reward" in low or "wm-quality" in low or "4d" in low:
+        return "World Model evaluation shift"
+    if "cross-embodiment" in low or "bifrostumi" in low or "robot-free" in low or ("human video" in low and "robot" in low):
+        return "Cross-embodiment data bridge"
+    if "efficiency" in low and ("lora" in low or "npu" in low or "kv" in low or "dit" in low):
+        return "Deployment-side efficiency surge"
     if "video" in low and ("camera" in low or "controll" in low):
         return "Controllable video generation"
     if "vla" in low and ("relation" in low or "expert" in low or "latent" in low or "structure" in low):
@@ -455,6 +506,16 @@ def cluster_tags(text: str) -> list[str]:
 
 def lab_action_for(text: str) -> str:
     low = text.lower()
+    if "understanding-generation gap" in low or ("understanding" in low and "generation" in low and "vlm" in low):
+        return "prompt verification 점수와 prompt-faithful generation 점수를 분리한 gap benchmark 만들기"
+    if "embodied ai safety" in low or ("safety" in low and "embodied" in low):
+        return "perception/cognition/planning/action/interaction 5층으로 기존 로봇 safety 논문 태깅표 작성"
+    if "world model" in low or "robot wm" in low or "wm reward" in low or "wm-quality" in low or "4d" in low:
+        return "영상 복원 점수와 robot success rate를 같은 rollout에서 비교"
+    if "cross-embodiment" in low or "bifrostumi" in low or "robot-free" in low or ("human video" in low and "robot" in low):
+        return "human video, robot-free demo, teleop demo를 같은 manipulation task에서 IL 성능으로 비교"
+    if "efficiency" in low and ("lora" in low or "npu" in low or "kv" in low or "dit" in low):
+        return "LoRA/NPU/MoE/RD-ViT를 latency, memory, quality drop 3축으로 비교표 작성"
     if "video" in low and ("camera" in low or "controll" in low):
         return "카메라 경로 오차, 대상 정체성 유지, 지연시간을 분리한 metric grid 설계"
     if "vla" in low and ("relation" in low or "expert" in low or "latent" in low or "structure" in low):
@@ -482,6 +543,18 @@ def evidence_ids_from_obj(obj: dict) -> list[str]:
 
 def fallback_cluster_specs(id_map: dict[str, tuple[str, dict]]) -> list[dict]:
     candidates = [
+        {
+            "name": "Cross-embodiment data bridge",
+            "keywords": ["bifrostumi", "robot-free demonstrations", "humanoid whole-body", "cross-embodiment", "embodiment gap", "video editing"],
+            "why": (
+                "로봇 학습에서 demonstration을 직접 모으는 비용이 너무 크기 때문에, 사람 영상이나 로봇 없는 데모를 로봇 정책 학습용 데이터로 바꾸려는 흐름이 커지고 있습니다. "
+                "여기서 중요한 건 영상 변환이 그럴듯한지가 아니라, 변환된 데이터로 실제 policy success rate가 올라가느냐입니다. 그래서 데이터 생성 논문과 imitation learning 논문을 한 표에서 같이 봐야 합니다."
+            ),
+            "confidence": "Medium",
+            "confidence_note": "robot-free demo와 cross-embodiment video editing이 같은 데이터 병목을 겨냥",
+            "lab_action": "human video, robot-free demo, teleop demo를 같은 manipulation task에서 IL 성능으로 비교",
+            "tags": ["방법전환", "인프라"],
+        },
         {
             "name": "Navigation as map-level decision",
             "keywords": ["navone", "navigation", "objectnav", "label map", "ambiguous user queries", "top-down maps"],
@@ -576,7 +649,7 @@ def render_cluster_map(trends: dict, insights: dict, id_map: dict[str, tuple[str
             else:
                 links.append(arxiv_link(aid, aid))
         confidence = "High" if len(ids) >= 2 else "Medium"
-        why = explain_claim(claim or text)
+        why = explain_claim(f"{text} {claim}")
         tags = " ".join(f"<span class='tag'>[{esc(tag)}]</span>" for tag in cluster_tags(text))
         rows.append(
             "<tr>"
@@ -655,7 +728,7 @@ def render_insights(insights: dict, id_map: dict[str, tuple[str, dict]]) -> str:
         return "<p>저장된 인사이트 JSON이 없어, 오늘 논문별 요약과 버킷 현황을 중심으로 읽으면 됩니다.</p>"
     for obj in items:
         title = topic_title_ko(obj.get("title", "") + " " + obj.get("claim", ""))
-        claim = explain_claim(obj.get("claim", ""))
+        claim = explain_claim(obj.get("title", "") + " " + obj.get("claim", ""))
         links = []
         for url in obj.get("papers", [])[:4]:
             aid = url.rstrip("/").split("/")[-1]
@@ -671,7 +744,7 @@ def render_topics(insights: dict) -> str:
     cards = []
     for obj in insights.get("research_topics", [])[:3]:
         title = topic_title_ko(obj.get("title", "") + " " + obj.get("claim", ""))
-        claim = explain_claim(obj.get("claim", ""))
+        claim = explain_claim(obj.get("title", "") + " " + obj.get("claim", ""))
         cards.append(f"<div class='card topic'><h3>{esc(title)}</h3><p>{esc(claim)}</p></div>")
     if not cards:
         cards.append("<p>저장된 추천 연구주제 JSON이 없어 이번 재생성에서는 별도 주제 제안을 생략했습니다.</p>")
@@ -850,11 +923,11 @@ def render_weekly(path: Path) -> str:
     top5 = data.get("top5", [])
     buckets = data.get("buckets_summary", {})
     theme_html = "\n".join(
-        f"<div class='card'><h3>{esc(topic_title_ko(t.get('title','') + ' ' + t.get('summary','')))}</h3><p>{esc(explain_claim(t.get('summary') or t.get('title','')))}</p></div>"
+        f"<div class='card'><h3>{esc(topic_title_ko(t.get('title','') + ' ' + t.get('summary','')))}</h3><p>{esc(explain_claim(t.get('title','') + ' ' + t.get('summary','')))}</p></div>"
         for t in themes[:5]
     )
     pred_html = "\n".join(
-        f"<div class='card topic'><h3>{esc(clean(p.get('title','')))}</h3><p>{esc(explain_claim(p.get('claim','')))}</p><p class='small'>{esc(clean(p.get('rationale','')))}</p></div>"
+        f"<div class='card topic'><h3>{esc(clean(p.get('title','')))}</h3><p>{esc(explain_claim(p.get('title','') + ' ' + p.get('claim','')))}</p><p class='small'>{esc(clean(p.get('rationale','')))}</p></div>"
         for p in preds[:5]
     )
     top_items = []
