@@ -462,23 +462,57 @@ TriRelVLA: Triadic Relational Structure for Generalizable Embodied Manipulation 
 
 ## [11. Weekly 산출물]
 
+Weekly는 daily를 단순히 합친 글이 아니다. 한 주 동안 반복해서 나타난 문제 설정, 뜨거워진 클러스터, 식은 클러스터, 예측이 맞았는지 여부, 다음 주에 실제로 볼 관찰 포인트를 정리하는 회고 문서다.
+
+따라서 weekly는 아래 4가지 질문에 반드시 답해야 한다.
+
+1. 이번 주에 판세가 실제로 바뀐 축은 무엇인가?
+2. 지난 daily에서 중요하다고 본 흐름 중 무엇이 이어졌고, 무엇이 꺼졌는가?
+3. 다음 주에 확인해야 할 논문 유형, benchmark, failure case는 무엇인가?
+4. 우리 랩이 당장 해볼 수 있는 1주짜리 실험/읽기/비교표는 무엇인가?
+
 `posts/YYYY-MM-DD-weekly.html`에 아래 순서로 작성한다.
 
 1. 상단 홈 버튼
-2. 🗓 Executive Summary
-3. 주간 thesis — 이번주 판세를 1~2문장으로 선언
-4. 🔭 주간 동향 — RSS 요약 추출을 위해 반드시 이 h2 포함
-5. ⚖️ Hot vs Cold
+2. 🗓 Executive Summary — 한 주의 결론 3줄. 숫자 나열 금지, “그래서 이번 주는 무엇으로 기억할지”를 쓴다.
+3. 주간 thesis — 이번주 판세를 1~2문장으로 선언. 반드시 “지난주/초반 daily에서 보던 흐름과 무엇이 달라졌는지”를 포함한다.
+4. 🔭 주간 동향 — RSS 요약 추출을 위해 반드시 이 h2 포함. 3문단으로 작성한다.
+   - 1문단: 뜨거운 클러스터와 그 의미.
+   - 2문단: 식은 클러스터 또는 비어 있는 공백.
+   - 3문단: 다음 주로 넘어갈 관찰 포인트.
+5. ⚖️ Hot vs Cold — 주간 상승/하락 클러스터를 나란히 비교한다. 단순 편수보다 “왜 뜨거워졌고 왜 식었는지”를 설명한다.
 6. 🧩 주간 클러스터 표 — 필수. Daily의 `오늘의 클러스터 지도`와 같은 5열 표를 사용한다: Cluster / 대표 논문(Papers) / 왜 중요?(Why) / Confidence / Lab action. 카드 목록이나 Top 5로 대체 금지.
-7. 📐 CV vs RO 키워드
-8. 🔥 주간 Top 5 — 각 항목에 중요도 태그
-9. 🌟 Deep-dive 1편
-10. 🧭 주간 테마 3개 — 각 카드에 `.theme-card` 클래스 사용, confidence 포함
-11. 🪞 지난 예측 채점 — 있으면
-12. 🔮 다음주 예측
-13. 🧊 Skim-only / Watch-only 흐름 — 있으면
-14. 🎧 주간 오디오 — 있으면
-15. 참고 링크 + 하단 홈 버튼
+7. 📐 CV vs RO 키워드 — 공통 키워드, CV 전용 키워드, RO 전용 키워드, 같은 단어의 다른 맥락을 분리한다.
+8. 🔥 주간 Top 5 — 각 항목에 중요도 태그와 “왜 Top 5인지” 2문장 설명을 붙인다. 제목+링크만 나열 금지.
+9. 🌟 Weekly deep-dive 1편 — 주간 판세를 가장 잘 대표하는 1편만 고른다. daily must-read를 재탕하지 말고, “왜 주간 대표인지”를 기준으로 다시 고른다.
+10. 🧭 주간 테마 3개 — 각 카드에 `.theme-card` 클래스 사용, confidence 포함. 각 테마는 “관찰 → 의미 → 다음 주 전망” 순서로 쓴다.
+11. 🪞 지난 예측 채점 — 있으면 반드시 수행한다. 1주 전 weekly predictions 또는 2주 전 insights를 읽고 ✅/◐/✗/⏳ 라벨을 붙인다.
+12. 🔮 다음주 예측 — 3개. 각 예측은 “무엇이 나오면 적중인지 / 무엇이 안 나오면 빗나감인지” 판정 기준을 포함한다.
+13. 🧪 다음 주 1주 실행안 — 2~3개. 읽기 목록이 아니라 실제로 만들 표, 돌릴 benchmark, 비교할 ablation을 적는다.
+14. 🧊 Skim-only / Watch-only 흐름 — 있으면. 아직 약하지만 추적할 가치가 있는 미니토픽을 표시한다.
+15. 🎧 주간 오디오 — 있으면
+16. 참고 링크 + 하단 홈 버튼
+
+### Weekly 클러스터 표 품질 기준
+
+주간 클러스터 표는 daily 표보다 더 “판세 지도”에 가까워야 한다.
+
+- 최소 5개 행을 목표로 한다. 자료가 부족하면 3개까지 허용하되, 그 이유를 meta에 적는다.
+- 각 Cluster는 같은 주 안에서 2편 이상 연결되어야 한다. 1편뿐이면 `Watch-only`로 내리고 표의 주 클러스터에는 넣지 않는다.
+- `대표 논문` 칸에는 2~4편을 넣고, 논문 제목은 짧게 줄이되 링크는 유지한다.
+- `왜 중요?` 칸은 “A가 나왔고 B도 나왔다”가 아니라 “이 둘이 같이 나오면 평가 기준이나 연구 질문이 어떻게 달라지는지”를 설명한다.
+- `Confidence`는 High/Medium/Low 중 하나로 쓰고, 바로 아래에 근거를 한 줄로 붙인다. 예: “High — 서로 다른 저자군 4편 + benchmark가 겹침”.
+- `Lab action`은 다음 주에 바로 할 행동이어야 한다. 예: “LIBERO에서 relation/expert/verifier ablation 표 만들기”, “camera path error·identity preservation·latency 3축으로 ActCam/RealCam 비교”.
+- Weekly 표 생성 후 `Cluster</th>`, `대표 논문`, `왜 중요?`, `Confidence`, `Lab action`이 HTML에 있는지 검증한다.
+
+### Weekly에서 금지되는 약한 패턴
+
+- daily 요약 5개를 이어붙이고 “이번 주도 비슷했다”로 끝내기.
+- Top 5 제목만 나열하고 왜 Top 5인지 설명하지 않기.
+- 예측을 했는데 다음 weekly에서 채점하지 않기.
+- `VLA community가 catalog 단계에 진입`처럼 라벨만 말하고, 실제로 무슨 변화인지 풀지 않기.
+- `Hot vs Cold`를 단순 편수 순위로만 쓰기. 반드시 의미를 설명한다.
+- `Lab action`을 “follow-up 필요”, “더 봐야 함”처럼 비어 있는 말로 끝내기.
 
 필수 파일:
 - `posts/YYYY-MM-DD-weekly.html`
@@ -534,14 +568,34 @@ weekly에서는 `insights/YYYY-MM-DD.json`을 만들지 않는다.
   "iso_week": "YYYY-WW",
   "week_start": "YYYY-MM-DD",
   "week_end": "YYYY-MM-DD",
+  "weekly_thesis": "...",
+  "hot_vs_cold": {
+    "hot": [{"cluster": "...", "why": "...", "papers": ["https://arxiv.org/abs/..."]}],
+    "cold": [{"cluster": "...", "why": "..."}]
+  },
+  "clusters": [
+    {
+      "cluster": "...",
+      "papers": ["https://arxiv.org/abs/..."],
+      "why": "...",
+      "confidence": "High",
+      "lab_action": "..."
+    }
+  ],
   "predictions": [
-    {"title": "...", "claim": "...", "rationale": "..."}
+    {"title": "...", "claim": "...", "rationale": "...", "hit_condition": "...", "miss_condition": "..."}
+  ],
+  "prediction_review": [
+    {"title": "...", "label": "✅|◐|✗|⏳", "reason": "..."}
   ],
   "themes": [
-    {"title": "...", "summary": "..."}
+    {"title": "...", "summary": "...", "confidence": "High"}
   ],
   "top5": [
-    {"title": "...", "arxiv": "https://arxiv.org/abs/..."}
+    {"title": "...", "arxiv": "https://arxiv.org/abs/...", "why": "...", "tag": "[문제정의]"}
+  ],
+  "next_week_actions": [
+    {"title": "...", "action": "...", "expected_output": "..."}
   ]
 }
 ```
