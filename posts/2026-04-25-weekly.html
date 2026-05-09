@@ -202,7 +202,7 @@ discrete diffusion은 action 공간을 K개 token으로 vocabularize하고 마�
 <div class="step"><span class="step-label">🔍 관찰</span>
 3D/Scene 버킷이 정체(52편)인데 그 안의 무게중심이 quality 경쟁에서 응용 흡수로 옮겨가고 있어요. WildSplatter(2604.21182) 같이 in-the-wild 환경 splatting + 동시에 manipulation scene 구성으로 가는 시도가 늘었습니다.</div>
 <div class="step"><span class="step-label">⚙️ 왜 지금</span>
-splatting 자체의 속도·메모리 한계가 어느 정도 정착됐고(2024–2025 누적), 이제 robotics scene 표현 layer로 자연스럽게 흡수되는 단계. SLAM·manipulation이 점유하던 voxel·implicit 표현이 splatting으로 한 번 갈아치워지는 중간 시점.</div>
+splatting 자체의 속도·메모리 한계가 어느 정도 정착됐고(2024–2025 누적), 이제 robotics scene 표현 단계로 자연스럽게 흡수되는 단계. SLAM·manipulation이 점유하던 voxel·implicit 표현이 splatting으로 한 번 갈아치워지는 중간 시점.</div>
 <div class="step"><span class="step-label">🔭 전망</span>
 6개월 안에 manipulation scene 표현의 디폴트가 splatting으로 굳어질 가능성. 다만 dynamic scene + articulation 결합에서 막힐 거라 4D splatting이 그 다음 페이즈가 될 듯.</div>
 </div>
@@ -211,7 +211,7 @@ splatting 자체의 속도·메모리 한계가 어느 정도 정착됐고(2024�
 <div class="step"><span class="step-label">🔍 관찰</span>
 이번주 Safety 50편 중 5편 가까이가 "hierarchical robust" 또는 "human-aware safety" 라벨로 나왔습니다 — Human Awareness AMR(2604.18627), 3D Poisson CBF(2604.21189) 등.</div>
 <div class="step"><span class="step-label">⚙️ 왜 지금</span>
-2024–2025 RL safety는 single-level constraint가 주류였는데, VLA가 long-horizon 태스크를 진짜로 풀기 시작하면서 "단계별로 다른 safety bound"가 필요해진 거예요. CBF·STL 같은 formal method이 VLA의 high-level intent와 layered로 결합하는 시도.</div>
+2024–2025 RL safety는 single-level constraint가 주류였는데, VLA가 long-horizon 태스크를 진짜로 풀기 시작하면서 "단계별로 다른 safety bound"가 필요해진 거예요. CBF·STL 같은 formal method이 VLA의 high-level intent와 단계ed로 결합하는 시도.</div>
 <div class="step"><span class="step-label">🔭 전망</span>
 이게 다음 1년 동안 robotics safety의 새 디폴트가 될 가능성 큼. 단발 RL safety 논문은 줄고, "VLA + 위계 safety" 결합이 컨퍼런스 segment로 자리잡을 것.</div>
 </div>

@@ -6,7 +6,7 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 09 May 2026 11:48:03 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 09 May 2026 12:12:31 +0900</lastBuildDate>
     <ttl>720</ttl>
     <item>
       <title>🗓 arXiv Weekly Retrospective</title>
@@ -41,21 +41,21 @@
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-05.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-05.html</guid>
       <pubDate>Tue, 05 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Generation 54편, Robot Learning 44편, Foundation Models 39편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA 연구 흐름 shift 3주차 — monitoring/safety/test-time compute 운영 층위 드러남 쪽이에요. 어제 'pixel-free latent 기반 구조' shift 위에 7+편 한 하루치로 운영 층위 누적 — 단순 burst 아닌 커뮤니티 표준ization 신호.]]></description>
+      <description><![CDATA[오늘 단일 배치에서는 Generation 54편, Robot Learning 44편, Foundation Models 39편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA를 실제로 굴릴 때 필요한 운영 문제가 한꺼번에 올라왔다는 점이에요. Sentinel-VLA와 VLA-ATTC는 언제 더 오래 생각할지, TAIL-Safe와 To Do or Not To Do는 언제 행동을 멈추거나 안전 범위를 확인할지, Latent Bridge는 VLM 호출 비용을 얼마나 줄일지를 다룹니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-04 (월)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-04.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-04.html</guid>
       <pubDate>Mon, 04 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Generation 17편, Efficiency/Systems 14편, 3D/Scene 13편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA latent reasoning 연구 흐름 2주차 — pixel-free world-action models 정착 쪽이에요. Being-H0.7가 'pixel-space prediction은 비효율적' 직접 다루는 흐름 + Hamiltonian WM이 'physically meaningful' 측 연구 흐름 제안 + WM Survey가 정리. LaST-R1(지난주) 후속 결로 연구 흐름 단단해지는 모양새.]]></description>
+      <description><![CDATA[오늘 단일 배치에서는 Generation 17편, Efficiency/Systems 14편, 3D/Scene 13편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA가 미래 영상을 맞히는 문제에서 행동에 필요한 상태를 배우는 문제로 옮겨간다는 점이에요. Being-H0.7는 future frame을 직접 예측하지 않는 world-action model을, Hamiltonian WM은 물리적으로 말이 되는 latent dynamics를, IVLR은 긴 manipulation에서 vision-language reasoning trace를 다룹니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-03 (일)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-03.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-03.html</guid>
       <pubDate>Sun, 03 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 3D/Scene 20편, Robot Learning 17편, Foundation Models 16편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA reasoning 연구 흐름 shift — latent CoT + RL 쪽이에요. LaST-R1 + MotuBrain + PRTS 셋이 다른 axis로 같은 연구 흐름 직접 다루는 흐름; 일요일까지도 후속 ablation 결 미등장]]></description>
+      <description><![CDATA[오늘 단일 배치에서는 3D/Scene 20편, Robot Learning 17편, Foundation Models 16편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA reasoning 연구 흐름 전환 — latent CoT + RL 쪽이에요. LaST-R1 + MotuBrain + PRTS 셋이 다른 axis로 같은 연구 흐름 직접 다루는 흐름; 일요일까지도 후속 ablation 결 미등장]]></description>
     </item>
     <item>
       <title>🗓 arXiv Weekly Retrospective</title>
@@ -83,7 +83,7 @@
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-29.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-29.html</guid>
       <pubDate>Wed, 29 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Safety/Alignment 67편, Generation 66편, Robot Learning 53편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA execution 연구 흐름 재정의 쪽이에요. Libra-VLA dual-system + DiscreteRTC discrete diffusion + Privileged Foresight Distillation이 같은 날 동시 등장]]></description>
+      <description><![CDATA[오늘 단일 배치에서는 Safety/Alignment 67편, Generation 66편, Robot Learning 53편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA 실행 구조를 다시 묻는 논문들이 같이 나왔다는 점이에요. VLA가 길게 생각할수록 로봇 제어가 느려지고, 빠르게 움직이려 하면 추론이 얕아지는 문제가 있는데, Libra-VLA·DiscreteRTC·Privileged Foresight Distillation이 이 병목을 서로 다른 방식으로 다룹니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-28 (화)</title>

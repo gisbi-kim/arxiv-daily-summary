@@ -302,7 +302,7 @@ Daily에는 가능하면 "어제/지난주와 달라진 점"을 짧게 넣는다
 
 ```text
 🧭 어제와 달라진 점
-- 어제는 VLA latent substrate였고, 오늘은 VLA execution/reliability로 이동.
+- 어제는 VLA의 latent 표현을 어떻게 만들지가 중심이었고, 오늘은 그 모델을 실제 실행·신뢰성 문제로 어떻게 연결할지가 중심.
 - 지난주에는 4D world model 평가가 중심이었고, 오늘은 controllable video generation으로 확장.
 ```
 
