@@ -6,147 +6,147 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 09 May 2026 14:07:16 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 09 May 2026 14:17:15 +0900</lastBuildDate>
     <ttl>720</ttl>
     <item>
-      <title>🗓 arXiv Weekly Retrospective</title>
+      <title>📄 arXiv Weekly Briefing — 2026-05-09 (토)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-09-weekly.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-09-weekly.html</guid>
       <pubDate>Sat, 09 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[이번주 가장 분명한 흐름은 Generation 101편 이 단순 생성 품질 경쟁을 넘어 controllable video, world model, few-step diffusion, camera-control 쪽으로 재정렬됐다는 점입니다. 금요일 ActCam 과 RealCam 이 특히 상징적이에요. 배우 motion과 카메라 경로를 함께 다루거나 실시간 camera-controlled V2V로 가면서, 생성 모델 평가가 “예쁜 결과”에서 “원하는 시점과 움직임을 얼마나 안정적으로 조종하나”로 옮겨가는 느낌입니다.]]></description>
+      <description><![CDATA[비디오 생성은 더 이상 한 장면이 그럴듯한지만으로는 부족해지고 있습니다. 카메라 경로, 대상의 움직임, 정체성 유지, 지연시간처럼 실제 제작 도구에서 중요한 조건을 따로 재야 합니다. 그래서 이 흐름은 생성 모델을 감상용 샘플러가 아니라 조작 가능한 촬영 시스템으로 바꾸려는 움직임에 가깝습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-08 (금)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-08.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-08.html</guid>
       <pubDate>Fri, 08 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[이번 리포트에서는 결론의 위계를 먼저 세웁니다. Generation 36편 은 단순히 양이 많은 버킷이 아니라 ActCam·RealCam·FreeSpec으로 이어지는 “조종 가능한 video generation” 클러스터입니다. 여기서 중요한 건 FID류 품질 점수보다, 원하는 카메라 궤적을 따라가는지, 대상의 정체성이 흔들리지 않는지, 실시간으로 쓸 만큼 지연시간이 낮은지 같은 새 평가축이에요.]]></description>
+      <description><![CDATA[2026-05-08 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 36편이 잡혔습니다. 비디오 생성은 더 이상 한 장면이 그럴듯한지만으로는 부족해지고 있습니다. 카메라 경로, 대상의 움직임, 정체성 유지, 지연시간처럼 실제 제작 도구에서 중요한 조건을 따로 재야 합니다. 그래서 이 흐름은 생성 모델을 감상용 샘플러가 아니라 조작 가능한 촬영 시스템으로 바꾸려는 움직임에 가깝습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-07 (목)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-07.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-07.html</guid>
       <pubDate>Thu, 07 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Generation 26편, Foundation Models 18편, Efficiency/Systems 18편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA의 'latent action supervision' 문제 설정이 처음 체계적인 정리됨 — image-based vs action-based 구분 쪽이에요. VLA를 학습시킬 때 행동을 그대로 맞히게 할지, 아니면 이미지 변화 속에 숨어 있는 행동 단서를 먼저 배우게 할지의 차이를 본격적으로 비교하기 시작했다는 뜻입니다. 쉽게 말하면 '로봇에게 정답 행동을 외우게 할 것인가, 장면이 어떻게 변해야 하는지를 먼저 이해하게 할 것인가'를 나눠 보기 시작한 겁니다.]]></description>
+      <description><![CDATA[2026-05-07 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 26편이 잡혔습니다. VLA를 하나의 거대한 policy로만 보면 왜 성공하고 왜 실패하는지 설명하기가 어렵습니다. 이번 흐름은 object-hand-task 관계, expert routing, latent action, verifier처럼 내부 역할을 나눠서 보는 쪽입니다. 즉 모델 크기를 더 키우기 전에 어떤 구조가 어떤 작업에서 실제로 도움이 되는지 비교할 수 있는 발판이 생긴다는 뜻입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-06 (수)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-06.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-06.html</guid>
       <pubDate>Wed, 06 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Foundation Models 19편, Generation 16편, Efficiency/Systems 16편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 World Model 평가가 'reward alignment + interactive 벤치마크' 양축으로 같이 드러남 쪽이에요. 예전에는 World Model을 '미래 영상을 얼마나 그럴듯하게 복원하거나 예측하느냐'로 많이 평가했는데, 이제는 '그 예측이 로봇 행동 성공에 실제로 도움이 되느냐'와 '상호작용 상황에서 계속 쓸 수 있느냐'가 더 중요해지고 있다는 뜻입니다.]]></description>
+      <description><![CDATA[2026-05-06 묶음에서 제일 두꺼운 축은 Foundation Models이고, 저장된 스냅샷 기준 19편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-05 (화)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-05.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-05.html</guid>
       <pubDate>Tue, 05 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Generation 54편, Robot Learning 44편, Foundation Models 39편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA를 실제로 굴릴 때 필요한 운영 문제가 한꺼번에 올라왔다는 점이에요. Sentinel-VLA와 VLA-ATTC는 언제 더 오래 생각할지, TAIL-Safe와 To Do or Not To Do는 언제 행동을 멈추거나 안전 범위를 확인할지, Latent Bridge는 VLM 호출 비용을 얼마나 줄일지를 다룹니다.]]></description>
+      <description><![CDATA[2026-05-05 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 54편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-04 (월)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-04.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-04.html</guid>
       <pubDate>Mon, 04 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Generation 17편, Efficiency/Systems 14편, 3D/Scene 13편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA가 미래 영상을 맞히는 문제에서 행동에 필요한 상태를 배우는 문제로 옮겨간다는 점이에요. Being-H0.7는 future frame을 직접 예측하지 않는 world-action model을, Hamiltonian WM은 물리적으로 말이 되는 latent dynamics를, IVLR은 긴 manipulation에서 vision-language reasoning trace를 다룹니다.]]></description>
+      <description><![CDATA[2026-05-04 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 17편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-03 (일)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-03.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-03.html</guid>
       <pubDate>Sun, 03 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 3D/Scene 20편, Robot Learning 17편, Foundation Models 16편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA reasoning을 언어 설명이 아니라 행동에 가까운 latent 표현과 RL 학습 안으로 넣는 흐름이에요. LaST-R1·MotuBrain·PRTS가 같은 문제를 서로 다른 방식으로 다뤘고, 일요일까지는 이를 직접 대체하는 후속 ablation이 보이지 않았습니다.]]></description>
+      <description><![CDATA[2026-05-03 묶음에서 제일 두꺼운 축은 3D/Scene이고, 저장된 스냅샷 기준 20편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
-      <title>🗓 arXiv Weekly Retrospective</title>
+      <title>📄 arXiv Weekly Briefing — 2026-05-02 (토)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-02-weekly.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-02-weekly.html</guid>
       <pubDate>Sat, 02 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[arXiv Daily Briefing 2026-05-02]]></description>
+      <description><![CDATA[이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-01 (금)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-01.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-01.html</guid>
       <pubDate>Fri, 01 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 3D/Scene 20편, Robot Learning 17편, Foundation Models 16편이 제일 두꺼웠습니다.]]></description>
+      <description><![CDATA[2026-05-01 묶음에서 제일 두꺼운 축은 3D/Scene이고, 저장된 스냅샷 기준 20편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-30 (목)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-30.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-30.html</guid>
       <pubDate>Thu, 30 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Generation 76편, Robot Learning 49편, Foundation Models 46편이 제일 두꺼웠습니다.]]></description>
+      <description><![CDATA[2026-04-30 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 76편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-29 (수)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-29.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-29.html</guid>
       <pubDate>Wed, 29 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Safety/Alignment 67편, Generation 66편, Robot Learning 53편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA 실행 구조를 다시 묻는 논문들이 같이 나왔다는 점이에요. VLA가 길게 생각할수록 로봇 제어가 느려지고, 빠르게 움직이려 하면 추론이 얕아지는 문제가 있는데, Libra-VLA·DiscreteRTC·Privileged Foresight Distillation이 이 병목을 서로 다른 방식으로 다룹니다.]]></description>
+      <description><![CDATA[2026-04-29 묶음에서 제일 두꺼운 축은 Safety/Alignment이고, 저장된 스냅샷 기준 67편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-28 (화)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-28.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-28.html</guid>
       <pubDate>Tue, 28 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Generation 72편, Robot Learning 64편, Foundation Models 52편이 제일 두꺼웠습니다.]]></description>
+      <description><![CDATA[2026-04-28 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 72편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-27 (월)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-27.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-27.html</guid>
       <pubDate>Mon, 27 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Foundation Models 111편, Generation 105편, Robot Learning 71편이 제일 두꺼웠습니다.]]></description>
+      <description><![CDATA[2026-04-27 묶음에서 제일 두꺼운 축은 Foundation Models이고, 저장된 스냅샷 기준 111편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-26 (일)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-26.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-26.html</guid>
       <pubDate>Sun, 26 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Generation 95편, Foundation Models 69편, Safety/Alignment 58편이 제일 두꺼웠습니다.]]></description>
+      <description><![CDATA[2026-04-26 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 95편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
-      <title>🗓 arXiv Weekly Retrospective</title>
+      <title>📄 arXiv Weekly Briefing — 2026-04-25 (토)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-25-weekly.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-25-weekly.html</guid>
       <pubDate>Sat, 25 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[arXiv Daily Briefing 2026-04-25]]></description>
+      <description><![CDATA[이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-24 (금)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-24.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-24.html</guid>
       <pubDate>Fri, 24 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Safety/Alignment 27편, Generation 20편, Foundation Models 19편이 제일 두꺼웠습니다. 근데 숫자보다 중요한 건 VLA 내부 이해·진단 페이즈 쪽이에요. 오픈소스 VLA 해부 + spatial grounding 약점 겨냥 + post-training을 world-model 시뮬에 묶는 흐름이 한 날에 터짐]]></description>
+      <description><![CDATA[2026-04-24 묶음에서 제일 두꺼운 축은 Safety/Alignment이고, 저장된 스냅샷 기준 27편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-23 (목)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-23.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-23.html</guid>
       <pubDate>Thu, 23 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 Foundation Models 112편, Generation 79편, Robot Learning 58편이 제일 두꺼웠습니다.]]></description>
+      <description><![CDATA[2026-04-23 묶음에서 제일 두꺼운 축은 Foundation Models이고, 저장된 스냅샷 기준 112편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-22 (수)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-22.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-22.html</guid>
       <pubDate>Wed, 22 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 이 제일 두꺼웠습니다.]]></description>
+      <description><![CDATA[2026-04-22 묶음에서 제일 두꺼운 축은 Robot Learning이고, 저장된 스냅샷 기준 15편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-21 (화)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-21.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-21.html</guid>
       <pubDate>Tue, 21 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 이 제일 두꺼웠습니다.]]></description>
+      <description><![CDATA[2026-04-21 묶음에서 제일 두꺼운 축은 Robot Learning이고, 저장된 스냅샷 기준 8편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-18 (토)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-18.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-18.html</guid>
       <pubDate>Sat, 18 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 단일 배치에서는 이 제일 두꺼웠습니다.]]></description>
+      <description><![CDATA[2026-04-18 묶음에서 제일 두꺼운 축은 Robot Learning이고, 저장된 스냅샷 기준 10편이 잡혔습니다. 이 흐름은 새 기술 이름을 외우라는 뜻이라기보다, 여러 논문이 같은 평가 기준과 실패 조건을 공유하기 시작했다는 신호로 읽는 게 좋습니다. 그래서 다음에 볼 것은 성능 숫자 하나보다 어떤 조건에서 좋아지고, 어떤 조건에서 무너지는지입니다.]]></description>
     </item>
   </channel>
 </rss>
