@@ -45,8 +45,23 @@ EMOJI = {
     "Safety/Alignment": "🛡️",
 }
 WEEKDAY = {
+    "2026-04-18": "토",
+    "2026-04-21": "화",
+    "2026-04-22": "수",
+    "2026-04-23": "목",
+    "2026-04-24": "금",
+    "2026-04-26": "일",
+    "2026-04-27": "월",
+    "2026-04-28": "화",
+    "2026-04-29": "수",
+    "2026-04-30": "목",
+    "2026-05-01": "금",
+    "2026-05-03": "일",
+    "2026-05-04": "월",
+    "2026-05-05": "화",
     "2026-05-06": "수",
     "2026-05-07": "목",
+    "2026-05-08": "금",
 }
 
 
@@ -55,7 +70,7 @@ def esc(s) -> str:
 
 
 def clean_text(s: str) -> str:
-    s = html.unescape(s or "")
+    s = html.unescape(str(s or ""))
     s = re.sub(r"<[^>]+>", " ", s)
     s = re.sub(r"\s+", " ", s)
     return s.strip()
@@ -108,8 +123,10 @@ def naturalize_ko(s: str) -> str:
         ("systematic", "체계적인"),
         ("paradigm 측", "연구 흐름상"),
         ("paradigm", "연구 흐름"),
+        ("Substrate", "기반 구조"),
         ("substrate 측", "기반 구조 쪽"),
         ("substrate", "기반 구조"),
+        ("Audit", "점검"),
         ("audit 대상", "점검해야 할 지점"),
         ("audit 가치", "점검 가치"),
         ("audit", "점검"),
@@ -144,9 +161,14 @@ def naturalize_ko(s: str) -> str:
     s = re.sub(r"\breference\b", "기준점", s)
     s = re.sub(r"\bcommunity\b", "연구 커뮤니티", s)
     s = re.sub(r"\baudit\b", "점검", s)
+    s = re.sub(r"\bAudit\b", "점검", s)
     s = s.replace("연구 흐름으로 전환라는", "연구 흐름으로 전환됐다는")
     s = s.replace("정량화됐다는 것라는", "정량화됐다는")
     s = s.replace("평가이", "평가가")
+    s = s.replace("직접 다룸했지만", "직접 다뤘지만")
+    s = s.replace("직접 다룸한", "직접 다룬")
+    s = s.replace("직접 다룸하고", "직접 다루고")
+    s = s.replace("직접 다룸", "직접 다루는 흐름")
     s = re.sub(r"\s+", " ", s).strip()
     return s
 
@@ -610,9 +632,15 @@ def page(date: str) -> str:
     all_papers = {p["arxiv_id"]: p for papers in papers_by_bucket.values() for p in papers}
 
     total = sum(len(v) for v in papers_by_bucket.values())
-    top_bucket = max(trends.get("buckets", {"": {"total": 0}}).items(), key=lambda kv: kv[1].get("total", 0))[0]
+    trend_buckets = trends.get("buckets") or {}
+    if trend_buckets:
+        top_bucket = max(trend_buckets.items(), key=lambda kv: kv[1].get("total", 0))[0]
+    else:
+        top_bucket = max(papers_by_bucket.items(), key=lambda kv: len(kv[1]))[0]
     first_insight = (insights.get("insights") or [{}])[0]
     thesis_phrase = explain_plain(first_insight.get("claim") or first_insight.get("title", "평가축과 배포 조건이 동시에 바뀌는 흐름"))
+    if thesis_phrase and thesis_phrase[-1] not in ".!?요다":
+        thesis_phrase += "입니다."
     thesis = (
         f"{date} 배치에서 가장 두꺼운 버킷은 {top_bucket}입니다. 그래도 진짜 포인트는 "
         f"{thesis_phrase} "
