@@ -6,7 +6,7 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 09 May 2026 15:15:11 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 09 May 2026 15:27:25 +0900</lastBuildDate>
     <ttl>720</ttl>
     <item>
       <title>📄 arXiv Weekly Briefing — 2026-05-09 (토)</title>
@@ -48,70 +48,70 @@
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-04.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-04.html</guid>
       <pubDate>Mon, 04 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-05-04 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 17편이 잡혔습니다. VLA를 하나의 거대한 policy로만 보면 왜 성공하고 왜 실패하는지 설명하기가 어렵습니다. 이번 흐름은 object-hand-task 관계, expert routing, latent action, verifier처럼 내부 역할을 나눠서 보는 쪽입니다. 즉 모델 크기를 더 키우기 전에 어떤 구조가 어떤 작업에서 실제로 도움이 되는지 비교할 수 있는 발판이 생긴다는 뜻입니다.]]></description>
+      <description><![CDATA[2026-05-04 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 17편이 잡혔습니다. VLA를 하나의 거대한 policy로 실행하면 어느 단계가 판단이고 어느 단계가 미세 제어인지 분리하기 어렵습니다. Libra-VLA와 DiscreteRTC, LaST-R1 계열은 고수준 선택, 저수준 pose 조정, latent reasoning처럼 실행 안쪽 역할을 나누려는 흐름입니다. 함의는 모델 크기 경쟁보다, 어떤 역할 분해가 실제 조작 성공률과 latency를 같이 개선하는지 비교해야 한다는 점입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-03 (일)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-03.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-03.html</guid>
       <pubDate>Sun, 03 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-05-03 묶음에서 제일 두꺼운 축은 3D/Scene이고, 저장된 스냅샷 기준 20편이 잡혔습니다. VLA를 하나의 거대한 policy로만 보면 왜 성공하고 왜 실패하는지 설명하기가 어렵습니다. 이번 흐름은 object-hand-task 관계, expert routing, latent action, verifier처럼 내부 역할을 나눠서 보는 쪽입니다. 즉 모델 크기를 더 키우기 전에 어떤 구조가 어떤 작업에서 실제로 도움이 되는지 비교할 수 있는 발판이 생긴다는 뜻입니다.]]></description>
+      <description><![CDATA[2026-05-03 묶음에서 제일 두꺼운 축은 3D/Scene이고, 저장된 스냅샷 기준 20편이 잡혔습니다. VLA를 하나의 거대한 policy로 실행하면 어느 단계가 판단이고 어느 단계가 미세 제어인지 분리하기 어렵습니다. Libra-VLA와 DiscreteRTC, LaST-R1 계열은 고수준 선택, 저수준 pose 조정, latent reasoning처럼 실행 안쪽 역할을 나누려는 흐름입니다. 함의는 모델 크기 경쟁보다, 어떤 역할 분해가 실제 조작 성공률과 latency를 같이 개선하는지 비교해야 한다는 점입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Weekly Briefing — 2026-05-02 (토)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-02-weekly.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-02-weekly.html</guid>
       <pubDate>Sat, 02 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[자율주행 쪽은 이제 detection이나 planning 점수 하나로는 충분하지 않다는 쪽으로 움직이고 있습니다. Judge Then Drive, ProDrive, Dreaming Across Towns 같은 논문들은 모델이 왜 그런 주행 판단을 했는지, 그리고 시뮬레이션이나 폐루프 상황에서 그 판단이 어디서 깨지는지를 같이 보려는 흐름입니다. 그래서 우리도 인식 성능과 주행 성공률을 따로 보지 말고, 판단 근거와 실패 장면을 같은 평가표에 묶어야 합니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-05-01 (금)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-01.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-01.html</guid>
       <pubDate>Fri, 01 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-05-01 묶음에서 제일 두꺼운 축은 3D/Scene이고, 저장된 스냅샷 기준 20편이 잡혔습니다. 여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[2026-05-01 묶음에서 제일 두꺼운 축은 3D/Scene이고, 저장된 스냅샷 기준 20편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-30 (목)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-30.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-30.html</guid>
       <pubDate>Thu, 30 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-30 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 76편이 잡혔습니다. 여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[2026-04-30 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 76편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-29 (수)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-29.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-29.html</guid>
       <pubDate>Wed, 29 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-29 묶음에서 제일 두꺼운 축은 Safety/Alignment이고, 저장된 스냅샷 기준 67편이 잡혔습니다. 여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[2026-04-29 묶음에서 제일 두꺼운 축은 Safety/Alignment이고, 저장된 스냅샷 기준 67편이 잡혔습니다. VLA를 하나의 거대한 policy로 실행하면 어느 단계가 판단이고 어느 단계가 미세 제어인지 분리하기 어렵습니다. Libra-VLA와 DiscreteRTC, LaST-R1 계열은 고수준 선택, 저수준 pose 조정, latent reasoning처럼 실행 안쪽 역할을 나누려는 흐름입니다. 함의는 모델 크기 경쟁보다, 어떤 역할 분해가 실제 조작 성공률과 latency를 같이 개선하는지 비교해야 한다는 점입니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-28 (화)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-28.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-28.html</guid>
       <pubDate>Tue, 28 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-28 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 72편이 잡혔습니다. 여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[2026-04-28 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 72편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-27 (월)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-27.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-27.html</guid>
       <pubDate>Mon, 27 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-27 묶음에서 제일 두꺼운 축은 Foundation Models이고, 저장된 스냅샷 기준 111편이 잡혔습니다. 여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[2026-04-27 묶음에서 제일 두꺼운 축은 Foundation Models이고, 저장된 스냅샷 기준 111편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-26 (일)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-26.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-26.html</guid>
       <pubDate>Sun, 26 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-26 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 95편이 잡혔습니다. 여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[2026-04-26 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 95편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Weekly Briefing — 2026-04-25 (토)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-25-weekly.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-25-weekly.html</guid>
       <pubDate>Sat, 25 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-24 (금)</title>
@@ -125,28 +125,28 @@
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-23.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-23.html</guid>
       <pubDate>Thu, 23 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-23 묶음에서 제일 두꺼운 축은 Foundation Models이고, 저장된 스냅샷 기준 112편이 잡혔습니다. 여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[2026-04-23 묶음에서 제일 두꺼운 축은 Foundation Models이고, 저장된 스냅샷 기준 112편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-22 (수)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-22.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-22.html</guid>
       <pubDate>Wed, 22 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-22 묶음에서 제일 두꺼운 축은 Robot Learning이고, 저장된 스냅샷 기준 15편이 잡혔습니다. 여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[2026-04-22 묶음에서 제일 두꺼운 축은 Robot Learning이고, 저장된 스냅샷 기준 15편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-21 (화)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-21.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-21.html</guid>
       <pubDate>Tue, 21 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-21 묶음에서 제일 두꺼운 축은 Robot Learning이고, 저장된 스냅샷 기준 8편이 잡혔습니다. 여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[2026-04-21 묶음에서 제일 두꺼운 축은 Robot Learning이고, 저장된 스냅샷 기준 8편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
     <item>
       <title>📄 arXiv Daily Briefing — 2026-04-18 (토)</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-18.html</link>
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-18.html</guid>
       <pubDate>Sat, 18 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-18 묶음에서 제일 두꺼운 축은 Robot Learning이고, 저장된 스냅샷 기준 10편이 잡혔습니다. 여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. 따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다.]]></description>
+      <description><![CDATA[2026-04-18 묶음에서 제일 두꺼운 축은 Robot Learning이고, 저장된 스냅샷 기준 10편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
   </channel>
 </rss>

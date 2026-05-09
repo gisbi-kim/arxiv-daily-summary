@@ -199,6 +199,14 @@ def short_title(title: str, limit: int = 58) -> str:
 
 def topic_title_ko(text: str) -> str:
     low = text.lower()
+    if any(x in low for x in ["judge then drive", "prodrive", "dreaming across towns", "hermes++", "autonomous driving"]):
+        return "자율주행 평가는 인식 점수보다 판단 과정과 폐루프 실패를 함께 묻고 있습니다"
+    if any(x in low for x in ["libra-vla", "discretertc", "last-r1", "asynchronous execution", "dual-system"]):
+        return "VLA는 하나의 policy가 아니라 역할이 나뉜 실행 구조로 재편되고 있습니다"
+    if any(x in low for x in ["asyncshield", "breaking lock-in", "vla safety survey", "vla safety"]):
+        return "VLA 안전성은 단일 방어가 아니라 실패 조건 지도로 정리되고 있습니다"
+    if any(x in low for x in ["recgen", "in-the-wild", "in the wild"]):
+        return "생성·추천 모델은 정돈된 벤치마크 밖의 실제 사용 조건으로 끌려가고 있습니다"
     if "understanding-generation gap" in low or ("understanding" in low and "generation" in low and "vlm" in low):
         return "VLM은 이해한 것을 그대로 생성으로 옮기지 못하는 간극을 재기 시작했습니다"
     if "embodied ai safety" in low or ("safety" in low and "embodied" in low):
@@ -225,12 +233,36 @@ def topic_title_ko(text: str) -> str:
         return "생성 모델은 품질 경쟁에서 제어와 평가 경쟁으로 이동합니다"
     if "efficien" in low or "router" in low or "token" in low:
         return "효율 논문은 계산량 절감만이 아니라 무엇을 버려도 되는지 묻고 있습니다"
-    return "오늘 논문들이 같은 질문을 다른 방식으로 묻고 있습니다"
+    return "저장된 논문 묶음에서 보이는 보수적 관찰입니다"
 
 
 def explain_claim(text: str) -> str:
     raw = clean(text)
     low = raw.lower()
+    if any(x in low for x in ["judge then drive", "prodrive", "dreaming across towns", "hermes++", "autonomous driving"]):
+        return (
+            "자율주행 쪽은 이제 detection이나 planning 점수 하나로는 충분하지 않다는 쪽으로 움직이고 있습니다. "
+            "Judge Then Drive, ProDrive, Dreaming Across Towns 같은 논문들은 모델이 왜 그런 주행 판단을 했는지, 그리고 시뮬레이션이나 폐루프 상황에서 그 판단이 어디서 깨지는지를 같이 보려는 흐름입니다. "
+            "그래서 우리도 인식 성능과 주행 성공률을 따로 보지 말고, 판단 근거와 실패 장면을 같은 평가표에 묶어야 합니다."
+        )
+    if any(x in low for x in ["libra-vla", "discretertc", "last-r1", "asynchronous execution", "dual-system"]):
+        return (
+            "VLA를 하나의 거대한 policy로 실행하면 어느 단계가 판단이고 어느 단계가 미세 제어인지 분리하기 어렵습니다. "
+            "Libra-VLA와 DiscreteRTC, LaST-R1 계열은 고수준 선택, 저수준 pose 조정, latent reasoning처럼 실행 안쪽 역할을 나누려는 흐름입니다. "
+            "함의는 모델 크기 경쟁보다, 어떤 역할 분해가 실제 조작 성공률과 latency를 같이 개선하는지 비교해야 한다는 점입니다."
+        )
+    if any(x in low for x in ["asyncshield", "breaking lock-in", "vla safety survey", "vla safety"]):
+        return (
+            "VLA 안전성은 이제 공격 하나를 막는 문제가 아니라, 어떤 상황에서 policy가 고집을 부리거나 위험 행동으로 빠지는지를 지도처럼 정리하는 문제에 가깝습니다. "
+            "AsyncShield, Breaking Lock-In, VLA Safety Survey는 실행 중 차단, 실패 유형 이름 붙이기, 위협 분류를 각각 맡고 있습니다. "
+            "그래서 다음 실험은 안전 성공률 하나보다 lock-in, unsafe recovery, intervention timing을 분리해서 봐야 합니다."
+        )
+    if any(x in low for x in ["recgen", "in-the-wild", "in the wild"]):
+        return (
+            "RecGen과 in-the-wild 계열 논문은 모델을 깔끔한 벤치마크 안에서만 보지 말고, 실제 사용 로그나 불완전한 환경에서도 같은 방식으로 작동하는지 묻습니다. "
+            "추천·생성 모델은 오프라인 점수는 좋아도 사용자 조건이 바뀌면 품질과 안전성이 같이 흔들릴 수 있습니다. "
+            "그래서 이 묶음은 성능표보다 데이터가 어디서 왔고, 실제 사용 조건을 얼마나 대표하는지를 먼저 보라는 신호로 읽는 게 좋습니다."
+        )
     if "understanding-generation gap" in low or ("understanding" in low and "generation" in low and ("vlm" in low or "unireasoner" in low)):
         return (
             "VLM이 이미지를 보고 설명하거나 답을 검증하는 능력과, 그 이해를 바탕으로 원하는 이미지를 정확히 생성하는 능력은 같은 것이 아닙니다. "
@@ -329,8 +361,8 @@ def explain_claim(text: str) -> str:
         )
     if raw:
         return (
-            "여기서는 논문들이 같은 문제를 보는 듯하지만, 아직 공통 평가축이 충분히 정리되지는 않았습니다. "
-            "따라서 먼저 각 논문이 입력 조건, 실패 사례, 비교군을 어떻게 잡았는지 같은 표에 올려보고, 실제로 같은 질문을 풀고 있는지 확인하는 편이 좋습니다."
+            "저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. "
+            "다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다."
         )
     return "오늘 논문들은 성능 숫자보다 평가 조건과 실패 조건을 더 분명히 하려는 방향으로 묶입니다."
 
@@ -461,6 +493,14 @@ def render_cv_ro(trends: dict) -> str:
 
 def cluster_name(text: str) -> str:
     low = text.lower()
+    if any(x in low for x in ["judge then drive", "prodrive", "dreaming across towns", "hermes++", "autonomous driving"]):
+        return "Driving evaluation as judgment + closed-loop failure"
+    if any(x in low for x in ["libra-vla", "discretertc", "last-r1", "asynchronous execution", "dual-system"]):
+        return "VLA execution structure split"
+    if any(x in low for x in ["asyncshield", "breaking lock-in", "vla safety survey", "vla safety"]):
+        return "VLA safety failure map"
+    if any(x in low for x in ["recgen", "in-the-wild", "in the wild"]):
+        return "In-the-wild generation and recommendation check"
     if "understanding-generation gap" in low or ("understanding" in low and "generation" in low and "vlm" in low):
         return "VLM understanding-generation gap"
     if "embodied ai safety" in low or ("safety" in low and "embodied" in low):
@@ -506,6 +546,14 @@ def cluster_tags(text: str) -> list[str]:
 
 def lab_action_for(text: str) -> str:
     low = text.lower()
+    if any(x in low for x in ["judge then drive", "prodrive", "dreaming across towns", "hermes++", "autonomous driving"]):
+        return "nuScenes/Waymo 지표와 CARLA closed-loop 실패 장면을 같은 평가표로 묶기"
+    if any(x in low for x in ["libra-vla", "discretertc", "last-r1", "asynchronous execution", "dual-system"]):
+        return "LIBERO/RoboCasa에서 high-level decision, pose refinement, latent reasoning을 분리 ablation"
+    if any(x in low for x in ["asyncshield", "breaking lock-in", "vla safety survey", "vla safety"]):
+        return "unsafe recovery, lock-in, intervention timing을 분리한 VLA safety stress test 작성"
+    if any(x in low for x in ["recgen", "in-the-wild", "in the wild"]):
+        return "offline benchmark 점수와 실제 사용 로그 기반 실패 사례를 같은 표로 비교"
     if "understanding-generation gap" in low or ("understanding" in low and "generation" in low and "vlm" in low):
         return "prompt verification 점수와 prompt-faithful generation 점수를 분리한 gap benchmark 만들기"
     if "embodied ai safety" in low or ("safety" in low and "embodied" in low):
@@ -528,7 +576,7 @@ def lab_action_for(text: str) -> str:
         return "영상 복원 점수와 robot success rate를 같은 rollout에서 비교"
     if "3d" in low or "lidar" in low:
         return "view shift와 sensor shift를 나눠 calibration protocol 작성"
-    return "대표 논문 2~3편을 같은 입력, 같은 실패 기준, 같은 ablation 표로 재비교"
+    return "대표 논문별 입력 조건, 평가셋, 실패 사례, ablation 유무를 한 장 비교표로 정리"
 
 
 def evidence_ids_from_obj(obj: dict) -> list[str]:
@@ -1066,8 +1114,17 @@ def render_weekly_cluster_map(themes: list[dict], top5: list[dict]) -> str:
         if name in used:
             name = short_title(topic_title_ko(text), 46)
         used.add(name)
-        start = min(idx, max(len(papers) - 1, 0))
-        linked = papers[start:start + 2] or papers[:2]
+        low_text = text.lower()
+        linked = []
+        for aid, title in papers:
+            title_low = title.lower()
+            title_tokens = [t for t in re.split(r"[^a-z0-9+]+", title_low) if len(t) >= 4]
+            if title_low in low_text or any(t in low_text for t in title_tokens[:3]):
+                linked.append((aid, title))
+        if not linked:
+            start = min(idx, max(len(papers) - 1, 0))
+            linked = papers[start:start + 2] or papers[:2]
+        linked = linked[:3]
         links = []
         for aid, title in linked:
             links.append(arxiv_link(aid, short_title(title, 34)) if aid else esc(short_title(title, 34)))
@@ -1094,6 +1151,55 @@ def render_weekly_cluster_map(themes: list[dict], top5: list[dict]) -> str:
     )
 
 
+def link_based_weekly_themes(date_str: str, links: list[tuple[str, str]]) -> list[str]:
+    titles = {title.lower(): (aid, title) for aid, title in links}
+
+    def has_any(*needles: str) -> bool:
+        return any(any(n.lower() in title for title in titles) for n in needles)
+
+    themes = []
+    if has_any("hermes++", "judge then drive", "prodrive", "dreaming across towns"):
+        themes.append(
+            "HERMES++, Judge Then Drive, ProDrive, Dreaming Across Towns가 같이 보인다는 건 자율주행 평가가 단순 인식 점수에서 판단 근거와 폐루프 실패 장면까지 묶어 보는 방향으로 넓어진다는 뜻입니다."
+        )
+    if has_any("libra-vla", "discretertc", "last-r1"):
+        themes.append(
+            "Libra-VLA, DiscreteRTC, LaST-R1은 VLA를 하나의 실행 policy로 두기보다 고수준 판단, 저수준 제어, latent reasoning 역할을 나눠 보려는 흐름입니다."
+        )
+    if has_any("asyncshield", "breaking lock-in", "vla safety survey"):
+        themes.append(
+            "AsyncShield, Breaking Lock-In, VLA Safety Survey가 함께 잡힌 것은 VLA 안전성이 개별 방어 기법보다 실패 유형 지도와 개입 시점 평가로 이동하고 있다는 신호입니다."
+        )
+    if has_any("recgen", "in the wild"):
+        themes.append(
+            "RecGen과 in-the-wild 계열 논문은 생성이나 추천 모델이 정돈된 벤치마크 바깥의 실제 사용 조건에서 얼마나 버티는지 묻기 시작했다는 점에서 같이 볼 수 있습니다."
+        )
+    if themes:
+        return themes[:5]
+
+    # Last-resort fallback: use paper titles, not section headings.
+    out = []
+    for _, title in links[:5]:
+        if title:
+            out.append(f"{title}를 중심으로 같은 주의 대표 논문들을 묶어 보면, 핵심은 새 방법 이름보다 어떤 입력 조건과 실패 장면을 새로 평가 대상으로 삼았는지입니다.")
+    return out
+
+
+def is_bad_weekly_heading(text: str) -> bool:
+    low = clean(text).lower()
+    if not low:
+        return True
+    bad_bits = [
+        "주간 클러스터 표",
+        "주간 동향",
+        "주간 핵심 논문",
+        "참고 링크",
+        "오늘 논문들이 같은 질문",
+        "저장된",
+    ]
+    return any(x in low for x in bad_bits)
+
+
 def render_weekly_from_post(path: Path) -> str:
     source = path.read_text(encoding="utf-8")
     date_m = re.search(r"(20[0-9]{2}-[0-9]{2}-[0-9]{2})", path.name)
@@ -1105,15 +1211,17 @@ def render_weekly_from_post(path: Path) -> str:
             continue
         seen.add(aid)
         links.append((aid, clean(title)))
-    headings = [clean(x) for x in re.findall(r"<h[23][^>]*>(.*?)</h[23]>", source, re.S)]
-    themes = [h for h in headings if h and "참고" not in h and "링크" not in h][:5]
+    themes = link_based_weekly_themes(date_str, links)
+    if len(themes) < 3:
+        headings = [clean(x) for x in re.findall(r"<h[23][^>]*>(.*?)</h[23]>", source, re.S)]
+        themes = [h for h in headings if not is_bad_weekly_heading(h)][:5]
     theme_html = "\n".join(
         f"<div class='card theme-card'><h3>{esc(topic_title_ko(t))}</h3><p>{esc(explain_claim(t))}</p></div>"
         for t in themes
     )
     top_html = "\n".join(f"<li>{arxiv_link(aid, title)}</li>" for aid, title in links[:12])
     pseudo_themes = [{"title": t, "summary": t} for t in themes]
-    pseudo_top5 = [{"title": title, "arxiv": f"https://arxiv.org/abs/{aid}"} for aid, title in links[:5]]
+    pseudo_top5 = [{"title": title, "arxiv": f"https://arxiv.org/abs/{aid}"} for aid, title in links[:12]]
     cluster_html = render_weekly_cluster_map(pseudo_themes, pseudo_top5)
     return f"""<!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
