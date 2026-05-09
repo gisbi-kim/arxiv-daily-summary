@@ -221,11 +221,23 @@ def topic_title_ko(text: str) -> str:
 def explain_claim(text: str) -> str:
     raw = clean(text)
     low = raw.lower()
+    if "vla" in low and ("relation" in low or "expert" in low or "latent" in low or "structure" in low or "supervision" in low):
+        return (
+            "VLA를 하나의 거대한 policy로만 보면 왜 성공하고 왜 실패하는지 설명하기가 어렵습니다. "
+            "이번 흐름은 object-hand-task 관계, expert routing, latent action, verifier처럼 내부 역할을 나눠서 보는 쪽입니다. "
+            "즉 모델 크기를 더 키우기 전에 어떤 구조가 어떤 작업에서 실제로 도움이 되는지 비교할 수 있는 발판이 생긴다는 뜻입니다."
+        )
     if "world model" in low and ("reconstruction" in low or "reward" in low or "interactive" in low):
         return (
             "예전에는 World Model을 미래 영상을 얼마나 그럴듯하게 복원하거나 예측하느냐로 많이 평가했습니다. "
             "이제는 그 예측이 로봇 행동 성공에 실제로 도움이 되는지, 그리고 상호작용 상황에서도 계속 쓸 수 있는지를 같이 보자는 쪽으로 기준이 바뀌고 있습니다. "
             "뜻은 간단합니다. 보기 좋은 예측보다 행동을 더 잘하게 만드는 예측이 중요해졌다는 겁니다."
+        )
+    if "world model" in low or "4d" in low or "physical realism" in low or "physics" in low:
+        return (
+            "4D World Model 쪽은 이제 장면을 그럴듯하게 만드는 수준을 넘어, 시간에 따라 물리적으로 말이 되는지와 실제 상호작용에 쓸 수 있는지를 같이 묻고 있습니다. "
+            "LoViF 같은 평가는 dynamics, optics, temporal consistency처럼 실패가 어디서 나는지 나눠서 보려는 시도입니다. "
+            "즉 4D/World Model 연구가 데모 영상 경쟁에서 평가 프로토콜과 물리 기반 장면 표현 경쟁으로 넘어가고 있다는 뜻입니다."
         )
     if "vla" in low and ("relation" in low or "expert" in low or "latent" in low or "structure" in low):
         return (
@@ -251,11 +263,23 @@ def explain_claim(text: str) -> str:
             "질문에 따라 어떤 프레임과 근거를 남겨야 하는지 고르는 문제가 되었고, 잘못 고르면 중요한 증거를 버릴 수 있습니다. "
             "그래서 계산량 절감과 실패 위험을 한 표에서 같이 봐야 할 필요성이 커지고 있습니다."
         )
+    if "diffusion" in low and ("alignment" in low or "preference" in low or "self" in low or "nash" in low):
+        return (
+            "diffusion alignment는 외부 보상 모델이 정답을 준다고 가정하는 방식에서 조금씩 벗어나고 있습니다. "
+            "이번 흐름은 self-play, self-distillation, self-editing처럼 모델이 자기 출력과 비교하거나 스스로 고치는 루프를 쓰려는 쪽입니다. "
+            "그래서 중요한 질문은 성능이 올랐느냐뿐 아니라, 이런 자기참조 루프가 어떤 task에서는 안정적이고 어떤 task에서는 편향을 키우는지입니다."
+        )
     if "navigation" in low or "objectnav" in low or "vln" in low:
         return (
             "내비게이션 쪽은 지시문을 한 단계씩 따라가는 policy보다, 지도 수준에서 목표와 모호성을 다시 해석하는 쪽으로 움직입니다. "
             "사용자 질문이 애매하거나 관측이 부족할 때 바로 이동하기보다 비교하고 확인하는 과정이 중요해졌습니다. "
             "로봇이 길을 찾는 문제가 점점 '어디로 갈까'뿐 아니라 '지금 이 목표를 제대로 이해했나'를 묻는 문제로 바뀌고 있습니다."
+        )
+    if "hallucination" in low or "evidence" in low or "grounding" in low or "clinical" in low or "unintended changes" in low:
+        return (
+            "VLM 쪽 신뢰성 논문은 모델이 답을 맞히는지만 보지 않고, 실제로 어떤 근거를 보고 답했는지를 더 집요하게 묻고 있습니다. "
+            "차트, 의료 영상, image-to-image 변화처럼 근거가 흐려지기 쉬운 영역에서 evidence anchoring이나 hallucination 점검이 중요해졌습니다. "
+            "즉 foundation model 평가가 '그럴듯한 설명'에서 '근거가 남는 설명'으로 이동하고 있다는 뜻입니다."
         )
     if "attack surface" in low or "threat" in low or "stride" in low or "jailbreak" in low:
         return (
@@ -461,7 +485,7 @@ def fallback_cluster_specs(id_map: dict[str, tuple[str, dict]]) -> list[dict]:
         {
             "name": "Navigation as map-level decision",
             "keywords": ["navone", "navigation", "objectnav", "label map", "ambiguous user queries", "top-down maps"],
-            "exclude": ["mri", "slice navigation", "image pretraining"],
+            "exclude": ["mri", "slice navigation", "image pretraining", "underwater"],
             "why": (
                 "VLN/ObjectNav가 지시문을 한 단계씩 따라가는 문제에서, 전체 지도와 애매한 목표를 함께 판단하는 문제로 이동하고 있습니다. "
                 "즉 로봇이 바로 움직이기보다, 현재 목표가 무엇인지와 어느 후보가 더 맞는지를 먼저 비교해야 한다는 뜻입니다."
@@ -470,6 +494,30 @@ def fallback_cluster_specs(id_map: dict[str, tuple[str, dict]]) -> list[dict]:
             "confidence_note": "navigation 관련 논문 2편 이상 연결, benchmark 확산은 추가 확인 필요",
             "lab_action": "R2R/ObjectNav에 ambiguous-query와 top-down map planning stress test를 묶어 평가",
             "tags": ["문제정의", "인프라"],
+        },
+        {
+            "name": "Evidence-aware VLM reliability",
+            "keywords": ["hallucination", "evidence-aware", "keyframe anchoring", "clinical dermatology", "unintended changes", "diffcap-bench", "grounding video-llms"],
+            "why": (
+                "VLM 평가는 이제 정답률이나 그럴듯한 설명만으로 부족해지고 있습니다. "
+                "의료, 차트, image-to-image 변화처럼 근거가 흐려지기 쉬운 작업에서는 모델이 어떤 시각 근거를 붙잡고 답했는지까지 확인해야 합니다."
+            ),
+            "confidence": "Medium",
+            "confidence_note": "foundation/safety 쪽에서 evidence·hallucination·clinical robustness 논문이 함께 등장",
+            "lab_action": "VTAgent/CAST/DiffCap-Bench류를 묶어 evidence anchoring 실패 사례 표 만들기",
+            "tags": ["경고신호", "평가축"],
+        },
+        {
+            "name": "Efficient physical grounding systems",
+            "keywords": ["grounding video-llms", "physical reality", "sparse attention", "temporal structure", "efficient test-time adaptation", "lightweight"],
+            "why": (
+                "효율 논문도 단순히 모델을 작게 만드는 데서 끝나지 않고, 물리적 단서나 시간 구조를 잃지 않으면서 계산을 줄이는 방향으로 가고 있습니다. "
+                "즉 빠른 모델을 만들되, 실제 장면을 이해하는 데 필요한 근거를 버리지 않는지가 핵심 평가축이 됩니다."
+            ),
+            "confidence": "Medium",
+            "confidence_note": "Efficiency/Systems 안에서 physical grounding·sparse attention·temporal adaptation 신호가 반복",
+            "lab_action": "token/attention 절감 전후로 physical grounding과 temporal consistency가 얼마나 깨지는지 비교",
+            "tags": ["인프라", "방법전환"],
         },
         {
             "name": "3D/robotics calibration under shift",
