@@ -50,6 +50,17 @@ h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.
 .prompt-actions a:hover{background:#f6f8fa;text-decoration:none}
 .prompt-view{max-height:520px;overflow:auto;margin:10px 0 0;padding:14px;background:#fff;border:1px solid #d0d7de;border-radius:6px;white-space:pre-wrap;word-break:break-word;font:12.5px/1.6 ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;color:#24292f}
 .prompt-view.loading{color:#656d76;font-family:inherit}
+.label-panel{margin:0 0 22px;padding:14px 18px;background:#fff;border:1px solid #d0d7de;border-radius:8px;font-size:13.5px;color:#3b434d;line-height:1.65}
+.label-panel summary{cursor:pointer;font-weight:700;color:#0d1117;list-style:none;display:flex;align-items:center;gap:8px}
+.label-panel summary::-webkit-details-marker{display:none}
+.label-panel summary::before{content:"▸";font-size:11px;color:#0969da}
+.label-panel[open] summary::before{content:"▾"}
+.label-intro{margin:8px 0 12px;color:#656d76}
+.label-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:10px 0}
+.label-card{border:1px solid #e5e7eb;border-radius:8px;background:#fafbfc;padding:10px 12px}
+.label-badge{display:inline-block;font:12px/1.4 ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;color:#7c2d12;background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:1px 7px;margin-bottom:5px}
+.label-card p{margin:0;color:#3b434d}
+.label-note{margin:10px 0 0;color:#656d76;font-size:12.5px}
 .stats-panel{margin:0 0 22px;padding:16px 18px;background:#fff;border:1px solid #d0d7de;border-radius:8px;font-size:13.5px;color:#3b434d}
 .stats-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
 .stats-title{margin:0;font-weight:700;color:#0d1117;font-size:15px}
@@ -82,6 +93,7 @@ footer a{color:#656d76}
   .archive-link{padding:16px 2px}
   .archive-date{font-size:15px}
   .archive-summary{font-size:13.5px}
+  .label-grid{grid-template-columns:1fr}
   .stats-head{display:block}
   .stats-source{text-align:left;margin-top:8px}
   .weekday-chart{grid-template-columns:36px minmax(0,1fr);grid-template-rows:180px auto}
@@ -124,6 +136,19 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   <a href="https://github.com/gisbi-kim/arxiv-daily-summary/blob/main/prompts/instruction_v20260509.md" target="_blank" rel="noopener">GitHub에서 보기</a>
 </div>
 <pre id="prompt-view" class="prompt-view loading">토글을 열면 프롬프트를 불러옵니다…</pre>
+</details>
+
+<details class="label-panel">
+<summary>리포트 라벨은 어떻게 읽나요?</summary>
+<p class="label-intro">논문 제목 옆의 <strong>[CV]</strong>, <strong>[RO]</strong>, <strong>[CV/RO]</strong>는 arXiv 카테고리 출처입니다. 클러스터 표와 논문 요약에 붙는 갈색 라벨은 “이 논문을 왜 봐야 하는가”를 빠르게 표시하는 의미 태그이고, 현재 5개를 씁니다.</p>
+<div class="label-grid">
+  <div class="label-card"><span class="label-badge">[문제정의]</span><p>새로운 문제나 연구 질문을 세웁니다. “무엇을 풀어야 하는가” 자체를 바꾸는 논문입니다.</p></div>
+  <div class="label-card"><span class="label-badge">[평가축]</span><p>성능을 재는 기준을 바꿉니다. 정확도 하나보다 실패 조건, 제어 가능성, calibration처럼 무엇을 봐야 하는지 제안합니다.</p></div>
+  <div class="label-card"><span class="label-badge">[방법전환]</span><p>같은 병목을 다른 formulation이나 구조로 풉니다. 예전 접근을 더 키우는 대신 문제를 나눠 보거나 학습 방식을 바꿉니다.</p></div>
+  <div class="label-card"><span class="label-badge">[인프라]</span><p>데이터셋, 벤치마크, 툴, 프레임워크, 평가 파이프라인을 만듭니다. 후속 실험의 바닥재가 되는 논문입니다.</p></div>
+  <div class="label-card"><span class="label-badge">[경고신호]</span><p>failure mode, negative result, safety/deployment risk를 드러냅니다. “이 조건에서는 믿으면 안 된다”를 알려주는 논문입니다.</p></div>
+</div>
+<p class="label-note">한 논문에 라벨이 2개 붙을 수 있습니다. 예를 들어 새 벤치마크가 특정 실패 유형을 드러내면 <span class="label-badge">[인프라]</span>와 <span class="label-badge">[경고신호]</span>가 같이 붙습니다.</p>
 </details>
 
 <section class="stats-panel" aria-labelledby="weekday-stats-title">

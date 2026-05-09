@@ -317,7 +317,8 @@ Daily와 weekly에는 반드시 클러스터 지도 표를 넣는다. 카드형 
 대표 논문과 클러스터에는 아래 태그 중 하나 이상을 붙인다.
 
 ```text
-[문제정의] 새 평가축/문제 자체를 만든 논문
+[문제정의] 새 문제나 연구 질문 자체를 세운 논문
+[평가축] metric, benchmark protocol, failure condition처럼 성능을 재는 기준을 바꾼 논문
 [방법전환] 기존 병목을 다른 formulation으로 푼 논문
 [인프라] dataset/tool/framework/benchmark를 만든 논문
 [경고신호] negative result, failure mode, safety/deployment risk를 드러낸 논문
@@ -328,6 +329,7 @@ Daily와 weekly에는 반드시 클러스터 지도 표를 넣는다. 카드형 
 - VideoRouter → `[방법전환] [인프라]`
 - From Pixels to Tokens → `[방법전환]`
 - GA3T → `[인프라]`
+- iWorld-Bench → `[평가축] [인프라]`
 
 ### 8.5.5 Confidence와 evidence strength
 
