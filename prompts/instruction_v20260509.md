@@ -791,6 +791,7 @@ Backup prompt vYYYYMMDD (sanitized)
 3. `latent action supervision`, `world model`, `alignment`, `controllability`, `benchmark` 같은 용어는 첫 등장 문단에서 직관을 붙인다.
 4. 핵심 요약은 "문제 → 바뀐 기준/방법 → 왜 중요한지" 순서로 쓴다. 기술어 나열은 이 순서를 대체할 수 없다.
 5. 독자가 "그래서 그게 무슨 말인데?"라고 되물을 만한 문장이 보이면 실패로 간주하고 다시 쓴다.
+6. `A에서 B로 이동`, `A가 B로 전환`, `A가 B로 재정렬` 같은 문장은 반드시 다음 문장에 함의를 붙인다. 함의는 "그래서 평가 기준/실험 설계/랩 파이프라인에서 무엇을 다르게 봐야 하는가"여야 한다.
 
 ### 독자 친절성 게이트
 
@@ -886,7 +887,22 @@ diffusion 모델을 사람 취향에 맞추는 방식이 단순한 선호도 점
 평가와 학습 방식이 옮겨가고 있습니다.
 ```
 
-**예시 5 — Benchmark / SOTA**
+**예시 5 — VLA Reasoning 표현**
+
+나쁜 예:
+```text
+VLA의 reasoning 표현 층위가 explicit linguistic CoT에서 physical latent CoT + joint RL 최적화로 이동했습니다.
+```
+
+좋은 예:
+```text
+기존에는 VLA가 "내가 이렇게 생각했다"를 언어 문장으로 풀어 쓴 뒤 행동으로 바꾸는 방식에 가까웠는데,
+이제는 로봇 행동에 바로 쓸 수 있는 latent 상태를 만들고 그 상태와 action을 RL로 함께 최적화하는 쪽으로 옮겨가고 있습니다.
+함의는 평가 기준도 바뀐다는 점입니다. 앞으로는 reasoning 설명이 그럴듯한지보다,
+그 표현이 실제 manipulation 성공률, 제어 지연시간, long-horizon 안정성을 얼마나 바꾸는지를 봐야 합니다.
+```
+
+**예시 6 — Benchmark / SOTA**
 
 나쁜 예:
 ```text
