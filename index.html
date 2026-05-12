@@ -22,6 +22,10 @@ h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.
 .archive-date{display:inline-block;font-size:16px;font-weight:700;color:#0d1117;letter-spacing:-.005em;margin-bottom:4px;font-variant-numeric:tabular-nums}
 .archive-dow{font-size:13px;font-weight:400;color:#656d76;margin-left:2px}
 .archive-weekly-badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-left:8px;vertical-align:middle;background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);color:#78350f;border:1px solid #f59e0b;letter-spacing:.02em}
+.archive-counts{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:8px;vertical-align:middle}
+.archive-count-badge{display:inline-block;font-size:11px;font-weight:700;line-height:1.35;padding:2px 7px;border-radius:10px;letter-spacing:0;font-variant-numeric:tabular-nums}
+.archive-count-badge.cv{background:#ddf4ff;color:#0550ae;border:1px solid #54aeff}
+.archive-count-badge.ro{background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c}
 .archive-summary{display:block;color:#3b434d;font-size:14px;line-height:1.6;margin:4px 0 0;padding:0;list-style:none}
 .archive-summary li{position:relative;padding-left:14px;margin:2px 0}
 .archive-summary li::before{content:"•";position:absolute;left:2px;color:#8b95a1}
@@ -92,6 +96,7 @@ footer a{color:#656d76}
   body{padding:16px 8px}
   .archive-link{padding:16px 2px}
   .archive-date{font-size:15px}
+  .archive-counts{display:flex;margin:5px 0 0}
   .archive-summary{font-size:13.5px}
   .label-grid{grid-template-columns:1fr}
   .stats-head{display:block}
@@ -206,6 +211,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   const weekdayMeta = document.getElementById('weekday-stats-meta');
   const weekdayControls = document.getElementById('weekday-window-controls');
   const weekdayChart = document.getElementById('weekday-chart');
+  let weekdayPayloadPromise;
 
   const lsGet = (k) => {
     try {
@@ -247,6 +253,25 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
     const date = new Date(ymd + 'T00:00:00');
     date.setDate(date.getDate() - daysBack);
     return date.toISOString().slice(0, 10);
+  }
+
+  async function loadWeekdayPayload() {
+    if (!weekdayPayloadPromise) {
+      weekdayPayloadPromise = fetch('stats/weekday_counts.json', { cache: 'no-cache' }).then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      });
+    }
+    return weekdayPayloadPromise;
+  }
+
+  function archiveCountMap(payload) {
+    const rows = Array.isArray(payload?.archive_counts) ? payload.archive_counts
+      : Array.isArray(payload?.daily) ? payload.daily
+      : [];
+    return new Map(rows
+      .filter(row => row && row.date && Number.isFinite(Number(row.cv)) && Number.isFinite(Number(row.ro)))
+      .map(row => [row.date, { cv: Number(row.cv), ro: Number(row.ro), scope: row.scope || '' }]));
   }
 
   function renderWeekdayStats(payload, selectedDays) {
@@ -325,9 +350,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   async function loadWeekdayStats() {
     if (!weekdayChart || !weekdayControls || !weekdayMeta) return;
     try {
-      const res = await fetch('stats/weekday_counts.json', { cache: 'no-cache' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const payload = await res.json();
+      const payload = await loadWeekdayPayload();
       const windows = payload.windows || [
         { label: '1개월', days: 31 },
         { label: '3개월', days: 92 },
@@ -418,7 +441,25 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
     return titles;
   }
 
-  function renderRow(entry) {
+  function appendArchiveCounts(dateEl, entry, counts) {
+    if (entry.suffix || !counts) return;
+    const wrap = document.createElement('span');
+    wrap.className = 'archive-counts';
+    wrap.title = counts.scope ? `daily /new count · ${counts.scope}` : 'daily /new count';
+
+    const cv = document.createElement('span');
+    cv.className = 'archive-count-badge cv';
+    cv.textContent = `CV ${counts.cv}편`;
+    const ro = document.createElement('span');
+    ro.className = 'archive-count-badge ro';
+    ro.textContent = `RO ${counts.ro}편`;
+
+    wrap.appendChild(cv);
+    wrap.appendChild(ro);
+    dateEl.appendChild(wrap);
+  }
+
+  function renderRow(entry, counts) {
     const li = document.createElement('li');
     li.className = 'archive-item';
     const link = document.createElement('a');
@@ -432,6 +473,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
     dow.className = 'archive-dow';
     dow.textContent = ` (${dowOf(entry.date)})`;
     dateEl.appendChild(dow);
+    appendArchiveCounts(dateEl, entry, counts);
     if (entry.suffix === '-weekly') {
       const wk = document.createElement('span');
       wk.className = 'archive-weekly-badge';
@@ -469,14 +511,18 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   }
 
   try {
-    const dates = await listDates();
+    const [dates, countPayload] = await Promise.all([
+      listDates(),
+      loadWeekdayPayload().catch(() => null),
+    ]);
     if (!dates.length) {
       status.textContent = '아직 업로드된 브리핑이 없습니다.';
       return;
     }
     status.textContent = `총 ${dates.length}개의 브리핑 · 최신순 정렬`;
 
-    const summaryEls = dates.map(renderRow);
+    const counts = archiveCountMap(countPayload);
+    const summaryEls = dates.map(entry => renderRow(entry, counts.get(entry.date)));
 
     const CONCURRENCY = 6;
     let cursor = 0;
