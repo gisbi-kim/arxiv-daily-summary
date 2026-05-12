@@ -812,7 +812,7 @@ weekly에서는 `insights/YYYY-MM-DD.json`을 만들지 않는다.
 ```
 
 과거처럼 note 문자열에만 `cs.CV N + cs.RO M`을 남기지 말고, 위 구조화 필드를 함께 저장한다.
-홈페이지의 요일별 막대 차트와 archive 날짜 옆 CV/RO 배지는 `scripts/build_weekday_counts.py`가 repo에 저장된 이 필드와 과거 note를 읽어 생성한다. 차트는 선택 기간 안의 날짜들을 요일별로 누적 합산한 plot이어야 하며, 새 daily를 추가하거나 backfill할 때마다 `stats/weekday_counts.json`의 `daily`와 `weekday_totals`가 함께 갱신되어야 한다. 홈 archive의 각 daily 날짜 옆에는 가능한 경우 `CV N편`, `RO M편` 배지를 표시한다.
+홈페이지의 날짜별 막대 차트와 archive 날짜 옆 CV/RO 배지는 `scripts/build_weekday_counts.py`가 repo에 저장된 이 필드와 과거 note를 읽어 생성한다. 차트 x축은 요일 그룹이 아니라 저장된 daily 날짜 순서여야 하며, 새 daily를 추가하거나 backfill할 때마다 `stats/weekday_counts.json`의 `daily`에 해당 날짜 row가 append/정렬되어야 한다. 홈 archive의 각 daily 날짜 옆에는 가능한 경우 `CV N편`, `RO M편` 배지를 표시한다.
 
 `benchmarks/YYYY-MM-DD.json`:
 
@@ -1009,7 +1009,7 @@ Weekly:
 - scripts/build_feed.py --check 통과
 - stats/weekday_counts.json 존재, `daily`가 repo에 저장된 `/new` 카운트만 포함
 - stats/weekday_counts.json `daily`에 YYYY-MM-DD row가 존재하고 `daily_new_counts`와 CV/RO가 일치
-- stats/weekday_counts.json `weekday_totals`가 존재해 요일별 누적 plot이 새 날짜를 반영
+- 홈페이지 날짜별 plot은 x축에 저장된 daily 날짜를 순서대로 표시하고 새 날짜가 빠지지 않음
 - git diff --check 통과
 - out/, __pycache__ 등 임시 파일은 commit하지 않음
 ```

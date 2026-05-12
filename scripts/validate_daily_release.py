@@ -103,7 +103,6 @@ def validate(date: str) -> list[str]:
         stats_row.get("cv") == counts.get("cv") and stats_row.get("ro") == counts.get("ro"),
         f"stats/weekday_counts.json count mismatch for {date}: {stats_row.get('cv')}/{stats_row.get('ro')} != {counts.get('cv')}/{counts.get('ro')}",
     )
-    require(isinstance(stats.get("weekday_totals"), list), "stats/weekday_counts.json missing cumulative weekday_totals")
 
     totals = trends.get("totals") or {}
     require(isinstance(totals.get("total_scanned"), int), "totals.total_scanned must be integer")

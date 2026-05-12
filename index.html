@@ -74,7 +74,7 @@ h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.
 .range-controls button{appearance:none;border:1px solid #d0d7de;background:#f6f8fa;color:#24292f;border-radius:6px;padding:5px 10px;font:12.5px/1.3 inherit;cursor:pointer}
 .range-controls button:hover{background:#eef2f6}
 .range-controls button.active{background:#0969da;border-color:#0969da;color:#fff;font-weight:600}
-.weekday-chart{display:grid;grid-template-columns:44px minmax(0,1fr);grid-template-rows:220px auto;gap:8px 10px;padding:4px 0 0}
+.weekday-chart{display:grid;grid-template-columns:44px minmax(0,1fr);grid-template-rows:220px auto;gap:8px 10px;padding:4px 0 0;overflow-x:auto}
 .y-axis{grid-column:1;grid-row:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;font:12px/1.2 ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;color:#6b7280;padding:0 0 20px}
 .plot-area{grid-column:2;grid-row:1;position:relative;height:220px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;padding:0 6px 20px;border-left:1px solid #d0d7de;border-bottom:1px solid #d0d7de;background:linear-gradient(to top,#eaeef2 1px,transparent 1px) 0 0/100% 25%}
 .day-group{height:100%;display:flex;align-items:flex-end;justify-content:center;gap:4px;position:relative;z-index:1}
@@ -166,8 +166,8 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 <section class="stats-panel" aria-labelledby="weekday-stats-title">
 <div class="stats-head">
   <div>
-    <p class="stats-title" id="weekday-stats-title">요일별 /new 논문 수</p>
-    <p class="stats-note">x축은 요일, y축은 선택 기간 내 누적 논문 수입니다. repo에 저장된 일간 리포트 메타데이터만 사용하고, 업데이트/replacement가 아니라 당일 /new 배치에 기록된 cs.CV · cs.RO 수를 봅니다.</p>
+    <p class="stats-title" id="weekday-stats-title">날짜별 /new 논문 수</p>
+    <p class="stats-note">x축은 날짜, y축은 해당 날짜의 논문 수입니다. repo에 저장된 일간 리포트 메타데이터만 사용하고, 업데이트/replacement가 아니라 당일 /new 배치에 기록된 cs.CV · cs.RO 수를 봅니다.</p>
   </div>
   <div class="stats-source" id="weekday-stats-meta">데이터 불러오는 중…</div>
 </div>
@@ -192,15 +192,6 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   const REPO = 'arxiv-daily-summary';
   const DATE_RE = /^(\d{4}-\d{2}-\d{2})(-weekly)?\.html$/;
   const DOW = ['일','월','화','수','목','금','토'];
-  const WEEKDAY_ORDER = [
-    { idx: 1, label: '월' },
-    { idx: 2, label: '화' },
-    { idx: 3, label: '수' },
-    { idx: 4, label: '목' },
-    { idx: 5, label: '금' },
-    { idx: 6, label: '토' },
-    { idx: 0, label: '일' },
-  ];
   const LIST_TTL_MS = 10 * 60 * 1000;
   const INSIGHT_TTL_MS = 24 * 60 * 60 * 1000;
 
@@ -226,6 +217,10 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   };
 
   const dowOf = (ymd) => DOW[new Date(ymd + 'T00:00:00').getDay()];
+  const shortDate = (ymd) => {
+    const [, month, day] = ymd.split('-');
+    return `${Number(month)}/${Number(day)}`;
+  };
 
   async function loadPromptOnce() {
     if (!promptPanel || !promptView || promptView.dataset.loaded) return;
@@ -287,17 +282,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
     const latest = rows[rows.length - 1].date;
     const start = isoShift(latest, selectedDays - 1);
     const filtered = rows.filter(row => row.date >= start && row.date <= latest);
-    const groups = new Map(WEEKDAY_ORDER.map(w => [w.idx, { cv: 0, ro: 0, days: 0 }]));
-
-    filtered.forEach(row => {
-      const idx = new Date(row.date + 'T00:00:00').getDay();
-      const g = groups.get(idx);
-      g.cv += Number(row.cv || 0);
-      g.ro += Number(row.ro || 0);
-      g.days += 1;
-    });
-
-    const rawMax = Math.max(1, ...Array.from(groups.values()).flatMap(g => [g.cv, g.ro]));
+    const rawMax = Math.max(1, ...filtered.flatMap(row => [Number(row.cv || 0), Number(row.ro || 0)]));
     const step = rawMax > 500 ? 100 : rawMax > 200 ? 50 : rawMax > 80 ? 20 : 10;
     const maxValue = Math.ceil(rawMax / step) * step;
     weekdayChart.textContent = '';
@@ -312,27 +297,32 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
     plotArea.className = 'plot-area';
     const xAxis = document.createElement('div');
     xAxis.className = 'x-axis';
+    const columns = `repeat(${filtered.length}, minmax(42px, 1fr))`;
+    const minWidth = `${filtered.length * 46}px`;
+    plotArea.style.gridTemplateColumns = columns;
+    plotArea.style.minWidth = minWidth;
+    xAxis.style.gridTemplateColumns = columns;
+    xAxis.style.minWidth = minWidth;
 
-    WEEKDAY_ORDER.forEach(w => {
-      const g = groups.get(w.idx);
+    filtered.forEach(row => {
       const group = document.createElement('div');
       group.className = 'day-group';
       [['cv', 'bar-cv'], ['ro', 'bar-ro']].forEach(([key, cls]) => {
         const fill = document.createElement('div');
         fill.className = `bar-fill ${cls}`;
-        fill.style.height = `${Math.round((g[key] / maxValue) * 100)}%`;
-        const avg = g.days ? (g[key] / g.days).toFixed(1) : '0.0';
-        fill.title = `${w.label}요일 누적 ${key.toUpperCase()} ${g[key]}편 · 저장 날짜 ${g.days}개 · 평균 ${avg}편/일`;
+        const count = Number(row[key] || 0);
+        fill.style.height = `${Math.round((count / maxValue) * 100)}%`;
+        fill.title = `${row.date} (${dowOf(row.date)}) ${key.toUpperCase()} ${count}편`;
         group.appendChild(fill);
       });
 
       const tick = document.createElement('div');
       tick.className = 'x-tick';
-      tick.textContent = w.label;
+      tick.textContent = shortDate(row.date);
       const value = document.createElement('span');
       value.className = 'x-value';
-      value.textContent = `${g.cv}/${g.ro}`;
-      value.title = `${w.label}요일 누적: CV ${g.cv}, RO ${g.ro}, 저장 날짜 ${g.days}개`;
+      value.textContent = `${Number(row.cv || 0)}/${Number(row.ro || 0)}`;
+      value.title = `${row.date} (${dowOf(row.date)}): CV ${Number(row.cv || 0)}, RO ${Number(row.ro || 0)}`;
       tick.appendChild(value);
 
       plotArea.appendChild(group);
@@ -344,7 +334,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 
     const totalCv = filtered.reduce((sum, row) => sum + Number(row.cv || 0), 0);
     const totalRo = filtered.reduce((sum, row) => sum + Number(row.ro || 0), 0);
-    weekdayMeta.textContent = `${start} ~ ${latest} · 요일별 누적 합산 · 저장 날짜 ${filtered.length}개 · CV ${totalCv} / RO ${totalRo}`;
+    weekdayMeta.textContent = `${start} ~ ${latest} · 날짜별 daily /new · 저장 날짜 ${filtered.length}개 · CV ${totalCv} / RO ${totalRo}`;
   }
 
   async function loadWeekdayStats() {
@@ -377,7 +367,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
       renderWeekdayStats(payload, Number(windows[0].days));
     } catch (err) {
       weekdayMeta.textContent = '통계 데이터 없음';
-      weekdayChart.innerHTML = `<div class="stats-empty">요일별 통계를 불러오지 못했습니다: ${err.message}</div>`;
+      weekdayChart.innerHTML = `<div class="stats-empty">날짜별 통계를 불러오지 못했습니다: ${err.message}</div>`;
     }
   }
 
