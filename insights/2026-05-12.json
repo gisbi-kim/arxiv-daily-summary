@@ -1,12 +1,12 @@
 {
   "date": "2026-05-12",
-  "daily_thesis": "VLA와 world model이 내부 구조, 물리 일관성, closed-loop 평가를 중심으로 다시 묶이는 날입니다.",
+  "daily_thesis": "5/12는 5/11보다 훨씬 더 VLA 실행 스택과 closed-loop 평가가 전면에 나온 날입니다. CoWorld-VLA, async inference, CapVector, ALAM이 내부 실행 구조를 건드리고, HiDrive와 driving world model 계열이 그 구조가 실제 주행 루프에서 버티는지를 묻습니다.",
   "clusters": [
     {
-      "cluster": "VLA가 큰 policy 하나에서 내부 역할을 나누는 쪽으로 이동",
-      "why": "VLA를 하나의 거대한 policy로 보면 왜 성공하고 왜 실패하는지 설명하기가 어렵습니다. 오늘은 retrieval, multi-expert world model, asynchronous inference, capability vector, latent transition처럼 내부 역할을 나눠서 보려는 논문이 많이 나왔습니다. 그래서 다음 비교는 모델 크기보다 어떤 내부 구조가 어떤 task family에서 실제로 도움이 되는지를 따져야 합니다.",
+      "cluster": "VLA 실행 스택이 async, capability vector, latent transition으로 쪼개짐",
+      "why": "CoWorld-VLA, asynchronous inference, CapVector, ALAM은 VLA를 하나의 큰 policy로 두지 않고 실행 경로를 나눠 봅니다. 이는 reasoning, capability transfer, latent transition, inference timing을 따로 조절할 수 있어야 실제 로봇이나 주행 시스템에서 안정적으로 쓸 수 있다는 뜻입니다.",
       "confidence": "High",
-      "lab_action": "LIBERO, RoboCasa, driving closed-loop에서 retrieval, expert routing, latent transition, async inference를 같은 표로 ablation",
+      "lab_action": "같은 VLA backbone에서 async inference, capability vector, latent transition을 task family별로 ablation",
       "papers": [
         {
           "title": "CoWorld-VLA: Thinking in a Multi-Expert World Model for Autonomous Driving",
@@ -76,13 +76,19 @@
             "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
           }
         }
+      ],
+      "confidence_note": "VLA 내부 구조 관련 대표 논문 4편 연결",
+      "importance_tags": [
+        "[해부분석]",
+        "[방법전환]",
+        "[실사용전환]"
       ]
     },
     {
-      "cluster": "World model 평가는 예쁜 예측보다 행동과 물리 일관성으로 이동",
-      "why": "예전에는 world model을 미래 영상이 얼마나 그럴듯한지로 보는 경우가 많았습니다. 이번 묶음은 action-conditioned video, deformable object, driving world model, physical reasoning benchmark처럼 그 예측이 행동과 물리 조건에서 계속 쓸 수 있는지를 묻습니다. 즉 생성 품질보다 closed-loop 실패 조건을 먼저 보자는 신호입니다.",
+      "cluster": "World model은 물리 상호작용과 driving generalist 평가로 압축됨",
+      "why": "Is Your Driving World Model an All-Around Player, DeformMaster, ACWM-Phys, SceneFactory는 world model이 그럴듯한 영상을 만드는지보다 물리 상호작용과 driving 상황에서 쓸 수 있는지를 묻습니다. 5/12의 world model 흐름은 5/11보다 평가 대상이 더 closed-loop와 physical interaction 쪽으로 가까워졌습니다.",
       "confidence": "High",
-      "lab_action": "PhyGround, ACWM-Phys, driving WM 계열을 묶어 물리 위반률, action success, temporal drift를 분리 측정",
+      "lab_action": "driving, deformable manipulation, action-conditioned video에서 physics violation과 task success를 같은 protocol로 측정",
       "papers": [
         {
           "title": "Is Your Driving World Model an All-Around Player?",
@@ -152,13 +158,19 @@
             "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
           }
         }
+      ],
+      "confidence_note": "driving WM, deformable object, physical interaction 논문이 직접 연결",
+      "importance_tags": [
+        "[평가축]",
+        "[표준후보]",
+        "[경고신호]"
       ]
     },
     {
-      "cluster": "주행은 perception 점수보다 closed-loop 판단 근거를 묻기 시작",
-      "why": "자율주행 논문이 lane, HD map, trajectory 예측을 따로 잘하는지에서 멈추지 않고 있습니다. VLA driver, expert routing, corruption dataset, closed-loop benchmark가 같이 나온 것은 판단 근거와 실패 상황을 실제로 주행 루프 안에서 확인하려는 흐름입니다.",
+      "cluster": "주행은 고수준 지시와 closed-loop benchmark가 중심축",
+      "why": "HiDrive, VECTOR-Drive, DeepSight, DRIVE-C는 주행을 perception score가 아니라 고수준 지시, trajectory expert routing, long-horizon latent state, corruption condition에서 봅니다. 즉 5/12의 driving은 모델이 맞히는지가 아니라 실제 루프 안에서 언제 틀리는지를 묻는 날입니다.",
       "confidence": "High",
-      "lab_action": "nuPlan/CARLA에서 corruption, route change, high-level instruction failure를 한 묶음으로 넣은 closed-loop stress test 구성",
+      "lab_action": "HiDrive류 high-level instruction과 DRIVE-C corruption을 결합한 closed-loop failure matrix 작성",
       "papers": [
         {
           "title": "HiDrive: A Closed-Loop Benchmark for High-Level Autonomous Driving",
@@ -228,13 +240,19 @@
             "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
           }
         }
+      ],
+      "confidence_note": "closed-loop, expert routing, corruption dataset이 같은 driving 평가축으로 연결",
+      "importance_tags": [
+        "[평가축]",
+        "[실사용전환]",
+        "[표준후보]"
       ]
     },
     {
-      "cluster": "VLM 신뢰성은 정답률보다 왜곡, 환각, 검증 경계를 보는 쪽으로 이동",
-      "why": "VLM이 벤치마크 정답을 맞히는지만 보면 실제 배포 위험을 놓치기 쉽습니다. 오늘은 over-alignment, kinematic physics calibration, medical VQA verification, OOD, jailbreak처럼 모델이 자신 있게 틀리는 조건을 드러내는 논문이 두껍게 나왔습니다.",
+      "cluster": "VLM 신뢰성은 self-verification과 over-alignment의 경계를 드러냄",
+      "why": "Verification Mirage, C-CoT, When Language Overwrites Vision, Lost in Volume은 VLM이 스스로 검증하거나 언어 지시에 맞춘다고 해서 항상 더 안전해지는 것은 아니라는 점을 보여줍니다. 특히 의료와 driving처럼 틀린 확신이 위험한 도메인에서, self-verification이 어디서 깨지는지 따로 측정해야 합니다.",
       "confidence": "High",
-      "lab_action": "의료 VQA와 driving VLM에 counterfactual perturbation, confidence calibration, self-verification failure case를 같은 대시보드로 기록",
+      "lab_action": "의료 VQA와 driving VLM에서 self-check answer, visual evidence, counterfactual prompt를 같이 저장하는 failure set 구축",
       "papers": [
         {
           "title": "Verification Mirage: Mapping the Reliability Boundary of Self-Verification in Medical VQA",
@@ -304,13 +322,19 @@
             "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
           }
         }
+      ],
+      "confidence_note": "medical VQA, driving VLM, over-alignment, spatial VQA가 reliability boundary로 연결",
+      "importance_tags": [
+        "[경고신호]",
+        "[평가축]",
+        "[해부분석]"
       ]
     },
     {
-      "cluster": "효율화는 파라미터 축소보다 token, cache, streaming 제어로 구체화",
-      "why": "효율 논문이 단순히 작은 모델을 만드는 이야기에 머물지 않습니다. visual token compression, KV cache compression, token pruning, streaming impairments처럼 실제 추론 경로에서 무엇을 버리고 무엇을 남길지 정하는 문제로 바뀌고 있습니다.",
+      "cluster": "효율화는 KV cache와 visual token pruning으로 실제 추론 경로를 줄임",
+      "why": "Forcing-KV, LLaVA-UHD v4, Evading Visual Aphasia는 효율화를 파라미터 수가 아니라 추론 중 어떤 token과 cache를 남길지의 문제로 봅니다. 이는 큰 MLLM과 video diffusion을 배포하려면 정확도와 latency를 같은 그래프에서 봐야 한다는 뜻입니다.",
       "confidence": "High",
-      "lab_action": "video diffusion, MLLM, tracking에서 token budget, latency, accuracy drop을 같은 x축으로 놓고 Pareto curve 작성",
+      "lab_action": "MLLM/video diffusion에서 token count, cache size, latency, hallucination rate를 한 Pareto plot에 정리",
       "papers": [
         {
           "title": "Forcing-KV: Hybrid KV Cache Compression for Efficient Autoregressive Video Diffusion Models",
@@ -380,13 +404,19 @@
             "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
           }
         }
+      ],
+      "confidence_note": "KV cache, visual encoding, semantic token pruning이 같은 deployment bottleneck으로 연결",
+      "importance_tags": [
+        "[실사용전환]",
+        "[방법전환]",
+        "[인프라]"
       ]
     },
     {
-      "cluster": "Navigation은 단기 이동보다 기억, 제약, 애매한 지시를 함께 다루는 문제로 확장",
-      "why": "navigation을 다음 waypoint를 고르는 문제로만 보면 long-horizon 지시와 애매한 목표를 설명하기 어렵습니다. LCGNav, SleepWalk, ConsistNav, NEXUS 같은 논문은 기억, semantic executive control, symbolic constraint를 같이 보려는 흐름입니다.",
-      "confidence": "High",
-      "lab_action": "R2R/ObjectNav에 ambiguous query, memory reset, symbolic constraint violation을 넣은 navigation stress split 생성",
+      "cluster": "Navigation은 consistency gap과 long-horizon memory를 동시에 다룸",
+      "why": "LCGNav, ConsistNav, EgoMemReason, PECMAN은 navigation이 단순한 다음 행동 선택이 아니라 목표 후보, semantic consistency, 장기 기억, multi-agent 협업을 함께 다뤄야 한다고 봅니다. 5/12의 navigation 흐름은 5/11보다 benchmark와 consistency failure가 더 분명합니다.",
+      "confidence": "Medium",
+      "lab_action": "ObjectNav/VLN에 memory reset, ambiguous goal, semantic executive mismatch를 넣은 stress split 생성",
       "papers": [
         {
           "title": "LCGNav: Local Candidate-Aware Geometric Enhancement for General Topological Planning in Vision-Language Navigation",
@@ -456,21 +486,27 @@
             "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
           }
         }
+      ],
+      "confidence_note": "navigation benchmark와 consistency 논문이 연결되지만 표준 protocol은 아직 분산",
+      "importance_tags": [
+        "[문제정의]",
+        "[평가축]",
+        "[인프라]"
       ]
     }
   ],
   "research_topics": [
     {
-      "title": "VLA 내부 구조 ablation suite",
-      "claim": "retrieval, expert routing, latent transition, async inference를 같은 manipulation/driving task family에서 비교해야 합니다."
+      "title": "VLA execution-stack ablation",
+      "claim": "CoWorld-VLA, async inference, CapVector, ALAM을 같은 backbone과 task family 위에서 실행 경로별로 비교합니다."
     },
     {
-      "title": "World model physical failure board",
-      "claim": "보기 좋은 예측이 아니라 물리 위반률, action success, temporal drift를 분리 기록하는 평가판이 필요합니다."
+      "title": "Driving world model closed-loop suite",
+      "claim": "HiDrive, VECTOR-Drive, DeepSight, DRIVE-C를 묶어 고수준 지시와 corruption 조건의 실패 행렬을 만듭니다."
     },
     {
-      "title": "VLM self-verification stress set",
-      "claim": "의료 VQA와 driving VLM에서 self-verification이 언제 착각을 강화하는지 counterfactual case로 모아야 합니다."
+      "title": "VLM self-verification boundary set",
+      "claim": "Verification Mirage, C-CoT, over-alignment 계열을 의료와 driving VLM에 적용해 self-check가 언제 실패를 강화하는지 모읍니다."
     }
   ],
   "must_read": [
