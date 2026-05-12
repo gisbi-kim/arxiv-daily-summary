@@ -144,6 +144,43 @@ def collect_from_scripts(root: Path):
     return entries
 
 
+def aggregate_by_weekday(rows):
+    labels = [
+        (1, "Mon"),
+        (2, "Tue"),
+        (3, "Wed"),
+        (4, "Thu"),
+        (5, "Fri"),
+        (6, "Sat"),
+        (0, "Sun"),
+    ]
+    totals = {
+        idx: {
+            "weekday": label,
+            "weekday_index": idx,
+            "cv": 0,
+            "ro": 0,
+            "days": 0,
+        }
+        for idx, label in labels
+    }
+    for row in rows:
+        idx = (dt.date.fromisoformat(row["date"]).weekday() + 1) % 7
+        bucket = totals[idx]
+        bucket["cv"] += int(row.get("cv") or 0)
+        bucket["ro"] += int(row.get("ro") or 0)
+        bucket["days"] += 1
+
+    out = []
+    for idx, _label in labels:
+        bucket = totals[idx]
+        days = bucket["days"]
+        bucket["avg_cv_per_day"] = round(bucket["cv"] / days, 1) if days else 0
+        bucket["avg_ro_per_day"] = round(bucket["ro"] / days, 1) if days else 0
+        out.append(bucket)
+    return out
+
+
 def build(root: Path):
     # Trends are the committed daily snapshots, so they win over older scripts
     # when both have a count for the same date.
@@ -173,6 +210,7 @@ def build(root: Path):
             {"label": "2년", "days": 731},
             {"label": "3년", "days": 1096},
         ],
+        "weekday_totals": aggregate_by_weekday(daily),
         "daily": daily,
     }
 

@@ -78,13 +78,15 @@ def validate(date: str) -> list[str]:
     insights_path = ROOT / "insights" / f"{date}.json"
     benchmarks_path = ROOT / "benchmarks" / f"{date}.json"
     feed_path = ROOT / "feed.xml"
+    stats_path = ROOT / "stats" / "weekday_counts.json"
 
-    for path in [post_path, trends_path, insights_path, benchmarks_path, feed_path]:
+    for path in [post_path, trends_path, insights_path, benchmarks_path, feed_path, stats_path]:
         require(path.exists(), f"missing required artifact: {path.relative_to(ROOT)}")
 
     trends = load_json(trends_path)
     insights = load_json(insights_path)
     load_json(benchmarks_path)
+    stats = load_json(stats_path)
     html = post_path.read_text(encoding="utf-8", errors="replace")
     feed = feed_path.read_text(encoding="utf-8", errors="replace")
 
@@ -94,6 +96,14 @@ def validate(date: str) -> list[str]:
     counts = trends.get("daily_new_counts") or {}
     require(counts.get("scope") == "new+cross; replacements excluded", "daily_new_counts.scope must exclude replacements")
     require(isinstance(counts.get("cv"), int) and isinstance(counts.get("ro"), int), "daily_new_counts cv/ro must be integers")
+    stats_rows = [row for row in stats.get("daily", []) if isinstance(row, dict) and row.get("date") == date]
+    require(stats_rows, f"stats/weekday_counts.json missing daily row for {date}")
+    stats_row = stats_rows[-1]
+    require(
+        stats_row.get("cv") == counts.get("cv") and stats_row.get("ro") == counts.get("ro"),
+        f"stats/weekday_counts.json count mismatch for {date}: {stats_row.get('cv')}/{stats_row.get('ro')} != {counts.get('cv')}/{counts.get('ro')}",
+    )
+    require(isinstance(stats.get("weekday_totals"), list), "stats/weekday_counts.json missing cumulative weekday_totals")
 
     totals = trends.get("totals") or {}
     require(isinstance(totals.get("total_scanned"), int), "totals.total_scanned must be integer")

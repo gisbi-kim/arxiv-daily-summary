@@ -162,7 +162,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 <div class="stats-head">
   <div>
     <p class="stats-title" id="weekday-stats-title">요일별 /new 논문 수</p>
-    <p class="stats-note">x축은 요일, y축은 논문 수입니다. repo에 저장된 일간 리포트 메타데이터만 사용하고, 업데이트/replacement가 아니라 당일 /new 배치에 기록된 cs.CV · cs.RO 수를 봅니다.</p>
+    <p class="stats-note">x축은 요일, y축은 선택 기간 내 누적 논문 수입니다. repo에 저장된 일간 리포트 메타데이터만 사용하고, 업데이트/replacement가 아니라 당일 /new 배치에 기록된 cs.CV · cs.RO 수를 봅니다.</p>
   </div>
   <div class="stats-source" id="weekday-stats-meta">데이터 불러오는 중…</div>
 </div>
@@ -296,7 +296,8 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
         const fill = document.createElement('div');
         fill.className = `bar-fill ${cls}`;
         fill.style.height = `${Math.round((g[key] / maxValue) * 100)}%`;
-        fill.title = `${w.label}요일 ${key.toUpperCase()} ${g[key]}편`;
+        const avg = g.days ? (g[key] / g.days).toFixed(1) : '0.0';
+        fill.title = `${w.label}요일 누적 ${key.toUpperCase()} ${g[key]}편 · 저장 날짜 ${g.days}개 · 평균 ${avg}편/일`;
         group.appendChild(fill);
       });
 
@@ -306,7 +307,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
       const value = document.createElement('span');
       value.className = 'x-value';
       value.textContent = `${g.cv}/${g.ro}`;
-      value.title = `repo 저장 날짜 ${g.days}개`;
+      value.title = `${w.label}요일 누적: CV ${g.cv}, RO ${g.ro}, 저장 날짜 ${g.days}개`;
       tick.appendChild(value);
 
       plotArea.appendChild(group);
@@ -318,7 +319,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 
     const totalCv = filtered.reduce((sum, row) => sum + Number(row.cv || 0), 0);
     const totalRo = filtered.reduce((sum, row) => sum + Number(row.ro || 0), 0);
-    weekdayMeta.textContent = `${start} ~ ${latest} · 저장 날짜 ${filtered.length}개 · CV ${totalCv} / RO ${totalRo}`;
+    weekdayMeta.textContent = `${start} ~ ${latest} · 요일별 누적 합산 · 저장 날짜 ${filtered.length}개 · CV ${totalCv} / RO ${totalRo}`;
   }
 
   async function loadWeekdayStats() {
