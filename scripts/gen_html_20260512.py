@@ -174,6 +174,10 @@ def all_classified_papers(classified: dict) -> list[dict]:
     return papers
 
 
+def listing_count(rows: list[dict]) -> int:
+    return sum(1 for row in rows if row.get("section") != "replace")
+
+
 def classify_pastweek(papers: list[dict]) -> dict:
     out = {b: {"total": 0, "cv": 0, "ro": 0, "cvro": 0} for b in BUCKET_ORDER}
     seen = {}
@@ -337,8 +341,8 @@ def build() -> None:
     must_read = must_read[:10]
     trends = {
         "date": DATE,
-        "daily_new_counts": {"cv": len(cv_new), "ro": len(ro_new), "scope": "raw /new including cross-list sections"},
-        "totals": {"selected": classified["selected"], "total_scanned": classified["total"], "note": f"cs.CV {len(cv_new)} + cs.RO {len(ro_new)} raw /new entries, dedup {classified['total']}, selected {classified['selected']} ROI papers."},
+        "daily_new_counts": {"cv": listing_count(cv_new), "ro": listing_count(ro_new), "scope": "new+cross; replacements excluded"},
+        "totals": {"selected": classified["selected"], "total_scanned": classified["total"], "note": f"cs.CV {listing_count(cv_new)} + cs.RO {listing_count(ro_new)} new+cross entries, dedup {classified['total']}, selected {classified['selected']} ROI papers."},
         "buckets": {b: {k: v for k, v in classified["buckets"][b].items() if k != "papers"} for b in BUCKET_ORDER},
         "buckets_pastweek": classify_pastweek(cv_pw + ro_pw),
         "keywords_cv": keyword_counts(cv_pw),
