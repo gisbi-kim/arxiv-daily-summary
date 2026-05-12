@@ -1,0 +1,50 @@
+{
+  "date": "2026-04-21",
+  "insights": [
+    {
+      "title": "Robot policy learning beyond single-task demos",
+      "claim": "Robot Learning 논문들은 policy가 한 데모나 한 환경에서만 잘하는지, 다른 물체와 다른 장면에서도 행동으로 이어지는지를 묻습니다. 중요한 건 모델 이름보다 어떤 데이터로 배웠고 어떤 실패 상황에서 무너지는지입니다.",
+      "papers": [
+        "https://arxiv.org/abs/2604.15483",
+        "https://arxiv.org/abs/2604.15671",
+        "https://arxiv.org/abs/2604.15938",
+        "https://arxiv.org/abs/2604.15569"
+      ]
+    },
+    {
+      "title": "3D reconstruction and mapping under real constraints",
+      "claim": "3D/Scene 논문들은 단순히 더 예쁜 재구성을 만드는 데서 끝나지 않고, sparse view, 동적 장면, SLAM처럼 실제 센서 조건에서 장면 표현이 얼마나 버티는지를 묻습니다. 그래서 렌더링 품질 점수만 보지 말고, 시점 변화와 시간 변화에서 geometry가 얼마나 안정적인지 같이 봐야 합니다.",
+      "papers": [
+        "https://arxiv.org/abs/2604.15612",
+        "https://arxiv.org/abs/2604.15941",
+        "https://arxiv.org/abs/2604.15875",
+        "https://arxiv.org/abs/2604.15862"
+      ]
+    },
+    {
+      "title": "VLM reasoning and reliability under harder prompts",
+      "claim": "Foundation Model 논문들은 모델이 그럴듯하게 말하는지를 넘어서, 근거를 제대로 보고 답했는지와 어려운 프롬프트에서 일관성을 유지하는지를 묻습니다. 그래서 정답률 하나보다 hallucination, grounding, calibration을 같이 확인해야 합니다.",
+      "papers": [
+        "https://arxiv.org/abs/2604.16060",
+        "https://arxiv.org/abs/2604.16256",
+        "https://arxiv.org/abs/2604.16264",
+        "https://arxiv.org/abs/2604.15809"
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "Robot policy learning beyond single-task demos 후속 확인",
+      "claim": "원본 parser snapshot이 repo에 남아 있지 않은 초기 발행분이라, 대표 논문별 입력 조건, 평가셋, 실패 사례, ablation 유무를 먼저 비교표로 정리하는 것이 좋습니다."
+    },
+    {
+      "title": "3D reconstruction and mapping under real constraints 후속 확인",
+      "claim": "원본 parser snapshot이 repo에 남아 있지 않은 초기 발행분이라, 대표 논문별 입력 조건, 평가셋, 실패 사례, ablation 유무를 먼저 비교표로 정리하는 것이 좋습니다."
+    },
+    {
+      "title": "VLM reasoning and reliability under harder prompts 후속 확인",
+      "claim": "원본 parser snapshot이 repo에 남아 있지 않은 초기 발행분이라, 대표 논문별 입력 조건, 평가셋, 실패 사례, ablation 유무를 먼저 비교표로 정리하는 것이 좋습니다."
+    }
+  ],
+  "backfill_note": "Generated from the committed cluster table because the original insights JSON was not present in the repository."
+}

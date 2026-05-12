@@ -391,14 +391,28 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
     if (cached && Date.now() - cached.t < INSIGHT_TTL_MS) return cached.v;
 
     const res = await fetch(`posts/${slug}.html`, { cache: 'no-cache' });
-    if (!res.ok) return [];
-    const html = await res.text();
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    // weekly pages use .theme-card h3, daily pages use .insight h3 — pick whichever exists
-    const selector = entry.suffix === '-weekly' ? '.theme-card h3' : '.insight h3';
-    const titles = Array.from(doc.querySelectorAll(selector))
-      .map(el => el.textContent.replace(/^\s*\d+\.\s*/, '').trim())
-      .filter(Boolean);
+    let titles = [];
+    if (res.ok) {
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      // weekly pages use .theme-card h3, daily pages use .insight h3.
+      const selector = entry.suffix === '-weekly' ? '.theme-card h3' : '.insight h3';
+      titles = Array.from(doc.querySelectorAll(selector))
+        .map(el => el.textContent.replace(/^\s*\d+\.\s*/, '').trim())
+        .filter(Boolean);
+    }
+    if (!titles.length && entry.suffix !== '-weekly') {
+      try {
+        const insightRes = await fetch(`insights/${entry.date}.json`, { cache: 'no-cache' });
+        if (insightRes.ok) {
+          const payload = await insightRes.json();
+          const rows = Array.isArray(payload.insights) ? payload.insights
+            : Array.isArray(payload.clusters) ? payload.clusters
+            : [];
+          titles = rows.map(row => row.title || row.cluster).filter(Boolean);
+        }
+      } catch {}
+    }
     lsSet(cacheKey, titles);
     return titles;
   }
