@@ -19,6 +19,7 @@ DATE = "2026-05-11"
 WEEKDAY = "월"
 WEEK_START = "2026-05-05"
 WEEK_END = DATE
+SOURCE_MODE = "pastweek-date-section"
 ROOT = Path(__file__).resolve().parents[1]
 BUCKET_ORDER = [b for b, _ in BUCKETS]
 BUCKET_ICON = {
@@ -341,6 +342,8 @@ def build() -> None:
     must_read = must_read[:10]
     trends = {
         "date": DATE,
+        "source_listing_date": DATE,
+        "source_mode": SOURCE_MODE,
         "daily_new_counts": {"cv": listing_count(cv_new), "ro": listing_count(ro_new), "scope": "new+cross; replacements excluded"},
         "totals": {"selected": classified["selected"], "total_scanned": classified["total"], "note": f"cs.CV {listing_count(cv_new)} + cs.RO {listing_count(ro_new)} new+cross entries, dedup {classified['total']}, selected {classified['selected']} ROI papers."},
         "buckets": {b: {k: v for k, v in classified["buckets"][b].items() if k != "papers"} for b in BUCKET_ORDER},
