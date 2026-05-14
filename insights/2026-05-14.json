@@ -1,0 +1,796 @@
+{
+  "date": "2026-05-14",
+  "daily_thesis": "VLA, autonomous driving, embodied agents가 streaming 실행과 불확실성 관리 쪽으로 다시 묶이는 날입니다.",
+  "clusters": [
+    {
+      "cluster": "VLA는 streaming, latent action, speculative inference로 실행 지연을 줄이는 쪽으로 이동",
+      "why": "오늘 VLA 쪽은 큰 policy 하나의 성능보다 streaming architecture, rotational latent action, interactive reasoning, speculative inference처럼 실제 제어 루프에서 지연과 행동 표현을 줄이는 논문이 눈에 띕니다. 그래서 다음 비교는 모델 크기보다 어떤 실행 구조가 latency와 task success를 같이 개선하는지를 봐야 합니다.",
+      "confidence": "High",
+      "lab_action": "LIBERO, RoboCasa, closed-loop driving에서 latent action, streaming, speculative decoding을 같은 latency-success 표로 ablation",
+      "papers": [
+        {
+          "title": "RotVLA: Rotational Latent Action for Vision-Language-Action Model",
+          "arxiv": "https://arxiv.org/abs/2605.13403",
+          "importance_tags": [
+            "[평가축]",
+            "[통합정리]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "MindVLA-U1: VLA Beats VA with Unified Streaming Architecture for Autonomous Driving",
+          "arxiv": "https://arxiv.org/abs/2605.12624",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "D-VLA: A High-Concurrency Distributed Asynchronous Reinforcement Learning Framework for Vision-Language-Action Models",
+          "arxiv": "https://arxiv.org/abs/2605.13276",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "BlockVLA: Accelerating Autoregressive VLA via Block Diffusion Finetuning",
+          "arxiv": "https://arxiv.org/abs/2605.13382",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
+    {
+      "cluster": "3D 표현은 reconstruction 품질보다 wild robustness와 provenance까지 묻기 시작",
+      "why": "3D 쪽은 단순히 더 선명한 reconstruction을 만드는 데서 멈추지 않습니다. WildPose, GuardMarkGS, HarmoGS, RoSplat처럼 야외 조건, 소유권 추적, 입력 view 변화, object-centric segmentation까지 같이 등장했습니다. 이제 3DGS와 3D reconstruction은 보기 좋은 결과뿐 아니라 누가 만들었고 어떤 환경에서 무너지는지까지 평가해야 합니다.",
+      "confidence": "High",
+      "lab_action": "3DGS 계열을 view sparsity, weather/domain shift, edit provenance 조건으로 나눠 같은 robustness 표에 올리기",
+      "papers": [
+        {
+          "title": "OCH3R: Object-Centric Holistic 3D Reconstruction",
+          "arxiv": "https://arxiv.org/abs/2605.13018",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Visual Perception",
+            "class": "3D Vision",
+            "order": "Scene Representation",
+            "genus": "Gaussian/Geometry Models",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Sparse Code Uplifting for Efficient 3D Language Gaussian Splatting",
+          "arxiv": "https://arxiv.org/abs/2605.13600",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Visual Perception",
+            "class": "3D Vision",
+            "order": "Scene Representation",
+            "genus": "Gaussian/Geometry Models",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "HarmoGS: Robust 3D Gaussian Splatting in the Wild via Conflict-Aware Gradient Harmonization",
+          "arxiv": "https://arxiv.org/abs/2605.13073",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Visual Perception",
+            "class": "3D Vision",
+            "order": "Scene Representation",
+            "genus": "Gaussian/Geometry Models",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Real2Sim: A Physics-driven and Editable Gaussian Splatting Framework for Autonomous Driving Scenes",
+          "arxiv": "https://arxiv.org/abs/2605.13591",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
+    {
+      "cluster": "주행은 intent, risk, MLOps를 묶어 불확실성 아래 실행 근거를 묻는 쪽으로 이동",
+      "why": "오늘 주행 논문은 perception 성능만 따로 올리는 이야기보다 intent, planning-oriented RL, belief-space risk, localization uncertainty, MLOps architecture를 같이 봅니다. 즉 차량이 무엇을 보았는지보다 불확실한 상태에서 왜 그 행동을 택했는지와 그 판단을 어떻게 배포 관리할지를 묻는 흐름입니다.",
+      "confidence": "High",
+      "lab_action": "nuPlan/CARLA에서 intent ambiguity, localization uncertainty, risk budget, deployment rollback을 함께 넣은 closed-loop stress test 구성",
+      "papers": [
+        {
+          "title": "Action Emergence from Streaming Intent",
+          "arxiv": "https://arxiv.org/abs/2605.12622",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Causality-Aware End-to-End Autonomous Driving via Ego-Centric Joint Scene Modeling",
+          "arxiv": "https://arxiv.org/abs/2605.13646",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Learning Responsibility-Attributed Adversarial Scenarios for Testing Autonomous Vehicles",
+          "arxiv": "https://arxiv.org/abs/2605.13751",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Still Camouflage, Moving Illusion: View-Induced Trajectory Manipulation in Autonomous Driving",
+          "arxiv": "https://arxiv.org/abs/2605.12743",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
+    {
+      "cluster": "VLM 신뢰성은 decoding 이전 evidence routing과 long-video authority를 보는 쪽으로 이동",
+      "why": "VLM 쪽은 답을 낸 뒤 맞았는지만 보는 단계에서 벗어나고 있습니다. Prefill grounding, evidence misalignment, semantic distraction membership attack, anomaly framing 같은 논문은 모델이 답하기 전에 어떤 증거를 잡고 어느 authority를 믿는지부터 흔들 수 있음을 보여줍니다.",
+      "confidence": "High",
+      "lab_action": "GUI grounding과 long-video QA에서 prefill evidence, answer authority, distraction sensitivity를 분리 기록",
+      "papers": [
+        {
+          "title": "AdaFocus: Adaptive Relevance-Diversity Sampling with Zero-Cache Look-back for Efficient Long Video Understanding",
+          "arxiv": "https://arxiv.org/abs/2605.12954",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Model Compression",
+            "order": "Token and Cache Efficiency",
+            "genus": "Deployment",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "VideoSEAL: Mitigating Evidence Misalignment in Agentic Long Video Understanding by Decoupling Answer Authority",
+          "arxiv": "https://arxiv.org/abs/2605.12571",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "CiteVQA: Benchmarking Evidence Attribution for Trustworthy Document Intelligence",
+          "arxiv": "https://arxiv.org/abs/2605.12882",
+          "importance_tags": [
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "What Happens Before Decoding? Prefill Determines GUI Grounding in VLMs",
+          "arxiv": "https://arxiv.org/abs/2605.12549",
+          "importance_tags": [
+            "[평가축]",
+            "[통합정리]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
+    {
+      "cluster": "효율화는 on-device 선택과 diffusion/action fast path를 같이 설계하는 문제로 구체화",
+      "why": "효율 논문은 단순히 파라미터를 줄이는 쪽보다 어떤 모델을 런타임에 고르고 어떤 diffusion/action 경로를 빠르게 통과시킬지로 이동합니다. Scale-Gest, AdaFocus, Test-time Sparsity, lightweight distillation 계열은 배포 장치와 latency budget을 논문 안으로 끌어옵니다.",
+      "confidence": "High",
+      "lab_action": "on-device gesture, long-video understanding, action diffusion에서 model selection, cache use, sparsity를 같은 latency-budget curve로 비교",
+      "papers": [
+        {
+          "title": "GRIP-VLM: Group-Relative Importance Pruning for Efficient Vision-Language Models",
+          "arxiv": "https://arxiv.org/abs/2605.13375",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Model Compression",
+            "order": "Token and Cache Efficiency",
+            "genus": "Deployment",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "OP4KSR: One-Step Patch-Free 4K Super-Resolution with Periodic Artifact Suppression",
+          "arxiv": "https://arxiv.org/abs/2605.13457",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Image and Video Generation",
+            "order": "World Models",
+            "genus": "Controllable Synthesis",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "CLIP Tricks You: Training-free Token Pruning for Efficient Pixel Grounding in Large VIsion-Language Models",
+          "arxiv": "https://arxiv.org/abs/2605.13178",
+          "importance_tags": [
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Qwen-Image-VAE-2.0 Technical Report",
+          "arxiv": "https://arxiv.org/abs/2605.13565",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Image and Video Generation",
+            "order": "World Models",
+            "genus": "Controllable Synthesis",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
+    {
+      "cluster": "Embodied agents는 navigation을 executable world와 tool-aligned VLA로 넓히는 중",
+      "why": "Embodied AI는 VLN 점수 하나보다 도구와 world representation을 어떻게 실행 가능한 계획으로 바꾸는지가 더 중요해지고 있습니다. Tool-aligned VLA, Ego2World, Unified Autonomy Stack, DynoJEPP 같은 논문은 navigation을 belief-state planning과 autonomy stack 문제로 넓힙니다.",
+      "confidence": "High",
+      "lab_action": "VLN/ObjectNav에 tool availability, executable world mismatch, belief-state reset을 넣은 long-horizon stress split 생성",
+      "papers": [
+        {
+          "title": "Ego2World: Compiling Egocentric Cooking Videos into Executable Worlds for Belief-State Planning",
+          "arxiv": "https://arxiv.org/abs/2605.13335",
+          "importance_tags": [
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Towards Long-horizon Embodied Agents with Tool-Aligned Vision-Language-Action Models",
+          "arxiv": "https://arxiv.org/abs/2605.13119",
+          "importance_tags": [
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "The Unified Autonomy Stack: Toward a Blueprint for Generalizable Robot Autonomy",
+          "arxiv": "https://arxiv.org/abs/2605.12735",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "What Limits Vision-and-Language Navigation ?",
+          "arxiv": "https://arxiv.org/abs/2605.13328",
+          "importance_tags": [
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "VLA latency-action ablation suite",
+      "claim": "streaming, rotational latent action, speculative inference를 같은 manipulation/driving task family에서 비교해야 합니다."
+    },
+    {
+      "title": "Driving uncertainty deployment board",
+      "claim": "intent ambiguity, localization uncertainty, risk budget, MLOps rollback을 한 표에서 기록하는 평가판이 필요합니다."
+    },
+    {
+      "title": "VLM evidence-routing stress set",
+      "claim": "GUI grounding과 long-video QA에서 prefill evidence와 answer authority가 언제 흔들리는지 case로 모아야 합니다."
+    }
+  ],
+  "must_read": [
+    {
+      "title": "RotVLA: Rotational Latent Action for Vision-Language-Action Model",
+      "arxiv": "https://arxiv.org/abs/2605.13403",
+      "why": "단순 성공률보다 내부 역할 분해와 closed-loop 안정성을 같이 비교할 만한 논문입니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[통합정리]",
+        "[방법전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Learning",
+        "class": "Policy Learning",
+        "order": "Vision-Language-Action",
+        "genus": "Embodied Control",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "MindVLA-U1: VLA Beats VA with Unified Streaming Architecture for Autonomous Driving",
+      "arxiv": "https://arxiv.org/abs/2605.12624",
+      "why": "단순 성공률보다 내부 역할 분해와 closed-loop 안정성을 같이 비교할 만한 논문입니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[실사용전환]",
+        "[방법전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Learning",
+        "class": "Policy Learning",
+        "order": "Vision-Language-Action",
+        "genus": "Embodied Control",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "D-VLA: A High-Concurrency Distributed Asynchronous Reinforcement Learning Framework for Vision-Language-Action Models",
+      "arxiv": "https://arxiv.org/abs/2605.13276",
+      "why": "단순 성공률보다 내부 역할 분해와 closed-loop 안정성을 같이 비교할 만한 논문입니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[경고신호]",
+        "[방법전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Learning",
+        "class": "Policy Learning",
+        "order": "Vision-Language-Action",
+        "genus": "Embodied Control",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "BlockVLA: Accelerating Autoregressive VLA via Block Diffusion Finetuning",
+      "arxiv": "https://arxiv.org/abs/2605.13382",
+      "why": "단순 성공률보다 내부 역할 분해와 closed-loop 안정성을 같이 비교할 만한 논문입니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[경고신호]",
+        "[실사용전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Learning",
+        "class": "Policy Learning",
+        "order": "Vision-Language-Action",
+        "genus": "Embodied Control",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "OCH3R: Object-Centric Holistic 3D Reconstruction",
+      "arxiv": "https://arxiv.org/abs/2605.13018",
+      "why": "3D/Scene 흐름 안에서 후속 실험의 비교 기준이나 보조 evidence로 볼 만합니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[방법전환]"
+      ],
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Visual Perception",
+        "class": "3D Vision",
+        "order": "Scene Representation",
+        "genus": "Gaussian/Geometry Models",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "Sparse Code Uplifting for Efficient 3D Language Gaussian Splatting",
+      "arxiv": "https://arxiv.org/abs/2605.13600",
+      "why": "모델 정확도와 배포 비용을 같은 표에서 비교해야 하는 논문입니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[실사용전환]",
+        "[방법전환]"
+      ],
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Visual Perception",
+        "class": "3D Vision",
+        "order": "Scene Representation",
+        "genus": "Gaussian/Geometry Models",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "HarmoGS: Robust 3D Gaussian Splatting in the Wild via Conflict-Aware Gradient Harmonization",
+      "arxiv": "https://arxiv.org/abs/2605.13073",
+      "why": "성능 개선 논문보다 배포 전 점검 항목으로 더 가치가 클 수 있습니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[경고신호]",
+        "[실사용전환]"
+      ],
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Visual Perception",
+        "class": "3D Vision",
+        "order": "Scene Representation",
+        "genus": "Gaussian/Geometry Models",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "Real2Sim: A Physics-driven and Editable Gaussian Splatting Framework for Autonomous Driving Scenes",
+      "arxiv": "https://arxiv.org/abs/2605.13591",
+      "why": "world model을 실제 로봇이나 주행 루프에 넣기 전에 실패 조건을 분리해 볼 근거가 됩니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[경고신호]",
+        "[방법전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Autonomous Systems",
+        "class": "Driving",
+        "order": "Planning and Perception",
+        "genus": "Closed-Loop Evaluation",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "Action Emergence from Streaming Intent",
+      "arxiv": "https://arxiv.org/abs/2605.12622",
+      "why": "단순 성공률보다 내부 역할 분해와 closed-loop 안정성을 같이 비교할 만한 논문입니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[경고신호]",
+        "[실사용전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Autonomous Systems",
+        "class": "Driving",
+        "order": "Planning and Perception",
+        "genus": "Closed-Loop Evaluation",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "Causality-Aware End-to-End Autonomous Driving via Ego-Centric Joint Scene Modeling",
+      "arxiv": "https://arxiv.org/abs/2605.13646",
+      "why": "offline metric과 실제 주행 안정성 사이의 간격을 줄이는 데 쓸 수 있습니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[방법전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Autonomous Systems",
+        "class": "Driving",
+        "order": "Planning and Perception",
+        "genus": "Closed-Loop Evaluation",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    }
+  ],
+  "phylogeny_tags": [
+    {
+      "paper": "https://arxiv.org/abs/2605.13403",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.12624",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13276",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13382",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13018",
+      "source": "CVML",
+      "lineage": "Visual Perception > 3D Vision > Scene Representation > Gaussian/Geometry Models"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13600",
+      "source": "CVML",
+      "lineage": "Visual Perception > 3D Vision > Scene Representation > Gaussian/Geometry Models"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13073",
+      "source": "CVML",
+      "lineage": "Visual Perception > 3D Vision > Scene Representation > Gaussian/Geometry Models"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13591",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Systems > Driving > Planning and Perception > Closed-Loop Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.12622",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Systems > Driving > Planning and Perception > Closed-Loop Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13646",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Systems > Driving > Planning and Perception > Closed-Loop Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13751",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Systems > Driving > Planning and Perception > Closed-Loop Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.12743",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Systems > Driving > Planning and Perception > Closed-Loop Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.12954",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Model Compression > Token and Cache Efficiency > Deployment"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.12571",
+      "source": "CVML",
+      "lineage": "Foundation Models > Multimodal Learning > Vision-Language Models > Reasoning and Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.12882",
+      "source": "CVML",
+      "lineage": "Foundation Models > Multimodal Learning > Vision-Language Models > Reasoning and Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.12549",
+      "source": "CVML",
+      "lineage": "Foundation Models > Multimodal Learning > Vision-Language Models > Reasoning and Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13375",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Model Compression > Token and Cache Efficiency > Deployment"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13457",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Image and Video Generation > World Models > Controllable Synthesis"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13178",
+      "source": "CVML",
+      "lineage": "Foundation Models > Multimodal Learning > Vision-Language Models > Reasoning and Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13565",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Image and Video Generation > World Models > Controllable Synthesis"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13335",
+      "source": "ROBOTICS",
+      "lineage": "Embodied AI > Navigation and Planning > Instruction Following > Long-Horizon Agents"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13119",
+      "source": "ROBOTICS",
+      "lineage": "Embodied AI > Navigation and Planning > Instruction Following > Long-Horizon Agents"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.12735",
+      "source": "ROBOTICS",
+      "lineage": "Embodied AI > Navigation and Planning > Instruction Following > Long-Horizon Agents"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13328",
+      "source": "ROBOTICS",
+      "lineage": "Embodied AI > Navigation and Planning > Instruction Following > Long-Horizon Agents"
+    }
+  ]
+}
