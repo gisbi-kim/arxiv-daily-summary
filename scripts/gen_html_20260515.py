@@ -43,11 +43,11 @@ PHYLOGENY = {
     "Safety/Alignment": ("CVML", "Trustworthy ML > Robustness and Alignment > OOD and Adversarial Risk > Deployment Safety"),
 }
 CLUSTER_SPECS = [
-    ("SLAM/recon은 3DGS 지도, feed-forward geometry, localization으로 재포장되는 중",
+    ("SLAM/recon은 사라진 게 아니라 3DGS·VGGT·calibration 안으로 들어가는 중",
      ["slam", "odometry", "localization", "relocalization", "gaussian", "splat", "3d reconstruction", "reconstruction", "lidar", "depth", "calibration", "pose", "mapping", "4d"],
      ["3D/Scene", "Autonomous Driving", "Robot Learning", "Generation"],
-     "오늘 3D/Scene 논문은 단순히 예쁜 reconstruction을 만드는 쪽만이 아닙니다. Gaussian Splatting, fast visual geometry reconstruction, panoramic sparse-view completion, camera calibration, LiDAR fusion, physical reconstruction이 같이 나오면서, classic SLAM의 pose-map-correspondence 문제가 3DGS map, feed-forward geometry model, localization prior로 흩어져 다시 등장하는 흐름이 보입니다. 그래서 SLAM이라는 제목이 적어도 geometry backbone이 로봇과 주행 시스템의 지도 표현으로 이동하는지는 따로 추적해야 합니다.",
-     "3DGS map, point cloud map, feed-forward geometry map을 visual localization 성공률, update cost, dynamic-object failure로 비교하는 1주짜리 표 작성",
+     "오늘 3D/Scene을 그냥 Gaussian Splatting 논문 묶음으로만 보면 중요한 변화가 안 보입니다. TurboVGGT는 SfM/MVS처럼 반복 최적화로 하던 visual geometry를 feed-forward 모델 쪽으로 당기고, CalibAnyView는 wild camera calibration을, PanoPlane과 VGGT-Edit은 sparse-view 3DGS와 editable 3D scene을 다룹니다. 즉 classic SLAM의 핵심이던 pose, map, correspondence, update 문제가 이제 `SLAM`이라는 제목 대신 3DGS map, VGGT류 geometry backbone, calibration/localization prior 안에서 다시 나타나는 중입니다.",
+     "TurboVGGT/VGGT-Edit류 feed-forward geometry와 3DGS map, point cloud map을 같은 relocalization split에서 성공률, update cost, dynamic-object failure로 비교",
      ["[방법전환]", "[실사용전환]", "[해부분석]"]),
     ("VLA가 큰 policy 하나에서 내부 역할을 나누는 쪽으로 이동",
      ["vla", "vision-language-action", "world model", "latent", "asynchronous", "capability vector"],
@@ -307,8 +307,8 @@ def render_html(classified: dict, trends: dict, html_insights: dict) -> str:
     bucket_counts = {b: classified["buckets"][b]["total"] for b in BUCKET_ORDER}
     top = sorted(bucket_counts.items(), key=lambda x: x[1], reverse=True)[:3]
     bottom = sorted(bucket_counts.items(), key=lambda x: x[1])[:2]
-    thesis = "오늘은 VLA와 world model이 여전히 크지만, 3D/Scene 쪽도 그냥 부록이 아닙니다. Gaussian Splatting, feed-forward reconstruction, calibration, LiDAR fusion이 같이 나오면서 classic SLAM/recon 문제가 새로운 geometry representation 안으로 흡수되는 흐름이 보입니다."
-    trend_text = f"오늘 /new는 cs.CV {trends['daily_new_counts']['cv']}건, cs.RO {trends['daily_new_counts']['ro']}건이고 dedupe 후 {classified['total']}건 중 {classified['selected']}건이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 {top[0][0]} {top[0][1]}편, {top[1][0]} {top[1][1]}편, {top[2][0]} {top[2][1]}편입니다. 단순 생성 논문이 많은 날이지만, 3D/Scene도 {bucket_counts.get('3D/Scene', 0)}편으로 두껍습니다. 핵심은 VLA와 world model만이 아니라, SLAM/recon의 pose-map-correspondence 문제가 3DGS map, feed-forward geometry, localization/calibration 문제로 이름을 바꿔 이어진다는 점입니다."
+    thesis = "오늘은 VLA와 world model이 여전히 크지만, 3D/Scene 쪽도 부록이 아닙니다. classic SLAM/recon의 핵심이던 pose, map, correspondence 문제가 3DGS 지도, VGGT류 feed-forward geometry, calibration/localization prior 안으로 들어가고 있습니다."
+    trend_text = f"오늘 /new는 cs.CV {trends['daily_new_counts']['cv']}건, cs.RO {trends['daily_new_counts']['ro']}건이고 dedupe 후 {classified['total']}건 중 {classified['selected']}건이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 {top[0][0]} {top[0][1]}편, {top[1][0]} {top[1][1]}편, {top[2][0]} {top[2][1]}편입니다. 숫자만 보면 Generation이 가장 크지만, 3D/Scene도 {bucket_counts.get('3D/Scene', 0)}편으로 두껍습니다. 오늘의 해석 포인트는 `SLAM 논문이 적다`가 아니라, SLAM/recon 문제가 3DGS map, feed-forward geometry, calibration, sparse-view reconstruction이라는 이름으로 재배치되고 있다는 점입니다."
     bucket_line = " · ".join(f"[{b.split('/')[0]}] {n}" for b, n in bucket_counts.items())
     insight_cards = "".join(f"<div class='card insight'><h3>{esc(cl['cluster'])}</h3><p>{esc(cl['why'])}</p><p><strong>대표:</strong> {paper_link(cl['papers'][0], cl['papers'][0]['title'])}</p></div>" for cl in clusters[:4])
     topic_cards = "".join(f"<div class='card topic'><h3>{esc(t['title'])}</h3><p>{esc(t['claim'])}</p></div>" for t in html_insights["research_topics"])
@@ -380,10 +380,10 @@ def build() -> None:
     }
     insights = {
         "date": DATE,
-        "daily_thesis": "VLA와 world model이 크지만, 3D/Scene에서는 SLAM/recon 문제가 3DGS map, feed-forward geometry, localization/calibration 흐름으로 재포장되는 날입니다.",
+        "daily_thesis": "VLA와 world model이 크지만, 3D/Scene에서는 classic SLAM/recon의 pose-map-correspondence 문제가 3DGS map, VGGT류 feed-forward geometry, calibration/localization 흐름으로 재배치되는 날입니다.",
         "clusters": [],
         "research_topics": [
-            {"title": "3DGS map vs feed-forward geometry localization board", "claim": "3DGS 기반 map, point cloud map, VGGT류 feed-forward geometry를 같은 visual localization/relocalization split에서 성공률, update cost, dynamic-object failure로 비교합니다."},
+            {"title": "Geometry map representation board", "claim": "TurboVGGT/VGGT-Edit류 feed-forward geometry, 3DGS map, point cloud map을 같은 visual localization/relocalization split에서 성공률, update cost, dynamic-object failure로 비교합니다."},
             {"title": "VLA 내부 구조 ablation suite", "claim": "retrieval, expert routing, latent transition, async inference를 같은 manipulation/driving task family에서 비교해야 합니다."},
             {"title": "World model physical failure board", "claim": "보기 좋은 예측이 아니라 물리 위반률, action success, temporal drift를 분리 기록하는 평가판이 필요합니다."},
         ],

@@ -1,12 +1,12 @@
 {
   "date": "2026-05-15",
-  "daily_thesis": "VLA와 world model이 크지만, 3D/Scene에서는 SLAM/recon 문제가 3DGS map, feed-forward geometry, localization/calibration 흐름으로 재포장되는 날입니다.",
+  "daily_thesis": "VLA와 world model이 크지만, 3D/Scene에서는 classic SLAM/recon의 pose-map-correspondence 문제가 3DGS map, VGGT류 feed-forward geometry, calibration/localization 흐름으로 재배치되는 날입니다.",
   "clusters": [
     {
-      "cluster": "SLAM/recon은 3DGS 지도, feed-forward geometry, localization으로 재포장되는 중",
-      "why": "오늘 3D/Scene 논문은 단순히 예쁜 reconstruction을 만드는 쪽만이 아닙니다. Gaussian Splatting, fast visual geometry reconstruction, panoramic sparse-view completion, camera calibration, LiDAR fusion, physical reconstruction이 같이 나오면서, classic SLAM의 pose-map-correspondence 문제가 3DGS map, feed-forward geometry model, localization prior로 흩어져 다시 등장하는 흐름이 보입니다. 그래서 SLAM이라는 제목이 적어도 geometry backbone이 로봇과 주행 시스템의 지도 표현으로 이동하는지는 따로 추적해야 합니다.",
+      "cluster": "SLAM/recon은 사라진 게 아니라 3DGS·VGGT·calibration 안으로 들어가는 중",
+      "why": "오늘 3D/Scene을 그냥 Gaussian Splatting 논문 묶음으로만 보면 중요한 변화가 안 보입니다. TurboVGGT는 SfM/MVS처럼 반복 최적화로 하던 visual geometry를 feed-forward 모델 쪽으로 당기고, CalibAnyView는 wild camera calibration을, PanoPlane과 VGGT-Edit은 sparse-view 3DGS와 editable 3D scene을 다룹니다. 즉 classic SLAM의 핵심이던 pose, map, correspondence, update 문제가 이제 `SLAM`이라는 제목 대신 3DGS map, VGGT류 geometry backbone, calibration/localization prior 안에서 다시 나타나는 중입니다.",
       "confidence": "High",
-      "lab_action": "3DGS map, point cloud map, feed-forward geometry map을 visual localization 성공률, update cost, dynamic-object failure로 비교하는 1주짜리 표 작성",
+      "lab_action": "TurboVGGT/VGGT-Edit류 feed-forward geometry와 3DGS map, point cloud map을 같은 relocalization split에서 성공률, update cost, dynamic-object failure로 비교",
       "papers": [
         {
           "title": "TurboVGGT: Fast Visual Geometry Reconstruction with Adaptive Alternating Attention",
@@ -458,8 +458,8 @@
   ],
   "research_topics": [
     {
-      "title": "3DGS map vs feed-forward geometry localization board",
-      "claim": "3DGS 기반 map, point cloud map, VGGT류 feed-forward geometry를 같은 visual localization/relocalization split에서 성공률, update cost, dynamic-object failure로 비교합니다."
+      "title": "Geometry map representation board",
+      "claim": "TurboVGGT/VGGT-Edit류 feed-forward geometry, 3DGS map, point cloud map을 같은 visual localization/relocalization split에서 성공률, update cost, dynamic-object failure로 비교합니다."
     },
     {
       "title": "VLA 내부 구조 ablation suite",
