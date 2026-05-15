@@ -1,7 +1,81 @@
 {
   "date": "2026-05-15",
-  "daily_thesis": "VLA와 world model이 내부 구조, 물리 일관성, closed-loop 평가를 중심으로 다시 묶이는 날입니다.",
+  "daily_thesis": "VLA와 world model이 크지만, 3D/Scene에서는 SLAM/recon 문제가 3DGS map, feed-forward geometry, localization/calibration 흐름으로 재포장되는 날입니다.",
   "clusters": [
+    {
+      "cluster": "SLAM/recon은 3DGS 지도, feed-forward geometry, localization으로 재포장되는 중",
+      "why": "오늘 3D/Scene 논문은 단순히 예쁜 reconstruction을 만드는 쪽만이 아닙니다. Gaussian Splatting, fast visual geometry reconstruction, panoramic sparse-view completion, camera calibration, LiDAR fusion, physical reconstruction이 같이 나오면서, classic SLAM의 pose-map-correspondence 문제가 3DGS map, feed-forward geometry model, localization prior로 흩어져 다시 등장하는 흐름이 보입니다. 그래서 SLAM이라는 제목이 적어도 geometry backbone이 로봇과 주행 시스템의 지도 표현으로 이동하는지는 따로 추적해야 합니다.",
+      "confidence": "High",
+      "lab_action": "3DGS map, point cloud map, feed-forward geometry map을 visual localization 성공률, update cost, dynamic-object failure로 비교하는 1주짜리 표 작성",
+      "papers": [
+        {
+          "title": "TurboVGGT: Fast Visual Geometry Reconstruction with Adaptive Alternating Attention",
+          "arxiv": "https://arxiv.org/abs/2605.14315",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Visual Perception",
+            "class": "3D Vision",
+            "order": "Scene Representation",
+            "genus": "Gaussian/Geometry Models",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "CalibAnyView: Beyond Single-View Camera Calibration in the Wild",
+          "arxiv": "https://arxiv.org/abs/2605.14615",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Visual Perception",
+            "class": "3D Vision",
+            "order": "Scene Representation",
+            "genus": "Gaussian/Geometry Models",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "PanoPlane: Plane-Aware Panoramic Completion for Sparse-View Indoor 3D Gaussian Splatting",
+          "arxiv": "https://arxiv.org/abs/2605.14135",
+          "importance_tags": [
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Visual Perception",
+            "class": "3D Vision",
+            "order": "Scene Representation",
+            "genus": "Gaussian/Geometry Models",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "VGGT-Edit: Feed-forward Native 3D Scene Editing with Residual Field Prediction",
+          "arxiv": "https://arxiv.org/abs/2605.15186",
+          "importance_tags": [
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Visual Perception",
+            "class": "3D Vision",
+            "order": "Scene Representation",
+            "genus": "Gaussian/Geometry Models",
+            "confidence": "Medium",
+            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
     {
       "cluster": "VLA가 큰 policy 하나에서 내부 역할을 나누는 쪽으로 이동",
       "why": "VLA를 하나의 거대한 policy로 보면 왜 성공하고 왜 실패하는지 설명하기가 어렵습니다. 오늘은 retrieval, multi-expert world model, asynchronous inference, capability vector, latent transition처럼 내부 역할을 나눠서 보려는 논문이 많이 나왔습니다. 그래서 다음 비교는 모델 크기보다 어떤 내부 구조가 어떤 task family에서 실제로 도움이 되는지를 따져야 합니다.",
@@ -380,84 +454,13 @@
           }
         }
       ]
-    },
-    {
-      "cluster": "Navigation은 단기 이동보다 기억, 제약, 애매한 지시를 함께 다루는 문제로 확장",
-      "why": "navigation을 다음 waypoint를 고르는 문제로만 보면 long-horizon 지시와 애매한 목표를 설명하기 어렵습니다. LCGNav, SleepWalk, ConsistNav, NEXUS 같은 논문은 기억, semantic executive control, symbolic constraint를 같이 보려는 흐름입니다.",
-      "confidence": "High",
-      "lab_action": "R2R/ObjectNav에 ambiguous query, memory reset, symbolic constraint violation을 넣은 navigation stress split 생성",
-      "papers": [
-        {
-          "title": "Exploring Bottlenecks in VLM-LLM Navigation: How 3D Scene Understanding Capability Impacts Zero-Shot VLN",
-          "arxiv": "https://arxiv.org/abs/2605.14801",
-          "importance_tags": [
-            "[평가축]"
-          ],
-          "phylogeny": {
-            "source": "ROBOTICS",
-            "phylum": "Embodied AI",
-            "class": "Navigation and Planning",
-            "order": "Instruction Following",
-            "genus": "Long-Horizon Agents",
-            "confidence": "Medium",
-            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
-          }
-        },
-        {
-          "title": "Safety-Constrained Reinforcement Learning with Post-Training Reachability Verification for Robot Navigation",
-          "arxiv": "https://arxiv.org/abs/2605.14174",
-          "importance_tags": [
-            "[경고신호]"
-          ],
-          "phylogeny": {
-            "source": "ROBOTICS",
-            "phylum": "Robot Learning",
-            "class": "Policy Learning",
-            "order": "Vision-Language-Action",
-            "genus": "Embodied Control",
-            "confidence": "Medium",
-            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
-          }
-        },
-        {
-          "title": "IntentVLA: Short-Horizon Intent Modeling for Aliased Robot Manipulation",
-          "arxiv": "https://arxiv.org/abs/2605.14712",
-          "importance_tags": [
-            "[평가축]",
-            "[방법전환]"
-          ],
-          "phylogeny": {
-            "source": "ROBOTICS",
-            "phylum": "Robot Learning",
-            "class": "Policy Learning",
-            "order": "Vision-Language-Action",
-            "genus": "Embodied Control",
-            "confidence": "Medium",
-            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
-          }
-        },
-        {
-          "title": "DSSP: Diffusion State Space Policy with Full-History Encoding",
-          "arxiv": "https://arxiv.org/abs/2605.14598",
-          "importance_tags": [
-            "[평가축]",
-            "[실사용전환]",
-            "[방법전환]"
-          ],
-          "phylogeny": {
-            "source": "ROBOTICS",
-            "phylum": "Robot Learning",
-            "class": "Policy Learning",
-            "order": "Vision-Language-Action",
-            "genus": "Embodied Control",
-            "confidence": "Medium",
-            "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
-          }
-        }
-      ]
     }
   ],
   "research_topics": [
+    {
+      "title": "3DGS map vs feed-forward geometry localization board",
+      "claim": "3DGS 기반 map, point cloud map, VGGT류 feed-forward geometry를 같은 visual localization/relocalization split에서 성공률, update cost, dynamic-object failure로 비교합니다."
+    },
     {
       "title": "VLA 내부 구조 ablation suite",
       "claim": "retrieval, expert routing, latent transition, async inference를 같은 manipulation/driving task family에서 비교해야 합니다."
@@ -465,13 +468,79 @@
     {
       "title": "World model physical failure board",
       "claim": "보기 좋은 예측이 아니라 물리 위반률, action success, temporal drift를 분리 기록하는 평가판이 필요합니다."
-    },
-    {
-      "title": "VLM self-verification stress set",
-      "claim": "의료 VQA와 driving VLM에서 self-verification이 언제 착각을 강화하는지 counterfactual case로 모아야 합니다."
     }
   ],
   "must_read": [
+    {
+      "title": "TurboVGGT: Fast Visual Geometry Reconstruction with Adaptive Alternating Attention",
+      "arxiv": "https://arxiv.org/abs/2605.14315",
+      "why": "모델 정확도와 배포 비용을 같은 표에서 비교해야 하는 논문입니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[실사용전환]"
+      ],
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Visual Perception",
+        "class": "3D Vision",
+        "order": "Scene Representation",
+        "genus": "Gaussian/Geometry Models",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "CalibAnyView: Beyond Single-View Camera Calibration in the Wild",
+      "arxiv": "https://arxiv.org/abs/2605.14615",
+      "why": "성능 개선 논문보다 배포 전 점검 항목으로 더 가치가 클 수 있습니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[경고신호]"
+      ],
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Visual Perception",
+        "class": "3D Vision",
+        "order": "Scene Representation",
+        "genus": "Gaussian/Geometry Models",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "PanoPlane: Plane-Aware Panoramic Completion for Sparse-View Indoor 3D Gaussian Splatting",
+      "arxiv": "https://arxiv.org/abs/2605.14135",
+      "why": "offline metric과 실제 주행 안정성 사이의 간격을 줄이는 데 쓸 수 있습니다.",
+      "importance_tags": [
+        "[방법전환]"
+      ],
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Visual Perception",
+        "class": "3D Vision",
+        "order": "Scene Representation",
+        "genus": "Gaussian/Geometry Models",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "VGGT-Edit: Feed-forward Native 3D Scene Editing with Residual Field Prediction",
+      "arxiv": "https://arxiv.org/abs/2605.15186",
+      "why": "3D/Scene 흐름 안에서 후속 실험의 비교 기준이나 보조 evidence로 볼 만합니다.",
+      "importance_tags": [
+        "[평가축]"
+      ],
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Visual Perception",
+        "class": "3D Vision",
+        "order": "Scene Representation",
+        "genus": "Gaussian/Geometry Models",
+        "confidence": "Medium",
+        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
     {
       "title": "MAPLE: Latent Multi-Agent Play for End-to-End Autonomous Driving",
       "arxiv": "https://arxiv.org/abs/2605.14201",
@@ -579,79 +648,29 @@
         "confidence": "Medium",
         "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
       }
-    },
-    {
-      "title": "Chrono-Gymnasium: An Open-Source, Gymnasium-Compatible Distributed Simulation Framework",
-      "arxiv": "https://arxiv.org/abs/2605.14911",
-      "why": "world model을 실제 로봇이나 주행 루프에 넣기 전에 실패 조건을 분리해 볼 근거가 됩니다.",
-      "importance_tags": [
-        "[인프라]"
-      ],
-      "phylogeny": {
-        "source": "ROBOTICS",
-        "phylum": "Robot Learning",
-        "class": "Policy Learning",
-        "order": "Vision-Language-Action",
-        "genus": "Embodied Control",
-        "confidence": "Medium",
-        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
-      }
-    },
-    {
-      "title": "AnyBand-Diff: A Unified Remote Sensing Image Generation and Band Repair Framework with Spectral Priors",
-      "arxiv": "https://arxiv.org/abs/2605.14341",
-      "why": "world model을 실제 로봇이나 주행 루프에 넣기 전에 실패 조건을 분리해 볼 근거가 됩니다.",
-      "importance_tags": [
-        "[경고신호]",
-        "[방법전환]"
-      ],
-      "phylogeny": {
-        "source": "CVML",
-        "phylum": "Generative Modeling",
-        "class": "Image and Video Generation",
-        "order": "World Models",
-        "genus": "Controllable Synthesis",
-        "confidence": "Medium",
-        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
-      }
-    },
-    {
-      "title": "CLOVER: Closed-Loop Value Estimation \\& Ranking for End-to-End Autonomous Driving Planning",
-      "arxiv": "https://arxiv.org/abs/2605.15120",
-      "why": "offline metric과 실제 주행 안정성 사이의 간격을 줄이는 데 쓸 수 있습니다.",
-      "importance_tags": [
-        "[평가축]",
-        "[경고신호]"
-      ],
-      "phylogeny": {
-        "source": "ROBOTICS",
-        "phylum": "Autonomous Systems",
-        "class": "Driving",
-        "order": "Planning and Perception",
-        "genus": "Closed-Loop Evaluation",
-        "confidence": "Medium",
-        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
-      }
-    },
-    {
-      "title": "Learning Direct Control Policies with Flow Matching for Autonomous Driving",
-      "arxiv": "https://arxiv.org/abs/2605.14832",
-      "why": "offline metric과 실제 주행 안정성 사이의 간격을 줄이는 데 쓸 수 있습니다.",
-      "importance_tags": [
-        "[방법전환]"
-      ],
-      "phylogeny": {
-        "source": "ROBOTICS",
-        "phylum": "Autonomous Systems",
-        "class": "Driving",
-        "order": "Planning and Perception",
-        "genus": "Closed-Loop Evaluation",
-        "confidence": "Medium",
-        "rationale": "제목, 초록, ROI 버킷 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
-      }
     }
   ],
   "phylogeny_tags": [
+    {
+      "paper": "https://arxiv.org/abs/2605.14315",
+      "source": "CVML",
+      "lineage": "Visual Perception > 3D Vision > Scene Representation > Gaussian/Geometry Models"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14615",
+      "source": "CVML",
+      "lineage": "Visual Perception > 3D Vision > Scene Representation > Gaussian/Geometry Models"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14135",
+      "source": "CVML",
+      "lineage": "Visual Perception > 3D Vision > Scene Representation > Gaussian/Geometry Models"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.15186",
+      "source": "CVML",
+      "lineage": "Visual Perception > 3D Vision > Scene Representation > Gaussian/Geometry Models"
+    },
     {
       "paper": "https://arxiv.org/abs/2605.14201",
       "source": "ROBOTICS",
@@ -751,26 +770,6 @@
       "paper": "https://arxiv.org/abs/2605.14191",
       "source": "CVML",
       "lineage": "Efficient ML Systems > Model Compression > Token and Cache Efficiency > Deployment"
-    },
-    {
-      "paper": "https://arxiv.org/abs/2605.14801",
-      "source": "ROBOTICS",
-      "lineage": "Embodied AI > Navigation and Planning > Instruction Following > Long-Horizon Agents"
-    },
-    {
-      "paper": "https://arxiv.org/abs/2605.14174",
-      "source": "ROBOTICS",
-      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
-    },
-    {
-      "paper": "https://arxiv.org/abs/2605.14712",
-      "source": "ROBOTICS",
-      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
-    },
-    {
-      "paper": "https://arxiv.org/abs/2605.14598",
-      "source": "ROBOTICS",
-      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
     }
   ]
 }
