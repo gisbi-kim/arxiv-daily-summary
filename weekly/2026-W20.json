@@ -1,0 +1,1175 @@
+{
+  "date": "2026-05-16",
+  "iso_week": "2026-W20",
+  "week_start": "2026-05-10",
+  "week_end": "2026-05-16",
+  "weekly_thesis": "이번 주는 VLA와 world model이 커진 주이지만, 더 중요한 변화는 실행 가능한 표현으로 내려온 점입니다. SLAM/recon은 3DGS와 relocalization 안으로, VLA는 latent action과 runtime inference 안으로, video generation은 geometry consistency와 controllability 안으로 재배치됐습니다.",
+  "hot_vs_cold": {
+    "hot": [
+      {
+        "cluster": "Generation",
+        "why": "160편으로 최대 버킷이며 controllable video/world-model 평가가 두껍습니다."
+      },
+      {
+        "cluster": "Robot Learning",
+        "why": "103편으로 VLA 내부 구조와 execution stack 논문이 반복됩니다."
+      },
+      {
+        "cluster": "3D/Scene",
+        "why": "77편이며 SLAM/recon 신호가 3DGS와 LiDAR world model로 확산됐습니다."
+      }
+    ],
+    "cold": [
+      {
+        "cluster": "Embodied AI",
+        "why": "32편으로 상대적으로 작고 navigation 계열은 아직 독립 파도라기보다 watch-only에 가깝습니다."
+      }
+    ]
+  },
+  "clusters": [
+    {
+      "cluster": "SLAM/recon은 3DGS, relocalization, LiDAR world model 안으로 재배치",
+      "papers": [
+        {
+          "arxiv_id": "2605.14135",
+          "title": "PanoPlane: Plane-Aware Panoramic Completion for Sparse-View Indoor 3D Gaussian Splatting",
+          "authors": [
+            "Adil Qureshi",
+            "Dongki Jung",
+            "Jaehoon Choi",
+            "Dinesh Manocha"
+          ],
+          "first_author": "Adil Qureshi",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "3D/Scene",
+          "badge": "CV",
+          "short": "PanoPlane",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Perception",
+            "class": "Mapping and Reconstruction",
+            "order": "Neural and Gaussian Maps",
+            "genus": "Relocalizable 3D Scene Geometry",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[방법전환]",
+            "[실사용전환]",
+            "[해부분석]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.10760",
+          "title": "MAGS-SLAM: Monocular Multi-Agent Gaussian Splatting SLAM for Geometrically and Photometrically Consistent Reconstruction",
+          "authors": [
+            "Zhihao Cao",
+            "Qi Shao",
+            "Shuhao Zhai",
+            "Jing Zhang",
+            "Anh Nguyen",
+            "Baoru Huang"
+          ],
+          "first_author": "Zhihao Cao",
+          "subjects": "Robotics (cs.RO)",
+          "primary_cat": "cs.RO",
+          "section": "new",
+          "bucket": "3D/Scene",
+          "badge": "RO",
+          "short": "MAGS-SLAM",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Perception",
+            "class": "Mapping and Reconstruction",
+            "order": "Neural and Gaussian Maps",
+            "genus": "Relocalizable 3D Scene Geometry",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[방법전환]",
+            "[실사용전환]",
+            "[해부분석]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.07741",
+          "title": "Offline-Online Hierarchical 3D Global Relocalization With Synthetic LiDAR Sensing and Descriptor-Space Retrieval",
+          "authors": [
+            "Jiahua Ren",
+            "Kai Shen",
+            "Muhua Zhang",
+            "Lei Ma"
+          ],
+          "first_author": "Jiahua Ren",
+          "subjects": "Robotics (cs.RO)",
+          "primary_cat": "cs.RO",
+          "section": "new",
+          "bucket": "3D/Scene",
+          "badge": "RO",
+          "short": "Hierarchical 3D Global Relocalization",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Perception",
+            "class": "Mapping and Reconstruction",
+            "order": "Neural and Gaussian Maps",
+            "genus": "Relocalizable 3D Scene Geometry",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[방법전환]",
+            "[실사용전환]",
+            "[해부분석]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.07326",
+          "title": "GEM: Generating LiDAR World Model via Deformable Mamba",
+          "authors": [
+            "Yang Wu",
+            "Zhaojiang Liu",
+            "Qiang Meng",
+            "Youquan Liu",
+            "Renliang Weng",
+            "Jianjun Qian",
+            "Jian Yang",
+            "Jin Xie"
+          ],
+          "first_author": "Yang Wu",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "3D/Scene",
+          "badge": "CV",
+          "short": "GEM",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Perception",
+            "class": "Mapping and Reconstruction",
+            "order": "Neural and Gaussian Maps",
+            "genus": "Relocalizable 3D Scene Geometry",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[방법전환]",
+            "[실사용전환]",
+            "[해부분석]"
+          ]
+        }
+      ],
+      "why": "이번 주 3D/Scene은 단순히 장면을 예쁘게 복원하는 묶음이 아닙니다. PanoPlane은 sparse-view indoor 3DGS를, MAGS-SLAM은 multi-agent Gaussian Splatting SLAM을, relocalization 논문과 GEM은 LiDAR 기반 위치 추정과 world model을 다룹니다. 즉 classic SLAM의 pose, map, correspondence 문제가 3DGS 지도, relocalization descriptor, LiDAR world model이라는 이름으로 다시 나타난 주입니다.",
+      "confidence": "High — 3D/Scene 77편 중 geometry/SLAM/recon 신호가 여러 하위군으로 반복",
+      "lab_action": "3DGS map, LiDAR descriptor map, feed-forward geometry map을 같은 relocalization split에서 성공률, update cost, dynamic-object failure로 비교"
+    },
+    {
+      "cluster": "VLA는 큰 policy 하나보다 내부 역할과 실행 지연을 나누는 쪽으로 이동",
+      "papers": [
+        {
+          "arxiv_id": "2605.14950",
+          "title": "Evo-Depth: A Lightweight Depth-Enhanced Vision-Language-Action Model",
+          "authors": [
+            "Tao Lin",
+            "Yuxin Du",
+            "Jiting Liu",
+            "Nuobei Zhu",
+            "Yunhe Li",
+            "Yuqian Fu",
+            "Yinxinyu Chen",
+            "Hongyi Cai",
+            "Zewei Ye",
+            "Bing Cheng",
+            "Kai Ye",
+            "Yiran Mao",
+            "Yilei Zhong",
+            "MingKang Dong",
+            "Junchi Yan",
+            "Gen Li",
+            "Bo Zhao"
+          ],
+          "first_author": "Tao Lin",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Robotics (cs.RO)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Robot Learning",
+          "badge": "CV/RO",
+          "short": "Evo-Depth",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied Intelligence",
+            "class": "Vision-Language-Action Models",
+            "order": "Policy Structure",
+            "genus": "Latent Action and Runtime Execution",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[방법전환]",
+            "[해부분석]",
+            "[실사용전환]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.13778",
+          "title": "Realtime-VLA FLASH: Speculative Inference Framework for Diffusion-based VLAs",
+          "authors": [
+            "Jiahui Niu",
+            "Kefan Gu",
+            "Yucheng Zhao",
+            "Shengwen Liang",
+            "Tiancai Wang",
+            "Xing Hu",
+            "Ying Wang",
+            "Huawei Li"
+          ],
+          "first_author": "Jiahui Niu",
+          "subjects": "Robotics (cs.RO); Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.RO",
+          "section": "new",
+          "bucket": "Robot Learning",
+          "badge": "CV/RO",
+          "short": "Realtime-VLA FLASH",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied Intelligence",
+            "class": "Vision-Language-Action Models",
+            "order": "Policy Structure",
+            "genus": "Latent Action and Runtime Execution",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[방법전환]",
+            "[해부분석]",
+            "[실사용전환]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.14712",
+          "title": "IntentVLA: Short-Horizon Intent Modeling for Aliased Robot Manipulation",
+          "authors": [
+            "Shijie Lian",
+            "Bin Yu",
+            "Xiaopeng Lin",
+            "Zhaolong Shen",
+            "Laurence Tianruo Yang",
+            "Yurun Jin",
+            "Haishan Liu",
+            "Changti Wu",
+            "Hang Yuan",
+            "Cong Huang",
+            "Kai Chen"
+          ],
+          "first_author": "Shijie Lian",
+          "subjects": "Robotics (cs.RO); Artificial Intelligence (cs.AI); Computation and Language (cs.CL); Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.RO",
+          "section": "new",
+          "bucket": "Robot Learning",
+          "badge": "CV/RO",
+          "short": "IntentVLA",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied Intelligence",
+            "class": "Vision-Language-Action Models",
+            "order": "Policy Structure",
+            "genus": "Latent Action and Runtime Execution",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[방법전환]",
+            "[해부분석]",
+            "[실사용전환]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.13403",
+          "title": "RotVLA: Rotational Latent Action for Vision-Language-Action Model",
+          "authors": [
+            "Qiwei Li",
+            "Xicheng Gong",
+            "Xinghang Li",
+            "Peiyan Li",
+            "Quanyun Zhou",
+            "Hangjun Ye",
+            "Jiahuan Zhou",
+            "Yadong Mu"
+          ],
+          "first_author": "Qiwei Li",
+          "subjects": "Robotics (cs.RO); Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.RO",
+          "section": "new",
+          "bucket": "Robot Learning",
+          "badge": "CV/RO",
+          "short": "RotVLA",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied Intelligence",
+            "class": "Vision-Language-Action Models",
+            "order": "Policy Structure",
+            "genus": "Latent Action and Runtime Execution",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[방법전환]",
+            "[해부분석]",
+            "[실사용전환]"
+          ]
+        }
+      ],
+      "why": "Robot Learning 103편 안에서 VLA 계열은 더 큰 모델 하나를 밀어붙이는 흐름만 보이지 않습니다. depth-enhanced VLA, speculative inference, short-horizon intent, rotational latent action처럼 perception, inference latency, intent, action representation을 따로 떼어 보는 논문이 같이 나왔습니다. 그래서 다음 비교는 모델 크기가 아니라 어떤 내부 역할 분리가 어떤 task family에서 실제로 도움이 되는지입니다.",
+      "confidence": "High — CV/RO cross-list VLA 논문이 같은 주에 여럿 등장",
+      "lab_action": "LIBERO/RoboCasa에서 depth, intent, rotational latent action, speculative inference를 같은 task family로 ablation"
+    },
+    {
+      "cluster": "Video/world model은 샘플 품질보다 조종 가능성과 물리 일관성을 묻기 시작",
+      "papers": [
+        {
+          "arxiv_id": "2605.15199",
+          "title": "EntityBench: Towards Entity-Consistent Long-Range Multi-Shot Video Generation",
+          "authors": [
+            "Ruozhen He",
+            "Meng Wei",
+            "Ziyan Yang",
+            "Vicente Ordonez"
+          ],
+          "first_author": "Ruozhen He",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Generation",
+          "badge": "CV",
+          "short": "EntityBench",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Video and World Models",
+            "order": "Controllable Generation",
+            "genus": "Geometry-Aware Interactive Video",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[표준후보]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.15182",
+          "title": "Warp-as-History: Generalizable Camera-Controlled Video Generation from One Training Video",
+          "authors": [
+            "Yifan Wang",
+            "Tong He"
+          ],
+          "first_author": "Yifan Wang",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Generation",
+          "badge": "CV",
+          "short": "Warp-as-History",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Video and World Models",
+            "order": "Controllable Generation",
+            "genus": "Geometry-Aware Interactive Video",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[표준후보]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.15178",
+          "title": "SANA-WM: Efficient Minute-Scale World Modeling with Hybrid Linear Diffusion Transformer",
+          "authors": [
+            "Haoyi Zhu",
+            "Haozhe Liu",
+            "Yuyang Zhao",
+            "Tian Ye",
+            "Junsong Chen",
+            "Jincheng Yu",
+            "Tong He",
+            "Song Han",
+            "Enze Xie"
+          ],
+          "first_author": "Haoyi Zhu",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Generation",
+          "badge": "CV",
+          "short": "SANA-WM",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Video and World Models",
+            "order": "Controllable Generation",
+            "genus": "Geometry-Aware Interactive Video",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[표준후보]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.15185",
+          "title": "Quantitative Video World Model Evaluation for Geometric-Consistency",
+          "authors": [
+            "Jiaxin Wu",
+            "Yihao Pi",
+            "Yinling Zhang",
+            "Yuheng Li",
+            "Xueyan Zou"
+          ],
+          "first_author": "Jiaxin Wu",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Generation",
+          "badge": "CV",
+          "short": "Geometric-Consistency VWM Eval",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Video and World Models",
+            "order": "Controllable Generation",
+            "genus": "Geometry-Aware Interactive Video",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[표준후보]"
+          ]
+        }
+      ],
+      "why": "Generation이 160편으로 가장 컸지만, 핵심은 양이 아니라 평가 질문의 변화입니다. long-range multi-shot consistency, camera-controlled video, minute-scale world model, geometric consistency 평가가 같이 나오면서 보기 좋은 영상보다 원하는 시점과 움직임을 안정적으로 만들고 물리적으로 말이 되는지를 묻는 쪽으로 이동했습니다.",
+      "confidence": "High — generation 최대 버킷 안에서 controllability와 world-model 평가 논문이 동시에 관측",
+      "lab_action": "camera path error, entity consistency, geometry violation, latency를 분리한 video/world-model evaluation grid 작성"
+    },
+    {
+      "cluster": "자율주행은 perception 점수보다 closed-loop 가치와 직접 제어를 검증",
+      "papers": [
+        {
+          "arxiv_id": "2605.15120",
+          "title": "CLOVER: Closed-Loop Value Estimation \\& Ranking for End-to-End Autonomous Driving Planning",
+          "authors": [
+            "Sining Ang",
+            "Yuguang Yang",
+            "Canyu Chen",
+            "Yan Wang"
+          ],
+          "first_author": "Sining Ang",
+          "subjects": "Robotics (cs.RO); Artificial Intelligence (cs.AI); Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.RO",
+          "section": "new",
+          "bucket": "Autonomous Driving",
+          "badge": "CV/RO",
+          "short": "CLOVER",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Driving",
+            "class": "Closed-Loop Planning",
+            "order": "Value and Policy Evaluation",
+            "genus": "Scenario-Level Driving Decisions",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[위험보류]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.14832",
+          "title": "Learning Direct Control Policies with Flow Matching for Autonomous Driving",
+          "authors": [
+            "Marcello Ceresini",
+            "Federico Pirazzoli",
+            "Andrea Bertogalli",
+            "Lorenzo Cipelli",
+            "Filippo D'Addeo",
+            "Anthony Dell'Eva",
+            "Alessandro Paolo Capasso",
+            "Alberto Broggi"
+          ],
+          "first_author": "Marcello Ceresini",
+          "subjects": "Robotics (cs.RO); Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.RO",
+          "section": "new",
+          "bucket": "Autonomous Driving",
+          "badge": "CV/RO",
+          "short": "Direct Control with Flow Matching",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Driving",
+            "class": "Closed-Loop Planning",
+            "order": "Value and Policy Evaluation",
+            "genus": "Scenario-Level Driving Decisions",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[위험보류]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.14201",
+          "title": "MAPLE: Latent Multi-Agent Play for End-to-End Autonomous Driving",
+          "authors": [
+            "Rajeev Yasarla",
+            "Deepti Hegde",
+            "Hsin-Pai Cheng",
+            "Shizhong Han",
+            "Yunxiao Shi",
+            "Meysam Sadeghigooghari",
+            "Hanno Ackermann",
+            "Litian Liu",
+            "Pranav Desai",
+            "Fatih Porikli",
+            "Mohammad Ghavamzadeh",
+            "Hong Cai"
+          ],
+          "first_author": "Rajeev Yasarla",
+          "subjects": "Robotics (cs.RO); Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.RO",
+          "section": "new",
+          "bucket": "Autonomous Driving",
+          "badge": "CV/RO",
+          "short": "MAPLE",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Driving",
+            "class": "Closed-Loop Planning",
+            "order": "Value and Policy Evaluation",
+            "genus": "Scenario-Level Driving Decisions",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[위험보류]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.10564",
+          "title": "DeepSight: Long-Horizon World Modeling via Latent States Prediction for End-to-End Autonomous Driving",
+          "authors": [
+            "Lingjun Zhang",
+            "Changjie Wu",
+            "Linzhe Shi",
+            "Jiangyang Li",
+            "Jiaxin Liu",
+            "Lei Yang",
+            "Hang Zhang",
+            "Mu Xu",
+            "Hong Wang"
+          ],
+          "first_author": "Lingjun Zhang",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Robotics (cs.RO)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Autonomous Driving",
+          "badge": "CV/RO",
+          "short": "DeepSight",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Driving",
+            "class": "Closed-Loop Planning",
+            "order": "Value and Policy Evaluation",
+            "genus": "Scenario-Level Driving Decisions",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[위험보류]"
+          ]
+        }
+      ],
+      "why": "Autonomous Driving은 38편으로 최대 버킷은 아니지만, closed-loop value estimation, direct control policy, latent multi-agent play, long-horizon world modeling이 같이 나온 점이 중요합니다. lane이나 BEV 점수만 따로 올리는 문제보다 실제 주행 루프에서 어떤 판단이 안전하고 쓸 만한지 확인하려는 주간 흐름입니다.",
+      "confidence": "High — planning, policy, world model, value estimation이 같은 closed-loop 축으로 연결",
+      "lab_action": "nuPlan/CARLA에서 route change, perception corruption, high-level instruction failure를 넣은 closed-loop stress test 구성"
+    },
+    {
+      "cluster": "VLM 신뢰성은 정답률보다 기억, 환각, 근거 검증의 경계로 이동",
+      "papers": [
+        {
+          "arxiv_id": "2605.14906",
+          "title": "MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models",
+          "authors": [
+            "Xiyu Ren",
+            "Zhaowei Wang",
+            "Yiming Du",
+            "Zhongwei Xie",
+            "Chi Liu",
+            "Xinlin Yang",
+            "Haoyue Feng",
+            "Wenjun Pan",
+            "Tianshi Zheng",
+            "Baixuan Xu",
+            "Zhengnan Li",
+            "Yangqiu Song",
+            "Ginny Wong",
+            "Simon See"
+          ],
+          "first_author": "Xiyu Ren",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Foundation Models",
+          "badge": "CV",
+          "short": "MemLens",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Trustworthy ML",
+            "class": "Robustness and Alignment",
+            "order": "Hallucination and Verification",
+            "genus": "Deployment Reliability",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[경고신호]",
+            "[평가축]",
+            "[해부분석]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.14966",
+          "title": "MHSA: A Lightweight Framework for Mitigating Hallucinations via Steered Attention in LVLMs",
+          "authors": [
+            "Wei Ding",
+            "Yilin Li",
+            "Yudong Zhang",
+            "Ruobing Xie",
+            "Xingwu Sun",
+            "Jiansheng Chen",
+            "Yu Wang"
+          ],
+          "first_author": "Wei Ding",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Foundation Models",
+          "badge": "CV",
+          "short": "MHSA",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Trustworthy ML",
+            "class": "Robustness and Alignment",
+            "order": "Hallucination and Verification",
+            "genus": "Deployment Reliability",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[경고신호]",
+            "[평가축]",
+            "[해부분석]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.12571",
+          "title": "VideoSEAL: Mitigating Evidence Misalignment in Agentic Long Video Understanding by Decoupling Answer Authority",
+          "authors": [
+            "Chenhao Qiu",
+            "Yechao Zhang",
+            "Xin Luo",
+            "Shien Song",
+            "Xusheng Liu"
+          ],
+          "first_author": "Chenhao Qiu",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Safety/Alignment",
+          "badge": "CV",
+          "short": "VideoSEAL",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Trustworthy ML",
+            "class": "Robustness and Alignment",
+            "order": "Hallucination and Verification",
+            "genus": "Deployment Reliability",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[경고신호]",
+            "[평가축]",
+            "[해부분석]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.13813",
+          "title": "JANUS: Anatomy-Conditioned Gating for Robust CT Triage Under Distribution Shift",
+          "authors": [
+            "Lavsen Dahal",
+            "Yubraj Bhandari",
+            "Geoffrey Rubin",
+            "Joseph Y. Lo"
+          ],
+          "first_author": "Lavsen Dahal",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Safety/Alignment",
+          "badge": "CV",
+          "short": "JANUS",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Trustworthy ML",
+            "class": "Robustness and Alignment",
+            "order": "Hallucination and Verification",
+            "genus": "Deployment Reliability",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[경고신호]",
+            "[평가축]",
+            "[해부분석]"
+          ]
+        }
+      ],
+      "why": "Foundation Models 78편과 Safety/Alignment 52편이 따로 보이지만 실제로는 같은 문제를 보고 있습니다. 장기 기억, hallucination 완화, long-video evidence misalignment, distribution shift triage가 같이 나오면서 모델이 맞히는지보다 어떤 근거를 놓치고 언제 자신 있게 틀리는지를 기록하는 방향으로 움직였습니다.",
+      "confidence": "High — memory, hallucination, evidence, distribution shift가 서로 다른 응용에서 반복",
+      "lab_action": "medical VQA와 long-video QA에 counterfactual perturbation, evidence localization, confidence calibration failure를 같은 dashboard로 기록"
+    },
+    {
+      "cluster": "효율화는 작은 모델보다 token, cache, sparse attention 제어로 구체화",
+      "papers": [
+        {
+          "arxiv_id": "2605.14877",
+          "title": "HeatKV: Head-tuned KV-cache Compression for Visual Autoregressive Modeling",
+          "authors": [
+            "Jonathan Cederlund",
+            "Axel Berg",
+            "Durmus Alp Emre Acar",
+            "Chuteng Zhou",
+            "Pontus Giselsson"
+          ],
+          "first_author": "Jonathan Cederlund",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Efficiency/Systems",
+          "badge": "CV",
+          "short": "HeatKV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "Video and Multimodal Acceleration",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[실사용전환]",
+            "[인프라]",
+            "[방법전환]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.14513",
+          "title": "HASTE: Training-Free Video Diffusion Acceleration via Head-Wise Adaptive Sparse Attention",
+          "authors": [
+            "Xuzhe Zheng",
+            "Yuexiao Ma",
+            "Jing Xu",
+            "Xiawu Zheng",
+            "Rongrong Ji",
+            "Fei Chao"
+          ],
+          "first_author": "Xuzhe Zheng",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Efficiency/Systems",
+          "badge": "CV",
+          "short": "HASTE",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "Video and Multimodal Acceleration",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[실사용전환]",
+            "[인프라]",
+            "[방법전환]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.14191",
+          "title": "CoReDiT: Spatial Coherence-Guided Token Pruning and Reconstruction for Efficient Diffusion Transformers",
+          "authors": [
+            "Zhuojin Li",
+            "Hsin-Pai Cheng",
+            "Hong Cai",
+            "Shizhong Han",
+            "Fatih Porikli"
+          ],
+          "first_author": "Zhuojin Li",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Efficiency/Systems",
+          "badge": "CV",
+          "short": "CoReDiT",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "Video and Multimodal Acceleration",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[실사용전환]",
+            "[인프라]",
+            "[방법전환]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.14278",
+          "title": "KVPO: ODE-Native GRPO for Autoregressive Video Alignment via KV Semantic Exploration",
+          "authors": [
+            "Ruicheng Zhang",
+            "Kaixi Cong",
+            "Jun Zhou",
+            "Zhizhou Zhong",
+            "Zunnan Xu",
+            "Shuiyang Mao",
+            "Wei Liu",
+            "Xiu Li"
+          ],
+          "first_author": "Ruicheng Zhang",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Efficiency/Systems",
+          "badge": "CV",
+          "short": "KVPO",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "Video and Multimodal Acceleration",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[실사용전환]",
+            "[인프라]",
+            "[방법전환]"
+          ]
+        }
+      ],
+      "why": "Efficiency/Systems 67편은 파라미터를 줄이는 이야기에 머물지 않습니다. KV-cache compression, adaptive sparse attention, token pruning, KV semantic exploration처럼 실제 추론 경로에서 무엇을 버리고 남길지를 다룹니다. 즉 배포 가능한 multimodal/video model을 만들 때 latency와 품질 손실을 같은 표에서 봐야 한다는 신호입니다.",
+      "confidence": "High — video diffusion과 multimodal autoregressive inference 모두에서 같은 비용 문제가 반복",
+      "lab_action": "video diffusion, VLM, tracking에서 token budget, cache size, latency, accuracy drop을 한 Pareto curve로 비교"
+    }
+  ],
+  "top5": [
+    {
+      "title": "MAGS-SLAM: Monocular Multi-Agent Gaussian Splatting SLAM for Geometrically and Photometrically Consistent Reconstruction",
+      "arxiv": "https://arxiv.org/abs/2605.10760",
+      "why": "SLAM과 3DGS가 분리된 주제가 아니라 같은 map representation 문제로 붙기 시작했다는 점을 가장 선명하게 보여줍니다.",
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Perception",
+        "class": "Mapping and Reconstruction",
+        "order": "Neural and Gaussian Maps",
+        "genus": "Relocalizable 3D Scene Geometry",
+        "confidence": "High",
+        "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+      }
+    },
+    {
+      "title": "Realtime-VLA FLASH: Speculative Inference Framework for Diffusion-based VLAs",
+      "arxiv": "https://arxiv.org/abs/2605.13778",
+      "why": "VLA를 실제 로봇 루프에 넣을 때 inference latency가 병목이 된다는 문제를 정면으로 다룹니다.",
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Embodied Intelligence",
+        "class": "Vision-Language-Action Models",
+        "order": "Policy Structure",
+        "genus": "Latent Action and Runtime Execution",
+        "confidence": "High",
+        "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+      }
+    },
+    {
+      "title": "SANA-WM: Efficient Minute-Scale World Modeling with Hybrid Linear Diffusion Transformer",
+      "arxiv": "https://arxiv.org/abs/2605.15178",
+      "why": "world model을 minute-scale로 밀어 올리려는 시도라서 generation과 robot simulation 사이의 접점이 큽니다.",
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Generative Modeling",
+        "class": "Video and World Models",
+        "order": "Controllable Generation",
+        "genus": "Geometry-Aware Interactive Video",
+        "confidence": "High",
+        "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+      }
+    },
+    {
+      "title": "CLOVER: Closed-Loop Value Estimation \\& Ranking for End-to-End Autonomous Driving Planning",
+      "arxiv": "https://arxiv.org/abs/2605.15120",
+      "why": "end-to-end driving planning을 closed-loop value estimation과 ranking 문제로 다시 묶는 논문입니다.",
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Autonomous Driving",
+        "class": "Closed-Loop Planning",
+        "order": "Value and Policy Evaluation",
+        "genus": "Scenario-Level Driving Decisions",
+        "confidence": "High",
+        "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+      }
+    },
+    {
+      "title": "MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models",
+      "arxiv": "https://arxiv.org/abs/2605.14906",
+      "why": "multimodal long-term memory가 VLM 신뢰성의 핵심 병목으로 올라왔다는 신호입니다.",
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Trustworthy ML",
+        "class": "Robustness and Alignment",
+        "order": "Hallucination and Verification",
+        "genus": "Deployment Reliability",
+        "confidence": "High",
+        "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+      }
+    }
+  ],
+  "themes": [
+    {
+      "title": "Geometry는 SLAM 제목 밖으로 흩어졌지만, 지도 표현 문제는 더 커졌습니다",
+      "summary": "3D/Scene 77편 안에서 Gaussian Splatting, LiDAR world model, relocalization, odometry가 따로 나온 것처럼 보이지만, 실제 질문은 같습니다. 로봇이나 주행 시스템이 쓸 수 있는 지도 표현을 어떻게 만들고, 어떻게 갱신하며, 실패 조건을 어떻게 재는지가 이번 주 3D 축의 핵심입니다.",
+      "confidence": "High"
+    },
+    {
+      "title": "VLA는 모델 크기보다 실행 구조 경쟁으로 넘어갑니다",
+      "summary": "Evo-Depth, Realtime-VLA FLASH, IntentVLA, RotVLA가 보여준 건 VLA가 하나의 거대한 policy로는 설명과 배포가 어렵다는 점입니다. 다음 주에는 latent action, intent, depth, speculative inference를 같은 benchmark에서 나란히 비교하는 논문이 더 중요해질 가능성이 큽니다.",
+      "confidence": "High"
+    },
+    {
+      "title": "Generation과 reliability는 분리된 트랙이 아니라 배포 전 조건이 됩니다",
+      "summary": "Generation은 160편으로 가장 컸고, reliability와 efficiency도 각각 52편, 67편으로 두껍습니다. 이제 좋은 샘플을 만드는 것만으로는 부족하고, 조종 가능성, latency, memory, evidence alignment가 같이 들어와야 실제 도구로 볼 수 있습니다.",
+      "confidence": "High"
+    }
+  ],
+  "prediction_review": [
+    {
+      "title": "VLA structure ablation이 3편 이상 이어진다",
+      "label": "✅",
+      "reason": "Evo-Depth, Realtime-VLA FLASH, IntentVLA, RotVLA, Guide-Think-Act가 모두 VLA 내부 역할이나 실행 구조를 건드렸습니다."
+    },
+    {
+      "title": "controllable video generation 평가가 camera path fidelity로 분리된다",
+      "label": "✅",
+      "reason": "Warp-as-History, Geometric-Consistency VWM Eval, EntityBench가 long-range consistency와 camera/geometry control을 분리해서 다뤘습니다."
+    },
+    {
+      "title": "reliability-aware routing과 medical/3D calibration이 같은 주 안에서 만난다",
+      "label": "◐",
+      "reason": "reliability 흐름은 강했지만 medical, long-video, VLM memory 쪽이 더 두꺼웠고 3D calibration은 독립 흐름으로는 상대적으로 약했습니다."
+    }
+  ],
+  "predictions": [
+    {
+      "title": "3DGS map과 relocalization을 직접 비교하는 논문이 늘어날 것",
+      "claim": "SLAM이라는 제목은 적어도, 3DGS map, LiDAR descriptor, feed-forward geometry를 같은 localization benchmark에서 비교하는 논문이 더 나올 가능성이 큽니다.",
+      "hit_condition": "다음 주 /new 또는 pastweek에서 3DGS map + localization/relocalization/odometry를 함께 다루는 논문이 2편 이상 나오면 적중입니다.",
+      "miss_condition": "3DGS가 rendering/editing 품질 쪽으로만 남고 robot/localization 연결이 사라지면 빗나감입니다."
+    },
+    {
+      "title": "VLA latency와 내부 표현 ablation이 같은 표로 묶일 것",
+      "claim": "Realtime-VLA FLASH가 보여준 병목 때문에 VLA 논문이 success rate만이 아니라 latency, chunk length, action representation을 같이 보고할 가능성이 큽니다.",
+      "hit_condition": "VLA 논문 중 latency 또는 runtime inference와 action/intent representation ablation을 같이 둔 논문이 나오면 적중입니다.",
+      "miss_condition": "계속 benchmark success만 보고하고 runtime 분석이 빠지면 빗나감입니다."
+    },
+    {
+      "title": "world model 평가는 geometry consistency와 action success를 같이 물을 것",
+      "claim": "SANA-WM, EntityBench, Geometric-Consistency VWM Eval이 같은 주에 나온 만큼, 다음 비교는 샘플 품질보다 geometry violation과 downstream action usefulness로 옮겨갈 가능성이 큽니다.",
+      "hit_condition": "video/world-model 논문이 geometry consistency, camera path error, action success 중 2개 이상을 함께 평가하면 적중입니다.",
+      "miss_condition": "FVD나 visual preference 중심 평가만 반복되면 빗나감입니다."
+    }
+  ],
+  "next_week_actions": [
+    {
+      "title": "Geometry map representation board",
+      "action": "MAGS-SLAM, PanoPlane, relocalization, LiDAR world model을 같은 표에 놓고 map update cost와 localization failure를 정리",
+      "expected_output": "1-page comparison table with map type, update path, relocalization metric, dynamic-scene failure"
+    },
+    {
+      "title": "VLA runtime ablation table",
+      "action": "Realtime-VLA FLASH, IntentVLA, RotVLA, Evo-Depth의 latency/action-representation 차이를 LIBERO/RoboCasa 기준으로 정리",
+      "expected_output": "ablation matrix: representation, latency, task family, reported failure mode"
+    },
+    {
+      "title": "World model evaluation grid",
+      "action": "SANA-WM, EntityBench, Warp-as-History, Geometric-Consistency VWM Eval의 평가축을 camera, geometry, entity, latency로 분해",
+      "expected_output": "metric grid for choosing follow-up papers and reproducible benchmarks"
+    }
+  ],
+  "phylogeny_tags": [
+    {
+      "paper": "https://arxiv.org/abs/2605.14135",
+      "source": "ROBOTICS",
+      "lineage": "Robot Perception > Mapping and Reconstruction > Neural and Gaussian Maps > Relocalizable 3D Scene Geometry"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.10760",
+      "source": "ROBOTICS",
+      "lineage": "Robot Perception > Mapping and Reconstruction > Neural and Gaussian Maps > Relocalizable 3D Scene Geometry"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.07741",
+      "source": "ROBOTICS",
+      "lineage": "Robot Perception > Mapping and Reconstruction > Neural and Gaussian Maps > Relocalizable 3D Scene Geometry"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.07326",
+      "source": "ROBOTICS",
+      "lineage": "Robot Perception > Mapping and Reconstruction > Neural and Gaussian Maps > Relocalizable 3D Scene Geometry"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14950",
+      "source": "ROBOTICS",
+      "lineage": "Embodied Intelligence > Vision-Language-Action Models > Policy Structure > Latent Action and Runtime Execution"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13778",
+      "source": "ROBOTICS",
+      "lineage": "Embodied Intelligence > Vision-Language-Action Models > Policy Structure > Latent Action and Runtime Execution"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14712",
+      "source": "ROBOTICS",
+      "lineage": "Embodied Intelligence > Vision-Language-Action Models > Policy Structure > Latent Action and Runtime Execution"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13403",
+      "source": "ROBOTICS",
+      "lineage": "Embodied Intelligence > Vision-Language-Action Models > Policy Structure > Latent Action and Runtime Execution"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.15199",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Video and World Models > Controllable Generation > Geometry-Aware Interactive Video"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.15182",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Video and World Models > Controllable Generation > Geometry-Aware Interactive Video"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.15178",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Video and World Models > Controllable Generation > Geometry-Aware Interactive Video"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.15185",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Video and World Models > Controllable Generation > Geometry-Aware Interactive Video"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.15120",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Driving > Closed-Loop Planning > Value and Policy Evaluation > Scenario-Level Driving Decisions"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14832",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Driving > Closed-Loop Planning > Value and Policy Evaluation > Scenario-Level Driving Decisions"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14201",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Driving > Closed-Loop Planning > Value and Policy Evaluation > Scenario-Level Driving Decisions"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.10564",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Driving > Closed-Loop Planning > Value and Policy Evaluation > Scenario-Level Driving Decisions"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14906",
+      "source": "CVML",
+      "lineage": "Trustworthy ML > Robustness and Alignment > Hallucination and Verification > Deployment Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14966",
+      "source": "CVML",
+      "lineage": "Trustworthy ML > Robustness and Alignment > Hallucination and Verification > Deployment Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.12571",
+      "source": "CVML",
+      "lineage": "Trustworthy ML > Robustness and Alignment > Hallucination and Verification > Deployment Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.13813",
+      "source": "CVML",
+      "lineage": "Trustworthy ML > Robustness and Alignment > Hallucination and Verification > Deployment Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14877",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Token and Cache Efficiency > Adaptive Inference > Video and Multimodal Acceleration"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14513",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Token and Cache Efficiency > Adaptive Inference > Video and Multimodal Acceleration"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14191",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Token and Cache Efficiency > Adaptive Inference > Video and Multimodal Acceleration"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.14278",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Token and Cache Efficiency > Adaptive Inference > Video and Multimodal Acceleration"
+    }
+  ],
+  "buckets_summary": {
+    "3D/Scene": 77,
+    "Robot Learning": 103,
+    "Autonomous Driving": 38,
+    "Foundation Models": 78,
+    "Generation": 160,
+    "Efficiency/Systems": 67,
+    "Embodied AI": 32,
+    "Safety/Alignment": 52
+  }
+}
