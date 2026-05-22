@@ -279,16 +279,27 @@ def paper_excerpt(p: dict) -> str:
 
 def render_html(profile: dict, classified: dict, trends: dict, html_insights: dict) -> str:
     date = profile["date"]
+    source_mode = profile.get("source_mode", SOURCE_MODE)
+    source_label = profile.get("source_label", "arXiv cs.CV/pastweek date section + cs.RO/pastweek date section")
     clusters = html_insights["clusters"]
     bucket_counts = {b: classified["buckets"][b]["total"] for b in BUCKET_ORDER}
     top = sorted(bucket_counts.items(), key=lambda x: x[1], reverse=True)
     top_text = ", ".join(f"{b} {n}편" for b, n in top[:3])
-    trend_text = (
-        f"이 backfill은 arXiv /pastweek의 {date} 날짜 섹션에서 복구했습니다. "
-        f"cs.CV {trends['daily_new_counts']['cv']}건, cs.RO {trends['daily_new_counts']['ro']}건이고 "
-        f"dedupe 후 {classified['total']}건 중 {classified['selected']}건이 ROI 버킷에 걸렸습니다. "
-        f"상위 버킷은 {top_text}입니다. {profile['trend_note']}"
-    )
+    if source_mode == "new":
+        trend_text = (
+            f"오늘 /new는 cs.CV {trends['daily_new_counts']['cv']}건, cs.RO {trends['daily_new_counts']['ro']}건이고 "
+            f"dedupe 후 {classified['total']}건 중 {classified['selected']}건이 ROI 버킷에 걸렸습니다. "
+            f"상위 버킷은 {top_text}입니다. {profile['trend_note']}"
+        )
+        source_note_html = ""
+    else:
+        trend_text = (
+            f"이 backfill은 arXiv /pastweek의 {date} 날짜 섹션에서 복구했습니다. "
+            f"cs.CV {trends['daily_new_counts']['cv']}건, cs.RO {trends['daily_new_counts']['ro']}건이고 "
+            f"dedupe 후 {classified['total']}건 중 {classified['selected']}건이 ROI 버킷에 걸렸습니다. "
+            f"상위 버킷은 {top_text}입니다. {profile['trend_note']}"
+        )
+        source_note_html = "<div><strong>Backfill note:</strong> /pastweek 날짜 섹션에는 abstract가 없어 논문별 분류와 요약은 title/subject 기반입니다.</div>"
     bucket_line = " · ".join(f"[{b}] {bucket_counts[b]}" for b in BUCKET_ORDER)
 
     cluster_rows = []
@@ -352,10 +363,10 @@ a{{color:#0969da;text-decoration:none}}a:hover{{text-decoration:underline}}.home
 <a class="home" href="../index.html">← Home</a>
 <h1>arXiv Daily Briefing — {date} ({profile['weekday']})</h1>
 <div class="meta">
-<div><strong>소스:</strong> arXiv cs.CV/pastweek date section + cs.RO/pastweek date section · source_listing_date={date} · source_mode={SOURCE_MODE}</div>
+<div><strong>소스:</strong> {esc(source_label)} · source_listing_date={date} · source_mode={esc(source_mode)}</div>
 <div><strong>주간 시야:</strong> {profile['week_start']} ~ {date}</div>
 <div><strong>오늘 /new:</strong> cs.CV {trends['daily_new_counts']['cv']} + cs.RO {trends['daily_new_counts']['ro']} · {classified['total']} dedup · {classified['selected']} ROI papers</div>
-<div><strong>Backfill note:</strong> /pastweek 날짜 섹션에는 abstract가 없어 논문별 분류와 요약은 title/subject 기반입니다.</div>
+{source_note_html}
 </div>
 <section class="thesis"><strong>오늘의 결론:</strong> {esc(profile['thesis'])}</section>
 <h2>오늘의 클러스터 지도</h2>
@@ -380,6 +391,7 @@ a{{color:#0969da;text-decoration:none}}a:hover{{text-decoration:underline}}.home
 
 def build(profile: dict, cv_new_path: str, ro_new_path: str) -> None:
     date = profile["date"]
+    source_mode = profile.get("source_mode", SOURCE_MODE)
     cv_new = load_json(cv_new_path)
     ro_new = load_json(ro_new_path)
     cv_pw = load_json("out/cv_pastweek.json")
@@ -402,7 +414,7 @@ def build(profile: dict, cv_new_path: str, ro_new_path: str) -> None:
     trends = {
         "date": date,
         "source_listing_date": date,
-        "source_mode": SOURCE_MODE,
+        "source_mode": source_mode,
         "daily_new_counts": {
             "cv": listing_count(cv_new),
             "ro": listing_count(ro_new),
@@ -412,10 +424,9 @@ def build(profile: dict, cv_new_path: str, ro_new_path: str) -> None:
             "selected": classified["selected"],
             "total_scanned": classified["total"],
             "note": (
-                f"Backfill from arXiv /pastweek date section for {date}: "
+                f"{profile.get('source_note', 'Source parser output')} for {date}: "
                 f"cs.CV {listing_count(cv_new)} + cs.RO {listing_count(ro_new)} new+cross entries, "
-                f"dedup {classified['total']}, selected {classified['selected']} ROI papers. "
-                "Paper abstracts are not available in the date-section source."
+                f"dedup {classified['total']}, selected {classified['selected']} ROI papers."
             ),
         },
         "buckets": {b: {k: v for k, v in classified["buckets"][b].items() if k != "papers"} for b in BUCKET_ORDER},
@@ -476,7 +487,7 @@ def build(profile: dict, cv_new_path: str, ro_new_path: str) -> None:
             {"name": "Cluster table", "value": f"{len(clusters)} clusters with representative papers", "status": "pass"},
             {"name": "Phylogeny tags", "value": f"{len(insights['phylogeny_tags'])} representative mappings", "status": "pass"},
         ],
-        "note": "Backfill artifact generated from arXiv /pastweek date-section parser output. Per-paper abstracts were unavailable, so summaries are intentionally title/subject based.",
+        "note": profile.get("benchmark_note", "Artifact generated from arXiv parser output."),
     }
 
     (ROOT / "posts").mkdir(exist_ok=True)
