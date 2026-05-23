@@ -1,0 +1,1156 @@
+{
+  "date": "2026-05-23",
+  "iso_week": "2026-W21",
+  "week_start": "2026-05-17",
+  "week_end": "2026-05-23",
+  "weekly_thesis": "이번 주는 Generation이 149편으로 가장 크지만, 실제 변화는 video/world model, VLA, 3D geometry가 모두 '실행 전에 무엇을 검증하고 어떤 표현을 남길 것인가'로 내려온 점입니다. VLA는 runtime verification으로, 3D/SLAM은 feed-forward 3DGS와 4D scene으로, VLM 신뢰성은 evidence grounding과 memory compression으로 재배치됐습니다.",
+  "hot_vs_cold": {
+    "hot": [
+      {
+        "cluster": "Generation",
+        "why": "149편으로 최대 버킷이며 motion control, temporal reasoning, world-model memory가 함께 두꺼워졌습니다."
+      },
+      {
+        "cluster": "Foundation Models",
+        "why": "88편이고 medical VQA, receipt reasoning, visible-infrared vulnerability처럼 평가/근거 축이 선명합니다."
+      },
+      {
+        "cluster": "Robot Learning",
+        "why": "84편이지만 VLA runtime verification과 driving VLA가 직접적으로 나왔습니다."
+      }
+    ],
+    "cold": [
+      {
+        "cluster": "Embodied AI",
+        "why": "28편으로 가장 작고 VLN/abstention 신호는 있지만 아직 주간 thesis의 중심은 아닙니다."
+      }
+    ]
+  },
+  "clusters": [
+    {
+      "cluster": "VLA는 데모 성공률보다 런타임 검증과 실행 구조를 묻는 쪽으로 이동",
+      "papers": [
+        {
+          "arxiv_id": "2605.22446",
+          "title": "Pre-VLA: Preemptive Runtime Verification for Reliable Vision-Language-Action and World-Model Rollouts",
+          "authors": [
+            "Zhen Sun",
+            "Yongjian Guo",
+            "Haoran Sun",
+            "Luqiao Wang",
+            "Wei Lu",
+            "Jiachi Ji",
+            "Shengzhe Ji",
+            "Junwu Xiong",
+            "Zhijun Meng"
+          ],
+          "first_author": "Zhen Sun",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI); Robotics (cs.RO)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Robot Learning",
+          "badge": "CV/RO",
+          "short": "Pre-VLA",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied Intelligence",
+            "class": "Vision-Language-Action Models",
+            "order": "Runtime Verification",
+            "genus": "Preemptive Rollout Safety",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[실사용전환]",
+            "[검증축]",
+            "[로봇정책]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.21854",
+          "title": "CrossVLA: Cross-Paradigm Post-Training and Inference Optimization for Vision-Language-Action Models",
+          "authors": [
+            "Zhi Liu"
+          ],
+          "first_author": "Zhi Liu",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Robot Learning",
+          "badge": "CV",
+          "short": "CrossVLA",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied Intelligence",
+            "class": "Vision-Language-Action Models",
+            "order": "Runtime Verification",
+            "genus": "Preemptive Rollout Safety",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[실사용전환]",
+            "[검증축]",
+            "[로봇정책]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22812",
+          "title": "GesVLA: Gesture-Aware Vision-Language-Action Model Embedded Representations",
+          "authors": [
+            "Wenxuan Guo",
+            "Ziyuan Li",
+            "Meng Zhang",
+            "Yichen Liu",
+            "Yimeng Dong",
+            "Chuxi Xu",
+            "Yunfei Wei",
+            "Ze Chen",
+            "Erjin Zhou",
+            "Jianjiang Feng"
+          ],
+          "first_author": "Wenxuan Guo",
+          "subjects": "Robotics (cs.RO); Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.RO",
+          "section": "new",
+          "bucket": "Robot Learning",
+          "badge": "CV/RO",
+          "short": "GesVLA",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied Intelligence",
+            "class": "Vision-Language-Action Models",
+            "order": "Runtime Verification",
+            "genus": "Preemptive Rollout Safety",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[실사용전환]",
+            "[검증축]",
+            "[로봇정책]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.21061",
+          "title": "Grounding Driving VLA via Inverse Kinematics",
+          "authors": [
+            "Junsung Park",
+            "Hyunjung Shim"
+          ],
+          "first_author": "Junsung Park",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI); Robotics (cs.RO)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Robot Learning",
+          "badge": "CV/RO",
+          "short": "Grounding Driving VLA",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied Intelligence",
+            "class": "Vision-Language-Action Models",
+            "order": "Runtime Verification",
+            "genus": "Preemptive Rollout Safety",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[실사용전환]",
+            "[검증축]",
+            "[로봇정책]"
+          ]
+        }
+      ],
+      "why": "Robot Learning은 84편으로 지난주보다 작지만, VLA 신호는 더 구체적입니다. Pre-VLA는 rollout 전에 실패를 검증하려 하고, CrossVLA는 post-training과 inference를 함께 다루며, GesVLA와 driving VLA 계열은 입력 양식과 행동 표현을 나눠 봅니다. 이제 질문은 'VLA가 되는가'가 아니라 어떤 내부 표현과 검증 루프가 실제 로봇 실행을 망치지 않는가입니다.",
+      "confidence": "High — VLA, runtime verification, action representation 논문이 같은 주에 반복",
+      "lab_action": "LIBERO/RoboCasa와 driving VLA split에서 runtime verification, intent/action representation, inference optimization을 같은 실패 유형표로 비교"
+    },
+    {
+      "cluster": "Video/world model은 보기 좋은 샘플보다 움직임·시간·추론 통제성으로 재편",
+      "papers": [
+        {
+          "arxiv_id": "2605.22818",
+          "title": "MotiMotion: Motion-Controlled Video Generation with Visual Reasoning",
+          "authors": [
+            "Lee Hsin-Ying",
+            "Hanwen Jiang",
+            "Yiqun Mei",
+            "Jing Shi",
+            "Ming-Hsuan Yang",
+            "Zhixin Shu"
+          ],
+          "first_author": "Lee Hsin-Ying",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Foundation Models",
+          "badge": "CV",
+          "short": "MotiMotion",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Video and World Models",
+            "order": "Controllable Generation",
+            "genus": "Motion and Reasoning Control",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[표준후보]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22570",
+          "title": "VGenST-Bench: A Benchmark for Spatio-Temporal Reasoning via Active Video Synthesis",
+          "authors": [
+            "Jinho Park",
+            "Youbin Kim",
+            "Hogun Park",
+            "Eunbyung Park"
+          ],
+          "first_author": "Jinho Park",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Generation",
+          "badge": "CV",
+          "short": "VGenST-Bench",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Video and World Models",
+            "order": "Controllable Generation",
+            "genus": "Motion and Reasoning Control",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[표준후보]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22344",
+          "title": "Bernini: Latent Semantic Planning for Video Diffusion",
+          "authors": [
+            "Bernini Team",
+            "Chenchen Liu",
+            "Junyi Chen",
+            "Lei Li",
+            "Lu Chi",
+            "Mingzhen Sun",
+            "Zhuoying Li",
+            "Yi Fu",
+            "Ruoyu Guo",
+            "Yiheng Wu",
+            "Ge Bai",
+            "Zehuan Yuan"
+          ],
+          "first_author": "Bernini Team",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI); Multimedia (cs.MM)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Generation",
+          "badge": "CV",
+          "short": "Bernini",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Video and World Models",
+            "order": "Controllable Generation",
+            "genus": "Motion and Reasoning Control",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[표준후보]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22050",
+          "title": "Broken Memories: Detecting and Mitigating Memorization in Diffusion Models with Degraded Generations",
+          "authors": [
+            "Yuanmin Huang",
+            "Mi Zhang",
+            "Chen Chen",
+            "Feifei Li",
+            "Geng Hong",
+            "Xiaoyu You",
+            "Min Yang"
+          ],
+          "first_author": "Yuanmin Huang",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Generation",
+          "badge": "CV",
+          "short": "Broken Memories",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Video and World Models",
+            "order": "Controllable Generation",
+            "genus": "Motion and Reasoning Control",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[표준후보]"
+          ]
+        }
+      ],
+      "why": "Generation은 149편으로 가장 큰 버킷입니다. 그런데 핵심은 양이 아니라 평가축입니다. motion-controlled generation, spatio-temporal reasoning benchmark, latent semantic planning, memorization failure가 같이 나오면서 video generation을 단순 품질이 아니라 원하는 움직임을 안정적으로 만들고 오래 유지하며 추론에 쓸 수 있는지로 보려는 흐름이 강해졌습니다.",
+      "confidence": "High — Generation 최대 버킷 안에서 controllability, temporal reasoning, memory failure가 동시에 관측",
+      "lab_action": "camera/motion command, entity consistency, temporal reasoning, memorization failure를 분리한 video-world-model 평가표 작성"
+    },
+    {
+      "cluster": "Geometry/SLAM 신호는 3DGS 지도, feed-forward 복원, 4D 주행 시뮬레이션으로 분산",
+      "papers": [
+        {
+          "arxiv_id": "2605.22020",
+          "title": "ForeSplat: Optimization-Aware Foresight for Feed-Forward 3D Gaussian Splatting",
+          "authors": [
+            "Yuke Li",
+            "Weihang Liu",
+            "Cheng Zhang",
+            "Yuefeng Zhang",
+            "Jiadi Cui",
+            "Zixuan Wang",
+            "Junran Ding",
+            "Haoyu Wu",
+            "Yujiao Shi",
+            "Jingyi Yu",
+            "Xin Lou"
+          ],
+          "first_author": "Yuke Li",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "3D/Scene",
+          "badge": "CV",
+          "short": "ForeSplat",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Perception",
+            "class": "Mapping and Reconstruction",
+            "order": "Neural and Gaussian Maps",
+            "genus": "Feed-Forward 3D Geometry",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[지도표현]",
+            "[실사용전환]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.21032",
+          "title": "Towards Physically Consistent 4D Scene Reconstruction for Closed-loop Autonomous Driving Simulation",
+          "authors": [
+            "Bowyn Tan",
+            "Yutong Xie",
+            "Bai Huang",
+            "Fan Luo",
+            "Xiao Li",
+            "Naizheng Wang",
+            "Yang Guan",
+            "Shengbo Eben Li"
+          ],
+          "first_author": "Bowyn Tan",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "3D/Scene",
+          "badge": "CV",
+          "short": "Physically Consistent 4D Scene Reconstruction",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Perception",
+            "class": "Mapping and Reconstruction",
+            "order": "Neural and Gaussian Maps",
+            "genus": "Feed-Forward 3D Geometry",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[지도표현]",
+            "[실사용전환]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22013",
+          "title": "PointLLM-R: Enhancing 3D Point Cloud Reasoning via Chain-of-Thought",
+          "authors": [
+            "Chaoqi Chen",
+            "Qile Xu",
+            "Wenjun Zhou",
+            "Hui Huang"
+          ],
+          "first_author": "Chaoqi Chen",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Graphics (cs.GR); Machine Learning (cs.LG)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "3D/Scene",
+          "badge": "CV",
+          "short": "PointLLM-R",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Perception",
+            "class": "Mapping and Reconstruction",
+            "order": "Neural and Gaussian Maps",
+            "genus": "Feed-Forward 3D Geometry",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[지도표현]",
+            "[실사용전환]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22342",
+          "title": "4D-GSW: Kinematic-Aware Spatio-Temporal Consistent Watermarking for 4D Gaussian Splatting",
+          "authors": [
+            "Sifan Zhou",
+            "Hang Zhang",
+            "Yuhang Wang",
+            "Ming Li"
+          ],
+          "first_author": "Sifan Zhou",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "3D/Scene",
+          "badge": "CV",
+          "short": "4D-GSW",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Perception",
+            "class": "Mapping and Reconstruction",
+            "order": "Neural and Gaussian Maps",
+            "genus": "Feed-Forward 3D Geometry",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[지도표현]",
+            "[실사용전환]"
+          ]
+        }
+      ],
+      "why": "3D/Scene은 72편으로 여전히 두껍습니다. SLAM이라는 제목이 앞에 붙은 논문보다 feed-forward 3DGS, point-cloud reasoning, 4D reconstruction, closed-loop driving simulation 안에 geometry 문제가 숨어 있습니다. 그래서 이번 주의 geometry lens는 reconstruction 품질보다 로봇과 주행 시스템이 쓸 수 있는 지도/장면 표현을 얼마나 빨리 만들고 업데이트할 수 있는가에 가깝습니다.",
+      "confidence": "High — prompt의 Geometry/SLAM/Reconstruction watch lens에 해당하는 신호가 충분",
+      "lab_action": "ForeSplat, 4D scene reconstruction, point-cloud reasoning을 relocalization/update-cost/dynamic-scene-failure 기준으로 재분류"
+    },
+    {
+      "cluster": "VLM 신뢰성은 의료·주행 근거 위치와 보이는/안 보이는 취약성 검증으로 이동",
+      "papers": [
+        {
+          "arxiv_id": "2605.22414",
+          "title": "Towards Clinically Interpretable Ophthalmic VQA via Spatially-Grounded Lesion Evidence",
+          "authors": [
+            "Xingyue Wang",
+            "Bo Liu",
+            "Meng Wang",
+            "Zhixuan Zhang",
+            "Chengcheng Zhu",
+            "Huazhu Fu",
+            "Jiang Liu"
+          ],
+          "first_author": "Xingyue Wang",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Foundation Models",
+          "badge": "CV",
+          "short": "Ophthalmic VQA Evidence",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Trustworthy ML",
+            "class": "Robustness and Alignment",
+            "order": "Evidence Grounding",
+            "genus": "Medical and Driving Reliability",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[경고신호]",
+            "[근거검증]",
+            "[배포신뢰성]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22273",
+          "title": "Exposing Vulnerabilities in Visible-Infrared VLMs: A Unified Geometric Adversarial Framework with Cross-Task Transferability",
+          "authors": [
+            "Xiang Chen",
+            "Yuxian Dong",
+            "Chao Li",
+            "Chengyin Hu",
+            "Jiaju Han",
+            "Fengyu Zhang",
+            "Yiwei Wei",
+            "Jiahuan Long",
+            "Jiujiang Guo"
+          ],
+          "first_author": "Xiang Chen",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Foundation Models",
+          "badge": "CV",
+          "short": "Visible-Infrared VLM Vulnerability",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Trustworthy ML",
+            "class": "Robustness and Alignment",
+            "order": "Evidence Grounding",
+            "genus": "Medical and Driving Reliability",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[경고신호]",
+            "[근거검증]",
+            "[배포신뢰성]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22185",
+          "title": "Enhancing Multimodal Large Language Models for Safety-Critical Driving Video Analysis",
+          "authors": [
+            "Tomaso Trinci",
+            "Henrique Piñeiro Monteagudo",
+            "Leonardo Taccari"
+          ],
+          "first_author": "Tomaso Trinci",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Machine Learning (cs.LG)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Safety/Alignment",
+          "badge": "CV",
+          "short": "Safety-Critical Driving Video Analysis",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Trustworthy ML",
+            "class": "Robustness and Alignment",
+            "order": "Evidence Grounding",
+            "genus": "Medical and Driving Reliability",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[경고신호]",
+            "[근거검증]",
+            "[배포신뢰성]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22080",
+          "title": "JMed48k: A Multi-Profession Japanese Medical Licensing Benchmark for Vision-Language Model Evaluation",
+          "authors": [
+            "Yue Xun",
+            "Junyu Liu",
+            "Qian Niu",
+            "Xinyi Wang",
+            "Zheng Yuan",
+            "Zirui Li",
+            "Zequn Zhang",
+            "Bowen Zhao",
+            "Shujun Wang",
+            "Irene Li",
+            "Kan Hatakeyama-Sato",
+            "Yusuke Iwasawa",
+            "Yutaka Matsuo"
+          ],
+          "first_author": "Yue Xun",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Foundation Models",
+          "badge": "CV",
+          "short": "JMed48k",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Trustworthy ML",
+            "class": "Robustness and Alignment",
+            "order": "Evidence Grounding",
+            "genus": "Medical and Driving Reliability",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[경고신호]",
+            "[근거검증]",
+            "[배포신뢰성]"
+          ]
+        }
+      ],
+      "why": "Foundation Models와 Safety/Alignment를 따로 세면 각각 88편, 61편이지만 실제로는 같은 문제를 보고 있습니다. 의료 VQA는 병변 근거 위치를, visible-infrared VLM은 cross-task adversarial 취약성을, driving video analysis는 안전 critical 판단을 묻습니다. 정답률보다 '어떤 근거를 보고 틀렸는가'를 남기는 평가가 더 중요해졌습니다.",
+      "confidence": "High — medical, visible-infrared, driving safety가 모두 evidence/reliability 축으로 연결",
+      "lab_action": "VQA와 driving video QA에 evidence localization, counterfactual perturbation, confidence calibration failure를 같은 dashboard로 기록"
+    },
+    {
+      "cluster": "효율화는 모델 축소가 아니라 world memory, KV cache, video diffusion 토큰 예산 문제로 구체화",
+      "papers": [
+        {
+          "arxiv_id": "2605.22718",
+          "title": "WorldKV: Efficient World Memory with World Retrieval and Compression",
+          "authors": [
+            "Jung Yi",
+            "Minjae Kim",
+            "Paul Hyunbin Cho",
+            "Wooseok Jang",
+            "Sangdoo Yun",
+            "Seungryong Kim"
+          ],
+          "first_author": "Jung Yi",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Efficiency/Systems",
+          "badge": "CV",
+          "short": "WorldKV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "World Memory Compression",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[인프라]",
+            "[메모리]",
+            "[속도/비용]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22269",
+          "title": "MuKV: Multi-Grained KV Cache Compression for Long Streaming Video Question-Answering",
+          "authors": [
+            "Junbin Xiao",
+            "Jiajun Chen",
+            "Tianxiang Sun",
+            "Xun Yang",
+            "Angela Yao"
+          ],
+          "first_author": "Junbin Xiao",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI); Multimedia (cs.MM)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Efficiency/Systems",
+          "badge": "CV",
+          "short": "MuKV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "World Memory Compression",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[인프라]",
+            "[메모리]",
+            "[속도/비용]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22015",
+          "title": "ORBIS: Output-Guided Token Reduction with Distribution-Aware Matching for Video Diffusion Acceleration",
+          "authors": [
+            "Hangyeol Lee",
+            "Joo-Young Kim"
+          ],
+          "first_author": "Hangyeol Lee",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Hardware Architecture (cs.AR)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Efficiency/Systems",
+          "badge": "CV",
+          "short": "ORBIS",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "World Memory Compression",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[인프라]",
+            "[메모리]",
+            "[속도/비용]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.20891",
+          "title": "HDMoE: A Hierarchical Decoupling-Fusion Mixture-of-Experts Framework for Multimodal Cancer Survival Prediction",
+          "authors": [
+            "Huayi Wang",
+            "Haochao Ying",
+            "Yuyang Xu",
+            "Qiyao Zheng",
+            "jun wang",
+            "Cheng Zhang",
+            "Ying Sun",
+            "Jian Wu"
+          ],
+          "first_author": "Huayi Wang",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Efficiency/Systems",
+          "badge": "CV",
+          "short": "HDMoE",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "World Memory Compression",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[인프라]",
+            "[메모리]",
+            "[속도/비용]"
+          ]
+        }
+      ],
+      "why": "Efficiency/Systems는 61편입니다. WorldKV와 MuKV는 긴 video/world memory를 어떻게 압축하고 다시 꺼낼지 묻고, ORBIS는 video diffusion에서 어떤 토큰을 줄일지 다룹니다. 즉 효율화는 작은 모델 경쟁이 아니라 실제 multimodal/video 추론 경로에서 무엇을 기억하고 무엇을 버릴지의 설계 문제가 됐습니다.",
+      "confidence": "High — KV cache, world memory, token reduction이 여러 응용에서 반복",
+      "lab_action": "long-video QA, VLA rollout memory, video diffusion에서 cache size, latency, accuracy drop Pareto curve를 같은 축으로 비교"
+    },
+    {
+      "cluster": "자율주행은 악조건 센서 변환과 closed-loop 판단 실패를 함께 보기 시작",
+      "papers": [
+        {
+          "arxiv_id": "2605.22809",
+          "title": "Sensor2Sensor: Cross-Embodiment Sensor Conversion for Autonomous Driving",
+          "authors": [
+            "Jiahao Wang",
+            "Bo Sun",
+            "Yijing Bai",
+            "Vincent Casser",
+            "Songyou Peng",
+            "Zehao Zhu",
+            "Meng-Li Shih",
+            "Xander Masotto",
+            "Shih-Yang Su",
+            "Kanaad V Parvate",
+            "Tiancheng Ge",
+            "Linn Bieske",
+            "Dragomir Anguelov",
+            "Mingxing Tan",
+            "Chiyu Max Jiang"
+          ],
+          "first_author": "Jiahao Wang",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Autonomous Driving",
+          "badge": "CV",
+          "short": "Sensor2Sensor",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Driving",
+            "class": "Closed-Loop Planning",
+            "order": "Adverse Condition Robustness",
+            "genus": "Sensor and Policy Adaptation",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[악조건]",
+            "[closed-loop]",
+            "[데이터셋]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.22018",
+          "title": "FRED: A Multi-Modal Autonomous Driving Dataset for Flooded Road Environments",
+          "authors": [
+            "Connor Malone",
+            "Sebastien Demmel",
+            "Sebastien Glaser"
+          ],
+          "first_author": "Connor Malone",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI); Robotics (cs.RO)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Autonomous Driving",
+          "badge": "CV/RO",
+          "short": "FRED",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Driving",
+            "class": "Closed-Loop Planning",
+            "order": "Adverse Condition Robustness",
+            "genus": "Sensor and Policy Adaptation",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[악조건]",
+            "[closed-loop]",
+            "[데이터셋]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.21139",
+          "title": "Distill to Think, Foresee to Act: Cognitive-Physical Reinforcement Learning for Autonomous Driving",
+          "authors": [
+            "Yang Wu",
+            "Qiang Meng",
+            "Zhaojiang Liu",
+            "Youquan Liu",
+            "Jian Yang",
+            "Jin Xie"
+          ],
+          "first_author": "Yang Wu",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Machine Learning (cs.LG)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Autonomous Driving",
+          "badge": "CV",
+          "short": "Distill to Think, Foresee to Act",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Driving",
+            "class": "Closed-Loop Planning",
+            "order": "Adverse Condition Robustness",
+            "genus": "Sensor and Policy Adaptation",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[악조건]",
+            "[closed-loop]",
+            "[데이터셋]"
+          ]
+        },
+        {
+          "arxiv_id": "2605.20390",
+          "title": "STELLAR: Scaling 3D Perception Large Models for Autonomous Driving",
+          "authors": [
+            "Yingwei Li",
+            "Xin Huang",
+            "Yang Liu",
+            "Yang Fu",
+            "Alex Zihao Zhu",
+            "Chen Song",
+            "Junwen Yao",
+            "Anant Subramanian",
+            "Hao Xiang",
+            "Weijing Shi",
+            "Yuliang Zou",
+            "Tom Hoddes",
+            "Zhaoqi Leng",
+            "Govind Thattai",
+            "Dragomir Anguelov",
+            "Mingxing Tan"
+          ],
+          "first_author": "Yingwei Li",
+          "subjects": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI); Machine Learning (cs.LG); Robotics (cs.RO)",
+          "primary_cat": "cs.CV",
+          "section": "new",
+          "bucket": "Autonomous Driving",
+          "badge": "CV/RO",
+          "short": "STELLAR",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Driving",
+            "class": "Closed-Loop Planning",
+            "order": "Adverse Condition Robustness",
+            "genus": "Sensor and Policy Adaptation",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          },
+          "importance_tags": [
+            "[악조건]",
+            "[closed-loop]",
+            "[데이터셋]"
+          ]
+        }
+      ],
+      "why": "Autonomous Driving은 37편으로 크지는 않지만 명확합니다. flooded road dataset, cross-embodiment sensor conversion, cognitive-physical RL, 3D perception scaling이 함께 나오면서 단순 perception 점수보다 악조건에서 센서/정책이 어떻게 무너지는지 확인하려는 흐름이 보입니다.",
+      "confidence": "Medium-High — 버킷 수는 중간이지만 adverse condition과 closed-loop 신호가 선명",
+      "lab_action": "FRED류 악조건에서 sensor conversion, BEV uncertainty, policy failure를 route-level closed-loop stress test로 묶기"
+    }
+  ],
+  "top5": [
+    {
+      "title": "Pre-VLA: Preemptive Runtime Verification for Reliable Vision-Language-Action and World-Model Rollouts",
+      "arxiv": "https://arxiv.org/abs/2605.22446",
+      "why": "VLA를 실제 배포하기 전에 rollout 실패를 미리 잡자는 흐름을 가장 직접적으로 보여줍니다.",
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Embodied Intelligence",
+        "class": "Vision-Language-Action Models",
+        "order": "Runtime Verification",
+        "genus": "Preemptive Rollout Safety",
+        "confidence": "High",
+        "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+      }
+    },
+    {
+      "title": "MotiMotion: Motion-Controlled Video Generation with Visual Reasoning",
+      "arxiv": "https://arxiv.org/abs/2605.22818",
+      "why": "video generation이 motion control과 visual reasoning을 함께 요구받는 방향으로 이동했다는 대표 신호입니다.",
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Generative Modeling",
+        "class": "Video and World Models",
+        "order": "Controllable Generation",
+        "genus": "Motion and Reasoning Control",
+        "confidence": "High",
+        "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+      }
+    },
+    {
+      "title": "ForeSplat: Optimization-Aware Foresight for Feed-Forward 3D Gaussian Splatting",
+      "arxiv": "https://arxiv.org/abs/2605.22020",
+      "why": "feed-forward 3DGS가 SLAM/reconstruction lens와 만나는 지점이라 robotics 쪽 후속 읽기가 큽니다.",
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Perception",
+        "class": "Mapping and Reconstruction",
+        "order": "Neural and Gaussian Maps",
+        "genus": "Feed-Forward 3D Geometry",
+        "confidence": "High",
+        "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+      }
+    },
+    {
+      "title": "WorldKV: Efficient World Memory with World Retrieval and Compression",
+      "arxiv": "https://arxiv.org/abs/2605.22718",
+      "why": "world memory와 KV cache 문제가 VLM/VLA 장기 실행의 실제 병목으로 올라왔다는 신호입니다.",
+      "phylogeny": {
+        "source": "CVML",
+        "phylum": "Efficient ML Systems",
+        "class": "Token and Cache Efficiency",
+        "order": "Adaptive Inference",
+        "genus": "World Memory Compression",
+        "confidence": "High",
+        "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+      }
+    },
+    {
+      "title": "FRED: A Multi-Modal Autonomous Driving Dataset for Flooded Road Environments",
+      "arxiv": "https://arxiv.org/abs/2605.22018",
+      "why": "악조건 도로 데이터셋이 driving VLA와 closed-loop 평가에 바로 연결될 수 있어 실험 가치가 큽니다.",
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Autonomous Driving",
+        "class": "Closed-Loop Planning",
+        "order": "Adverse Condition Robustness",
+        "genus": "Sensor and Policy Adaptation",
+        "confidence": "High",
+        "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+      }
+    }
+  ],
+  "themes": [
+    {
+      "title": "VLA는 '잘한다'보다 '언제 망가지는지 미리 아는가'로 질문이 바뀝니다",
+      "summary": "Pre-VLA, CrossVLA, GesVLA, Grounding Driving VLA가 같은 주에 나온 점은 VLA가 단순 모델 크기 경쟁에서 벗어나 runtime verification, representation, inference optimization 경쟁으로 넘어간다는 뜻입니다. 우리 쪽에서는 VLA baseline을 볼 때 success rate 옆에 실패 예측, latency, action representation 항목을 같이 놓아야 합니다.",
+      "confidence": "High"
+    },
+    {
+      "title": "World/video generation은 장면 생성보다 조종 가능한 시뮬레이터에 가까워집니다",
+      "summary": "MotiMotion, VGenST-Bench, Bernini는 모두 영상이 그럴듯한지를 넘어서 움직임, 시간, semantic plan을 어떻게 제어할지를 묻습니다. 이 흐름은 robotics simulation이나 driving world model과 직접 이어질 가능성이 큽니다.",
+      "confidence": "High"
+    },
+    {
+      "title": "Geometry/SLAM은 제목보다 기능으로 추적해야 합니다",
+      "summary": "이번 주 geometry 논문들은 SLAM이라는 단어를 항상 앞세우지 않습니다. 대신 feed-forward 3DGS, physically consistent 4D reconstruction, point-cloud reasoning처럼 지도 표현과 재현 가능한 장면 상태를 만드는 기능으로 나타납니다. 그래서 SLAM/recon watch는 키워드 검색보다 기능별 분류가 더 중요합니다.",
+      "confidence": "High"
+    }
+  ],
+  "predictions": [
+    {
+      "title": "다음 주 VLA 논문은 runtime verification 또는 latency 항목을 더 자주 보고할 것",
+      "claim": "Pre-VLA와 CrossVLA가 같은 주에 나온 만큼, 다음 묶음에서는 VLA success rate만이 아니라 실패 예측, speculative inference, action representation latency가 표에 같이 들어갈 가능성이 큽니다.",
+      "hit_condition": "다음 주 VLA 논문 중 runtime/latency/verification을 명시적으로 포함한 논문이 2편 이상이면 적중입니다.",
+      "miss_condition": "VLA 논문이 계속 task success만 보고하고 실행 비용과 실패 예측을 빼면 빗나감입니다."
+    },
+    {
+      "title": "3DGS는 rendering 품질보다 driving/robotics 장면 표현으로 더 많이 연결될 것",
+      "claim": "ForeSplat과 physically consistent 4D reconstruction이 나온 만큼, feed-forward 3DGS와 dynamic scene reconstruction이 localization, simulation, policy evaluation으로 붙는 흐름을 더 볼 가능성이 큽니다.",
+      "hit_condition": "3DGS/4D reconstruction 논문이 driving simulation, relocalization, robot scene representation 중 하나와 연결되면 적중입니다.",
+      "miss_condition": "3DGS가 editing/rendering 품질 개선으로만 반복되면 빗나감입니다."
+    },
+    {
+      "title": "긴 video/VLM 평가는 memory compression과 evidence grounding을 같이 물을 것",
+      "claim": "WorldKV, MuKV, Ophthalmic VQA evidence, driving video safety가 함께 나온 주라 다음 주에는 memory를 줄이는 기술과 근거를 잃지 않는 평가가 같은 논문 안에서 만날 가능성이 큽니다.",
+      "hit_condition": "long-video/VLM 논문이 cache/memory 압축과 evidence localization 또는 factuality를 함께 평가하면 적중입니다.",
+      "miss_condition": "압축 논문과 신뢰성 논문이 완전히 분리돼 나오면 빗나감입니다."
+    }
+  ],
+  "next_week_actions": [
+    {
+      "title": "VLA runtime failure board",
+      "action": "Pre-VLA, CrossVLA, GesVLA, Grounding Driving VLA를 success, failure prediction, latency, action representation으로 정리",
+      "expected_output": "1-page matrix for VLA runtime risks"
+    },
+    {
+      "title": "Geometry/SLAM hidden-signal board",
+      "action": "ForeSplat, 4D scene reconstruction, PointLLM-R, 4D-GSW를 SLAM/recon 기능 관점으로 재태깅",
+      "expected_output": "geometry watch table with map type, update path, robotics relevance"
+    },
+    {
+      "title": "World memory and evidence metric grid",
+      "action": "WorldKV, MuKV, Ophthalmic VQA, driving video safety를 memory budget과 evidence retention 축으로 비교",
+      "expected_output": "metric grid for long-video/VLM reliability"
+    }
+  ],
+  "phylogeny_tags": [
+    {
+      "paper": "https://arxiv.org/abs/2605.22446",
+      "source": "ROBOTICS",
+      "lineage": "Embodied Intelligence > Vision-Language-Action Models > Runtime Verification > Preemptive Rollout Safety"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.21854",
+      "source": "ROBOTICS",
+      "lineage": "Embodied Intelligence > Vision-Language-Action Models > Runtime Verification > Preemptive Rollout Safety"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22812",
+      "source": "ROBOTICS",
+      "lineage": "Embodied Intelligence > Vision-Language-Action Models > Runtime Verification > Preemptive Rollout Safety"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.21061",
+      "source": "ROBOTICS",
+      "lineage": "Embodied Intelligence > Vision-Language-Action Models > Runtime Verification > Preemptive Rollout Safety"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22818",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Video and World Models > Controllable Generation > Motion and Reasoning Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22570",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Video and World Models > Controllable Generation > Motion and Reasoning Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22344",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Video and World Models > Controllable Generation > Motion and Reasoning Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22050",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Video and World Models > Controllable Generation > Motion and Reasoning Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22020",
+      "source": "ROBOTICS",
+      "lineage": "Robot Perception > Mapping and Reconstruction > Neural and Gaussian Maps > Feed-Forward 3D Geometry"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.21032",
+      "source": "ROBOTICS",
+      "lineage": "Robot Perception > Mapping and Reconstruction > Neural and Gaussian Maps > Feed-Forward 3D Geometry"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22013",
+      "source": "ROBOTICS",
+      "lineage": "Robot Perception > Mapping and Reconstruction > Neural and Gaussian Maps > Feed-Forward 3D Geometry"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22342",
+      "source": "ROBOTICS",
+      "lineage": "Robot Perception > Mapping and Reconstruction > Neural and Gaussian Maps > Feed-Forward 3D Geometry"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22414",
+      "source": "CVML",
+      "lineage": "Trustworthy ML > Robustness and Alignment > Evidence Grounding > Medical and Driving Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22273",
+      "source": "CVML",
+      "lineage": "Trustworthy ML > Robustness and Alignment > Evidence Grounding > Medical and Driving Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22185",
+      "source": "CVML",
+      "lineage": "Trustworthy ML > Robustness and Alignment > Evidence Grounding > Medical and Driving Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22080",
+      "source": "CVML",
+      "lineage": "Trustworthy ML > Robustness and Alignment > Evidence Grounding > Medical and Driving Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22718",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Token and Cache Efficiency > Adaptive Inference > World Memory Compression"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22269",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Token and Cache Efficiency > Adaptive Inference > World Memory Compression"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22015",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Token and Cache Efficiency > Adaptive Inference > World Memory Compression"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.20891",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Token and Cache Efficiency > Adaptive Inference > World Memory Compression"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22809",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Driving > Closed-Loop Planning > Adverse Condition Robustness > Sensor and Policy Adaptation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.22018",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Driving > Closed-Loop Planning > Adverse Condition Robustness > Sensor and Policy Adaptation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.21139",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Driving > Closed-Loop Planning > Adverse Condition Robustness > Sensor and Policy Adaptation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2605.20390",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Driving > Closed-Loop Planning > Adverse Condition Robustness > Sensor and Policy Adaptation"
+    }
+  ],
+  "buckets_summary": {
+    "3D/Scene": 72,
+    "Robot Learning": 84,
+    "Autonomous Driving": 37,
+    "Foundation Models": 88,
+    "Generation": 149,
+    "Efficiency/Systems": 61,
+    "Embodied AI": 28,
+    "Safety/Alignment": 61
+  }
+}
