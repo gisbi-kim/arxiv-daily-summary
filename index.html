@@ -194,6 +194,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   const DOW = ['일','월','화','수','목','금','토'];
   const LIST_TTL_MS = 10 * 60 * 1000;
   const INSIGHT_TTL_MS = 24 * 60 * 60 * 1000;
+  const INSIGHT_CACHE_VERSION = 'v2';
 
   const status = document.getElementById('status');
   const archive = document.getElementById('archive');
@@ -400,9 +401,9 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 
   async function loadInsights(entry) {
     const slug = entry.date + entry.suffix;
-    const cacheKey = `arxiv-archive:insight:${slug}`;
+    const cacheKey = `arxiv-archive:insight:${INSIGHT_CACHE_VERSION}:${slug}`;
     const cached = lsGet(cacheKey);
-    if (cached && Date.now() - cached.t < INSIGHT_TTL_MS) return cached.v;
+    if (cached && Date.now() - cached.t < INSIGHT_TTL_MS && Array.isArray(cached.v) && cached.v.length) return cached.v;
 
     const res = await fetch(`posts/${slug}.html`, { cache: 'no-cache' });
     let titles = [];
@@ -427,7 +428,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
         }
       } catch {}
     }
-    lsSet(cacheKey, titles);
+    if (titles.length) lsSet(cacheKey, titles);
     return titles;
   }
 
