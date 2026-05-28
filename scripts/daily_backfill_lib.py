@@ -270,11 +270,14 @@ def summary_for_paper(p: dict) -> tuple[str, str, str]:
 
 
 def paper_excerpt(p: dict) -> str:
-    abstract = clean(p.get("abstract", ""))
-    if abstract:
-        return abstract[:420]
     subjects = clean(p.get("subjects", ""))
-    return f"Backfill source에는 abstract가 없어 title/subject 기반으로 분류했습니다. Subjects: {subjects}"[:420]
+    label, focus, meaning = summary_for_paper(p)
+    source_note = "abstract와 title/subject" if clean(p.get("abstract", "")) else "title/subject"
+    return (
+        f"문제: {label} 흐름에 걸린 논문입니다. "
+        f"방법: {source_note} 기준으로 보면 {focus} "
+        f"의미: {meaning} Subjects: {subjects}"
+    )[:420]
 
 
 def render_html(profile: dict, classified: dict, trends: dict, html_insights: dict) -> str:
@@ -483,7 +486,14 @@ def build(profile: dict, cv_new_path: str, ro_new_path: str) -> None:
         "date": date,
         "results": [
             {"name": "Parser coverage", "value": f"{classified['selected']}/{classified['total']} ROI selected", "status": "pass"},
-            {"name": "Backfill source", "value": f"cs.CV {listing_count(cv_new)} + cs.RO {listing_count(ro_new)} date-section rows", "status": "pass"},
+            {
+                "name": "Daily source" if source_mode == "new" else "Backfill source",
+                "value": (
+                    f"cs.CV {listing_count(cv_new)} + cs.RO {listing_count(ro_new)} "
+                    f"{'/new rows' if source_mode == 'new' else 'date-section rows'}"
+                ),
+                "status": "pass",
+            },
             {"name": "Cluster table", "value": f"{len(clusters)} clusters with representative papers", "status": "pass"},
             {"name": "Phylogeny tags", "value": f"{len(insights['phylogeny_tags'])} representative mappings", "status": "pass"},
         ],
