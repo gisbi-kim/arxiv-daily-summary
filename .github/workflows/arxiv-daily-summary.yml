@@ -74,11 +74,11 @@ jobs:
         run: |
           set -euo pipefail
           if [[ -z "${ANTHROPIC_API_KEY}" ]]; then
-            echo "::error::Missing required repository secret ANTHROPIC_API_KEY. Add it in Settings > Secrets and variables > Actions."
+            echo "::error::Missing required repository secret ANTHROPIC_API_KEY."
             exit 1
           fi
           if [[ -z "${SLACK_WEBHOOK_URL}" ]]; then
-            echo "::warning::SLACK_WEBHOOK_URL is not configured. The workflow can update GitHub Pages, but Slack delivery will be skipped."
+            echo "::warning::SLACK_WEBHOOK_URL is not configured. Slack delivery will be skipped."
           fi
 
       - name: Install Claude Code CLI
@@ -94,7 +94,7 @@ jobs:
           set -euo pipefail
           mkdir -p out
           cat > out/ci_prompt.md <<'EOF'
-          You are running the arXiv Daily Briefing release workflow inside GitHub Actions.
+          Run the arXiv Daily Briefing release workflow inside GitHub Actions.
 
           Repository: gisbi-kim/arxiv-daily-summary
           Workdir: ${WORKDIR}
@@ -104,36 +104,23 @@ jobs:
           Requested mode: ${MODE}
           Requested target date: ${TARGET_DATE}
 
-          Authoritative runbook:
-          - Read and follow prompts/instruction_v20260516.md.
-          - Treat it as the source of truth for mode resolution, parser usage, output files, validation gates, and Slack copy.
+          Follow prompts/instruction_v20260516.md as the authoritative runbook.
 
-          Non-negotiable rules:
-          1. Do not use browser/WebFetch-style summarization of arXiv list pages. Use the repository parser scripts.
-          2. If the requested target date is older than the current /new listing date, use Backfill mode and scripts/fetch_arxiv_pastweek_date.py for that date.
-          3. For auto mode, run Calendar Audit first and fill missing weekdays in chronological order.
-          4. Generate or update all required artifacts: posts, trends, benchmarks, insights, weekly when applicable, feed.xml, index.html/stat artifacts when required by the repo.
-          5. Run the repo validation/release gates described in the instruction file, including JSON load checks, feed check, date/listing-source checks, duplicate/stale daily checks, phylogeny-tag checks, geometry/SLAM/reconstruction coverage checks, and git diff checks.
-          6. Commit and push only if the release gates pass.
-          7. After successful release, write the Slack message body to out/slack_message.txt. Do not call Slack directly from Claude Code.
-          8. After successful release, write a one-line success marker to out/release_ok.txt.
-          9. If there is intentionally no release, for example Sunday skip with no missing daily, write a short explanation to out/no_release.txt and write the Slack/no-op message to out/slack_message.txt.
-          10. If any required gate fails, do not fabricate success, do not commit partial outputs, and exit non-zero with a clear reason.
+          Required behavior:
+          1. Use repository parser scripts for arXiv /new and /pastweek data.
+          2. Do not summarize arXiv list pages manually.
+          3. In auto mode, run Calendar Audit first and fill missing weekdays in chronological order.
+          4. If target_date is older than the current /new listing date, use Backfill mode and scripts/fetch_arxiv_pastweek_date.py.
+          5. Generate or update required artifacts: posts, trends, benchmarks, insights, weekly when applicable, feed.xml, index.html, and stats if present.
+          6. Run the validation/release gates described in the instruction file.
+          7. Commit and push only if all release gates pass.
+          8. Write the Slack message body to out/slack_message.txt after success or intentional no-op.
+          9. Write out/release_ok.txt after a successful release, or out/no_release.txt after an intentional no-op.
+          10. If a required gate fails, exit non-zero and do not claim success.
 
-          Git settings to use if a commit is needed:
+          Git identity if a commit is needed:
           - user.name: arxiv-daily-bot
           - user.email: actions@github.com
-
-          Suggested high-level command flow, adapted as needed by the runbook:
-          - git pull --ff-only origin main
-          - mkdir -p out
-          - resolve execution_date, listing_date, post_date, weekly_date
-          - run fetch_arxiv.py or fetch_arxiv_pastweek_date.py according to mode
-          - run classify.py and generation/validation scripts
-          - run build_feed.py and build_feed.py --check
-          - run validate_daily_release.py --date YYYY-MM-DD when applicable
-          - inspect git diff
-          - commit and push only after all gates pass
           EOF
           python - <<'PY'
           from pathlib import Path
@@ -149,7 +136,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          claude -p "$(cat out/ci_prompt.md)" --dangerously-skip-permissions
+          claude -p "$(cat out/ci_prompt.md)"
 
       - name: Finalize commit and push if Claude left validated changes
         shell: bash
@@ -160,9 +147,13 @@ jobs:
 
           if [[ -f out/release_ok.txt ]]; then
             echo "Release marker found. Ensuring validated changes are pushed."
-            git add posts trends benchmarks insights weekly feed.xml index.html out || true
+            for path in posts trends benchmarks insights weekly feed.xml index.html stats; do
+              if [[ -e "$path" ]]; then
+                git add "$path"
+              fi
+            done
             if git diff --cached --quiet; then
-              echo "No staged changes remain; assuming Claude already committed/pushed or release was metadata-only."
+              echo "No staged changes remain."
             else
               DATE_TAG="${TARGET_DATE:-$(date +%F)}"
               git commit -m "Update arXiv daily summary (${DATE_TAG})"
@@ -172,7 +163,7 @@ jobs:
             echo "No-release marker found."
             cat out/no_release.txt
           else
-            echo "::error::Neither out/release_ok.txt nor out/no_release.txt exists. Treating run as failed."
+            echo "::error::Neither out/release_ok.txt nor out/no_release.txt exists."
             exit 1
           fi
 
@@ -197,6 +188,7 @@ jobs:
           else
             MESSAGE="arXiv Daily Summary workflow failed. Check GitHub Actions run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
           fi
+          export MESSAGE
 
           python - <<'PY'
           import json, os
