@@ -86,13 +86,23 @@ def parse_arxiv_listing_date() -> str:
         if not h3s:
             raise RuntimeError(f"cannot find /new h3 listing date for {cat}")
         text = strip_tags(h3s[0])
-        # Examples include dates like "Mon, 8 Jun 2026".
-        m = re.search(r"(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})", text)
+        # Examples include dates like "Mon, 8 Jun 2026" or
+        # "Showing new listings for Monday, 8 June 2026".
+        m = re.search(
+            r"(?:(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+)?"
+            r"(\d{1,2})\s+([A-Za-z]{3,9})\s+(\d{4})",
+            text,
+        )
         if not m:
             raise RuntimeError(f"cannot parse listing date for {cat}: {text}")
-        day = int(m.group(2))
-        mon = list(calendar.month_abbr).index(m.group(3))
-        year = int(m.group(4))
+        day = int(m.group(1))
+        month_name = m.group(2).lower()
+        months = {name.lower(): i for i, name in enumerate(calendar.month_name) if name}
+        months.update({name.lower(): i for i, name in enumerate(calendar.month_abbr) if name})
+        if month_name not in months:
+            raise RuntimeError(f"cannot parse listing month for {cat}: {text}")
+        mon = months[month_name]
+        year = int(m.group(3))
         dates.append(dt.date(year, mon, day))
     if dates[0] != dates[1]:
         raise RuntimeError(f"cs.CV and cs.RO listing dates differ: {dates}")
