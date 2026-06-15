@@ -1,77 +1,77 @@
 {
   "date": "2026-06-12",
   "source_listing_date": "2026-06-12",
-  "source_mode": "new",
+  "source_mode": "pastweek-date-section",
   "daily_new_counts": {
     "cv": 99,
     "ro": 56,
     "scope": "new+cross; replacements excluded"
   },
   "totals": {
-    "selected": 130,
+    "selected": 77,
     "total_scanned": 143,
-    "note": "Daily /new parser output for 2026-06-12: cs.CV 99 + cs.RO 56 new+cross entries, dedup 143, selected 130 ROI papers."
+    "note": "Backfill parser output from arXiv /pastweek date sections for 2026-06-12: cs.CV 99 + cs.RO 56 new+cross entries, dedup 143, selected 77 ROI papers."
   },
   "buckets": {
     "3D/Scene": {
-      "total": 8,
-      "cv": 6,
+      "total": 5,
+      "cv": 4,
       "ro": 0,
-      "cvro": 2
+      "cvro": 1
     },
     "Robot Learning": {
-      "total": 32,
-      "cv": 4,
-      "ro": 24,
-      "cvro": 4
+      "total": 27,
+      "cv": 2,
+      "ro": 20,
+      "cvro": 5
     },
     "Autonomous Driving": {
-      "total": 8,
-      "cv": 5,
-      "ro": 2,
-      "cvro": 1
-    },
-    "Foundation Models": {
-      "total": 18,
-      "cv": 15,
-      "ro": 3,
-      "cvro": 0
-    },
-    "Generation": {
-      "total": 28,
-      "cv": 22,
-      "ro": 4,
-      "cvro": 2
-    },
-    "Efficiency/Systems": {
-      "total": 21,
-      "cv": 16,
-      "ro": 4,
-      "cvro": 1
-    },
-    "Embodied AI": {
-      "total": 1,
-      "cv": 0,
+      "total": 4,
+      "cv": 3,
       "ro": 1,
       "cvro": 0
     },
-    "Safety/Alignment": {
-      "total": 14,
-      "cv": 10,
+    "Foundation Models": {
+      "total": 8,
+      "cv": 8,
+      "ro": 0,
+      "cvro": 0
+    },
+    "Generation": {
+      "total": 13,
+      "cv": 9,
       "ro": 3,
       "cvro": 1
+    },
+    "Efficiency/Systems": {
+      "total": 6,
+      "cv": 4,
+      "ro": 1,
+      "cvro": 1
+    },
+    "Embodied AI": {
+      "total": 6,
+      "cv": 0,
+      "ro": 5,
+      "cvro": 1
+    },
+    "Safety/Alignment": {
+      "total": 8,
+      "cv": 7,
+      "ro": 1,
+      "cvro": 0
     }
   },
   "buckets_pastweek": {
     "3D/Scene": {
       "total": 43,
-      "cv": 36,
-      "ro": 3,
+      "cv": 34,
+      "ro": 5,
       "cvro": 4
     },
     "Robot Learning": {
-      "total": 152,
-      "cv": 11,
+      "total": 151,
+      "cv": 10,
       "ro": 118,
       "cvro": 23
     },
@@ -82,56 +82,56 @@
       "cvro": 6
     },
     "Foundation Models": {
-      "total": 55,
-      "cv": 55,
+      "total": 49,
+      "cv": 49,
       "ro": 0,
       "cvro": 0
     },
     "Generation": {
-      "total": 93,
-      "cv": 80,
+      "total": 96,
+      "cv": 82,
       "ro": 10,
-      "cvro": 3
+      "cvro": 4
     },
     "Efficiency/Systems": {
-      "total": 38,
-      "cv": 29,
+      "total": 40,
+      "cv": 31,
       "ro": 7,
       "cvro": 2
     },
     "Embodied AI": {
-      "total": 24,
-      "cv": 2,
-      "ro": 16,
-      "cvro": 6
+      "total": 23,
+      "cv": 1,
+      "ro": 18,
+      "cvro": 4
     },
     "Safety/Alignment": {
-      "total": 39,
-      "cv": 30,
-      "ro": 7,
-      "cvro": 2
+      "total": 41,
+      "cv": 31,
+      "ro": 9,
+      "cvro": 1
     }
   },
   "keywords_cv": [
     [
       "video",
-      123
+      112
     ],
     [
       "3d",
-      82
+      75
     ],
     [
       "robot",
-      78
+      73
     ],
     [
       "diffusion",
-      42
+      38
     ],
     [
       "benchmark",
-      29
+      30
     ],
     [
       "dataset",
@@ -139,34 +139,38 @@
     ],
     [
       "token",
-      19
+      20
     ],
     [
-      "driving",
+      "world model",
       18
-    ],
-    [
-      "gaussian",
-      17
     ],
     [
       "memory",
       17
     ],
     [
-      "world model",
+      "driving",
       16
     ],
     [
-      "manipulation",
-      12
+      "gaussian",
+      13
     ],
     [
       "4d",
-      10
+      12
+    ],
+    [
+      "manipulation",
+      11
     ],
     [
       "lidar",
+      9
+    ],
+    [
+      "vla",
       9
     ],
     [
@@ -174,24 +178,20 @@
       8
     ],
     [
-      "navigation",
+      "calibration",
       6
     ],
     [
-      "calibration",
-      5
-    ],
-    [
       "compression",
-      5
-    ],
-    [
-      "vla",
-      5
+      6
     ],
     [
       "hallucination",
-      3
+      4
+    ],
+    [
+      "navigation",
+      4
     ],
     [
       "cache",
@@ -205,58 +205,62 @@
   "keywords_ro": [
     [
       "robot",
-      444
+      448
     ],
     [
       "manipulation",
-      51
+      55
     ],
     [
       "vla",
-      25
+      33
     ],
     [
       "navigation",
-      23
+      25
     ],
     [
       "driving",
-      20
+      19
     ],
     [
       "world model",
-      13
+      16
     ],
     [
       "diffusion",
-      12
-    ],
-    [
-      "video",
-      11
+      14
     ],
     [
       "benchmark",
-      9
+      10
     ],
     [
       "3d",
-      8
+      9
+    ],
+    [
+      "video",
+      9
+    ],
+    [
+      "memory",
+      7
     ],
     [
       "safety",
       7
     ],
     [
-      "memory",
-      6
+      "lidar",
+      4
     ],
     [
       "token",
       4
     ],
     [
-      "lidar",
+      "4d",
       3
     ],
     [
@@ -264,15 +268,11 @@
       2
     ],
     [
-      "4d",
-      1
-    ],
-    [
       "cache",
       1
     ],
     [
-      "compression",
+      "dataset",
       1
     ],
     [
