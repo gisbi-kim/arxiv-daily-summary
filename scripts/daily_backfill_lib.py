@@ -304,6 +304,10 @@ def render_html(profile: dict, classified: dict, trends: dict, html_insights: di
         )
         source_note_html = "<div><strong>Backfill note:</strong> /pastweek 날짜 섹션에는 abstract가 없어 논문별 분류와 요약은 title/subject 기반입니다.</div>"
     bucket_line = " · ".join(f"[{b}] {bucket_counts[b]}" for b in BUCKET_ORDER)
+    cluster_takeaway = profile.get(
+        "cluster_takeaway",
+        "오늘의 판세는 대표 논문들이 공통으로 드러내는 평가 축을 먼저 세운 뒤, 개별 논문을 그 축의 증거로 읽는 쪽입니다.",
+    )
 
     cluster_rows = []
     for cl in clusters:
@@ -355,7 +359,7 @@ h1{{font-size:28px;margin:0 0 6px;color:#0d1117}}h2{{font-size:21px;margin:40px 
 a{{color:#0969da;text-decoration:none}}a:hover{{text-decoration:underline}}.home{{display:inline-block;padding:6px 14px;font-size:13px;color:#0969da;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;margin:0 0 18px}}
 .meta{{font-size:13px;color:#3b434d;padding:14px 18px;background:#f6f8fa;border-left:3px solid #0969da;border-radius:6px;margin:14px 0 22px}}.thesis{{background:#0f172a;color:#f8fafc;border-radius:10px;padding:18px 22px;margin:16px 0 28px;font-size:16px}}.thesis strong{{color:#fef08a}}
 .cluster-table{{width:100%;table-layout:fixed;border-collapse:collapse;font-size:13px;margin:12px 0 18px}}.cluster-table th,.cluster-table td{{border:1px solid #d0d7de;padding:9px;vertical-align:top;overflow-wrap:anywhere;word-break:break-word}}.cluster-table th{{background:#f6f8fa;color:#0d1117}}
-.card,.mini-paper{{background:#fafbfc;border:1px solid #e5e7eb;border-radius:8px;padding:14px 18px;margin:12px 0}}.mini-paper{{background:#fff}}.topic{{border-left:4px solid #22c55e;background:#f0fdf4}}.insight{{border-left:4px solid #0969da;background:#f8fafc}}
+.card,.mini-paper{{background:#fafbfc;border:1px solid #e5e7eb;border-radius:8px;padding:14px 18px;margin:12px 0}}.mini-paper{{background:#fff}}.topic{{border-left:4px solid #22c55e;background:#f0fdf4}}.insight{{border-left:4px solid #0969da;background:#f8fafc}}.cluster-takeaway{{margin:-4px 0 24px;padding:12px 16px;background:#fff8e1;border-left:3px solid #f59e0b;border-radius:6px;color:#3b434d;font-size:14px}}
 .bucket-line{{font-family:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:10px 14px;font-size:13px;white-space:pre-wrap;overflow-x:auto}}
 .badge{{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;font-family:ui-monospace,monospace}}.cv{{background:#ddf4ff;color:#0550ae;border:1px solid #54aeff}}.ro{{background:#fff8c5;color:#7a4e00;border:1px solid #d4a72c}}.cvro{{background:#ffe5d9;color:#9a3412;border:1px solid #f59e0b}}.x{{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db}}
 .tag{{display:inline-block;font-family:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;font-size:12px;color:#7c2d12;background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:1px 7px;margin:2px 3px 2px 0}}.authors,.small{{color:#475569;font-size:13.5px}}footer{{margin-top:40px;padding-top:16px;border-top:1px solid #eaeef2;font-size:12px;color:#656d76;text-align:center}}
@@ -376,6 +380,7 @@ a{{color:#0969da;text-decoration:none}}a:hover{{text-decoration:underline}}.home
 <table class="cluster-table"><thead><tr><th>Cluster</th><th>대표 논문</th><th>왜 중요?</th><th>Confidence</th><th>Lab action</th></tr></thead><tbody>
 {''.join(cluster_rows)}
 </tbody></table>
+<p class="cluster-takeaway"><strong>오늘의 판세:</strong> {esc(cluster_takeaway)}</p>
 <h2>주간 동향</h2>
 <p>{esc(trend_text)}</p>
 <div class="bucket-line">{esc(bucket_line)}</div>

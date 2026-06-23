@@ -18,7 +18,11 @@ PROFILE = {
     "thesis": (
         "6/23 batch는 VLA, 3D world model, long-video memory, driving simulation, calibration/security가 모두 "
         "'실행 전에 어떤 증거를 보존하고, 실행 중 무엇을 의심할 것인가'로 모입니다. APRL 관점에서는 큰 모델보다 "
-        "memory budget, geometry uncertainty, failure detector, deployable efficiency를 같은 실험 로그에 묶어야 하는 날입니다."
+        "memory budget, geometry uncertainty, failure detector, deployable efficiency를 하나의 평가 설계로 묶어야 하는 날입니다."
+    ),
+    "cluster_takeaway": (
+        "오늘의 핵심은 모델 크기 경쟁이 아니라, VLA와 world model이 행동에 필요한 증거를 잃지 않는지, "
+        "3D geometry와 autonomy pipeline이 실제 실패 조건에서 스스로를 검증할 수 있는지입니다."
     ),
     "trend_note": (
         "cs.CV 358건과 cs.RO 174건이 같은 날짜에 쌓인 큰 배치입니다. Robot Learning과 Generation의 볼륨이 크지만, "
@@ -48,7 +52,7 @@ PROFILE = {
             ),
             "confidence": "High",
             "confidence_note": "VLA adaptation, memory, failure detection, policy efficiency 논문이 같은 날짜에 직접 등장",
-            "lab_action": "VLA 실험 테이블에 demo count, memory horizon, action chunk length, failure score, object-generalization split을 같은 row로 저장합니다.",
+            "lab_action": "VLA ablation은 demonstration 수, memory horizon, action chunk 길이, failure detector 유무, object-generalization split을 독립 축으로 흔들어야 합니다.",
             "limit": 6,
         },
         {
@@ -71,7 +75,7 @@ PROFILE = {
             ),
             "confidence": "High",
             "confidence_note": "physical validity, SfM pruning, robot camera rotation, driving reconstruction, collaborative uncertainty가 같은 축을 공유",
-            "lab_action": "3D/SLAM 실험에는 photometric score와 별도로 physical violation, viewpoint sweep error, uncertainty-weighted fusion, robot-task delta를 기록합니다.",
+            "lab_action": "3D/SLAM benchmark는 photometric score와 별도로 physical violation, viewpoint sweep, uncertainty-weighted fusion, robot-task transfer를 평가해야 합니다.",
             "limit": 6,
         },
         {
@@ -95,7 +99,7 @@ PROFILE = {
             ),
             "confidence": "High",
             "confidence_note": "driving, multi-robot, underwater autonomy, LiDAR security가 모두 deployment failure surface를 넓힘",
-            "lab_action": "자율시스템 benchmark를 OOD geography, replayable scenario seed, geometry cue, prior-map uncertainty, attack trigger exposure로 나눕니다.",
+            "lab_action": "자율시스템 benchmark는 OOD geography, replayable scenario seed, geometry cue, prior-map uncertainty, attack trigger exposure를 분리한 stress split으로 설계합니다.",
             "limit": 6,
         },
         {
@@ -119,7 +123,7 @@ PROFILE = {
             ),
             "confidence": "High",
             "confidence_note": "memory budget, camera control, entity persistence, HOI contact, procedural dependency가 같은 memory-control 축",
-            "lab_action": "world-model 평가에 frame budget, temporal distance, entity drift, camera-control error, contact consistency, procedure-step retrieval을 추가합니다.",
+            "lab_action": "World-model 평가는 frame budget과 temporal distance를 바꾸며 entity drift, camera-control error, contact consistency, procedure-step retrieval을 동시에 압박해야 합니다.",
             "limit": 6,
         },
         {
@@ -138,11 +142,11 @@ PROFILE = {
             "why": (
                 "Quantile adaptive calibration, LiDAR clean-label backdoor, web-agent visual prompt injection, PROTON OOD, "
                 "T-IMPACT manipulation severity, VLA-FAIL, BadDreamer는 reliability를 단일 confidence 숫자로 끝내면 안 된다는 신호입니다. "
-                "shift type, adversary capability, manipulated context, runtime failure sign을 분리해 로깅해야 합니다."
+                "shift type, adversary capability, manipulated context, runtime failure sign을 서로 다른 실패 가설로 분리해야 합니다."
             ),
             "confidence": "High",
             "confidence_note": "calibration, OOD, manipulation, web-agent injection, LiDAR/video-world-model attack이 명확히 safety 축을 형성",
-            "lab_action": "안전성 평가 row를 confidence quantile, OOD family, manipulation severity, prompt/visual trigger, runtime failure detector output으로 분리합니다.",
+            "lab_action": "Safety suite는 confidence quantile, OOD family, manipulation severity, prompt/visual trigger, runtime failure detector를 서로 다른 intervention으로 둬야 합니다.",
             "limit": 6,
         },
         {
@@ -165,14 +169,14 @@ PROFILE = {
             ),
             "confidence": "Medium",
             "confidence_note": "3D compression, occupancy, recurrent memory, quantization, edge-cloud, industrial segmentation이 evidence-preserving compression으로 연결",
-            "lab_action": "경량화 실험에는 latency, bandwidth, memory와 함께 retained geometry cue, occupancy false primitive, boundary error, downstream action delta를 plot합니다.",
+            "lab_action": "경량화 실험은 latency, bandwidth, memory를 낮추는 동시에 retained geometry cue, occupancy false primitive, boundary error, downstream action delta가 무너지지 않는지 봐야 합니다.",
             "limit": 6,
         },
     ],
     "research_topics": [
         {
             "title": "VLA evidence ledger",
-            "claim": "VLA 실행 로그를 action, memory token, failure detector, demo scarcity, policy length로 정규화해 성공률 뒤의 failure mode를 분리합니다.",
+            "claim": "VLA 성공률을 action choice, memory token, failure detector, demo scarcity, policy length로 분해해 숨은 failure mode를 드러냅니다.",
         },
         {
             "title": "Robot-facing 3D validity suite",
