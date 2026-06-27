@@ -1,0 +1,884 @@
+{
+  "date": "2026-06-27",
+  "iso_week": "2026-W26",
+  "week_start": "2026-06-21",
+  "week_end": "2026-06-27",
+  "source_mode": "pastweek",
+  "weekly_thesis": "이번 주의 핵심은 VLA, Gaussian SLAM, world model, VLM reliability, autonomy benchmark가 모두 더 큰 모델보다 실패를 재현하고 실행 전에 검증하는 평가 설계로 이동했다는 점입니다.",
+  "totals": {
+    "selected": 593,
+    "total_scanned": 1217
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 68,
+      "cv": 43,
+      "ro": 16,
+      "cvro": 9
+    },
+    "Robot Learning": {
+      "total": 160,
+      "cv": 10,
+      "ro": 135,
+      "cvro": 15
+    },
+    "Autonomous Driving": {
+      "total": 41,
+      "cv": 14,
+      "ro": 22,
+      "cvro": 5
+    },
+    "Foundation Models": {
+      "total": 75,
+      "cv": 68,
+      "ro": 3,
+      "cvro": 4
+    },
+    "Generation": {
+      "total": 124,
+      "cv": 96,
+      "ro": 22,
+      "cvro": 6
+    },
+    "Efficiency/Systems": {
+      "total": 51,
+      "cv": 47,
+      "ro": 4,
+      "cvro": 0
+    },
+    "Embodied AI": {
+      "total": 30,
+      "cv": 6,
+      "ro": 19,
+      "cvro": 5
+    },
+    "Safety/Alignment": {
+      "total": 44,
+      "cv": 35,
+      "ro": 8,
+      "cvro": 1
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA는 성능 확장에서 실행 전 safety diagnosis와 physical feasibility 검증으로 이동",
+      "representative_papers": [
+        {
+          "title": "ForesightSafety-VLA: A Unified Diagnostic Safety Benchmark for Vision-Language-Action Models",
+          "arxiv": "https://arxiv.org/abs/2606.27079",
+          "short": "ForesightSafety-VLA",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Safety Evaluation",
+            "genus": "Execution Diagnosis",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "LIBERO-Safety: A Comprehensive Benchmark for Physical and Semantic Safety in Vision-Language-Action Models",
+          "arxiv": "https://arxiv.org/abs/2606.23686",
+          "short": "LIBERO-Safety",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Safety Evaluation",
+            "genus": "Execution Diagnosis",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "ROAD-VLA: Robust Online Adaptation via Self-Distillation for Vision-Language-Action Models",
+          "arxiv": "https://arxiv.org/abs/2606.25800",
+          "short": "ROAD-VLA",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Safety Evaluation",
+            "genus": "Execution Diagnosis",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "dVLA-RL: Reinforcement Learning over Denoising Trajectories for Discrete Diffusion Vision-Language-Action Models",
+          "arxiv": "https://arxiv.org/abs/2606.23623",
+          "short": "dVLA-RL",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Safety Evaluation",
+            "genus": "Execution Diagnosis",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "PhysReflect-VLA: Physical Feasibility and Self-Reflective Regulation for Reliable Vision-Language-Action Policies",
+          "arxiv": "https://arxiv.org/abs/2606.27146",
+          "short": "PhysReflect-VLA",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Safety Evaluation",
+            "genus": "Execution Diagnosis",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "WatchAct: A Benchmark for Behavior-Grounded Robot Manipulation",
+          "arxiv": "https://arxiv.org/abs/2606.26443",
+          "short": "WatchAct",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Safety Evaluation",
+            "genus": "Execution Diagnosis",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "이번 주 Robot Learning은 160편으로 가장 큰 로봇 버킷이며, 중심 신호는 VLA가 단순 success rate를 넘는다는 점입니다. ForesightSafety-VLA와 LIBERO-Safety는 실패를 실행 전에 예측하고, ROAD-VLA와 PhysReflect-VLA는 online adaptation과 물리 feasibility를 정책 안으로 끌어옵니다. 따라서 VLA 평가는 더 큰 데이터셋이 아니라 어떤 failure family를 먼저 드러내는지로 재구성해야 합니다.",
+      "confidence": "High — VLA safety benchmark, online adaptation, physical reflection, behavior-grounded benchmark가 같은 주에 반복",
+      "lab_action": "LIBERO/RoboCasa/real-robot task에서 safety benchmark, online self-distillation, physical reflection을 독립 변수로 두고 unsafe action, failure warning lead time, object-generalization success를 비교한다."
+    },
+    {
+      "cluster": "Geometry/SLAM은 Gaussian map 경쟁에서 자원제약 localization과 robot-usable map 평가로 이동",
+      "representative_papers": [
+        {
+          "title": "Spectral GS-SLAM: Observability-Aware, Degeneracy-Robust Tracking for Real-Time 3D Gaussian Splatting SLAM",
+          "arxiv": "https://arxiv.org/abs/2606.21258",
+          "short": "Spectral GS-SLAM",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Gaussian and LiDAR Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "LIT-GS: LiDAR-Inertial-Thermal Gaussian Splatting for Illumination-Robust Mapping",
+          "arxiv": "https://arxiv.org/abs/2606.20424",
+          "short": "LIT-GS",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Gaussian and LiDAR Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "LOGOS: LiDAR-Only Gaussian Elevation Splatting for Unified Tiny Obstacle Segmentation",
+          "arxiv": "https://arxiv.org/abs/2606.21527",
+          "short": "LOGOS",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Gaussian and LiDAR Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "FAR-LIO: Enabling High-Speed Autonomy through Fast, Accurate, and Robust LiDAR-Inertial Odometry",
+          "arxiv": "https://arxiv.org/abs/2606.26010",
+          "short": "FAR-LIO",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Gaussian and LiDAR Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Commerge: Communication-Efficient, Robust, and Fast LiDAR Map Merging Framework for Multi-Robot Coordination in Resource-Constrained Scenarios",
+          "arxiv": "https://arxiv.org/abs/2606.25386",
+          "short": "Commerge",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Gaussian and LiDAR Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "ArtiTwinSplat: Interactable Digital Twin Reconstruction via Gaussian Splatting from RGB-D videos",
+          "arxiv": "https://arxiv.org/abs/2606.24628",
+          "short": "ArtiTwinSplat",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Gaussian and LiDAR Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "이번 주 3D/Scene은 68편이고, SLAM이라는 이름이 붙은 논문과 Gaussian map 논문이 함께 두껍습니다. Spectral GS-SLAM, LIT-GS, LOGOS는 Gaussian representation을 map과 segmentation substrate로 쓰고, FAR-LIO와 Commerge는 고속·자원제약 localization을 요구합니다. 핵심은 photometric quality가 아니라 로봇이 실제 환경 변화와 통신 제약 안에서 쓸 수 있는 지도인지입니다.",
+      "confidence": "High — Gaussian SLAM, LiDAR-inertial mapping, map merging, interactable digital twin 신호가 충분",
+      "lab_action": "warehouse/tunnel/driving sequence에서 Gaussian map, LiDAR-inertial map, object-SLAM map을 비교하고 localization drift, update cost, communication budget, navigation success를 함께 평가한다."
+    },
+    {
+      "cluster": "World model은 미래 프레임 생성에서 planning에 쓸 수 있는 trust horizon 검증으로 이동",
+      "representative_papers": [
+        {
+          "title": "NavWM: A Unified Navigation World Model for Foresight-Driven Planning",
+          "arxiv": "https://arxiv.org/abs/2606.24101",
+          "short": "NavWM",
+          "importance_tags": [
+            "[방법전환]",
+            "[평가축]",
+            "[위험보류]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "Generative Simulation",
+            "order": "Action-Conditioned Worlds",
+            "genus": "Trust Horizons",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "In-Context World Modeling for Robotic Control",
+          "arxiv": "https://arxiv.org/abs/2606.26025",
+          "short": "In-Context World Modeling",
+          "importance_tags": [
+            "[방법전환]",
+            "[평가축]",
+            "[위험보류]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "Generative Simulation",
+            "order": "Action-Conditioned Worlds",
+            "genus": "Trust Horizons",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Conformal Orbit-Valid Trust Horizons for Equivariant World Models",
+          "arxiv": "https://arxiv.org/abs/2606.24946",
+          "short": "Conformal Orbit-Valid Trust Horizons",
+          "importance_tags": [
+            "[방법전환]",
+            "[평가축]",
+            "[위험보류]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "Generative Simulation",
+            "order": "Action-Conditioned Worlds",
+            "genus": "Trust Horizons",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "When Do Conservation Laws Survive Learned Representations? Certified Horizons for Latent World Models",
+          "arxiv": "https://arxiv.org/abs/2606.24945",
+          "short": "Certified Horizons for Latent World Models",
+          "importance_tags": [
+            "[방법전환]",
+            "[평가축]",
+            "[위험보류]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "Generative Simulation",
+            "order": "Action-Conditioned Worlds",
+            "genus": "Trust Horizons",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Temporal Logic Guidance for Action-Only Diffusion Policies with World Models",
+          "arxiv": "https://arxiv.org/abs/2606.22729",
+          "short": "Temporal Logic Guidance",
+          "importance_tags": [
+            "[방법전환]",
+            "[평가축]",
+            "[위험보류]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "Generative Simulation",
+            "order": "Action-Conditioned Worlds",
+            "genus": "Trust Horizons",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Proposal-Conditioned Latent Diffusion for Closed-Loop Traffic Scenario Generation",
+          "arxiv": "https://arxiv.org/abs/2606.27123",
+          "short": "Closed-Loop Traffic Scenario Generation",
+          "importance_tags": [
+            "[방법전환]",
+            "[평가축]",
+            "[위험보류]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "Generative Simulation",
+            "order": "Action-Conditioned Worlds",
+            "genus": "Trust Horizons",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "Generation은 124편으로 매우 크지만, 단순 생성 품질보다 로봇이 얼마나 오래 믿고 행동할 수 있는지가 핵심입니다. NavWM과 in-context world modeling은 planning으로 연결되고, conformal/certified horizon 논문은 언제까지 예측을 믿을 수 있는지 묻습니다. traffic scenario diffusion과 temporal-logic guidance는 그 신뢰 구간을 closed-loop 실패 조건 안에서 검증하라는 신호입니다.",
+      "confidence": "High — navigation world model, certified horizon, temporal logic, closed-loop traffic generation이 같은 trust-horizon 축으로 연결",
+      "lab_action": "navigation/driving rollout에서 forecast horizon, temporal-logic constraint, scenario diffusion seed를 바꾸고 unsafe action rate, recovery behavior, closed-loop success를 함께 비교한다."
+    },
+    {
+      "cluster": "VLM 신뢰성은 hallucination rate에서 evidence grounding과 uncertainty routing 평가로 확장",
+      "representative_papers": [
+        {
+          "title": "Hallucination in World Models is Predictable and Preventable",
+          "arxiv": "https://arxiv.org/abs/2606.27326",
+          "short": "Hallucination in World Models",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[표준후보]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Reasoning",
+            "order": "Grounded Reliability",
+            "genus": "Evidence and Uncertainty",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Uncertainty Quantification for Computer-Use Agents: A Benchmark across Vision-Language Models and GUI Grounding Datasets",
+          "arxiv": "https://arxiv.org/abs/2606.25760",
+          "short": "Computer-Use Agent Uncertainty",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[표준후보]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Reasoning",
+            "order": "Grounded Reliability",
+            "genus": "Evidence and Uncertainty",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "FlameVQA: A Physically-Grounded UAV Wildfire VQA Benchmark with Radiometric Thermal Supervision",
+          "arxiv": "https://arxiv.org/abs/2606.27128",
+          "short": "FlameVQA",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[표준후보]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Reasoning",
+            "order": "Grounded Reliability",
+            "genus": "Evidence and Uncertainty",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "A Benchmark for Hallucination Detection in VLMs for Gastrointestinal Endoscopy",
+          "arxiv": "https://arxiv.org/abs/2606.24115",
+          "short": "Endoscopy Hallucination Benchmark",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[표준후보]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Reasoning",
+            "order": "Grounded Reliability",
+            "genus": "Evidence and Uncertainty",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "EG-VQA: Benchmarking Verifiable Video Question Answering with Grounded Temporal Evidence",
+          "arxiv": "https://arxiv.org/abs/2606.24797",
+          "short": "EG-VQA",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[표준후보]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Reasoning",
+            "order": "Grounded Reliability",
+            "genus": "Evidence and Uncertainty",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "From Hallucination to Grounding: Diagnosing Visual Spatial Intelligence via CRISP",
+          "arxiv": "https://arxiv.org/abs/2606.26535",
+          "short": "CRISP",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[표준후보]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Reasoning",
+            "order": "Grounded Reliability",
+            "genus": "Evidence and Uncertainty",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "The Inattentional Gap: Task-Conditioned Language and Vision Models Omit the Safety-Critical Signals They Can Otherwise Report",
+          "arxiv": "https://arxiv.org/abs/2606.26529",
+          "short": "The Inattentional Gap",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[표준후보]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Reasoning",
+            "order": "Grounded Reliability",
+            "genus": "Evidence and Uncertainty",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "Foundation Models 75편과 Safety/Alignment 44편은 별도 버킷이지만 실제로는 같은 신뢰성 질문을 공유합니다. world-model hallucination, computer-use uncertainty, thermal VQA, endoscopy hallucination, verifiable temporal VQA, CRISP, Inattentional Gap은 정답 여부보다 어떤 근거를 봤고 어떤 task 조건에서 중요한 신호를 놓쳤는지 평가해야 한다고 말합니다.",
+      "confidence": "High — hallucination, GUI uncertainty, physical VQA, temporal evidence, task-conditioned omission이 반복됨",
+      "lab_action": "medical/UAV/GUI/3D spatial VQA에서 evidence span, routing entropy, task prompt, visual saliency를 조작하고 omitted critical signal, confidence shift, correction behavior를 함께 평가한다."
+    },
+    {
+      "cluster": "Autonomy benchmark는 perception score에서 재현 가능한 closed-loop risk와 recovery 평가로 이동",
+      "representative_papers": [
+        {
+          "title": "Robusto-2: Benchmarking Humans & VLMs for Autonomous Driving in Lima & New York City",
+          "arxiv": "https://arxiv.org/abs/2606.20980",
+          "short": "Robusto-2",
+          "importance_tags": [
+            "[closed-loop]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Closed-Loop Planning",
+            "order": "Scenario Evaluation",
+            "genus": "Risk and Recovery",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Proposal-Conditioned Latent Diffusion for Closed-Loop Traffic Scenario Generation",
+          "arxiv": "https://arxiv.org/abs/2606.27123",
+          "short": "Traffic Scenario Diffusion",
+          "importance_tags": [
+            "[closed-loop]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Closed-Loop Planning",
+            "order": "Scenario Evaluation",
+            "genus": "Risk and Recovery",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Autonomous Driving with Priority-Ordered STL Specifications Under Multimodal Uncertainty",
+          "arxiv": "https://arxiv.org/abs/2606.20336",
+          "short": "Priority-Ordered STL Driving",
+          "importance_tags": [
+            "[closed-loop]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Closed-Loop Planning",
+            "order": "Scenario Evaluation",
+            "genus": "Risk and Recovery",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Risk-Aware Selective Multimodal Driver Monitoring with Driver-State World Modeling",
+          "arxiv": "https://arxiv.org/abs/2606.26922",
+          "short": "Driver-State World Modeling",
+          "importance_tags": [
+            "[closed-loop]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Closed-Loop Planning",
+            "order": "Scenario Evaluation",
+            "genus": "Risk and Recovery",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "ASSCG: Just-Right Gating over Chattering for Fast-Slow LLM Planning in Autonomous Driving",
+          "arxiv": "https://arxiv.org/abs/2606.25509",
+          "short": "ASSCG",
+          "importance_tags": [
+            "[closed-loop]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Closed-Loop Planning",
+            "order": "Scenario Evaluation",
+            "genus": "Risk and Recovery",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Scaling Self-Play for End-to-End Driving",
+          "arxiv": "https://arxiv.org/abs/2606.19641",
+          "short": "Scaling Self-Play for Driving",
+          "importance_tags": [
+            "[closed-loop]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Closed-Loop Planning",
+            "order": "Scenario Evaluation",
+            "genus": "Risk and Recovery",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "World Engine: Towards the Era of Post-Training for Autonomous Driving",
+          "arxiv": "https://arxiv.org/abs/2606.19836",
+          "short": "World Engine",
+          "importance_tags": [
+            "[closed-loop]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Closed-Loop Planning",
+            "order": "Scenario Evaluation",
+            "genus": "Risk and Recovery",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "Autonomous Driving은 41편으로 전체 최대 버킷은 아니지만 평가 방향은 선명합니다. Robusto-2, traffic scenario diffusion, STL driving, driver-state world modeling, fast-slow LLM planning, self-play, World Engine은 모두 offline score보다 재현 가능한 위험 상황과 회복 행동을 봅니다. 자율시스템 평가는 이제 near-miss와 rule violation을 closed-loop에서 다시 만드는 능력이 중심입니다.",
+      "confidence": "High — driving risk understanding, scenario generation, formal specification, self-play, post-training 신호가 같은 배포 평가축을 형성",
+      "lab_action": "CARLA/OpenSCENARIO에서 city OOD, driver-state change, STL priority violation, generated scenario seed를 stress condition으로 만들고 near-miss, recovery behavior, rule violation, closed-loop success를 비교한다."
+    },
+    {
+      "cluster": "효율화는 latency 경쟁에서 task-critical memory와 bandwidth 보존성 평가로 이동",
+      "representative_papers": [
+        {
+          "title": "AVOC: Enhancing Hour-Level Audio-Video Understanding in Omni-Modal LLMs via Retrieval-Inspired Token Compression",
+          "arxiv": "https://arxiv.org/abs/2606.24286",
+          "short": "AVOC",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[효율성]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "Memory Compression",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Accelerating Multimodal Large Language Models with Prior-Corrected Token Reduction",
+          "arxiv": "https://arxiv.org/abs/2606.24156",
+          "short": "Prior-Corrected Token Reduction",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[효율성]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "Memory Compression",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "DinoLink: A Token-Centric Representation Compression Framework for Bandwidth-Constrained Collaborative V2X Perception",
+          "arxiv": "https://arxiv.org/abs/2606.26398",
+          "short": "DinoLink",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[효율성]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "Memory Compression",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Compression and Retrieval: Implicit Memory Retrieval for Video World Models",
+          "arxiv": "https://arxiv.org/abs/2606.23105",
+          "short": "Compression and Retrieval",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[효율성]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "Memory Compression",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Memory-Efficient Policy Libraries with Low-Rank Adaptation in Reinforcement Learning",
+          "arxiv": "https://arxiv.org/abs/2606.25700",
+          "short": "Memory-Efficient Policy Libraries",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[효율성]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "Memory Compression",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "UNSEEN: Uncertainty-aware Navigation via Sparse Estimation in Unknown Environments",
+          "arxiv": "https://arxiv.org/abs/2606.20755",
+          "short": "UNSEEN",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[효율성]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Token and Cache Efficiency",
+            "order": "Adaptive Inference",
+            "genus": "Memory Compression",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the public robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "Efficiency/Systems 51편은 단순 모델 축소보다 어떤 정보를 버리지 말아야 하는지를 묻습니다. AVOC와 token reduction은 긴 multimodal 입력을 줄이고, DinoLink와 cache reuse는 V2X/visual revisiting에서 bandwidth와 memory를 다룹니다. ProtoKV와 UNSEEN은 delayed query와 sparse estimation에서 task-critical evidence가 남아야 실제 배포가 가능하다는 신호입니다.",
+      "confidence": "Medium-High — token compression, V2X bandwidth, cache reuse, streaming memory, sparse navigation이 같은 배포 효율성 축으로 묶임",
+      "lab_action": "V2X/long-video/navigation benchmark에서 token budget, cache size, bandwidth, delayed query를 제한하고 obstacle recall, semantic delivery success, spatial reasoning error, downstream decision change를 비교한다."
+    }
+  ],
+  "top5": [
+    {
+      "paper": "ForesightSafety-VLA: A Unified Diagnostic Safety Benchmark for Vision-Language-Action Models",
+      "arxiv": "https://arxiv.org/abs/2606.27079",
+      "why": "VLA safety를 실행 전 진단 문제로 명시해 이번 주 로봇 정책 흐름을 가장 잘 대표합니다.",
+      "phylogeny": "ROBOTICS · Robot Learning > Vision-Language-Action > Safety Evaluation > Execution Diagnosis"
+    },
+    {
+      "paper": "Spectral GS-SLAM: Observability-Aware, Degeneracy-Robust Tracking for Real-Time 3D Gaussian Splatting SLAM",
+      "arxiv": "https://arxiv.org/abs/2606.21258",
+      "why": "3D Gaussian representation이 SLAM tracking과 degeneracy robustness로 들어온 대표 신호입니다.",
+      "phylogeny": "ROBOTICS · Perception and Mapping > State Estimation > SLAM and Odometry > Gaussian and LiDAR Maps"
+    },
+    {
+      "paper": "Conformal Orbit-Valid Trust Horizons for Equivariant World Models",
+      "arxiv": "https://arxiv.org/abs/2606.24946",
+      "why": "world model을 언제까지 믿을 수 있는지 보증하려는 방향을 가장 선명하게 보여줍니다.",
+      "phylogeny": "ROBOTICS · Simulation and World Models > Generative Simulation > Action-Conditioned Worlds > Trust Horizons"
+    },
+    {
+      "paper": "Hallucination in World Models is Predictable and Preventable",
+      "arxiv": "https://arxiv.org/abs/2606.27326",
+      "why": "world-model hallucination을 예측 가능한 실패로 다뤄 VLM/world reliability cluster를 지탱합니다.",
+      "phylogeny": "CVML · Foundation Models > Multimodal Reasoning > Grounded Reliability > Evidence and Uncertainty"
+    },
+    {
+      "paper": "Proposal-Conditioned Latent Diffusion for Closed-Loop Traffic Scenario Generation",
+      "arxiv": "https://arxiv.org/abs/2606.27123",
+      "why": "closed-loop traffic scenario를 생성해 autonomy 평가를 offline score 밖으로 밀어냅니다.",
+      "phylogeny": "ROBOTICS · Autonomous Systems > Closed-Loop Planning > Scenario Evaluation > Risk and Recovery"
+    }
+  ],
+  "next_week_actions": [
+    {
+      "title": "VLA safety grid",
+      "body": "LIBERO-Safety, ForesightSafety-VLA, PhysReflect-VLA를 같은 task family에 올리고 unsafe action, failure-warning lead time, physical-feasibility violation을 비교한다."
+    },
+    {
+      "title": "Robot-usable Gaussian map test",
+      "body": "GS-SLAM, LiDAR-inertial Gaussian map, object/digital-twin map을 localization drift, map update cost, dynamic-object failure 기준으로 비교한다."
+    },
+    {
+      "title": "World-model trust horizon benchmark",
+      "body": "NavWM류 world model에서 forecast horizon과 temporal-logic constraint를 바꾸며 planning success와 unsafe action rate를 함께 평가한다."
+    },
+    {
+      "title": "Grounded VLM omission audit",
+      "body": "medical/UAV/GUI VQA에서 모델이 볼 수 있는 safety-critical signal을 task prompt 조건 때문에 놓치는지 evidence span과 confidence shift로 평가한다."
+    }
+  ]
+}
