@@ -135,10 +135,10 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 
 <details class="prompt-panel" id="prompt-panel">
 <summary>이 요약은 어떤 프롬프트로 만들어지나요?</summary>
-<p class="prompt-note">아래는 공개 repo에 저장된 sanitized 실행 프롬프트입니다. 개인 경로와 Slack 채널 정보는 변수로만 남겨두었습니다.</p>
+<p class="prompt-note">아래는 공개 repo에 저장된 sanitized 실행 프롬프트입니다. v20260713부터는 공통점 요약보다 핵심 논문의 사고 과정·결정적 증거·반증 조건을 복원하고, 이를 APRL의 연구 자산과 실행안으로 변환합니다. 개인 경로와 Slack 채널 정보는 변수로만 남겨두었습니다.</p>
 <div class="prompt-actions">
-  <a href="prompts/instruction_v20260624.md" target="_blank" rel="noopener">프롬프트 파일 열기</a>
-  <a href="https://github.com/gisbi-kim/arxiv-daily-summary/blob/main/prompts/instruction_v20260624.md" target="_blank" rel="noopener">GitHub에서 보기</a>
+  <a href="prompts/instruction_v20260713.md" target="_blank" rel="noopener">프롬프트 파일 열기</a>
+  <a href="https://github.com/gisbi-kim/arxiv-daily-summary/blob/main/prompts/instruction_v20260713.md" target="_blank" rel="noopener">GitHub에서 보기</a>
 </div>
 <pre id="prompt-view" class="prompt-view loading">토글을 열면 프롬프트를 불러옵니다…</pre>
 </details>
@@ -227,7 +227,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
     if (!promptPanel || !promptView || promptView.dataset.loaded) return;
     promptView.dataset.loaded = '1';
     try {
-      const res = await fetch('prompts/instruction_v20260624.md', { cache: 'no-cache' });
+      const res = await fetch('prompts/instruction_v20260713.md', { cache: 'no-cache' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       promptView.classList.remove('loading');
