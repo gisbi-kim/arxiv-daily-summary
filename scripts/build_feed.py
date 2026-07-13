@@ -1,7 +1,7 @@
 """
 Build RSS 2.0 feed.xml from posts/*.html.
 
-- Scans all posts/YYYY-MM-DD.html in the repo (script is expected to run from repo root).
+- Scans dated daily and special-edition HTML posts in the repo.
 - Extracts title (<h1>) and summary (first <p> under "주간 동향" h2) from each.
 - Emits feed.xml at repo root so GitHub Pages serves it at /feed.xml.
 
@@ -34,7 +34,7 @@ FEED_LANG = "ko"
 MAX_ITEMS = 60  # newest N posts
 KST = timezone(timedelta(hours=9))
 
-DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})(-weekly)?\.html$")
+DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})(-weekly|-research-intelligence)?\.html$")
 
 
 def strip_tags(s: str) -> str:
@@ -113,7 +113,7 @@ def collect_posts(repo_root: Path) -> list[tuple[str, str, str, str]]:
         title = extract_title(doc) or f"arXiv Daily Briefing — {date_str}"
         summary = extract_summary(doc)
         entries.append((date_str, title, summary, suffix))
-    # Sort by date (desc), weekly suffix wins on tie (so weekly entry of same date comes before daily — though we don't expect both)
+    # Sort by date (desc), then special editions before the same day's daily post.
     entries.sort(key=lambda x: (x[0], x[3]), reverse=True)
     return entries[:MAX_ITEMS]
 

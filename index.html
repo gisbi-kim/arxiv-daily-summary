@@ -22,6 +22,7 @@ h1{font-size:28px;margin:0 0 6px;font-weight:700;color:#0d1117;letter-spacing:-.
 .archive-date{display:inline-block;font-size:16px;font-weight:700;color:#0d1117;letter-spacing:-.005em;margin-bottom:4px;font-variant-numeric:tabular-nums}
 .archive-dow{font-size:13px;font-weight:400;color:#656d76;margin-left:2px}
 .archive-weekly-badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-left:8px;vertical-align:middle;background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);color:#78350f;border:1px solid #f59e0b;letter-spacing:.02em}
+.archive-ri-badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:8px;vertical-align:middle;background:linear-gradient(135deg,#e0f2fe 0%,#cffafe 100%);color:#155e75;border:1px solid #06b6d4;letter-spacing:.02em}
 .archive-counts{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:8px;vertical-align:middle}
 .archive-count-badge{display:inline-block;font-size:11px;font-weight:700;line-height:1.35;padding:2px 7px;border-radius:10px;letter-spacing:0;font-variant-numeric:tabular-nums}
 .archive-count-badge.cv{background:#ddf4ff;color:#0550ae;border:1px solid #54aeff}
@@ -190,11 +191,11 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
 (async () => {
   const OWNER = 'gisbi-kim';
   const REPO = 'arxiv-daily-summary';
-  const DATE_RE = /^(\d{4}-\d{2}-\d{2})(-weekly)?\.html$/;
+  const DATE_RE = /^(\d{4}-\d{2}-\d{2})(-weekly|-research-intelligence)?\.html$/;
   const DOW = ['일','월','화','수','목','금','토'];
   const LIST_TTL_MS = 10 * 60 * 1000;
   const INSIGHT_TTL_MS = 24 * 60 * 60 * 1000;
-  const INSIGHT_CACHE_VERSION = 'v2';
+  const INSIGHT_CACHE_VERSION = 'v3';
 
   const status = document.getElementById('status');
   const archive = document.getElementById('archive');
@@ -375,7 +376,7 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
   loadWeekdayStats();
 
   async function listDates() {
-    const cacheKey = `arxiv-archive:list`;
+    const cacheKey = `arxiv-archive:list:v2`;
     const cached = lsGet(cacheKey);
     if (cached && Date.now() - cached.t < LIST_TTL_MS) return cached.v;
 
@@ -410,13 +411,13 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
     if (res.ok) {
       const html = await res.text();
       const doc = new DOMParser().parseFromString(html, 'text/html');
-      // weekly pages use .theme-card h3, daily pages use .insight h3.
-      const selector = entry.suffix === '-weekly' ? '.theme-card h3' : '.insight h3';
+      // special editions use .theme-card h3, daily pages use .insight h3.
+      const selector = entry.suffix ? '.theme-card h3' : '.insight h3';
       titles = Array.from(doc.querySelectorAll(selector))
         .map(el => el.textContent.replace(/^\s*\d+\.\s*/, '').trim())
         .filter(Boolean);
     }
-    if (!titles.length && entry.suffix !== '-weekly') {
+    if (!titles.length && !entry.suffix) {
       try {
         const insightRes = await fetch(`insights/${entry.date}.json`, { cache: 'no-cache' });
         if (insightRes.ok) {
@@ -470,6 +471,11 @@ RSS 리더(Feedly · Inoreader · NetNewsWire 등)에 아래 주소를 넣으면
       wk.className = 'archive-weekly-badge';
       wk.textContent = '🗓 주간 회고';
       dateEl.appendChild(wk);
+    } else if (entry.suffix === '-research-intelligence') {
+      const ri = document.createElement('span');
+      ri.className = 'archive-ri-badge';
+      ri.textContent = '🧠 Research Intelligence';
+      dateEl.appendChild(ri);
     }
 
     const summary = document.createElement('ul');
