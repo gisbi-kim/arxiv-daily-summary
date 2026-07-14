@@ -6,8 +6,22 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 13 Jul 2026 12:56:05 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2026 23:19:10 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>2026-07-14 심층판</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-14-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-14-research-intelligence.html</guid>
+      <pubDate>Tue, 14 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 최고의 논문들은 모델을 더 크게 만드는 대신, 실패가 생기는 경계에 구조를 심습니다. object slot은 장면의 경쟁 단위를, robot-centric pointmap은 관측 좌표계를, SEAMLiS는 ‘보이지 않는 동안 안전할 수 있는가’를, SensorPerch는 센서의 물리적 위치를, Stop to Decide는 decision timing을, short-answer VQA 연구는 정답 판정 계약을 바꿉니다. 핵심은 ‘구조가 좋다’가 아니라 task invariant가 있는 층에만 구조를 주고, 그 구조가 깨지는 조건을 failure taxonomy와 matched control로 증명하는 것입니다.]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-07-14 (Tue)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-14.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-14.html</guid>
+      <pubDate>Tue, 14 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 223건, cs.RO 113건이고 dedupe 후 318건 중 264건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Robot Learning 47편, Efficiency/Systems 45편, Generation 42편입니다. Robot Learning, Efficiency/Systems, Safety/Alignment가 두껍고 Foundation Models와 3D/Scene이 평가·기하 축을 받칩니다. 공통된 전환은 capacity scaling에서 interface alignment, 그리고 평균 성능에서 failure-boundary 측정으로의 이동입니다.]]></description>
+    </item>
     <item>
       <title>2026-07-13 심층판</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-13-research-intelligence.html</link>
@@ -413,20 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-28.html</guid>
       <pubDate>Tue, 28 Apr 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[2026-04-28 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 72편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-04-27 (월)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-27.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-27.html</guid>
-      <pubDate>Mon, 27 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-27 묶음에서 제일 두꺼운 축은 Foundation Models이고, 저장된 스냅샷 기준 111편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-04-26 (일)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-26.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-26.html</guid>
-      <pubDate>Sun, 26 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-26 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 95편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
   </channel>
 </rss>
