@@ -6,8 +6,22 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Tue, 14 Jul 2026 23:19:10 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jul 2026 15:12:11 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>2026-07-15 심층판</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-15-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-15-research-intelligence.html</guid>
+      <pubDate>Wed, 15 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 강한 논문들은 모델을 더 크게 만드는 대신, 로봇 시스템이 실패하는 시간·공간·평가 계약을 다시 정의합니다. Jetson-PI와 temporal-redundancy VLA는 VLA inference를 평균 latency가 아니라 action chunk가 실행될 미래 상태와 맞추는 문제로 바꾸고, TrustVLA는 backdoor 방어를 입력 정화가 아니라 clean-calibrated evidence geometry 감시로 바꿉니다. DiffRadar, PixelLoop, TerraZero, temporal benchmark audit는 각각 센서 물리, topological shortcut, procedural long-tail, 시간 채널을 평가 안으로 끌어들입…]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-07-15 (Wed)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-15.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-15.html</guid>
+      <pubDate>Wed, 15 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 116건, cs.RO 41건이고 dedupe 후 151건 중 121건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Foundation Models 21편, Generation 19편, Efficiency/Systems 18편입니다. Foundation Models, Generation, Efficiency/Systems가 두껍지만 robotics 관점의 실제 판세는 Robot Learning, 3D/Scene, Safety/Alignment가 잡습니다. 공통 전환은 평균 성능에서 failure-family와 deployment-clock 측정으로, visual quality에서 downstream spatial validity로 이동하는 흐름입니다.]]></description>
+    </item>
     <item>
       <title>2026-07-14 심층판</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-14-research-intelligence.html</link>
@@ -413,20 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-30.html</guid>
       <pubDate>Thu, 30 Apr 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[2026-04-30 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 76편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-04-29 (수)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-29.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-29.html</guid>
-      <pubDate>Wed, 29 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-29 묶음에서 제일 두꺼운 축은 Safety/Alignment이고, 저장된 스냅샷 기준 67편이 잡혔습니다. VLA를 하나의 거대한 policy로 실행하면 어느 단계가 판단이고 어느 단계가 미세 제어인지 분리하기 어렵습니다. Libra-VLA와 DiscreteRTC, LaST-R1 계열은 고수준 선택, 저수준 pose 조정, latent reasoning처럼 실행 안쪽 역할을 나누려는 흐름입니다. 함의는 모델 크기 경쟁보다, 어떤 역할 분해가 실제 조작 성공률과 latency를 같이 개선하는지 비교해야 한다는 점입니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-04-28 (화)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-28.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-28.html</guid>
-      <pubDate>Tue, 28 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-28 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 72편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
   </channel>
 </rss>
