@@ -1,0 +1,591 @@
+#!/usr/bin/env python3
+"""Generate the full-text Research Intelligence edition for 2026-07-16."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import gen_research_intelligence_20260713 as template
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DATE = "2026-07-16"
+SLUG = f"{DATE}-research-intelligence"
+
+
+DATA = {
+    "date": DATE,
+    "edition": "Research Intelligence",
+    "source_prompt": "prompts/instruction_v20260713.md",
+    "scope_note": (
+        "당일 cs.CV/cs.RO /new 270건을 dedup하고 134건을 ROI로 분류했습니다. "
+        "Tier A 6편은 공식 arXiv HTML 본문, 섹션, 그림, 표 캡션을 확인해 작성했습니다. "
+        "Verified는 논문에서 직접 확인한 사실이고, Inference는 APRL 관점의 해석입니다."
+    ),
+    "executive_thesis": (
+        "오늘의 강한 신호는 VLA를 더 크게 만드는 방향이 아니라, 사전학습 의미 공간이 "
+        "행동 미세조정, 장기 장면 기억, 시뮬레이터 처리량, driving world model 안에서 어디서 "
+        "무너지는지 계측하는 방향입니다. Anchor-Align과 Semantic Anchoring은 행동 토큰이 "
+        "언어 의미 구조를 지워버리는 문제를, JIT scene graph와 HRIBench는 완전한 장면/과제 "
+        "표현이 오히려 planner를 포화시키거나 HRI 실패를 숨기는 문제를, M4World와 GPUSimBench는 "
+        "simulation scale이 downstream reliability로 바로 번역되지 않는 문제를 드러냅니다. "
+        "APRL에는 backbone 경쟁보다 representation preservation, just-in-time state, simulator "
+        "validity를 같은 closed-loop harness에서 추적하는 자산이 더 방어적인 연구 포지션입니다."
+    ),
+    "decision_cards": [
+        {
+            "title": "VLA fine-tuning은 성능 향상이 아니라 의미 보존 문제다",
+            "body": (
+                "Anchor-Align과 Semantic Anchoring은 모두 행동 supervision만 주면 pretrained VLM의 "
+                "language/semantic structure가 action representation 안에서 침식된다고 봅니다. "
+                "따라서 APRL 실험은 success rate와 함께 instruction-action retrieval, OOD object swap, "
+                "stage boundary error를 같은 진단 벡터로 측정해야 합니다."
+            ),
+            "label": "Decision",
+        },
+        {
+            "title": "장면 그래프와 HRI benchmark는 더 많이 넣을수록 좋은 입력이 아니다",
+            "body": (
+                "JITOMA는 ahead-of-time full graph가 planner를 포화시킨다는 문제를 제기하고, "
+                "HRIBench는 human role, temporal coordination, recovery constraint를 benchmark 축으로 "
+                "분리합니다. 공통 결론은 representation completeness보다 task-relevant state growth가 "
+                "더 중요한 설계 변수라는 점입니다."
+            ),
+            "label": "Decision",
+        },
+        {
+            "title": "world model과 GPU simulator는 scale보다 validity 계약이 먼저다",
+            "body": (
+                "M4World는 controllable minute-level driving generation을 내세우고, GPUSimBench는 "
+                "GPU simulator의 physical consistency, scalability, determinism을 따로 잽니다. "
+                "APRL은 synthetic data 양이 아니라 simulator artifact가 policy ranking을 바꾸는 조건을 "
+                "먼저 계측해야 합니다."
+            ),
+            "label": "Decision",
+        },
+    ],
+    "papers": [
+        {
+            "rank": 1,
+            "title": "Generalizable VLA Finetuning via Representation Anchoring and Language-Action Alignment",
+            "arxiv_id": "2607.13429",
+            "fit": "VLA fine-tuning - representation preservation - OOD generalization",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "VLA를 robot demonstration으로 behavior cloning하면 task success가 오르고, pretrained VLM의 "
+                "semantic prior는 대체로 유지된다고 가정하기 쉽습니다."
+            ),
+            "friction": (
+                "본문은 standard BC가 green mug로 fine-tune된 뒤 pink mug instruction에서도 green mug로 "
+                "가는 OOD failure를 Figure 1로 제시합니다. 행동 supervision만으로는 language output과 "
+                "action output이 서로 다른 의도를 말할 수 있습니다."
+            ),
+            "hidden_premise": (
+                "generalization의 병목은 더 많은 demonstration만이 아니라, pretrained representation을 "
+                "행동 head에 맞추는 동안 언어 의미 구조를 보존하는 방식입니다."
+            ),
+            "conceptual_move": (
+                "Anchor-Align은 frozen pretrained VLM representation을 trainable VLA에 distill하고, "
+                "language-action alignment loss로 action generation과 language prediction의 의도를 맞춥니다."
+            ),
+            "mechanism": (
+                "논문은 Vision-Language Anchoring과 Language-Action Alignment를 결합해 VLM prior 보존과 "
+                "행동 supervision을 동시에 둡니다. Figure 2와 Figure 3이 이 두 경로를 각각 보여줍니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "standard BC의 OOD mug 선택 실패를 시각적으로 제시해 representation drift가 실제 행동 오류로 이어질 수 있음을 보입니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "frozen pretrained VLM에서 trainable VLA로 layer-wise representation anchoring을 거는 구조를 제시합니다.",
+                },
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "language prediction과 action generation이 불일치할 수 있음을 진단하고, alignment objective로 이를 줄이는 설계를 둡니다.",
+                },
+                {
+                    "trace": "Table 1 [Verified]",
+                    "claim": "LIBERO-PRO와 LIBERO-Plus에서 Anchor-Align VLA가 baseline 대비 높은 success rate를 보인다고 보고합니다.",
+                },
+            ],
+            "falsification": (
+                "동일 compute와 data에서 단순 regularization이나 replay가 같은 OOD object-swap 개선을 만들면, "
+                "anchoring 자체보다 capacity/regularization 효과일 수 있습니다."
+            ),
+            "adversarial": (
+                "LIBERO 중심의 benchmark이므로 real robot latency, visual clutter, human interruption에서 "
+                "semantic preservation이 같은 방식으로 유지되는지는 별도 검증이 필요합니다."
+            ),
+            "thinking_tool": (
+                "fine-tuning을 성능 향상 과정으로만 보지 말고, pretrained semantic axes가 action token 안에서 "
+                "어느 layer부터 지워지는지 계측하는 representation audit로 바꿉니다."
+            ),
+            "transfer_boundary": (
+                "language instruction과 action chunk가 비교적 안정적인 manipulation에는 강하지만, force-rich contact나 "
+                "fast replanning에서는 semantics보다 dynamics state가 먼저 병목이 될 수 있습니다."
+            ),
+        },
+        {
+            "rank": 2,
+            "title": "Semantic Anchoring for Robotic Action Representations",
+            "arxiv_id": "2607.13597",
+            "fit": "VLA action representation - semantic alignment - LIBERO OOD",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "행동 표현은 downstream robot control에 맞게 바뀌어도 되고, semantic structure는 policy 성능에 "
+                "간접적으로만 중요하다고 보기 쉽습니다."
+            ),
+            "friction": (
+                "논문은 vanilla action-only fine-tuning이 pretrained representation의 semantic structure를 "
+                "무너뜨리고, OOD success와 action-instruction alignment가 함께 움직인다고 진단합니다."
+            ),
+            "hidden_premise": (
+                "좋은 action representation은 motor command만 압축하는 벡터가 아니라, instruction intent를 "
+                "행동 공간 안에서 계속 분리해 두는 표현입니다."
+            ),
+            "conceptual_move": (
+                "mid-network action-token representation을 shared intent component와 action-specific component로 "
+                "분해하고, semantic anchor를 유지하도록 regularize합니다."
+            ),
+            "mechanism": (
+                "Figure 3의 method overview는 pretrained VLA의 중간 layer에서 intent-preserving component를 "
+                "분리해 행동 fine-tuning 중 semantic erosion을 줄이는 구조를 보여줍니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "vanilla fine-tuning이 t-SNE semantic structure를 흐리게 만들고 semantic anchoring이 이를 보존하는 대비를 제시합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "action-instruction retrieval, ID success, OOD success를 fine-tuning trajectory에서 함께 추적합니다.",
+                },
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "action-token representation을 shared semantic component와 action-specific component로 다루는 method overview를 제시합니다.",
+                },
+                {
+                    "trace": "Section 4 [Verified]",
+                    "claim": "LIBERO 실험을 통해 OOD generalization과 semantic alignment의 결합을 평가합니다.",
+                },
+            ],
+            "falsification": (
+                "retrieval alignment가 좋아져도 unseen object/location success가 오르지 않으면 semantic anchoring은 "
+                "diagnostic proxy일 뿐 deployment variable이 아닐 수 있습니다."
+            ),
+            "adversarial": (
+                "semantic space를 보존하는 것이 항상 좋지는 않습니다. task-specific affordance가 pretrained language prior와 "
+                "충돌하는 경우에는 anchoring이 필요한 행동 재표현을 막을 수 있습니다."
+            ),
+            "thinking_tool": (
+                "action representation을 motor vector가 아니라 intent-preserving latent contract로 봅니다. "
+                "fine-tuning 전후의 semantic retrieval을 기본 회귀 테스트로 둡니다."
+            ),
+            "transfer_boundary": (
+                "instruction-conditioned manipulation에는 직접적이지만, tactile-only recovery나 locomotion reflex에는 "
+                "언어 의미 축보다 proprioceptive state가 우선될 수 있습니다."
+            ),
+        },
+        {
+            "rank": 3,
+            "title": "Just-In-Time Scene Graph Growth: Combating Perceptual Saturation in Long-Horizon Robotics",
+            "arxiv_id": "2607.13245",
+            "fit": "3D scene graph - long-horizon planning - edge runtime",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "embodied planner에는 가능한 한 완전한 3D scene graph를 제공하는 것이 안전하다는 직관이 강합니다."
+            ),
+            "friction": (
+                "Figure 1은 full graph가 cluttered scene에서 planner를 포화시켜 task-relevant object selection을 "
+                "흐릴 수 있음을 보여줍니다."
+            ),
+            "hidden_premise": (
+                "long-horizon robot state는 완성된 map이 아니라, intent가 바뀔 때 필요한 object와 relation만 "
+                "증분적으로 자라야 하는 working memory입니다."
+            ),
+            "conceptual_move": (
+                "JITOMA는 command를 primary objects와 latent functional targets로 파싱하고, 필요한 시점에만 "
+                "perception과 graph를 성장시킵니다."
+            ),
+            "mechanism": (
+                "Figure 2는 intent parsing, just-in-time perception, graph growth, planner feedback을 연결한 "
+                "runtime loop를 제시합니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "ahead-of-time full graph와 just-in-time graph가 long-horizon command에서 다른 planner 부담을 만든다는 motivation을 제시합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "JITOMA pipeline이 language command에서 graph growth와 planner loop로 이어지는 구조를 설명합니다.",
+                },
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "explicit grounding, task switching, complex instruction을 포함한 three-tier JITOMA-Bench를 제시합니다.",
+                },
+                {
+                    "trace": "Table 1 [Verified]",
+                    "claim": "JITOMA-Bench에서 grounding accuracy와 system efficiency를 함께 비교합니다.",
+                },
+            ],
+            "falsification": (
+                "full graph를 잘 압축한 retrieval baseline이 같은 latency와 더 높은 success를 내면, "
+                "just-in-time growth가 아니라 graph summarization이 핵심일 수 있습니다."
+            ),
+            "adversarial": (
+                "JIT 방식은 hidden dependency를 늦게 발견할 위험이 있습니다. safety-critical task에서는 처음부터 "
+                "반드시 포함해야 하는 constraint graph가 필요할 수 있습니다."
+            ),
+            "thinking_tool": (
+                "perception completeness를 목표로 두지 말고, instruction intent가 바뀔 때 어떤 state를 새로 열어야 "
+                "하는지 측정합니다."
+            ),
+            "transfer_boundary": (
+                "edge platform과 cluttered long-horizon task에는 유리하지만, 빠른 collision avoidance처럼 "
+                "전체 obstacle graph가 항상 필요한 문제에는 그대로 쓰기 어렵습니다."
+            ),
+        },
+        {
+            "rank": 4,
+            "title": "M4World: A Multi-view Multimodal Driving World Model for Interactive Object Manipulation and Minute-long Streaming",
+            "arxiv_id": "2607.14005",
+            "fit": "driving world model - multi-view generation - long-horizon simulation",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "driving generation은 visual realism이나 short clip fidelity로 충분히 평가할 수 있다고 보기 쉽습니다."
+            ),
+            "friction": (
+                "논문은 object-level controllability와 long-horizon stability를 기존 driving-world generation의 "
+                "핵심 한계로 놓고, minute-level streaming을 명시적 목표로 둡니다."
+            ),
+            "hidden_premise": (
+                "자율주행 world model의 가치는 frame 품질이 아니라, object manipulation, cross-sensor context, "
+                "long-tail control signal을 얼마나 오래 유지하는지에 달려 있습니다."
+            ),
+            "conceptual_move": (
+                "shared DiT backbone에 control signal과 cross-sensor context를 넣는 두 cross-attention pathway를 "
+                "두고, multi-view/multimodal generation을 하나의 controllable simulator로 묶습니다."
+            ),
+            "mechanism": (
+                "Figure 1은 few-step autoregressive video diffusion world model을, Figure 2는 shared DiT와 "
+                "cross-attention architecture를 보여줍니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "time-evolving control signal과 sensor context를 조건으로 multi-view driving scenes를 생성하는 전체 framing을 제시합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "control signal과 cross-sensor context를 통합하는 shared DiT architecture를 설명합니다.",
+                },
+                {
+                    "trace": "Section 4 [Verified]",
+                    "claim": "long-horizon streaming rollout을 별도 섹션으로 두어 short clip generation을 넘어서는 목표를 명시합니다.",
+                },
+                {
+                    "trace": "Section 8 [Verified]",
+                    "claim": "controllability evaluation에 VLM judge를 사용해 object-level control을 별도 평가합니다.",
+                },
+            ],
+            "falsification": (
+                "closed-loop planner를 넣었을 때 generated long-tail이 실제 policy ranking을 바꾸지 못하면, "
+                "world model은 data augmentation 이상으로 보기 어렵습니다."
+            ),
+            "adversarial": (
+                "VLM judge는 controllability proxy일 뿐 safety metric이 아닙니다. perception stack error, map prior, "
+                "agent interaction이 결합된 closed-loop 검증은 별도입니다."
+            ),
+            "thinking_tool": (
+                "world model을 멋진 video generator가 아니라, policy가 실패하는 object interaction axis를 조작하는 "
+                "scenario instrument로 봅니다."
+            ),
+            "transfer_boundary": (
+                "object-level driving simulation에는 강하지만, real sensor noise와 planner feedback을 그대로 반영하는 "
+                "closed-loop simulator라고 가정하면 과합니다."
+            ),
+        },
+        {
+            "rank": 5,
+            "title": "HRIBench: Benchmarking Interaction-Centric Human-Robot Collaboration",
+            "arxiv_id": "2607.13056",
+            "fit": "HRI benchmark - shared agency - temporal coordination",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "VLA benchmark는 isolated manipulation skill을 잘 재면 collaboration readiness도 어느 정도 "
+                "평가된다고 보기 쉽습니다."
+            ),
+            "friction": (
+                "HRIBench는 real-world collaboration이 human intent, temporal synchrony, shared agency, safety "
+                "recovery를 포함한다고 보며 기존 benchmark coverage를 Table 1에서 비교합니다."
+            ),
+            "hidden_premise": (
+                "collaboration failure는 object manipulation failure와 다릅니다. human role, robot objective, "
+                "coordination constraint가 scenario의 일부로 들어가야 합니다."
+            ),
+            "conceptual_move": (
+                "language model로 scenario scripts, environment specs, reward components를 생성하고, executable "
+                "HRI scenarios에서 policy를 평가합니다."
+            ),
+            "mechanism": (
+                "Figure 2의 generation pipeline은 task/object metadata에서 human and robot trajectories와 reward를 "
+                "만들어 benchmark로 연결합니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "human role, robot objective, temporal coordination, human motion을 명시한 executable HRI scenario framing을 제시합니다.",
+                },
+                {
+                    "trace": "Table 1 [Verified]",
+                    "claim": "대표 benchmark들이 interaction-centric axes를 얼마나 지원하는지 비교합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "scenario script, environment specification, reward components를 생성하는 pipeline을 설명합니다.",
+                },
+                {
+                    "trace": "Table 2 [Verified]",
+                    "claim": "safety and recovery components를 포함한 main HRIBench evaluation을 보고합니다.",
+                },
+            ],
+            "falsification": (
+                "isolated manipulation benchmark score가 HRIBench score를 대부분 설명한다면 interaction-specific 축의 "
+                "독립성이 약해집니다."
+            ),
+            "adversarial": (
+                "LLM-generated scenarios는 coverage를 넓히지만, human behavior realism과 reward hacking 위험이 남습니다. "
+                "human-in-the-loop validation이 필요합니다."
+            ),
+            "thinking_tool": (
+                "HRI를 natural language instruction의 확장이 아니라 shared agency state machine으로 봅니다."
+            ),
+            "transfer_boundary": (
+                "collaboration protocol 설계에는 직접적이지만, dexterous manipulation physics 자체를 대체하는 benchmark는 아닙니다."
+            ),
+        },
+        {
+            "rank": 6,
+            "title": "GPUSimBench: Towards Scalable and Reliable GPU-Accelerated Simulators in Embodied AI",
+            "arxiv_id": "2607.13059",
+            "fit": "GPU simulation - embodied AI infrastructure - determinism",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "GPU simulator는 더 많은 parallel environments와 더 높은 throughput을 제공하면 embodied AI data "
+                "infrastructure로 충분하다고 보기 쉽습니다."
+            ),
+            "friction": (
+                "논문은 simulator를 physical consistency, scalability, determinism으로 나누어 평가해야 한다고 봅니다. "
+                "throughput만으로는 real-world reliability를 설명하지 못합니다."
+            ),
+            "hidden_premise": (
+                "simulation scale은 policy 학습을 빠르게 하지만, simulator artifact가 policy ranking을 바꾸면 "
+                "데이터 인프라가 아니라 hidden confounder가 됩니다."
+            ),
+            "conceptual_move": (
+                "여러 GPU-accelerated simulator를 동일 scene과 stress condition에서 비교하고, consistency와 variability를 "
+                "benchmark axis로 분리합니다."
+            ),
+            "mechanism": (
+                "Figure 1은 physical consistency, scalability, determinism의 세 축을 제시하고, Figure 2는 parallel "
+                "physics stepping stress scenes를 보여줍니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "real-world consistency, sampling scalability, parallel/run-to-run variability를 핵심 평가 축으로 제시합니다.",
+                },
+                {
+                    "trace": "Table I [Verified]",
+                    "claim": "GPU-accelerated parallel simulation frameworks를 비교합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "cube stack과 Franka Panda manipulator stress scenes로 parallel physics stepping을 평가합니다.",
+                },
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "inclined-collision benchmark에서 simulator와 real-world reference의 distribution-level outcomes를 비교합니다.",
+                },
+            ],
+            "falsification": (
+                "simulator variability가 downstream policy success나 ranking에 거의 영향을 주지 않는다면, "
+                "determinism 축은 research bottleneck이 아니라 engineering hygiene일 수 있습니다."
+            ),
+            "adversarial": (
+                "benchmark scenes가 cube/franka 중심이면 deformable object, contact-rich manipulation, legged locomotion의 "
+                "failure modes를 충분히 대표하지 못할 수 있습니다."
+            ),
+            "thinking_tool": (
+                "simulator를 data factory로만 보지 말고, policy conclusion을 바꾸는 measurement instrument로 감사합니다."
+            ),
+            "transfer_boundary": (
+                "parallel simulation 선택과 benchmark reporting에는 강하지만, real robot transfer를 직접 보장하지는 않습니다."
+            ),
+        },
+    ],
+    "synthesis": [
+        {
+            "title": "Representation decision: action supervision 전에 semantic erosion을 계측한다",
+            "links": "Anchor-Align - Semantic Anchoring - Stage-information VLA",
+            "facts": (
+                "두 VLA 논문은 모두 action-only fine-tuning이 pretrained semantic structure를 훼손할 수 있다고 봅니다."
+            ),
+            "inference": (
+                "APRL VLA 실험은 success rate만으로는 부족하며, instruction-action retrieval, OOD object relocation, "
+                "stage transition error를 함께 측정해야 합니다."
+            ),
+            "decision": "모든 VLA fine-tuning run에 semantic retention report를 붙입니다.",
+        },
+        {
+            "title": "State decision: complete graph보다 just-in-time state를 우선한다",
+            "links": "JITOMA - HRIBench - Open-world mobile manipulation",
+            "facts": (
+                "JITOMA는 full scene graph가 planner를 포화시킬 수 있음을 보이고, HRIBench는 interaction state를 "
+                "명시적 benchmark contract로 둡니다."
+            ),
+            "inference": (
+                "robot memory는 많이 넣는 저장소가 아니라, instruction과 human interaction에 따라 열리고 닫히는 "
+                "runtime state machine이어야 합니다."
+            ),
+            "decision": "scene graph completeness 대신 task-relevant growth latency와 false state retention을 측정합니다.",
+        },
+        {
+            "title": "Infrastructure decision: simulation scale은 policy ranking artifact를 먼저 감사한다",
+            "links": "M4World - GPUSimBench - Ego-dynamics world model",
+            "facts": (
+                "M4World는 controllable long-horizon generation을, GPUSimBench는 simulator consistency와 determinism을 "
+                "분리해 다룹니다."
+            ),
+            "inference": (
+                "synthetic data와 GPU simulation은 양이 아니라 어떤 failure distribution을 보존하는지가 핵심입니다."
+            ),
+            "decision": "simulator 선택마다 policy ranking stability, determinism, real-reference gap을 release metric으로 둡니다.",
+        },
+    ],
+    "frontier_memory": [
+        {
+            "signal": "강화 중",
+            "title": "VLA runtime/fine-tuning 논의가 semantic preservation으로 이동",
+            "history": "최근 Jetson-PI와 temporal redundancy VLA가 runtime clock 문제를 드러냈습니다.",
+            "read": "오늘은 같은 VLA 축이 fine-tuning 과정에서 semantic structure가 어떻게 무너지는지로 이동했습니다.",
+        },
+        {
+            "signal": "새로운 통합",
+            "title": "Scene graph와 HRI benchmark가 state growth 문제로 합쳐짐",
+            "history": "지난 4주 동안 memory, semantic maps, embodied agents가 반복적으로 등장했습니다.",
+            "read": "JITOMA와 HRIBench는 memory를 더 많이 저장하는 문제가 아니라 필요한 state만 열어 planner와 human constraint에 넘기는 문제로 바꿉니다.",
+        },
+        {
+            "signal": "강화 중",
+            "title": "Driving world model이 controllability와 simulator validity로 이동",
+            "history": "지난 주 TerraZero와 procedural driving simulation이 long-tail generation 축을 강화했습니다.",
+            "read": "M4World와 GPUSimBench는 generated scenario의 양보다 downstream policy conclusion이 신뢰 가능한지 묻습니다.",
+        },
+        {
+            "signal": "비어 있음",
+            "title": "Representation, memory, simulator를 하나의 closed-loop harness에서 묶은 논문은 아직 적음",
+            "history": "개별 축은 강하지만 통합 실험은 드뭅니다.",
+            "read": "APRL의 기회는 VLA semantic erosion, just-in-time scene state, simulator artifact를 같은 robot task에서 함께 계측하는 것입니다.",
+        },
+    ],
+    "strategy": [
+        {
+            "priority": "BUILD",
+            "title": "Semantic Retention Harness for VLA Fine-Tuning",
+            "thesis": (
+                "VLA fine-tuning을 success rate가 아니라 pretrained semantic axes가 action representation 안에서 "
+                "얼마나 보존되는지로 평가합니다."
+            ),
+            "scores": {"fit": 5, "novelty": 4, "feasibility": 5, "moat": 5, "timing": 5, "evidence": 5},
+            "one_week": (
+                "LIBERO subset에서 Anchor-Align식 representation probe, Semantic Anchoring식 retrieval probe, "
+                "stage-information annotation을 같은 checkpoint trajectory에 붙입니다."
+            ),
+            "four_week": (
+                "OpenVLA/pi0 계열 wrapper에 semantic retention dashboard를 만들고 OOD object/location, language paraphrase, "
+                "stage boundary perturbation을 factorial sweep합니다."
+            ),
+            "metric": "OOD success +10p, retrieval drop -30%, language-action contradiction -50%, ID success drop <3p.",
+            "stop": "semantic probe 개선이 OOD success와 2개 task family 이상에서 연결되지 않으면 build를 중단하고 diagnostic note로 전환합니다.",
+            "assets": [
+                {"label": "Anchor-Align", "url": "https://arxiv.org/abs/2607.13429"},
+                {"label": "Semantic Anchoring", "url": "https://arxiv.org/abs/2607.13597"},
+                {"label": "Stage-information VLA", "url": "https://arxiv.org/abs/2607.13605"},
+            ],
+        },
+        {
+            "priority": "EXPLOIT",
+            "title": "Just-In-Time Robot State Protocol",
+            "thesis": (
+                "3D scene graph, language intent, human coordination constraint를 complete memory가 아니라 "
+                "task-relevant state growth protocol로 평가합니다."
+            ),
+            "scores": {"fit": 5, "novelty": 4, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 4},
+            "one_week": (
+                "JITOMA-Bench style tasks에서 full graph, retrieved graph, just-in-time graph를 같은 planner와 "
+                "latency budget으로 비교합니다."
+            ),
+            "four_week": (
+                "HRI role/temporal constraint를 추가한 mobile manipulation benchmark를 만들고 false state retention, "
+                "graph growth latency, recovery success를 로깅합니다."
+            ),
+            "metric": "planner error -20%, graph tokens -40%, recovery success +10p, hidden dependency miss <5%.",
+            "stop": "compressed full graph가 같은 budget에서 더 높은 success와 낮은 miss rate를 보이면 JIT growth claim을 축소합니다.",
+            "assets": [
+                {"label": "JITOMA", "url": "https://arxiv.org/abs/2607.13245"},
+                {"label": "HRIBench", "url": "https://arxiv.org/abs/2607.13056"},
+                {"label": "Open-world mobile manipulation", "url": "https://arxiv.org/abs/2607.13653"},
+            ],
+        },
+        {
+            "priority": "EXPLORE",
+            "title": "Simulator Validity Audit for Robot Learning",
+            "thesis": (
+                "GPU simulator와 driving world model을 throughput이 아니라 policy ranking stability, physical consistency, "
+                "long-tail controllability로 감사합니다."
+            ),
+            "scores": {"fit": 4, "novelty": 5, "feasibility": 3, "moat": 4, "timing": 5, "evidence": 4},
+            "one_week": (
+                "GPUSimBench의 consistency/determinism axes를 기존 manipulation simulator 두 개에 적용하고, "
+                "M4World식 controllable scenario axis를 driving mini-benchmark로 정리합니다."
+            ),
+            "four_week": (
+                "simulator별 policy ranking inversion, contact/occlusion stress, generated long-tail coverage를 같은 report로 묶습니다."
+            ),
+            "metric": "ranking inversion 발견 2건 이상, real-reference gap report, deterministic replay variance < target threshold.",
+            "stop": "simulator artifact가 policy conclusion을 바꾸는 사례를 찾지 못하면 benchmark/tooling note로 범위를 줄입니다.",
+            "assets": [
+                {"label": "GPUSimBench", "url": "https://arxiv.org/abs/2607.13059"},
+                {"label": "M4World", "url": "https://arxiv.org/abs/2607.14005"},
+                {"label": "DynaDreamer", "url": "https://arxiv.org/abs/2607.13410"},
+            ],
+        },
+    ],
+}
+
+
+def main() -> None:
+    template.DATE = DATE
+    template.SLUG = SLUG
+    template.DATA = DATA
+    doc = template.build_html()
+    doc = doc.replace("2026-07-13 arXiv Research Intelligence", "2026-07-16 arXiv Research Intelligence")
+    doc = doc.replace("<span>Tier A 5??full-text</span>", "<span>Tier A 6??full-text</span>")
+
+    json_dir = ROOT / "intelligence"
+    json_dir.mkdir(exist_ok=True)
+    json_path = json_dir / f"{DATE}.json"
+    html_path = ROOT / "posts" / f"{SLUG}.html"
+    json_path.write_text(json.dumps(DATA, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    html_path.write_text(doc, encoding="utf-8")
+    print(f"wrote {json_path.relative_to(ROOT)}")
+    print(f"wrote {html_path.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()

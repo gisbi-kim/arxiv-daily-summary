@@ -6,8 +6,22 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 15 Jul 2026 15:12:11 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jul 2026 15:11:30 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>2026-07-16 심층판</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-16-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-16-research-intelligence.html</guid>
+      <pubDate>Thu, 16 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘의 강한 신호는 VLA를 더 크게 만드는 방향이 아니라, 사전학습 의미 공간이 행동 미세조정, 장기 장면 기억, 시뮬레이터 처리량, driving world model 안에서 어디서 무너지는지 계측하는 방향입니다. Anchor-Align과 Semantic Anchoring은 행동 토큰이 언어 의미 구조를 지워버리는 문제를, JIT scene graph와 HRIBench는 완전한 장면/과제 표현이 오히려 planner를 포화시키거나 HRI 실패를 숨기는 문제를, M4World와 GPUSimBench는 simulation scale이 downstream reliability로 바로 번역되지 않는 문제를 드러냅니다. APRL에는 backbone 경쟁보다 representa…]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-07-16 (Thu)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-16.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-16.html</guid>
+      <pubDate>Thu, 16 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 102건, cs.RO 64건이고 dedupe 후 154건 중 134건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Robot Learning 25편, Efficiency/Systems 21편, Generation 20편입니다. Robot Learning, Efficiency/Systems, Generation, 3D/Scene이 동시에 두드러졌지만, robotics 관점의 공통 축은 semantic drift, runtime state saturation, simulator artifact, world-model controllability입니다. 이는 최근 4주간 반복된 VLA runtime, geometry validity, benchmark…]]></description>
+    </item>
     <item>
       <title>2026-07-15 심층판</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-15-research-intelligence.html</link>
@@ -413,20 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-02-weekly.html</guid>
       <pubDate>Sat, 02 May 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[자율주행 쪽은 이제 detection이나 planning 점수 하나로는 충분하지 않다는 쪽으로 움직이고 있습니다. Judge Then Drive, ProDrive, Dreaming Across Towns 같은 논문들은 모델이 왜 그런 주행 판단을 했는지, 그리고 시뮬레이션이나 폐루프 상황에서 그 판단이 어디서 깨지는지를 같이 보려는 흐름입니다. 그래서 우리도 인식 성능과 주행 성공률을 따로 보지 말고, 판단 근거와 실패 장면을 같은 평가표에 묶어야 합니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-05-01 (금)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-01.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-01.html</guid>
-      <pubDate>Fri, 01 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-05-01 묶음에서 제일 두꺼운 축은 3D/Scene이고, 저장된 스냅샷 기준 20편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-04-30 (목)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-30.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-04-30.html</guid>
-      <pubDate>Thu, 30 Apr 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-04-30 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 76편이 잡혔습니다. 저장된 요약만으로는 이 묶음의 세부 방법을 강하게 단정하기 어렵습니다. 다만 대표 논문들이 공통으로 건드리는 지점은 입력 조건과 실패 장면을 더 분명히 기록하려는 쪽이라, 각 논문의 데이터 출처·비교군·ablation 유무를 먼저 나란히 확인하는 편이 좋습니다.]]></description>
     </item>
   </channel>
 </rss>
