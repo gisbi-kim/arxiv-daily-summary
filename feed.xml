@@ -6,8 +6,22 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Thu, 16 Jul 2026 15:11:30 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jul 2026 15:13:34 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>2026-07-17 심층판</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-17-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-17-research-intelligence.html</guid>
+      <pubDate>Fri, 17 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘의 강한 신호는 로봇 foundation model을 더 크게 만드는 쪽이 아니라, 행동을 내보내기 직전에 어떤 표현과 상태가 실제 제어 실패를 만든다는 점을 계측하는 쪽입니다. Action QFormer는 action supervision이 상속된 multimodal representation을 어떻게 재배선하는지 묻고, LIFT와 RoboTTT는 force memory와 장기 visuomotor context가 action chunk 내부에서 언제 필요해지는지 보여줍니다. BadWAM은 world-action model의 상상 미래가 멀쩡해도 closed-loop action은 망가질 수 있음을 드러내고, G2SR과 VTM-Nav는 3D/scene memory가…]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-07-17 (Fri)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-17.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-17.html</guid>
+      <pubDate>Fri, 17 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 114건, cs.RO 58건이고 dedupe 후 165건 중 139건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Robot Learning 32편, Generation 26편, Foundation Models 21편입니다. Robot Learning이 가장 두껍고 Generation, Foundation Models, Safety/Alignment가 뒤따르지만, robotics 관점의 공통 축은 action-facing representation, contact observability, world-action safety, online geometry validity입니다. 이는 최근 4주간 반복된 VLA runtime, geometry val…]]></description>
+    </item>
     <item>
       <title>2026-07-16 심층판</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-16-research-intelligence.html</link>
@@ -413,20 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-04.html</guid>
       <pubDate>Mon, 04 May 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[2026-05-04 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 17편이 잡혔습니다. VLA를 하나의 거대한 policy로 실행하면 어느 단계가 판단이고 어느 단계가 미세 제어인지 분리하기 어렵습니다. Libra-VLA와 DiscreteRTC, LaST-R1 계열은 고수준 선택, 저수준 pose 조정, latent reasoning처럼 실행 안쪽 역할을 나누려는 흐름입니다. 함의는 모델 크기 경쟁보다, 어떤 역할 분해가 실제 조작 성공률과 latency를 같이 개선하는지 비교해야 한다는 점입니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-05-03 (일)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-03.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-03.html</guid>
-      <pubDate>Sun, 03 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-05-03 묶음에서 제일 두꺼운 축은 3D/Scene이고, 저장된 스냅샷 기준 20편이 잡혔습니다. VLA를 하나의 거대한 policy로 실행하면 어느 단계가 판단이고 어느 단계가 미세 제어인지 분리하기 어렵습니다. Libra-VLA와 DiscreteRTC, LaST-R1 계열은 고수준 선택, 저수준 pose 조정, latent reasoning처럼 실행 안쪽 역할을 나누려는 흐름입니다. 함의는 모델 크기 경쟁보다, 어떤 역할 분해가 실제 조작 성공률과 latency를 같이 개선하는지 비교해야 한다는 점입니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Weekly Briefing — 2026-05-02 (토)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-02-weekly.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-02-weekly.html</guid>
-      <pubDate>Sat, 02 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[자율주행 쪽은 이제 detection이나 planning 점수 하나로는 충분하지 않다는 쪽으로 움직이고 있습니다. Judge Then Drive, ProDrive, Dreaming Across Towns 같은 논문들은 모델이 왜 그런 주행 판단을 했는지, 그리고 시뮬레이션이나 폐루프 상황에서 그 판단이 어디서 깨지는지를 같이 보려는 흐름입니다. 그래서 우리도 인식 성능과 주행 성공률을 따로 보지 말고, 판단 근거와 실패 장면을 같은 평가표에 묶어야 합니다.]]></description>
     </item>
   </channel>
 </rss>
