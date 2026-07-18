@@ -1,0 +1,914 @@
+{
+  "date": "2026-07-18",
+  "iso_week": "2026-W29",
+  "week_start": "2026-07-12",
+  "week_end": "2026-07-18",
+  "source_mode": "pastweek",
+  "source_listing_date": "2026-07-17",
+  "source_daily_artifacts": [
+    "2026-07-13",
+    "2026-07-14",
+    "2026-07-15",
+    "2026-07-16",
+    "2026-07-17"
+  ],
+  "weekly_thesis": "이번 주의 핵심은 VLA, tactile manipulation, 3D/SLAM, world-action safety, embodied memory, VLM reliability가 모두 더 큰 모델보다 실패가 시작되는 interface와 state contract를 검증하는 방향으로 수렴했다는 점입니다.",
+  "totals": {
+    "selected": 394,
+    "total_scanned": 894
+  },
+  "daily_totals": {
+    "cv": 632,
+    "ro": 309,
+    "selected": 748,
+    "total_scanned": 894
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 51,
+      "cv": 35,
+      "ro": 13,
+      "cvro": 3
+    },
+    "Robot Learning": {
+      "total": 83,
+      "cv": 4,
+      "ro": 70,
+      "cvro": 9
+    },
+    "Autonomous Driving": {
+      "total": 37,
+      "cv": 8,
+      "ro": 26,
+      "cvro": 3
+    },
+    "Foundation Models": {
+      "total": 50,
+      "cv": 48,
+      "ro": 1,
+      "cvro": 1
+    },
+    "Generation": {
+      "total": 69,
+      "cv": 60,
+      "ro": 6,
+      "cvro": 3
+    },
+    "Efficiency/Systems": {
+      "total": 38,
+      "cv": 32,
+      "ro": 5,
+      "cvro": 1
+    },
+    "Embodied AI": {
+      "total": 33,
+      "cv": 5,
+      "ro": 22,
+      "cvro": 6
+    },
+    "Safety/Alignment": {
+      "total": 33,
+      "cv": 24,
+      "ro": 7,
+      "cvro": 2
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA가 action head 경쟁에서 action-facing interface와 runtime contract 검증으로 이동",
+      "representative_papers": [
+        {
+          "title": "Action QFormer: Structured Representation Shaping under Action Supervision in Vision-Language-Action Models",
+          "arxiv": "https://arxiv.org/abs/2607.14635",
+          "short": "Action QFormer",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Execution Interfaces",
+            "genus": "Runtime and Semantic Alignment",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "FoMoVLA: Bridging Visual Foresight and Motion Guidance for Vision-Language-Action Models",
+          "arxiv": "https://arxiv.org/abs/2607.14739",
+          "short": "FoMoVLA",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Execution Interfaces",
+            "genus": "Runtime and Semantic Alignment",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Generalizable VLA Finetuning via Representation Anchoring and Language-Action Alignment",
+          "arxiv": "https://arxiv.org/abs/2607.13429",
+          "short": "Anchor-Align VLA",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Execution Interfaces",
+            "genus": "Runtime and Semantic Alignment",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Semantic Anchoring for Robotic Action Representations",
+          "arxiv": "https://arxiv.org/abs/2607.13597",
+          "short": "Semantic Anchoring",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Execution Interfaces",
+            "genus": "Runtime and Semantic Alignment",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Jetson-PI: Towards Onboard Real-Time Robot Control via Foresight-Aligned Asynchronous Inference",
+          "arxiv": "https://arxiv.org/abs/2607.12659",
+          "short": "Jetson-PI",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Execution Interfaces",
+            "genus": "Runtime and Semantic Alignment",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Reducing Temporal Redundancy for Efficient Vision-Language-Action Inference",
+          "arxiv": "https://arxiv.org/abs/2607.12287",
+          "short": "Temporal Redundancy VLA",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Vision-Language-Action",
+            "order": "Execution Interfaces",
+            "genus": "Runtime and Semantic Alignment",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "이번 주 Robot Learning은 83편으로 가장 큰 버킷이지만 핵심은 VLA를 더 크게 만드는 경쟁이 아닙니다. Action QFormer와 FoMoVLA는 action supervision이 upstream visual representation을 어떻게 다시 쓰는지 묻고, Anchor-Align과 Semantic Anchoring은 fine-tuning 중 semantic structure가 침식되는 문제를 드러냅니다. Jetson-PI와 temporal redundancy 논문은 이 논의를 onboard latency와 control-loop clock까지 내립니다. 따라서 VLA 평가는 action head score보다 query interface, semantic retention, streaming delay가 실패를 어떻게 바꾸는지 분리해야 합니다.",
+      "confidence": "High — representation, semantic retention, streaming inference, onboard timing 신호가 같은 주에 반복",
+      "lab_action": "LIBERO/RoboCasa/UAV tracking에서 query interface, language-action anchoring, token reuse, latency jitter를 factorial split으로 두고 success, instruction-action contradiction, semantic retention, failure-warning lead time을 비교한다."
+    },
+    {
+      "cluster": "Contact-rich manipulation이 vision-only chunk에서 force와 tactile state 평가로 이동",
+      "representative_papers": [
+        {
+          "title": "Never Too Late for Force: Accelerating VLA Post-Training with Reactive Force Injection",
+          "arxiv": "https://arxiv.org/abs/2607.14236",
+          "short": "Never Too Late for Force",
+          "importance_tags": [
+            "[경고신호]",
+            "[데이터전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Manipulation",
+            "class": "Contact-Rich Control",
+            "order": "Tactile and Force Sensing",
+            "genus": "State Estimation",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Beyond Implicit Force: Evaluating Explicit Force-Torque Proxies in Action Chunking with Transformers",
+          "arxiv": "https://arxiv.org/abs/2607.14578",
+          "short": "Explicit Force-Torque Proxies",
+          "importance_tags": [
+            "[경고신호]",
+            "[데이터전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Manipulation",
+            "class": "Contact-Rich Control",
+            "order": "Tactile and Force Sensing",
+            "genus": "State Estimation",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Representation-Aligned Tactile Grounding for Contact-Rich Robotic Manipulation",
+          "arxiv": "https://arxiv.org/abs/2607.14609",
+          "short": "Tactile Grounding",
+          "importance_tags": [
+            "[경고신호]",
+            "[데이터전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Manipulation",
+            "class": "Contact-Rich Control",
+            "order": "Tactile and Force Sensing",
+            "genus": "State Estimation",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "KineFuse: Kinematic-Aware Haptic Fusion for In-Hand Occluded-Object Pose Tracking",
+          "arxiv": "https://arxiv.org/abs/2607.14842",
+          "short": "KineFuse",
+          "importance_tags": [
+            "[경고신호]",
+            "[데이터전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Manipulation",
+            "class": "Contact-Rich Control",
+            "order": "Tactile and Force Sensing",
+            "genus": "State Estimation",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "VQ-Touch: A Data-Efficient Tactile Generation Framework Across Sensors and Scenarios",
+          "arxiv": "https://arxiv.org/abs/2607.14728",
+          "short": "VQ-Touch",
+          "importance_tags": [
+            "[경고신호]",
+            "[데이터전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Manipulation",
+            "class": "Contact-Rich Control",
+            "order": "Tactile and Force Sensing",
+            "genus": "State Estimation",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "TACTIC: Tactile and Vision Conditioned Contact-Centric Control for Whole-Arm Manipulation",
+          "arxiv": "https://arxiv.org/abs/2607.09218",
+          "short": "TACTIC",
+          "importance_tags": [
+            "[경고신호]",
+            "[데이터전환]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Manipulation",
+            "class": "Contact-Rich Control",
+            "order": "Tactile and Force Sensing",
+            "genus": "State Estimation",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "금요일 batch에서 force, tactile, haptic fusion 논문이 한꺼번에 올라온 것은 manipulation policy가 시각 chunk만으로는 접촉 상태를 충분히 설명하지 못한다는 신호입니다. LIFT와 force-torque proxy 논문은 action chunk 안에 force memory를 넣고, tactile grounding과 KineFuse는 occlusion 상태에서 접촉 evidence를 별도 representation으로 둡니다. VQ-Touch와 TACTIC까지 묶으면 데이터셋 수집보다 어떤 contact state가 실제 recovery를 바꾸는지 검증하는 축이 더 중요해집니다.",
+      "confidence": "High — force, tactile, haptic, contact-centric control 논문이 같은 contact observability 문제로 연결",
+      "lab_action": "folding, insertion, in-hand pose tracking에서 force memory length, tactile prediction target, haptic fusion encoder를 독립 ablation으로 두고 contact failure, recovery success, failure-warning lead time을 평가한다."
+    },
+    {
+      "cluster": "3D/SLAM과 reconstruction이 visual fidelity에서 online geometry contract로 이동",
+      "representative_papers": [
+        {
+          "title": "MAGiSt3R: Multi-Agent Feed-forward 3D Reconstruction from Monocular RGB Videos",
+          "arxiv": "https://arxiv.org/abs/2607.15211",
+          "short": "MAGiSt3R",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Reconstruction",
+            "genus": "Gaussian and Point-Cloud Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Immediate 3D Gaussian Splat Reconstruction of Unordered Input with Global Consistency",
+          "arxiv": "https://arxiv.org/abs/2607.14481",
+          "short": "Immediate 3DGS",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Reconstruction",
+            "genus": "Gaussian and Point-Cloud Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Instant NuRec: Feed-Forward 3D Gaussian Reconstruction for Driving Scene Simulation",
+          "arxiv": "https://arxiv.org/abs/2607.14203",
+          "short": "Instant NuRec",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Reconstruction",
+            "genus": "Gaussian and Point-Cloud Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Image-to-Point Cloud Registration Made Easy with Rectified Flow-based LiDAR Upsampling",
+          "arxiv": "https://arxiv.org/abs/2607.14639",
+          "short": "Image-to-Point Cloud Registration",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Reconstruction",
+            "genus": "Gaussian and Point-Cloud Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "RoGS: Adaptive Meshgrid Gaussian for Large-Scale Road Surface Mapping",
+          "arxiv": "https://arxiv.org/abs/2607.15048",
+          "short": "RoGS",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Reconstruction",
+            "genus": "Gaussian and Point-Cloud Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "DiffRadar: Differentiable Physics-Aware Radar SLAM with Gaussian Fields",
+          "arxiv": "https://arxiv.org/abs/2607.12265",
+          "short": "DiffRadar",
+          "importance_tags": [
+            "[SLAM/Recon]",
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Reconstruction",
+            "genus": "Gaussian and Point-Cloud Maps",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "3D/Scene은 51편으로 두껍고, 이번 주 신호는 Gaussian이나 feed-forward reconstruction이 예쁜 rendering asset을 넘어 로봇 map contract가 되는 방향입니다. MAGiSt3R와 Immediate 3DGS는 unordered/monocular input에서 바로 geometry를 만들고, Instant NuRec과 RoGS는 driving/road-surface mapping으로 내려옵니다. Image-to-point-cloud registration과 DiffRadar는 camera-LiDAR/radar alignment와 pose drift를 직접 건드립니다. 이 축은 photometric score가 아니라 localization, update cost, memory footprint, dynamic-object failure를 함께 봐야 합니다.",
+      "confidence": "High — feed-forward reconstruction, Gaussian map, LiDAR/radar registration, road mapping 신호가 동시에 반복",
+      "lab_action": "같은 driving/robot camera trajectory에서 3DGS map, point-cloud registration, feed-forward reconstruction을 비교하고 localization success, update cost, dynamic-object failure, downstream navigation cost를 측정한다."
+    },
+    {
+      "cluster": "World-action safety와 driving simulation이 imagined future에서 executable scenario validity로 이동",
+      "representative_papers": [
+        {
+          "title": "BadWAM: When World-Action Models Dream Right but Act Wrong",
+          "arxiv": "https://arxiv.org/abs/2607.15207",
+          "short": "BadWAM",
+          "importance_tags": [
+            "[경고신호]",
+            "[closed-loop]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "World-Action Models",
+            "order": "Closed-Loop Safety",
+            "genus": "Scenario Validity",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "WorkDrive: Roadwork Chain of Causation for Autonomous Driving",
+          "arxiv": "https://arxiv.org/abs/2607.14727",
+          "short": "WorkDrive",
+          "importance_tags": [
+            "[경고신호]",
+            "[closed-loop]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "World-Action Models",
+            "order": "Closed-Loop Safety",
+            "genus": "Scenario Validity",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "M$^\\text{4}$World: A Multi-view Multimodal Driving World Model for Interactive Object Manipulation and Minute-long Streaming",
+          "arxiv": "https://arxiv.org/abs/2607.14005",
+          "short": "M4World",
+          "importance_tags": [
+            "[경고신호]",
+            "[closed-loop]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "World-Action Models",
+            "order": "Closed-Loop Safety",
+            "genus": "Scenario Validity",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "TerraZero: Procedural Driving Simulation for Zero-Demonstration Self-Play at Scale",
+          "arxiv": "https://arxiv.org/abs/2607.13028",
+          "short": "TerraZero",
+          "importance_tags": [
+            "[경고신호]",
+            "[closed-loop]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "World-Action Models",
+            "order": "Closed-Loop Safety",
+            "genus": "Scenario Validity",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Motion Planning with Model-Based Diffusion via Constraint Optimization and Adaptive Scheduling",
+          "arxiv": "https://arxiv.org/abs/2607.14455",
+          "short": "Model-Based Diffusion Planning",
+          "importance_tags": [
+            "[경고신호]",
+            "[closed-loop]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "World-Action Models",
+            "order": "Closed-Loop Safety",
+            "genus": "Scenario Validity",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Chat2Scenic: An Iterative RAG-Based Framework for Scenario Generation in Autonomous Driving",
+          "arxiv": "https://arxiv.org/abs/2607.14387",
+          "short": "Chat2Scenic",
+          "importance_tags": [
+            "[경고신호]",
+            "[closed-loop]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "World-Action Models",
+            "order": "Closed-Loop Safety",
+            "genus": "Scenario Validity",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "Generation은 69편이지만 weekly thesis는 샘플 품질보다 실행 가능한 scenario와 action alignment입니다. BadWAM은 imagined future가 맞아도 action channel이 틀릴 수 있음을 보이고, WorkDrive와 TerraZero는 roadwork/long-tail scenario를 closed-loop 실패 조건으로 재현합니다. M4World, diffusion planning, Chat2Scenic은 world model과 planner를 따로 평가하지 말고 constraint, intent, scenario validity가 실제 action을 어떻게 바꾸는지 보라는 신호입니다.",
+      "confidence": "Medium-High — WAM safety, driving causation, procedural simulation, constrained planning이 같은 실행 검증 축으로 연결",
+      "lab_action": "RoboTwin/LIBERO와 CARLA에서 visual perturbation, relation violation, roadwork cue removal, generated scenario seed를 stress split으로 만들고 imagined-future drift, action shift, collision margin, recovery behavior를 비교한다."
+    },
+    {
+      "cluster": "Embodied memory가 complete map과 episode reset에서 just-in-time persistent state로 이동",
+      "representative_papers": [
+        {
+          "title": "VTM-Nav: Hierarchical Visual-Topological Memory for Cross-Episode Object-Goal Navigation",
+          "arxiv": "https://arxiv.org/abs/2607.14514",
+          "short": "VTM-Nav",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Memory and Semantic Maps",
+            "genus": "Long-Horizon Agents",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "MEMORA: Embodied Action Memory from Egocentric Videos for Reasoning and Planning",
+          "arxiv": "https://arxiv.org/abs/2607.14252",
+          "short": "MEMORA",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Memory and Semantic Maps",
+            "genus": "Long-Horizon Agents",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "SoftNav: Injecting 3D Scene Tokens into VLMs for Embodied Navigation",
+          "arxiv": "https://arxiv.org/abs/2607.14586",
+          "short": "SoftNav",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Memory and Semantic Maps",
+            "genus": "Long-Horizon Agents",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Just-In-Time Scene Graph Growth: Combating Perceptual Saturation in Long-Horizon Robotics",
+          "arxiv": "https://arxiv.org/abs/2607.13245",
+          "short": "JITOMA",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Memory and Semantic Maps",
+            "genus": "Long-Horizon Agents",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Instance-Enriched Semantic Maps for Visual Language Navigation",
+          "arxiv": "https://arxiv.org/abs/2607.12630",
+          "short": "Instance-Enriched Semantic Maps",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Memory and Semantic Maps",
+            "genus": "Long-Horizon Agents",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Exploratory, Communicative, and Deployable: Vision-Driven Embodied Agents for Open-World Mobile Manipulation",
+          "arxiv": "https://arxiv.org/abs/2607.13653",
+          "short": "Open-World Mobile Manipulation",
+          "importance_tags": [
+            "[인프라]",
+            "[실사용전환]",
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Memory and Semantic Maps",
+            "genus": "Long-Horizon Agents",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "Embodied AI는 33편으로 중간 규모지만, memory와 navigation의 research decision은 분명합니다. JITOMA는 full scene graph가 planner를 포화시킬 수 있음을 보이고, VTM-Nav와 MEMORA는 cross-episode scene/action memory를 runtime state로 올립니다. SoftNav, instance-enriched semantic maps, open-world mobile manipulation은 더 많은 memory를 쌓는 방식이 아니라 instruction에 맞게 열리고 닫히는 state growth가 중요하다는 점을 강화합니다.",
+      "confidence": "Medium-High — semantic map, action memory, 3D scene tokens, just-in-time graph growth 신호가 반복",
+      "lab_action": "ObjectNav/mobile manipulation에서 no-memory, transcript memory, visual-topological memory, scene-graph growth를 비교하고 SPL, stale-memory failure, wrong-turn recovery, hidden-dependency miss를 평가한다."
+    },
+    {
+      "cluster": "Multimodal 신뢰성과 효율화가 headline score에서 evidence contract와 task-critical retention으로 이동",
+      "representative_papers": [
+        {
+          "title": "Beyond the Leaderboard: Design Lessons for Trustworthy Multimodal VQA",
+          "arxiv": "https://arxiv.org/abs/2607.15241",
+          "short": "Beyond the Leaderboard",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[인프라]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Trustworthy Evaluation",
+            "genus": "Evidence and Calibration",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Symbal: Detecting Systematic Misalignments in Model-Generated Captions",
+          "arxiv": "https://arxiv.org/abs/2607.15216",
+          "short": "Symbal",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[인프라]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Trustworthy Evaluation",
+            "genus": "Evidence and Calibration",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "GeoDetect: Geometric Adversarial Detection for VLPs",
+          "arxiv": "https://arxiv.org/abs/2607.14737",
+          "short": "GeoDetect",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[인프라]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Trustworthy Evaluation",
+            "genus": "Evidence and Calibration",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "VideoChat3: Fully Open Video MLLM for Efficient and Generalist Video Understanding",
+          "arxiv": "https://arxiv.org/abs/2607.14935",
+          "short": "VideoChat3",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[인프라]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Trustworthy Evaluation",
+            "genus": "Evidence and Calibration",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "Attention-Free and Lightweight Token Reduction for Efficient Vision-Language Models",
+          "arxiv": "https://arxiv.org/abs/2607.13500",
+          "short": "Attention-Free Token Reduction",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[인프라]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Trustworthy Evaluation",
+            "genus": "Evidence and Calibration",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        },
+        {
+          "title": "GPOcc++: Unified Sparse Gaussian Occupancy Prediction with Visual Geometry Priors",
+          "arxiv": "https://arxiv.org/abs/2607.13481",
+          "short": "GPOcc++",
+          "importance_tags": [
+            "[근거검증]",
+            "[경고신호]",
+            "[인프라]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Trustworthy Evaluation",
+            "genus": "Evidence and Calibration",
+            "confidence": "High",
+            "rationale": "weekly representative paper lineage assigned from the robotics/CVML phylogeny style"
+          }
+        }
+      ],
+      "why_it_matters": "Foundation Models 50편, Safety 33편, Efficiency 38편은 별개 버킷처럼 보이지만 같은 평가 질문을 공유합니다. Beyond the Leaderboard와 Symbal은 정답률보다 systematic mismatch와 evaluator contract를 묻고, GeoDetect는 geometric adversarial signal을 별도 failure family로 만듭니다. VideoChat3, token reduction, GPOcc++는 더 빠르고 큰 모델보다 어떤 visual evidence와 geometry prior가 남아야 downstream task가 유지되는지 확인해야 함을 보여줍니다.",
+      "confidence": "Medium — VLM reliability와 efficiency 신호가 강하지만 공통 benchmark는 아직 분산",
+      "lab_action": "VQA/VLN/occupancy task에서 cue removal, geometry corruption, token budget, visual-prior ablation을 함께 두고 evidence recall, calibration shift, occupancy error, downstream action delta를 비교한다."
+    }
+  ],
+  "top5": [
+    {
+      "paper": "Action QFormer: Structured Representation Shaping under Action Supervision in Vision-Language-Action Models",
+      "arxiv": "https://arxiv.org/abs/2607.14635",
+      "why": "VLA의 action-facing interface를 별도 진단 대상으로 세워 이번 주 VLA 축을 가장 잘 대표합니다.",
+      "phylogeny": "ROBOTICS · Robot Learning > Vision-Language-Action > Execution Interfaces > Runtime and Semantic Alignment"
+    },
+    {
+      "paper": "Never Too Late for Force: Accelerating VLA Post-Training with Reactive Force Injection",
+      "arxiv": "https://arxiv.org/abs/2607.14236",
+      "why": "vision-only VLA chunk가 놓치는 force state를 post-training 축으로 끌어올립니다.",
+      "phylogeny": "ROBOTICS · Robot Manipulation > Contact-Rich Control > Tactile and Force Sensing > State Estimation"
+    },
+    {
+      "paper": "MAGiSt3R: Multi-Agent Feed-forward 3D Reconstruction from Monocular RGB Videos",
+      "arxiv": "https://arxiv.org/abs/2607.15211",
+      "why": "feed-forward multi-agent reconstruction을 robot-usable geometry contract 쪽으로 밀어붙입니다.",
+      "phylogeny": "ROBOTICS · Perception and Mapping > State Estimation > SLAM and Reconstruction > Gaussian and Point-Cloud Maps"
+    },
+    {
+      "paper": "BadWAM: When World-Action Models Dream Right but Act Wrong",
+      "arxiv": "https://arxiv.org/abs/2607.15207",
+      "why": "world-action model의 imagined future와 executable action이 분리될 수 있음을 직접 드러냅니다.",
+      "phylogeny": "ROBOTICS · Simulation and World Models > World-Action Models > Closed-Loop Safety > Scenario Validity"
+    },
+    {
+      "paper": "VTM-Nav: Hierarchical Visual-Topological Memory for Cross-Episode Object-Goal Navigation",
+      "arxiv": "https://arxiv.org/abs/2607.14514",
+      "why": "cross-episode memory를 embodied navigation의 기본 평가 축으로 올립니다.",
+      "phylogeny": "ROBOTICS · Embodied AI > Navigation and Planning > Memory and Semantic Maps > Long-Horizon Agents"
+    }
+  ],
+  "research_autopsy": [
+    {
+      "title": "Action-facing representation을 action head 밖에서 계측한다",
+      "source": "2026-07-17 RI synthesis",
+      "evidence": "Action QFormer, FoMoVLA, Reflex, DiMaS는 action supervision이 visual token selection과 streaming latency를 함께 바꾸는지 묻습니다.",
+      "falsification": "같은 query/latency stress split에서 representation 차이가 failure family를 바꾸지 못하면 이 해석은 약해집니다.",
+      "aprl_tool": "VLA 실험표에 action-facing interface stress split을 기본 열로 둡니다."
+    },
+    {
+      "title": "Contact state는 policy 내부 memory가 아니라 관측 가능한 평가축이다",
+      "source": "2026-07-17 daily cluster",
+      "evidence": "force injection, force-torque proxy, tactile grounding, KineFuse가 모두 vision-only manipulation의 숨은 상태를 겨냥합니다.",
+      "falsification": "force/tactile ablation이 insertion/folding/in-hand tracking failure를 분리하지 못하면 contact observability thesis는 약합니다.",
+      "aprl_tool": "force memory length와 tactile prediction target을 failure-warning lead time과 함께 봅니다."
+    },
+    {
+      "title": "Geometry quality는 rendering이 아니라 downstream map contract로 인정한다",
+      "source": "2026-07-15 to 2026-07-17 RI frontier memory",
+      "evidence": "DiffRadar, Instant NuRec, MAGiSt3R, image-to-point-cloud registration이 pose drift, throughput, map update를 직접 건드립니다.",
+      "falsification": "ATE와 downstream navigation cost가 좋아지지 않으면 Gaussian/reconstruction novelty는 robot-useful map으로 보기 어렵습니다.",
+      "aprl_tool": "3D/SLAM benchmark에 localization, update cost, dynamic-object failure를 동시에 넣습니다."
+    },
+    {
+      "title": "World model safety는 future image quality가 아니라 action alignment다",
+      "source": "2026-07-17 RI decision cards",
+      "evidence": "BadWAM과 WAM steering은 future prediction이 좋아도 action channel이 공격되거나 misaligned될 수 있음을 전제로 둡니다.",
+      "falsification": "future/action divergence가 closed-loop failure와 상관하지 않으면 WAM safety metric으로 쓰기 어렵습니다.",
+      "aprl_tool": "imagined-future drift와 action shift를 같은 rollout에서 측정합니다."
+    },
+    {
+      "title": "Memory는 많이 쌓는 자산이 아니라 필요한 state를 늦지 않게 여는 runtime 계약이다",
+      "source": "2026-07-16 to 2026-07-17 RI synthesis",
+      "evidence": "JITOMA, HRIBench, VTM-Nav, MEMORA가 complete state보다 task-relevant state growth와 persistent retrieval을 강조합니다.",
+      "falsification": "persistent memory가 stale-state failure를 늘리면 memory-first 설계는 오히려 deployment risk가 됩니다.",
+      "aprl_tool": "memory horizon보다 state opening latency와 false retention을 측정합니다."
+    }
+  ],
+  "strategy_board": [
+    {
+      "opportunity": "Action-facing VLA interface stress suite",
+      "portfolio": "Build moat",
+      "why_now": "VLA papers now expose representation, streaming, semantic retention, and force state as separate failure sources.",
+      "contrarian_bet": "APRL can own the failure interface rather than chase another VLA backbone.",
+      "one_week_probe": "Run one LIBERO/RoboCasa task with latency jitter, query-interface ablation, and instruction paraphrase stress.",
+      "four_week_build": "Reusable VLA interface stress suite with semantic-retention and failure-warning metrics.",
+      "success_metric": "At least two VLA variants with equal success but different failure-warning or semantic-retention signatures.",
+      "stop_condition": "If interface stress does not change failure taxonomy beyond normal random seed variance.",
+      "asset_path": "Benchmark scripts, stress splits, and taxonomy of action-facing failures."
+    },
+    {
+      "opportunity": "Robot-usable Gaussian geometry harness",
+      "portfolio": "Exploit",
+      "why_now": "3DGS and feed-forward reconstruction papers are moving into road mapping, SLAM, and LiDAR registration.",
+      "contrarian_bet": "Measure pose drift and navigation utility before visual quality.",
+      "one_week_probe": "Compare one Gaussian map and one point-cloud baseline on a short indoor/outdoor trajectory.",
+      "four_week_build": "Trajectory suite with dynamic-object corruption, update cost, and downstream navigation hooks.",
+      "success_metric": "A geometry representation changes navigation or localization failure while photometric score stays ambiguous.",
+      "stop_condition": "If all methods rank identically under visual quality and robot metrics.",
+      "asset_path": "Robot-usable map evaluation protocol and logged trajectory pack."
+    },
+    {
+      "opportunity": "World-action safety divergence benchmark",
+      "portfolio": "Explore",
+      "why_now": "BadWAM and driving scenario papers make future/action mismatch measurable.",
+      "contrarian_bet": "Safety failures can be detected as divergence between generated future and executable action, not only outcome failure.",
+      "one_week_probe": "Inject one visual relation perturbation and one roadwork cue removal into existing rollout logs.",
+      "four_week_build": "Closed-loop divergence benchmark across WAM, driving, and embodied agent settings.",
+      "success_metric": "Future/action divergence predicts unsafe or unrecoverable behavior earlier than final task failure.",
+      "stop_condition": "If divergence metrics fail to rank risky rollouts before collision or task failure.",
+      "asset_path": "Stress scenarios and divergence metric implementation."
+    }
+  ]
+}
