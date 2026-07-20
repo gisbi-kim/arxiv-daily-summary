@@ -1,0 +1,589 @@
+#!/usr/bin/env python3
+"""Generate the full-text Research Intelligence edition for 2026-07-20."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import gen_research_intelligence_20260713 as template
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DATE = "2026-07-20"
+SLUG = f"{DATE}-research-intelligence"
+
+
+DATA = {
+    "date": DATE,
+    "edition": "Research Intelligence",
+    "source_prompt": "prompts/instruction_v20260713.md",
+    "scope_note": (
+        "당일 cs.CV/cs.RO /new 213건을 repo parser로 수집했고 replacement를 제외한 dedup 125건 중 "
+        "107건을 ROI로 분류했습니다. Tier A 6편은 official arXiv HTML 본문, figure/table caption, "
+        "experiment section, conclusion/limitation을 확인해 작성했습니다. Verified는 논문 본문에서 직접 "
+        "확인한 사실이고 Inference와 APRL hypothesis는 편집자 해석으로 분리했습니다."
+    ),
+    "executive_thesis": (
+        "오늘의 강한 신호는 로봇 foundation model이 커질수록 곧바로 배포 가능해진다는 낙관보다, "
+        "scale, compositional supervision, asynchronous control, world-model hierarchy, online geometry, "
+        "visual-tactile alignment를 각각 어떤 실패 조건에서 검증할지의 문제가 전면으로 올라왔다는 점입니다. "
+        "Xiaomi-Robotics-1은 데이터와 모델 scale이 실제 로봇 post-training까지 이어질 수 있음을 보이지만, "
+        "AC-VLA는 같은 VLA라도 sub-skill recombination과 wrist-view shortcut을 분리하지 않으면 OOD에서 무너진다고 "
+        "말합니다. Think-at-5Hz/Act-at-20Hz와 Orbis 2는 driving stack에서 느린 reasoning과 빠른 action, "
+        "abstract dynamics와 detail generation을 분리합니다. ImprovedVBGS와 VTLoc은 robot-usable state를 위해 "
+        "3D map update와 contact localization의 latency, ambiguity, alignment를 측정 가능한 계약으로 바꿉니다."
+    ),
+    "decision_cards": [
+        {
+            "title": "Scale은 충분조건이 아니라 평가 축을 늘리는 압력이다",
+            "body": (
+                "Xiaomi-Robotics-1은 100k 시간 UMI pre-training과 10k 시간 cross-embodiment post-training을 제시하지만, "
+                "AC-VLA는 familiar sub-task recombination에서 trajectory overfitting과 perceptual shortcut이 별도 failure임을 보입니다. "
+                "APRL은 scaling curve를 재현하기보다 OOD composition, shortcut suppression, low-data transfer를 같은 harness에서 봐야 합니다."
+            ),
+            "label": "Decision",
+        },
+        {
+            "title": "느린 reasoning과 빠른 action은 같은 forward pass에 묶지 않는다",
+            "body": (
+                "Think-at-5Hz/Act-at-20Hz는 frozen 7B VLA backbone cache와 337M action expert를 분리하고, Orbis 2는 high-level abstract "
+                "predictor와 low-level detail predictor를 나눕니다. 두 논문 모두 expensive context를 그대로 매 tick 재계산하지 않고, "
+                "staleness와 hierarchy를 명시적으로 학습·평가합니다."
+            ),
+            "label": "Decision",
+        },
+        {
+            "title": "Robot-usable geometry는 보기 좋은 3D가 아니라 갱신 가능한 state다",
+            "body": (
+                "ImprovedVBGS는 continual Gaussian update latency를 84.0s/frame에서 0.050s/frame으로 줄이는 것을 핵심 evidence로 삼고, "
+                "VTLoc은 tactile reading을 3D point cloud contact probability로 정렬합니다. APRL map/contact 실험은 PSNR이나 single-touch "
+                "accuracy가 아니라 downstream localization, insertion, recovery에 미치는 영향을 함께 봐야 합니다."
+            ),
+            "label": "Decision",
+        },
+    ],
+    "papers": [
+        {
+            "rank": 1,
+            "title": "Xiaomi-Robotics-1: Scaling Vision-Language-Action Models with over 100K Hours of Real-World Trajectories",
+            "arxiv_id": "2607.15330",
+            "fit": "VLA scaling - real-world trajectory pre-training - cross-embodiment post-training",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "로봇 VLA는 web-scale VLM과 달리 teleoperation data가 느리고 좁아서 scaling law를 그대로 적용하기 어렵다는 인식이 강합니다."
+            ),
+            "friction": (
+                "저자들은 robot data bottleneck을 UMI trajectory와 auto-labeling으로 우회해야 한다고 보고, state-transition language와 "
+                "imperative robot instruction 사이의 prompt mismatch를 post-training 문제로 분리합니다."
+            ),
+            "hidden_premise": (
+                "대규모 robot pre-training의 병목은 trajectory 수만이 아니라, 행동을 어떤 language-conditioned state transition으로 라벨링해 "
+                "나중에 embodiment instruction으로 다시 맞출 수 있는가입니다."
+            ),
+            "conceptual_move": (
+                "100k 시간 UMI trajectory를 VLM auto-labeling으로 state-transition prompt에 묶고, 이후 10k 시간 cross-embodiment data로 "
+                "robot embodiment와 imperative instruction에 정렬하는 two-stage recipe를 제안합니다."
+            ),
+            "mechanism": (
+                "Mixture-of-Transformers 구조에서 Qwen3-VL 계열 VLM은 observation/language와 KV cache를 제공하고, DiT는 robot state와 "
+                "VLM cache를 조건으로 action chunk를 flow matching으로 생성합니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "100k 시간 real-world UMI trajectory pre-training, auto-labeled state-transition prompt, cross-embodiment post-training의 전체 recipe를 제시합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "VLM KV cache와 robot proprioceptive state를 조건으로 DiT action chunk를 생성하는 MoT architecture를 설명합니다.",
+                },
+                {
+                    "trace": "Section 3.1 / Figure 5 [Verified]",
+                    "claim": "20k 시간 UMI subset에서 data scale과 model scale이 validation action MSE를 낮추며, data scale effect가 더 크다고 분석합니다.",
+                },
+                {
+                    "trace": "Section 3.2 / Figure 8 [Verified]",
+                    "claim": "pre-training data 0%에서 100%로 갈수록 unseen-environment post-training success가 26%에서 75%로 증가한다고 보고합니다.",
+                },
+                {
+                    "trace": "Section 3.3 [Verified]",
+                    "claim": "평균 10시간 미만 task data로 네 개 held-out dexterous/mobile tasks에서 75% success를 보이고 pi0.5의 40%와 비교합니다.",
+                },
+            ],
+            "falsification": (
+                "같은 10k post-training budget에서 더 작고 다양하게 curated된 dataset이 비슷한 unseen-environment success를 내거나, "
+                "state-transition auto-label을 제거해도 scaling transfer가 유지되면 large UMI labeling recipe의 핵심성은 약해집니다."
+            ),
+            "adversarial": (
+                "강한 결과는 매우 큰 proprietary trajectory corpus와 in-house robot data에 의존합니다. public reproduction 가능성, data diversity의 "
+                "정확한 coverage, failure cases, low-cost lab transfer는 별도 검증이 필요합니다."
+            ),
+            "thinking_tool": (
+                "로봇 scaling을 model size가 아니라 labelable state transition, embodiment alignment, low-data transfer의 세 계약으로 나누어 봅니다."
+            ),
+            "transfer_boundary": (
+                "대규모 data infra가 있는 팀에는 직접적이지만, APRL 규모에서는 100k 시간 재현보다 OOD composition과 small-data adaptation harness를 "
+                "소유하는 쪽이 더 현실적입니다."
+            ),
+        },
+        {
+            "rank": 2,
+            "title": "AC-VLA: Robust Out-of-Distribution Action Execution via Compositional Learning",
+            "arxiv_id": "2607.15714",
+            "fit": "VLA OOD generalization - sub-skill composition - visual shortcut suppression",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "end-to-end VLA는 충분한 demonstrations를 보면 pick/place 같은 familiar skills를 novel instruction에도 재조합한다고 기대하기 쉽습니다."
+            ),
+            "friction": (
+                "논문은 OOD recombination에서 holistic trajectory memorization과 wrist-view texture shortcut이 서로 보강되어, language instruction과 "
+                "global spatial grounding이 무시될 수 있다고 봅니다."
+            ),
+            "hidden_premise": (
+                "compositional OOD failure는 하나의 model-capacity 문제가 아니라 sub-task semantic supervision과 view-dependent shortcut을 동시에 "
+                "분리해야 드러나는 failure family입니다."
+            ),
+            "conceptual_move": (
+                "LLM instruction decomposer와 proprioceptive trajectory aligner로 dense sub-task supervision을 만들고, full demonstration과 decomposed "
+                "segments를 mixed training합니다. closed-gripper place phase에서는 wrist-view input을 mask해 global grounding을 강제합니다."
+            ),
+            "mechanism": (
+                "Figure 2는 compositional learning module과 state-conditioned asymmetric masking을 architecture modification 없이 VLA backbone에 붙이는 "
+                "방식을 보여줍니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "training에서는 object A->target A, object B->target B만 보았을 때 novel object A->target B가 visual/language token conflict를 만든다고 설명합니다.",
+                },
+                {
+                    "trace": "Section 3.2 [Verified]",
+                    "claim": "full trajectories와 decomposed sub-task data를 고정 ratio로 섞어 long-horizon coherence와 primitive recombination을 함께 학습합니다.",
+                },
+                {
+                    "trace": "Section 3.3 [Verified]",
+                    "claim": "closed-gripper phase에서 wrist-camera view를 suppress해 local texture shortcut 대신 third-person global spatial context를 쓰게 합니다.",
+                },
+                {
+                    "trace": "Table 2 [Verified]",
+                    "claim": "LIBERO-OOD Spatial/Goal에서 AC-VLA(pi0.5)가 64.2/73.3 success를 보고하며 vanilla pi0.5 대비 28.7/26.7 absolute gain을 제시합니다.",
+                },
+                {
+                    "trace": "Table 4 [Verified]",
+                    "claim": "real-world setup에서 baseline pi0.5는 OOD 35.0%, AC-VLA는 OOD 82.5% success를 보고합니다.",
+                },
+            ],
+            "falsification": (
+                "task templates와 object-target combinations를 충분히 다양하게 늘린 vanilla VLA가 같은 OOD split에서 비슷하게 올라가거나, "
+                "wrist masking이 다른 camera geometry에서는 성능을 해치면 shortcut 가설은 조건부로 약해집니다."
+            ),
+            "adversarial": (
+                "offline decomposition은 LLM semantic parser와 proprioceptive aligner 오류에 민감합니다. 저자도 ambiguous/domain-specific instruction에서 "
+                "sub-task description 오류가 trajectory alignment에 전파될 수 있다고 적습니다."
+            ),
+            "thinking_tool": (
+                "VLA OOD를 평균 success로 보지 말고 trajectory overfitting과 perceptual shortcut을 서로 다른 intervention으로 분리합니다."
+            ),
+            "transfer_boundary": (
+                "tabletop recombination에는 직접적이지만 deformable/contact-rich tasks에서는 sub-skill boundary와 wrist masking phase가 더 모호해질 수 있습니다."
+            ),
+        },
+        {
+            "rank": 3,
+            "title": "Think at 5 Hz, Act at 20 Hz: Asynchronous Fast-Slow Vision-Language-Action Inference for Closed-Loop Driving",
+            "arxiv_id": "2607.15621",
+            "fit": "closed-loop driving VLA - asynchronous cache - action expert latency",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "language-conditioned driving agent는 매 control tick마다 큰 VLA가 scene history를 다시 읽거나, 느리면 command replay로 frame skipping을 감수합니다."
+            ),
+            "friction": (
+                "7B backbone이 20Hz closed-loop control rate를 맞추지 못해, 기존 LMDrive 계열은 alternate tick만 model을 호출하고 나머지는 stale command를 재사용합니다."
+            ),
+            "hidden_premise": (
+                "instruction understanding과 scene aggregation은 느리게 갱신되어도 되지만, current-frame-to-waypoint mapping은 빠르게 매 tick 갱신되어야 합니다."
+            ),
+            "conceptual_move": (
+                "frozen 7B VLA backbone은 low-frequency slow system으로 KV cache를 유지하고, 337M action expert가 매 50ms tick마다 cache와 current frame에 "
+                "cross-attend해 waypoint를 예측합니다."
+            ),
+            "mechanism": (
+                "expert는 backbone per-layer KV cache를 읽지만 backbone은 expert token을 보지 않으므로 cache가 동일하게 유지됩니다. randomized staleness training은 "
+                "deployment cache lag를 학습 분포에 넣습니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "baseline frame-skipping agent는 89ms invocation 때문에 50ms tick마다 fresh control을 만들지 못하고, expert path는 32ms per tick을 제시합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "slow backbone이 K=4 tick마다 four visual tokens를 cache에 append하고, fast expert가 매 tick 10 tokens로 cached keys/values를 읽는 구조를 보여줍니다.",
+                },
+                {
+                    "trace": "Table 2 [Verified]",
+                    "claim": "LangAuto-Short town05에서 route completion이 frame-skipping baseline 37.0에서 94.0으로 상승하고, same expert 10Hz ablation은 82.1입니다.",
+                },
+                {
+                    "trace": "Table 3 / Figure 5 [Verified]",
+                    "claim": "legacy recompute cost는 history length에 따라 59-169ms로 증가하지만 cached expert model cost는 약 32ms로 flat하다고 보고합니다.",
+                },
+                {
+                    "trace": "Section 4 / limitations discussion [Verified]",
+                    "claim": "town03 long routes에서는 completion은 85.4%지만 collisions/red-light penalties로 driving score가 무너져 hazard negotiation은 아직 약하다고 분석합니다.",
+                },
+            ],
+            "falsification": (
+                "short-context state abstraction이나 smaller synchronous backbone이 같은 latency budget에서 route completion과 infraction score를 동시에 맞추면, "
+                "per-layer cache interface의 독립 가치는 줄어듭니다."
+            ),
+            "adversarial": (
+                "completion gain은 강하지만 infraction trade-off가 남아 있습니다. long-route dense traffic과 signalized encounter가 부족한 training distribution에서는 "
+                "fresh control이 더 멀리 가서 더 많은 위험에 노출될 수 있습니다."
+            ),
+            "thinking_tool": (
+                "큰 model을 줄이기보다 slow context와 fast control의 갱신 주기를 분리하고, staleness를 training variable로 만듭니다."
+            ),
+            "transfer_boundary": (
+                "VLA driving과 low-frequency reasoning에 강하지만 high-rate contact reflex나 safety-certified controller에는 별도 fast safety layer가 필요합니다."
+            ),
+        },
+        {
+            "rank": 4,
+            "title": "Orbis 2: A Hierarchical World Model for Driving",
+            "arxiv_id": "2607.15898",
+            "fit": "driving world model - hierarchy - diffusion forcing representation learning",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "driving world model은 single-level latent에서 frame-by-frame future를 만들고 FVD 같은 perceptual fidelity로 주로 평가됩니다."
+            ),
+            "friction": (
+                "저자들은 long-horizon dynamics에는 coarse semantic/structural latent가 필요하지만, visual rollout에는 fine detail latent가 필요하다고 보고 "
+                "두 objective를 한 representation에 묶는 것을 병목으로 봅니다."
+            ),
+            "hidden_premise": (
+                "world model의 useful representation은 보기 좋은 pixel detail보다 spatial/semantic structure와 steering response를 보존해야 downstream driving에 유효합니다."
+            ),
+            "conceptual_move": (
+                "2Hz abstract high-level predictor가 compressed DINO-aligned latent에서 long-horizon subgoal을 만들고, 10Hz low-level predictor가 그 subgoal을 조건으로 "
+                "short-horizon detailed frames를 생성합니다."
+            ),
+            "mechanism": (
+                "abstract predictor는 diffusion forcing으로 pre-train한 뒤 teacher forcing으로 fine-tune하고, low-level detail predictor는 teacher forcing으로 "
+                "pixel-aligned rollout을 맞춥니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "abstract predictor가 long horizon latent state를 예측하고 detail predictor가 high-level prediction에 조건화된 frame을 생성하는 hierarchy를 제시합니다.",
+                },
+                {
+                    "trace": "Section 3 [Verified]",
+                    "claim": "compressed DINO latent는 16-dimensional abstract space로, high-level flow-matching predictor의 안정적 rollout을 위해 설계됩니다.",
+                },
+                {
+                    "trace": "Table 2 [Verified]",
+                    "claim": "FVD, FVD-slope, semantic segmentation probing, depth probing을 함께 보고 perceptual fidelity와 representation quality를 동시에 평가합니다.",
+                },
+                {
+                    "trace": "Table 5 [Verified]",
+                    "claim": "diffusion forcing pre-training 후 teacher forcing fine-tuning이 semantic mIoU 58.29, depth RMSE 4.157로 가장 좋은 probing 결과를 낸다고 보고합니다.",
+                },
+                {
+                    "trace": "Conclusion / Limitations [Verified]",
+                    "claim": "diffusion forcing이 왜 representation을 개선하는지는 완전히 분리해 연구하지 않았고, abstract/detail latent interaction이 제한된다고 밝힙니다.",
+                },
+            ],
+            "falsification": (
+                "single-branch mixed abstraction model이나 action-conditioned flat predictor가 equal compute에서 같은 FVD-slope와 probing 성능을 얻으면 hierarchy의 필요성은 줄어듭니다."
+            ),
+            "adversarial": (
+                "strong internal representation과 steering responsiveness가 closed-loop planning success로 직접 이어지는지는 외부 planner/policy 연결 실험이 더 필요합니다."
+            ),
+            "thinking_tool": (
+                "world model을 pixel prediction machine이 아니라 abstraction level, temporal resolution, training corruption schedule의 조합으로 설계합니다."
+            ),
+            "transfer_boundary": (
+                "driving video world model에는 직접적이지만 robot manipulation에서는 contact, force, object permanence처럼 pixel latent 밖의 state가 추가로 필요합니다."
+            ),
+        },
+        {
+            "rank": 5,
+            "title": "ImprovedVBGS: Real-time Continual Variational Bayes Gaussian Splatting",
+            "arxiv_id": "2607.15542",
+            "fit": "continual Gaussian reconstruction - real-time map update - memory/latency contract",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "continual Gaussian Splatting은 replay-free learning이 가능해도 per-frame iterations over all observed points 때문에 robot online mapping에는 너무 느리다고 보기 쉽습니다."
+            ),
+            "friction": (
+                "VBGS의 CAVI update는 모든 observed point와 component assignment를 다루기 때문에 strict memory/latency requirement가 있는 robotics navigation에 맞지 않습니다."
+            ),
+            "hidden_premise": (
+                "robot map으로 쓰려면 reconstruction quality뿐 아니라 새 frame이 들어왔을 때 posterior update가 bounded latency 안에서 끝나야 합니다."
+            ),
+            "conceptual_move": (
+                "spatially truncated variational E-step으로 nearby Gaussian components만 평가하고, reassignment forwarding/truncation으로 wasteful recomputation을 줄입니다."
+            ),
+            "mechanism": (
+                "KD-tree로 spatial means의 C nearest candidates를 찾고 truncated E-step에서 responsibilities와 ELBO를 계산합니다. reassignment는 fit step에서 이미 계산된 ELBO를 forward합니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Abstract / Section 1 [Verified]",
+                    "claim": "NeRF Synthetic에서 mean per-frame latency를 84.0s에서 0.050s로 줄여 1680x speed-up을 보고합니다.",
+                },
+                {
+                    "trace": "Algorithm 1 [Verified]",
+                    "claim": "spatially truncated E-step은 KD-tree candidate pruning으로 nearest component subset만 평가합니다.",
+                },
+                {
+                    "trace": "Table 1 [Verified]",
+                    "claim": "RTX 3070 Ti, random initialization, static-shape reassignment protocol에서 latency와 PSNR을 scene별로 보고합니다.",
+                },
+                {
+                    "trace": "Table 2 [Verified]",
+                    "claim": "cumulative ablation으로 truncation, reassignment forwarding, batch-size change가 latency/quality trade-off에 주는 영향을 분리합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "baseline fit step의 compute_elbo_delta 28.8s/frame과 sum_stats 24.3s/frame bottleneck이 ImprovedVBGS에서 ms scale로 줄었다고 분석합니다.",
+                },
+            ],
+            "falsification": (
+                "dynamic scene, rolling shutter, noisy pose, loop closure가 들어간 robot trajectory에서 latency advantage가 PSNR만 유지하고 localization/map consistency를 해치면 "
+                "robot-usable map claim은 약해집니다."
+            ),
+            "adversarial": (
+                "평가는 NeRF Synthetic static scenes 중심입니다. robot navigation에 필요한 pose uncertainty, dynamic object update, closed-loop localization success는 별도 측정이 필요합니다."
+            ),
+            "thinking_tool": (
+                "3DGS 연구를 rendering quality 경쟁이 아니라 posterior update latency와 map usability contract로 다시 읽습니다."
+            ),
+            "transfer_boundary": (
+                "on-the-fly static reconstruction에는 강하지만 active SLAM, semantic map, dynamic object handling에는 pose and update-policy layer가 필요합니다."
+            ),
+        },
+        {
+            "rank": 6,
+            "title": "VTLoc: Learning-based Tactile Contact Localization in Visual Point Clouds",
+            "arxiv_id": "2607.16146",
+            "fit": "visual-tactile localization - 3D point cloud contact state - manipulation sensing",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "tactile contact localization은 object-specific codebook이나 same-dimensional matching에 기대기 쉬워, 2D tactile image를 3D object surface에 직접 맞추기 어렵습니다."
+            ),
+            "friction": (
+                "touch는 local signal이고 vision은 global geometry라서, tactile reading과 point cloud surface 사이의 spatial alignment ambiguity가 contact-rich manipulation 병목이 됩니다."
+            ),
+            "hidden_premise": (
+                "contact state를 action policy에 쓰려면 tactile feature를 3D object geometry 위의 probability distribution으로 바꿔야 합니다."
+            ),
+            "conceptual_move": (
+                "Geometric Multi-Modal Alignment가 fused visual-tactile feature에서 pseudo-point cloud를 reconstruct하고 원본 point cloud와 align하며, "
+                "Iterative Localization Updater가 contact coordinate를 반복 refinement합니다."
+            ),
+            "mechanism": (
+                "final contact estimate는 candidate contact set에서 top-K likelihood를 만들고, point cloud 위에 3D contact probability heat-map을 생성합니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "GMA가 pseudo-point cloud와 original point cloud의 Chamfer alignment를 만들고 ILU가 contact location을 반복 수정하는 workflow를 제시합니다.",
+                },
+                {
+                    "trace": "Figure 4 / Dataset section [Verified]",
+                    "claim": "ObjectFolder Real 기반 100 real-world objects, object당 30-50 contact locations, 1024 point samples로 benchmark를 구성합니다.",
+                },
+                {
+                    "trace": "Table II-III [Verified]",
+                    "claim": "non-uniform subset에서 VTLoc이 Point Filtering 대비 ND 14.87%, Top-5 Acc 30.19% 개선, uniform subset에서도 baseline 대비 개선을 보고합니다.",
+                },
+                {
+                    "trace": "Table IV [Verified]",
+                    "claim": "multi-contact localization에서 non-uniform ND가 single-contact 20.17%에서 4.85%로 감소하고 MidasTouch 8.76%보다 낮다고 보고합니다.",
+                },
+                {
+                    "trace": "Conclusion and Discussion [Verified]",
+                    "claim": "flat/symmetric surfaces에서는 tactile ambiguity가 본질적으로 남고, soft objects에는 temporal tactile sequence가 필요하다고 제한을 밝힙니다.",
+                },
+            ],
+            "falsification": (
+                "unknown soft objects, deformable contact, in-hand rotation under occlusion에서 probability heat-map이 action recovery를 개선하지 못하면 "
+                "contact localization gain은 perception-only gain으로 제한됩니다."
+            ),
+            "adversarial": (
+                "symmetry prior는 manually specified axis에 의존하고, hard objects 중심입니다. downstream manipulation success와 failure-warning lead time은 아직 직접 평가되지 않았습니다."
+            ),
+            "thinking_tool": (
+                "touch를 binary contact event가 아니라 3D geometry 위의 uncertainty map으로 바꾸고, action update가 어느 ambiguity를 줄이는지 봅니다."
+            ),
+            "transfer_boundary": (
+                "rigid object contact localization에는 직접적이지만 soft/deformable manipulation이나 high-speed tactile servoing에는 temporal model과 control loop 검증이 필요합니다."
+            ),
+        },
+    ],
+    "synthesis": [
+        {
+            "title": "S1 - scale과 composition은 같은 VLA 문제가 아니다",
+            "links": "Xiaomi-Robotics-1 - AC-VLA - IMBench",
+            "facts": (
+                "Xiaomi는 data/model scale이 post-training success로 이어진다고 보고, AC-VLA는 familiar sub-skills의 OOD recombination에서 별도 failure mode를 보입니다."
+            ),
+            "inference": (
+                "APRL은 large-data scaling을 그대로 따라가기보다, small-data adaptation과 composition OOD split을 결합한 evaluation asset을 소유해야 합니다."
+            ),
+            "decision": "VLA 실험의 기본 split을 ID success, composition OOD, shortcut view ablation, low-data transfer로 고정합니다.",
+        },
+        {
+            "title": "S2 - fast/slow decomposition은 control stack의 새 기본형이 된다",
+            "links": "Think-at-5Hz/Act-at-20Hz - Orbis 2 - Orbis 2 steering evaluation",
+            "facts": (
+                "driving VLA는 slow backbone cache와 fast expert를 나누고, world model은 abstract 2Hz predictor와 detail 10Hz predictor를 나눕니다."
+            ),
+            "inference": (
+                "로봇 시스템도 high-level reasoning, map/world update, action reflex의 갱신 주기를 따로 설계하고 staleness를 실험 변수로 봐야 합니다."
+            ),
+            "decision": "closed-loop benchmark마다 p50/p95 latency, cache age, control freshness, hazard recovery를 같은 결과표에 둡니다.",
+        },
+        {
+            "title": "S3 - geometry는 map appearance보다 update and contact state로 평가된다",
+            "links": "ImprovedVBGS - VTLoc - CSS-BA - NeoSLAM",
+            "facts": (
+                "ImprovedVBGS는 continual GS update latency를 줄이고, VTLoc은 tactile reading을 3D point cloud contact probability로 정렬합니다."
+            ),
+            "inference": (
+                "APRL geometry 연구의 자산은 예쁜 map이 아니라 robot이 쓰는 state update: localization drift, contact ambiguity, downstream failure를 함께 재는 protocol입니다."
+            ),
+            "decision": "3D/SLAM/contact 논문은 PSNR/ND와 함께 task success delta, update age, ambiguity-to-action error를 요구합니다.",
+        },
+        {
+            "title": "S4 - benchmark는 physical reasoning과 execution을 같이 물어야 한다",
+            "links": "IMBench - UAV-DualCog - Embodied Active Learning",
+            "facts": (
+                "IMBench는 reasoning과 action generation을 통합 capability로 보고, UAV-DualCog는 self-state/environment-state reasoning을 함께 봅니다."
+            ),
+            "inference": (
+                "단일 perception score가 아니라 어떤 state를 이해하고 어떤 action으로 옮기는지 묻는 benchmark가 다음 moat가 됩니다."
+            ),
+            "decision": "APRL benchmark 후보는 observation-only answer와 executable plan을 분리 채점합니다.",
+        },
+    ],
+    "frontier_memory": [
+        {
+            "signal": "강화 중",
+            "title": "VLA scale에서 VLA execution diagnosis로 이동",
+            "history": "7/15-7/17에는 VLA grounding, action-facing interface, long-context update가 반복되었습니다.",
+            "read": "오늘은 Xiaomi scaling과 AC-VLA OOD composition이 함께 나와, scale이 해결하는 것과 decomposition이 해결하는 것을 나눠야 한다는 신호가 강해졌습니다.",
+        },
+        {
+            "signal": "강화 중",
+            "title": "world model은 visual fidelity보다 representation and steering evidence를 요구",
+            "history": "최근 weekly에서는 world-action safety와 simulator validity가 반복되었습니다.",
+            "read": "Orbis 2는 FVD만이 아니라 probing, FVD-slope, counterfactual steering을 함께 보며 이 방향을 명확히 합니다.",
+        },
+        {
+            "signal": "강화 중",
+            "title": "3D/SLAM은 online update latency와 robot usability로 좁혀짐",
+            "history": "지난 4주에는 Gaussian map, localization, feed-forward reconstruction이 계속 등장했습니다.",
+            "read": "ImprovedVBGS, CSS-BA, Event3R, NeoSLAM은 visual asset보다 update cost, weak-geometry stability, event/SLAM runtime을 강조합니다.",
+        },
+        {
+            "signal": "새로운 통합",
+            "title": "tactile contact와 3D geometry가 같은 state-estimation 문제로 합쳐짐",
+            "history": "force/tactile papers는 이전 batch에서 contact-rich manipulation failure로 주로 읽혔습니다.",
+            "read": "VTLoc은 tactile image를 point cloud probability로 바꾸며, contact state를 map/state estimation asset으로 연결합니다.",
+        },
+    ],
+    "strategy": [
+        {
+            "priority": "BUILD",
+            "title": "Composition-OOD VLA Stress Harness",
+            "thesis": (
+                "large VLA를 새로 만들지 않고, existing OpenVLA/pi0-style policy를 ID, composition OOD, wrist shortcut, low-data transfer split에서 "
+                "같은 action-facing diagnostics로 평가합니다."
+            ),
+            "scores": {"fit": 5, "novelty": 4, "feasibility": 5, "moat": 5, "timing": 5, "evidence": 5},
+            "one_week": (
+                "LIBERO/RoboCasa에서 object-target recombination split을 만들고 wrist-view masking, third-view-only, language paraphrase, "
+                "low-data fine-tuning 조건을 factor로 둡니다."
+            ),
+            "four_week": (
+                "trajectory overfitting detector, visual shortcut attention probe, instruction-action contradiction metric을 자동 산출하는 harness로 확장합니다."
+            ),
+            "metric": "composition OOD success +10p, ID success drop <3p, shortcut attention shift와 failure reduction의 rank correlation >=0.5.",
+            "stop": "두 task family에서 decomposition/masking이 baseline 대비 5p 미만이면 VLA contribution을 접고 benchmark note로 전환합니다.",
+            "assets": [
+                {"label": "Xiaomi-Robotics-1", "url": "https://arxiv.org/abs/2607.15330"},
+                {"label": "AC-VLA", "url": "https://arxiv.org/abs/2607.15714"},
+                {"label": "IMBench", "url": "https://arxiv.org/abs/2607.15641"},
+            ],
+        },
+        {
+            "priority": "EXPLOIT",
+            "title": "Fast-Slow Robot Control Accounting",
+            "thesis": (
+                "slow reasoning cache, world-model abstract state, fast action expert를 같은 closed-loop robot task에서 latency, staleness, recovery로 재는 "
+                "계측 자산을 만듭니다."
+            ),
+            "scores": {"fit": 5, "novelty": 5, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 4},
+            "one_week": (
+                "CARLA 또는 lightweight mobile manipulation sim에서 cache age, action freshness, p95 latency, failure recovery를 logging하는 wrapper를 붙입니다."
+            ),
+            "four_week": (
+                "fast expert, action chunking, synchronous small model, stale-cache robust training을 equal compute budget에서 비교합니다."
+            ),
+            "metric": "route/task completion +15p, stale-action failure -30%, p95 latency < control tick budget, infraction/recovery trade-off가 명시됨.",
+            "stop": "fresh control이 completion만 올리고 safety penalty를 악화시키면 safety layer 없는 deployment claim을 철회합니다.",
+            "assets": [
+                {"label": "Think at 5Hz Act at 20Hz", "url": "https://arxiv.org/abs/2607.15621"},
+                {"label": "Orbis 2", "url": "https://arxiv.org/abs/2607.15898"},
+            ],
+        },
+        {
+            "priority": "EXPLORE",
+            "title": "Robot-Usable Geometry and Contact State Protocol",
+            "thesis": (
+                "online Gaussian map과 tactile contact localization을 같은 manipulation/navigation suite에 넣고, map/contact state가 downstream action을 얼마나 "
+                "바꾸는지 측정합니다."
+            ),
+            "scores": {"fit": 5, "novelty": 5, "feasibility": 3, "moat": 5, "timing": 4, "evidence": 4},
+            "one_week": (
+                "ImprovedVBGS-style update cost와 VTLoc-style contact probability를 각각 toy navigation/insertion task에 연결하고 update age, contact entropy를 저장합니다."
+            ),
+            "four_week": (
+                "dynamic object, pose noise, symmetric/flat contact object를 stress split으로 넣고 localization drift, insertion recovery, false-contact action을 비교합니다."
+            ),
+            "metric": "map update age가 localization failure AUC >=0.75, contact entropy가 insertion failure lead time >=0.5s, downstream success +10p.",
+            "stop": "PSNR/ND improvement가 downstream task delta를 설명하지 못하면 perception-only artifact로 낮춥니다.",
+            "assets": [
+                {"label": "ImprovedVBGS", "url": "https://arxiv.org/abs/2607.15542"},
+                {"label": "VTLoc", "url": "https://arxiv.org/abs/2607.16146"},
+                {"label": "CSS-BA", "url": "https://arxiv.org/abs/2607.15652"},
+            ],
+        },
+    ],
+}
+
+
+def main() -> None:
+    template.DATE = DATE
+    template.SLUG = SLUG
+    template.DATA = DATA
+    doc = template.build_html()
+    doc = doc.replace("2026-07-13 arXiv Research Intelligence", "2026-07-20 arXiv Research Intelligence")
+    doc = doc.replace("<span>Tier A 5편 full-text</span>", "<span>Tier A 6편 full-text</span>")
+
+    json_dir = ROOT / "intelligence"
+    json_dir.mkdir(exist_ok=True)
+    json_path = json_dir / f"{DATE}.json"
+    html_path = ROOT / "posts" / f"{SLUG}.html"
+    json_path.write_text(json.dumps(DATA, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    html_path.write_text(doc, encoding="utf-8")
+    print(f"wrote {json_path.relative_to(ROOT)}")
+    print(f"wrote {html_path.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()

@@ -6,8 +6,22 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 18 Jul 2026 15:10:16 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jul 2026 15:14:30 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>2026-07-20 심층판</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-20-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-20-research-intelligence.html</guid>
+      <pubDate>Mon, 20 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘의 강한 신호는 로봇 foundation model이 커질수록 곧바로 배포 가능해진다는 낙관보다, scale, compositional supervision, asynchronous control, world-model hierarchy, online geometry, visual-tactile alignment를 각각 어떤 실패 조건에서 검증할지의 문제가 전면으로 올라왔다는 점입니다. Xiaomi-Robotics-1은 데이터와 모델 scale이 실제 로봇 post-training까지 이어질 수 있음을 보이지만, AC-VLA는 같은 VLA라도 sub-skill recombination과 wrist-view shortcut을 분리하지 않으면 OOD에서 무너진다고 말합니…]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-07-20 (Mon)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-20.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-20.html</guid>
+      <pubDate>Mon, 20 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 88건, cs.RO 46건이고 dedupe 후 125건 중 107건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Foundation Models 23편, Robot Learning 21편, Efficiency/Systems 15편입니다. Foundation Models와 Robot Learning이 가장 두껍고 Efficiency/Systems, Safety/Alignment, 3D/Scene도 두드러졌지만, robotics 관점의 공통 축은 VLA composition, fast-slow control, world-model hierarchy, online geometry update, visual-tactile state alignment입니다…]]></description>
+    </item>
     <item>
       <title>arXiv Weekly Briefing — 2026-W29</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-18-weekly.html</link>
@@ -413,20 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-07.html</guid>
       <pubDate>Thu, 07 May 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[2026-05-07 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 26편이 잡혔습니다. VLA를 하나의 거대한 policy로만 보면 왜 성공하고 왜 실패하는지 설명하기가 어렵습니다. 이번 흐름은 object-hand-task 관계, expert routing, latent action, verifier처럼 내부 역할을 나눠서 보는 쪽입니다. 즉 모델 크기를 더 키우기 전에 어떤 구조가 어떤 작업에서 실제로 도움이 되는지 비교할 수 있는 발판이 생긴다는 뜻입니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-05-06 (수)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-06.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-06.html</guid>
-      <pubDate>Wed, 06 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-05-06 묶음에서 제일 두꺼운 축은 Foundation Models이고, 저장된 스냅샷 기준 19편이 잡혔습니다. 예전에는 World Model을 미래 영상을 얼마나 그럴듯하게 복원하거나 예측하느냐로 많이 평가했습니다. 이번 묶음은 그 기준을 '그 예측이 로봇 행동 성공에 실제로 도움이 되는가'와 '상호작용 상황에서도 계속 쓸 수 있는가'로 옮기고 있습니다. 그래서 보기 좋은 예측보다 행동을 더 잘하게 만드는 예측이 중요한지, 같은 rollout 안에서 영상 점수와 성공률을 함께 재야 한다는 뜻입니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-05-05 (화)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-05.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-05.html</guid>
-      <pubDate>Tue, 05 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[2026-05-05 묶음에서 제일 두꺼운 축은 Generation이고, 저장된 스냅샷 기준 54편이 잡혔습니다. VLA를 하나의 거대한 policy로만 보면 왜 성공하고 왜 실패하는지 설명하기가 어렵습니다. 이번 흐름은 object-hand-task 관계, expert routing, latent action, verifier처럼 내부 역할을 나눠서 보는 쪽입니다. 즉 모델 크기를 더 키우기 전에 어떤 구조가 어떤 작업에서 실제로 도움이 되는지 비교할 수 있는 발판이 생긴다는 뜻입니다.]]></description>
     </item>
   </channel>
 </rss>
