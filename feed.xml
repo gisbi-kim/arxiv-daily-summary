@@ -6,8 +6,22 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Tue, 21 Jul 2026 15:12:26 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jul 2026 22:46:06 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>2026-07-22 심층판</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-22-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-22-research-intelligence.html</guid>
+      <pubDate>Wed, 22 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[7월 22일 배치의 강한 신호는 robotics foundation model 연구가 모델 출력 자체보다 실행 계약을 어떻게 명시하고 검증할지로 이동했다는 점입니다. Masked Visual Actions와 WorldScape Policy 2.0은 action을 token이 아니라 visual trajectory, event memory, latent subgoal state로 바꿔 world model이 실행 가능성을 예측하게 만듭니다. Agentic Real2Sim은 실제 episode를 simulator twin으로 바꾸려면 geometry뿐 아니라 object state, physical prior, critic loop가 필요하다고 보고, OREN-Bubble*…]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-07-22 (Wed)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-22.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-22.html</guid>
+      <pubDate>Wed, 22 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 93건, cs.RO 39건이고 dedupe 후 124건 중 108건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Generation 23편, Efficiency/Systems 20편, Foundation Models 19편입니다. Generation 23편, Efficiency/Systems 20편, Foundation Models 19편, Robot Learning 15편, 3D/Scene 13편이 두꺼웠지만, robotics 관점의 공통 연구 결정은 model capacity보다 execution-state interface입니다. 오늘은 visual action masks, event memory, episode twins, SDF corri…]]></description>
+    </item>
     <item>
       <title>2026-07-21 심층판</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-21-research-intelligence.html</link>
@@ -413,20 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-12.html</guid>
       <pubDate>Tue, 12 May 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[오늘 /new는 cs.CV 399건, cs.RO 113건이고 dedupe 후 483건 중 417건이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 Generation 80편, Foundation Models 76편, Efficiency/Systems 69편입니다. 5/12의 핵심은 논문 수 자체보다 VLA 내부 실행 구조, driving world model, closed-loop benchmark, VLM self-verification failure가 한꺼번에 나온 점입니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-05-11 (월)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-11.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-11.html</guid>
-      <pubDate>Mon, 11 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 /new는 cs.CV 184건, cs.RO 47건이고 dedupe 후 219건 중 99건이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 Generation 29편, Foundation Models 16편, 3D/Scene 14편입니다. 핵심은 VLA 논문 숫자보다 world model, 4D/LiDAR generation, resilient driving, adaptive token budget이 같은 날 나온 점입니다. 즉 5/11은 모델 구조 경쟁보다 '실제 제어와 센서 조건에서 쓸 수 있는 생성·예측 기반'을 보는 날에 가깝습니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Weekly Briefing — 2026-05-09 (토)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-09-weekly.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-09-weekly.html</guid>
-      <pubDate>Sat, 09 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[4D World Model 쪽은 이제 장면을 그럴듯하게 만드는 수준을 넘어, 시간에 따라 물리적으로 말이 되는지와 실제 상호작용에 쓸 수 있는지를 같이 묻고 있습니다. LoViF 같은 평가는 dynamics, optics, temporal consistency처럼 실패가 어디서 나는지 나눠서 보려는 시도입니다. 즉 4D/World Model 연구가 데모 영상 경쟁에서 평가 프로토콜과 물리 기반 장면 표현 경쟁으로 넘어가고 있다는 뜻입니다.]]></description>
     </item>
   </channel>
 </rss>
