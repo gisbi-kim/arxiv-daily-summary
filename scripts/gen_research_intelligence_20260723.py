@@ -1,0 +1,680 @@
+#!/usr/bin/env python3
+"""Generate the full-text Research Intelligence edition for 2026-07-23."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import gen_research_intelligence_20260713 as template
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DATE = "2026-07-23"
+SLUG = f"{DATE}-research-intelligence"
+
+
+DATA = {
+    "date": DATE,
+    "edition": "Research Intelligence",
+    "source_prompt": "prompts/instruction_v20260713.md",
+    "scope_note": (
+        "cs.CV/cs.RO /new listing for 2026-07-23 was parsed with the repository scripts. "
+        "The parser found 149 cs.CV rows and 58 cs.RO rows; after replacement exclusion and deduplication, "
+        "117 papers remained and 102 were classified as ROI. Tier A uses official arXiv HTML full text for "
+        "KineBench, PerceptDrive, EgoRecovery, NavVerse, EA-Nav, DINS-IO, LENS, and Silent Failures."
+    ),
+    "executive_thesis": (
+        "오늘 배치의 공통 신호는 로봇 foundation model 연구가 더 큰 backbone보다 실행 상태를 어떻게 만들고, "
+        "검증하고, 실패 후 다시 들어올지를 묻기 시작했다는 점입니다. KineBench와 PerceptDrive는 video/world-action "
+        "model을 pixel score가 아니라 kinematic grounding, trajectory metric, expert routing으로 판정합니다. EgoRecovery와 "
+        "LENS는 더 많은 성공 demo를 모으는 대신 failure state, corrective intent, task-relevant scene abstraction을 "
+        "훈련 신호로 바꿉니다. NavVerse와 EA-Nav는 navigation을 indoor/outdoor split이 아니라 continuous execution, "
+        "embodiment geometry, safety metric의 문제로 재정의합니다. DINS-IO는 labeled pose 없이 IMU consistency를 "
+        "metric state로 끌어내고, Silent Failures는 answer accuracy 뒤에 숨은 evidence trajectory 오류를 드러냅니다. "
+        "APRL 관점의 결론은 VLA를 바로 키우는 것보다 action-state contract, recovery-data protocol, robot-usable "
+        "geometry, evidence-grounded audit harness를 먼저 소유해야 한다는 것입니다."
+    ),
+    "decision_cards": [
+        {
+            "title": "판단 1 - world model 평가는 video fidelity보다 executable state contract가 먼저다",
+            "body": (
+                "KineBench는 generated video에서 6D end-effector pose를 추출해 simulator에서 실행하고, "
+                "PerceptDrive는 frozen perception prior를 expert-routed world-action model에 보존합니다. 두 논문 모두 "
+                "model output을 사람이 보기 좋은 장면이 아니라 control이 소비할 수 있는 상태 계약으로 바꾸는 쪽입니다."
+            ),
+            "label": "Decision",
+        },
+        {
+            "title": "판단 2 - recovery 능력은 policy architecture보다 failure-state data economy에서 갈린다",
+            "body": (
+                "EgoRecovery는 사람 egocentric recovery segment가 robot teleoperation보다 훨씬 넓은 failure coverage를 "
+                "줄 수 있음을 보이고, LENS는 cluttered scene에서 planning state 자체를 task-relevant abstraction으로 줄입니다. "
+                "APRL이 봐야 할 축은 성공 demo 수가 아니라 failure를 staging하고, 설명하고, 복구 행동으로 압축하는 비용입니다."
+            ),
+            "label": "Decision",
+        },
+        {
+            "title": "판단 3 - deployment reliability는 정답률이 아니라 trajectory와 evidence audit에서 나온다",
+            "body": (
+                "NavVerse와 EA-Nav는 안전한 navigation을 embodiment-aware executable episode로 평가하고, Silent Failures는 "
+                "final answer가 맞아도 retrieval trajectory가 틀릴 수 있음을 보입니다. 로봇 시스템에서는 같은 문제가 "
+                "missed hazard, stale localization, unsafe recovery로 나타나므로 evidence and state audit이 필수입니다."
+            ),
+            "label": "Decision",
+        },
+    ],
+    "papers": [
+        {
+            "rank": 1,
+            "title": "KineBench: Benchmarking Embodied World Models via IDM-Free Kinematic Grounding",
+            "arxiv_id": "2607.19876",
+            "fit": "embodied world model evaluation - kinematic grounding - simulator execution",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "Embodied world model 평가는 generated video를 inverse dynamics model에 넣어 action을 복원한 뒤 simulator에서 "
+                "닫힌 루프로 평가하는 방식에 크게 의존해 왔습니다."
+            ),
+            "friction": (
+                "IDM이 novel object나 novel scenario에서 brittle하면, 실패 원인이 world model인지 action extractor인지 "
+                "분리하기 어렵습니다."
+            ),
+            "hidden_premise": (
+                "world model이 robotically useful하려면 pixel realism이 아니라 3D end-effector trajectory와 manipulability로 "
+                "검증 가능한 실행 상태를 남겨야 합니다."
+            ),
+            "conceptual_move": (
+                "generated video를 바로 action으로 해석하지 않고, 2D segmentation, monocular depth, 6D pose tracking을 거쳐 "
+                "explicit kinematic grounding으로 바꾼 뒤 physics simulator에서 실행합니다."
+            ),
+            "mechanism": (
+                "KineBench는 ManiSkill3의 20개 manipulation task, four-suite benchmark, SPARC와 Maruyama manipulability metric을 "
+                "결합해 physical execution과 generalization을 봅니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "논문은 IDM-free 3D kinematic grounding pipeline을 기존 open-loop/video-only 평가와 구분해 제시합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "2D instance segmentation, monocular depth estimation, 6D pose tracking을 통합해 generated frames에서 pose sequence를 추출합니다.",
+                },
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "20개 ManiSkill3 manipulation tasks로 primitive rigid interaction부터 long-horizon articulated manipulation까지 구성합니다.",
+                },
+                {
+                    "trace": "Table 1 [Verified]",
+                    "claim": "closed-loop success rates를 suite별로 보고해 model comparison을 physical execution metric에 묶습니다.",
+                },
+            ],
+            "falsification": (
+                "pose extraction error가 task별 success ranking을 지배하거나, generated-video quality와 simulator success가 "
+                "상관되지 않으면 kinematic grounding의 평가 가치가 약해집니다."
+            ),
+            "adversarial": (
+                "pipeline은 IDM ambiguity를 줄이지만 segmentation/depth/pose tracker의 bias를 새로 도입합니다. "
+                "real robot contact나 deformable object에서는 simulator execution이 아직 deployment proof가 아닙니다."
+            ),
+            "thinking_tool": (
+                "world model을 평가할 때 영상의 그럴듯함을 묻지 말고, generated state가 robot controller가 실행할 수 있는 "
+                "kinematic contract인지 먼저 묻습니다."
+            ),
+            "transfer_boundary": (
+                "rigid manipulation과 visible end-effector setting에는 직접적이지만, tactile-only contact, heavy occlusion, "
+                "deformable manipulation에는 별도 sensing contract가 필요합니다."
+            ),
+        },
+        {
+            "rank": 2,
+            "title": "PerceptDrive: Perception Prior World-Action Modeling with Adaptive Expert Routing for End-to-End Autonomous Driving",
+            "arxiv_id": "2607.20175",
+            "fit": "autonomous driving - perception prior - world-action model routing",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "end-to-end driving은 perception foundation model의 풍부한 geometry, semantic, dynamics prior를 좁은 conditioning "
+                "interface나 static fusion으로 압축하는 경향이 있습니다."
+            ),
+            "friction": (
+                "scene마다 필요한 prior가 다르지만 static fusion은 어떤 prior를 보존하고 어떤 prior를 버릴지 명시하지 못합니다."
+            ),
+            "hidden_premise": (
+                "driving world-action model은 perception prior를 latent hint로만 쓰면 안 되고, branch별로 보존하고 routing할 수 있어야 합니다."
+            ),
+            "conceptual_move": (
+                "frozen driving-adapted provider와 frozen self-supervised video encoder의 dense prior를 expert-specific query branch에 넣고, "
+                "router가 scene representation에서 soft gate를 예측합니다."
+            ),
+            "mechanism": (
+                "training에서는 privileged rule-based sub-metric estimates가 gate distillation target을 주고, inference에서는 "
+                "front camera 하나로 single trajectory를 생성합니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "논문은 narrow VLM conditioning, implicit expert prior, static fusion을 비교하고 adaptive expert routing을 핵심 차이로 둡니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "frozen provider, prior-retention objective, router, future head, action head가 분리된 world-action architecture로 제시됩니다.",
+                },
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "NAVSIM qualitative examples에서 front-view observation과 BEV context에 trajectory를 투영해 single-trajectory inference를 보여줍니다.",
+                },
+                {
+                    "trace": "Table 1 / Table 2 [Verified]",
+                    "claim": "NAVSIM v1/v2 comparison에서 PDMS/EPDMS 및 sub-score를 사용해 direct planning 성능을 보고합니다.",
+                },
+            ],
+            "falsification": (
+                "router gate가 privileged training signal 없이도 scene-conditioned prior selection을 유지하지 못하거나, "
+                "sub-metric gain이 특정 NAVSIM split에만 묶이면 prior-routing claim은 약해집니다."
+            ),
+            "adversarial": (
+                "single-front-camera inference는 practical하지만, LiDAR/multi-camera baselines와 sensor budget이 다릅니다. "
+                "routing이 explainable prior selection인지 additional capacity인지 분리해야 합니다."
+            ),
+            "thinking_tool": (
+                "perception foundation model을 feature provider로만 쓰지 말고, 어떤 prior가 current scene에서 살아남아야 하는지 "
+                "routing trace를 metric으로 봅니다."
+            ),
+            "transfer_boundary": (
+                "structured road scenes에는 강하지만, indoor/mobile manipulation처럼 dynamics prior가 sparse하고 contact-rich한 setting에는 "
+                "branch definition 자체를 새로 설계해야 합니다."
+            ),
+        },
+        {
+            "rank": 3,
+            "title": "EgoRecovery: Acquiring Failure Recovery Ability Through Human Recovery Demonstration",
+            "arxiv_id": "2607.19745",
+            "fit": "failure recovery - human egocentric data - corrective intent",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "robot recovery는 robot teleoperation으로 failure state를 만들고 reset하며 corrective action을 수집해야 한다는 전제가 큽니다."
+            ),
+            "friction": (
+                "failure mode diversity가 커질수록 robot teleoperation은 failure staging, valid-state checking, reset cost 때문에 scale이 막힙니다."
+            ),
+            "hidden_premise": (
+                "사람과 로봇의 embodiment는 다르지만, recovery에서 필요한 corrective intent는 shared bottleneck으로 압축될 수 있습니다."
+            ),
+            "conceptual_move": (
+                "egocentric human recovery video를 robot action으로 직접 imitate하지 않고, compact corrective-intent space로 align한 뒤 robot data와 co-train합니다."
+            ),
+            "mechanism": (
+                "human recovery segments, robot recovery data, DCT-like corrective target, recovery gate를 사용해 closed-loop real-robot task에서 복구 능력을 학습합니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "논문은 egocentric human recovery collection과 gated corrective-intent bottleneck을 전체 pipeline으로 제시합니다.",
+                },
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "cup brush insertion, table sweep, round disk placement, cube stacking을 real robot tabletop evaluation으로 사용합니다.",
+                },
+                {
+                    "trace": "Table 1 [Verified]",
+                    "claim": "accepted demonstrations per operator hour에서 human recovery가 robot recovery보다 평균 약 10.5배 많은 valid data를 제공합니다.",
+                },
+                {
+                    "trace": "Table 2 / Appendix reference [Verified]",
+                    "claim": "closed-loop mechanism diagnostics가 DCT target, intent bottleneck, recovery gate의 역할을 분리합니다.",
+                },
+            ],
+            "falsification": (
+                "corrective-intent bottleneck을 제거해도 recovery success가 유지되거나, human recovery gain이 task-specific staging artifact라면 "
+                "human-to-robot recovery claim은 약해집니다."
+            ),
+            "adversarial": (
+                "human hands와 robot gripper의 contact mechanics가 다르므로, recovery intent가 fine manipulation force를 대체한다고 보면 안 됩니다."
+            ),
+            "thinking_tool": (
+                "복구 능력은 success demonstration의 tail이 아니라 failure-state distribution과 corrective intent vocabulary의 문제로 봅니다."
+            ),
+            "transfer_boundary": (
+                "visible tabletop correction에는 강하지만, force-dominant insertion, deformable object, hidden contact failure에는 extra sensing과 labeling이 필요합니다."
+            ),
+        },
+        {
+            "rank": 4,
+            "title": "NavVerse: Benchmarking Indoor-to-Outdoor Embodied Navigation in Continuous Robot Simulation",
+            "arxiv_id": "2607.19695",
+            "fit": "embodied navigation - indoor-to-outdoor transition - safety metrics",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "navigation benchmark는 indoor와 outdoor를 따로 평가하거나, robot execution을 추상화해 boundary traversal과 kinodynamic failure를 놓치기 쉽습니다."
+            ),
+            "friction": (
+                "delivery, campus, emergency-response 로봇은 building-to-street transition을 한 episode에서 처리해야 하며, exit finding과 adaptation failure가 같이 나타납니다."
+            ),
+            "hidden_premise": (
+                "navigation benchmark는 scene diversity보다 continuous robot execution, task success, efficiency, safety가 같은 protocol에 있어야 유용합니다."
+            ),
+            "conceptual_move": (
+                "indoor, outdoor, indoor-to-outdoor scenes를 Isaac Sim 기반 continuous execution benchmark로 묶고 ObjNav, VLN, PlaceNav tasks를 평가합니다."
+            ),
+            "mechanism": (
+                "100 indoor scenes, 50 urban outdoor scenes, 50 indoor-to-outdoor scenes, 10,000 episodes와 task-success, path-efficiency, safety metrics를 제공합니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "NavVerse는 indoor/outdoor/hybrid scenes를 continuous physics-enabled robot execution으로 연결합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "Isaac Sim execution engine, scene construction, task generation, oracle validation, diagnostic evaluation pipeline이 제시됩니다.",
+                },
+                {
+                    "trace": "Table 1 [Verified]",
+                    "claim": "기존 benchmarks와 비교해 indoor-to-outdoor environment, embodiment dynamics, safety metrics를 포함함을 보입니다.",
+                },
+                {
+                    "trace": "Table 2 [Verified]",
+                    "claim": "success rate와 path efficiency를 indoor, outdoor, indoor-to-outdoor split별로 보고해 transition bottleneck을 분리합니다.",
+                },
+            ],
+            "falsification": (
+                "indoor-to-outdoor drop이 scene generation artifact이거나, safety metrics가 실제 collision/recovery risk와 상관되지 않으면 benchmark value가 제한됩니다."
+            ),
+            "adversarial": (
+                "continuous simulation은 real deployment보다 clean합니다. sensor degradation, map update, human crowd dynamics가 약하면 campus robot proof가 아닙니다."
+            ),
+            "thinking_tool": (
+                "navigation을 route success로만 보지 말고 boundary transition, safety violation, adaptation latency가 붙은 executable episode로 봅니다."
+            ),
+            "transfer_boundary": (
+                "campus/delivery-style navigation에는 직접적이지만, dynamic crowd negotiation이나 manipulation-coupled navigation에는 extra interaction metrics가 필요합니다."
+            ),
+        },
+        {
+            "rank": 5,
+            "title": "EA-Nav: Learning Safe Visual Navigation Policies with Embodiment Awareness",
+            "arxiv_id": "2607.19880",
+            "fit": "safe navigation - embodiment geometry - imitation learning",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "vision navigation policy는 같은 observation이면 같은 action을 예측한다고 가정하기 쉽지만, embodiment 크기와 geometry가 다르면 같은 path도 위험도가 달라집니다."
+            ),
+            "friction": (
+                "RL 기반 cross-embodiment navigation은 interaction과 reward design cost가 크고, imitation 기반 방법은 embodiment-conditioned pretraining이 약합니다."
+            ),
+            "hidden_premise": (
+                "safe navigation policy는 visual observation뿐 아니라 traversable height, width, geometry token을 condition으로 받아야 ambiguity가 줄어듭니다."
+            ),
+            "conceptual_move": (
+                "Internet first-person videos에서 cross-embodiment navigation dataset을 만들고, embodiment geometry modality와 risk-aware correction을 별도 module로 주입합니다."
+            ),
+            "mechanism": (
+                "Input encoder가 visual observation, goal, embodiment parameters를 함께 encode하고, spatial perception과 risk-aware correction이 risky trajectory를 보정합니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "large-scale first-person videos와 embodiment-geometry modality injection을 주요 contribution으로 제시합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "navigation model이 embodiment parameters, spatial perception, risk-aware correction을 분리해 safe trajectory를 예측합니다.",
+                },
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "ground plane과 obstacle region을 추정해 risky waypoint correction supervision을 만듭니다.",
+                },
+                {
+                    "trace": "Table 2 [Verified]",
+                    "claim": "risk augmentation이 high-risk/collision sample recognition을 약 5배 개선하면서 false alarm을 거의 늘리지 않는다고 보고합니다.",
+                },
+            ],
+            "falsification": (
+                "embodiment token 없이도 same-size and out-of-range body splits에서 성능이 유지되거나, risk correction이 실제 collision 감소로 이어지지 않으면 claim이 약해집니다."
+            ),
+            "adversarial": (
+                "Internet videos는 action labels와 embodiment metadata가 noisy할 수 있습니다. safe visual navigation이 sim-to-real geometry mismatch를 견딜지 별도 검증이 필요합니다."
+            ),
+            "thinking_tool": (
+                "navigation policy의 input contract에 robot body geometry를 넣고, visual ambiguity를 embodiment-conditioned risk로 해소합니다."
+            ),
+            "transfer_boundary": (
+                "wheeled/legged visual navigation에는 적합하지만, articulated manipulation이나 carried-load changes처럼 geometry가 runtime에 바뀌면 online body-state estimation이 필요합니다."
+            ),
+        },
+        {
+            "rank": 6,
+            "title": "DINS-IO: Learned Inertial Odometry via Differentiable INS Consistency",
+            "arxiv_id": "2607.20232",
+            "fit": "inertial odometry - self-supervised consistency - metric calibration",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "learned inertial odometry는 motion capture, VIO, SLAM 같은 dense high-precision position labels에 의존하는 경우가 많습니다."
+            ),
+            "friction": (
+                "position labels는 scale acquisition이 어렵고, platform/domain마다 새로 모으기 비싸며, label noise가 odometry learning을 흔듭니다."
+            ),
+            "hidden_premise": (
+                "raw IMU stream에는 strapdown INS velocity recursion이라는 differentiable consistency prior가 있어서 position label 없이도 motion shape를 학습할 수 있습니다."
+            ),
+            "conceptual_move": (
+                "network가 dense body-frame velocity를 예측하고, least-squares solve residual을 self-supervised loss로 사용한 뒤 소량 labeled trajectory로 metric calibration합니다."
+            ),
+            "mechanism": (
+                "stage 1은 label-free INS consistency, stage 2는 LoRA adapters로 body-frame velocity를 metric velocity에 맞추는 self-supervised-then-label-efficient pipeline입니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "predicted velocity가 strapdown INS recursion을 만족해야 하며 LS residual이 loss가 되는 구조를 제시합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "per-window feature extraction, temporal modeling, high-frequency regression으로 IMU-rate velocity sequence를 예측합니다.",
+                },
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "label-free stage 1 trajectory가 similarity transform 후 ground truth shape와 heading을 상당히 회복함을 시각화합니다.",
+                },
+                {
+                    "trace": "Table 1 [Verified]",
+                    "claim": "label-free model의 median direction error가 TLIO 14.0도, Tango 21.1도로 보고되며 방향 안정성을 보입니다.",
+                },
+            ],
+            "falsification": (
+                "accelerometer bias assumption이 domain마다 무너지거나, 소량 labeled calibration 없이 metric drift가 planner에 유의미하게 커지면 deployment value가 제한됩니다."
+            ),
+            "adversarial": (
+                "velocity direction recovery는 full pose accuracy와 다릅니다. contact-rich robot motion이나 magnetic/noisy phone IMU에서는 consistency prior가 충분하지 않을 수 있습니다."
+            ),
+            "thinking_tool": (
+                "geometry/state estimation asset을 label collection 문제가 아니라 physics recursion을 differentiable verifier로 쓰는 문제로 전환합니다."
+            ),
+            "transfer_boundary": (
+                "IMU-rich mobile/handheld/legged motion에는 유용하지만, wheel slip, impact, vibration-heavy manipulation에는 domain-specific bias handling이 필요합니다."
+            ),
+        },
+        {
+            "rank": 7,
+            "title": "LENS: LLM-guided Environment Simplification for Planning and Control in Clutter",
+            "arxiv_id": "2607.19633",
+            "fit": "cluttered manipulation - scene abstraction - planning and control",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "cluttered manipulation에서 planner나 controller가 full scene object를 모두 동일하게 모델링하면 object count와 contact ambiguity가 빠르게 커집니다."
+            ),
+            "friction": (
+                "task-specific manual abstraction은 만들기 비싸고, scene이 바뀌면 pruning/merging rule을 다시 고쳐야 합니다."
+            ),
+            "hidden_premise": (
+                "LLM이 task and scene context를 보고 불필요한 object를 prune하거나 relevant object를 merge해 downstream planner의 state space를 줄일 수 있습니다."
+            ),
+            "conceptual_move": (
+                "LENS는 full scene을 task-relevant abstracted scene으로 바꾸고, progress에 따라 abstraction을 closed-loop로 update합니다."
+            ),
+            "mechanism": (
+                "TAMP, model-based controller, VLA policy에 plug-and-play로 붙고, object pruning/merging으로 clutter complexity를 줄입니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "scene complexity를 pruning and merging으로 줄여 planning target에 관련 없는 object를 제거하는 예를 보여줍니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "LENS가 task description과 full scene prompt에서 abstracted scene을 만들어 planner/controller에 넘기는 system overview를 제시합니다.",
+                },
+                {
+                    "trace": "Figure 3 [Verified]",
+                    "claim": "light/heavy clutter and stack tabletop TAMP environments에서 baseline과 LENS-TAMP를 비교합니다.",
+                },
+                {
+                    "trace": "Figure 5 [Verified]",
+                    "claim": "object count ablation에서 baseline runtime이 크게 증가하는 반면 LENS가 constant에 가깝게 유지된다고 보고합니다.",
+                },
+            ],
+            "falsification": (
+                "LLM abstraction error가 missed relevant object나 unsafe contact를 만들거나, object count가 적은 실험에서만 gain이 나오면 방법의 scope가 좁아집니다."
+            ),
+            "adversarial": (
+                "LLM이 scene abstraction을 hallucinate하면 planner는 더 확신 있게 틀릴 수 있습니다. abstraction confidence와 recovery trigger가 없으면 deployment risk가 큽니다."
+            ),
+            "thinking_tool": (
+                "planning을 stronger solver 문제가 아니라, 어떤 scene entity가 current task state에 필요하고 언제 다시 넣어야 하는지 결정하는 abstraction control 문제로 봅니다."
+            ),
+            "transfer_boundary": (
+                "object-level tabletop clutter에는 적합하지만 deformable, fluid, fine contact, occluded support relation에는 symbolic merge/prune이 불충분할 수 있습니다."
+            ),
+        },
+        {
+            "rank": 8,
+            "title": "Silent Failures in Multimodal Agentic Search: A Diagnostic Taxonomy and Cross-Judge Evaluation",
+            "arxiv_id": "2607.19793",
+            "fit": "multimodal agent reliability - evidence trajectory - hidden failure taxonomy",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "multimodal agentic search 평가는 final-answer accuracy에 집중해 retrieval trajectory나 grounding quality 오류를 놓치기 쉽습니다."
+            ),
+            "friction": (
+                "정답이 맞아도 wrong evidence, phantom grounding, cross-modal contradiction이 있으면 agent는 deployment에서 디버깅 불가능한 실패를 만듭니다."
+            ),
+            "hidden_premise": (
+                "agent reliability는 answer correctness와 evidence-grounding quality를 같은 scaffold에서 같이 판정해야 합니다."
+            ),
+            "conceptual_move": (
+                "six-category silent-failure taxonomy를 만들고 ReAct-style trajectory에서 answer correctness와 evidence quality를 동시에 진단합니다."
+            ),
+            "mechanism": (
+                "MMSearch-Plus trajectories across frontier models를 cross-judge validation, blank-image stress test, tool ablation으로 분석합니다."
+            ),
+            "evidence": [
+                {
+                    "trace": "Figure 1 [Verified]",
+                    "claim": "modality shortcuts, phantom grounding, wrong-evidence-right-answer 등 silent failure taxonomy를 예시와 함께 제시합니다.",
+                },
+                {
+                    "trace": "Figure 2 [Verified]",
+                    "claim": "model capability가 올라가도 silent failure가 단순히 사라지지 않고 category profile이 이동함을 보여줍니다.",
+                },
+                {
+                    "trace": "Table 1 [Verified]",
+                    "claim": "model별 committed/refused/exhausted/crashed terminal states를 분리해 answer-set coverage를 먼저 점검합니다.",
+                },
+                {
+                    "trace": "Table 2 / Table 3 [Verified]",
+                    "claim": "surface accuracy가 trajectory-level correctness보다 높으며, blank-image stress test에서 correct trajectories 대부분이 유지되지 않습니다.",
+                },
+            ],
+            "falsification": (
+                "taxonomy label이 judge-specific하거나, robot task evidence trace에서 silent-failure categories가 재현되지 않으면 robotics transfer는 약해집니다."
+            ),
+            "adversarial": (
+                "search QA와 robot execution은 failure cost가 다릅니다. 그래도 wrong-evidence-right-action은 robot에서 unsafe success illusion으로 바뀔 수 있습니다."
+            ),
+            "thinking_tool": (
+                "agent 평가를 final answer score가 아니라 evidence trace, tool call, grounding, intervention cost를 포함한 trajectory audit으로 바꿉니다."
+            ),
+            "transfer_boundary": (
+                "visual QA/search agent에는 직접적이지만, physical robot에는 sensor evidence, state estimator, action trace를 taxonomy에 맞게 다시 정의해야 합니다."
+            ),
+        },
+    ],
+    "synthesis": [
+        {
+            "title": "World-action papers are converging on executable state, not better videos",
+            "links": "KineBench + PerceptDrive + KineBench-related world-model papers",
+            "facts": (
+                "KineBench evaluates generated videos through 6D pose and simulator execution, while PerceptDrive keeps frozen perception priors separated and routed before trajectory generation."
+            ),
+            "inference": (
+                "The reusable asset is not another world model demo; it is a shared state contract that can score generated futures against kinematics, route feasibility, and downstream success."
+            ),
+            "decision": (
+                "Build APRL's world-model evaluation around action-state schema, contact realism, trajectory recovery, and real-execution correlation."
+            ),
+        },
+        {
+            "title": "Recovery is becoming a data protocol rather than a policy trick",
+            "links": "EgoRecovery + LENS + Robots Acquire Skills from Single Video",
+            "facts": (
+                "EgoRecovery scales recovery data through human egocentric segments; LENS reduces clutter through task-specific abstraction; several manipulation papers target fast post-training or single-video skill acquisition."
+            ),
+            "inference": (
+                "The bottleneck is identifying useful failure states and corrective intent, then making the robot consume that signal without copying human embodiment."
+            ),
+            "decision": (
+                "Prioritize a recovery-state capture protocol before adding more VLA architecture experiments."
+            ),
+        },
+        {
+            "title": "Navigation benchmark design is moving from scene split to embodiment split",
+            "links": "NavVerse + EA-Nav + SOPD-SocialNav",
+            "facts": (
+                "NavVerse ties indoor-to-outdoor navigation to continuous physics execution and safety metrics; EA-Nav injects embodiment geometry and risk correction into imitation learning."
+            ),
+            "inference": (
+                "Navigation failure is often not semantic misunderstanding but mismatch between body geometry, transition context, and safety correction."
+            ),
+            "decision": (
+                "APRL navigation evals should report boundary traversal, embodiment-conditioned risk, recovery latency, and safety intervention cost."
+            ),
+        },
+        {
+            "title": "Evidence audit is the missing reliability layer for multimodal agents",
+            "links": "Silent Failures + Trace + ENTRAP-VL",
+            "facts": (
+                "Silent Failures shows answer accuracy can overstate trajectory correctness; today's other VLM benchmarks also probe taxonomies, entrainment, compute adaptation, and structured perception."
+            ),
+            "inference": (
+                "Robotics agents need the same audit but over sensor traces, state estimator outputs, planner evidence, and action records."
+            ),
+            "decision": (
+                "Use a silent-failure taxonomy for robot decisions: correct action with wrong evidence, phantom object grounding, stale state reuse, and over-retrieval laundering."
+            ),
+        },
+    ],
+    "frontier_memory": [
+        {
+            "signal": "strengthening",
+            "title": "Execution-state accounting continued from July 20-22 into kinematic grounding",
+            "history": "Recent runs emphasized verifier evidence, world-model state, and executable action contracts.",
+            "read": "KineBench and PerceptDrive make this stronger by attaching video/world-action output to 3D pose, trajectory metrics, and prior-routing evidence.",
+        },
+        {
+            "signal": "new",
+            "title": "Failure recovery data economics became a first-class research axis",
+            "history": "Prior VLA reports focused on policy memory, action chunking, and terminal-state foresight.",
+            "read": "EgoRecovery shifts the question to how cheaply a lab can collect valid failure and corrective-intent data before robot teleoperation becomes the bottleneck.",
+        },
+        {
+            "signal": "strengthening",
+            "title": "Robot-usable geometry is moving below map quality into state-estimator consistency",
+            "history": "The prompt's geometry gate has repeatedly separated pretty 3D reconstruction from downstream robotics value.",
+            "read": "DINS-IO pushes this axis into IMU consistency and metric velocity calibration, while today's 3D papers add Gaussian/4D/occupancy representation options.",
+        },
+        {
+            "signal": "new",
+            "title": "Embodiment is now an explicit benchmark variable",
+            "history": "Navigation and embodied AI reports often treated embodiment as the simulator default.",
+            "read": "NavVerse and EA-Nav make robot body, transition context, and safety correction part of the benchmark contract.",
+        },
+        {
+            "signal": "missing_axis",
+            "title": "Agent evidence audits still need physical intervention cost",
+            "history": "VLM reliability papers are increasingly strong on answer/evidence mismatch.",
+            "read": "Silent Failures gives the taxonomy, but APRL can differentiate by measuring robot-side costs: missed hazard, recovery delay, operator correction, and unsafe actuation.",
+        },
+    ],
+    "strategy": [
+        {
+            "priority": "BUILD",
+            "title": "Action-State Contract Harness for Embodied World Models",
+            "thesis": (
+                "Convert generated video/world-action outputs into a common executable state schema, then score them with kinematic consistency, contact realism, and downstream task success correlation."
+            ),
+            "scores": {"fit": 5, "novelty": 5, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 5},
+            "one_week": (
+                "Pick three RoboCasa/ManiSkill-style tasks and define fields for generated frames, 6D end-effector pose, object displacement, contact event, and next-skill readiness."
+            ),
+            "four_week": (
+                "Implement a KineBench-style extraction path plus a PerceptDrive-style prior-routing trace, then compare ranking agreement with real/sim execution outcomes."
+            ),
+            "metric": "task-level generated-real ranking correlation >=0.6, imagined-success false positive rate -30%, extraction failure reason recorded for every episode.",
+            "stop": "If kinematic/execution score does not beat video metric for predicting success on two task families, narrow to state-schema paper rather than model benchmark.",
+            "assets": [
+                {"label": "KineBench", "url": "https://arxiv.org/abs/2607.19876"},
+                {"label": "PerceptDrive", "url": "https://arxiv.org/abs/2607.20175"},
+                {"label": "KineBench data", "url": "https://huggingface.co/datasets/Zorkzak/KineBenchDatasets"},
+            ],
+        },
+        {
+            "priority": "EXPLOIT",
+            "title": "Failure-Recovery Data Protocol for Manipulation",
+            "thesis": (
+                "Treat recovery as a data problem: stage failure states, collect human egocentric correction segments, map them to corrective intent, and test robot recovery under controlled failure families."
+            ),
+            "scores": {"fit": 5, "novelty": 4, "feasibility": 5, "moat": 4, "timing": 5, "evidence": 4},
+            "one_week": (
+                "Define four tabletop failure families and collect short human recovery videos plus robot teleop baseline for one task, recording recovery time and valid segment rate."
+            ),
+            "four_week": (
+                "Train a small corrective-intent bottleneck and compare no-recovery, robot-only recovery, human-intent co-training, and LENS-style scene abstraction wrappers."
+            ),
+            "metric": "second-attempt success +20p, valid recovery segments/hour >5x robot teleop, unsafe corrective contact not increased.",
+            "stop": "If human intent labels do not transfer beyond one object family or abstraction errors dominate recovery failures, split into data protocol and planner abstraction tracks.",
+            "assets": [
+                {"label": "EgoRecovery", "url": "https://arxiv.org/abs/2607.19745"},
+                {"label": "LENS", "url": "https://arxiv.org/abs/2607.19633"},
+                {"label": "Single-video skill paper", "url": "https://arxiv.org/abs/2607.20033"},
+            ],
+        },
+        {
+            "priority": "EXPLORE",
+            "title": "Evidence-Grounded Robot Agent Audit",
+            "thesis": (
+                "Port silent-failure analysis from multimodal search to robot agents by auditing sensor evidence, state-estimator traces, planner claims, and action outcomes together."
+            ),
+            "scores": {"fit": 4, "novelty": 5, "feasibility": 4, "moat": 4, "timing": 5, "evidence": 4},
+            "one_week": (
+                "Define four robot silent-failure labels: phantom object grounding, stale localization, right action wrong evidence, and over-retrieved irrelevant context."
+            ),
+            "four_week": (
+                "Run a small navigation/manipulation agent with evidence trace capture and score final success, evidence correctness, operator correction time, and safety intervention."
+            ),
+            "metric": "trajectory-level correctness gap measured for at least 100 episodes; taxonomy inter-judge agreement >=0.75; missed-hazard examples isolated.",
+            "stop": "If labels cannot be applied consistently or evidence trace capture changes agent behavior too much, reduce to offline diagnostic dataset first.",
+            "assets": [
+                {"label": "Silent Failures", "url": "https://arxiv.org/abs/2607.19793"},
+                {"label": "Trace", "url": "https://arxiv.org/abs/2607.19790"},
+                {"label": "NavVerse", "url": "https://arxiv.org/abs/2607.19695"},
+            ],
+        },
+    ],
+}
+
+
+def main() -> None:
+    template.DATE = DATE
+    template.SLUG = SLUG
+    template.DATA = DATA
+    doc = template.build_html()
+    doc = doc.replace("2026-07-13 arXiv Research Intelligence", "2026-07-23 arXiv Research Intelligence")
+    doc = doc.replace("<span>Tier A 5??full-text</span>", "<span>Tier A 8??full-text</span>")
+    doc = doc.replace("Tier A 5편 full-text", "Tier A 8편 full-text")
+    doc = doc.replace(
+        "공식 arXiv PDF의 본문·표·부록",
+        "공식 arXiv HTML의 본문·표·그림 캡션",
+    )
+
+    json_dir = ROOT / "intelligence"
+    json_dir.mkdir(exist_ok=True)
+    json_path = json_dir / f"{DATE}.json"
+    html_path = ROOT / "posts" / f"{SLUG}.html"
+    json_path.write_text(json.dumps(DATA, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    html_path.write_text(doc, encoding="utf-8")
+    print(f"wrote {json_path.relative_to(ROOT)}")
+    print(f"wrote {html_path.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()

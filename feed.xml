@@ -6,8 +6,22 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 22 Jul 2026 22:46:06 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2026 15:11:11 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>2026-07-23 심층판</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-23-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-23-research-intelligence.html</guid>
+      <pubDate>Thu, 23 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 배치의 공통 신호는 로봇 foundation model 연구가 더 큰 backbone보다 실행 상태를 어떻게 만들고, 검증하고, 실패 후 다시 들어올지를 묻기 시작했다는 점입니다. KineBench와 PerceptDrive는 video/world-action model을 pixel score가 아니라 kinematic grounding, trajectory metric, expert routing으로 판정합니다. EgoRecovery와 LENS는 더 많은 성공 demo를 모으는 대신 failure state, corrective intent, task-relevant scene abstraction을 훈련 신호로 바꿉니다. NavVerse와 EA-Nav는 navig…]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-07-23 (Thu)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-23.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-23.html</guid>
+      <pubDate>Thu, 23 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 88건, cs.RO 34건이고 dedupe 후 117건 중 102건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Generation 20편, Foundation Models 16편, Robot Learning 15편입니다. Generation 20편, Foundation Models 16편, Robot Learning 15편, Efficiency/Systems 14편, Autonomous Driving 13편이 크지만, robotics 관점의 공통 축은 model family가 아니라 state contract, recovery data, embodiment-aware safety, and trajectory-level evidence audit입…]]></description>
+    </item>
     <item>
       <title>2026-07-22 심층판</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-22-research-intelligence.html</link>
@@ -413,20 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-14.html</guid>
       <pubDate>Thu, 14 May 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[오늘 /new는 cs.CV 160건, cs.RO 66건이고 dedupe 후 213건 중 177건이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 Generation 34편, Foundation Models 29편, Efficiency/Systems 23편입니다. 생성 논문도 많지만, 제목과 초록을 같이 보면 오늘의 무게는 controllability보다 실행 지연, evidence routing, 불확실성 관리 쪽으로 옮겨가 있습니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-05-13 (수)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-13.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-13.html</guid>
-      <pubDate>Wed, 13 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 /new는 cs.CV 188건, cs.RO 50건이고 dedupe 후 229건 중 198건이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 Generation 37편, Robot Learning 36편, Foundation Models 33편입니다. 단순 생성 논문이 많은 날이지만, 제목과 초록을 같이 보면 핵심은 controllable generation 자체보다 world model과 closed-loop 평가가 어디까지 버틸 수 있는지를 묻는 쪽입니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-05-12 (화)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-12.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-12.html</guid>
-      <pubDate>Tue, 12 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 /new는 cs.CV 399건, cs.RO 113건이고 dedupe 후 483건 중 417건이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 Generation 80편, Foundation Models 76편, Efficiency/Systems 69편입니다. 5/12의 핵심은 논문 수 자체보다 VLA 내부 실행 구조, driving world model, closed-loop benchmark, VLM self-verification failure가 한꺼번에 나온 점입니다.]]></description>
     </item>
   </channel>
 </rss>
