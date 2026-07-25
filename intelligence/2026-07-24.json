@@ -1,0 +1,449 @@
+{
+  "date": "2026-07-24",
+  "edition": "Research Intelligence",
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "scope_note": "cs.CV/cs.RO /new listing for 2026-07-24 was parsed with the repository scripts. The parser found 152 cs.CV rows and 58 cs.RO rows; after replacement exclusion and deduplication, 135 papers remained and 117 were classified as ROI. Tier A uses official arXiv HTML full text for HyWorldVLA, Scale Up Strategically, GLAM-SLAM, HGeo-TopoMap, FORGE-plus, AXIS, VoLN, and Geo3R.",
+  "executive_thesis": "오늘 배치의 공통 신호는 로봇 foundation model 연구가 모델 크기보다 실행 계약을 어떻게 검증할지로 이동했다는 점입니다. HyWorldVLA는 pixel world model과 latent world model의 장단점을 hybrid supervision으로 묶고, Scale Up Strategically와 AXIS는 robot data scaling을 무작정 더 모으는 문제가 아니라 bias factor와 growable benchmark snapshot을 설계하는 문제로 바꿉니다. FORGE-plus는 frozen LLM을 force authority가 아니라 slow supervisory budget으로 제한하고, GLAM-SLAM과 HGeo-TopoMap은 3D/BEV map을 rendering asset이 아니라 tracking, topology, downstream driving이 소비하는 geometric prior로 재정의합니다. VoLN과 Geo3R은 long-horizon navigation과 spatial reasoning에서 language-only 또는 2D answer accuracy가 놓치는 failure boundary를 드러냅니다. APRL 관점의 결론은 VLA를 키우기 전에 hybrid state contract, bias-aware data engine, force-bounded recovery, robot-usable geometry, geometry-grounded reasoning benchmark를 자산으로 소유해야 한다는 것입니다.",
+  "decision_cards": [
+    {
+      "label": "Decision",
+      "title": "판단 1 - world model은 visual future보다 action-conditioned state contract로 평가해야 한다",
+      "body": "HyWorldVLA, PhysCoRe, GS-Agent는 generated future가 사람이 보기에 그럴듯한지보다 trajectory, material dynamics, physical world state로 control에 남는지를 묻습니다. 같은 흐름은 driving, deformable dynamics, generative simulation을 한 평가 계약으로 묶습니다."
+    },
+    {
+      "label": "Decision",
+      "title": "판단 2 - robot data scaling은 volume보다 bias factor와 growth protocol의 문제다",
+      "body": "Scale Up Strategically는 Factor Dominance Rate/Hierarchy로 어떤 instruction factor가 policy를 지배하는지 드러내고, AXIS는 task generation, teleoperation, augmentation, validation을 growable data engine으로 연결합니다. 데이터 자산의 핵심은 demo 수가 아니라 어떤 factor를 바꿨을 때 policy가 계속 의미를 보존하는지입니다."
+    },
+    {
+      "label": "Decision",
+      "title": "판단 3 - navigation과 reasoning safety는 geometry와 body contract 없이는 release gate가 약하다",
+      "body": "GLAM-SLAM, HGeo-TopoMap, VoLN, Geo3R은 서로 다른 문제를 다루지만 모두 map, body, spatial relation을 명시적 evidence로 만듭니다. 로봇 시스템에서는 answer accuracy나 route success만으로는 충분하지 않고, geometry-consistent state가 실제 action을 지탱하는지 봐야 합니다."
+    }
+  ],
+  "papers": [
+    {
+      "rank": 1,
+      "title": "HyWorldVLA: A Vision-Language-Action Model with Hybrid World Modeling for Autonomous Driving",
+      "arxiv_id": "2607.20988",
+      "fit": "autonomous driving VLA - hybrid world modeling - scene noise robustness",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "driving world model은 future frame을 pixel로 복원하거나 latent feature만 예측하는 두 흐름으로 갈렸습니다. 전자는 dense spatial supervision을 주지만 scene noise에 약하고, 후자는 robust하지만 pixel grounding과 interpretability가 약합니다.",
+      "friction": "rain, fog, illumination shift 같은 scene noise에서는 pixel prediction이 흔들리고, latent-only prediction은 causal physical relation을 충분히 드러내지 못합니다.",
+      "hidden_premise": "end-to-end driving VLA는 future scene을 그릴 뿐 아니라 action expert가 소비할 latent state와 noise-robust trajectory contract를 동시에 남겨야 합니다.",
+      "conceptual_move": "pre-training에서는 video VAE latent와 raw pixel frame reconstruction을 함께 쓰고, co-fine-tuning에서는 predicted latent를 VLM context와 joint attention으로 action expert에 연결합니다.",
+      "mechanism": "text-guided VAE latent learning, iterative latent prediction, co-fine-tuned action expert를 결합해 pixel-grounded detail과 latent noise robustness를 분리된 단계로 맡깁니다.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "논문은 pixel-based, latent-based, hybrid world VLA의 trade-off를 직접 비교하며 hybrid paradigm을 핵심 차이로 둡니다."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "video VAE, pre-training latent query, co-fine-tuning action expert가 세 단계로 분리된 system overview를 제시합니다."
+        },
+        {
+          "trace": "Table 1 / Table 2 [Verified]",
+          "claim": "NAVSIM v1/v2에서 pixel-based world model, latent world model, canonical E2E/VLA baselines와 비교합니다."
+        },
+        {
+          "trace": "Figure 3 / Sec. 4.5 [Verified]",
+          "claim": "scene noise robustness analysis에서 illumination and weather perturbation 아래 trajectory consistency를 비교합니다."
+        }
+      ],
+      "falsification": "rain/fog-corrupted inputs에서 gain이 NAVSIM-specific artifact이거나, multi-camera/LiDAR sensor budget을 맞춘 baseline에서 사라지면 hybrid world modeling claim은 약해집니다.",
+      "adversarial": "single front-view camera와 driving benchmark에 최적화된 route metric이 robot manipulation이나 off-road navigation으로 일반화된다고 보면 안 됩니다. latent robustness가 실제 causal state를 배운 것인지 additional regularization 효과인지 분리해야 합니다.",
+      "thinking_tool": "world model output을 영상 품질로 보지 말고, action expert가 소비하는 latent state와 downstream trajectory robustness를 같은 release gate로 묶습니다.",
+      "transfer_boundary": "structured road scenes에는 직접적이지만, contact-rich manipulation에는 tactile/contact state와 object dynamics contract를 추가해야 합니다."
+    },
+    {
+      "rank": 2,
+      "title": "Scale Up Strategically: Learning Compositional Generalization via Bias-Aware Evaluation and Data Collection for Robotic Manipulation",
+      "arxiv_id": "2607.21582",
+      "fit": "robot manipulation - compositional generalization - bias-aware data collection",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "robot manipulation scaling은 더 많은 demonstrations가 언어 grounding과 compositional generalization을 자연스럽게 해결한다고 가정하기 쉽습니다.",
+      "friction": "policy가 instruction을 이해한 것이 아니라 color, object, verb 중 가장 쉬운 shortcut factor에 overfit할 수 있고, 평균 success는 이 실패를 숨깁니다.",
+      "hidden_premise": "scaling data는 factor dominance를 먼저 측정하고, 지배적인 shortcut을 깨는 distribution intervention으로 설계되어야 합니다.",
+      "conceptual_move": "language instruction을 factor로 분해한 뒤 Factor Dominance Rate와 Factor Dominance Hierarchy로 pairwise/global bias를 측정하고, diagnosis-guided data collection을 수행합니다.",
+      "mechanism": "ManiSkill-based factor correlation setups와 OOD rollouts를 통해 VLA and video action backbones가 어떤 factor를 우선하는지 수치화합니다.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "factor bias, FDR/FDH, diagnosis-guided data collection을 하나의 scaling loop로 제시합니다."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "verb-object and color-object factor correlation setups로 instruction factor dominance를 시험합니다."
+        },
+        {
+          "trace": "Table 1 [Verified]",
+          "claim": "400 OOD rollouts per factor pair로 Factor Dominance Rate를 계산해 factor imbalance를 비교합니다."
+        },
+        {
+          "trace": "Table 2 [Verified]",
+          "claim": "Copeland ranking 기반 Factor Dominance Hierarchy로 model별 dominant factor order를 제시합니다."
+        }
+      ],
+      "falsification": "factor dominance가 judge artifact이거나 real robot tasks에서 factor-balanced data가 OOD success를 높이지 못하면 data-collection recommendation은 약해집니다.",
+      "adversarial": "VLM judge와 simulated factor setups가 policy의 true grounding failure를 과대 또는 과소평가할 수 있습니다. 색, 물체, 동사 factor만으로 long-horizon contact and recovery failures를 설명할 수 없습니다.",
+      "thinking_tool": "demo 수를 늘리기 전에 policy가 어느 instruction factor를 shortcut으로 쓰는지 먼저 측정하고, data collection을 그 bias를 깨는 intervention으로 설계합니다.",
+      "transfer_boundary": "language-factor manipulation에는 강하지만 force, tactile, deformable dynamics처럼 language factor 밖의 hidden state에는 별도 diagnostic axis가 필요합니다."
+    },
+    {
+      "rank": 3,
+      "title": "GLAM-SLAM: Real-time Gaussian Large-scale Mapping via Flow Densification and Spatial Decomposition",
+      "arxiv_id": "2607.21416",
+      "fit": "SLAM - Gaussian large-scale mapping - real-time robot map representation",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "sparse SLAM은 trajectory stability가 강하지만 map이 interaction에는 빈약하고, dense neural/3DGS mapping은 시각적 품질이 좋지만 tracking cost와 dynamic artifacts가 큽니다.",
+      "friction": "robot downstream task는 sparse feature cloud보다 dense and interpretable map을 원하지만, GPU-heavy dense SLAM은 large-scale real-time operation에서 병목이 됩니다.",
+      "hidden_premise": "3DGS가 robot map으로 쓰이려면 rendering quality뿐 아니라 ORB-SLAM-style tracking stability, anchor structure, incremental update cost를 동시에 만족해야 합니다.",
+      "conceptual_move": "CPU ORB-SLAM2 front-end와 GPU Gaussian mapper를 decoupled thread로 분리하고, sparse ORB points에 flow-densified points와 spatial decomposition을 결합합니다.",
+      "mechanism": "anchor grid를 ORB-SLAM2 feature와 optical-flow densification에서 만들고, voxelized Gaussian model을 incremental Scaffold-GS style로 확장합니다.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "KITTI and Oxford RobotCar unseen trajectories에서 post-optimization 없이 novel-view map consistency를 보입니다."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "ORB-SLAM2 tracking thread와 Gaussian Mapper thread를 decoupled real-time system으로 제시합니다."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "flow densification and MLP contribution이 localized rendering blur를 줄이는 qualitative comparison을 제공합니다."
+        },
+        {
+          "trace": "Sec. I / limitation discussion [Verified]",
+          "claim": "dense SLAM의 memory/GPU burden, dynamic artifacts, photometric vulnerability를 problem framing으로 둡니다."
+        }
+      ],
+      "falsification": "localization drift와 map update cost가 dynamic scenes에서 ORB-SLAM2 baseline보다 나쁘거나, rendering quality gain이 navigation/localization success로 이어지지 않으면 robotics value는 제한됩니다.",
+      "adversarial": "novel view synthesis가 좋아도 robot-usable map이라는 claim은 별도입니다. moving-object handling, relocalization under occlusion, map invalidation policy가 검증되어야 합니다.",
+      "thinking_tool": "3DGS를 rendering asset으로만 읽지 말고, sparse SLAM front-end와 dense map back-end 사이의 state contract로 평가합니다.",
+      "transfer_boundary": "large-scale visual mapping에는 적합하지만 contact manipulation or semantic affordance mapping에는 object-level state and physics labels가 더 필요합니다."
+    },
+    {
+      "rank": 4,
+      "title": "HGeo-TopoMap: Boosting Topological Mapping with Hierarchical Geometric Priors",
+      "arxiv_id": "2607.21281",
+      "fit": "topological mapping - BEV geometry priors - downstream driving maps",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "online topological mapping은 visual evidence만으로 traffic sign, centerline, lane topology를 추론하려 하며, instance geometry가 sparse하게 들어가면 relation learning이 불안정합니다.",
+      "friction": "map instance에 explicit marking이 부족하고, connected centerline이나 lane boundary relation 같은 geometric prior를 충분히 쓰지 못하면 downstream driving topology가 깨집니다.",
+      "hidden_premise": "topological map은 visual detector output이 아니라 BEV instance geometry와 relation graph를 함께 학습하는 structured state여야 합니다.",
+      "conceptual_move": "geometric adaptive learning module이 road structure map prior를 instance decoding에 넣고, geometric consistency learning이 contrastive relation을 통해 implicit geometry를 학습합니다.",
+      "mechanism": "center-point regression and stage-wise instance point regression으로 instance geometry를 복원한 뒤, geometric contrastive learning으로 relation consistency를 강화합니다.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "explicit markings 부족을 hierarchical geometric priors로 보완하는 motivation을 제시합니다."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "geometric adaptive learning and geometric consistency learning modules를 HGeo-TopoMap architecture로 분리합니다."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "single-point regression 대비 center-point and instance-point regression이 instance geometry를 더 잘 학습하는 구조를 비교합니다."
+        },
+        {
+          "trace": "Method sections [Verified]",
+          "claim": "BEV topological mapping에서 multiple classes and topological relations를 동시에 다루는 problem setting을 명시합니다."
+        }
+      ],
+      "falsification": "geometric prior가 특정 map dataset의 annotation convention만 학습하거나, unseen road geometry에서 relation graph quality가 떨어지면 prior-learning claim은 약해집니다.",
+      "adversarial": "HD-map-like prior를 많이 넣을수록 online mapping의 autonomy claim과 충돌할 수 있습니다. prior quality and noise robustness를 별도 ablation으로 봐야 합니다.",
+      "thinking_tool": "map quality를 detector AP로 보지 말고, instance geometry와 relation topology가 planning-ready graph로 남는지 평가합니다.",
+      "transfer_boundary": "road BEV mapping에는 강하지만 indoor robot navigation의 cluttered movable objects and human interactions에는 different topology primitives가 필요합니다."
+    },
+    {
+      "rank": 5,
+      "title": "FORGE-plus: Force-Budgeted Recovery for Contact-Rich Assembly with a Frozen LLM Supervisor",
+      "arxiv_id": "2607.21227",
+      "fit": "contact-rich assembly - force-bounded recovery - frozen LLM supervisor",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "LLM-in-the-loop robot control은 high-level reasoning이 contact-rich assembly의 recovery까지 직접 해결할 수 있다는 인상을 주기 쉽습니다.",
+      "friction": "fragile object assembly에서는 force authority가 잘못 주어지면 recovery 시도 자체가 part breakage로 이어지고, language reasoning은 fast control loop의 safety guarantee를 대체할 수 없습니다.",
+      "hidden_premise": "LLM은 force를 직접 제어하지 않고, slow layer에서 force ceiling and recovery menu를 고르는 supervisory budget setter로 제한되어야 합니다.",
+      "conceptual_move": "frozen LLM은 episode start and failure event에서 JSON으로 F_max and recovery choice만 내고, fast loop는 force-conditioned RL skill and impedance controller가 clamp를 보장합니다.",
+      "mechanism": "signature encoder가 recent force/torque and contact history를 short text token으로 바꾸고, recovery menu에서 regrasp/retry choices를 선택하게 합니다.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "two-layer architecture에서 LLM budget setter와 fast force-control loop의 authority boundary를 분리합니다."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "released 2F-140 videos with live force gauge and recovery phases show regrasp cycles under force budget."
+        },
+        {
+          "trace": "Table 1 [Verified]",
+          "claim": "Robotiq 2F-140 clean gates에서 insertion/release success and breakage checks를 strict criterion으로 보고합니다."
+        },
+        {
+          "trace": "Table 2 [Verified]",
+          "claim": "budget-setter baselines에서 no-ceiling and oracle-like variants를 force margin, breakage, success로 비교합니다."
+        }
+      ],
+      "falsification": "LLM identity-only budget이 unseen material/geometry에서 force ceiling을 안정적으로 정하지 못하거나, clamp가 recovery success를 과도하게 낮추면 supervisory framing은 약해집니다.",
+      "adversarial": "simulation-only result이며 hidden breakage threshold and object classes가 controlled입니다. real contact sensing noise와 compliance mismatch에서 같은 guarantee가 유지되는지 검증해야 합니다.",
+      "thinking_tool": "LLM을 controller로 쓰지 말고, safety-critical authority boundary를 숫자 예산과 recovery menu로 좁혀 fast loop guarantee와 연결합니다.",
+      "transfer_boundary": "fragile assembly에는 설득력 있지만 deformable manipulation, multi-contact whole-arm behavior, variable tool compliance에는 richer tactile and force models가 필요합니다."
+    },
+    {
+      "rank": 6,
+      "title": "AXIS: A Growable Community-Driven Data Engine for Scalable Robot Manipulation",
+      "arxiv_id": "2607.21588",
+      "fit": "robot manipulation dataset - growable data engine - benchmark snapshots",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "robot manipulation datasets are often fixed releases collected by centralized expert teams, which makes continual task expansion and reproducible scaling studies hard.",
+      "friction": "general-purpose manipulation needs diversity across tasks, objects, scenes, contributors, and physical variations, but static datasets do not naturally support controlled growth.",
+      "hidden_premise": "scalable robot learning requires a data engine whose growth is structured into reproducible snapshots, not just a larger pool of trajectories.",
+      "conceptual_move": "AXIS unifies task generation, web teleoperation, data refinement, realistic augmentation, policy learning, and real-world validation into a community-driven growth loop.",
+      "mechanism": "The Franka dataset snapshot includes 207 tasks, over 50K human demonstrations, more than 60K task/scene variants, multi-view RGB-D, robot/object state, actions, metadata, and success labels.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "AXIS is framed as a growable community-driven data engine from task generation to validation."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "augmentation diversity changes materials, lighting, scene layout, and object initial states while preserving task semantics."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "dataset overview states 207 manipulation tasks, 50K+ human demonstrations, and 60K+ task or scene variants."
+        },
+        {
+          "trace": "Table 2 [Verified]",
+          "claim": "LIBERO-Plus evaluation compares pretraining conditions and perturbation axes with identical fine-tuning hyperparameters."
+        }
+      ],
+      "falsification": "If growth snapshots do not improve robustness under controlled perturbations, or web teleoperation/refinement quality varies too much across contributors, the data-engine claim weakens.",
+      "adversarial": "Franka tabletop diversity is still a narrow slice of robot manipulation. Community growth can amplify annotation and task-design bias unless validation catches it.",
+      "thinking_tool": "dataset release를 archive로 보지 말고, task generation, validation, augmentation, and benchmark snapshots가 계속 자라는 engine으로 설계합니다.",
+      "transfer_boundary": "tabletop Franka manipulation에는 directly useful하지만 mobile manipulation, bimanual force tasks, field robotics에는 task generator and validation schema를 바꿔야 합니다."
+    },
+    {
+      "rank": 7,
+      "title": "VoLN: Vision-Only Long-Horizon Navigation - Paradigm, Benchmark, and Method",
+      "arxiv_id": "2607.21400",
+      "fit": "vision-only navigation - aerial long horizon - visual goal contract",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "VLN-style navigation often gives language instructions or route guidance that encode global route structure unavailable to onboard visual sensing at decision time.",
+      "friction": "aerial long-horizon navigation operates in open 3D space where destinations may be outside the field of view and metric route instructions can leak non-observable information.",
+      "hidden_premise": "long-horizon navigation benchmark should specify goals visually and restrict policy inputs to onboard observation and proprioception, leaving global goal position only for evaluation.",
+      "conceptual_move": "VoLN replaces instruction-derived global route information with goal views, egocentric RGB observation, and proprioception, while excluding GPS/world-frame position from policy input.",
+      "mechanism": "The policy maps visual goal views, current observation, and platform signals to closed-loop actions with explicit stop, evaluated by navigation error, success, OSR, nDTW, and SPL.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "instruction-based setting and vision-only destination setting are contrasted as different information contracts."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "policy input excludes GPS/world-frame position; goal pose serves only for evaluation."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "representative VoLN-UAV environments show the benchmark setting for long-horizon aerial navigation."
+        },
+        {
+          "trace": "Table 1 / Table 2 [Verified]",
+          "claim": "Validation-Seen/Test-Unseen results and ablations report NE, SR, OSR, nDTW, SPL, CT, and EER."
+        }
+      ],
+      "falsification": "If visual-goal navigation still depends on implicit scene priors that do not transfer, or if stop/action metrics miss collision and safety costs, the paradigm remains incomplete.",
+      "adversarial": "vision-only does not automatically mean deployable: weather, motion blur, GPS-denied drift, and dynamic obstacles need separate stress splits.",
+      "thinking_tool": "navigation benchmark의 input contract를 먼저 감사한다: policy가 실제 onboard sensor로 알 수 없는 route information을 받으면 deployment claim이 약합니다.",
+      "transfer_boundary": "aerial visual navigation에는 directly relevant하지만 wheeled ground robots with tight clearance need body geometry and contact/safety metrics."
+    },
+    {
+      "rank": 8,
+      "title": "Geo3R: Mitigating Spatial Reasoning Hallucination in Multimodal Large Language Models",
+      "arxiv_id": "2607.21085",
+      "fit": "MLLM spatial reasoning - geometric evidence cards - hallucination mitigation",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "MLLM hallucination mitigation often handles object existence or attributes, while spatial relation errors are treated as another answer accuracy problem.",
+      "friction": "spatial relations such as viewpoint, object depth, facing direction, and relative orientation require 3D geometry; 2D visual tokens alone often leave the model guessing.",
+      "hidden_premise": "relation hallucination needs explicit geometric evidence in camera, gravity-aligned world, and object-local frames rather than only language prompting.",
+      "conceptual_move": "Geo3R builds structured geometric cards from visual grounding, depth/back-projection, gravity-aligned transformation, object-local relation aggregation, then guides the MLLM answer.",
+      "mechanism": "It is training-free and plug-and-play, lifting single-image observations into multi-space geometric evidence before final spatial reasoning.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "paper frames the gap between 2D representations and 3D reality as the cause of spatial reasoning hallucination."
+        },
+        {
+          "trace": "Figure 2 / Table 1 [Verified]",
+          "claim": "existing hallucination mitigation methods are tested on spatial reasoning tasks and show unclear effectiveness."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "Geo3R pipeline uses visual grounding, geometric evidence extraction, and geometric-augmented reasoning."
+        },
+        {
+          "trace": "Table 2 [Verified]",
+          "claim": "comparison covers 18 tasks across perspective, orientation, and viewpoint benchmarks."
+        }
+      ],
+      "falsification": "If geometry estimator errors dominate or structured cards improve only synthetic spatial tasks, Geo3R may be a prompt/tooling fix rather than robust spatial understanding.",
+      "adversarial": "single-image geometric evidence can be underdetermined. For robotics, temporal sensor fusion and metric uncertainty must be exposed rather than hidden inside cards.",
+      "thinking_tool": "robot agents should carry explicit geometry cards for object relation, camera pose, and uncertainty before they commit to spatial language or action decisions.",
+      "transfer_boundary": "static image spatial QA에는 적합하지만 closed-loop robot planning에는 multi-view geometry, temporal drift, and action-conditioned failure labels가 필요합니다."
+    }
+  ],
+  "synthesis": [
+    {
+      "title": "World-state contract가 video, map, navigation, reasoning을 가로지른다",
+      "links": "HyWorldVLA · GLAM-SLAM · HGeo-TopoMap · VoLN · Geo3R",
+      "facts": "각 논문은 output을 final answer or image로 끝내지 않고 latent state, Gaussian map, BEV topology, visual goal contract, geometry card로 구조화합니다.",
+      "inference": "APRL이 가져올 것은 model family가 아니라 robot controller and evaluator가 소비할 수 있는 state contract입니다.",
+      "decision": "next benchmark는 visual realism이나 answer accuracy가 아니라 state contract가 downstream action을 얼마나 안정화하는지 물어야 합니다."
+    },
+    {
+      "title": "Data scaling은 growth보다 intervention design으로 재정의된다",
+      "links": "Scale Up Strategically · AXIS · TableVerse · TransBiolab",
+      "facts": "Scale Up Strategically는 factor bias를 측정하고, AXIS는 task/scene snapshot growth를 reproducible benchmark로 설계합니다.",
+      "inference": "demo volume 자체보다 어떤 factor, object transparency, scene layout, contributor variation이 policy shortcut을 깨는지가 핵심입니다.",
+      "decision": "APRL data collection은 task count report가 아니라 factor dominance and perturbation family를 release criterion으로 가져야 합니다."
+    },
+    {
+      "title": "LLM/MLLM은 authority가 아니라 evidence boundary를 좁힐 때 유용하다",
+      "links": "FORGE-plus · Geo3R · HalluScope · GuidedAttention",
+      "facts": "FORGE-plus는 LLM을 force budget setter로 제한하고, Geo3R은 spatial answer 전에 geometry card를 제공합니다.",
+      "inference": "robot agent에서 language model의 역할은 command generator가 아니라 uncertainty, evidence, and authority boundary를 좁히는 supervisor일 때 더 검증 가능합니다.",
+      "decision": "LLM-in-robotics paper를 만들려면 free-form planner보다 force/geometry/attention contract를 좁힌 wrapper를 먼저 검증해야 합니다."
+    },
+    {
+      "title": "Geometry gate is back, but as task-facing infrastructure",
+      "links": "GLAM-SLAM · HGeo-TopoMap · WAT3R · DTIF · DAPM",
+      "facts": "today has 16 3D/Scene ROI papers and at least four mapping, localization, reconstruction, or depth signals.",
+      "inference": "geometry is no longer a side bucket; it is a substrate for map update, relation reasoning, underwater/forest/UAV robustness, and downstream navigation.",
+      "decision": "APRL should evaluate geometry papers by relocalization, topology correctness, task success, and update latency, not only PSNR or reconstruction fidelity."
+    }
+  ],
+  "frontier_memory": [
+    {
+      "signal": "strengthening",
+      "title": "VLA/action stack diagnosis continues after 2026-07-20 to 2026-07-23",
+      "history": "Recent daily briefings repeatedly highlighted action-state contracts, recovery data, evidence traces, and VLA execution diagnostics.",
+      "read": "HyWorldVLA and MoE VLA add world-state and expert-routing evidence, so the signal is no longer one paper family but a weekly direction."
+    },
+    {
+      "signal": "new",
+      "title": "Bias-aware data scaling becomes an explicit robot-data release gate",
+      "history": "Previous July posts focused on failure recovery, action contracts, and data assets, but not factor dominance as the primary scaling metric.",
+      "read": "Scale Up Strategically plus AXIS suggests APRL should measure shortcut factors before adding more demos."
+    },
+    {
+      "signal": "strengthening",
+      "title": "Robot-usable geometry keeps moving from rendering toward map/state infrastructure",
+      "history": "KineBench, DINS-IO, and earlier GLAM/3DGS-related signals framed geometry as execution evidence.",
+      "read": "GLAM-SLAM, HGeo-TopoMap, WAT3R, DTIF, and DAPM make the geometry gate mandatory for this batch."
+    },
+    {
+      "signal": "missing_axis",
+      "title": "Few papers connect these contracts to real multi-sensor closed-loop robot deployment",
+      "history": "Recent work proposes strong benchmarks and pipelines, but many remain in NAVSIM, simulation, single-image, or controlled tabletop settings.",
+      "read": "APRL can own the missing bridge: same episodes with camera/IMU/depth/tactile evidence, state contract, failure family, and downstream task outcome."
+    }
+  ],
+  "strategy": [
+    {
+      "priority": "BUILD",
+      "title": "Hybrid State Contract Harness",
+      "thesis": "Build a benchmark layer that converts VLA/world-model outputs into latent state, 6D pose, map/topology, and action feasibility signals, then scores downstream robot success.",
+      "scores": {
+        "fit": 5,
+        "novelty": 4,
+        "feasibility": 4,
+        "moat": 5,
+        "timing": 5,
+        "evidence": 5
+      },
+      "one_week": "Choose two RoboCasa or ManiSkill tasks and one navigation trace, define four contract fields: generated future, pose/map state, uncertainty, action feasibility.",
+      "four_week": "Compare visual-only score, latent-state score, and geometry/map contract score against real/sim execution success under weather, occlusion, and object perturbations.",
+      "metric": "contract score predicts execution success better than image/answer score by >=0.15 AUC and isolates at least three recurring failure families.",
+      "stop": "If contract fields do not improve failure prediction on two task families, narrow to geometry-only map/state harness.",
+      "assets": [
+        {
+          "label": "HyWorldVLA",
+          "url": "https://arxiv.org/abs/2607.20988"
+        },
+        {
+          "label": "GLAM-SLAM",
+          "url": "https://arxiv.org/abs/2607.21416"
+        },
+        {
+          "label": "HGeo-TopoMap",
+          "url": "https://arxiv.org/abs/2607.21281"
+        }
+      ]
+    },
+    {
+      "priority": "EXPLOIT",
+      "title": "Bias-Aware Manipulation Data Engine",
+      "thesis": "Treat robot data collection as an intervention design problem: measure factor dominance, add targeted trajectories, and release growable task snapshots.",
+      "scores": {
+        "fit": 5,
+        "novelty": 4,
+        "feasibility": 5,
+        "moat": 4,
+        "timing": 5,
+        "evidence": 4
+      },
+      "one_week": "Define verb/object/color/material/force factor pairs for three tabletop tasks and run small OOD rollouts to estimate factor dominance before collecting new data.",
+      "four_week": "Create a small AXIS-style snapshot with targeted bias-breaking trajectories, transparent/cluttered objects, and success checkers, then compare against volume-matched random collection.",
+      "metric": "OOD success +15p over random collection; factor dominance absolute value reduced by 30%; validation cost per task family measured.",
+      "stop": "If factor dominance does not correlate with OOD failure, move to recovery/force factor definitions rather than more language factors.",
+      "assets": [
+        {
+          "label": "Scale Up Strategically",
+          "url": "https://arxiv.org/abs/2607.21582"
+        },
+        {
+          "label": "AXIS",
+          "url": "https://arxiv.org/abs/2607.21588"
+        },
+        {
+          "label": "TransBiolab",
+          "url": "https://arxiv.org/abs/2607.21071"
+        }
+      ]
+    },
+    {
+      "priority": "EXPLORE",
+      "title": "Force and Geometry Bounded Robot Supervisor",
+      "thesis": "Limit LLM/MLLM authority to numeric budgets, geometry cards, and recovery choices, then test whether those boundaries improve safety without killing task success.",
+      "scores": {
+        "fit": 4,
+        "novelty": 5,
+        "feasibility": 4,
+        "moat": 4,
+        "timing": 5,
+        "evidence": 4
+      },
+      "one_week": "Implement a toy force-budget setter and geometry-card generator for one assembly task and one navigation task; expose only bounded choices to the policy layer.",
+      "four_week": "Evaluate free-form planner, numeric-budget supervisor, and geometry-card supervisor under fragile object, occlusion, and wrong-goal perturbations.",
+      "metric": "breakage/collision reduced by 40% with success drop under 10p; supervisor interventions are attributable to force or geometry evidence.",
+      "stop": "If bounded supervision just defers failures without improving recovery, convert it into an offline diagnostic dataset first.",
+      "assets": [
+        {
+          "label": "FORGE-plus",
+          "url": "https://arxiv.org/abs/2607.21227"
+        },
+        {
+          "label": "Geo3R",
+          "url": "https://arxiv.org/abs/2607.21085"
+        },
+        {
+          "label": "VoLN",
+          "url": "https://arxiv.org/abs/2607.21400"
+        }
+      ]
+    }
+  ]
+}

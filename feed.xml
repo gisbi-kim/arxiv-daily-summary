@@ -6,8 +6,29 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Thu, 23 Jul 2026 15:11:11 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2026 22:34:43 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>arXiv Weekly Briefing — 2026-W30</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-25-weekly.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-25-weekly.html</guid>
+      <pubDate>Sat, 25 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[arXiv Daily Briefing 2026-07-25]]></description>
+    </item>
+    <item>
+      <title>2026-07-24 심층판</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-24-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-24-research-intelligence.html</guid>
+      <pubDate>Fri, 24 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 배치의 공통 신호는 로봇 foundation model 연구가 모델 크기보다 실행 계약을 어떻게 검증할지로 이동했다는 점입니다. HyWorldVLA는 pixel world model과 latent world model의 장단점을 hybrid supervision으로 묶고, Scale Up Strategically와 AXIS는 robot data scaling을 무작정 더 모으는 문제가 아니라 bias factor와 growable benchmark snapshot을 설계하는 문제로 바꿉니다. FORGE-plus는 frozen LLM을 force authority가 아니라 slow supervisory budget으로 제한하고, GLAM-SLAM과 HGeo-TopoM…]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-07-24 (Fri)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-24.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-24.html</guid>
+      <pubDate>Fri, 24 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 107건, cs.RO 35건이고 dedupe 후 135건 중 117건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Generation 23편, Safety/Alignment 19편, 3D/Scene 16편입니다. Generation 23편, Safety/Alignment 19편, 3D/Scene과 Robot Learning이 각각 16편으로 크지만, robotics 관점의 공통 축은 bucket 크기가 아니라 hybrid world-state contract, bias-aware data scaling, robot-usable geometry, bounded supervision입니다.]]></description>
+    </item>
     <item>
       <title>2026-07-23 심층판</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-23-research-intelligence.html</link>
@@ -406,27 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-18.html</guid>
       <pubDate>Mon, 18 May 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[오늘 /new는 cs.CV 180건, cs.RO 38건이고 dedupe 후 206건 중 177건이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 Generation 49편, Foundation Models 31편, 3D/Scene 22편입니다. 숫자로는 Generation이 크지만, lab 관점에서는 geometry/SLAM/recon과 VLA 실행 구조를 따로 읽는 편이 더 중요합니다.]]></description>
-    </item>
-    <item>
-      <title>🗓 arXiv Weekly Retrospective — 2026-05-16 (Week 20)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-16-weekly.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-16-weekly.html</guid>
-      <pubDate>Sat, 16 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[이번 주 pastweek는 1350편을 dedupe해서 봤고, 그중 607편이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 Generation 160편, Robot Learning 103편, Foundation Models 78편입니다. 숫자만 보면 생성 계열이 압도적이지만, 실제 판세는 생성 모델이 조종 가능성, 물리 일관성, closed-loop 실행으로 내려오면서 Robot Learning, 3D/Scene, Safety/Alignment와 엮이는 쪽입니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-05-15 (금)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-15.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-15.html</guid>
-      <pubDate>Fri, 15 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 /new는 cs.CV 180건, cs.RO 38건이고 dedupe 후 206건 중 177건이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 Generation 49편, Foundation Models 31편, 3D/Scene 22편입니다. 숫자만 보면 Generation이 가장 크지만, 3D/Scene도 22편으로 두껍습니다. 오늘의 해석 포인트는 `SLAM 논문이 적다`가 아니라, SLAM/recon 문제가 3DGS map, feed-forward geometry, calibration, sparse-view reconstruction이라는 이름으로 재배치되고 있다는 점입니다.]]></description>
-    </item>
-    <item>
-      <title>📄 arXiv Daily Briefing — 2026-05-14 (목)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-14.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-14.html</guid>
-      <pubDate>Thu, 14 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 /new는 cs.CV 160건, cs.RO 66건이고 dedupe 후 213건 중 177건이 ROI 버킷에 걸렸습니다. 가장 큰 버킷은 Generation 34편, Foundation Models 29편, Efficiency/Systems 23편입니다. 생성 논문도 많지만, 제목과 초록을 같이 보면 오늘의 무게는 controllability보다 실행 지연, evidence routing, 불확실성 관리 쪽으로 옮겨가 있습니다.]]></description>
     </item>
   </channel>
 </rss>

@@ -1,0 +1,98 @@
+{
+  "date": "2026-07-25",
+  "source_listing_date": "2026-07-24",
+  "source_mode": "pastweek",
+  "iso_week": "2026-W30",
+  "totals": {
+    "selected": 377,
+    "total_scanned": 377
+  },
+  "daily_totals": {
+    "cv": 595,
+    "ro": 245,
+    "selected": 687,
+    "total_scanned": 799
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 46,
+      "cv": 32,
+      "ro": 8,
+      "cvro": 6
+    },
+    "Robot Learning": {
+      "total": 65,
+      "cv": 6,
+      "ro": 52,
+      "cvro": 7
+    },
+    "Autonomous Driving": {
+      "total": 27,
+      "cv": 6,
+      "ro": 19,
+      "cvro": 2
+    },
+    "Foundation Models": {
+      "total": 51,
+      "cv": 49,
+      "ro": 0,
+      "cvro": 2
+    },
+    "Generation": {
+      "total": 81,
+      "cv": 71,
+      "ro": 5,
+      "cvro": 5
+    },
+    "Efficiency/Systems": {
+      "total": 41,
+      "cv": 37,
+      "ro": 2,
+      "cvro": 2
+    },
+    "Embodied AI": {
+      "total": 28,
+      "cv": 4,
+      "ro": 20,
+      "cvro": 4
+    },
+    "Safety/Alignment": {
+      "total": 38,
+      "cv": 27,
+      "ro": 9,
+      "cvro": 2
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA가 action head 경쟁에서 world-state and execution-interface contract로 이동",
+      "why": "이번 주 VLA 흐름은 action decoder를 더 키우는 경쟁이 아니라 action이 소비하는 state와 interface를 어떻게 검증할지로 이동했습니다. KineBench와 PerceptDrive는 generated/world-action output을 kinematic grounding and trajectory metric으로 판정하고, HyWorldVLA는 pixel and latent world modeling을 분리합니다. MoE VLA와 Action QFormer류는 action-facing representation and expert routing이 실제 skill phase와 instruction alignment를 바꾸는지 묻습니다.",
+      "confidence": "High — week 내 독립 저자군이 world model, action interface, expert routing, bias-aware evaluation을 반복"
+    },
+    {
+      "cluster": "Robot data scaling이 fixed dataset release에서 bias-aware growable engine으로 이동",
+      "why": "데이터를 많이 모은다는 말은 이번 주에 더 구체적인 계약으로 바뀌었습니다. AXIS는 task generation, web teleoperation, refinement, augmentation, validation을 growable snapshot으로 묶고, Scale Up Strategically는 factor dominance를 먼저 측정한 뒤 collection을 설계합니다. EgoRecovery와 LENS는 failure state and planning abstraction이 data economy의 핵심임을 보여줍니다.",
+      "confidence": "High — AXIS/Scale Up/EgoRecovery 계열이 static dataset보다 growth, bias, failure data를 강조"
+    },
+    {
+      "cluster": "Geometry 연구가 visual fidelity에서 robot-usable map and topology state로 이동",
+      "why": "3D/Scene은 주간 46편이지만 숫자보다 중요한 것은 map/state contract입니다. GLAM-SLAM은 ORB-SLAM2 front-end와 Gaussian mapper를 decoupled real-time map으로 묶고, HGeo-TopoMap은 BEV topology에 hierarchical geometric priors를 넣습니다. DINS-IO, WAT3R, DTIF, 3D-aware VLMs, UAV depth까지 더하면 geometry는 rendering score가 아니라 localization, relation, topology, navigation success의 substrate입니다.",
+      "confidence": "High — SLAM, odometry, topology, depth, spatial VLM signals가 한 주에 반복"
+    },
+    {
+      "cluster": "Contact-rich manipulation이 success demo에서 force, recovery, and tactile failure boundary로 이동",
+      "why": "contact-rich manipulation은 성공 demo를 더 모으는 것만으로는 fragile failure를 설명하지 못합니다. FORGE-plus는 LLM을 force budget setter로 제한하고, EgoRecovery는 human recovery segment를 corrective intent로 바꾸며, URF/FELT/bimanual diffusion papers는 force, tactile, composition boundary를 별도 state로 봅니다. 지난 주 force/tactile 신호와 합치면 contact 평가의 중심은 peak success가 아니라 breakage, recovery, tactile ambiguity입니다.",
+      "confidence": "Medium-High — 일부 force/tactile 대표는 지난 W29 daily에서 이어진 strengthening signal이지만 recovery/contact boundary가 명확히 반복"
+    },
+    {
+      "cluster": "MLLM and robot-agent reliability가 final answer에서 evidence trajectory diagnosis로 이동",
+      "why": "이번 주 Foundation Models 51편의 핵심은 answer accuracy가 아니라 evidence가 맞았는지입니다. Geo3R은 geometry cards로 spatial relation hallucination을 줄이고, HalluScope는 hallucinated span and type을 fine-grained diagnosis로 바꿉니다. Silent Failures, CRAG-MM-Diagnostics, ViSTR-Bench, ResponseGuard는 retrieval path, stage-wise VQA, dynamic visual cues, guardrail latency를 같은 diagnostic surface로 만듭니다.",
+      "confidence": "High — spatial, span, retrieval, dynamic-cue, guardrail diagnostics가 서로 다른 tasks에서 반복"
+    },
+    {
+      "cluster": "Autonomy benchmark가 route success에서 body, capability, conflict, and safety constraints로 이동",
+      "why": "navigation/autonomy는 성공률 한 줄로 충분하지 않습니다. NavVerse와 VoLN은 continuous execution and visual-goal input contract를 강조하고, EA-Nav는 embodiment geometry를 safety condition으로 넣습니다. ZONDA, capability-aware traversability, socially consistent multi-robot navigation, CBF payload transport까지 포함하면 constraint violation, false stop, recovery margin을 함께 봐야 합니다.",
+      "confidence": "High — embodied navigation and safety-control papers가 input contract와 constraint metrics를 공유"
+    }
+  ]
+}

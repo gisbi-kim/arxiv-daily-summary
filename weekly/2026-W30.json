@@ -1,0 +1,637 @@
+{
+  "date": "2026-07-25",
+  "iso_week": "2026-W30",
+  "week_start": "2026-07-19",
+  "week_end": "2026-07-25",
+  "source_mode": "pastweek",
+  "source_listing_date": "2026-07-24",
+  "source_daily_artifacts": [
+    "2026-07-20",
+    "2026-07-21",
+    "2026-07-22",
+    "2026-07-23",
+    "2026-07-24"
+  ],
+  "weekly_thesis": "2026-W30의 핵심은 VLA, world model, manipulation data, geometry/SLAM, MLLM reliability가 모두 더 큰 모델보다 실행 가능한 state contract와 failure-evidence contract를 소유하는 방향으로 수렴했다는 점입니다. 월요일과 화요일의 VLA/action interface 흐름은 목요일의 KineBench/PerceptDrive, 금요일의 HyWorldVLA/MoE VLA로 이어졌고, EgoRecovery, FORGE-plus, AXIS, Scale Up Strategically는 data scaling을 success demo volume이 아니라 failure, bias, force, growth protocol로 재정의했습니다. GLAM-SLAM, DINS-IO, HGeo-TopoMap, Geo3R은 geometry를 rendering or answer support가 아니라 robot task가 소비하는 verified state로 끌어올렸습니다.",
+  "totals": {
+    "selected": 377,
+    "total_scanned": 377
+  },
+  "daily_totals": {
+    "cv": 595,
+    "ro": 245,
+    "selected": 687,
+    "total_scanned": 799
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 46,
+      "cv": 32,
+      "ro": 8,
+      "cvro": 6
+    },
+    "Robot Learning": {
+      "total": 65,
+      "cv": 6,
+      "ro": 52,
+      "cvro": 7
+    },
+    "Autonomous Driving": {
+      "total": 27,
+      "cv": 6,
+      "ro": 19,
+      "cvro": 2
+    },
+    "Foundation Models": {
+      "total": 51,
+      "cv": 49,
+      "ro": 0,
+      "cvro": 2
+    },
+    "Generation": {
+      "total": 81,
+      "cv": 71,
+      "ro": 5,
+      "cvro": 5
+    },
+    "Efficiency/Systems": {
+      "total": 41,
+      "cv": 37,
+      "ro": 2,
+      "cvro": 2
+    },
+    "Embodied AI": {
+      "total": 28,
+      "cv": 4,
+      "ro": 20,
+      "cvro": 4
+    },
+    "Safety/Alignment": {
+      "total": 38,
+      "cv": 27,
+      "ro": 9,
+      "cvro": 2
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA가 action head 경쟁에서 world-state and execution-interface contract로 이동",
+      "representative_papers": [
+        {
+          "title": "HyWorldVLA: A Vision-Language-Action Model with Hybrid World Modeling for Autonomous Driving",
+          "arxiv": "https://arxiv.org/abs/2607.20988",
+          "short": "HyWorldVLA",
+          "badge": "CV",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "PerceptDrive: Perception Prior World-Action Modeling with Adaptive Expert Routing for End-to-End Autonomous Driving",
+          "arxiv": "https://arxiv.org/abs/2607.20175",
+          "short": "PerceptDrive",
+          "badge": "CV",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "KineBench: Benchmarking Embodied World Models via IDM-Free Kinematic Grounding",
+          "arxiv": "https://arxiv.org/abs/2607.19876",
+          "short": "KineBench",
+          "badge": "CV/RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "Generative Simulation",
+            "order": "Action-Conditioned Worlds",
+            "genus": "Control Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Emergent Compositional Skills in Mixture-of-Experts VLAs",
+          "arxiv": "https://arxiv.org/abs/2607.20771",
+          "short": "Emergent Compositional Skills in Mixture-of-Experts VLAs",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Scale Up Strategically: Learning Compositional Generalization via Bias-Aware Evaluation and Data Collection for Robotic Manipulation",
+          "arxiv": "https://arxiv.org/abs/2607.21582",
+          "short": "Scale Up Strategically",
+          "badge": "CV/RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ],
+      "why_it_matters": "이번 주 VLA 흐름은 action decoder를 더 키우는 경쟁이 아니라 action이 소비하는 state와 interface를 어떻게 검증할지로 이동했습니다. KineBench와 PerceptDrive는 generated/world-action output을 kinematic grounding and trajectory metric으로 판정하고, HyWorldVLA는 pixel and latent world modeling을 분리합니다. MoE VLA와 Action QFormer류는 action-facing representation and expert routing이 실제 skill phase와 instruction alignment를 바꾸는지 묻습니다.",
+      "confidence": "High — week 내 독립 저자군이 world model, action interface, expert routing, bias-aware evaluation을 반복",
+      "lab_action": "LIBERO/RoboCasa/NAVSIM mini-suite에서 action head, world-state latent, expert routing, representation anchoring을 factorial split으로 두고 execution success, semantic retention, trajectory robustness, failure-warning lead time을 비교한다."
+    },
+    {
+      "cluster": "Robot data scaling이 fixed dataset release에서 bias-aware growable engine으로 이동",
+      "representative_papers": [
+        {
+          "title": "AXIS: A Growable Community-Driven Data Engine for Scalable Robot Manipulation",
+          "arxiv": "https://arxiv.org/abs/2607.21588",
+          "short": "AXIS",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Scale Up Strategically: Learning Compositional Generalization via Bias-Aware Evaluation and Data Collection for Robotic Manipulation",
+          "arxiv": "https://arxiv.org/abs/2607.21582",
+          "short": "Scale Up Strategically",
+          "badge": "CV/RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "TableVerse: A Large-scale Tabletop Dataset with Real-world Grounded Layouts for Generalizable Manipulation",
+          "arxiv": "https://arxiv.org/abs/2607.21017",
+          "short": "TableVerse",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ],
+      "why_it_matters": "데이터를 많이 모은다는 말은 이번 주에 더 구체적인 계약으로 바뀌었습니다. AXIS는 task generation, web teleoperation, refinement, augmentation, validation을 growable snapshot으로 묶고, Scale Up Strategically는 factor dominance를 먼저 측정한 뒤 collection을 설계합니다. EgoRecovery와 LENS는 failure state and planning abstraction이 data economy의 핵심임을 보여줍니다.",
+      "confidence": "High — AXIS/Scale Up/EgoRecovery 계열이 static dataset보다 growth, bias, failure data를 강조",
+      "lab_action": "same tabletop family에서 random collection, factor-targeted collection, human recovery collection, AXIS-style snapshot growth를 비교하고 OOD success, factor dominance, valid segments per hour, second-attempt recovery를 평가한다."
+    },
+    {
+      "cluster": "Geometry 연구가 visual fidelity에서 robot-usable map and topology state로 이동",
+      "representative_papers": [
+        {
+          "title": "GLAM-SLAM: Real-time Gaussian Large-scale Mapping via Flow Densification and Spatial Decomposition",
+          "arxiv": "https://arxiv.org/abs/2607.21416",
+          "short": "GLAM-SLAM",
+          "badge": "CV/RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Geometry Maps",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "DINS-IO: Learned Inertial Odometry via Differentiable INS Consistency",
+          "arxiv": "https://arxiv.org/abs/2607.20232",
+          "short": "DINS-IO",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Geometry Maps",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "WAT3R: Feedforward Underwater 3D Reconstruction",
+          "arxiv": "https://arxiv.org/abs/2607.21023",
+          "short": "WAT3R",
+          "badge": "CV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Visual Perception",
+            "class": "3D Vision",
+            "order": "Scene Representation",
+            "genus": "Gaussian/Geometry Models",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "DTIF: Robust Loop Closure Detection via Delaunay Triangle Topology in Complex Forests",
+          "arxiv": "https://arxiv.org/abs/2607.21138",
+          "short": "DTIF",
+          "badge": "CV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Trustworthy ML",
+            "class": "Robustness and Alignment",
+            "order": "OOD and Adversarial Risk",
+            "genus": "Deployment Safety",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "3D-Aware VLMs with Implicit and Explicit Geometries",
+          "arxiv": "https://arxiv.org/abs/2607.21595",
+          "short": "3D-Aware VLMs with Implicit and Explicit Geometries",
+          "badge": "CV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ],
+      "why_it_matters": "3D/Scene은 주간 46편이지만 숫자보다 중요한 것은 map/state contract입니다. GLAM-SLAM은 ORB-SLAM2 front-end와 Gaussian mapper를 decoupled real-time map으로 묶고, HGeo-TopoMap은 BEV topology에 hierarchical geometric priors를 넣습니다. DINS-IO, WAT3R, DTIF, 3D-aware VLMs, UAV depth까지 더하면 geometry는 rendering score가 아니라 localization, relation, topology, navigation success의 substrate입니다.",
+      "confidence": "High — SLAM, odometry, topology, depth, spatial VLM signals가 한 주에 반복",
+      "lab_action": "same indoor/outdoor route traces에서 sparse SLAM, Gaussian map, inertial odometry, BEV topology, geometric VLM card를 비교하고 metric drift, relocalization success, topology error, spatial relation error, downstream route recovery를 측정한다."
+    },
+    {
+      "cluster": "Contact-rich manipulation이 success demo에서 force, recovery, and tactile failure boundary로 이동",
+      "representative_papers": [
+        {
+          "title": "URF: A Unified Robot Control-Policy Framework for Stable Contact Aware Manipulation",
+          "arxiv": "https://arxiv.org/abs/2607.20912",
+          "short": "URF",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "FELT: Generating Tactile Signals from Vision for Visuo-Tactile Manipulation",
+          "arxiv": "https://arxiv.org/abs/2607.20683",
+          "short": "FELT",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Grasp, Handover, Rotate: Bimanual Object Reorientation via Compositional Diffusion and Energy-Based Optimization",
+          "arxiv": "https://arxiv.org/abs/2607.21341",
+          "short": "Grasp, Handover, Rotate",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ],
+      "why_it_matters": "contact-rich manipulation은 성공 demo를 더 모으는 것만으로는 fragile failure를 설명하지 못합니다. FORGE-plus는 LLM을 force budget setter로 제한하고, EgoRecovery는 human recovery segment를 corrective intent로 바꾸며, URF/FELT/bimanual diffusion papers는 force, tactile, composition boundary를 별도 state로 봅니다. 지난 주 force/tactile 신호와 합치면 contact 평가의 중심은 peak success가 아니라 breakage, recovery, tactile ambiguity입니다.",
+      "confidence": "Medium-High — 일부 force/tactile 대표는 지난 W29 daily에서 이어진 strengthening signal이지만 recovery/contact boundary가 명확히 반복",
+      "lab_action": "assembly and tabletop tasks에서 visual-only policy, force-budget wrapper, tactile-signal wrapper, human-recovery data를 비교하고 peak force violation, breakage, recovery latency, tactile ambiguity failure, final success를 함께 평가한다."
+    },
+    {
+      "cluster": "MLLM and robot-agent reliability가 final answer에서 evidence trajectory diagnosis로 이동",
+      "representative_papers": [
+        {
+          "title": "Geo3R: Mitigating Spatial Reasoning Hallucination in Multimodal Large Language Models",
+          "arxiv": "https://arxiv.org/abs/2607.21085",
+          "short": "Geo3R",
+          "badge": "CV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "HalluScope: Fine-grained Hallucination Diagnosis for Multimodal Large Language Models",
+          "arxiv": "https://arxiv.org/abs/2607.21105",
+          "short": "HalluScope",
+          "badge": "CV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "CRAG-MM-Diagnostics: Enabling Stage-Wise Analysis of Knowledge-Intensive VQA",
+          "arxiv": "https://arxiv.org/abs/2607.21155",
+          "short": "CRAG-MM-Diagnostics",
+          "badge": "CV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "ViSTR-Bench: Can MLLMs Reason from Continuous Visual Cues in Dynamic Scenes?",
+          "arxiv": "https://arxiv.org/abs/2607.20868",
+          "short": "ViSTR-Bench",
+          "badge": "CV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Look Less, Think Faster: Joint Token-Compute Adaptation for Multimodal LLMs",
+          "arxiv": "https://arxiv.org/abs/2607.20357",
+          "short": "Look Less, Think Faster",
+          "badge": "CV",
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ],
+      "why_it_matters": "이번 주 Foundation Models 51편의 핵심은 answer accuracy가 아니라 evidence가 맞았는지입니다. Geo3R은 geometry cards로 spatial relation hallucination을 줄이고, HalluScope는 hallucinated span and type을 fine-grained diagnosis로 바꿉니다. Silent Failures, CRAG-MM-Diagnostics, ViSTR-Bench, ResponseGuard는 retrieval path, stage-wise VQA, dynamic visual cues, guardrail latency를 같은 diagnostic surface로 만듭니다.",
+      "confidence": "High — spatial, span, retrieval, dynamic-cue, guardrail diagnostics가 서로 다른 tasks에서 반복",
+      "lab_action": "robot VLM episodes에 geometry card, retrieval/evidence path, visual-cue timeline, span-level hallucination label을 붙이고 phantom grounding, stale state, wrong spatial relation, unsafe guardrail miss를 failure family별로 평가한다."
+    },
+    {
+      "cluster": "Autonomy benchmark가 route success에서 body, capability, conflict, and safety constraints로 이동",
+      "representative_papers": [
+        {
+          "title": "VoLN: Vision-Only Long-Horizon Navigation---Paradigm, Benchmark, and Method",
+          "arxiv": "https://arxiv.org/abs/2607.21400",
+          "short": "VoLN",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "NavVerse: Benchmarking Indoor-to-Outdoor Embodied Navigation in Continuous Robot Simulation",
+          "arxiv": "https://arxiv.org/abs/2607.19695",
+          "short": "NavVerse",
+          "badge": "CV/RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "EA-Nav: Learning Safe Visual Navigation Policies with Embodiment Awareness",
+          "arxiv": "https://arxiv.org/abs/2607.19880",
+          "short": "EA-Nav",
+          "badge": "CV/RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "ZONDA: Zero-shot Object Navigation with Dynamic Avoidance in Multi-floor Environments",
+          "arxiv": "https://arxiv.org/abs/2607.21025",
+          "short": "ZONDA",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Towards Capability-Aware Traversability Navigation for Unstructured Environments",
+          "arxiv": "https://arxiv.org/abs/2607.20679",
+          "short": "Towards Capability-Aware Traversability Navigation for Unstructured En",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Socially Consistent Multi-Robot Navigation Using Decoupled Planning and Trajectory Coordination",
+          "arxiv": "https://arxiv.org/abs/2607.20772",
+          "short": "Socially Consistent Multi-Robot Navigation Using Decoupled Planning an",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Safe and Scalable Multi-Drone Payload Transport via CBF-based Reinforcement Learning with Zero-Shot Sim-to-Real Transfer",
+          "arxiv": "https://arxiv.org/abs/2607.20665",
+          "short": "Safe and Scalable Multi-Drone Payload Transport via CBF-based Reinforc",
+          "badge": "RO",
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ],
+      "why_it_matters": "navigation/autonomy는 성공률 한 줄로 충분하지 않습니다. NavVerse와 VoLN은 continuous execution and visual-goal input contract를 강조하고, EA-Nav는 embodiment geometry를 safety condition으로 넣습니다. ZONDA, capability-aware traversability, socially consistent multi-robot navigation, CBF payload transport까지 포함하면 constraint violation, false stop, recovery margin을 함께 봐야 합니다.",
+      "confidence": "High — embodied navigation and safety-control papers가 input contract와 constraint metrics를 공유",
+      "lab_action": "indoor-to-outdoor, UAV, sidewalk, multi-robot scenes에서 visual-goal policy, embodiment-aware policy, capability-aware planner, CBF safety wrapper를 비교하고 clearance violation, collision margin, false stop, human intervention, recovery latency를 평가한다."
+    }
+  ],
+  "top_papers": [
+    {
+      "title": "HyWorldVLA",
+      "arxiv": "https://arxiv.org/abs/2607.20988",
+      "why": "hybrid pixel/latent world model로 driving VLA의 state contract를 직접 제시"
+    },
+    {
+      "title": "Scale Up Strategically",
+      "arxiv": "https://arxiv.org/abs/2607.21582",
+      "why": "factor dominance를 data collection target으로 바꾼 manipulation scaling paper"
+    },
+    {
+      "title": "GLAM-SLAM",
+      "arxiv": "https://arxiv.org/abs/2607.21416",
+      "why": "Gaussian map을 ORB-SLAM2 tracking과 large-scale real-time mapping으로 연결"
+    },
+    {
+      "title": "AXIS",
+      "arxiv": "https://arxiv.org/abs/2607.21588",
+      "why": "robot data를 growable community-driven benchmark snapshot engine으로 설계"
+    },
+    {
+      "title": "Geo3R",
+      "arxiv": "https://arxiv.org/abs/2607.21085",
+      "why": "MLLM spatial hallucination을 explicit geometry card problem으로 전환"
+    }
+  ],
+  "strategy_board": [
+    {
+      "opportunity": "State Contract Evaluation Harness",
+      "portfolio": "Build moat",
+      "one_week_probe": "Select one manipulation and one navigation trace, define latent/world/geometry/evidence contract fields, and score existing policies under three perturbations.",
+      "four_week_build": "Release a small reusable evaluation harness with state contract schema, failure family labels, and downstream execution metrics.",
+      "success_metric": "state contract score predicts execution failure with AUC >=0.75 and isolates at least three actionable failure families.",
+      "stop_condition": "If contract fields do not outperform task success history or visual score, narrow scope to geometry-only state estimation.",
+      "paper_path": [
+        "https://arxiv.org/abs/2607.20988",
+        "https://arxiv.org/abs/2607.21416",
+        "https://arxiv.org/abs/2607.21085"
+      ],
+      "asset_path": [
+        "APRL internal state-contract schema",
+        "robot episode failure-family taxonomy"
+      ]
+    },
+    {
+      "opportunity": "Bias-Aware Data Growth Protocol",
+      "portfolio": "Exploit",
+      "one_week_probe": "Run factor dominance tests for verb/object/color/material on three tabletop tasks before adding new demonstrations.",
+      "four_week_build": "Build a small growable snapshot with targeted bias-breaking trajectories and controlled augmentation variants.",
+      "success_metric": "OOD success improves by 15 percentage points over random collection and factor dominance magnitude drops by 30%.",
+      "stop_condition": "If factor dominance fails to predict OOD errors, switch to recovery/force factor labels.",
+      "paper_path": [
+        "https://arxiv.org/abs/2607.21582",
+        "https://arxiv.org/abs/2607.21588"
+      ],
+      "asset_path": [
+        "factor dominance test suite",
+        "task snapshot validation script"
+      ]
+    },
+    {
+      "opportunity": "Bounded Supervisor for Robot Safety",
+      "portfolio": "Explore",
+      "one_week_probe": "Prototype force-budget and geometry-card supervisors that expose only bounded choices to a policy.",
+      "four_week_build": "Compare free-form planner, bounded force supervisor, and geometry-card supervisor on fragile assembly and wrong-goal navigation.",
+      "success_metric": "breakage or collision drops by 40% while success drop remains below 10 percentage points.",
+      "stop_condition": "If bounded supervision only delays failures, convert it into offline diagnostic labeling first.",
+      "paper_path": [
+        "https://arxiv.org/abs/2607.21227",
+        "https://arxiv.org/abs/2607.21085",
+        "https://arxiv.org/abs/2607.21400"
+      ],
+      "asset_path": [
+        "bounded-supervisor API",
+        "force/geometry intervention logs"
+      ]
+    }
+  ],
+  "frontier_memory": {
+    "strengthening": [
+      "VLA execution interface and world-state contract repeated across all five daily briefings.",
+      "Robot-usable geometry appeared as mapping, odometry, topology, and spatial-reasoning infrastructure."
+    ],
+    "new": [
+      "Bias-aware robot data scaling became explicit through Factor Dominance and AXIS-style growable snapshots."
+    ],
+    "missing_axis": [
+      "Few papers test the proposed contracts on shared real multi-sensor closed-loop episodes."
+    ]
+  }
+}
