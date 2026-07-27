@@ -1,0 +1,450 @@
+{
+  "date": "2026-07-27",
+  "edition": "Research Intelligence",
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "scope_note": "cs.CV/cs.RO /new listing for 2026-07-27 was parsed with the repository scripts. The parser found 67 non-replacement cs.CV rows and 31 non-replacement cs.RO rows; after deduplication, 93 papers remained and 81 were classified as ROI. Tier A uses official arXiv HTML full text for Robot-Factored World Models, SM4RT, SceneActBench, GRACE, JustDepth, CARA, Physical Agency, and Mag4D-SLAM.",
+  "executive_thesis": "오늘 배치의 강한 신호는 robotics가 더 큰 VLA를 주장하기보다 action이 실제 상태로 번역되는 경계, 3D 장면을 실제로 수정하는 agent loop, 그리고 안전한 autonomy가 어떤 evidence를 소비해야 하는지를 분리하기 시작했다는 점입니다. Robot-Factored World Models는 action-conditioned video prediction을 raw action이 아니라 rendered robot geometry와 scene response의 계약으로 바꾸고, GRACE는 diffusion policy guidance를 미분 가능한 cost가 아니라 MPPI posterior mean으로 제한합니다. SceneActBench와 SM4RT는 3D understanding을 answer accuracy가 아니라 scene edit, motion basis, hidden ground-truth evaluation으로 밀어 넣습니다. JustDepth, CARA, Physical Agency, Mag4D-SLAM은 deployment stack에서 depth latency, risk concept, tool-call auditability, localization substrate가 모델 성능만큼 중요한 release variable임을 보여줍니다. APRL 관점의 결론은 policy 자체보다 action-to-state contract, scene-action benchmark, gradient-free safety wrapper, and robot-usable sensing dataset을 자산으로 잡아야 한다는 것입니다.",
+  "decision_cards": [
+    {
+      "label": "Decision",
+      "title": "판단 1 - world model은 action token보다 realization gap을 봐야 한다",
+      "body": "Robot-Factored World Models와 GRACE는 policy output을 곧바로 action으로 믿지 않습니다. 하나는 nominal robot geometry가 scene response로 바뀌는 gap을 조건으로 두고, 다른 하나는 diffusion prior를 constraint cost로 재가중합니다. APRL 평가는 action head보다 action이 state로 실현되는 중간 표면을 기록해야 합니다."
+    },
+    {
+      "label": "Decision",
+      "title": "판단 2 - 3D agent 평가는 텍스트 답이 아니라 scene operation이다",
+      "body": "SceneActBench와 SM4RT는 3D 능력을 서술형 정답으로만 측정하지 않습니다. agent가 Blender interface로 scene을 고치고, dynamic reconstruction은 per-pixel displacement보다 structured motion bases로 설명됩니다. 로봇 연구에서는 3D reasoning score보다 state edit, motion structure, and hidden evaluation contract가 중요합니다."
+    },
+    {
+      "label": "Decision",
+      "title": "판단 3 - deployment risk는 perception output보다 evidence budget이다",
+      "body": "JustDepth는 radar-camera depth의 error-latency frontier를, CARA는 사고 보고서에서 뽑은 risk concept을, Physical Agency는 frozen skill을 호출하고 검증하는 audit trail을 전면에 둡니다. 시스템의 release gate는 정확도 하나가 아니라 latency, concept trace, verification, and localization substrate의 조합이어야 합니다."
+    }
+  ],
+  "papers": [
+    {
+      "rank": 1,
+      "title": "Robot-Factored World Models via Robot Rendering",
+      "arxiv_id": "2607.22535",
+      "fit": "robot world models - action-conditioned video - state realization",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Action-conditioned video world models often treat the action signal as if it directly explains the next observation. That collapses controller limits, robot embodiment, and contact response into one opaque conditioning token.",
+      "friction": "Robotics has two gaps at once: a raw action becomes a nominal robot trajectory through a controller, then the nominal trajectory changes the scene only through imperfect physical interaction.",
+      "hidden_premise": "A useful world model should expose the deployment-available robot state that mediates action, not require hidden privileged dynamics.",
+      "conceptual_move": "The paper conditions video prediction on rendered nominal robot geometry, separating static scene context from robot motion evidence.",
+      "mechanism": "A visual world-model interface carries static context and a rendered robot trajectory; the diffusion model predicts the resulting scene response.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "Static context, rendered nominal robot geometry, and scene response are separated in the visual world-model interface."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The paper explicitly distinguishes the action-to-nominal-trajectory gap from the nominal-trajectory-to-realized-state gap."
+        },
+        {
+          "trace": "Section 3.1 [Verified]",
+          "claim": "Robot-factored visual world-model interface is presented as the method core, not as a post-hoc visualization."
+        },
+        {
+          "trace": "Abstract [Verified]",
+          "claim": "The paper frames actions as influencing observations through two distinct processes, matching the release thesis."
+        }
+      ],
+      "falsification": "If rendered nominal geometry does not predict contact-rich state change better than raw action tokens under the same data budget, the robot-factored interface is mostly a visualization convenience.",
+      "adversarial": "Rendered robot geometry may encode controller bias without solving scene physics. It can also fail when the relevant state is tactile, deformable, or hidden behind occlusion rather than visible geometry.",
+      "thinking_tool": "Insert an explicit action-to-state surface before judging a policy. If that surface is wrong, downstream video quality is not the real bottleneck.",
+      "transfer_boundary": "The idea transfers best to tasks where nominal robot geometry is observable and causally close to scene response; it needs extra state channels for force and tactile domains."
+    },
+    {
+      "rank": 2,
+      "title": "SM4RT: Learning Structured Motion Geometry for 4D Reconstruction",
+      "arxiv_id": "2607.22534",
+      "fit": "4D reconstruction - motion bases - dynamic scene state",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Dynamic reconstruction is often represented as dense displacement, optical flow, or frame-level tracking, which makes object-level motion structure hard to inspect.",
+      "friction": "A robot consuming a dynamic scene needs stable motion components and tracks, not just visually plausible 4D output.",
+      "hidden_premise": "Motion should be represented as structured geometry with reusable bases and assignments before it can become a robot-usable state variable.",
+      "conceptual_move": "SM4RT moves from geometry with motion to geometry of motion: motion bases describe component dynamics, and time-shared assignments bind points to those bases.",
+      "mechanism": "The method predicts structured motion bases and dense rigid transform maps, producing world-coordinate tracks for dynamic 4D scenes.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "Structure-of-Motion is defined through motion bases, time-shared point-to-base assignments, and dense rigid transform maps."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The paper contrasts structured motion representation with standard per-pixel displacement."
+        },
+        {
+          "trace": "Section 3.1 [Verified]",
+          "claim": "The method explicitly reframes dynamic understanding as geometry of motion."
+        },
+        {
+          "trace": "Abstract [Verified]",
+          "claim": "The stated challenge is extending geometry foundation models from monocular 3D to dynamic 4D understanding."
+        }
+      ],
+      "falsification": "If motion bases do not improve downstream tracking or planning under occlusion and articulation, the structure may be cleaner for visualization than for robotics.",
+      "adversarial": "Rigid transform maps can hide non-rigid contact and topology change. A high-quality 4D reconstruction still needs task-level validation before being called robot-usable.",
+      "thinking_tool": "Treat dynamic geometry as a set of reusable motion hypotheses that a planner can query, not as a single dense reconstruction artifact.",
+      "transfer_boundary": "The representation is strongest for visually trackable structured motion; deformable manipulation and tool contact need additional physical state evidence."
+    },
+    {
+      "rank": 3,
+      "title": "SceneActBench: Can Agents Act on the 3D Scenes They See?",
+      "arxiv_id": "2607.22393",
+      "fit": "3D agent benchmark - scene editing - hidden evaluation",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Most 3D VLM benchmarks score text answers or isolated object judgments, leaving open whether an agent can modify a complete 3D scene correctly.",
+      "friction": "An embodied agent must inspect a scene, call tools, change geometry or camera state, and stop without seeing evaluator feedback.",
+      "hidden_premise": "3D understanding becomes meaningful for robotics only when it is tied to executable scene operations and hidden ground-truth checks.",
+      "conceptual_move": "SceneActBench uses a shared agent-environment loop where the VLM inspects rendered views, executes Blender code, revises, and is evaluated once against hidden 3D truth.",
+      "mechanism": "The benchmark covers layout, camera, articulated, reconstruction, and dynamic tasks through GLB assets, PNG/video observations, MCP tools, and task-specific metrics.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The leaderboard reports overall scores across five per-task contributions, exposing capability distribution rather than one text score."
+        },
+        {
+          "trace": "Table 1 [Verified]",
+          "claim": "The benchmark coverage matrix separates five 3D capabilities and three evaluation properties."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The agent loop uses scene observations, Blender code execution, rendering, revision, and hidden ground-truth evaluation."
+        },
+        {
+          "trace": "Sections 3.1-3.6 [Verified]",
+          "claim": "The task family spans layout, camera, articulated, reconstruction, and dynamic scene operations."
+        }
+      ],
+      "falsification": "If leaderboard gains come mostly from Blender scripting heuristics or dataset-specific scene priors, the benchmark may measure tool fluency more than 3D agency.",
+      "adversarial": "The hidden evaluator is strong, but the environment is still an offline scene editor. It does not prove real-time robot perception or actuation under sensor noise.",
+      "thinking_tool": "Move 3D reasoning evaluation from answer checking to state-changing tool use, then score the final artifact with hidden geometry tests.",
+      "transfer_boundary": "This transfers to simulation and dataset curation immediately; real robot transfer needs latency, calibration, and contact constraints."
+    },
+    {
+      "rank": 4,
+      "title": "GRACE: Gradient-Free Robot Action Generation via Combined Diffusion-MPPI Posterior Mean Estimation",
+      "arxiv_id": "2607.21661",
+      "fit": "diffusion policy - MPPI guidance - deployment constraints",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Diffusion policies can model multimodal demonstrations, but deployment-time safety or task constraints are often added through differentiable guidance costs.",
+      "friction": "Many real robot constraints are non-differentiable, simulator-backed, or black-box, so differentiable guidance excludes exactly the checks needed at deployment.",
+      "hidden_premise": "A policy prior should stay multimodal while a separate optimizer enforces costs that were not differentiable or available during training.",
+      "conceptual_move": "GRACE treats diffusion and MPPI as score-ascent components and estimates a cost-conditioned posterior mean without differentiating the cost or dynamics.",
+      "mechanism": "At each denoising step, MPPI rollouts around the diffusion reverse mean are reweighted by deployment-time costs and projected back into the diffusion reverse kernel.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The diffusion prior chooses the mode while gradient-free guidance keeps the trajectory safe around unseen obstacles."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The inference pipeline samples MPPI rollouts, reweights by constraint costs, and uses a projected reverse kernel."
+        },
+        {
+          "trace": "Algorithm 1 [Verified]",
+          "claim": "The paper specifies a gradient-free inference procedure rather than only a conceptual wrapper."
+        },
+        {
+          "trace": "Section III-D [Verified]",
+          "claim": "Gradient guidance is presented as a differentiable special case, clarifying the broader design."
+        }
+      ],
+      "falsification": "If MPPI rollouts require too much sampling for real-time manipulation or collapse diffusion diversity, the wrapper becomes a slow planner rather than a policy interface.",
+      "adversarial": "Gradient-free guidance can satisfy the specified cost while missing unmodeled safety constraints. The cost library becomes the real safety boundary.",
+      "thinking_tool": "Keep the learned policy prior and the deployment constraint evaluator separate, then measure the cost of that separation in latency and mode collapse.",
+      "transfer_boundary": "The idea transfers to constraints that can be evaluated cheaply at inference; high-dimensional contact and delayed failures need surrogate costs or receding-horizon checks."
+    },
+    {
+      "rank": 5,
+      "title": "JustDepth: Real-Time Radar-Camera Depth Estimation with Single-Scan LiDAR Supervision",
+      "arxiv_id": "2607.22172",
+      "fit": "radar-camera depth - real-time perception - autonomous systems",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Depth estimation papers often optimize error while deployment stacks need a latency/accuracy trade-off that survives sparse radar and limited LiDAR supervision.",
+      "friction": "Radar gives metric range but sparse noisy evidence; camera gives dense appearance without metric scale. A robot needs both without waiting for heavy fusion.",
+      "hidden_premise": "Depth should be treated as a real-time contract between sensing modalities, not as a dense map generated after the fact.",
+      "conceptual_move": "JustDepth fuses 1D radar and RGB features through a height-aware block and graph-based propagation, using single-scan LiDAR as supervision.",
+      "mechanism": "The model uses image and radar encoders, a Height Fusion Block, a GNN depth propagation stage, a depth decoder, and a confidence decoder during training.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The paper plots error-latency trade-off and reports an 8-layer GNN real-time point around 14.8 ms on nuScenes."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The architecture separates RGB/radar encoders, fusion, GNN propagation, dense depth, and training-only confidence."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "The Height Fusion Block repeats radar features along height and applies height-wise attention."
+        },
+        {
+          "trace": "Section IV [Verified]",
+          "claim": "Experiments are framed around autonomous-system depth, not only image reconstruction quality."
+        }
+      ],
+      "falsification": "If radar artifacts or LiDAR supervision leakage dominate performance outside nuScenes, the method may not produce a transferable robot depth contract.",
+      "adversarial": "Latency measured on a desktop GPU may not match embedded autonomy. Sparse radar can also create confident but wrong depth in unusual vertical structure.",
+      "thinking_tool": "Plot perception as a latency/error frontier and include the supervision source in the asset definition.",
+      "transfer_boundary": "The method is most relevant to radar-camera platforms; indoor manipulation and low-speed mobile robots may need depth confidence and failure labels more than raw latency."
+    },
+    {
+      "rank": 6,
+      "title": "CARA: Concept-Aware Risk Attention for Interpretable Collision Anticipation",
+      "arxiv_id": "2607.22494",
+      "fit": "collision anticipation - interpretable risk - autonomous driving",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Collision anticipation models often rely on latent spatio-temporal correlations, which makes early warnings hard to inspect or debug.",
+      "friction": "A warning is only useful to a robot stack if it exposes what risk concept was tracked and how that risk evolved before the collision window.",
+      "hidden_premise": "Interpretability should guide attention during prediction, not just explain the model after it has already emitted a risk score.",
+      "conceptual_move": "CARA derives domain-grounded risk concepts from accident reports, aligns them with video observations, and uses them to govern spatio-temporal attention.",
+      "mechanism": "CLIP-aligned concept signals become temporal trajectories; concept risk assessment guides spatial and temporal attention for collision anticipation.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The paper contrasts latent feature-driven prediction with concept-aware risk attention."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The framework derives risk concepts from 804 DMV accident reports and aligns them with video using CLIP."
+        },
+        {
+          "trace": "Table 1 [Verified]",
+          "claim": "The paper reports performance comparison across three collision anticipation benchmarks."
+        },
+        {
+          "trace": "Section 3.2 [Verified]",
+          "claim": "Concept risk assessment is part of the framework overview, not a separate explanation-only module."
+        }
+      ],
+      "falsification": "If concept trajectories improve interpretability but not early warning under rare collision patterns, the attention mechanism may be explanatory decoration.",
+      "adversarial": "DMV accident reports may encode reporting bias. CLIP concept alignment can also miss visual risk factors that are not cleanly nameable.",
+      "thinking_tool": "Convert safety perception into concept trajectories that can be audited before the final risk score.",
+      "transfer_boundary": "The concept-attention idea transfers to driving and navigation; manipulation risk needs contact and force concepts rather than traffic-report language."
+    },
+    {
+      "rank": 7,
+      "title": "Addressing the Orchestration Gap in Generalist Robots via Physical Agency",
+      "arxiv_id": "2607.21725",
+      "fit": "generalist robots - tool orchestration - verification",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Generalist robot systems often push perception, planning, success detection, recovery, and low-level control into a single opaque model stack.",
+      "friction": "Real tasks need the robot to decide when to call a rigid planner, when to use a VLA, when to verify, and when to recover after failure.",
+      "hidden_premise": "The orchestration layer is itself a research object; auditability and verification can be more valuable than another end-to-end policy update.",
+      "conceptual_move": "The paper frames Physical Agency as a closed observe-reason-act-verify loop over frozen motor backends rather than a new monolithic policy.",
+      "mechanism": "A frontier VLM routes subgoals to TAMP or a VLA backend, verifies outcomes, and recovers on failure through explicit tool calls.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The paper shows obstacle reasoning, safety reasoning, clearing, long-horizon memory, and spatial reasoning in real-robot rollouts."
+        },
+        {
+          "trace": "Table 1 [Verified]",
+          "claim": "The operational profile compares auditability and added training across modular manipulation systems."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The system is an observe-reason-act-verify loop over TAMP and pi0.5-style VLA backends."
+        },
+        {
+          "trace": "Section 3.4 [Verified]",
+          "claim": "Verification is treated as a first-class component of the orchestration design."
+        }
+      ],
+      "falsification": "If explicit orchestration does not improve recovery or diagnosis over a strong end-to-end policy under matched skills, the layer may mostly add latency.",
+      "adversarial": "Frozen skills limit the task distribution. The VLM orchestrator can still hallucinate subgoals or choose a plausible but unsafe tool call.",
+      "thinking_tool": "Treat robot intelligence as a sequence of auditable tool choices and verification gates, not only as a policy parameterization.",
+      "transfer_boundary": "The approach transfers best where reliable low-level skills already exist; novel contact skills still need policy learning and failure data."
+    },
+    {
+      "rank": 8,
+      "title": "Mag4D-SLAM Dataset: A Repeated-Traversal Multi-Modal 4D Geomagnetic Dataset for Localization and Mapping",
+      "arxiv_id": "2607.21986",
+      "fit": "SLAM dataset - geomagnetic sensing - repeated traversal",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "SLAM datasets usually emphasize visual, LiDAR, inertial, or GNSS signals, while infrastructure-free geomagnetic cues are less systematically benchmarked.",
+      "friction": "Outdoor robots need localization evidence when GNSS is denied and visual appearance degrades across day, night, and repeated traversal.",
+      "hidden_premise": "Localization robustness can be a sensing-asset problem, not only a mapping algorithm problem.",
+      "conceptual_move": "Mag4D-SLAM packages repeated-traversal multimodal data with geomagnetic sensing as an explicit localization and mapping substrate.",
+      "mechanism": "The platform includes LiDAR with IMU, GNSS, camera, and magnetometer, collected across repeated campus-loop traversals.",
+      "evidence": [
+        {
+          "trace": "Table I [Verified]",
+          "claim": "The paper positions Mag4D-SLAM against public SLAM and magnetic datasets."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The dataset includes day/night camera images and a LiDAR point-cloud overview of the campus loop."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "The robot platform integrates LiDAR/IMU, GNSS, camera, and magnetometer."
+        },
+        {
+          "trace": "Section III-A [Verified]",
+          "claim": "The sensor suite is documented as part of the system overview."
+        }
+      ],
+      "falsification": "If geomagnetic signals are too environment-specific or unstable across hardware, the dataset may be useful only for a narrow campus-like localization regime.",
+      "adversarial": "Repeated traversal can make robustness look easier than open-world deployment. The dataset still needs route-level failure metrics tied to robot tasks.",
+      "thinking_tool": "Treat sensing diversity as a data moat for localization failure modes, especially when common visual/GNSS assumptions break.",
+      "transfer_boundary": "The asset transfers to outdoor mobile robots and drones; indoor manipulation needs different hidden-state sensors."
+    }
+  ],
+  "synthesis": [
+    {
+      "title": "S1 - Action-conditioned models are becoming state-contract systems",
+      "links": "Robot-Factored World Models - GRACE - Physical Agency",
+      "facts": "Robot-Factored World Models separates action realization gaps, GRACE separates diffusion prior from deployment costs, and Physical Agency separates tool choice from verification.",
+      "inference": "The common decision is not which policy head wins, but where the system records the state that makes an action safe and auditable.",
+      "decision": "APRL should instrument action-to-state traces before comparing larger VLA checkpoints."
+    },
+    {
+      "title": "S2 - 3D reasoning is shifting from answer scoring to executable scene tests",
+      "links": "SceneActBench - SM4RT - JustDepth",
+      "facts": "SceneActBench evaluates scene operations, SM4RT exposes motion bases, and JustDepth plots depth quality against real-time latency.",
+      "inference": "The actionable asset is a benchmark where perception output must support a state-changing operation under bounded compute.",
+      "decision": "Prioritize scene-action and depth-latency tests over generic 3D QA leaderboards."
+    },
+    {
+      "title": "S3 - Safety evidence is becoming named, timed, and inspectable",
+      "links": "CARA - Mag4D-SLAM - Physical Agency",
+      "facts": "CARA builds risk concepts from accident reports, Mag4D-SLAM adds geomagnetic localization evidence, and Physical Agency logs tool-call verification.",
+      "inference": "Safety claims get stronger when the evidence has a name, timestamp, and failure boundary.",
+      "decision": "APRL safety evaluation should store concept trajectory, localization substrate, and verification result in the same episode record."
+    }
+  ],
+  "frontier_memory": [
+    {
+      "signal": "strengthening",
+      "title": "State contracts extend the July VLA/action-stack thread",
+      "history": "Recent July briefings repeatedly emphasized VLA execution diagnostics, world-state contracts, recovery, and evidence traces.",
+      "read": "Today adds robot rendering, gradient-free guidance, and physical agency, so the signal is now a systems interface direction rather than a single model family."
+    },
+    {
+      "signal": "new",
+      "title": "Scene-action benchmarks become a concrete 3D evaluation axis",
+      "history": "Earlier July posts treated 3D/SLAM mostly as robot-usable geometry and map validity.",
+      "read": "SceneActBench makes the agent edit a scene through tools and hidden evaluation, giving APRL a stronger benchmark pattern than static 3D QA."
+    },
+    {
+      "signal": "strengthening",
+      "title": "Latency and sensing substrate are recurring deployment variables",
+      "history": "Weekly W30 already highlighted force, geometry, and evidence contracts.",
+      "read": "JustDepth and Mag4D-SLAM add concrete sensing and latency axes that can be stored as reusable data assets."
+    },
+    {
+      "signal": "missing_axis",
+      "title": "Contact-rich manipulation still lacks unified hidden-state evidence",
+      "history": "Force, tactile, and recovery appeared across recent runs but remain fragmented.",
+      "read": "Today has wrappers and orchestration, but a single benchmark tying rendered robot state, force, tactile, and verification is still missing."
+    }
+  ],
+  "strategy": [
+    {
+      "priority": "BUILD",
+      "title": "Action-to-State Contract Harness",
+      "thesis": "Record nominal robot geometry, realized scene state, constraint cost, verification result, and recovery choice for the same policy rollout.",
+      "scores": {
+        "fit": 5,
+        "novelty": 5,
+        "feasibility": 4,
+        "moat": 5,
+        "timing": 5,
+        "evidence": 5
+      },
+      "one_week": "Use two tabletop tasks and one navigation trace to log action tokens, rendered robot state, depth/pose evidence, and post-action verification.",
+      "four_week": "Build a small benchmark package comparing raw action conditioning, robot-rendered state conditioning, and gradient-free constraint guidance.",
+      "metric": "state-contract fields predict execution failure with AUC >=0.75 and reduce unsafe or unrecoverable actions by 25%.",
+      "stop": "If state-contract fields do not outperform prior success history, narrow to geometry-only state logging.",
+      "assets": [
+        {
+          "label": "Robot-Factored World Models",
+          "url": "https://arxiv.org/abs/2607.22535"
+        },
+        {
+          "label": "GRACE",
+          "url": "https://arxiv.org/abs/2607.21661"
+        },
+        {
+          "label": "Physical Agency",
+          "url": "https://arxiv.org/abs/2607.21725"
+        },
+        {
+          "label": "APRL contract schema",
+          "url": "APRL internal action-state schema"
+        }
+      ]
+    },
+    {
+      "priority": "EXPLOIT",
+      "title": "Scene-Action 3D Evaluation Suite",
+      "thesis": "Convert 3D perception into executable scene edits, camera choices, reconstruction checks, and hidden geometry scoring.",
+      "scores": {
+        "fit": 5,
+        "novelty": 4,
+        "feasibility": 4,
+        "moat": 4,
+        "timing": 5,
+        "evidence": 4
+      },
+      "one_week": "Replicate a small SceneActBench-style loop on three internal 3D scenes with GLB outputs and hidden pose/layout checks.",
+      "four_week": "Add dynamic scene cases using SM4RT-style motion basis labels and evaluate whether VLM/tool agents preserve object motion structure.",
+      "metric": "agent-edited scenes pass hidden geometry checks on 60% of cases and expose failure type for every miss.",
+      "stop": "If tool scripting dominates the score, separate tool-use evaluation from spatial reasoning evaluation.",
+      "assets": [
+        {
+          "label": "SceneActBench",
+          "url": "https://arxiv.org/abs/2607.22393"
+        },
+        {
+          "label": "SM4RT",
+          "url": "https://arxiv.org/abs/2607.22534"
+        },
+        {
+          "label": "APRL 3D scene task bank",
+          "url": "APRL internal GLB task bank"
+        }
+      ]
+    },
+    {
+      "priority": "EXPLORE",
+      "title": "Risk-Concept and Sensing Evidence Log",
+      "thesis": "Store concept trajectory, depth latency, localization modality, and verification outcome together for navigation and driving failures.",
+      "scores": {
+        "fit": 4,
+        "novelty": 4,
+        "feasibility": 4,
+        "moat": 4,
+        "timing": 5,
+        "evidence": 4
+      },
+      "one_week": "Annotate ten near-collision or navigation-failure clips with CARA-style risk concepts plus depth/localization evidence availability.",
+      "four_week": "Build a lightweight episode logger that links risk concept timelines to radar-depth confidence and geomagnetic/LiDAR localization status.",
+      "metric": "risk concept plus sensing evidence identifies the failure family 20% earlier than final collision or route-deviation labels.",
+      "stop": "If concept labels are unstable across annotators, keep the sensing log and defer concept supervision.",
+      "assets": [
+        {
+          "label": "CARA",
+          "url": "https://arxiv.org/abs/2607.22494"
+        },
+        {
+          "label": "JustDepth",
+          "url": "https://arxiv.org/abs/2607.22172"
+        },
+        {
+          "label": "Mag4D-SLAM",
+          "url": "https://arxiv.org/abs/2607.21986"
+        },
+        {
+          "label": "APRL episode evidence log",
+          "url": "APRL internal failure-evidence logger"
+        }
+      ]
+    }
+  ]
+}
