@@ -1,0 +1,450 @@
+{
+  "date": "2026-07-28",
+  "edition": "Research Intelligence",
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "scope_note": "cs.CV/cs.RO /new listing for 2026-07-28 was parsed with the repository scripts. The parser found 243 non-replacement cs.CV rows and 69 non-replacement cs.RO rows; after deduplication, 301 papers remained and 246 were classified as ROI. Tier A uses official arXiv HTML full text for DeVA, N0-VTLA, N0-TWAM, FutureRTC, ArmnetBench, Data Pyramid, Semantic Semi-Incremental Object SLAM, and Anticipatory Risk-Guided RL.",
+  "executive_thesis": "The July 28 batch pushes robotics evaluation away from bigger policy claims and toward observable contracts: predicted tactile state, delayed execution context, scalable robot-data provenance, low-cost real-world rollouts, semantic map association, and future collision risk. DeVA, N0-VTLA, N0-TWAM, and FutureRTC all separate the policy output from the physical evidence that should make the next action valid. Data Pyramid and ArmnetBench ask whether the data and evaluation substrate can scale without losing embodiment fidelity. Semantic Object SLAM and Anticipatory Risk-Guided RL show the same pattern in mapping and flight: the useful asset is not a final score but a traceable intermediate variable. For APRL, the practical decision is to build benchmarks that record action-to-touch, stale-observation correction, data-source tier, rollout label, semantic association, and risk horizon before comparing larger checkpoints.",
+  "decision_cards": [
+    {
+      "label": "Decision",
+      "title": "Action models need a physical evidence interface",
+      "body": "The strongest robot-policy papers do not just map observations to actions. They insert depth or affordance tokens, predicted tactile tokens, future tactile state, or corrected execution-time observations before the action head is trusted."
+    },
+    {
+      "label": "Decision",
+      "title": "Data scale only matters after embodiment fidelity is typed",
+      "body": "Data Pyramid and ArmnetBench both make scale conditional: simulation, egocentric video, UMI-style data, real-robot trajectories, and low-cost rollout labels have different failure boundaries. A data moat is the taxonomy plus the resettable evaluation substrate."
+    },
+    {
+      "label": "Decision",
+      "title": "Navigation safety is becoming a timed latent variable",
+      "body": "Off-road planning, semantic object SLAM, visual localization, and risk-guided flight all depend on when an intermediate estimate becomes stale or misleading. The release gate should track temporal validity, not only terminal route success."
+    }
+  ],
+  "papers": [
+    {
+      "rank": 1,
+      "title": "DeVA: Decoupled Video-Action Model with physical guidance for robot policy learning",
+      "arxiv_id": "2607.24159",
+      "fit": "video-action policy - physical guidance - robot manipulation",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Video-action models often ask one backbone to learn visual dynamics and action prediction at once, so policy failure is hard to assign to future-frame modeling, geometric grounding, or the action head.",
+      "friction": "Robot actions need spatial contact evidence. A visually plausible future does not tell the action decoder where the robot can safely touch, push, or grasp.",
+      "hidden_premise": "The policy should expose physical guidance as an intermediate interface, not bury it inside a fused latent sequence.",
+      "conceptual_move": "DeVA decouples video dynamics from action prediction and injects depth/affordance-style physical tokens into the action stream.",
+      "mechanism": "Layer-wise video features feed an action transformer through cross-attention, while a physical guidance module aggregates multi-level video features into affordance and depth maps that condition action chunks.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The model explicitly separates video dynamics modeling from action prediction."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The physical guidance module converts depth and affordance estimates into tokens for the action head."
+        },
+        {
+          "trace": "Section 3.1 [Verified]",
+          "claim": "The method is organized around a decoupled video-action architecture with multi-level feature interaction."
+        },
+        {
+          "trace": "Section 4.1 [Verified]",
+          "claim": "Evaluation spans RoboCasa, LIBERO, LIBERO-plus, and real-world bimanual manipulation tasks."
+        }
+      ],
+      "falsification": "If physical guidance helps only on visually easy manipulation tasks, the module may be a regularizer rather than a real action-validity interface.",
+      "adversarial": "Depth and affordance maps can be confidently wrong under occlusion, transparent objects, or deformable contact. The paper's interface still needs failure labels.",
+      "thinking_tool": "Split a robot policy into visual prediction, physical guidance, and action emission; then test which interface actually predicts rollout failure.",
+      "transfer_boundary": "The interface transfers best to tasks where depth and affordance are visible before contact. It needs tactile or force evidence for hidden-contact regimes."
+    },
+    {
+      "rank": 2,
+      "title": "N0-VTLA: Scaling Vision-Tactile-Language-Action Model with Latent Tactile Tokens",
+      "arxiv_id": "2607.23782",
+      "fit": "vision-tactile-language-action - latent touch - contact manipulation",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Tactile observations are often appended as another context stream, which lets sparse touch be ignored by a model optimized for dense vision and language tokens.",
+      "friction": "Contact-rich manipulation is decided by future fingertip change, not just the current tactile frame.",
+      "hidden_premise": "Touch should become a predicted action-conditioning variable, so the policy is forced to use it at the point of action generation.",
+      "conceptual_move": "N0-VTLA predicts latent tactile tokens for the coming action chunk and conditions the action expert on those tokens.",
+      "mechanism": "A tactile encoder builds tactile-difference tokens, a predictor estimates future tactile tokens from the vision-language prefix, and the action expert is trained to depend on them.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The model encodes vision, instruction, and tactile difference images, then conditions a flow-matching action expert on latent tactile tokens."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "Future tactile targets are generated by applying the tactile encoder to a future tactile difference."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "The vision-language context is masked during action-expert alignment so action prediction must draw on latent tactile tokens."
+        },
+        {
+          "trace": "Section 2.2 [Verified]",
+          "claim": "Latent tactile tokens are the core interface rather than a late auxiliary feature."
+        }
+      ],
+      "falsification": "If masking the vision-language context does not improve contact tasks or robustness, the latent tactile interface may not carry decisive control information.",
+      "adversarial": "Future tactile prediction can overfit sensor geometry and platform-specific contact. Cross-embodiment claims need canonical action and state checks.",
+      "thinking_tool": "Make the hidden contact variable a prediction target, then require the action head to consume it before comparing policy families.",
+      "transfer_boundary": "This transfers to tactile-equipped grippers and contact-rich manipulation; it does not help camera-only platforms unless another hidden-state sensor is available."
+    },
+    {
+      "rank": 3,
+      "title": "N0-TWAM: Scaling Tactile-Native World Action Model for Contact-Rich Manipulation",
+      "arxiv_id": "2607.23783",
+      "fit": "tactile world-action model - future touch - long-horizon contact",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "VLA and video world-model stacks inherit visual priors, but fingertip events can decide task success while staying invisible to cameras.",
+      "friction": "A model must predict touch and act from touch without tripling the cost of a full-width expert for every modality.",
+      "hidden_premise": "A world-action model for manipulation needs a native tactile stream, not an auxiliary tactile classifier bolted onto a visual policy.",
+      "conceptual_move": "N0-TWAM uses a mixture-of-transformers style design where video, tactile, and action experts interact through shared attention but keep asymmetric capacity.",
+      "mechanism": "The model predicts future vision and tactile state, then predicts action from those states; the video expert stays full width while tactile and action experts are slim.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The model is pretrained on synchronized real-robot manipulation data with per-finger tactile streams."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "Video, tactile, and action experts interact through a shared self-attention layer ordered by a frame-id causal cascade."
+        },
+        {
+          "trace": "Table 1 [Verified]",
+          "claim": "The trainable backbone uses an asymmetric design rather than three full-width modality experts."
+        },
+        {
+          "trace": "Section 2.3 [Verified]",
+          "claim": "The paper treats tactile-aware execution, streaming deployment, and long-horizon tactile punctuation as system concerns."
+        }
+      ],
+      "falsification": "If tactile prediction improves offline loss but not long-horizon contact recovery, the world-action framing is missing the control-relevant tactile variable.",
+      "adversarial": "Large tactile datasets may encode gripper and sensor specifics. Cross-platform claims require explicit normalization and held-out hardware checks.",
+      "thinking_tool": "Treat touch as a world-state channel with its own prediction horizon, then ask where that channel changes the action decision.",
+      "transfer_boundary": "The method is strongest for repeatable fingertip contact. It needs additional sensing for deformable objects, tools, and non-fingertip contact."
+    },
+    {
+      "rank": 4,
+      "title": "FutureRTC: Real-Time Robot Execution with Anticipatory-Conditioned Action Chunking",
+      "arxiv_id": "2607.24008",
+      "fit": "asynchronous robot execution - action chunking - stale observation correction",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Action chunking improves throughput, but slow policy inference means the robot may execute actions conditioned on stale observations.",
+      "friction": "Synchronous execution stalls; naive asynchronous execution keeps moving but can drift from the scene as delay grows.",
+      "hidden_premise": "The policy context should be corrected to execution time without retraining the underlying policy.",
+      "conceptual_move": "FutureRTC adds a plug-in adapter that predicts execution-time observations and corrects rolled-forward proprioceptive state.",
+      "mechanism": "A State Correction Module and Observation Prediction Module synthesize the context expected by the original policy, with a policy consistency loss.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The paper contrasts synchronous, naive asynchronous, and corrected execution under inference delay."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The adapter contains state correction and observation prediction modules."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "Transport and synthesis gates decide how existing visual features are propagated or newly generated."
+        },
+        {
+          "trace": "Methodology [Verified]",
+          "claim": "The paper frames the problem as prediction-execution misalignment caused by stale observations and states."
+        }
+      ],
+      "falsification": "If the adapter works only for small delays or visually smooth scenes, it may be interpolation rather than a robust execution-time state estimator.",
+      "adversarial": "Predicted observations can hide unexpected contact or object motion. The adapter needs a confidence or abort path, not only smoother execution.",
+      "thinking_tool": "Measure robot policies by the age of the observation they really execute against, then insert a correction layer before blaming the policy.",
+      "transfer_boundary": "This transfers to VLA stacks with moderate inference delay; high-speed contact tasks need real sensing fallback and hard safety gates."
+    },
+    {
+      "rank": 5,
+      "title": "ArmnetBench v0.1: Parallel Real-World Evaluation of Manipulation Policies on a Low-Cost Arm Farm",
+      "arxiv_id": "2607.24481",
+      "fit": "real-world manipulation benchmark - low-cost arm farm - rollout labels",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Real robot evaluation is usually too expensive to run many trials across tasks, so reported improvements are hard to separate from setup noise.",
+      "friction": "Simulation is cheap but inherits a sim-to-real gap; physical evaluation is faithful but bottlenecked by hardware, resets, and scoring.",
+      "hidden_premise": "A manipulation benchmark can scale if each cell is cheap, resettable, camera-standardized, and produces labeled rollouts.",
+      "conceptual_move": "ArmnetBench defines a managed fleet of low-cost single-arm and bimanual cells that evaluate policies in parallel under light supervision.",
+      "mechanism": "Each cell uses bounded workspaces, three cameras, a low-cost arm setup, and a protocol for running, labeling, and comparing policy rollouts.",
+      "evidence": [
+        {
+          "trace": "Table 1 [Verified]",
+          "claim": "The benchmark is positioned around a labeled evaluation corpus, not just teleoperated training data."
+        },
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "Single-arm and bimanual cells use bounded workspaces and three camera views."
+        },
+        {
+          "trace": "Table 2 [Verified]",
+          "claim": "The paper reports approximate per-cell bill of materials for low-cost deployment."
+        },
+        {
+          "trace": "Section 4.3 [Verified]",
+          "claim": "The benchmark specifies an evaluation protocol and labels."
+        }
+      ],
+      "falsification": "If low-cost cells produce high variance or embodiment artifacts that dominate policy differences, the arm farm becomes a data generator rather than a fair benchmark.",
+      "adversarial": "Cardboard workspaces and SO-101-class arms may understate contact and calibration complexity. Parallelism does not remove the need for failure taxonomy.",
+      "thinking_tool": "Turn real-world evaluation into an infrastructure problem: cell cost, reset cost, label schema, and variance matter as much as policy architecture.",
+      "transfer_boundary": "The design transfers to tabletop manipulation and policy regression tests; heavy payloads, mobile manipulation, and deformables need different cells."
+    },
+    {
+      "rank": 6,
+      "title": "Data Pyramid for Embodied Manipulation",
+      "arxiv_id": "2607.24744",
+      "fit": "embodied data taxonomy - scalability - robot alignment",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Embodied foundation-model discussions often collapse all demonstrations, videos, simulation, and robot trajectories into a single scale number.",
+      "friction": "Data sources differ in physical fidelity, embodiment dependence, transferability, and collection scalability.",
+      "hidden_premise": "A robot data strategy needs a typed portfolio, because different data tiers create different failure modes and moats.",
+      "conceptual_move": "The paper frames embodied manipulation data as a pyramid spanning real-robot, UMI-style, egocentric-exocentric, simulation, and general data.",
+      "mechanism": "It compares data scale, utilization, collection paradigms, embodiment dependence, and training roles across those categories.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The paper organizes the embodied data pyramid and separates data sources by scope and robot alignment."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The paper visualizes chronological scale growth across simulation, UMI, robot, ego, and general data."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "Recent embodied foundation models increasingly mix real-robot, egocentric, simulation, general, and UMI-style sources."
+        },
+        {
+          "trace": "Introduction [Verified]",
+          "claim": "The paper asks what data should train embodied foundation models and why categories differ."
+        }
+      ],
+      "falsification": "If a mixed data recipe cannot predict which failure family it improves, the pyramid is descriptive rather than operational.",
+      "adversarial": "Taxonomies can hide hard measurement costs. The paper's value depends on turning categories into concrete dataset acquisition and evaluation decisions.",
+      "thinking_tool": "Budget robot data by fidelity and transfer boundary, not just by number of trajectories or hours.",
+      "transfer_boundary": "The pyramid transfers to portfolio planning; it does not by itself decide which data source fixes a specific contact or planning failure."
+    },
+    {
+      "rank": 7,
+      "title": "Semantic Semi-Incremental Data-Association-Free Object SLAM",
+      "arxiv_id": "2607.23384",
+      "fit": "object SLAM - semantic association - semi-incremental mapping",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "Object SLAM usually depends on data association decisions that can fail when objects are visually similar or odometry drifts.",
+      "friction": "Semantic information from detectors and foundation models is useful, but batch data-association-free optimization can be slow and drift-sensitive.",
+      "hidden_premise": "Semantic features should reduce association ambiguity without forcing the mapper to commit early to a fixed landmark set.",
+      "conceptual_move": "The paper extends data-association-free SLAM with semantic feature vectors and semi-incremental processing.",
+      "mechanism": "The method adds semantic terms to the local optimality condition and updates the object map incrementally enough to manage computation and drift.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The paper illustrates mis-association errors that arise after removing a landmark."
+        },
+        {
+          "trace": "Section IV-A [Verified]",
+          "claim": "The method defines a local optimality condition for object association."
+        },
+        {
+          "trace": "Section IV-B [Verified]",
+          "claim": "Semantic feature vectors are incorporated into the object SLAM formulation."
+        },
+        {
+          "trace": "Section IV-C [Verified]",
+          "claim": "Semi-incremental processing is treated as a practical part of the method."
+        }
+      ],
+      "falsification": "If semantic features do not improve ambiguous object association under drift and repeated objects, the extension is mostly extra perception metadata.",
+      "adversarial": "Detector embeddings can be unstable across lighting, viewpoint, and category confusion. SLAM evaluation needs association-level failure reporting.",
+      "thinking_tool": "For semantic maps, evaluate the association decision itself rather than only the final trajectory or reconstruction.",
+      "transfer_boundary": "The approach fits object-level indoor and mobile manipulation maps; dense geometry or open-vocabulary categories need additional validation."
+    },
+    {
+      "rank": 8,
+      "title": "Anticipatory Risk-Guided Reinforcement Learning for Safe Flight Through Dynamic Clutter",
+      "arxiv_id": "2607.23565",
+      "fit": "safe flight - future collision risk - dynamic clutter",
+      "status": "Tier A - official arXiv HTML verified",
+      "status_quo": "MAV navigation policies often learn from instantaneous depth or local geometry, which can miss the relative motion that creates future collision risk.",
+      "friction": "Dynamic obstacles introduce temporal urgency. Tracking every obstacle can be slow, but ignoring motion makes avoidance reactive.",
+      "hidden_premise": "A safe flight policy should learn a future risk representation during training, then infer enough of it from onboard depth sequences at deployment.",
+      "conceptual_move": "The paper formulates a directionally aligned future collision risk map based on closest-point-of-approach analysis and uses it as privileged guidance.",
+      "mechanism": "An asymmetric actor-critic learns from privileged future obstacle states while a lightweight spatio-temporal depth encoder predicts risk for deployment.",
+      "evidence": [
+        {
+          "trace": "Figure 1 [Verified]",
+          "claim": "The real-world demonstration shows raw ego depth and a predicted directional future collision-risk map."
+        },
+        {
+          "trace": "Figure 2 [Verified]",
+          "claim": "The training framework uses privileged obstacle states and future collision-risk supervision."
+        },
+        {
+          "trace": "Figure 3 [Verified]",
+          "claim": "Depth is projected into a geometry-consistent inverted spherical grid and concatenated over time."
+        },
+        {
+          "trace": "Section III-B [Verified]",
+          "claim": "Future collision risk modeling is a core method component, not a post-hoc metric."
+        }
+      ],
+      "falsification": "If risk predictions do not transfer to unseen obstacle motion or sensor latency, the privileged representation may be overfit to simulator dynamics.",
+      "adversarial": "Closest-point risk may miss social intent, nonholonomic constraints, or adversarial human motion. Real-world validation needs near-miss and abort statistics.",
+      "thinking_tool": "Store future risk as a timed directional variable, then test whether it predicts the moment a navigation policy should change course.",
+      "transfer_boundary": "This transfers to dynamic flight and navigation; ground robots with contacts or occluded agents need a broader risk state."
+    }
+  ],
+  "synthesis": [
+    {
+      "title": "S1 - Action validity is moving into predicted physical state",
+      "links": "DeVA - N0-VTLA - N0-TWAM - FutureRTC",
+      "facts": "The papers insert depth/affordance, latent tactile tokens, future touch, or execution-time observation correction before action emission.",
+      "inference": "The common research decision is where to expose the physical variable that makes the next action valid.",
+      "decision": "APRL should log predicted physical state beside every action chunk before scaling policy size."
+    },
+    {
+      "title": "S2 - Embodied data work is becoming infrastructure design",
+      "links": "Data Pyramid - ArmnetBench",
+      "facts": "One paper types data sources by embodiment fidelity and scalability; the other builds low-cost parallel real-world evaluation cells.",
+      "inference": "A data strategy is only defensible when the collection tier and the evaluation substrate are both explicit.",
+      "decision": "APRL should pair every new data source with a rollout label schema and resettable evaluation cell."
+    },
+    {
+      "title": "S3 - Mapping and navigation papers expose temporal validity as the missing metric",
+      "links": "Semantic Object SLAM - Risk-Guided RL - FutureRTC",
+      "facts": "The papers track association ambiguity, future collision risk, and stale execution context as intermediate variables.",
+      "inference": "Robot autonomy fails when an intermediate state estimate expires before the final metric notices.",
+      "decision": "APRL should add freshness, association confidence, and risk horizon to navigation and manipulation logs."
+    }
+  ],
+  "frontier_memory": [
+    {
+      "signal": "strengthening",
+      "title": "Action-to-state contracts extend the July VLA thread",
+      "history": "Recent July briefings emphasized execution diagnostics, evidence traces, and world-state contracts.",
+      "read": "July 28 adds tactile prediction and stale-context correction, making the contract more physical and time-indexed."
+    },
+    {
+      "signal": "new",
+      "title": "Low-cost real-world rollout infrastructure becomes a strategy axis",
+      "history": "Earlier runs discussed benchmarks and data moats, but mostly at the dataset or simulation level.",
+      "read": "ArmnetBench makes the physical evaluation cell itself a reusable research asset."
+    },
+    {
+      "signal": "strengthening",
+      "title": "Contact-rich manipulation needs a hidden-state benchmark",
+      "history": "Force and tactile evidence have appeared across recent papers but remained fragmented.",
+      "read": "The tactile pair and DeVA now make hidden contact state a central policy interface."
+    },
+    {
+      "signal": "missing_axis",
+      "title": "Data-source choice still lacks failure-family accounting",
+      "history": "Embodied data recipes increasingly mix simulation, robot trajectories, human video, and general media.",
+      "read": "The next missing artifact is a table that predicts which failure family each data tier can and cannot fix."
+    }
+  ],
+  "strategy": [
+    {
+      "priority": "BUILD",
+      "title": "Physical-State Action Contract Harness",
+      "thesis": "Record action chunks together with predicted depth/affordance, predicted tactile tokens, future tactile state, and execution-time observation correction.",
+      "scores": {
+        "fit": 5,
+        "novelty": 5,
+        "feasibility": 4,
+        "moat": 5,
+        "timing": 5,
+        "evidence": 5
+      },
+      "one_week": "Instrument two manipulation tasks with action chunk, observation timestamp, predicted contact state, and post-action tactile/depth outcome.",
+      "four_week": "Compare raw VLA, DeVA-style physical guidance, VTLA-style tactile tokens, and FutureRTC-style correction on the same rollout schema.",
+      "metric": "physical-state fields predict failure with AUC >= 0.75 and reduce unrecoverable contacts by 25%.",
+      "stop": "If predicted physical fields do not improve failure prediction over prior success history, narrow to tactile-only contracts.",
+      "assets": [
+        {
+          "label": "DeVA",
+          "url": "https://arxiv.org/abs/2607.24159"
+        },
+        {
+          "label": "N0-VTLA",
+          "url": "https://arxiv.org/abs/2607.23782"
+        },
+        {
+          "label": "N0-TWAM",
+          "url": "https://arxiv.org/abs/2607.23783"
+        },
+        {
+          "label": "FutureRTC",
+          "url": "https://arxiv.org/abs/2607.24008"
+        },
+        {
+          "label": "APRL action-contract schema",
+          "url": "APRL internal physical-state contract"
+        }
+      ]
+    },
+    {
+      "priority": "EXPLOIT",
+      "title": "Embodied Data and Rollout Cell Ledger",
+      "thesis": "Tie each data source to embodiment fidelity, reset cost, label cost, and rollout variance before adding it to the training mix.",
+      "scores": {
+        "fit": 5,
+        "novelty": 4,
+        "feasibility": 5,
+        "moat": 4,
+        "timing": 5,
+        "evidence": 4
+      },
+      "one_week": "Create a ledger for current APRL manipulation data: source tier, robot alignment, reset protocol, label fields, and known failure blind spots.",
+      "four_week": "Build one ArmnetBench-style low-cost cell and produce a labeled evaluation corpus for two policies and three tasks.",
+      "metric": "same-policy rollout variance is measured below 10 percentage points across repeated cells and labels expose every failed subgoal.",
+      "stop": "If cell variance dominates policy differences, standardize cameras, lighting, and reset procedure before scaling cells.",
+      "assets": [
+        {
+          "label": "Data Pyramid",
+          "url": "https://arxiv.org/abs/2607.24744"
+        },
+        {
+          "label": "ArmnetBench",
+          "url": "https://arxiv.org/abs/2607.24481"
+        },
+        {
+          "label": "APRL rollout ledger",
+          "url": "APRL internal evaluation-cell ledger"
+        }
+      ]
+    },
+    {
+      "priority": "EXPLORE",
+      "title": "Timed Navigation-State Freshness Probe",
+      "thesis": "Measure when semantic association, localization evidence, and future-risk estimates expire before route or flight failure appears.",
+      "scores": {
+        "fit": 4,
+        "novelty": 4,
+        "feasibility": 4,
+        "moat": 4,
+        "timing": 5,
+        "evidence": 4
+      },
+      "one_week": "Add timestamped association confidence and directional risk horizon to ten navigation or flight episodes.",
+      "four_week": "Run off-road or indoor navigation with semantic-object association, localization cue ablation, and risk-horizon logging.",
+      "metric": "freshness features predict route deviation or near-collision at least two seconds before the terminal label.",
+      "stop": "If freshness features do not precede failure, focus on localization substrate quality rather than risk prediction.",
+      "assets": [
+        {
+          "label": "Semantic Object SLAM",
+          "url": "https://arxiv.org/abs/2607.23384"
+        },
+        {
+          "label": "Risk-Guided RL",
+          "url": "https://arxiv.org/abs/2607.23565"
+        },
+        {
+          "label": "APRL freshness logger",
+          "url": "APRL internal timed-state logger"
+        }
+      ]
+    }
+  ]
+}
