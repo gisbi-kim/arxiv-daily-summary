@@ -1,0 +1,531 @@
+#!/usr/bin/env python3
+"""Generate the full-text Research Intelligence edition for 2026-07-29."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import gen_research_intelligence_20260713 as template
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DATE = "2026-07-29"
+SLUG = f"{DATE}-research-intelligence"
+
+
+DATA = {
+    "date": DATE,
+    "edition": "Research Intelligence",
+    "source_prompt": "prompts/instruction_v20260713.md",
+    "scope_note": (
+        "cs.CV/cs.RO /new listing for 2026-07-29 was parsed with the repository scripts. "
+        "The parser found 104 non-replacement cs.CV rows and 41 non-replacement cs.RO rows; "
+        "after deduplication, 140 papers remained and 117 were classified as ROI. Tier A uses "
+        "official arXiv HTML full text for CoTinyVLA, HiFi-UMI, IDR, SAM3D-VLA, DC-WAM, "
+        "FIRMGrasp, SONG, and track-leakage-free photogrammetric validation."
+    ),
+    "executive_thesis": (
+        "The July 29 batch makes the same research decision appear in three different places: "
+        "robot policies, simulators, and geometric validators are being forced to expose the evidence "
+        "that justifies an action before the final success score is trusted. CoTinyVLA compresses a VLA "
+        "by distilling phase-level reasoning rather than simply shrinking a backbone. HiFi-UMI asks whether "
+        "robot-free data can become deployable once pose, synchronization, and field-of-view fidelity are "
+        "tight enough. IDR, SAM3D-VLA, and DC-WAM each move hidden modality choice, object-centric 3D priors, "
+        "or dynamic visual evidence into the action path. FIRMGrasp and the photogrammetry protocol show the "
+        "same move in validation: nominal confidence is not enough unless the adverse tail or leakage path is "
+        "explicit. SONG turns social navigation from a policy leaderboard into a photorealistic, safety-aware "
+        "episode generator. APRL should treat these as a mandate to build evidence-bearing rollout logs: "
+        "reasoning span, data-source fidelity, causal modality effect, 3D object prior, dynamic token, friction "
+        "risk margin, social-safety state, and geometry self-validation should be recorded before model size is compared."
+    ),
+    "decision_cards": [
+        {
+            "label": "Decision",
+            "title": "Small robot policies need structured evidence, not just distillation loss",
+            "body": (
+                "CoTinyVLA's useful move is that the teacher distills phase, gripper state, and next subaction. "
+                "The student is smaller, but the important artifact is the reasoning contract that can be audited per failure."
+            ),
+        },
+        {
+            "label": "Decision",
+            "title": "Robot-free data is only a substitute when fidelity is typed",
+            "body": (
+                "HiFi-UMI does not argue that any human demonstration can replace robot data. It narrows the claim to "
+                "microsecond synchronization, accurate relative pose, wide hand views, and replay validation."
+            ),
+        },
+        {
+            "label": "Decision",
+            "title": "Validation metrics must name the blind spot they cannot see",
+            "body": (
+                "FIRMGrasp discounts adverse friction tails and the photogrammetry protocol separates internal consistency "
+                "from absolute accuracy. Both are valuable because they state what the metric does not certify."
+            ),
+        },
+    ],
+    "papers": [
+        {
+            "rank": 1,
+            "title": "CoTinyVLA: Chain-of-Thought Distillation for a Sub-Billion-Parameter Vision-Language-Action Model",
+            "arxiv_id": "2607.25487",
+            "fit": "compact VLA - chain-of-thought distillation - LIBERO-Plus robustness",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "Robotics papers often treat VLA robustness as a backbone scale problem, leaving the smaller model to imitate actions without a visible task-phase rationale."
+            ),
+            "friction": (
+                "Embedded robots need low memory use, but compact action models usually lose robustness on initial-state, object, and long-horizon perturbations."
+            ),
+            "hidden_premise": (
+                "A small VLA can inherit useful structure if the teacher exposes an episode plan and chunk-level reasoning, rather than only final actions."
+            ),
+            "conceptual_move": (
+                "CoTinyVLA distills hierarchical reasoning into a 0.9B VLA with dual-view temporal history and paraphrase-expanded language supervision."
+            ),
+            "mechanism": (
+                "The model assembles third-person frames, wrist frames, proprioception, and instruction tokens, then distills Plan and Think spans from a larger teacher into action prediction."
+            ),
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The architecture is organized as a four-stage pipeline with dual camera histories, proprioception, language, hierarchical CoT, and action prediction."},
+                {"trace": "Section 3.2 [Verified]", "claim": "The paper defines hierarchical chain-of-thought supervision with episode-level Plan and chunk-level Think spans."},
+                {"trace": "Tables 1-2 [Verified]", "claim": "LIBERO-Plus Spatial and Object tables report higher total success than the strongest 7B baseline."},
+                {"trace": "Abstract [Author claim]", "claim": "Closed-loop inference peaks at 2.25 GiB allocated GPU memory, and removing or contradicting the episode Plan costs 40 to 45 success points."},
+            ],
+            "falsification": (
+                "If Plan/Think spans improve only prompt paraphrase robustness but not physical perturbations, the method is mostly language regularization."
+            ),
+            "adversarial": (
+                "Teacher reasoning can be plausible but wrong. The release needs failure cases where the distilled Plan is inspected against actual robot state transitions."
+            ),
+            "thinking_tool": (
+                "Log a robot action together with the compact model's phase explanation, gripper-state belief, and next subaction, then score which field fails first."
+            ),
+            "transfer_boundary": (
+                "The idea transfers to manipulation tasks with stable subtask phases. It is weaker for highly reactive contact tasks where language-level phase is not the limiting variable."
+            ),
+        },
+        {
+            "rank": 2,
+            "title": "HiFi-UMI: Learning Deployable Manipulation Policies from High-Fidelity UMI Data Alone",
+            "arxiv_id": "2607.25895",
+            "fit": "UMI data - deployable manipulation - synchronization and pose fidelity",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "Robot-free demonstrations are usually treated as scalable pretraining data, while a smaller real-robot anchor is still assumed necessary for deployment."
+            ),
+            "friction": (
+                "UMI data can scale, but inaccurate hand pose, poor synchronization, and narrow field of view can make the learned policy brittle on the robot."
+            ),
+            "hidden_premise": (
+                "A robot-free corpus can replace a real-robot anchor only when the capture system preserves the control-relevant state at deployment fidelity."
+            ),
+            "conceptual_move": (
+                "HiFi-UMI co-designs head-mounted stereo-inertial SLAM, native relative pose, microsecond GPIO synchronization, and wide hand cameras for high-fidelity robot-free data."
+            ),
+            "mechanism": (
+                "The device and processing pipeline reconstruct high-quality hand trajectories and validate demonstrations through simulation replay before using them for policy post-training."
+            ),
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The paper presents a robot-free pipeline from data collection through real-robot policy deployment."},
+                {"trace": "Figure 3 [Verified]", "claim": "The capture device combines a head-mounted stereo camera pair, per-hand marker cubes, and synchronized wide-angle hand cameras."},
+                {"trace": "Section 3.2 [Verified]", "claim": "Data-quality criteria are a first-class part of the system rather than an afterthought."},
+                {"trace": "Abstract [Author claim]", "claim": "The paper reports 3 mm workspace-local end-effector accuracy and direct deployment without robot post-training across three policy backbones."},
+            ],
+            "falsification": (
+                "If zero-robot post-training fails outside the captured scene family, the system may still be an in-domain teleoperation substitute rather than a general data moat."
+            ),
+            "adversarial": (
+                "Fidelity can be concentrated in pose while contact force, compliance, or object dynamics remain missing. Replay validation should expose which failure modes the corpus cannot see."
+            ),
+            "thinking_tool": (
+                "Evaluate data sources by the state variables they preserve: relative pose, synchronization, hand-object visibility, replay pass rate, and contact ambiguity."
+            ),
+            "transfer_boundary": (
+                "The claim transfers to visuomotor manipulation with visible gripper-object geometry; force-dominated tasks still need additional sensing or real-robot labels."
+            ),
+        },
+        {
+            "rank": 3,
+            "title": "A Causality-aware Infer-diagnose-refine Framework for Test-time Modality Adaptation in VLA Models",
+            "arxiv_id": "2607.25516",
+            "fit": "VLA test-time adaptation - causal visual importance - frozen policy refinement",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "VLA models usually fuse vision, language, and proprioception with a fixed learned balance, even though task phases change which modality should matter."
+            ),
+            "friction": (
+                "Close-range interaction and long-distance motion can require different visual reliance, but retraining for every phase or camera condition is impractical."
+            ),
+            "hidden_premise": (
+                "The policy can diagnose visual importance by comparing factual and counterfactual action predictions at test time."
+            ),
+            "conceptual_move": (
+                "IDR keeps the VLA frozen, intervenes on visual observations, estimates causal effects, and uses them to refine the action in a training-free way."
+            ),
+            "mechanism": (
+                "Zero-padding interventions create counterfactual actions; norm-based causal effects estimate dynamic visual importance; gated residual fusion refines the base action."
+            ),
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The paper contrasts direct multimodal fusion with IDR's factual and counterfactual action paths."},
+                {"trace": "Figure 2 [Verified]", "claim": "IDR is a frozen-model test-time wrapper with infer, diagnose, and refine stages."},
+                {"trace": "Figure 3 [Verified]", "claim": "The causal graph frames visual intervention as the basis for modality-effect estimation."},
+                {"trace": "Section IV-A [Verified]", "claim": "The method defines the infer-diagnose-refine framework as the core algorithmic loop."},
+            ],
+            "falsification": (
+                "If counterfactual visual padding changes action magnitude for nuisance reasons rather than causal task relevance, the diagnostic signal can be misleading."
+            ),
+            "adversarial": (
+                "A frozen VLA may already encode spurious visual shortcuts; IDR can refine them rather than remove them unless the intervention family is stress-tested."
+            ),
+            "thinking_tool": (
+                "For each action step, store factual action, visual-counterfactual action, causal-effect norm, and refined action to locate phase-specific modality failure."
+            ),
+            "transfer_boundary": (
+                "The wrapper transfers to existing VLA backbones; it depends on an intervention that isolates the modality without destroying unrelated task context."
+            ),
+        },
+        {
+            "rank": 4,
+            "title": "SAM3D-Guided Object-Centric Representation Alignment for Vision-Language-Action Models",
+            "arxiv_id": "2607.25912",
+            "fit": "object-centric 3D supervision - VLA alignment - long-horizon manipulation",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "Many VLA policies inherit 2D visual-language backbones and hope that object pose, scale, and occlusion robustness emerge from RGB-language training."
+            ),
+            "friction": (
+                "Manipulation often fails at the target-object relation, especially when subtasks shift attention across objects and views."
+            ),
+            "hidden_premise": (
+                "3D object priors can be injected during training while preserving the original RGB-language-to-action test-time pipeline."
+            ),
+            "conceptual_move": (
+                "The paper uses SAM3D as a frozen teacher to align object-centric 3D representations with intermediate VLA visual features."
+            ),
+            "mechanism": (
+                "Task instructions are decomposed into subtasks, relevant object masks are generated, SAM3D extracts dense object-level 3D features, and the VLA aligns to those features during training."
+            ),
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The method is presented as an object-centric 3D alignment framework using SAM3D as frozen training-time teacher."},
+                {"trace": "Figure 2 [Verified]", "claim": "Task-relevant masks feed the SAM3D teacher and supervise intermediate VLA features."},
+                {"trace": "Table 1 [Verified]", "claim": "The paper compares the method with state-of-the-art approaches on the LIBERO benchmark."},
+                {"trace": "Section 6 [Verified]", "claim": "The paper includes limitations, which is important because SAM3D supervision is still teacher-dependent."},
+            ],
+            "falsification": (
+                "If gains disappear under objects outside SAM3D's reliable geometry prior, the alignment may be teacher-specific rather than a general 3D reasoning capability."
+            ),
+            "adversarial": (
+                "The test-time policy does not receive depth, masks, or SAM3D. A distribution shift that breaks learned object priors can fail silently."
+            ),
+            "thinking_tool": (
+                "Treat frozen 3D teachers as training-time sensors and measure which object-relation failures they actually remove from the rollout log."
+            ),
+            "transfer_boundary": (
+                "The idea transfers to object-centric manipulation; deformable objects, fluids, and tool use need a different teacher or explicit runtime sensing."
+            ),
+        },
+        {
+            "rank": 5,
+            "title": "DC-WAM: Dynamic-Centric Visual Supervision and Reasoning for World-Action Models",
+            "arxiv_id": "2607.25918",
+            "fit": "world-action model - dynamic visual tokens - control-relevant foresight",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "World-action models often optimize future-image fidelity, which can spend capacity on texture and lighting that do not determine the next action."
+            ),
+            "friction": (
+                "The video branch is expensive, and it is unclear whether photorealistic prediction or control-relevant dynamics are responsible for policy gains."
+            ),
+            "hidden_premise": (
+                "The visual branch should preserve interaction-induced changes, not reconstruct every appearance detail."
+            ),
+            "conceptual_move": (
+                "DC-WAM redirects RGB future supervision toward dynamic regions and uses DynaRoute attention bias to emphasize control-relevant future tokens."
+            ),
+            "mechanism": (
+                "Temporal-difference flow matching, trajectory-guided weighting, and token-wise dynamic relevance bias the model toward gripper, object, and contact-area changes."
+            ),
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The paper reports lower PSNR with higher policy success, arguing against appearance fidelity as the decisive objective."},
+                {"trace": "Figure 2 [Verified]", "claim": "The architecture combines dynamic-centric dense and sparse supervision with attention routing."},
+                {"trace": "Figure 3 [Verified]", "claim": "Under perturbations, DC-WAM keeps attention closer to dynamic regions while the baseline shifts toward distractors."},
+                {"trace": "Training Objective [Verified]", "claim": "The method makes dynamic supervision part of the optimization, not a post-hoc interpretation."},
+            ],
+            "falsification": (
+                "If dynamic routing helps only the benchmark scenes used to create tracker-derived maps, the method may be overfitting supervision artifacts."
+            ),
+            "adversarial": (
+                "Motion is not always task relevance; moving distractors and stationary task-critical objects can reverse the assumption."
+            ),
+            "thinking_tool": (
+                "For WAM policies, log which future tokens were kept or emphasized, then test whether those tokens predict action success better than PSNR."
+            ),
+            "transfer_boundary": (
+                "The method transfers to tasks where contact or object motion carries the decision. It needs safeguards for static constraints and moving distractors."
+            ),
+        },
+        {
+            "rank": 6,
+            "title": "FIRMGrasp: A Friction-Informed Risk Margin for Robust Grasp Synthesis",
+            "arxiv_id": "2607.25049",
+            "fit": "risk-aware grasp metric - friction uncertainty - CVaR margin",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "Classical grasp scores often assume one friction coefficient, so a grasp can look high-quality while failing under the adverse part of the friction distribution."
+            ),
+            "friction": (
+                "Dexterous grasp deployment depends on uncertain contact surfaces, not just nominal force closure."
+            ),
+            "hidden_premise": (
+                "The metric should evaluate the adverse friction tail directly and expose a probabilistic closure certificate."
+            ),
+            "conceptual_move": (
+                "FIRMGrasp defines a CVaR-discounted friction-informed margin for the risk-adjusted grasp wrench space."
+            ),
+            "mechanism": (
+                "The method replaces a single nominal friction value with a risk-adjusted friction term and evaluates the inscribed-ball radius of the corresponding wrench space."
+            ),
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The paper shows nominally similar Allegro grasps that separate under adverse friction risk."},
+                {"trace": "Figure 3 [Verified]", "claim": "The risk-adjusted margin is constructed from a friction prior and adverse-tail discounting."},
+                {"trace": "VI Risk-Sensitive Grasp Quality [Verified]", "claim": "Risk-sensitive grasp quality is the central method section."},
+                {"trace": "Abstract [Author claim]", "claim": "Across 1,599 LEAP Hand and Allegro grasps, 53% certified by the nominal margin lose force closure in the adverse friction tail."},
+            ],
+            "falsification": (
+                "If calibrated friction distributions are unavailable or unstable, the risk margin can be mathematically clean but operationally underdetermined."
+            ),
+            "adversarial": (
+                "CVaR over friction does not cover geometry error, tactile slip detection, or object compliance. The certificate is not a full grasp-success guarantee."
+            ),
+            "thinking_tool": (
+                "Replace single-score grasp selection with an adverse-tail margin and log which assumed uncertainty distribution made the grasp acceptable."
+            ),
+            "transfer_boundary": (
+                "This transfers to grasp synthesis with friction priors; it needs coupling with perception and tactile feedback for real object handling."
+            ),
+        },
+        {
+            "rank": 7,
+            "title": "SONG: A Photorealistic 3D Gaussian Simulation Platform for Benchmarking Social Navigation",
+            "arxiv_id": "2607.25219",
+            "fit": "3DGS simulation - social navigation - safety and compliance benchmark",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "Social navigation benchmarks often simplify pedestrians, rendering, or observations enough that vision-based policies avoid the hardest deployment evidence."
+            ),
+            "friction": (
+                "A robot must navigate from onboard visual observations while moving people create both safety and social-compliance constraints."
+            ),
+            "hidden_premise": (
+                "A useful social-navigation benchmark needs photorealistic scene appearance, dynamic human avatars, and metrics beyond task success."
+            ),
+            "conceptual_move": (
+                "SONG builds a 3D Gaussian simulation platform with photorealistic environments, dynamic avatars, semantic episode synthesis, and a multidimensional metric suite."
+            ),
+            "mechanism": (
+                "3D Gaussian scenes and avatars are prepared as assets; LLM-generated semantic trajectories and motion generation produce social episodes for closed-loop agents."
+            ),
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The overview presents 1,000 photorealistic 3DGS environments and 500 dynamic human avatars."},
+                {"trace": "Figure 2 [Verified]", "claim": "The pipeline covers asset preparation, semantic episode synthesis, and dynamic Gaussian rendering."},
+                {"trace": "Table 1 [Verified]", "claim": "SONG is compared with social-navigation platforms on representation, animation, and observation fidelity."},
+                {"trace": "Section 4 [Verified]", "claim": "The benchmark defines an evaluation protocol rather than only a simulator implementation."},
+            ],
+            "falsification": (
+                "If policies trained in SONG do not transfer across real social layouts and crowd dynamics, photorealistic rendering may not be the missing variable."
+            ),
+            "adversarial": (
+                "LLM-generated pedestrian trajectories can encode plausible but non-human behavior. Social compliance metrics need real-world behavioral calibration."
+            ),
+            "thinking_tool": (
+                "Design navigation benchmarks as episode generators with separate effectiveness, safety, and compliance labels."
+            ),
+            "transfer_boundary": (
+                "The platform helps vision-based navigation and social compliance; it is less direct for contact-rich manipulation or non-human dynamic obstacles."
+            ),
+        },
+        {
+            "rank": 8,
+            "title": "Track-Leakage-Free Hold-Out Self-Validation for Photogrammetric Reconstruction: Protocol, Sensitivity, and Limits",
+            "arxiv_id": "2607.24852",
+            "fit": "photogrammetric validation - leakage-free hold-out - internal consistency limit",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": (
+                "Reconstruction pipelines often want a no-ground-truth confidence score, but hold-out views can leak structure or mistake internal consistency for absolute accuracy."
+            ),
+            "friction": (
+                "A robot or inspection system can have a self-consistent map that is globally wrong, and a high confidence score can hide that failure."
+            ),
+            "hidden_premise": (
+                "Self-validation is useful only when the protocol states exactly which leakage path it blocks and which error family it cannot certify."
+            ),
+            "conceptual_move": (
+                "The paper withholds images and re-localizes them only against 3D points seen by retained images, creating a track-level barrier."
+            ),
+            "mechanism": (
+                "A deterministic hold-out subset is evaluated by resection against trusted tracks and aggregated into an mAA-style confidence score."
+            ),
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The protocol relocalizes held-out views against retained-view structure and excludes points the view helped create."},
+                {"trace": "Figure 2 [Verified]", "claim": "The paper illustrates both the track-level leakage barrier and the blind spot to self-consistent global distortion."},
+                {"trace": "Table I [Verified]", "claim": "The re-BA ablation compares the paper's hold-out test with an independent bundle-adjustment variant."},
+                {"trace": "V-B and V-C [Verified]", "claim": "The results separate leakage control and hold-out fraction sensitivity from absolute accuracy certification."},
+            ],
+            "falsification": (
+                "If the protocol is used as a deployment accuracy gate, the paper's own blind-spot analysis invalidates that use."
+            ),
+            "adversarial": (
+                "Internal consistency metrics can reward a coherent wrong world. Robot mapping needs external anchors or downstream task checks."
+            ),
+            "thinking_tool": (
+                "Every self-validation metric should publish a blocked-leakage list and a known-blind-spot list before being accepted as a gate."
+            ),
+            "transfer_boundary": (
+                "The protocol transfers to reconstruction QA and map self-checking; it cannot replace ground truth, control points, or robot task validation."
+            ),
+        },
+    ],
+    "synthesis": [
+        {
+            "title": "S1 - Robot policies are being judged by exposed intermediate evidence",
+            "links": "CoTinyVLA - IDR - SAM3D-VLA - DC-WAM",
+            "facts": "The papers expose reasoning spans, causal modality effects, object-centric 3D priors, and dynamic visual tokens inside the action path.",
+            "inference": "The shared research decision is where to make the policy's hidden state inspectable before the action is executed.",
+            "decision": "APRL should log phase reasoning, visual-causal effect, 3D object prior, and dynamic-token salience for each manipulation rollout.",
+        },
+        {
+            "title": "S2 - Data scale is now a fidelity-and-replay question",
+            "links": "HiFi-UMI - SONG",
+            "facts": "One paper makes robot-free manipulation data deployable by tightening capture fidelity; the other builds photorealistic social-navigation episodes with safety and compliance metrics.",
+            "inference": "More data matters only when the collection system names the physical state it preserves and the failure family it can replay.",
+            "decision": "APRL should attach a fidelity ledger and replay-validation result to every new data source before mixing it into policy training.",
+        },
+        {
+            "title": "S3 - Robustness metrics are useful only when their adverse case is explicit",
+            "links": "FIRMGrasp - track-leakage-free validation",
+            "facts": "FIRMGrasp evaluates adverse friction tails; the photogrammetry paper blocks track leakage while warning that global distortion can remain invisible.",
+            "inference": "A metric becomes trustworthy when it states both the tail it measures and the blind spot it leaves uncovered.",
+            "decision": "APRL should publish adverse-tail and blind-spot fields for grasp, mapping, and navigation benchmarks.",
+        },
+    ],
+    "frontier_memory": [
+        {
+            "signal": "strengthening",
+            "title": "The July VLA thread keeps moving toward action-state contracts",
+            "history": "Recent releases emphasized tactile tokens, stale-observation correction, and physical guidance for robot actions.",
+            "read": "July 29 adds reasoning distillation, causal modality diagnosis, object-centric 3D priors, and dynamic-token routing as inspectable control evidence.",
+        },
+        {
+            "signal": "new",
+            "title": "Robot-free data is becoming a measurement problem",
+            "history": "Earlier data discussions focused on scale, source mix, and resettable evaluation cells.",
+            "read": "HiFi-UMI shifts the question to whether synchronization, pose, field of view, and replay validation are enough to remove a robot anchor.",
+        },
+        {
+            "signal": "strengthening",
+            "title": "Photorealistic simulation is being tied to social-safety labels",
+            "history": "3DGS and simulation papers have often optimized rendering fidelity or scene assets.",
+            "read": "SONG makes social episode generation, safety deficit, and real-world fine-tuning the point of the simulator.",
+        },
+        {
+            "signal": "missing_axis",
+            "title": "Most VLA gains still lack per-failure evidence fields",
+            "history": "Many papers report aggregate success under perturbations.",
+            "read": "The missing artifact is a rollout schema that says which reasoning span, 3D object prior, modality effect, or dynamic token caused recovery or failure.",
+        },
+    ],
+    "strategy": [
+        {
+            "priority": "BUILD",
+            "title": "Evidence-Bearing VLA Rollout Ledger",
+            "thesis": (
+                "Record the policy's exposed intermediate evidence at every action step: phase plan, causal visual effect, object-centric 3D prior, dynamic-token map, and final action."
+            ),
+            "scores": {"fit": 5, "novelty": 5, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 5},
+            "one_week": (
+                "Instrument two LIBERO-style and one real tabletop task with Plan/Think text, visual-counterfactual action delta, target-object 3D prior flag, and dynamic-token salience."
+            ),
+            "four_week": (
+                "Compare a compact VLA, frozen-model IDR wrapper, 3D-teacher-aligned VLA, and dynamic-centric WAM on the same failure-labeled rollout ledger."
+            ),
+            "metric": "At least one logged evidence field predicts failure two steps earlier than success/fail labels with AUC >= 0.75.",
+            "stop": "If evidence fields are not more predictive than task ID and previous success history, narrow the work to one failure family before scaling.",
+            "assets": [
+                {"label": "CoTinyVLA", "url": "https://arxiv.org/abs/2607.25487"},
+                {"label": "IDR", "url": "https://arxiv.org/abs/2607.25516"},
+                {"label": "SAM3D-VLA", "url": "https://arxiv.org/abs/2607.25912"},
+                {"label": "DC-WAM", "url": "https://arxiv.org/abs/2607.25918"},
+                {"label": "APRL rollout ledger", "url": "APRL internal VLA evidence ledger"},
+            ],
+        },
+        {
+            "priority": "EXPLOIT",
+            "title": "High-Fidelity Data Source and Replay Ledger",
+            "thesis": (
+                "Before adding a demonstration source, record which physical variables it preserves and which replay checks certify deployment relevance."
+            ),
+            "scores": {"fit": 5, "novelty": 4, "feasibility": 5, "moat": 4, "timing": 5, "evidence": 4},
+            "one_week": (
+                "Audit current APRL manipulation data for pose accuracy, synchronization, hand-object visibility, replay availability, and known contact blind spots."
+            ),
+            "four_week": (
+                "Build a small HiFi-UMI-style capture and replay validation path for one precision manipulation task, then test whether robot-free post-training removes a real-robot anchor."
+            ),
+            "metric": "Replay validation predicts real-robot success within 10 percentage points on held-out task variants.",
+            "stop": "If synchronization and pose fidelity are not the limiting failures, redirect toward force/tactile labeling instead of more UMI data.",
+            "assets": [
+                {"label": "HiFi-UMI", "url": "https://arxiv.org/abs/2607.25895"},
+                {"label": "SONG", "url": "https://arxiv.org/abs/2607.25219"},
+                {"label": "APRL data-source ledger", "url": "APRL internal data fidelity ledger"},
+            ],
+        },
+        {
+            "priority": "EXPLORE",
+            "title": "Adverse-Tail Metric Audit",
+            "thesis": (
+                "Every robotics metric should publish the adverse case it measures and the blind spot it cannot certify."
+            ),
+            "scores": {"fit": 4, "novelty": 5, "feasibility": 4, "moat": 4, "timing": 5, "evidence": 5},
+            "one_week": (
+                "For one grasp metric and one reconstruction confidence metric, write the adverse-tail variable, blocked leakage path, and known blind spot in a benchmark card."
+            ),
+            "four_week": (
+                "Run FIRMGrasp-style friction-tail tests and track-leakage-free reconstruction self-validation on APRL data, then compare metric confidence against downstream failure."
+            ),
+            "metric": "Benchmark cards prevent at least one false certification case that the nominal score accepts.",
+            "stop": "If the adverse-tail card does not change model or grasp selection, keep it as documentation rather than a new benchmark line.",
+            "assets": [
+                {"label": "FIRMGrasp", "url": "https://arxiv.org/abs/2607.25049"},
+                {"label": "Track-leakage-free validation", "url": "https://arxiv.org/abs/2607.24852"},
+                {"label": "APRL metric blind-spot card", "url": "APRL internal metric audit template"},
+            ],
+        },
+    ],
+}
+
+
+def main() -> None:
+    template.DATE = DATE
+    template.SLUG = SLUG
+    template.DATA = DATA
+    doc = template.build_html()
+    doc = doc.replace("2026-07-13 arXiv Research Intelligence", f"{DATE} arXiv Research Intelligence")
+    doc = doc.replace("Tier A 5", f"Tier A {len(DATA['papers'])}")
+    doc = doc.replace(
+        "기존 daily 요약을 보완한 별도 에디션입니다.",
+        "Today's parser corpus is distilled into a separate Research Intelligence edition.",
+    )
+    json_dir = ROOT / "intelligence"
+    json_dir.mkdir(exist_ok=True)
+    json_path = json_dir / f"{DATE}.json"
+    html_path = ROOT / "posts" / f"{SLUG}.html"
+    json_path.write_text(json.dumps(DATA, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    html_path.write_text(doc, encoding="utf-8")
+    print(f"wrote {json_path.relative_to(ROOT)}")
+    print(f"wrote {html_path.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()
