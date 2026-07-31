@@ -6,8 +6,36 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 29 Jul 2026 15:12:58 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jul 2026 20:19:07 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>2026-07-31 심층판</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-31-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-31-research-intelligence.html</guid>
+      <pubDate>Fri, 31 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[The July 31 batch turns the week into a clear research decision: robot learning is moving from more demonstrations and better-looking futures toward counterfactual coverage, action-sensitive world models, and runtime correction. Counterfactual Action Sensitivity Coverage asks which new examples actually repair a trained policy's nuisance-induced action drift. RedFlow then conv…]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-07-31 (Fri)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-31.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-31.html</guid>
+      <pubDate>Fri, 31 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 131건, cs.RO 32건이고 dedupe 후 157건 중 131건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Foundation Models 33편, Generation 24편, Efficiency/Systems 20편입니다. Foundation Models, Generation, Efficiency/Systems, Robot Learning, and 3D/Scene all have high volume, but the robotics thread cuts across them: action-drift coverage, failed-action correction, tactile futures, anchored 3D memory, pose-i…]]></description>
+    </item>
+    <item>
+      <title>2026-07-30 심층판</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-30-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-30-research-intelligence.html</guid>
+      <pubDate>Thu, 30 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[The July 30 batch makes execution-time evidence the center of the robotics story. TurboVLA removes the LLM bottleneck from the action path and asks whether language-conditioned control can run at local control-loop speed. RL2-VLA and CheckVLA then show the next problem: a fast or strong base policy still needs adaptive steering, failure prediction, and calibrated repair while…]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-07-30 (Thu)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-30.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-30.html</guid>
+      <pubDate>Thu, 30 Jul 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[이 backfill은 arXiv /pastweek의 2026-07-30 날짜 섹션에서 복구했습니다. cs.CV 96건, cs.RO 43건이고 dedupe 후 130건 중 64건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Generation 15편, Robot Learning 14편, Safety/Alignment 10편입니다. Robot Learning and Generation dominate the ROI set, but the robotics-relevant axis is not bucket size. It is the repeated attempt to type the hidden state behind an action: latency, latent steerin…]]></description>
+    </item>
     <item>
       <title>2026-07-29 심층판</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-29-research-intelligence.html</link>
@@ -399,34 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-29.html</guid>
       <pubDate>Fri, 29 May 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[오늘 /new는 cs.CV 170건, cs.RO 43건이고 dedupe 후 204건 중 174건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Robot Learning 30편, Generation 29편, Efficiency/Systems 29편입니다. Robot Learning, Generation, Foundation Models, Efficiency/Systems가 동시에 높고, 3D/Scene도 24편이라 geometry/SLAM/reconstruction watch lens를 상단에 올려야 하는 배치입니다. 오늘의 핵심은 모델 규모 경쟁보다 상태 추론, 공간 grounding, runtime budget, hallucination 검증을 같은 배포 체크리스트에 넣는…]]></description>
-    </item>
-    <item>
-      <title>arXiv Daily Briefing — 2026-05-28 (목)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-28.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-28.html</guid>
-      <pubDate>Thu, 28 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 /new는 cs.CV 133건, cs.RO 60건이고 dedupe 후 186건 중 156건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Robot Learning 38편, Generation 27편, Foundation Models 26편입니다. ROI 선별 비율이 높고 Robot Learning, Generation, Foundation Models, Safety/Alignment가 동시에 큽니다. 특히 3D/Scene도 15편이라 geometry/SLAM/reconstruction을 상단 클러스터로 올렸고, VLA와 world model은 실제 robot deployment failure와 직접 연결됩니다.]]></description>
-    </item>
-    <item>
-      <title>arXiv Daily Briefing — 2026-05-27 (수)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-27.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-27.html</guid>
-      <pubDate>Wed, 27 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[이 backfill은 arXiv /pastweek의 2026-05-27 날짜 섹션에서 복구했습니다. cs.CV 141건, cs.RO 40건이고 dedupe 후 174건 중 73건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Generation 15편, Robot Learning 11편, Foundation Models 11편입니다. 논문 수는 28일 /new보다 작지만, geometry, manipulation, embodied navigation 쪽 신호가 또렷합니다. 특히 3DGS map과 VLN, VLA continual learning, VR-based on-policy correction이 같은 날 나와서 robot stack의 perception-memory-ac…]]></description>
-    </item>
-    <item>
-      <title>arXiv Daily Briefing — 2026-05-26 (화)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-26.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-26.html</guid>
-      <pubDate>Tue, 26 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 /new는 cs.CV 292건, cs.RO 89건이고 dedupe 후 365건 중 315건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Generation 71편, Foundation Models 54편, Efficiency/Systems 48편입니다. Generation, Foundation Models, Efficiency/Systems가 가장 크지만 Robot Learning과 3D/Scene도 두껍습니다. 특히 world model, VLA quantization, cooperative driving, 3DGS/physical scene understanding이 서로 분리되지 않고 같은 runtime budget 문제로 연결됩니다.]]></description>
-    </item>
-    <item>
-      <title>arXiv Daily Briefing — 2026-05-25 (월)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-25.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-05-25.html</guid>
-      <pubDate>Mon, 25 May 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[이 backfill은 arXiv /pastweek의 2026-05-25 날짜 섹션에서 복구했습니다. cs.CV 109건, cs.RO 34건이고 dedupe 후 135건 중 67건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Generation 15편, Robot Learning 14편, 3D/Scene 10편입니다. 수량상 Generation과 Robot Learning이 가장 크고 3D/Scene, Foundation Models가 뒤따릅니다. 주요 신호는 video prior, VLA planning, 4D/3D Gaussian, visual grounding benchmark가 같은 날짜에 겹친다는 점입니다.]]></description>
     </item>
   </channel>
 </rss>

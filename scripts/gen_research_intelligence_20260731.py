@@ -1,0 +1,398 @@
+#!/usr/bin/env python3
+"""Generate the full-text Research Intelligence edition for 2026-07-31."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import gen_research_intelligence_20260713 as template
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DATE = "2026-07-31"
+SLUG = f"{DATE}-research-intelligence"
+
+
+DATA = {
+    "date": DATE,
+    "edition": "Research Intelligence",
+    "source_prompt": "prompts/instruction_v20260713.md",
+    "scope_note": (
+        "cs.CV/cs.RO /new listings for 2026-07-31 were parsed with repository scripts. "
+        "The parser found 131 non-replacement cs.CV rows and 32 non-replacement cs.RO rows; "
+        "after deduplication, 157 papers remained and 131 were classified as ROI. Tier A uses "
+        "official arXiv HTML for EgoGenesis, ACE-Data-0, Counterfactual Action Sensitivity Coverage, "
+        "RedFlow, TacWAM, World Action Planner, ODEWorld, LabEvolver, and rest-state articulated reconstruction."
+    ),
+    "executive_thesis": (
+        "The July 31 batch turns the week into a clear research decision: robot learning is moving from "
+        "more demonstrations and better-looking futures toward counterfactual coverage, action-sensitive "
+        "world models, and runtime correction. Counterfactual Action Sensitivity Coverage asks which new "
+        "examples actually repair a trained policy's nuisance-induced action drift. RedFlow then converts "
+        "failed rollouts into action-level corrective targets instead of discarding them. EgoGenesis, TacWAM, "
+        "World Action Planner, and ODEWorld each make a different state variable explicit: anchored 3D memory, "
+        "mechanics-aware tactile futures, pose-image world-model rollouts, or continuous physical-time flow. "
+        "ACE-Data-0 and LabEvolver broaden the same lesson to data and agents: synchronized human interaction "
+        "streams and evolved wet-lab experience are assets only when the state they preserve is typed. APRL "
+        "should prioritize a counterfactual action-sensitivity and world-action ledger over another generic "
+        "demo-scaling run."
+    ),
+    "decision_cards": [
+        {
+            "label": "Decision",
+            "title": "Demo value is measured by action drift coverage",
+            "body": (
+                "The counterfactual coverage paper and RedFlow both reject undifferentiated data growth. "
+                "A new sample matters when it changes the action under a nuisance or supplies a corrective target for a failed step."
+            ),
+        },
+        {
+            "label": "Decision",
+            "title": "World-action models need the missing physical channel",
+            "body": (
+                "EgoGenesis adds anchored 3D memory, TacWAM adds tactile mechanics, ODEWorld adds physical-time flow, "
+                "and World Action Planner uses pose-image rollouts for search. Each paper names the state absent from pixel futures."
+            ),
+        },
+        {
+            "label": "Decision",
+            "title": "Experience becomes reusable only after safety and state are summarized",
+            "body": (
+                "LabEvolver turns completed wet-lab traces into skills, strategies, and safety memories; ACE-Data-0 synchronizes perception, pose, object, audio, and contact. "
+                "The asset is not the raw trace but the reusable state abstraction."
+            ),
+        },
+    ],
+    "papers": [
+        {
+            "rank": 1,
+            "title": "EgoGenesis: Egocentric World-Action Modeling with Online Anchored Projective Memory and Action-3D RoPE",
+            "arxiv_id": "2607.28243",
+            "fit": "egocentric world-action modeling - anchored 3D memory - action geometry",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": "Egocentric video generation can look plausible while camera motion, gripper trajectory, and object interaction drift away from the intended action.",
+            "friction": "Embodied data is scarce, but synthetic egocentric video is not useful for robot learning unless it preserves scene anchors and action geometry.",
+            "hidden_premise": "A generated manipulation video should remember the first-frame 3D scene and encode end-effector motion in camera-aware coordinates.",
+            "conceptual_move": "EgoGenesis adds Online Anchored Projective Memory and Action-3D RoPE to a pretrained video prior for controllable egocentric interaction generation.",
+            "mechanism": "OAPM stores anchored and recent 3D scene slots, while A3D-RoPE injects metric action geometry into skeleton-to-video cross-attention during autoregressive generation.",
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The paper diagnoses uncontrolled camera motion and gripper trajectory drift in existing egocentric video generators."},
+                {"trace": "Figure 2 [Verified]", "claim": "The architecture shows OAPM maintaining anchored and recent 3D scene slots and A3D-RoPE injecting action geometry."},
+                {"trace": "Table 1 [Verified]", "claim": "Generation quality is compared on held-out trajectories under identical scene and action conditioning."},
+                {"trace": "Experiment headings [Verified]", "claim": "The HTML lists geometric drift, spatial influence, scene-memory ablation, and downstream WAM generalization."},
+            ],
+            "falsification": "If generated trajectories improve video metrics but not downstream real-robot WAM generalization, anchored memory is not preserving the right control variable.",
+            "adversarial": "A3D action geometry can still be a clean skeleton prior that hides contact ambiguity, force, and gripper-object slip.",
+            "thinking_tool": "Treat generated egocentric data as valid only when it preserves anchor state, end-effector geometry, and downstream policy effect.",
+            "transfer_boundary": "Transfers to visuomotor manipulation data augmentation; less direct for contact-rich tasks without tactile or force state.",
+        },
+        {
+            "rank": 2,
+            "title": "ACE-Data-0: Human-Centric Ambient Capture as Embodied Data Engine",
+            "arxiv_id": "2607.28625",
+            "fit": "ambient embodied data - synchronized multimodal capture - human interaction state",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": "Embodied datasets often split egocentric video, exocentric views, body pose, hand-object motion, audio, and tactile contact into separate corpora.",
+            "friction": "Robot imitation and world models need the full perception-action loop, but home-scale activity and close hand-object contact require different sensor geometry.",
+            "hidden_premise": "A data engine can be valuable if it captures every important interaction signal, synchronizes it, and keeps it in a common spatial frame.",
+            "conceptual_move": "ACE turns real homes into calibrated recording studios at table and room scales, releasing synchronized multimodal interaction streams.",
+            "mechanism": "The system captures egocentric and exocentric video, body and hand pose, object state, sound, and contact annotations across complementary spatial scales.",
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "ACE is presented as a capture system that transforms real home environments into table-scale and room-scale recording studios."},
+                {"trace": "Figure 2 [Verified]", "claim": "The architecture separates close manipulation capture from whole-room motion capture while keeping signals registered."},
+                {"trace": "Table 1 [Verified]", "claim": "The paper contrasts ACE with egocentric datasets and motion-capture HOI datasets that fragment modalities."},
+                {"trace": "Evaluation note [Verified]", "claim": "The HTML states that current methods expose gaps under contact, occlusion, egomotion, and long horizons."},
+            ],
+            "falsification": "If synchronized ambient capture does not improve policy learning or world-model prediction compared with cheaper partial sensors, the data engine is over-specified.",
+            "adversarial": "Rich capture can create a private-studio bias: the hardest household deployment variation may sit outside the calibrated homes.",
+            "thinking_tool": "Audit data sources by preserved state variables and synchronization error, not just hours or number of demonstrations.",
+            "transfer_boundary": "Strong for household and dexterous interaction data; field robots and laboratories need domain-specific sensors and safety labels.",
+        },
+        {
+            "rank": 3,
+            "title": "It's Not Just More Demos: Counterfactual Action Sensitivity Coverage for Data-Efficient Robust Robot Imitation",
+            "arxiv_id": "2607.27261",
+            "fit": "counterfactual data selection - action drift - robust imitation repair",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": "Imitation policies are often repaired by collecting more diverse demonstrations without knowing which examples address the trained policy's brittle action boundary.",
+            "friction": "Lighting, distractors, color, or local support changes can preserve the task but still push the policy action away from the expert action.",
+            "hidden_premise": "The useful new data is the data that covers action drift under task-preserving nuisances.",
+            "conceptual_move": "CFNBC generates paired clean and nuisance observations, measures action drift, and selects counterfactual examples for targeted robustness repair.",
+            "mechanism": "A nominal policy is probed with counterfactual nuisance grids; high-response examples define repair candidates for fine-tuning under a low data budget.",
+            "evidence": [
+                {"trace": "Figure 2 [Verified]", "claim": "The paper defines representative task-preserving nuisance conditions including appearance, lighting, distractor, local support, and multi-factor combinations."},
+                {"trace": "Table I/II text [Verified]", "claim": "The official HTML reports response-guided repair improving all-nuisance success by +0.66 in cube transfer and +0.44 in cube stacking at matched low budgets."},
+                {"trace": "Method sections III-A to III-D [Verified]", "claim": "The method separates task-preserving counterfactuals, action drift, response-guided repair selection, and repair fine-tuning."},
+                {"trace": "Appendix headings [Verified]", "claim": "The paper includes narrow repair and held-out nuisance generalization analyses."},
+            ],
+            "falsification": "If action-drift-selected examples do not transfer to held-out nuisance families, the method is selecting visible variation rather than causal brittleness.",
+            "adversarial": "Counterfactual rendering can preserve the expert action by construction while missing real-world nuisance physics or perception artifacts.",
+            "thinking_tool": "Before adding demonstrations, ask which nuisance changes the policy action while preserving the expert action.",
+            "transfer_boundary": "Best for visuomotor imitation with controllable nuisance generation; harder for tasks where the nuisance changes the valid expert action.",
+        },
+        {
+            "rank": 4,
+            "title": "RedFlow: Redirect Failure into Action-Level Corrections for Flow-matching VLA Policy",
+            "arxiv_id": "2607.27782",
+            "fit": "failure-to-correction learning - flow-matching VLA - offline RL",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": "Offline improvement often imitates success or learns trajectory-level preferences, leaving failed rollouts underused as action-level supervision.",
+            "friction": "A failed rollout contains diagnostic information, but it must be localized to the action that caused progress to break.",
+            "hidden_premise": "Failure can be redirected if a similar successful context supplies a corrective action target.",
+            "conceptual_move": "RedFlow finds failure-inducing actions and maps them to corrective targets from successful experiences in matched contexts.",
+            "mechanism": "Context-aware corrective matching estimates task progress, clusters similar execution contexts, and trains an adaptive redirection objective for flow-matching policies.",
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The paper contrasts trajectory-level failure learning with RedFlow's action-level corrective guidance."},
+                {"trace": "Figure 2 [Verified]", "claim": "The pipeline includes data collection, context-aware corrective matching, and adaptive redirection."},
+                {"trace": "Table 1 [Verified]", "claim": "LIBERO average success is reported as 56.2 for the base policy, 62.3 for AWR, 59.7 for DPO, and 68.2 for RedFlow."},
+                {"trace": "Experiment headings [Verified]", "claim": "The paper includes ablation, sample efficiency, real-robot results, and qualitative recovery analysis."},
+            ],
+            "falsification": "If matched successful contexts are semantically similar but dynamically different, corrective targets can push the policy toward a plausible but wrong action.",
+            "adversarial": "Progress estimators can encode benchmark-specific task phases; failure localization needs inspection on natural real-robot failures.",
+            "thinking_tool": "Store failed action, progress estimate, matched successful context, corrective target, and post-repair action error.",
+            "transfer_boundary": "Transfers to flow-matching VLA policies with rollout buffers; less direct for policies without comparable latent or action-space geometry.",
+        },
+        {
+            "rank": 5,
+            "title": "TacWAM: Anchor-Guided World Action Model with Mechanics-Aware Tactile Prediction",
+            "arxiv_id": "2607.28391",
+            "fit": "tactile world-action model - contact-rich manipulation - mechanics-aware futures",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": "World Action Models mostly predict visual futures, which can omit force, deformation, shear, and slip during contact.",
+            "friction": "Tactile futures are useful only if they carry physical information without becoming privileged future cues for action generation.",
+            "hidden_premise": "A WAM can predict tactile state while keeping action tokens restricted to deployment-available context.",
+            "conceptual_move": "TacWAM builds mechanics-aware tactile prediction and anchor-guided tri-modal attention into a WAM.",
+            "mechanism": "A tactile encoder fuses appearance, force fields, and deformation flow; AGT attention separates observable anchors, prediction targets, and action tokens.",
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The overview shows joint prediction of visual futures, tactile futures, and action chunks from deployment-available context."},
+                {"trace": "Table 1 [Verified]", "claim": "AGT visibility rules prevent action tokens from reading future visual or tactile prediction tokens."},
+                {"trace": "Figure 2 [Verified]", "claim": "Real-world tasks cover fragile grasping, contact localization, sustained contact, and in-hand manipulation."},
+                {"trace": "Table 2 [Verified]", "claim": "TacWAM reports 75.0% average success across four contact-rich tasks versus lower visual/tactile baselines."},
+            ],
+            "falsification": "If tactile prediction quality does not correlate with contact success, the tactile future is auxiliary supervision rather than a planning state.",
+            "adversarial": "Tactile sensors can make the benchmark hardware-specific; transfer to different grippers or materials must be tested.",
+            "thinking_tool": "Evaluate WAMs by which physical channels they preserve: vision, force, deformation, slip, and action feasibility.",
+            "transfer_boundary": "Strong for contact-rich manipulation with tactile sensing; weaker for long-range navigation or tasks without tactile feedback.",
+        },
+        {
+            "rank": 6,
+            "title": "World Action Planner: Generalizable Decision-Making with Action-Conditioned World Models",
+            "arxiv_id": "2607.27599",
+            "fit": "world-model planning - pose-image conditioning - compositional generalization",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": "End-to-end imitation policies can fit training tasks but struggle to compose new layouts and tasks at test time.",
+            "friction": "Planning over imagined futures needs a world model that generalizes to new actions and embodiments, not only known low-dimensional action vectors.",
+            "hidden_premise": "Rendering future robot joint positions as pose images can provide an action-conditioned world model that is easier to search over.",
+            "conceptual_move": "World Action Planner combines VLM reasoning with pose-image conditioned world-model rollouts for iterative plan refinement.",
+            "mechanism": "The system proposes an initial plan, renders action-conditioned pose images, imagines future rollouts, then optimizes and searches over plan candidates.",
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The planner reasons about and refines action plans through world-model imagination for novel scenarios."},
+                {"trace": "Figure 2 [Verified]", "claim": "The world model conditions on future robot joint positions rendered as pose skeleton images."},
+                {"trace": "Table 1 [Verified]", "claim": "The official HTML reports average improvements of 11.4% in-distribution and 16.8% in generalization settings for single-embodiment world modeling."},
+                {"trace": "Table 2 [Verified]", "claim": "Cross-embodiment modeling is evaluated across fixed arm, mobile Panda, bi-manual gripper, and dexterous-hand settings."},
+            ],
+            "falsification": "If search succeeds only when the world model already knows the scene family, planning may be exploiting visual familiarity rather than action generalization.",
+            "adversarial": "Pose-image conditioning can hide dynamics, contact, and force; imagined rollouts need physical violation checks.",
+            "thinking_tool": "Separate plan proposal quality from world-model rollout fidelity and search contribution under equal compute.",
+            "transfer_boundary": "Transfers to compositional robot tasks with renderable embodiment state; harder when robot-environment contact is under-modeled.",
+        },
+        {
+            "rank": 7,
+            "title": "ODEWorld: A Continuous Predictive Architecture via Physical-Time Flow",
+            "arxiv_id": "2607.27924",
+            "fit": "physical-time flow - continuous world model - policy learning",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": "Discrete next-step latent predictors can produce jagged or collapsed trajectories that do not reflect smooth physical evolution.",
+            "friction": "A useful world model for policies should predict over physical time while remaining fast enough for planning and policy learning.",
+            "hidden_premise": "Decoupled dynamical representations and first-order supervision can make latent trajectories smoother and more useful for control.",
+            "conceptual_move": "ODEWorld models latent dynamics through physical-time flow, then uses the representation for video prediction and policy learning.",
+            "mechanism": "A PT-Flow representation evolves compressed visual features through a continuous dynamics model, with ablations on representation decoupling and first-order supervision.",
+            "evidence": [
+                {"trace": "Figure 2 [Verified]", "claim": "The paper visualizes smoother latent trajectories for ODEWorld than DINO features or a next-step predictive baseline."},
+                {"trace": "Table 1 [Verified]", "claim": "Short-fragment prediction reports PSNR 20.53, LPIPS 0.109, and latency 0.030s for ODEWorld in the shown table."},
+                {"trace": "Table 2 heading [Verified]", "claim": "The official HTML states that ODEWorld improves policy performance on LIBERO-LONG."},
+                {"trace": "Ablation headings [Verified]", "claim": "The appendix lists ablations on dynamical representation decoupling, first-order supervision, vision encoders, and token numbers."},
+            ],
+            "falsification": "If smoother latent trajectories do not improve intervention planning or contact-sensitive policy learning, physical-time flow is mostly representation aesthetics.",
+            "adversarial": "Video metrics and smoothness can reward over-regularized dynamics that underfit abrupt contact or discontinuous object events.",
+            "thinking_tool": "Pair every world-model smoothness metric with action success, contact failure, and rollout divergence.",
+            "transfer_boundary": "Good for continuous visual dynamics and policy pretraining; needs contact-aware state for manipulation with discontinuities.",
+        },
+        {
+            "rank": 8,
+            "title": "LabEvolver: Training-Free Experience Evolution for Safe and Grounded Wet-Lab Agents",
+            "arxiv_id": "2607.27690",
+            "fit": "wet-lab agent - episodic experience evolution - safety gate",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": "Lab agents often correct within a trial but fail to distill completed experience into reusable skills, strategies, and safety rules.",
+            "friction": "Scientific automation needs online perception, planning, and safety validation while also preventing memory from growing into raw trace clutter.",
+            "hidden_premise": "Completed trajectories can be compressed into reusable experience without updating model weights.",
+            "conceptual_move": "LabEvolver uses an inner state-grounded trial loop and an outer experience-evolution loop for training-free wet-lab agents.",
+            "mechanism": "An Observer tracks hierarchical lab state, an Operator maps goals to LabSkill actions under a tri-layer safety gate, and a Strategist distills completed traces.",
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The overview shows LabEvolver improving pH regulation through accumulated experience beyond one-shot or within-trial correction."},
+                {"trace": "Figure 2 [Verified]", "claim": "The dual-loop framework separates inner trial execution from outer strategy, skill, and safety experience evolution."},
+                {"trace": "Table 1 [Verified]", "claim": "The HTML reports reduced MAE and execution time compared with PD controller baselines in pouring."},
+                {"trace": "Abstract [Author claim]", "claim": "The paper reports pH-regulation completion time and safety-gate intercept reductions of 48.2% and 60.0%, and ALFWorld success from 76.2% to 91.4%."},
+            ],
+            "falsification": "If distilled experience fails under a new reagent, vessel, or safety constraint, the memory may be task replay rather than grounded scientific abstraction.",
+            "adversarial": "Training-free does not mean risk-free; safety gates must be audited for false negatives, not only fewer intercepts.",
+            "thinking_tool": "Summarize an agent trace into skill, strategy, safety rule, evidence source, and stop condition before adding it to memory.",
+            "transfer_boundary": "Strong for procedural lab tasks with measurable state; less direct for open-world manipulation without stable skill APIs.",
+        },
+        {
+            "rank": 9,
+            "title": "Articulated Object Reconstruction from Rest-State Observation",
+            "arxiv_id": "2607.27749",
+            "fit": "articulated reconstruction - rest-state inference - kinematic digital twin",
+            "status": "Tier A - official arXiv HTML verified",
+            "status_quo": "Articulated-object reconstruction usually assumes multiple observed articulation states or visible motion.",
+            "friction": "Robots often see a closed cabinet or drawer before interaction and still need to infer parts and joints.",
+            "hidden_premise": "Geometry, semantics, and motion priors can compensate for missing motion cues if cross-model verification is explicit.",
+            "conceptual_move": "The paper reconstructs articulated objects from a single rest-state observation using mesh intermediates, VLM/segmentation evidence, and diffusion-generated articulation hypotheses.",
+            "mechanism": "Noisy part hierarchies and masks are fused into spatially consistent structures; synthesized articulation videos support joint-parameter estimation without observed motion.",
+            "evidence": [
+                {"trace": "Figure 1 [Verified]", "claim": "The method reconstructs part-level geometry and joint parameters from rest-state observations alone."},
+                {"trace": "Figure 2 [Verified]", "claim": "The paper shows naive pretrained VLM, segmentation, and video-diffusion failures on a closed cabinet example."},
+                {"trace": "Table 1 [Verified]", "claim": "The comparison table positions the method against articulated reconstruction methods requiring multiple states or part-count priors."},
+                {"trace": "Experiment headings [Verified]", "claim": "The HTML lists part segmentation, joint estimation, ablation, and diverse-input generalization evaluations."},
+            ],
+            "falsification": "If synthesized articulation hypotheses are plausible but wrong, a robot can plan an invalid interaction with high confidence.",
+            "adversarial": "Rest-state priors are powerful but can hallucinate affordances; physical probing or uncertainty is needed before execution.",
+            "thinking_tool": "For object reconstruction, log which joint came from observation, segmentation, VLM prior, diffusion hypothesis, or physical probe.",
+            "transfer_boundary": "Strong for cabinets, drawers, and structured objects; weaker for deformable or broken mechanisms without strong priors.",
+        },
+    ],
+    "synthesis": [
+        {
+            "title": "S1 - Counterfactual coverage is replacing demo count",
+            "links": "Counterfactual Action Sensitivity Coverage - RedFlow - ACE-Data-0",
+            "facts": "CFNBC selects nuisance examples by action drift, RedFlow turns failed actions into corrective targets, and ACE captures synchronized interaction state.",
+            "inference": "The relevant unit of data is no longer a demonstration; it is a state-action contrast that changes a policy or explains a failure.",
+            "decision": "APRL should rank new data by action sensitivity, correction value, and preserved physical channel.",
+        },
+        {
+            "title": "S2 - World-action models are filling missing state channels",
+            "links": "EgoGenesis - TacWAM - World Action Planner - ODEWorld",
+            "facts": "The papers add anchored 3D memory, tactile mechanics, pose-image rollouts, and physical-time flow to world-action modeling.",
+            "inference": "A future is useful when it preserves the variable needed by the planner or controller, not when it is merely coherent.",
+            "decision": "APRL should evaluate WAMs with channel-specific state probes and downstream repair tests.",
+        },
+        {
+            "title": "S3 - Agents need reusable experience summaries with safety fields",
+            "links": "LabEvolver - RedFlow - TacWAM",
+            "facts": "LabEvolver distills experience into skill, strategy, and safety memories; RedFlow localizes correction; TacWAM blocks future tactile leakage into action.",
+            "inference": "Experience reuse is defensible only when the state, safety rule, and information boundary are explicit.",
+            "decision": "APRL should make memory entries include evidence source, allowed use, safety gate, and stop condition.",
+        },
+        {
+            "title": "S4 - Geometry becomes a prior that must declare uncertainty",
+            "links": "Rest-state articulated reconstruction - EgoGenesis - World Action Planner",
+            "facts": "Rest-state reconstruction infers hidden joints, EgoGenesis anchors 3D scene memory, and World Action Planner renders robot pose into world-model rollouts.",
+            "inference": "Geometry is moving into the action loop, so hallucinated structure becomes an execution risk rather than a visualization error.",
+            "decision": "APRL should require uncertainty and source tags for geometry used in planning.",
+        },
+    ],
+    "frontier_memory": [
+        {
+            "signal": "strengthening",
+            "title": "Action-sensitive data is now a repeated robotics axis",
+            "history": "Earlier July releases emphasized rollout ledgers, causal modality effects, and execution-time verification.",
+            "read": "July 31 adds counterfactual action drift and failure-to-correction targets as concrete data-selection mechanisms.",
+        },
+        {
+            "signal": "strengthening",
+            "title": "World-action models are becoming multi-channel state models",
+            "history": "Recent WAM papers moved from video prediction to dynamic tokens, 3D object priors, and action-conditioned verification.",
+            "read": "EgoGenesis, TacWAM, ODEWorld, and World Action Planner add 3D memory, tactile mechanics, physical time, and pose-image action state.",
+        },
+        {
+            "signal": "new",
+            "title": "Ambient capture and wet-lab experience are converging as data engines",
+            "history": "Prior data discussions focused on robot demonstrations, simulation, or resettable benchmarks.",
+            "read": "ACE and LabEvolver make synchronized human-state capture and distilled lab experience look like reusable infrastructure.",
+        },
+        {
+            "signal": "missing_axis",
+            "title": "Most world-model papers still need failure-conditioned channel ablations",
+            "history": "Many papers add state channels and report aggregate improvements.",
+            "read": "The missing audit is which channel predicts or repairs which failure family under equal compute and data budgets.",
+        },
+    ],
+    "strategy": [
+        {
+            "priority": "BUILD",
+            "title": "Counterfactual Action-Sensitivity Data Engine",
+            "thesis": "Select and generate robot data by the action drift or correction it induces, not by raw demonstration count.",
+            "scores": {"fit": 5, "novelty": 5, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 5},
+            "one_week": "Take one existing imitation policy and generate nuisance pairs for lighting, distractor, object pose, and moving-object state; measure action drift.",
+            "four_week": "Add RedFlow-style corrective target matching and compare random demos, action-drift examples, and failure-correction examples under the same budget.",
+            "metric": "OOD success +10p at equal data budget, with at least one selected example family explaining a specific failure mode.",
+            "stop": "If action-drift examples do not outperform random additions on two nuisance families, narrow the generator or switch to real perturbation collection.",
+            "assets": [
+                {"label": "Counterfactual Action Sensitivity Coverage", "url": "https://arxiv.org/abs/2607.27261"},
+                {"label": "RedFlow", "url": "https://arxiv.org/abs/2607.27782"},
+                {"label": "ACE-Data-0", "url": "https://arxiv.org/abs/2607.28625"},
+                {"label": "APRL counterfactual data ledger", "url": "APRL internal counterfactual data ledger"},
+            ],
+        },
+        {
+            "priority": "BUILD",
+            "title": "Multi-Channel World-Action Model Audit",
+            "thesis": "Test which missing physical channel makes a WAM useful: 3D memory, tactile mechanics, pose-image rollout, or physical-time flow.",
+            "scores": {"fit": 5, "novelty": 5, "feasibility": 3, "moat": 5, "timing": 5, "evidence": 5},
+            "one_week": "Define four channel probes on one manipulation task: visual-only, anchored 3D memory, tactile future, and pose-conditioned rollout.",
+            "four_week": "Train or adapt small WAM variants and measure channel ablation, plan success, contact failure, repair lead time, and compute.",
+            "metric": "A channel-specific probe predicts or repairs its target failure family with AUC >= 0.75 or success +10p.",
+            "stop": "If no channel beats a visual-only WAM under equal compute, convert the result into a negative benchmark note.",
+            "assets": [
+                {"label": "EgoGenesis", "url": "https://arxiv.org/abs/2607.28243"},
+                {"label": "TacWAM", "url": "https://arxiv.org/abs/2607.28391"},
+                {"label": "World Action Planner", "url": "https://arxiv.org/abs/2607.27599"},
+                {"label": "ODEWorld", "url": "https://arxiv.org/abs/2607.27924"},
+                {"label": "APRL WAM channel audit", "url": "APRL internal WAM channel audit"},
+            ],
+        },
+        {
+            "priority": "EXPLOIT",
+            "title": "Reusable Experience Memory With Safety Fields",
+            "thesis": "Convert agent traces into compact, typed experience cards: skill, strategy, state evidence, safety gate, and stop condition.",
+            "scores": {"fit": 5, "novelty": 4, "feasibility": 5, "moat": 4, "timing": 5, "evidence": 4},
+            "one_week": "Summarize five APRL lab or robot traces into experience cards and label which field would have changed the next attempt.",
+            "four_week": "Integrate the cards into a small planning loop and compare raw trace retrieval, card retrieval, and no memory.",
+            "metric": "Card retrieval improves success or reduces safety interrupts while keeping memory size bounded.",
+            "stop": "If cards do not outperform raw trace retrieval or introduce unsafe reuse, keep them as human-facing documentation only.",
+            "assets": [
+                {"label": "LabEvolver", "url": "https://arxiv.org/abs/2607.27690"},
+                {"label": "Rest-state articulated reconstruction", "url": "https://arxiv.org/abs/2607.27749"},
+                {"label": "APRL experience memory cards", "url": "APRL internal experience memory cards"},
+            ],
+        },
+    ],
+}
+
+
+def main() -> None:
+    template.DATE = DATE
+    template.SLUG = SLUG
+    template.DATA = DATA
+    doc = template.build_html()
+    doc = doc.replace("2026-07-13 arXiv Research Intelligence", f"{DATE} arXiv Research Intelligence")
+    doc = doc.replace("Tier A 5", f"Tier A {len(DATA['papers'])}")
+    doc = doc.replace(
+        "기존 daily 요약을 보완한 별도 에디션입니다.",
+        "Today's parser corpus is distilled into a separate Research Intelligence edition.",
+    )
+    json_dir = ROOT / "intelligence"
+    json_dir.mkdir(exist_ok=True)
+    json_path = json_dir / f"{DATE}.json"
+    html_path = ROOT / "posts" / f"{SLUG}.html"
+    json_path.write_text(json.dumps(DATA, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    html_path.write_text(doc, encoding="utf-8")
+    print(f"wrote {json_path.relative_to(ROOT)}")
+    print(f"wrote {html_path.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()
