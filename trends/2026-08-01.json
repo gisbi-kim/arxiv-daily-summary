@@ -1,0 +1,240 @@
+{
+  "date": "2026-08-01",
+  "iso_week": "2026-W31",
+  "week_start": "2026-07-26",
+  "week_end": "2026-08-01",
+  "source_listing_date": "2026-07-31",
+  "source_mode": "pastweek",
+  "source_daily_artifacts": [
+    "2026-07-27",
+    "2026-07-28",
+    "2026-07-29",
+    "2026-07-30",
+    "2026-07-31"
+  ],
+  "totals": {
+    "selected": 355,
+    "total_scanned": 821
+  },
+  "daily_totals": {
+    "cv": 641,
+    "ro": 216,
+    "selected": 639,
+    "total_scanned": 821
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 39,
+      "cv": 27,
+      "ro": 8,
+      "cvro": 4
+    },
+    "Robot Learning": {
+      "total": 63,
+      "cv": 4,
+      "ro": 53,
+      "cvro": 6
+    },
+    "Autonomous Driving": {
+      "total": 20,
+      "cv": 10,
+      "ro": 8,
+      "cvro": 2
+    },
+    "Foundation Models": {
+      "total": 45,
+      "cv": 43,
+      "ro": 0,
+      "cvro": 2
+    },
+    "Generation": {
+      "total": 82,
+      "cv": 66,
+      "ro": 13,
+      "cvro": 3
+    },
+    "Efficiency/Systems": {
+      "total": 43,
+      "cv": 38,
+      "ro": 4,
+      "cvro": 1
+    },
+    "Embodied AI": {
+      "total": 19,
+      "cv": 5,
+      "ro": 14,
+      "cvro": 0
+    },
+    "Safety/Alignment": {
+      "total": 44,
+      "cv": 37,
+      "ro": 5,
+      "cvro": 2
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA가 action decoder 경쟁에서 evidence-bearing execution contract로 이동",
+      "representative_ids": [
+        "2607.22535",
+        "2607.24159",
+        "2607.25487",
+        "2607.27205",
+        "2607.26789"
+      ],
+      "why": "기존 VLA 비교는 같은 task success를 놓고 backbone, action head, data 규모를 겨루는 방식이 많았습니다. 이번 주 논문들은 action을 바로 신뢰하지 않고 rendered robot state, physical guidance, Plan/Think span, direct local latency, action-conditioned verifier를 중간 evidence로 세웁니다. 따라서 VLA 평가는 최종 성공률보다 어떤 evidence가 실패 직전에 먼저 무너지는지를 드러내야 합니다.",
+      "confidence": "High — 5일 연속 VLA/action 논문이 서로 다른 구현으로 같은 execution-evidence 축을 반복했습니다.",
+      "lab_action": "LIBERO/RoboCasa와 실제 tabletop trace에서 direct VLA, physical-guided VLA, reasoning-distilled VLA, action-conditioned verifier를 같은 task family에 배치하고 latency, physical-state prediction, intervention timing, repair outcome이 failure-prediction lead time과 task success를 얼마나 바꾸는지 비교합니다."
+    },
+    {
+      "cluster": "Robot data scaling이 demo volume에서 action-sensitive counterfactual coverage로 이동",
+      "representative_ids": [
+        "2607.24744",
+        "2607.25895",
+        "2607.27261",
+        "2607.27782",
+        "2607.28625"
+      ],
+      "why": "이번 주 data 논문들은 demonstration을 더 모으는 문제보다 어떤 example이 action boundary를 실제로 바꾸는지 묻습니다. Data Pyramid와 HiFi-UMI는 source fidelity와 pose/synchronization을 분리하고, Counterfactual Action Sensitivity Coverage와 RedFlow는 nuisance-induced action drift와 failure-to-correction target을 데이터 선택 기준으로 만듭니다. ACE-Data-0는 ambient interaction을 synchronized state engine으로 제시해, 데이터의 가치를 volume이 아니라 action information으로 재정의합니다.",
+      "confidence": "High — source fidelity, action drift, failure correction, ambient capture가 같은 data-selection decision으로 연결됩니다.",
+      "lab_action": "동일 imitation policy에서 random demo, fidelity-filtered demo, action-drift example, failure-correction example을 같은 budget으로 비교하고 OOD success, failure-family coverage, collection cost, corrective transfer가 어떤 data family에서 개선되는지 평가합니다."
+    },
+    {
+      "cluster": "World-action models가 plausible future에서 physically grounded planning interface로 이동",
+      "representative_ids": [
+        "2607.26056",
+        "2607.26452",
+        "2607.26712",
+        "2607.28243",
+        "2607.28391",
+        "2607.27924"
+      ],
+      "why": "World model은 더 그럴듯한 future frame을 만드는 것만으로 robot policy에 충분하지 않습니다. INTACT, CG-World, ActSWM은 action-sensitive state, branch lineage, distinguishable futures를 planning interface로 만들고, EgoGenesis와 TacWAM은 anchored 3D memory와 tactile mechanics를 future prediction에 주입합니다. 즉 world model의 평가는 video quality가 아니라 action choice를 바꾸는 physical channel을 보존하는지로 옮겨야 합니다.",
+      "confidence": "High — action law, typed state, branch lineage, 3D memory, tactile mechanics가 주간 corpus에서 반복되었습니다.",
+      "lab_action": "visual-only, anchored-3D, tactile, pose-image, physical-time channel을 같은 world-action task에 놓고 candidate rollout 수, planning success, contact failure, recovery behavior, latency trade-off를 분리해 검증합니다."
+    },
+    {
+      "cluster": "Geometry and SLAM이 visual fidelity에서 action-usable map state와 uncertainty tags로 이동",
+      "representative_ids": [
+        "2607.21986",
+        "2607.23384",
+        "2607.24852",
+        "2607.26889",
+        "2607.27749",
+        "2607.28045"
+      ],
+      "why": "이번 주 3D/Scene 신호는 rendering quality만의 문제가 아니었습니다. Mag4D-SLAM, Semantic Object SLAM, leakage-aware photogrammetry, StructureGS, articulated reconstruction, radar odometry는 map field가 어떤 sensor source, uncertainty, association stability, action use를 갖는지 묻습니다. 로봇에게 필요한 geometry는 예쁜 view가 아니라 sensor dropout, repeated objects, dynamic objects 아래에서도 route recovery나 manipulation pose를 지탱하는 state입니다.",
+      "confidence": "High — pastweek 3D/Scene ROI가 크고, localization, odometry, semantic association, articulated prior가 독립적으로 반복되었습니다.",
+      "lab_action": "동일 route와 tabletop scene에서 visual-inertial SLAM, semantic-object map, Gaussian/object map, radar odometry를 비교하고 association flips, relocalization time, uncertainty calibration, downstream navigation or manipulation success를 함께 평가합니다."
+    },
+    {
+      "cluster": "VLM reliability가 answer confidence에서 evidence routing and failure-family diagnosis로 이동",
+      "representative_ids": [
+        "2607.22864",
+        "2607.24957",
+        "2607.27667",
+        "2607.27700",
+        "2607.27830",
+        "2607.28463"
+      ],
+      "why": "Foundation-model reliability 논문들은 정답 여부나 confidence 하나로는 robot VLM failure를 설명하지 못한다고 봅니다. Spatial-IQ와 PerceptionBench는 perception을 atomic test로 쪼개고, Witness, token calibration, VisualRouter, FaithEyes는 어떤 evidence가 retrieval, compression, verifier, routing을 지나 행동 판단까지 살아남는지 묻습니다. 따라서 robot VLM 평가는 right-answer-wrong-evidence를 별도 failure family로 다뤄야 합니다.",
+      "confidence": "High — spatial, atomic perception, token, routing, verifier evidence가 서로 다른 task에서 같은 reliability decision을 만듭니다.",
+      "lab_action": "하나의 robot VLM benchmark에 spatial relation, kept tokens, routed frames, verifier correction, final action을 결합한 조건을 만들고 정답-근거 불일치, wrong grounding, unsafe action을 failure family별로 비교합니다."
+    },
+    {
+      "cluster": "Safety and autonomy가 route success에서 risk horizon and runtime repair constraints로 이동",
+      "representative_ids": [
+        "2607.22494",
+        "2607.23565",
+        "2607.25049",
+        "2607.26789",
+        "2607.28474",
+        "2607.28623"
+      ],
+      "why": "Autonomy와 safety는 이번 주에 final route success나 nominal grasp score에서 벗어났습니다. CARA와 risk-guided flight는 위험이 언제 보이기 시작하는지 묻고, FIRMGrasp는 adverse-tail friction을 안전 margin에 넣으며, CheckVLA와 surgical/agri failure detectors는 execution 중 repair timing과 alarm condition을 policy module로 만듭니다. 평균 성능보다 중요한 것은 어떤 risk evidence가 intervention을 정당화하는지입니다.",
+      "confidence": "Medium-High — driving, flight, grasping, mobile manipulation, surgery, agriculture가 risk-horizon decision을 공유합니다.",
+      "lab_action": "navigation과 manipulation episode에서 nominal score, risk horizon, adverse-tail variable, predicted consequence, intervention timing을 바꿔가며 near miss, unsafe contact, false alarm, recovery latency, terminal success를 비교합니다."
+    }
+  ],
+  "frontier_memory": {
+    "new": [
+      "Counterfactual action drift and failure-to-correction targets became explicit data-selection mechanisms on July 31.",
+      "Ambient capture moved embodied data from video archive to synchronized state engine."
+    ],
+    "strengthening": [
+      "The July action-state contract thread strengthened every day from robot rendering to tactile state, causal modality evidence, real-time execution, and runtime repair.",
+      "Robot-usable geometry appeared repeatedly as localization, semantic association, articulated prior, radar odometry, and action-conditioned map state."
+    ],
+    "commoditizing": [
+      "Generic VLA scale and generic video/world-model quality are less defensible unless they expose an intervention-ready evidence field."
+    ],
+    "contradiction": [
+      "Fast direct VLA execution reduces latency, while verifier and repair modules add diagnostic depth; the useful boundary is task-dependent and needs controlled measurement."
+    ],
+    "missing_axis": [
+      "The corpus still lacks a shared multi-sensor closed-loop benchmark that evaluates action evidence, geometry evidence, and VLM evidence in the same episodes."
+    ]
+  },
+  "strategy_board": [
+    {
+      "opportunity": "Evidence-Bearing VLA Execution Ledger",
+      "portfolio": "Build moat",
+      "why_now": "Five consecutive daily batches made action validity depend on exposed intermediate evidence rather than final success alone.",
+      "contrarian_bet": "APRL should own the failure-evidence protocol before competing on another VLA backbone.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week_probe": "Instrument two manipulation tasks with action chunk, physical-state prediction, causal modality delta, verifier risk, and repair decision.",
+      "four_week_build": "Compare TurboVLA-style direct execution, DeVA-style physical guidance, IDR-style modality diagnosis, and CheckVLA-style repair under one failure-labeled protocol.",
+      "success_metric": "At least one evidence field predicts terminal failure two steps earlier than success history with AUC >= 0.75 or improves recovery by 10 points.",
+      "stop_condition": "If evidence fields do not outperform task ID and previous action error, narrow to one failure family before scaling.",
+      "paper_path": "Execution-evidence contracts for reliable VLA control.",
+      "asset_path": "Reusable APRL VLA failure-evidence protocol and annotated rollout set."
+    },
+    {
+      "opportunity": "Counterfactual Action-Sensitivity Data Engine",
+      "portfolio": "Exploit",
+      "why_now": "July 31 made action drift a concrete selection criterion, while earlier days showed typed data-source and fidelity constraints.",
+      "contrarian_bet": "Instead of collecting broader demos, select examples that move the trained policy's action boundary.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 4
+      },
+      "one_week_probe": "Generate nuisance pairs for lighting, distractor, support, object pose, and moving-object state on one imitation policy.",
+      "four_week_build": "Compare random demos, fidelity-filtered demos, action-drift examples, and failure-correction examples under the same data budget.",
+      "success_metric": "OOD success improves by at least 10 points at equal budget, with selected examples explaining a specific failure family.",
+      "stop_condition": "If action-drift examples do not beat random additions on two nuisance families, switch to real perturbation collection.",
+      "paper_path": "Data-efficient imitation repair through action-sensitive counterfactual coverage.",
+      "asset_path": "Counterfactual data-selection harness plus failure-correction library."
+    },
+    {
+      "opportunity": "Robot-Usable Geometry and World-State Protocol",
+      "portfolio": "Build moat",
+      "why_now": "3D/Scene and world-action papers repeatedly moved from visual quality to sensor source, uncertainty, contact, and action use.",
+      "contrarian_bet": "APRL can avoid photorealism competition by owning task-grounded geometry validity.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 4,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week_probe": "Build a small route plus tabletop card with map source, uncertainty, action use, and expected failure mode for each geometry field.",
+      "four_week_build": "Compare visual-inertial SLAM, semantic-object maps, Gaussian/object maps, anchored 3D world models, and tactile world models on downstream recovery.",
+      "success_metric": "Geometry/world-state fields explain at least three distinct failure families and improve navigation or manipulation recovery over visual-only state.",
+      "stop_condition": "If fields only correlate with visual quality and not recovery, split the work into localization-only and contact-only protocols.",
+      "paper_path": "Robot-usable geometry state as an execution contract.",
+      "asset_path": "APRL map/world-state validity suite."
+    }
+  ]
+}
