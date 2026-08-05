@@ -1,0 +1,193 @@
+{
+  "date": "2026-08-04",
+  "edition": "Research Intelligence",
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "source_mode": "pastweek-date-section",
+  "scope_note": "Large Tuesday backfill from arXiv /pastweek date sections: 331 cs.CV rows, 118 cs.RO rows, 431 deduplicated papers, and 194 ROI papers. Tier A cards use official arXiv abstract pages and available arXiv HTML headings.",
+  "executive_thesis": "The August 4 backlog is the clearest contact-rich and evidence-compression day in this run. DynamicManip, Demystifying VLA Failures, ChainVLA, and Messages Not Tokens all reject periodic, opaque reuse: a robot needs to know which motion state, contact condition, cross-query memory, or visual evidence message remains valid. The strategy shift for APRL is to evaluate replanning, token compression, and WAM feedback by preserved decision state rather than average success alone.",
+  "decision_cards": [
+    {
+      "label": "Decision",
+      "title": "Contact-rich VLA failures need diagnosis before architecture changes",
+      "body": "The contact-rich papers separate precision, force, tactile, and trajectory-prior failures. That should become the first APRL ablation grid."
+    },
+    {
+      "label": "Decision",
+      "title": "Cross-query memory is a VLA execution state",
+      "body": "ChainVLA frames repeated action chunks as an incomplete handoff problem, not just a longer-horizon planning problem."
+    },
+    {
+      "label": "Decision",
+      "title": "Compression should preserve messages, not isolated patches",
+      "body": "Messages Not Tokens challenges Top-K token pruning and moves the evidence unit toward collective signed visual messages."
+    }
+  ],
+  "papers": [
+    {
+      "rank": 1,
+      "title": "DynamicManip: Enabling Dynamic Manipulation from a Single Static Demonstration",
+      "arxiv_id": "2608.01452",
+      "fit": "dynamic manipulation - single demonstration - real-time policy execution",
+      "status": "Tier A - official arXiv abstract and HTML structure checked",
+      "status_quo": "Dynamic manipulation usually demands many demonstrations covering moving-object variations.",
+      "friction": "Dynamic scenarios have combinatorial complexity and require rapid policy execution.",
+      "hidden_premise": "A static demonstration can be useful if the missing dynamic variables are reconstructed and stress-tested.",
+      "conceptual_move": "Treat a single demonstration as a seed for dynamic manipulation rather than a complete behavior distribution.",
+      "mechanism": "The official abstract positions DynamicManip as a response to data requirements and real-time variation.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper names data complexity and rapid dynamics as its two central challenges."
+        },
+        {
+          "trace": "[HTML headings]",
+          "claim": "Official HTML includes DynamicManip Benchmark and Experiments sections."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should ask what dynamic state is inferred from a static demo before trusting generalization."
+        }
+      ],
+      "falsification": "If performance drops on unseen motion profiles, the single-demo premise is not enough.",
+      "adversarial": "A benchmark can hide how much dynamic variation is supplied by simulation rather than by the method.",
+      "thinking_tool": "Convert static demonstrations into explicit dynamic-state hypotheses and test those hypotheses separately.",
+      "transfer_boundary": "Best for tasks with reusable object geometry; weaker for deformable or contact-rich dynamics without sensing."
+    },
+    {
+      "rank": 2,
+      "title": "Demystifying When and Why VLAs Fail in Contact-Rich Tasks and How to Fix Them",
+      "arxiv_id": "2608.01402",
+      "fit": "contact-rich manipulation - VLA failure diagnosis - force and precision",
+      "status": "Tier A - official arXiv abstract and HTML structure checked",
+      "status_quo": "Contact-rich VLA failures are often treated as a need for force modules or regularizers.",
+      "friction": "The root causes are underexplored, so fixes may target the wrong failure family.",
+      "hidden_premise": "Precision and force failures should be separated before the architecture is changed.",
+      "conceptual_move": "Diagnose when and why VLA policies fail in physical interaction tasks.",
+      "mechanism": "The official abstract identifies precision failures and force-related failures as distinct root causes.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The authors explicitly separate failure modes in contact-rich manipulation."
+        },
+        {
+          "trace": "[HTML headings]",
+          "claim": "Official HTML includes Diagnosing Failures and Experiments sections."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should label contact failures by precision, force, and policy-training mismatch."
+        }
+      ],
+      "falsification": "If the proposed fixes do not transfer across contact materials and tools, the diagnosis is benchmark-specific.",
+      "adversarial": "Force augmentation can improve apparent contact success while hiding unsafe contact impulses.",
+      "thinking_tool": "Do not add tactile or force channels until the failure family is typed.",
+      "transfer_boundary": "Strong for manipulation; less direct for locomotion and navigation."
+    },
+    {
+      "rank": 3,
+      "title": "ChainVLA: Chaining Vision-Language-Action Queries through a Unified Execution State",
+      "arxiv_id": "2608.02326",
+      "fit": "long-horizon manipulation - VLA memory - execution state",
+      "status": "Tier A - official arXiv abstract and HTML structure checked",
+      "status_quo": "Action-chunked VLAs repeatedly replan from current input.",
+      "friction": "That loses the handoff between long-term task evidence and short-term motion.",
+      "hidden_premise": "The policy query should carry an execution state, not only the current image and language instruction.",
+      "conceptual_move": "Chain VLA queries through a unified execution state for long-horizon manipulation.",
+      "mechanism": "The official abstract frames ChainVLA as preserving what earlier actions established while adapting ongoing motion.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper contrasts repeated replanning with retaining prior action knowledge."
+        },
+        {
+          "trace": "[HTML headings]",
+          "claim": "Official HTML includes Method and Experiments sections."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "The reusable APRL variable is cross-query state validity."
+        }
+      ],
+      "falsification": "If state chaining helps only by smoothing actions and not by preserving task evidence, its conceptual gain is narrower.",
+      "adversarial": "A stale execution state can propagate early mistakes unless the policy also learns when to discard it.",
+      "thinking_tool": "Every action chunk should test what it established and when that state expires.",
+      "transfer_boundary": "Best for long-horizon manipulation; less important for one-step tasks."
+    },
+    {
+      "rank": 4,
+      "title": "Messages, Not Tokens: Grounded Coresets for Faithful VLM Compression",
+      "arxiv_id": "2608.02134",
+      "fit": "VLM compression - visual evidence - token pruning",
+      "status": "Tier A - official arXiv abstract and HTML structure checked",
+      "status_quo": "Visual token compression often ranks individual patches and keeps Top-K tokens.",
+      "friction": "Language decoders consume collective signed attention messages, not isolated visual patches.",
+      "hidden_premise": "Faithful compression should preserve the message induced by the visual population.",
+      "conceptual_move": "Move the compression unit from token importance to grounded coreset messages.",
+      "mechanism": "The official abstract argues that equally sized Top-K sets can distort the collective evidence used by the decoder.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper explicitly rejects isolated Top-K token scores as the evidence unit."
+        },
+        {
+          "trace": "[HTML headings]",
+          "claim": "Official HTML includes Methodology, Analysis, and Experiments sections."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should evaluate visual compression by action evidence preservation, not just token count."
+        }
+      ],
+      "falsification": "If message preservation does not improve downstream grounding under fixed compute, the coreset unit is not operationally better.",
+      "adversarial": "Grounded coresets may be query-sensitive and expensive to recompute in real-time robotics.",
+      "thinking_tool": "Ask what evidence message is preserved after compression, not how many tokens remain.",
+      "transfer_boundary": "Direct for VLM inference and robot VLM grounding; indirect for low-level control."
+    }
+  ],
+  "synthesis": [
+    {
+      "title": "The execution state is now the bottleneck",
+      "links": "DynamicManip - ChainVLA - Demystifying VLA Failures",
+      "facts": "The papers expose dynamic object state, cross-query state, and contact failure state.",
+      "inference": "APRL should make an execution-state benchmark before comparing VLA backbones."
+    },
+    {
+      "title": "Compression and replanning need validity tests",
+      "links": "Messages Not Tokens - Budgeted Replanning - ET-Prune",
+      "facts": "The backlog has many papers on token, memory, and replanning budgets.",
+      "inference": "Budget savings should be accepted only if the state needed for action remains valid."
+    }
+  ],
+  "frontier_memory": [
+    {
+      "label": "Strengthening",
+      "history": "Late July emphasized WAM and VLA state channels.",
+      "body": "August 4 adds contact-rich diagnosis and cross-query execution memory."
+    },
+    {
+      "label": "New signal",
+      "history": "Prior compression notes focused on visual token count.",
+      "body": "Messages Not Tokens reframes compression around preserved evidence messages."
+    }
+  ],
+  "strategy": [
+    {
+      "priority": "Build moat",
+      "title": "Contact-rich execution-state benchmark",
+      "thesis": "Separate precision, force, tactile, memory, and replanning failures under the same manipulation tasks.",
+      "scores": {
+        "fit": 5,
+        "novelty": 5,
+        "feasibility": 4,
+        "moat": 5,
+        "timing": 5,
+        "evidence": 4
+      },
+      "one_week": "Annotate 30 contact-rich failures by precision, force, memory, and replanning boundary.",
+      "four_week": "Run a small VLA suite with state chaining, tactile prediction, and budgeted replanning ablations.",
+      "success": "At least two failure families require different fixes under matched tasks.",
+      "stop": "All failures collapse to generic perception error after replay inspection.",
+      "asset": "Reusable failure taxonomy and manipulation replay set."
+    }
+  ]
+}

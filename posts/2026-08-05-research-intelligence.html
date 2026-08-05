@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-05 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">← arXiv Daily Summary</a><h1>2026-08-05 arXiv Research Intelligence</h1>
+<p class="lead">The August 5 batch turns world models, SLAM, and VLA execution into one operational question: when should an agent trust, refresh, or discard its internal state? Quo Vadis broadens world models into agent-centric feedback proxies, SLAMFormer-infinity removes a fixed distance bound from SLAM processing, Continue or Replan turns action-chunk horizons into a learned continuation decision, and DRIFT shows flow-matching VLA robustness can fail along the denoising trajectory. APRL's best move is a state-validity benchmark that couples map memory, action horizon, proprioception, and adversarial physical attention.</p><p class="scope">Daily edition from matching Wednesday /new listings: 146 non-replacement cs.CV rows, 55 cs.RO rows, 190 deduplicated papers, and 161 ROI papers. Tier A cards use official arXiv abstract pages plus available official arXiv HTML headings.</p></header>
+<main>
+<h2>🔭 주간 동향을 넘어: 오늘의 판단</h2><div class="decision-grid"><article><span>Decision</span><h3>World models are feedback interfaces, not only future-video predictors</h3><p>Quo Vadis reframes world proxies around actionable feedback before real actions, matching APRL's need for cheap but typed robot trials.</p></article><article><span>Decision</span><h3>Long-range SLAM needs flexible memory coordinates</h3><p>SLAMFormer-infinity asks the frontend and backend to process unbounded structure without anchoring everything to the first frame.</p></article><article><span>Decision</span><h3>Execution horizons and VLA attacks are state-validity problems</h3><p>Continue/Replan and DRIFT both show that hidden trajectory state can become stale or steerable before the final action is emitted.</p></article></div>
+<h2>🧠 Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.02713" target="_blank" rel="noopener">Quo Vadis, World Modeling?</a></h3>
+  <p class="fit">agent-centric world proxies - feedback interface - world-model design space</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>World models are commonly treated as future physical-state predictors.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Improving agents need feedback that is cheaper and safer than direct real-environment interaction.</p></div>
+    <div><h4>Hidden premise</h4><p>The useful proxy can be any interface that gives actionable feedback before real action, not only a predicted video.</p></div>
+    <div><h4>Conceptual move</h4><p>Shift from physical-state prediction to agent-centric world proxies and their functional forms.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper says world models offer lower-cost, controllable feedback before real actions.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes Definition and Instantiations sections for agent-centric world proxies.</span></li><li><strong>[Inference]</strong><span>APRL should classify WAMs by feedback type: image, state, critic, planner, or monitor.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The official HTML headings lay out motivation, definition, empowerment, instantiations, and design-space conclusion.</p></div>
+    <div><h4>Falsification frontier</h4><p>If proxy feedback does not predict real-world action improvement, the broadened design space becomes taxonomy without leverage.</p></div>
+    <div><h4>Adversarial read</h4><p>A broad proxy definition can hide weak grounding unless every proxy is tied to a success and stop condition.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Before building a world model, name the feedback channel and the real action it is supposed to change.</p><p>Strong for robot learning and agent evaluation; less direct for pure generative-media tasks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.03429" target="_blank" rel="noopener">SLAMFormer-infinity: Infinite SLAM Transformer for Unbounded Frontend and Backend Processing</a></h3>
+  <p class="fit">SLAM transformer - unbounded memory - frontend/backend geometry</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Transformer SLAM often has a bounded context or first-frame-anchored coordinate formulation.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Long-range frontend and backend processing need flexible coordinate systems and memory conditions.</p></div>
+    <div><h4>Hidden premise</h4><p>The SLAM memory coordinate should be redefined as the sequence grows rather than fixed at frame one.</p></div>
+    <div><h4>Conceptual move</h4><p>Use memory conditions to define flexible coordinate systems and scales for unbounded processing.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper claims support for long-range frontend and backend processing without an explicit distance bound.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes Methodology and Experiments sections.</span></li><li><strong>[Inference]</strong><span>APRL's map benchmark should measure when memory coordinates become stale or inconsistent.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes memory-conditioned frontend and backend processing without an explicit distance bound.</p></div>
+    <div><h4>Falsification frontier</h4><p>If unbounded processing fails under loop closure, dynamic objects, or calibration drift, the memory condition is not enough.</p></div>
+    <div><h4>Adversarial read</h4><p>Transformer context can appear unbounded while computation or map update cost still grows operationally.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Evaluate SLAM memory by coordinate validity and update cost, not just endpoint trajectory error.</p><p>Direct for visual SLAM and localization; less direct for sparse LiDAR-only systems.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.03483" target="_blank" rel="noopener">Continue or Replan? Bernoulli-Continuation Policy Learning for Adaptive Horizon Execution</a></h3>
+  <p class="fit">VLA execution horizon - replanning boundary - adaptive control</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Chunk-based VLA policies often execute a fixed number of actions before replanning.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A critical manipulation stage can be executed from a stale chunk if no replanning boundary arrives in time.</p></div>
+    <div><h4>Hidden premise</h4><p>The policy should learn whether its current chunk remains valid.</p></div>
+    <div><h4>Conceptual move</h4><p>Add a Bernoulli continuation decision that adaptively decides continue versus replan.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names fixed execution horizons as task-agnostic periodic schedules.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes Method and Experiments sections.</span></li><li><strong>[Inference]</strong><span>APRL should ablate chunk age, continuation probability, and failure onset together.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The official abstract positions BCP as a lightweight plug-and-play adaptive horizon framework.</p></div>
+    <div><h4>Falsification frontier</h4><p>If adaptive replanning only increases compute without improving critical-stage success, the continuation signal is weak.</p></div>
+    <div><h4>Adversarial read</h4><p>A continuation head can learn dataset rhythm rather than true task progress.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat replanning as a learned validity test for the current action chunk.</p><p>Strong for chunk-based manipulation; less relevant for continuous MPC controllers.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.03207" target="_blank" rel="noopener">DRIFT: Derailing Denoising Trajectories of Flow-Matching VLAs with Adversarial Patch Attack</a></h3>
+  <p class="fit">flow-matching VLA security - denoising trajectory - physical attention hijacking</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Flow-matching VLAs have been reported to resist attacks that fool autoregressive VLAs.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Prior attacks can ignore the multi-step denoising ODE where action trajectories are formed.</p></div>
+    <div><h4>Hidden premise</h4><p>Robustness must be tested along the denoising path, not only at the final output.</p></div>
+    <div><h4>Conceptual move</h4><p>Attack the denoising trajectory with a universal adversarial patch on the robot's scene.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper says apparent robustness stems from attacks ignoring the multi-step denoising ODE.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes Methodology and Experiments sections.</span></li><li><strong>[Inference]</strong><span>APRL should monitor intermediate denoising states for attack or drift evidence.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The official abstract says DRIFT redirects the flow-matching trajectory through test-time input perturbation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If trajectory attacks fail under real camera lighting, viewpoint, and object clutter, physical transfer is limited.</p></div>
+    <div><h4>Adversarial read</h4><p>Patch attacks can overstate risk if they require unrealistic placement or visibility.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Audit generative policies at every internal refinement step, not only at the emitted action.</p><p>Direct for flow-matching VLA policies; less direct for discrete action decoders.</p></div>
+  </div>
+</article>
+
+<h2>🔗 Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>State validity ties world models, maps, and action chunks</h3><p class='links'>Quo Vadis - SLAMFormer-infinity - Continue/Replan</p><p><strong>Observed</strong> · The papers each replace a fixed state assumption: physical future only, first-frame coordinate, fixed action horizon.</p><p><strong>Inference</strong> · APRL should evaluate when internal state is valid enough to act and when it must be refreshed.</p></article><article><h3>Robustness must be checked before the final decision</h3><p class='links'>DRIFT - proprioceptive VLA state - visual evidence scheduling</p><p><strong>Observed</strong> · The batch has attacks, proprioception, token pruning, and evidence-scheduling papers.</p><p><strong>Inference</strong> · Intermediate state audits are a better moat than another end-to-end success comparison.</p></article></div>
+<h2>🧭 Frontier memory</h2><div class="memory-grid"><article><span>New signal</span><p class='history'>Prior weeks framed WAMs as future prediction.</p><p>Quo Vadis reframes them as agent feedback proxies.</p></article><article><span>Strengthening</span><p class='history'>Late July tracked geometry memory and WAM state.</p><p>SLAMFormer-infinity and Continue/Replan make state-validity timing explicit.</p></article></div>
+<h2>🧪 APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 28/30</span></div>
+  <h3>State-validity benchmark for robot agents</h3><p class="thesis">Couple map memory, action chunk age, proprioceptive history, and attack trajectory into one validity benchmark.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Instrument one VLA rollout with chunk age, replan decision, proprioception window, map age, and denoising-step drift.</p></div>
+    <div><strong>4-week build</strong><p>Build a small suite where stale map, stale chunk, missing proprioception, and adversarial patch are crossed.</p></div>
+    <div><strong>Success metric</strong><p>The benchmark predicts failure family before final action failure in at least two stress conditions.</p></div>
+    <div><strong>Stop condition</strong><p>State validity signals do not separate failure families beyond generic confidence.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> · Robot-agent state-validity logs plus replayable stress scenarios.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-05.json">intelligence/2026-08-05.json</a>.</footer>
+</body></html>

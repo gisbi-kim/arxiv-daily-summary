@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-03 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">← arXiv Daily Summary</a><h1>2026-08-03 arXiv Research Intelligence</h1>
+<p class="lead">The August 3 backfill is about replacing generic VLA scaling with state-aware policy repair. WCM asks whether the critic should see temporal robot history, RayViT injects camera rays before imitation breaks under viewpoint shift, ST-WAM separates action-relevant future state from visual hallucination, and CorrelationFlow rejects the common LiDAR scene-flow formulation when sparse or fast objects violate its assumptions. APRL should treat viewpoint, temporal history, and failure geometry as separate audit axes before adding more robot demonstrations.</p><p class="scope">Backfill edition from arXiv /pastweek date sections. The repo parser found 98 cs.CV rows and 36 cs.RO rows; after deduplication, 127 papers remained and 58 were ROI. Tier A cards use official arXiv abstract pages plus available arXiv HTML headings, and avoid claiming PDF-only evidence.</p></header>
+<main>
+<h2>🔭 주간 동향을 넘어: 오늘의 판단</h2><div class="decision-grid"><article><span>Decision</span><h3>Critics need robot history, not only current-frame features</h3><p>WCM frames single-frame critic latents as a mismatch for partially observable robot control. That pushes APRL toward value diagnostics that condition on recent observation, action, and state transitions.</p></article><article><span>Decision</span><h3>Viewpoint robustness is a geometry interface problem</h3><p>RayViT does not just add more augmentation; it gives the visual backbone camera-ray structure. A VLA robustness run should ablate geometry encoding separately from data volume.</p></article><article><span>Decision</span><h3>World-action models must preserve task state under visual shift</h3><p>ST-WAM identifies training-distribution hallucination in visually shifted futures. Future prediction is useful for control only when it keeps the state that changes the action.</p></article></div>
+<h2>🧠 Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2607.29613" target="_blank" rel="noopener">WCM: A World Critic Model for Vision-Language-Action Reinforcement Learning</a></h3>
+  <p class="fit">VLA reinforcement learning - temporal critic - partially observable control</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA RL post-training often attaches a critic to current visual state or current VLM latents.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Robot manipulation is partially observable; a single frame can miss the causal state that explains success or failure.</p></div>
+    <div><h4>Hidden premise</h4><p>A useful critic must compress recent world history without exploding the visual-state complexity.</p></div>
+    <div><h4>Conceptual move</h4><p>Treat the value estimator as a world critic that reasons over temporally grounded robot state.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper explicitly calls single-frame critic observations a mismatch for partially observable robot control.</span></li><li><strong>[HTML headings]</strong><span>The official arXiv HTML exposes Methodology and Experiments sections for the world critic formulation.</span></li><li><strong>[Inference]</strong><span>The reusable APRL variable is critic state history, not a larger policy backbone.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The official abstract motivates history-aware critic modeling for VLA RL instead of a single-frame value head.</p></div>
+    <div><h4>Falsification frontier</h4><p>If history-aware critics do not improve under occlusion, delayed reward, or contact ambiguity, the claimed world-state benefit is weak.</p></div>
+    <div><h4>Adversarial read</h4><p>A history critic can overfit benchmark progress signals unless evaluated on held-out failure families.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Before RL post-training, decide which unobserved state the critic must remember and how to ablate it.</p><p>Best for multi-step manipulation and delayed-contact tasks; weaker for single-step pick tasks with full observability.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2607.29622" target="_blank" rel="noopener">RayViT: Ray-Conditioned Visual Representations for Viewpoint-Robust Imitation Learning</a></h3>
+  <p class="fit">viewpoint-robust imitation - camera geometry - visual representation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Imitation policies trained from RGB often absorb camera viewpoint as an untyped nuisance.</p></div>
+    <div><h4>Friction / anomaly</h4><p>RGB lacks explicit geometric cues, so policies become brittle when camera pose shifts.</p></div>
+    <div><h4>Hidden premise</h4><p>The perception backbone should know the camera ray geometry before it maps pixels to action state.</p></div>
+    <div><h4>Conceptual move</h4><p>Inject Plucker ray maps into a pretrained ViT with gated cross-attention.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names RGB-only camera perturbation brittleness and proposes a ray-conditioned ViT encoder.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes simulated and real robot experiment sections.</span></li><li><strong>[Inference]</strong><span>APRL should compare ray-conditioned encoders against viewpoint augmentation at equal data size.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Ray features condition image patches, making viewpoint part of the representation rather than a hidden dataset bias.</p></div>
+    <div><h4>Falsification frontier</h4><p>If ray conditioning helps only on synthetic camera shifts but not real robot camera recalibration, it is not a robust interface.</p></div>
+    <div><h4>Adversarial read</h4><p>Camera geometry can be miscalibrated; the robustness claim needs calibration-error stress splits.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Expose camera geometry as a typed policy input before collecting more viewpoint-diverse demos.</p><p>Strong for multi-camera and mobile manipulation; less direct when proprioception or tactile state dominates.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2607.28993" target="_blank" rel="noopener">ST-WAM: Semantic-Temporal World Action Model for Robust Manipulation under Visual Distribution Shifts</a></h3>
+  <p class="fit">world-action model - visual shift - manipulation robustness</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>WAMs often supervise future pixels and actions together, assuming generated futures preserve control-relevant state.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Under visual distribution shift, generated futures can hallucinate training-domain content rather than the actual shifted scene.</p></div>
+    <div><h4>Hidden premise</h4><p>The future state useful for action is semantic-temporal, not every visual detail in the predicted frame.</p></div>
+    <div><h4>Conceptual move</h4><p>Separate action-relevant future state from task-irrelevant visual content in WAM supervision.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The authors describe WAM future supervision entangling action-relevant transitions with irrelevant visual content.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes Methodology and Experiments sections.</span></li><li><strong>[Inference]</strong><span>The key APRL audit is whether the generated future preserves the state that changes action choice.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract identifies Training-Distribution Hallucination and motivates a semantic-temporal WAM for robust manipulation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If shifted futures look wrong but action success remains unchanged, visual hallucination is not the operational failure.</p></div>
+    <div><h4>Adversarial read</h4><p>A semantic-temporal loss can still hide force, contact, and object-state errors.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Evaluate WAMs by action-state preservation under controlled visual shifts.</p><p>Useful for visually shifted manipulation; less complete for contact-rich tasks without force channels.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2607.29237" target="_blank" rel="noopener">CorrelationFlow: A Training-Free Geometric Approach for LiDAR Scene Flow Estimation</a></h3>
+  <p class="fit">LiDAR scene flow - geometric formulation - sparse moving objects</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Recent LiDAR scene-flow methods share feed-forward architectures and self-supervised losses.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Those assumptions fail together for sparse, distant, or fast-moving objects.</p></div>
+    <div><h4>Hidden premise</h4><p>When a formulation fails, adding parameters or simulated data may not repair the geometric blind spot.</p></div>
+    <div><h4>Conceptual move</h4><p>Use a training-free geometric approach to scene flow instead of another learned variant of the same template.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names sparse, distant, and fast-moving object failures as shared blind spots.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes CorrelationFlow, component, and keypoint sections.</span></li><li><strong>[Inference]</strong><span>APRL should keep a classical geometric baseline in dynamic-map evaluations.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The official abstract frames the method as a deliberate escape from shared architectural monoculture.</p></div>
+    <div><h4>Falsification frontier</h4><p>If learned baselines recover under matched sparse-object stress, the formulation critique is overstated.</p></div>
+    <div><h4>Adversarial read</h4><p>Training-free geometry can be brittle under sensor noise, rain, or severe ego-motion.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>When a whole method family fails together, change the problem formulation before scaling it.</p><p>Direct for LiDAR flow and map update; indirect for RGB-only SLAM.</p></div>
+  </div>
+</article>
+
+<h2>🔗 Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>State variables are becoming the real comparison unit</h3><p class='links'>WCM - RayViT - ST-WAM</p><p><strong>Observed</strong> · The papers each introduce a missing state channel: temporal critic history, camera rays, or semantic-temporal future state.</p><p><strong>Inference</strong> · APRL should compare policies by which hidden state they expose and ablate, not by backbone family.</p></article><article><h3>Geometry remains a counterweight to learned monoculture</h3><p class='links'>CorrelationFlow - GO-PRE - FillGS</p><p><strong>Observed</strong> · The 3D/Scene bucket includes LiDAR scene flow, active reconstruction entropy, and Gaussian gap filling.</p><p><strong>Inference</strong> · A robot map benchmark should include geometric failure cases before accepting generated or learned map updates.</p></article></div>
+<h2>🧭 Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>Late July already emphasized WAM state channels.</p><p>August 3 adds critic history and camera-ray geometry as typed interfaces.</p></article><article><span>Missing axis</span><p class='history'>Prior releases tracked geometry validity.</p><p>Force/contact uncertainty remains under-specified in the WAM papers selected today.</p></article></div>
+<h2>🧪 APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 27/30</span></div>
+  <h3>Typed-state VLA audit harness</h3><p class="thesis">Measure whether temporal history, camera geometry, and generated future state independently change action success.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Run one policy with camera-ray on/off, critic-history on/off, and shifted-background WAM probes.</p></div>
+    <div><strong>4-week build</strong><p>Build a reusable typed-state benchmark for VLA and WAM failures.</p></div>
+    <div><strong>Success metric</strong><p>At least one state channel predicts a held-out failure family better than a generic confidence score.</p></div>
+    <div><strong>Stop condition</strong><p>No channel changes failure prediction or recovery under controlled stress.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> · Typed-state audit schema plus small stress-suite videos.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-03.json">intelligence/2026-08-03.json</a>.</footer>
+</body></html>
