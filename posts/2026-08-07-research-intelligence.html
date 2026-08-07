@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-07 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-07 arXiv Research Intelligence</h1>
+<p class="lead">The August 7 batch asks whether robot policies and world models are grounded in auditable physical state rather than plausible language, video, or visual similarity. In-Context VLA argues that low-level control should consume grounded language instead of narrating chain of thought, World-to-Wrist makes future wrist state a task-conditioned control interface, XEWorld shows action-conditioned world models still follow visual embodiment similarity, and UQ-Loc turns LiDAR localization uncertainty into a solver variable. APRL should turn this into an evidence-to-action audit: every language, future-state, geometry, and failure signal must show which robot decision it changes.</p><p class="scope">Daily edition from matching Friday /new listings: 132 non-replacement cs.CV rows, 42 cs.RO rows, 165 deduplicated papers, and 137 ROI papers. Tier A cards use official arXiv abstract pages plus available official arXiv HTML structure.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>VLA language should be consumed, not performed</h3><p>In-Context VLA separates grounded language context from free-form CoT generation, which matters because narration can optimize against action timing.</p></article><article><span>Decision</span><h3>World models need embodiment and physics audits</h3><p>XEWorld and GAUGE both turn attractive future prediction into a test of physical correspondence, not just plausible pixels.</p></article><article><span>Decision</span><h3>Geometry confidence must reach planning</h3><p>UQ-Loc, KILVO, and viewpoint-alignment work make uncertainty, sensor failure, and viewpoint shifts explicit enough to route into downstream control.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.05738" target="_blank" rel="noopener">In-Context VLA: Endowing Vision-Language-Action Models with Language via In-Context Post-Training and Agentic Tool Use</a></h3>
+  <p class="fit">VLA control - grounded language - tool acquired evidence</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA policies usually imitate action chunks from images and fixed instructions, with language treated as static conditioning.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Free-form textual CoT can slow closed-loop control and optimize narration instead of action quality.</p></div>
+    <div><h4>Hidden premise</h4><p>The useful language channel is structured evidence that the policy consumes while still being supervised on actions only.</p></div>
+    <div><h4>Conceptual move</h4><p>Replace generated reasoning with in-context post-training plus an agentic tool interface for detectors, depth, and VLM evidence.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names ungrounded reasoning, latency, and conflicting objectives as reasons CoT hurts control.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes Method, Why Generative CoT Hurts Low-Level Control, Agentic Tool Use for Grounded Evidence, and In-Context Post-Training.</span></li><li><strong>[Inference]</strong><span>APRL should score whether each language evidence tuple changes the next action under occlusion or distractor shifts.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract states that free-form CoT degrades low-level control and that structured context plus tool use improves manipulation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If structured language context does not outperform direct perception under held-out object, viewpoint, or timing shifts, the language interface is decorative.</p></div>
+    <div><h4>Adversarial read</h4><p>Tool queries can leak benchmark-specific priors, so detector/depth/VLM evidence must be ablated separately.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask whether language is adding executable state, or only producing a human-readable explanation after the policy has already acted.</p><p>Strong for instruction-conditioned manipulation; weaker for reactive servo loops where language is not part of the control state.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.05369" target="_blank" rel="noopener">World-to-Wrist: Task-Conditioned Future Wrist Modeling for Fine-Grained Robot Manipulation</a></h3>
+  <p class="fit">fine manipulation - wrist-local future state - task-conditioned VLA</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Many VLAs treat main-view and wrist-view observations as parallel inputs with no explicit role separation.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Contact-sensitive manipulation fails when the model cannot anticipate how local wrist evidence will evolve under the task.</p></div>
+    <div><h4>Hidden premise</h4><p>A compact latent interface can carry task context into future wrist prediction without slowing action generation.</p></div>
+    <div><h4>Conceptual move</h4><p>Forecast future wrist latents and feed them back as future-aware context for action prediction.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper ties future wrist modeling to progress cues, physical transition cues, and wrist-local evidence.</span></li><li><strong>[HTML headings]</strong><span>Official HTML exposes the main method, experiment, and supplementary structure for the model.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate wrist future state by contact event prediction, not only task success.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes latent modeling tokens, future wrist latents, W2-CoT annotations, and above-80 Hz action generation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If future wrist latents do not predict contact-sensitive failures earlier than raw wrist frames, the extra interface is not justified.</p></div>
+    <div><h4>Adversarial read</h4><p>Future-aware context may overfit scripted benchmarks unless contact timing and bimanual transfer are separated.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat local future state as a control variable with latency and contact-value budgets.</p><p>Direct for manipulation with wrist cameras and fine contact; less direct for large-scale navigation without local interaction state.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.05799" target="_blank" rel="noopener">XEWorld: Can Action-Conditioned World Models Generalize to Unseen Robot Embodiments?</a></h3>
+  <p class="fit">world model - cross-embodiment generalization - physical dynamics</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Action-conditioned world models are often evaluated on the same robot embodiments they saw during training.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A visually plausible rollout can be driven by robot appearance similarity rather than learned physical dynamics.</p></div>
+    <div><h4>Hidden premise</h4><p>Held-out embodiments in physically identical scenes reveal whether actions are mapped to dynamics or to pixels.</p></div>
+    <div><h4>Conceptual move</h4><p>Build a controlled cross-embodiment testbed and evaluate unseen robots under paired physical scenes.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper reports failure to translate abstract numeric joint actions into coherent visual trajectories for unseen embodiments.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes action-conditioned embodied world models, benchmarks, cross-embodiment learning, embodiments, and evaluation protocols.</span></li><li><strong>[Inference]</strong><span>APRL should keep robot identity, kinematics, and scene physics separable in world-model tests.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract reports that current models behave like 2D visual pattern matchers and need grounded pixel-space actions plus spatial-temporal alignment.</p></div>
+    <div><h4>Falsification frontier</h4><p>If a world model transfers to held-out embodiments using only appearance-similar robots, it has not shown dynamics abstraction.</p></div>
+    <div><h4>Adversarial read</h4><p>Few-shot adaptation can recover appearance while forgetting seen embodiments, so transfer must include retention checks.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Separate visual embodiment similarity from physical kinematic similarity before trusting generated rollouts.</p><p>Strong for robot world models and cross-embodiment manipulation; less direct for fixed-camera video prediction without actions.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.06307" target="_blank" rel="noopener">UQ-Loc: Uncertainty-Aware LiDAR Scene Coordinate Regression</a></h3>
+  <p class="fit">LiDAR localization - covariance prediction - uncertainty-weighted registration</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Scene coordinate regression for LiDAR often outputs deterministic coordinates and drops aleatoric uncertainty.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Downstream localization can treat all scene-coordinate predictions as equally reliable even when geometry is ambiguous.</p></div>
+    <div><h4>Hidden premise</h4><p>Per-voxel covariance can guide seed scoring and inlier testing inside the registration solver.</p></div>
+    <div><h4>Conceptual move</h4><p>Add an anisotropic Gaussian covariance head and use uncertainty-weighted SC2-PCR matching with Mahalanobis inliers.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper reports improved 6-DoF localization and calibrated covariances.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes method and experiment sections for uncertainty-aware SCR.</span></li><li><strong>[Inference]</strong><span>APRL should propagate geometry uncertainty into map matching and recovery decisions.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract names the covariance head, NLL training, smoothness regularizer, uncertainty-weighted solver, and ECE calibration metric.</p></div>
+    <div><h4>Falsification frontier</h4><p>If covariance estimates do not identify failure-prone voxels under sparse, repetitive, or degraded LiDAR scenes, calibration is not operational.</p></div>
+    <div><h4>Adversarial read</h4><p>ECE can look good while localization failures remain clustered in safety-critical map regions.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Do not report a pose without the uncertainty path that changed the inlier set.</p><p>Direct for LiDAR localization and SLAM front ends; weaker for image-only policies unless uncertainty is made geometric.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.05948" target="_blank" rel="noopener">GAUGE: A Measurement-Grounded Benchmark for Physical Fidelity in Simulation Engines and Video World Models</a></h3>
+  <p class="fit">physical fidelity - simulator/world-model benchmark - calibrated measurements</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Physics engine and video world model evaluations often rely on perceptual similarity or isolated task scores.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A generated or simulated rollout can look plausible while violating friction, momentum transfer, self-contact, or deformation parameters.</p></div>
+    <div><h4>Hidden premise</h4><p>Physical fidelity should be scored against calibrated real trajectories and task-specific observables.</p></div>
+    <div><h4>Conceptual move</h4><p>Evaluate numerical simulators and generative video world models with one measurement-grounded benchmark.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper reports no uniformly faithful physics engine and large discrepancies in impulsive contact, textiles, and volumetric deformation.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes Real-World Validation of Physics Engines, Physical Consistency of Generative World Models, and Physical Parameter Supervision.</span></li><li><strong>[Inference]</strong><span>APRL should pair simulator choice with the physical observable that determines robot policy validity.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes 22 task families, physical metadata, uncertainty annotations, generalized trajectory errors, and video-model law consistency checks.</p></div>
+    <div><h4>Falsification frontier</h4><p>If policy success is insensitive to the measured physical discrepancies, the benchmark may not target the right robot decisions.</p></div>
+    <div><h4>Adversarial read</h4><p>Video models can fit equation form while missing parameter values, so both trajectory shape and recovered parameters must be checked.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Replace visual plausibility with a named physical observable and failure threshold.</p><p>Strong for simulation-backed robot learning and video world models; less direct for tasks with no physical trajectory target.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - official arXiv abstract and HTML structure checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.05903" target="_blank" rel="noopener">Robust-WAM: Bridging Generative Pretraining and Semantic Foresight in World-Action Models</a></h3>
+  <p class="fit">world-action model - semantic foresight - OOD visual shift</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Video-generation-based WAMs inherit VAE latent spaces optimized for pixel reconstruction.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Pixel detail can preserve appearance while making action prediction fragile under illumination and visual OOD shifts.</p></div>
+    <div><h4>Hidden premise</h4><p>Semantic foresight can be aligned into the action stream without discarding generative pretraining.</p></div>
+    <div><h4>Conceptual move</h4><p>Keep the VAE generative path and add semantic query tokens aligned to future-frame semantics for the action stream.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper says semantic latent WAMs are more robust but lose large-scale VGM pretraining, motivating a bridge.</span></li><li><strong>[HTML headings]</strong><span>Official HTML includes World-Action Models, Representation Alignment, Per-Frame Semantic Query Tokens, Semantic Foresight Targets, and Alignment Objective.</span></li><li><strong>[Inference]</strong><span>APRL should test whether semantic foresight predicts action recovery under visual shift, not only video quality.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract names semantic foresight alignment, learnable query tokens, positional encodings for future steps, and OOD robot experiments.</p></div>
+    <div><h4>Falsification frontier</h4><p>If semantic foresight improves video features but not action success under illumination or background shift, the bridge is incomplete.</p></div>
+    <div><h4>Adversarial read</h4><p>The alignment target can hide dataset semantics that fail on new task objects or camera viewpoints.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask whether future prediction is attached to the action stream or only to the reconstructed image stream.</p><p>Strong for WAM-style robot manipulation; less direct for planners that do not consume future visual latents.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Grounded evidence replaces verbal explanation</h3><p class='links'>In-Context VLA - World-to-Wrist - Robust-WAM</p><p><strong>Observed</strong> - The papers move from generated text or pixels toward structured evidence: tool-acquired language, wrist future state, and semantic foresight.</p><p><strong>Inference</strong> - APRL should log the evidence representation that actually changes the action token or controller command.</p></article><article><h3>Physical validity is becoming the audit surface</h3><p class='links'>XEWorld - GAUGE - UQ-Loc</p><p><strong>Observed</strong> - The batch tests cross-embodiment dynamics, calibrated physical observables, and localization covariance instead of single aggregate scores.</p><p><strong>Inference</strong> - A robot benchmark should couple visual/world-model output to physical state variables with falsification thresholds.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 6 focused on evidence-channel validity.</p><p>August 7 strengthens that axis by moving the evidence closer to action timing, wrist state, and localization covariance.</p></article><article><span>New signal</span><p class='history'>Recent WAM notes emphasized future-state usefulness.</p><p>XEWorld and GAUGE add an explicit physical-fidelity and embodiment-transfer audit.</p></article><article><span>Missing axis</span><p class='history'>Late July geometry notes emphasized maps and SLAM.</p><p>UQ-Loc and KILVO indicate that confidence and sensor-degradation propagation should become first-class outputs.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Evidence-to-action VLA audit harness</h3><p class="thesis">Measure which grounded language, wrist-future, geometry, and semantic-foresight signals change the next robot action under perturbation.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Instrument one manipulation task with language-context ablation, wrist-future masking, visual distractors, and action-token delta logging.</p></div>
+    <div><strong>4-week build</strong><p>Build a reusable benchmark that links each evidence channel to action success, early failure warning, and recovery choice.</p></div>
+    <div><strong>Success metric</strong><p>At least two evidence channels predict distinct failure families before final task failure.</p></div>
+    <div><strong>Stop condition</strong><p>Evidence channels collapse to generic confidence or do not change the controller decision.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Perturbation logs, action-delta traces, wrist-future masks, and calibrated recovery labels.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 25/30</span></div>
+  <h3>Measurement-grounded world-model validity suite</h3><p class="thesis">Evaluate world models and simulators on embodiment transfer, physical observables, and semantic foresight under identical robot tasks.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 3</span><span>moat 4</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Select two tabletop contact tasks and define friction, contact timing, object displacement, and appearance-shift observables.</p></div>
+    <div><strong>4-week build</strong><p>Compare one simulator, one video world model, and one WAM using the same measurements and action-success threshold.</p></div>
+    <div><strong>Success metric</strong><p>Physical observable error explains downstream policy failure better than perceptual similarity.</p></div>
+    <div><strong>Stop condition</strong><p>Measurement errors do not correlate with action failure or recovery decisions.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Calibrated task metadata, measurement scripts, and paired generated/simulated/real rollouts.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 24/30</span></div>
+  <h3>Recoverable robot failure and prompt-injection replay set</h3><p class="thesis">Combine inevitable-failure planning, physical prompt injection, simulator fuzzing, and constrained multi-agent navigation into a replayable safety suite.</p>
+  <div class="scores"><span>fit 4</span><span>novelty 4</span><span>feasibility 4</span><span>moat 4</span><span>timing 4</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create five failure scenes with signage attacks, actuator degradation, simulator mutation, and path-planning constraints.</p></div>
+    <div><strong>4-week build</strong><p>Run VLM planners and robot policies with mitigation variants, measuring impact severity, detection, and recovery action quality.</p></div>
+    <div><strong>Success metric</strong><p>The replay set separates avoidable perception attacks from unavoidable physical failures with different mitigation choices.</p></div>
+    <div><strong>Stop condition</strong><p>The suite only reproduces known failures and does not change mitigation ranking.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Safety replay scenarios, prompt-injection masks, failure-impact labels, and Isaac Sim mutation recipes.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-07.json">intelligence/2026-08-07.json</a>.</footer>
+</body></html>
