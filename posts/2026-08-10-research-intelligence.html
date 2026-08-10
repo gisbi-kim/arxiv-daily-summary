@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-10 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-10 arXiv Research Intelligence</h1>
+<p class="lead">The August 10 batch is about making robot policies accountable to persistent state rather than plausible next frames or smooth action chunks. AtlasVLA adds world-ego memory to VLA control, PSG-JEPA asks whether latent prediction carries physical state, AutoIntervene turns action support into a deployment switch, WNM-3D routes 3D scene context into VLN, and distractor-augmented VPR shows that a retrieval score can reward the wrong variable. APRL should turn these papers into a state-to-action audit: memory, geometry, intervention, and compression are useful only when they change a robot decision under stress.</p><p class="scope">Daily edition from matching Monday /new listings: 102 non-replacement cs.CV rows, 40 cs.RO rows, 132 deduplicated papers, and 112 ROI papers. Tier A cards use official arXiv abstract pages; official arXiv HTML was available for AtlasVLA, PSG-JEPA, AutoIntervene, TEMPO, planning-token pruning, and the accessibility-field paper.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>Persistent state is now a control variable</h3><p>AtlasVLA and WNM-3D both reject single-frame reactivity: the useful question is whether a world or navigation memory changes the next action when evidence leaves view.</p></article><article><span>Decision</span><h3>World models need physical probes</h3><p>PSG-JEPA and TaskSense imply that forward prediction and reconstruction are weak objectives unless the latent can expose proprioceptive state or task-relevant regions.</p></article><article><span>Decision</span><h3>Evaluation must attack shortcut variables</h3><p>VPR distractors, intervention thresholds, viewpoint shifts, and planning-token pruning all ask whether the measured success is attached to identity, state, or only conditions.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - official arXiv abstract and HTML checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.06729" target="_blank" rel="noopener">AtlasVLA: Persistent World-Ego State Modeling for Vision-Language-Action Models</a></h3>
+  <p class="fit">VLA execution memory - world state - ego task progress</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Many VLA policies remain reactive, conditioning the next action on the current observation and instruction.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A wrist-camera robot loses objects outside the field of view and loses task progress during long-horizon execution.</p></div>
+    <div><h4>Hidden premise</h4><p>A persistent spatial memory and an ego-progress memory can be made action-relevant without requiring multiple live cameras.</p></div>
+    <div><h4>Conceptual move</h4><p>Lift transient wrist observations into a voxel-hashed 4D world state and pair it with an ego-working state memory for the policy.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names perception forgetting and temporal task-progress forgetting as the bottlenecks.</span></li><li><strong>[Abstract]</strong><span>It claims a 4D Persistent World State Memory plus Ego-Working State Memory improves LIBERO, RLBench, and real-world manipulation.</span></li><li><strong>[Inference]</strong><span>APRL should test memory usefulness by removing objects from view and measuring action changes before final failure.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract reports a dual-memory architecture that conditions a diffusion transformer on persistent world-ego state.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the persistent state does not improve recovery after occlusion, viewpoint change, or multi-step interruption, it is only an expensive context cache.</p></div>
+    <div><h4>Adversarial read</h4><p>Memory can hide benchmark priors, so success should be split by object exit, revisit, phase boundary, and recovery segment.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat memory as a hypothesis about hidden task state, not as an extra perception feature.</p><p>Direct for manipulation and long-horizon tasks; weaker for purely reactive contact servoing where the state is fully observed.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - official arXiv abstract and HTML checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.06799" target="_blank" rel="noopener">Is Forward Prediction Enough? Physical State Grounding for JEPA World Models</a></h3>
+  <p class="fit">world model - latent grounding - proprioceptive state</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>JEPA-style world models often optimize action-conditioned latent prediction rather than explicit robot-state identifiability.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A latent can predict the next embedding while failing to expose joint state or state change needed by a planner.</p></div>
+    <div><h4>Hidden premise</h4><p>A useful world model should make physical state readable from individual latents and multi-horizon state change readable from latent pairs.</p></div>
+    <div><h4>Conceptual move</h4><p>Add proprioceptive-state and joint-angle-change grounding losses during training while keeping inference cost unchanged.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper directly asks whether forward prediction alone enforces reliable physical-state identifiability.</span></li><li><strong>[Abstract]</strong><span>It evaluates latent identifiability, goal-conditioned planning, simulation policy learning, and real-robot policy learning.</span></li><li><strong>[Inference]</strong><span>APRL should require a frozen-latent physical-state probe before trusting a world model for control.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract states that PSG-JEPA adds two grounding objectives and evaluates probing, frozen-latent planning, and policy learning.</p></div>
+    <div><h4>Falsification frontier</h4><p>If latent probes improve while planning and policy learning do not, physical grounding is diagnostic but not operational.</p></div>
+    <div><h4>Adversarial read</h4><p>Proprioceptive probes may overfit robot morphology, so cross-object and cross-task transfer should be separated.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask whether the world model latent contains the state variable the controller will actually use.</p><p>Strong for robot world models and model-based control; less direct for video-only generation without action consumption.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - official arXiv abstract and HTML checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.07065" target="_blank" rel="noopener">AutoIntervene: Calibrated Intervention for Action-Chunking Imitation Learning Policies</a></h3>
+  <p class="fit">deployment intervention - action support memory - operator handoff</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Action-chunking policies can keep producing smooth chunks after perception or execution drift leaves the demonstration distribution.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Smoothness can mask state inconsistency, so the system needs a calibrated handoff before damage accumulates.</p></div>
+    <div><h4>Hidden premise</h4><p>Support should be measured jointly in visual state and proposed action space, with separate thresholds for taking and returning control.</p></div>
+    <div><h4>Conceptual move</h4><p>Compare proposed chunks against a visual-action support memory from successful executions and use quantile-calibrated transfer thresholds.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names perception errors and execution drift as failure modes for action chunks.</span></li><li><strong>[Abstract]</strong><span>It calibrates separate switching thresholds from held-out expert demonstration score quantiles.</span></li><li><strong>[Inference]</strong><span>APRL should log intervention segments as training data only when they cover learner-induced states.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes phase-local support for policy-to-operator transfer and global support for operator-to-policy return.</p></div>
+    <div><h4>Falsification frontier</h4><p>If support scores do not predict recoverable failure earlier than task failure, intervention is reactive teleoperation rather than policy governance.</p></div>
+    <div><h4>Adversarial read</h4><p>Operator return can bias the learner toward easy recovery states unless phase labels and failed interventions are retained.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Measure whether confidence changes the controller authority, not only whether it correlates with success.</p><p>Direct for action-chunking imitation policies; less direct for policies without operator recovery or chunked action output.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - official arXiv abstract checked; official /html returned 404 during this run</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.07267" target="_blank" rel="noopener">WNM-3D: A World Navigation Model with 3D Scene Conditioning for Closed-Loop VLN</a></h3>
+  <p class="fit">vision-language navigation - 3D scene prefix - world-action diffusion</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLN systems increasingly adapt VLMs into action policies without explicitly modeling how observations should evolve under motion.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Action-centric training can follow language while ignoring geometry that determines which future view should appear after movement.</p></div>
+    <div><h4>Hidden premise</h4><p>A frozen geometry encoder can consolidate egocentric RGB history into a 3D scene prefix that conditions future video-action blocks.</p></div>
+    <div><h4>Conceptual move</h4><p>Feed geometry-aware tokens into a world-action diffusion transformer through block-causal attention for closed-loop VLN.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper argues existing WAMs for continuous VLN lack geometry-aware conditioning from observed history.</span></li><li><strong>[Abstract]</strong><span>It proposes a fixed-length 3D scene prefix that conditions every future video-action block.</span></li><li><strong>[Inference]</strong><span>APRL should score whether geometry prefix errors predict wrong turns before navigation failure.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes monocular history, a 3D Scene-to-Token Adapter, and joint future-view/action generation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If 3D scene conditioning does not outperform history-only tokens under layout ambiguity, the geometry path is decorative.</p></div>
+    <div><h4>Adversarial read</h4><p>A frozen geometry encoder can import reconstruction biases that look like navigation competence in static scenes.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Tie every map token to an action or future-view prediction it changes.</p><p>Strong for VLN and object navigation; weaker for manipulation unless scene geometry maps to reachable contacts.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - official arXiv abstract and HTML checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.07314" target="_blank" rel="noopener">TEMPO: Semantic-Action Decoupled RL Post-Training for Vision-Language-Action Models</a></h3>
+  <p class="fit">VLA post-training - semantic/action decoupling - two-timescale RL</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA post-training often applies one update strategy across semantic representations and low-level action modules.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Fast online RL updates can destabilize pretrained semantic features even when only the action expert needs rapid adaptation.</p></div>
+    <div><h4>Hidden premise</h4><p>Semantic projection and action expert should be optimized at different rates because they serve different control roles.</p></div>
+    <div><h4>Conceptual move</h4><p>Freeze the vision-language backbone and use two dedicated RL loops: slow semantic projection updates and fast action expert updates.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies distribution mismatch in SFT and uniform RL updates as the post-training problem.</span></li><li><strong>[Abstract]</strong><span>It updates semantic projection infrequently and the action expert frequently to preserve semantic stability.</span></li><li><strong>[Inference]</strong><span>APRL should monitor semantic drift and action improvement as separate curves during RL post-training.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes semantic-action decoupling, two-timescale RL, CALVIN evaluation, and real-world manipulation tasks.</p></div>
+    <div><h4>Falsification frontier</h4><p>If semantic drift is not lower than uniform RL at equal success, the decoupling does not solve the stated failure.</p></div>
+    <div><h4>Adversarial read</h4><p>Freezing the backbone can preserve a wrong semantic prior, so failures need object and instruction-level attribution.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Separate what the robot understands from how it converts that understanding into motor correction.</p><p>Direct for VLA manipulation post-training; less direct for modular planners whose semantic and action modules are already separate.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - official arXiv abstract and HTML checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.07361" target="_blank" rel="noopener">Depth-Wise Probing and Pruning of the Planning Token in a Driving Vision-Language-Action Model</a></h3>
+  <p class="fit">driving VLA - planning token - depth pruning</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>A driving VLA may route trajectory planning through the full depth of a language model even when the action signal appears early.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Semantic intent can be linearly readable before the planning token is in the format expected by the deployed planner.</p></div>
+    <div><h4>Hidden premise</h4><p>Planner compatibility and semantic decodability are different signals and should be measured layer by layer.</p></div>
+    <div><h4>Conceptual move</h4><p>Use a trajectory-space logit lens to decode the planning token across 32 decoder layers and prune by angular deviation.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Command-probe accuracy reaches 97.7 percent after the first decoder layer, while native planner compatibility improves across depth.</span></li><li><strong>[Abstract]</strong><span>The paper ranks decoder layers by angular deviation induced in the planning token.</span></li><li><strong>[Inference]</strong><span>APRL should distinguish intention availability from controller-usable action format.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract reports early command decodability, gradual planner compatibility improvement, learned readouts, and layer ranking for pruning.</p></div>
+    <div><h4>Falsification frontier</h4><p>If pruned layers fail under closed-loop perturbations despite open-loop compatibility, the token diagnostic misses feedback sensitivity.</p></div>
+    <div><h4>Adversarial read</h4><p>Open-loop Avg-L2 can hide rare safety-critical maneuvers, so pruning needs scenario-level failure stratification.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Do not ask whether an LLM knows the command; ask when the action representation becomes executable.</p><p>Direct for token-based VLA planners; less direct for continuous policies without a discrete planning bottleneck.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - official arXiv abstract checked; official /html returned 404 during this run</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.06847" target="_blank" rel="noopener">Are Visual Place Recognition Models Recognizing Places or Conditions? Distractor-Augmented Evaluation and Condition Suppression</a></h3>
+  <p class="fit">place recognition - distractor evaluation - condition suppression</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Long-term VPR is usually judged by Recall@1 between one query condition and another database condition.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Crowdsourced map databases can contain distractors that match illumination, weather, or season while depicting the wrong place.</p></div>
+    <div><h4>Hidden premise</h4><p>A descriptor can be discriminative by encoding condition information, which is useful for matching but harmful for place identity.</p></div>
+    <div><h4>Conceptual move</h4><p>Introduce Distractor-Augmented Recall and suppress condition information with INLP and LEACE.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper says method rankings under DAR@1 differ from standard Recall@1.</span></li><li><strong>[Abstract]</strong><span>It reports that condition suppression can improve distractor robustness without reducing R@1.</span></li><li><strong>[Inference]</strong><span>APRL should apply condition distractors to localization and map retrieval before claiming place robustness.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract reports ranking reversals under DAR@1 and improvement after condition suppression without reducing standard R@1.</p></div>
+    <div><h4>Falsification frontier</h4><p>If condition suppression hurts loop-closure precision in mixed real maps, the method trades one shortcut for another.</p></div>
+    <div><h4>Adversarial read</h4><p>A suppression method can remove condition evidence that is genuinely needed for localization under appearance change.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Attack the nuisance variable that the benchmark quietly rewards.</p><p>Strong for place recognition and loop closure; less direct for semantic mapping without retrieval decisions.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - official arXiv abstract and HTML checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.06412" target="_blank" rel="noopener">Beyond Visibility: Real-Time Surface Accessibility Fields from Sparse LiDAR</a></h3>
+  <p class="fit">robot geometry - surface accessibility - sparse LiDAR</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>3D perception often stops at visibility or reconstruction, leaving tool-specific physical access to later planning heuristics.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Complete meshes and fixed bases are unrealistic for mobile robots mapping from sparse streaming LiDAR.</p></div>
+    <div><h4>Hidden premise</h4><p>Accessibility can be represented as a per-point field conditioned on the tool and approach corridor, updated at sensor rate.</p></div>
+    <div><h4>Conceptual move</h4><p>Evaluate each surface point against rotated tool-geometry kernels and approach-corridor clearance on a scan-centric TSDF.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper distinguishes physical surface accessibility from visibility estimation.</span></li><li><strong>[Abstract]</strong><span>It checks tool collisions and approach-corridor clearance from streaming sparse LiDAR.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate geometry by reachable-contact success rather than map completeness alone.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a GPU accessibility field from sparse LiDAR, collision kernels, and sensor-rate updates.</p></div>
+    <div><h4>Falsification frontier</h4><p>If accessibility labels do not predict successful approach and contact under sensor sparsity, the field is not robot-usable.</p></div>
+    <div><h4>Adversarial read</h4><p>Tool kernels can encode a narrow gripper model, so transfer to different end effectors needs explicit tests.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A map is valuable when it names what the robot can physically do next.</p><p>Direct for mobile manipulation and inspection; less direct for scene understanding tasks without tool geometry.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Memory and world models converge on state identifiability</h3><p class='links'>AtlasVLA - PSG-JEPA - WNM-3D</p><p><strong>Observed</strong> - The papers separately add persistent world-ego state, physical grounding losses, and 3D scene prefixes.</p><p><strong>Inference</strong> - The common decision is whether hidden state can be recovered early enough to change action choice.</p></article><article><h3>Control authority becomes a measured switch</h3><p class='links'>AutoIntervene - TEMPO - planning-token pruning</p><p><strong>Observed</strong> - One paper transfers authority to an operator, one separates semantic/action RL rates, and one probes when a planning token becomes executable.</p><p><strong>Inference</strong> - APRL should instrument controller authority, semantic drift, and action-format readiness as separate deployment signals.</p></article><article><h3>Geometry is useful when it resists shortcut evaluation</h3><p class='links'>VPR distractors - accessibility fields - WNM-3D</p><p><strong>Observed</strong> - The batch tests whether descriptors encode conditions, surfaces are physically accessible, and navigation uses 3D scene history.</p><p><strong>Inference</strong> - Map and retrieval benchmarks should include nuisance-variable distractors and contact/navigation consequences.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 7 emphasized evidence-to-action audits.</p><p>August 10 strengthens the same axis by making persistent state, intervention thresholds, and planning-token readiness explicit.</p></article><article><span>New signal</span><p class='history'>Recent WAM notes focused on future prediction and physical fidelity.</p><p>PSG-JEPA asks for physical-state identifiability inside the latent, not only better rollout quality.</p></article><article><span>Missing axis</span><p class='history'>Late July and early August geometry notes focused on maps, SLAM, and reconstruction.</p><p>Accessibility fields and VPR distractors add action reachability and nuisance-variable suppression as missing evaluation axes.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 28/30</span></div>
+  <h3>Persistent-state VLA failure audit</h3><p class="thesis">Measure whether world-ego memory, semantic-action decoupling, and action-support thresholds predict failure before the robot loses recoverability.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Replay one LIBERO-style task with object exit, camera shift, and phase interruption while logging memory state, support score, and action deltas.</p></div>
+    <div><strong>4-week build</strong><p>Build a benchmark that compares reactive VLA, persistent-memory VLA, and intervention-gated VLA under the same recoverability labels.</p></div>
+    <div><strong>Success metric</strong><p>At least two state signals predict different failure families earlier than task-level failure.</p></div>
+    <div><strong>Stop condition</strong><p>Memory and support scores collapse to generic confidence and do not change recovery ranking.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Occlusion/interruption rollouts, state-memory dumps, intervention labels, and action-delta traces.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 25/30</span></div>
+  <h3>Physical-state world-model probe suite</h3><p class="thesis">Require latent world models to expose proprioceptive state, state changes, and task-relevant visual regions before using them for planning.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 3</span><span>moat 4</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Add frozen-latent probes for joint state and state change to one existing robot world-model dataset.</p></div>
+    <div><strong>4-week build</strong><p>Compare forward-prediction-only, physical-grounded, and task-attended world models on planning and real-robot transfer.</p></div>
+    <div><strong>Success metric</strong><p>Probe quality explains planning improvement better than reconstruction loss or visual rollout quality.</p></div>
+    <div><strong>Stop condition</strong><p>Physical probes improve but downstream planning and policy learning remain unchanged.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Latent probe scripts, robot-state labels, task-attention masks, and planning success logs.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 28/30</span></div>
+  <h3>Robot-usable geometry and shortcut evaluation</h3><p class="thesis">Turn maps and descriptors into action-facing tests: accessibility, loop-closure distractors, and 3D navigation tokens must change robot decisions.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 4</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create a small testbed with condition distractors, sparse LiDAR surfaces, and tool-specific approach constraints.</p></div>
+    <div><strong>4-week build</strong><p>Evaluate VPR, semantic mapping, and accessibility-field methods by navigation/contact success rather than standalone map quality.</p></div>
+    <div><strong>Success metric</strong><p>The benchmark changes method ranking relative to standard retrieval or reconstruction metrics.</p></div>
+    <div><strong>Stop condition</strong><p>Action-facing metrics track standard metrics so closely that the new labels add no decision value.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Distractor maps, accessibility labels, tool kernels, and closed-loop navigation/contact traces.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-10.json">intelligence/2026-08-10.json</a>.</footer>
+</body></html>
