@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-11 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-11 arXiv Research Intelligence</h1>
+<p class="lead">The August 11 batch says the next robotics advantage is not a larger perception backbone; it is the instrumented interface between evidence, latent state, adaptation, and action. LIRA opens the VLM-to-action routing problem, GWM-VLA and SLIM ask which predictive latents are actually action-grounded, VANE and SC2-WM turn deployment feedback into selective correction, CMU-Drive and FactorDrive make driving reasoning conditional on cooperation and planning-critical factors, and EndoMD-SLAM shows that a map must know when not to update. APRL should treat every memory, world model, compressed token, and safety claim as a contract: which downstream action changes, under which stress condition, and what evidence would force us to stop using it.</p><p class="scope">Daily edition from matching Tuesday /new listings: 313 non-replacement cs.CV rows, 116 cs.RO rows, 409 deduplicated papers, and 336 ROI papers. Tier A cards use the repository parser abstracts and official arXiv HTML availability checks for the selected papers.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>Action interfaces are now first-class model components</h3><p>LIRA, SLIM, JEPA-WAM, and World Tokens all focus on the interface that converts visual-language representations into executable robot actions, not just the upstream encoder.</p></article><article><span>Decision</span><h3>Online adaptation needs delayed evidence</h3><p>VANE, SC2-WM, SAFE-CHEM, and RecoverFly ask whether a correction should be committed only after future observations, uncertainty, or failure replay support it.</p></article><article><span>Decision</span><h3>Benchmarks must attack shortcut variables</h3><p>EMRD, Evidence-RL, consequence-sensitive compression, and EndoMD-SLAM all separate useful evidence from priors, nuisance conditions, or transient artifacts that can silently corrupt a decision.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - official arXiv abstract and HTML availability checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.07596" target="_blank" rel="noopener">LIRA: Local Cross-Layer Information Routing for Vision-Language-Action Decoding</a></h3>
+  <p class="fit">VLA action decoding - representation routing - deployment transfer</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA action decoders often consume a narrow or rigid slice of the pretrained VLM hierarchy.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A robot action can depend on low-level geometry, mid-level affordance, and high-level task tokens at the same control step.</p></div>
+    <div><h4>Hidden premise</h4><p>Layer-local routing can expose complementary evidence without changing the backbone or the supervised training recipe.</p></div>
+    <div><h4>Conceptual move</h4><p>Treat VLM-to-action conditioning as depth-aware local information routing into parallel fusion blocks.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies the VLM-to-action routing interface as underexplored.</span></li><li><strong>[Abstract]</strong><span>It reports an 18.9-point zero-shot transfer gain on LIBERO-Plus over VLA-Adapter under the same 0.5B configuration.</span></li><li><strong>[Inference]</strong><span>APRL should log which encoder depths change each action under viewpoint and object-shift splits.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes task-token features, LIRA query features from intermediate states, and proprioceptive fusion before action prediction.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the same layers route under every task phase, LIRA is an adapter regularizer rather than a state-sensitive interface.</p></div>
+    <div><h4>Adversarial read</h4><p>A local layer window may overfit benchmark phase structure; transfer needs novel camera pose, object layout, and contact-state shifts.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask which representation depth changed the motor command, not only which backbone produced the embedding.</p><p>Direct for VLA manipulation; weaker for modular systems whose action decoder already receives explicit state estimates.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - official arXiv abstract and HTML availability checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.07619" target="_blank" rel="noopener">GWM-VLA: Geometry-Aware Latent World Modeling for Vision-Language-Action Learning</a></h3>
+  <p class="fit">geometry-aware world model - multi-view latent state - action supervision</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Latent VLA world models can predict view dynamics while treating camera views as independent evidence streams.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Manipulation robustness under visual shift depends on end-effector geometry and gripper-object interaction, not holistic scene prediction alone.</p></div>
+    <div><h4>Hidden premise</h4><p>Multi-view aggregation and action supervision can force the latent transition to preserve geometry that matters for control.</p></div>
+    <div><h4>Conceptual move</h4><p>Aggregate multi-view observations into geometry-aware states, predict target-view patch tokens, and share latent-action representations with the action head.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Existing latent world models are described as weak at explicitly modeling geometric relationships across camera views.</span></li><li><strong>[Abstract]</strong><span>The proposed latent representation is grounded by both next-view prediction and robot-action supervision.</span></li><li><strong>[Inference]</strong><span>APRL should probe whether latent geometry predicts contact error before final task success changes.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract names VGGT-Omega aggregation, target wrist-view prediction, and flow-matching action supervision as the coupled path.</p></div>
+    <div><h4>Falsification frontier</h4><p>If geometry-aware latents improve view prediction but not action recovery under camera shift, the geometry is not operational.</p></div>
+    <div><h4>Adversarial read</h4><p>Targeting the wrist view can hide failures in global scene state, so static-camera and wrist-camera ablations should be separated.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>World-model quality should be measured by the geometry variable a controller consumes.</p><p>Strong for manipulation with multi-view observations; less direct for single-camera policies without calibrated view geometry.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - official arXiv abstract and HTML availability checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.09448" target="_blank" rel="noopener">VANE: Reliable Test-Time Training for Vision-Language-Action Models via Future Visual Representation Prediction</a></h3>
+  <p class="fit">VLA test-time training - selective update - future evidence</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Deployment-time adaptation often updates a shared policy space before the consequence of that update is known.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Closed-loop manipulation can be damaged by a correction that mixes incompatible task errors or commits too early.</p></div>
+    <div><h4>Hidden premise</h4><p>Adaptation should be isolated from the live policy and committed only when future visual observations support the update.</p></div>
+    <div><h4>Conceptual move</h4><p>Use future visual representation prediction as delayed evidence for selective, reversible prompt adaptation.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper states that online updates can alter subsequent actions before their consequences are known.</span></li><li><strong>[Abstract]</strong><span>It reports a 3.2 percentage-point average success gain over a corresponding TTT baseline on SimplerEnv WidowX.</span></li><li><strong>[Inference]</strong><span>APRL should maintain an adaptation quarantine log before changing the deployed policy.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes candidate updates isolated from the live policy, evaluated on later observations, then committed only when supported.</p></div>
+    <div><h4>Falsification frontier</h4><p>If future-evidence gating only accepts easy corrections, it may improve average success while avoiding the rare failures that matter.</p></div>
+    <div><h4>Adversarial read</h4><p>Future visual support can reward visually plausible but contact-wrong behavior unless contact and action residuals are also logged.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Do not let a model update itself until a later observation has audited the proposed correction.</p><p>Direct for closed-loop VLA policies with unlabeled deployment streams; less direct for static offline evaluation.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - official arXiv abstract and HTML availability checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.09771" target="_blank" rel="noopener">SLIM-0.5B: Learning Action-Grounded Predictive Latents for Robot Manipulation</a></h3>
+  <p class="fit">compact VLA - predictive latent - low-latency manipulation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Large VLA backbones spend capacity on open-domain semantics even when manipulation needs compact transition variables.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Pixel-level world prediction can be expensive and can preserve visual detail that does not change control.</p></div>
+    <div><h4>Hidden premise</h4><p>A smaller model can compete if its latent space is explicitly grounded in action-conditioned future transitions and inverse action explanation.</p></div>
+    <div><h4>Conceptual move</h4><p>Train masked trajectory prediction with action reconstruction and future-latent prediction in a compact mixture-of-transformers backbone.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper argues continuous manipulation primarily requires compact observation-action-transition representations.</span></li><li><strong>[Abstract]</strong><span>It claims competitive simulation and real-world performance with fewer parameters, lower latency, and lower GPU memory.</span></li><li><strong>[Inference]</strong><span>APRL should compare latent transition error against real action correction, not only model size.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract says SLIM captures both action-conditioned transitions and the actions that explain observed changes, then uses flow matching for actions.</p></div>
+    <div><h4>Falsification frontier</h4><p>If latency improves but failure modes shift to unseen objects or contacts, compactness traded away necessary state.</p></div>
+    <div><h4>Adversarial read</h4><p>A 0.5B result can benefit from task distribution fit; evaluate out-of-family object geometry and contact timing.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Compression is useful only after naming which action-relevant variable survives.</p><p>Strong for manipulation policies where transition labels are available; weaker for language-heavy embodied tasks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - official arXiv abstract and HTML availability checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.07548" target="_blank" rel="noopener">SC2-WM: A Self-Correcting World Model with Closed-Loop Feedback for Vision-and-Language Navigation in Continuous Environments</a></h3>
+  <p class="fit">VLN-CE - self-correcting world model - state drift feedback</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLN-CE policies often execute open loop under partial observability and detect failure only after navigation has drifted.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A route can look locally plausible while the internal state has already diverged from the instruction and observed layout.</p></div>
+    <div><h4>Hidden premise</h4><p>World-model foresight can generate feedback before action execution and can trigger model-level correction at test time.</p></div>
+    <div><h4>Conceptual move</h4><p>Use internal closed-loop feedback for state-level plan refinement, then selectively update the world model when feedback exposes capacity insufficiency.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names internal state drift during inference as the central VLN-CE failure.</span></li><li><strong>[Abstract]</strong><span>It uses feedback before action execution and selective world-model test-time updates.</span></li><li><strong>[Inference]</strong><span>APRL should log when a predicted next observation disagrees with the actual one before wrong turns accumulate.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes self-correction through world-model foresight and conditional world-aware adaptation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If correction triggers after the same step as task failure, the feedback is diagnostic but not control-relevant.</p></div>
+    <div><h4>Adversarial read</h4><p>World-model foresight can inherit map priors and mask localization drift; evaluate unseen layouts and ambiguous turns.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat navigation world models as drift sensors before treating them as planners.</p><p>Strong for VLN and object navigation; less direct for manipulation unless future observations can be tied to contact state.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - official arXiv abstract and HTML availability checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.08077" target="_blank" rel="noopener">Explore, Map, Remember, Decide: Are Embodied VLMs Ready for Safety-Critical Scenarios?</a></h3>
+  <p class="fit">embodied VLM safety - spatial memory - bias under partial observability</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Embodied VLMs can appear capable by producing plausible decisions without proving spatial memory or evidence grounding.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Safety-critical evacuation decisions can be driven by textual priors rather than the explored physical environment.</p></div>
+    <div><h4>Hidden premise</h4><p>A safety benchmark must separate exploration coverage, map fidelity, memory persistence, and focal decision quality.</p></div>
+    <div><h4>Conceptual move</h4><p>Extend Theory of Space into an Explore-Map-Remember-Decide pipeline with coverage, fidelity, memory, and decision metrics.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper tests whether decisions are based on physical evidence or visual-language bias.</span></li><li><strong>[Abstract]</strong><span>It reports divergence from human memory patterns and degraded spatial reasoning in low-light conditions.</span></li><li><strong>[Inference]</strong><span>APRL should score embodied policies by evidence-grounded memory, not final instruction answer alone.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract reports that VLMs often choose evacuation points from pre-trained textual priors and lose spatial reasoning in low light.</p></div>
+    <div><h4>Falsification frontier</h4><p>If focal decisions improve without map fidelity or memory persistence, the benchmark may still reward response priors.</p></div>
+    <div><h4>Adversarial read</h4><p>The ToS task may not cover manipulation or locomotion hazards; include dynamic obstacles and irreversible actions before generalizing.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Split a safety decision into explore, map, remember, and decide, then attack each stage separately.</p><p>Strong for navigation and safety-critical reasoning; weaker for low-level control unless connected to action authority.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - official arXiv abstract and HTML availability checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.07621" target="_blank" rel="noopener">CMU-Drive and V2V-VLA: Cooperative Multi-agent Unified Driving with Reasoning Benchmark and Vehicle-to-Vehicle Vision-Language-Action Models</a></h3>
+  <p class="fit">cooperative driving - multi-agent VLA - closed-loop benchmark</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>End-to-end driving VLA work is usually framed around an individual vehicle with local perception and planning.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Safety-critical traffic scenes require communication and cooperative perception, so single-agent reasoning hides coordination failure.</p></div>
+    <div><h4>Hidden premise</h4><p>Driving actions, future waypoints, language reasoning, and communication policy can be generated in one cooperative forward pass.</p></div>
+    <div><h4>Conceptual move</h4><p>Create a closed-loop cooperative driving benchmark and a V2V-VLA baseline for connected autonomous vehicles.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper frames cooperative autonomous driving as a missing benchmark and baseline.</span></li><li><strong>[Abstract]</strong><span>It requires multiple connected vehicles in safety-critical scenarios with background traffic.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether communication changes the action, not just whether the message is plausible.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes CMU-Drive and V2V-VLA jointly generating actions, waypoints, reasoning, and communication policies.</p></div>
+    <div><h4>Falsification frontier</h4><p>If vehicle-to-vehicle language does not improve closed-loop safety under occlusion or conflicting intent, it is explanatory overhead.</p></div>
+    <div><h4>Adversarial read</h4><p>Communication can leak simulator priors; test delayed, missing, and adversarial messages separately.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A cooperative VLA must prove which partner evidence changed the ego action.</p><p>Direct for driving and multi-robot systems; less direct for single-arm manipulation.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - official arXiv abstract and HTML availability checked</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.08949" target="_blank" rel="noopener">EndoMD-SLAM: Endoscopic Gaussian Splatting SLAM under Optical Degradation with Memory and Static-Transient Decomposition</a></h3>
+  <p class="fit">medical SLAM - transient artifact rejection - memory-gated mapping</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Gaussian Splatting SLAM assumes multi-view photometric consistency and can fuse temporary artifacts into a persistent map.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Endoscopic debris and water flushing move with the camera, corrupting tracking and mapping if treated as anatomy.</p></div>
+    <div><h4>Hidden premise</h4><p>A SLAM system should sometimes suspend updates and isolate transient fields rather than always integrate observations.</p></div>
+    <div><h4>Conceptual move</h4><p>Use memory-driven tracking gates for unreliable observations and static-transient decomposition for mapping.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names camera-attached artifacts as a cause of irreversible map corruption.</span></li><li><strong>[Abstract]</strong><span>It reports 91 percent absolute trajectory error reduction and 9.9 dB PSNR improvement under severe degradation.</span></li><li><strong>[Inference]</strong><span>APRL should test when mapping should reject observations rather than improve reconstruction loss.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract reports drift-aware relocalization from historical keyframes and a separate transient field for contaminants.</p></div>
+    <div><h4>Falsification frontier</h4><p>If gates only work for colonoscopy-specific artifacts, the static-transient split may not transfer to general robot mapping.</p></div>
+    <div><h4>Adversarial read</h4><p>A memory gate can preserve stale geometry after real scene change; dynamic-update tests are required.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A map update is an action with a stop condition, not a passive accumulation step.</p><p>Strong for SLAM under corruption and medical navigation; weaker for static offline reconstruction.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Predictive latents and action decoders are converging</h3><p class='links'>LIRA - GWM-VLA - SLIM - JEPA-WAM - World Tokens</p><p><strong>Observed</strong> - The papers separately route intermediate VLM layers, ground latent transitions with action supervision, and remove online world-model cost after training.</p><p><strong>Inference</strong> - APRL should benchmark the interface variable that changes action: layer depth, latent transition, world token, or action expert state.</p></article><article><h3>Adaptation is becoming an evidence contract</h3><p class='links'>VANE - SC2-WM - SAFE-CHEM - RecoverFly</p><p><strong>Observed</strong> - The papers gate adaptation with future observations, self-correcting world-model feedback, uncertainty switching, or failure replay.</p><p><strong>Inference</strong> - The deployment question is when to commit an update, who holds authority before commitment, and which future evidence invalidates it.</p></article><article><h3>Safety benchmarks now separate evidence from priors</h3><p class='links'>EMRD - Evidence-RL - consequence-sensitive token compression - EndoMD-SLAM</p><p><strong>Observed</strong> - The batch tests physical evidence use, causal evidence regions, consequence-aware token budgets, and transient map corruption.</p><p><strong>Inference</strong> - Robot evaluation should attack the shortcut variable before trusting a policy, descriptor, map, or compressed perception stack.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 10 emphasized state accountability in VLA, world models, intervention, and geometry.</p><p>August 11 strengthens that axis with action routing, future-evidence TTT, self-correcting navigation, and memory-gated SLAM.</p></article><article><span>New signal</span><p class='history'>Recent RI editions treated world models mostly as latent or rollout evaluators.</p><p>Today adds a stronger interface question: can a world-model latent be shared with the action head without carrying irrelevant prediction detail?</p></article><article><span>Missing axis</span><p class='history'>Prior driving and navigation notes focused on single-agent or single-robot execution.</p><p>CMU-Drive and EMRD add cooperation and safety-critical memory as axes that should be stressed explicitly.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Action-interface audit for VLA policies</h3><p class="thesis">Measure which representation depth, latent transition, and world token changes the action under controlled visual, semantic, and contact shifts.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Run one LIBERO-style replay with layer-depth routing logs, latent prediction loss, action delta, and contact-state labels.</p></div>
+    <div><strong>4-week build</strong><p>Compare VLA-Adapter, LIRA-style routing, latent WAM, and compact predictive-latent policies on the same shift suite.</p></div>
+    <div><strong>Success metric</strong><p>At least two interface signals predict different failure families before task-level success changes.</p></div>
+    <div><strong>Stop condition</strong><p>Interface logs collapse to model confidence and do not change recovery or transfer ranking.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Layer routing traces, world-token dumps, action deltas, contact labels, and shift-conditioned success tables.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 26/30</span></div>
+  <h3>Future-evidence adaptation quarantine</h3><p class="thesis">Treat test-time updates as untrusted candidates until later observations, world-model feedback, or uncertainty thresholds prove they should enter the live controller.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 4</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Implement a quarantine buffer that stores proposed prompt/model updates and replays the next observation before commit.</p></div>
+    <div><strong>4-week build</strong><p>Evaluate VANE-style gating, SC2-WM correction, and uncertainty switching under object shifts, low light, and recovery tasks.</p></div>
+    <div><strong>Success metric</strong><p>Gating reduces harmful updates while preserving at least half of the positive adaptation gain.</p></div>
+    <div><strong>Stop condition</strong><p>Delayed evidence accepts only easy updates or fails to predict recoverability.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Candidate-update logs, future-observation support scores, rejection labels, and operator handoff traces.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 27/30</span></div>
+  <h3>Shortcut-resistant robot evidence benchmark</h3><p class="thesis">Stress maps, VLM answers, token budgets, and driving communication with nuisance variables that look plausible but should not change the action.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 3</span><span>moat 5</span><span>timing 4</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create a small suite with transient visual artifacts, low-light navigation, token-budget cost labels, and delayed V2V messages.</p></div>
+    <div><strong>4-week build</strong><p>Evaluate SLAM, embodied VLM, VLA driving, and VLM compression methods by action change, not only answer or reconstruction quality.</p></div>
+    <div><strong>Success metric</strong><p>The benchmark reverses at least one method ranking relative to a standard metric.</p></div>
+    <div><strong>Stop condition</strong><p>Nuisance labels do not reveal failures beyond ordinary held-out splits.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Artifact-corrupted videos, EMRD-style memory traces, cost-tagged VQA tasks, V2V message perturbations, and closed-loop action logs.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-11.json">intelligence/2026-08-11.json</a>.</footer>
+</body></html>
