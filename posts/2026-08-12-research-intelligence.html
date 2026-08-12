@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-12 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-12 arXiv Research Intelligence</h1>
+<p class="lead">The August 12 batch turns yesterday's action-interface question into a harder release gate: which evidence is trusted enough to update a policy, map, cache, memory, or safety claim? Embodied Semantic 3DGS, Surgical WAM, FACT, VIScore, Gated VLA-Cache, DriveVLA-M0, estimator spectral analysis, AD2-Bench, and Dual Stress all move from final score reporting toward introspective evidence contracts. APRL should treat this as a mandate to own stress benchmarks where update, reject, cache, retrieve, and intervene decisions are measured before aggregate success.</p><p class="scope">Daily edition from matching Wednesday /new listings: 148 non-replacement cs.CV rows, 40 cs.RO rows, 180 deduplicated papers, and 151 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure/table claims are asserted.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>World models must expose why an action changes</h3><p>Surgical WAM, FACT, VIScore, and 4D-WAM all ask whether latent prediction helps only when it is tied to planning success, task progress, or 4D consistency rather than plausible video.</p></article><article><span>Decision</span><h3>Robotics evidence now needs a reject option</h3><p>Estimator spectral analysis, protection levels, Dual Stress, and PBD-AG all treat robot memory or safety as a decision about when evidence is unreliable enough to stop or inspect.</p></article><article><span>Decision</span><h3>VLA deployment is becoming an adversarial systems problem</h3><p>DURA attacks, Gated VLA-Cache, Lost in Reconstruction, UniProbe, and SafeCap show that action tokens, cache reuse, semantic action latents, and safety captions can all become failure interfaces.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.10756" target="_blank" rel="noopener">Embodied Multimodal Grounding for Open-Vocabulary Mobile Manipulation via Semantic 3D Gaussian Splatting</a></h3>
+  <p class="fit">Semantic 3DGS - open-vocabulary grounding - mobile manipulation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Open-vocabulary manipulation is often split across language localization, mapping, base placement, and action generation modules.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A mobile manipulator can ground the right object but still fail if the 3D scene, reachability, and action prior do not agree before execution.</p></div>
+    <div><h4>Hidden premise</h4><p>Semantic 3DGS can act as a shared interface only if active sensing, obstacle reasoning, base positioning, and action conditioning consume compatible scene evidence.</p></div>
+    <div><h4>Conceptual move</h4><p>Use a task-driven local Semantic-3DGS as the common grounding substrate, then inject 3D semantic cues into late action-expert blocks to preserve pretrained action priors.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper states that language, visual observations, 3D scene structure, and action feasibility must be aligned before execution.</span></li><li><strong>[Abstract]</strong><span>It uses task-driven local Semantic-3DGS across active sensing, 3D localization, obstacle reasoning, base preparation, and action conditioning.</span></li><li><strong>[Inference]</strong><span>APRL should test whether a semantic 3D map changes base pose, target choice, or final action under distractor and reachability stress.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract links active multi-view Semantic-3DGS, reachability-aware base positioning, and a diffusion-based VLA policy.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the 3D semantic map improves language grounding but not action success under reachability conflicts, it is a perception aid rather than an execution interface.</p></div>
+    <div><h4>Adversarial read</h4><p>Few-shot household trials may hide failures under clutter, transparent objects, or base-placement limits; the map-action path needs counterfactual distractors.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat semantic maps as action contracts: every map update should be tied to a reachable manipulation decision.</p><p>Strong for mobile manipulation with active sensing; weaker for fixed-arm tasks where workspace geometry is already known.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.11204" target="_blank" rel="noopener">Surgical WAM: A World-Action Model for Data-Efficient Surgical Robot Learning</a></h3>
+  <p class="fit">surgical world-action model - action-scarce learning - closed-loop control</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Surgical robot learning is bottlenecked by expensive video-kinematics demonstrations, while endoscopic video is comparatively abundant.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Surgical world models are often used for simulation or evaluation without proving that video dynamics improve closed-loop manipulation.</p></div>
+    <div><h4>Hidden premise</h4><p>Action-free endoscopic video can pretrain a dynamics representation that remains useful when only a small action-labeled set is available.</p></div>
+    <div><h4>Conceptual move</h4><p>Ask whether a world-action model can convert abundant action-free video into data-efficient surgical control under a fixed demonstration budget.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies synchronized surgical video-kinematics trajectories as costly and scarce.</span></li><li><strong>[Abstract]</strong><span>It asks whether action-free video pretraining improves closed-loop surgical manipulation under a fixed action-labeled budget.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether action-free robot video helps contact timing, bimanual coordination, and recovery, not only future-frame quality.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract frames Surgical WAM around world modeling of surgical scenes and closed-loop manipulation policies.</p></div>
+    <div><h4>Falsification frontier</h4><p>If video pretraining improves visual prediction but not contact-rich closed-loop success, the world model learned surgical appearance rather than control state.</p></div>
+    <div><h4>Adversarial read</h4><p>Surgical video distribution may be narrow; cross-instrument, tissue, and camera-motion splits are needed before claiming data efficiency.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Measure world-model usefulness by the labeled-action budget it saves at the same failure profile.</p><p>Direct for surgical and contact-rich manipulation; weaker for tasks where abundant video lacks controllable state change.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.10232" target="_blank" rel="noopener">FACT: Failure-Aware Causal Training for World-Action Models</a></h3>
+  <p class="fit">failure-aware WAM - causal action conditioning - task progress</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Many world-action models learn mostly from successful demonstrations and treat bad actions as data to discard.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A controller cannot know which action to avoid if the world model never learns the future consequence of failure actions.</p></div>
+    <div><h4>Hidden premise</h4><p>Failed rollouts can supervise causal action consequences if the model predicts future video and task progress conditioned on executed action.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn bad actions into valid future targets so failure evidence shapes both future prediction and action generation.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper states that WAMs trained on successful demonstrations have little reason to predict bad-action consequences.</span></li><li><strong>[Abstract]</strong><span>It uses failure rollouts to supervise action-conditioned future prediction and progress estimation.</span></li><li><strong>[Inference]</strong><span>APRL should label failures as causal interventions, not merely negative episodes.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a causal WAM that conditions future video and task-progress prediction on executed actions.</p></div>
+    <div><h4>Falsification frontier</h4><p>If failure-aware progress prediction does not change action selection under near-miss states, it is a diagnostic auxiliary loss rather than a control mechanism.</p></div>
+    <div><h4>Adversarial read</h4><p>The approach may overfit known failure modes; test unseen failure families and ambiguous recovery states.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Use failed actions as controlled counterfactuals for what the robot should not do next.</p><p>Strong for datasets with recoverable failure rollouts; weaker when failure labels are sparse or unsafe to collect.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.10393" target="_blank" rel="noopener">Hidden in Plain Sight: Diffusion-Based Unrestricted Robotic Attacks on Vision-Language-Action Models</a></h3>
+  <p class="fit">VLA adversarial robustness - natural patch attack - action steering</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA robustness work often inherits pixel-perturbation threat models that are visible or require white-box access.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Physical robots can be steered by natural-looking objects or patches that fit the scene and avoid easy detection.</p></div>
+    <div><h4>Hidden premise</h4><p>A diffusion prior can search visually plausible patches while using only action outputs in the black-box setting.</p></div>
+    <div><h4>Conceptual move</h4><p>Move VLA attack evaluation from imperceptible image noise to deployable unrestricted visual interventions.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper targets visually natural adversarial patches for VLA models.</span></li><li><strong>[Abstract]</strong><span>It supports black-box attack settings that require only predicted actions from the victim model.</span></li><li><strong>[Inference]</strong><span>APRL should test VLA policies with scene-plausible distractors and monitor action-token drift before contact.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract says DURA optimizes along a pretrained diffusion latent trajectory to generate natural patches that steer robot actions.</p></div>
+    <div><h4>Falsification frontier</h4><p>If attacks fail under viewpoint changes, lighting changes, or object interaction, the threat is less physical than the abstract suggests.</p></div>
+    <div><h4>Adversarial read</h4><p>Defense evaluation needs human-plausible placement constraints and closed-loop recovery, not only target-action success.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Robotic adversarial examples should be evaluated as objects in the task scene, not just pixels in the camera frame.</p><p>Direct for camera-based VLA manipulation; less direct for state-estimator-heavy controllers with explicit geometry checks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.10824" target="_blank" rel="noopener">Neural Introspection Gating for Adaptive KV-Cache Reuse in Vision-Language-Action Models</a></h3>
+  <p class="fit">VLA runtime cache - uncertainty gating - real-time control</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA cache reuse can reduce compute by reusing visually static tokens, but observation similarity alone does not know when the action is uncertain.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A reused cache can be safe for redundant frames yet harmful near decision boundaries where a small visual change alters the action token.</p></div>
+    <div><h4>Hidden premise</h4><p>The logit margin between top action tokens is a useful zero-cost introspection signal for cache invalidation.</p></div>
+    <div><h4>Conceptual move</h4><p>Let the model's own action uncertainty decide when to recompute visual KV states instead of relying only on image-space heuristics.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies repeated visual-token KV computation as a real-time control cost.</span></li><li><strong>[Abstract]</strong><span>It monitors the top-two action-token logit margin and triggers full recompute when confidence drops.</span></li><li><strong>[Inference]</strong><span>APRL should compare cache savings against the first action decision that changes under occlusion, contact, or motion blur.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes Gated VLA-Cache, which invalidates cache when the action-token margin falls below a threshold.</p></div>
+    <div><h4>Falsification frontier</h4><p>If logit margins are poorly calibrated under distribution shift, cache invalidation may occur too late for safe control.</p></div>
+    <div><h4>Adversarial read</h4><p>A visually static but semantically changed scene can preserve cache similarity; evaluate with object swaps and delayed contact cues.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Every deployment optimization needs a model-internal stop condition tied to action risk.</p><p>Strong for autoregressive VLA policies; weaker for controllers that do not expose action-token margins.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.11174" target="_blank" rel="noopener">VIScore: Diagnosing Planning-Relevant Quality in Latent World Models</a></h3>
+  <p class="fit">latent world model quality - planning relevance - OOD success</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Latent world-model regularization often optimizes representation geometry without directly testing planning success.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A latent space can look stable or information-rich while failing to support OOD planning.</p></div>
+    <div><h4>Hidden premise</h4><p>Planning-relevant latent quality can be diagnosed by metrics that correlate with success rather than generic SSL properties.</p></div>
+    <div><h4>Conceptual move</h4><p>Separate latent distribution targets that help self-supervised learning from properties that actually improve world-model planning.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper states that latent-space property and successful planning remain disconnected.</span></li><li><strong>[Abstract]</strong><span>It finds one regularization style helps SSL while another improves planning success on OOD datasets.</span></li><li><strong>[Inference]</strong><span>APRL should score world-model latents by downstream plan recovery under OOD shifts.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract compares SIGReg and VISReg, then motivates VIScore to connect latent-space factors with planning success.</p></div>
+    <div><h4>Falsification frontier</h4><p>If VIScore correlates only within the tested environment family, it may measure dataset fit rather than planning-relevant structure.</p></div>
+    <div><h4>Adversarial read</h4><p>A latent metric can become another proxy; closed-loop plan success and intervention tests should remain the authority.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Reject representation metrics that cannot predict a planning decision.</p><p>Strong for latent world-model planning; less direct for purely discriminative perception models.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.10623" target="_blank" rel="noopener">When Your State Estimator Has Lost The Plot: Detecting Estimator Failures Via Spectral Analysis</a></h3>
+  <p class="fit">state-estimator introspection - spectral health - aerial robot odometry</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Estimator confidence is often represented by covariance or learned quality measures that can be overconfident under OOD noise.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Robots need to know that visual-inertial, LiDAR-inertial, or radar-inertial odometry has degraded before unsafe control decisions accumulate.</p></div>
+    <div><h4>Hidden premise</h4><p>Recent velocity-estimate frequency content contains sensor-agnostic signatures of estimator failure.</p></div>
+    <div><h4>Conceptual move</h4><p>Diagnose estimator health from spectral power distribution rather than relying only on estimator-reported uncertainty.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names sensor aliasing and OOD noise as causes of estimator degradation or failure.</span></li><li><strong>[Abstract]</strong><span>It evaluates visual-inertial, LiDAR-inertial, and radar-inertial odometry failures using outdoor flight data.</span></li><li><strong>[Inference]</strong><span>APRL should record estimator-health spectra next to map-update and controller-handoff decisions.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract proposes frequency-domain analysis of recent velocity estimates and evaluates it on aerial robot data across multiple odometry modalities.</p></div>
+    <div><h4>Falsification frontier</h4><p>If spectral signatures lag behind actual pose divergence, the method may confirm failure but not prevent it.</p></div>
+    <div><h4>Adversarial read</h4><p>Frequency cues may be platform- or controller-dependent; transfer should be tested across speed, terrain, and sensor suites.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat state estimation as a monitored subsystem with its own failure-warning signal.</p><p>Strong for mobile robots with velocity streams; weaker for static perception or low-rate manipulation.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.10954" target="_blank" rel="noopener">Evidence-Grounded Trustworthy Multimodal Reasoning and Evaluation Benchmark in Complex Urban Scenes</a></h3>
+  <p class="fit">urban scene reasoning - evidence chain benchmark - trustworthy MLLM</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Many multimodal benchmarks score final answers without diagnosing whether the model acquired the right visual evidence.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Complex adverse urban scenes encourage implicit inference, making a correct-looking answer unreliable for safety-critical autonomy.</p></div>
+    <div><h4>Hidden premise</h4><p>Trustworthy multimodal reasoning depends on an observable chain of evidence that can be decomposed and evaluated.</p></div>
+    <div><h4>Conceptual move</h4><p>Use hierarchical visual diagnosis and Chain of Evidence evaluation rather than outcome-only scoring.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper says MLLM reliability deteriorates under complex scenes and adverse conditions.</span></li><li><strong>[Abstract]</strong><span>It criticizes outcome-oriented benchmarks for failing to diagnose reasoning-process failures.</span></li><li><strong>[Inference]</strong><span>APRL should require evidence-chain traces before trusting language explanations in driving or navigation.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract introduces AD2-Bench and decomposes reasoning through a structured Chain of Evidence.</p></div>
+    <div><h4>Falsification frontier</h4><p>If Chain of Evidence quality does not predict intervention success or failure recovery, it may improve explanation quality without improving autonomy.</p></div>
+    <div><h4>Adversarial read</h4><p>Benchmarks must include occlusion, weather, and rare hazard splits so evidence grounding is not reduced to caption completeness.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Grade the evidence path, not only the final multimodal answer.</p><p>Strong for driving and urban autonomy; less direct for low-level manipulation unless evidence chains are tied to action authority.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>World-action learning now has to consume failure evidence</h3><p class='links'>Surgical WAM - FACT - VIScore - 4D-WAM</p><p><strong>Observed</strong> - The papers link video/world-model learning to fixed action-label budgets, failed rollouts, planning-relevant latent metrics, and 4D consistency.</p><p><strong>Inference</strong> - APRL should stop accepting future prediction as a proxy unless it predicts when an action should change or be rejected.</p></article><article><h3>Runtime optimizations need explicit invalidation signals</h3><p class='links'>Gated VLA-Cache - estimator spectral analysis - protection levels - Dual Stress</p><p><strong>Observed</strong> - Cache reuse, state estimation, pose integrity, and MPC monitoring all expose internal signals that can trigger recompute, reject, or warning decisions.</p><p><strong>Inference</strong> - A deployable robotics system needs stop conditions for every shortcut it takes to run faster or longer.</p></article><article><h3>Evidence-grounded reasoning is crossing from VLMs into robot memory</h3><p class='links'>AD2-Bench - TAR-Bench - AECNav - PBD-AG - Semantic 3DGS grounding</p><p><strong>Observed</strong> - Urban reasoning, traffic anomaly, object navigation, service-robot graphs, and 3D semantic grounding all separate evidence acquisition from final decision.</p><p><strong>Inference</strong> - The stronger benchmark is one where removing or corrupting evidence changes the robot decision in a measurable way.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 11 emphasized evidence-controlled action interfaces.</p><p>August 12 strengthens the same axis with explicit failure-aware WAMs, cache invalidation, estimator health, and evidence-chain benchmarks.</p></article><article><span>New signal</span><p class='history'>Recent editions discussed geometry as map and localization substrate.</p><p>Today adds semantic 3DGS as a shared execution interface for open-vocabulary mobile manipulation rather than a rendering artifact.</p></article><article><span>Missing axis</span><p class='history'>Prior VLA notes focused on action routing and adaptation.</p><p>The current batch still leaves multi-robot manipulation and real contact-rich failure collection under-specified; APRL can own that data asset.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Failure-conditioned world-action benchmark</h3><p class="thesis">Build a robot replay suite where successful and failed actions supervise future prediction, progress estimation, and recovery decisions.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Convert one manipulation or surgical-style dataset into success/failure action clips with progress labels and near-miss tags.</p></div>
+    <div><strong>4-week build</strong><p>Compare vanilla WAM, FACT-style failure conditioning, and video-only pretraining under the same action-label budget.</p></div>
+    <div><strong>Success metric</strong><p>Failure-conditioned prediction changes the selected action before task-level failure in at least two failure families.</p></div>
+    <div><strong>Stop condition</strong><p>Failure labels improve offline prediction but do not alter recovery or success ranking.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Failure rollouts, progress labels, counterfactual action clips, and recovery-decision tables.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 26/30</span></div>
+  <h3>Introspective deployment shortcut controller</h3><p class="thesis">Unify cache invalidation, estimator-health warning, protection-level bound, and MPC dual stress as stop conditions for fast robot deployment.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 4</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Instrument one navigation or VLA replay with action-token margin, estimator spectral score, pose bound, and safety multiplier traces.</p></div>
+    <div><strong>4-week build</strong><p>Run stress tests where each shortcut is allowed or rejected, then measure latency, warning lead time, and downstream action error.</p></div>
+    <div><strong>Success metric</strong><p>At least one introspection signal prevents a harmful shortcut before a standard metric flags failure.</p></div>
+    <div><strong>Stop condition</strong><p>Signals are redundant with confidence or arrive after the unsafe action has already been chosen.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Synchronized introspection traces, rejection labels, latency-risk curves, and intervention policies.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 27/30</span></div>
+  <h3>Evidence-chain robot memory protocol</h3><p class="thesis">Make semantic 3D maps, object-navigation beliefs, and urban-scene reasoning prove which evidence supports each action or map update.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 3</span><span>moat 5</span><span>timing 4</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create paired scenes with target distractors, corrupted evidence regions, and reachability conflicts for map-to-action grounding.</p></div>
+    <div><strong>4-week build</strong><p>Evaluate Semantic 3DGS grounding, AECNav-style evidence consolidation, and AD2/TAR-style reasoning traces by action change under evidence removal.</p></div>
+    <div><strong>Success metric</strong><p>Evidence-chain quality predicts target choice, base placement, or hazard response better than final answer accuracy.</p></div>
+    <div><strong>Stop condition</strong><p>Evidence traces improve explanation readability but do not predict control or navigation decisions.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Evidence-corrupted scenes, 3D semantic maps, belief traces, target support labels, and action-change metrics.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-12.json">intelligence/2026-08-12.json</a>.</footer>
+</body></html>
