@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-13 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-13 arXiv Research Intelligence</h1>
+<p class="lead">The August 13 batch says that robotics progress is moving from larger end-to-end policies toward auditable execution contracts. StellaVLA, G0.5, MiDAS, and OpenVLA failure monitors ask what evidence should be carried into a new task and when adaptation should stop. RISC, neuro-symbolic driving guards, counterfactual driving world models, and RoadWeaver ask whether evaluation covers the safety slice that will actually fail. DreamFly, DaViNCi, D3D-GEN, Map-Det3D, Seed2GS, and GeoUniPR shift 3D and navigation work toward memory, reachability, and dynamic-world stress. APRL should turn this into logged probes: which evidence changes the action, which monitor warns early, and which map or simulator state is trusted enough to drive a robot decision.</p><p class="scope">Daily edition from matching Thursday /new listings: 126 non-replacement cs.CV rows, 28 cs.RO rows, 152 deduplicated papers, and 121 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure/table claims are asserted.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>Adaptation needs evidence, not only more demonstrations</h3><p>StellaVLA, MiDAS, G0.5, HandEdit, and OpenVLA failure monitoring all separate reusable task structure from raw trajectory imitation.</p></article><article><span>Decision</span><h3>Driving evaluation is becoming slice and rule aware</h3><p>RISC, neuro-symbolic safety guards, counterfactual driving world models, TrafficDiffuser, RoadWeaver, and real-world behavior planning all expose the limits of aggregate driving scores.</p></article><article><span>Decision</span><h3>3D memory must be executable</h3><p>DreamFly, DaViNCi, D3D-GEN, Map-Det3D, Seed2GS, and GeoUniPR make maps and generated worlds useful only when they change navigation, grounding, localization, or simulator coverage.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.11671" target="_blank" rel="noopener">StellaVLA: In-Context Structured Demonstration for Generalizable Vision-Language-Action Models</a></h3>
+  <p class="fit">VLA test-time adaptation - structured demonstrations - cross-embodiment transfer</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA adaptation often means collecting more task data or fine-tuning after the policy fails out of distribution.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A raw demonstration can show what happened without explaining the task plan, sub-goals, or 3D motion that should transfer to a new embodiment.</p></div>
+    <div><h4>Hidden premise</h4><p>A retrieved trajectory becomes reusable only if it is converted into structured task evidence rather than copied as pixels and actions.</p></div>
+    <div><h4>Conceptual move</h4><p>Use an offline pipeline to turn a raw trajectory into a task plan, sub-goal descriptions, and verbalized 3D motion for in-context VLA guidance.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper states that VLA performance often collapses when scene, viewpoint, or object differs from training.</span></li><li><strong>[Abstract]</strong><span>It converts raw trajectories into structured demonstrations at zero human-annotation cost.</span></li><li><strong>[Inference]</strong><span>APRL should log which part of a demonstration transfers: plan, sub-goal, motion phrase, or action residual.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes structured demonstrations, a dual training design, and inference through the action expert alone to preserve real-time control.</p></div>
+    <div><h4>Falsification frontier</h4><p>If structured demonstrations help only when retrieved scenes closely match training scenes, the method is retrieval similarity rather than reasoning transfer.</p></div>
+    <div><h4>Adversarial read</h4><p>Cross-embodiment transfer needs object, camera, and gripper mismatches; otherwise the structure could hide ordinary imitation bias.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat demonstrations as decomposed evidence objects instead of trajectories to replay.</p><p>Strong for VLA manipulation and XR/human-hand transfer; weaker for tasks where language plans are not the bottleneck.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.11739" target="_blank" rel="noopener">G0.5: One Autoregressive Stream for Robot Reasoning and Action</a></h3>
+  <p class="fit">autoregressive VLA - reasoning tokens - action tokenizer</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Many VLA systems use a pretrained VLM as a context encoder and rely on a separate action expert for control.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Separating reasoning and action can make prompts steer text while the executable policy follows a different representation path.</p></div>
+    <div><h4>Hidden premise</h4><p>Robot reasoning becomes more controllable if task decomposition, object grounding, action hints, and action tokens share one training stream.</p></div>
+    <div><h4>Conceptual move</h4><p>Emit reasoning and action tokens from a single autoregressive transformer with a cross-embodiment action tokenizer and visual memory.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper says the current recipe makes the VLM a context encoder rather than a decision-maker.</span></li><li><strong>[Abstract]</strong><span>It interleaves task decomposition, object grounding, action hints, and action tokens under one objective.</span></li><li><strong>[Inference]</strong><span>APRL should test whether prompt changes alter action granularity and horizon under the same visual state.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract names a shared action vocabulary, native chain-of-thought stream, and multi-second visual memory through the vision encoder.</p></div>
+    <div><h4>Falsification frontier</h4><p>If reasoning tokens are fluent but do not predict action changes, the shared stream is an explanation layer rather than a control interface.</p></div>
+    <div><h4>Adversarial read</h4><p>Chain-of-thought steering can create brittle prompt dependence; evaluate with equivalent instructions and object distractors.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask whether a reasoning token has motor authority before treating it as robotics evidence.</p><p>Strong for language-conditioned robot policies; less direct for low-level controllers without tokenized actions.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.11363" target="_blank" rel="noopener">Adaptation of Generalist Robot Policies with Minimal Data</a></h3>
+  <p class="fit">minimal-data adaptation - offline-to-online RL - residual policy</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Fully autonomous robot learning remains blocked by sparse rewards and weak zero-shot exploration.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A generalist policy can know many behaviors yet still fail to discover the first successful trajectory for a new task.</p></div>
+    <div><h4>Hidden premise</h4><p>One or a few demonstrations can anchor the target task enough for autonomous online improvement to become feasible.</p></div>
+    <div><h4>Conceptual move</h4><p>Use behavior cloning on single/few demonstrations, then value-based online RL over a residual policy parameterization.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper defines minimal-data adaptation as one demonstration followed by autonomous online interaction.</span></li><li><strong>[Abstract]</strong><span>It combines behavior cloning anchoring with value-based online RL on a residual policy.</span></li><li><strong>[Inference]</strong><span>APRL should measure how much human guidance is needed before online exploration becomes non-random.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract frames MiDAS as an offline-to-online recipe evaluated on LIBERO and RoboCasa.</p></div>
+    <div><h4>Falsification frontier</h4><p>If residual RL improves only demonstrated variations, it has not crossed into autonomous improvement.</p></div>
+    <div><h4>Adversarial read</h4><p>Sparse reward success can hide unsafe exploration; compare intervention count, failure type, and recovery trajectory.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Use one-demo bootstrapping as a measurable proxy for autonomous robot improvement.</p><p>Strong for manipulation benchmarks with resettable online interaction; weaker for safety-critical hardware without cheap exploration.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2606.29699" target="_blank" rel="noopener">Early Warning Signals for OpenVLA Failure under Visual Distribution Shift</a></h3>
+  <p class="fit">VLA failure monitoring - visual distribution shift - internal activations</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA failures are often diagnosed after the task has already failed under visual shift.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A fixed policy can show confident actions while internal activations already contain near-term failure evidence.</p></div>
+    <div><h4>Hidden premise</h4><p>Lightweight probes on feedforward activations can forecast failure without changing the deployed OpenVLA policy.</p></div>
+    <div><h4>Conceptual move</h4><p>Train post-hoc monitors on execution activations and ask whether they predict failure within a fixed horizon.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Occlusion reduces OpenVLA success from 57 percent to 17 percent over 100 episodes per condition.</span></li><li><strong>[Abstract]</strong><span>A logistic probe at layer 16 reaches AUROC 0.972 for predicting failure within a 15 step horizon under occlusion.</span></li><li><strong>[Inference]</strong><span>APRL should collect warning lead time before evaluating only task success.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract logs OpenVLA activations in LIBERO rollouts and fits lightweight monitors after collection.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the monitor fires only after irreversible contact or does not transfer to other visual shifts, it is a shift detector rather than a failure warning.</p></div>
+    <div><h4>Adversarial read</h4><p>Occlusion is only one stressor; color, camera jitter, viewpoint, and object identity should separate benign shift from task failure.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat internal activations as early warning sensors with lead-time metrics.</p><p>Strong for feedforward VLA policies with accessible activations; weaker for black-box closed models.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.12051" target="_blank" rel="noopener">Do Not Forget the Obvious - RISC: A Risk-Informed Slice-Coverage Protocol for Safe Autonomous Driving</a></h3>
+  <p class="fit">risk-informed driving evaluation - slice coverage - audit budget</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Aggregate autonomous-driving metrics can look acceptable while high-risk conditions remain under-audited.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A finite validation budget must choose which weather, scene, actor, and perception slices deserve manual or model audit.</p></div>
+    <div><h4>Hidden premise</h4><p>Safety concerns can be translated into machine-readable risk slices and coverage-qualified reports.</p></div>
+    <div><h4>Conceptual move</h4><p>Use risk-guided stress testing plus explicit coverage statements about sufficiently and insufficiently covered slices.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper says aggregate metrics may not reflect insufficiently examined high-risk conditions.</span></li><li><strong>[Abstract]</strong><span>It instantiates RISC for monocular pedestrian perception using 1,000 frames and a detector proxy.</span></li><li><strong>[Inference]</strong><span>APRL should make every driving or robot benchmark publish uncovered risk slices next to the score.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes lightweight signals for candidate tagging, compact audit selection by risk, and coverage-qualified reporting.</p></div>
+    <div><h4>Falsification frontier</h4><p>If risk slices are broad or manually chosen after results, coverage qualification can become a reporting label rather than a stress protocol.</p></div>
+    <div><h4>Adversarial read</h4><p>LLM-supported slice discovery should be audited for missed obvious conditions and hallucinated irrelevant slices.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Every score needs a coverage statement for the risk it does not measure.</p><p>Strong for perception, driving, and robotics benchmarks with finite audit sets.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.11451" target="_blank" rel="noopener">Herding End-to-End Autonomous Driving via Neuro-Symbolic Safety Guards</a></h3>
+  <p class="fit">driving safety guard - command interface - traceable intervention</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>End-to-end driving agents can achieve high average performance while violating basic traffic rules.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A learned agent may not expose or enforce the physical conditions that make a command safe.</p></div>
+    <div><h4>Hidden premise</h4><p>A non-learned rule guard can improve safety if it sits at the final command interface and changes only unsafe actions.</p></div>
+    <div><h4>Conceptual move</h4><p>Attach a lightweight neuro-symbolic guard that checks commands against explicit rules and replaces unsafe commands with nearest safe alternatives.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The guard attaches immediately before commands reach the vehicle.</span></li><li><strong>[Abstract]</strong><span>It reports 15 percent Success Rate improvement and up to 53 percent fewer safety-critical collisions in evaluated benchmarks.</span></li><li><strong>[Inference]</strong><span>APRL should log every rule intervention as a counterfactual action label.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract reports that each intervention is executable and traceable to the triggering rule without retraining.</p></div>
+    <div><h4>Falsification frontier</h4><p>If guards preserve benchmark score by over-constraining rare maneuvers, they may hide autonomy limits rather than solve them.</p></div>
+    <div><h4>Adversarial read</h4><p>Rules must handle conflicts, sensor uncertainty, and off-policy recovery after intervention.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Put a traceable contract at the final command boundary.</p><p>Strong for driving and mobile robots with explicit command interfaces; weaker for high-dimensional manipulation without simple safety alternatives.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.11601" target="_blank" rel="noopener">How Can Driving World Models Do Counterfactual Prediction?</a></h3>
+  <p class="fit">driving world model - counterfactual prediction - abduction action prediction</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Driving world models are often treated as counterfactual simulators for alternative ego actions.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Direct action-conditioned prediction can ignore the factual continuation and produce a plausible future that is not the counterfactual for this episode.</p></div>
+    <div><h4>Hidden premise</h4><p>Counterfactual driving prediction needs abduction from observed evidence before applying the alternative action.</p></div>
+    <div><h4>Conceptual move</h4><p>Formalize the gap using abduction, action, and prediction, then build controlled factual and matched counterfactual outcomes.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies a mismatch between counterfactual simulation and direct action-conditioned prediction.</span></li><li><strong>[Abstract]</strong><span>It constructs a controlled simulation benchmark with factual and matched counterfactual outcomes.</span></li><li><strong>[Inference]</strong><span>APRL should require factual evidence preservation before using a world model for intervention planning.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract evaluates two representative world models and introduces a training-free pipeline that moves observed evidence into the counterfactual view.</p></div>
+    <div><h4>Falsification frontier</h4><p>If abduction helps only on short horizons where other agents do not respond, the result may not scale to interactive traffic.</p></div>
+    <div><h4>Adversarial read</h4><p>Longer horizons and social response break the assumption that surrounding agents evolve independently of the ego change.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Counterfactual prediction must preserve what actually happened before imagining what could have happened.</p><p>Strong for driving evaluation and replay; less direct for manipulation unless factual rollouts have matched counterfactual labels.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.12308" target="_blank" rel="noopener">DreamFly: Causal Memory and Receding-Horizon Diffusion Planning for Aerial Vision-Language Navigation</a></h3>
+  <p class="fit">aerial VLN - causal memory - receding-horizon diffusion planning</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Aerial VLN agents must integrate partial observations, plan ahead, and decide when to stop under limited history.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Implicit history and termination can leak future evidence or stop for the wrong reason in partially observable navigation.</p></div>
+    <div><h4>Hidden premise</h4><p>Navigation planning can use future action chunks as auxiliary targets while executing only one action before replanning.</p></div>
+    <div><h4>Conceptual move</h4><p>Combine causally aligned historical memory with receding-horizon diffusion planning and action-logit stop estimation.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names limited historical context, short planning horizons, and unreliable implicit termination as aerial VLN challenges.</span></li><li><strong>[Abstract]</strong><span>It uses causally aligned historical memory and receding-horizon diffusion planning.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether memory improves stop decisions and not only path success.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes plan-K execute-one replanning, LiteStop, and memory that uses only observations before the current decision step.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the stop signal improves in static scenes but fails with dynamic distractors, causal memory is not sufficient for outdoor deployment.</p></div>
+    <div><h4>Adversarial read</h4><p>Plan-K execute-one can still optimize short-horizon visibility unless routes include occlusion and dynamic elements.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Use future action chunks as planning scaffolds, not commitments.</p><p>Strong for aerial and mobile navigation; weaker for contact manipulation unless a replanning horizon is explicit.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>VLA adaptation is becoming an evidence-routing problem</h3><p class='links'>StellaVLA - G0.5 - MiDAS - OpenVLA warning signals</p><p><strong>Observed</strong> - The papers use structured demonstrations, shared reasoning/action tokens, one-demo online RL, and activation probes.</p><p><strong>Inference</strong> - APRL should compare which evidence source changes the action before adding larger task datasets.</p></article><article><h3>Driving world models need factual anchors and rule exits</h3><p class='links'>RISC - safety guards - counterfactual world models - RoadWeaver</p><p><strong>Observed</strong> - The papers focus on risk slices, traceable command interventions, factual counterfactual alignment, and scalable simulator maps.</p><p><strong>Inference</strong> - The useful driving benchmark records which slice, rule, or factual continuation controlled the decision.</p></article><article><h3>3D and navigation assets are shifting toward executable memory</h3><p class='links'>DreamFly - DaViNCi - D3D-GEN - Map-Det3D - Seed2GS</p><p><strong>Observed</strong> - The papers tie memory, dynamic elements, simulator generation, metric reconstruction, and object extraction to downstream decisions.</p><p><strong>Inference</strong> - APRL should evaluate maps by action, stop, and target changes under corrupted or missing evidence.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 12 emphasized update, reject, cache, retrieve, and intervene decisions.</p><p>August 13 strengthens this into explicit adaptation, warning, safety-guard, and risk-slice contracts.</p></article><article><span>New signal</span><p class='history'>Recent editions treated geometry as an execution substrate.</p><p>Today adds generated simulator worlds and camera-free 3DGS object extraction as map assets that must be tested through decisions.</p></article><article><span>Missing axis</span><p class='history'>Prior VLA notes focused on action routing and cache invalidation.</p><p>The current batch still lacks a shared benchmark for when a robot should trust, revise, or discard a retrieved demonstration.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Evidence-routed VLA adaptation benchmark</h3><p class="thesis">Build a benchmark where each VLA adaptation step is traced to demonstration structure, reasoning tokens, one-demo RL, or activation warnings.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create paired LIBERO or RoboCasa tasks with one raw demo, one structured demo, and one activation-warning log.</p></div>
+    <div><strong>4-week build</strong><p>Compare Stella-style structure, G0.5-style reasoning/action traces, MiDAS residual adaptation, and failure probes under object/viewpoint shifts.</p></div>
+    <div><strong>Success metric</strong><p>The benchmark predicts which evidence source changes the action before the first failed contact in at least two task families.</p></div>
+    <div><strong>Stop condition</strong><p>All methods improve only final success while evidence traces fail to predict recovery or unsafe actions.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Structured demonstrations, action-token logs, residual adaptation traces, warning lead-time labels, and task-shift splits.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 27/30</span></div>
+  <h3>Risk-slice and guard contract for closed-loop driving</h3><p class="thesis">Unify RISC slice coverage, neuro-symbolic guard interventions, and counterfactual world-model evidence in one closed-loop audit protocol.</p>
+  <div class="scores"><span>fit 4</span><span>novelty 5</span><span>feasibility 4</span><span>moat 4</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Choose three obvious high-risk slices and define the rule or factual evidence that should change the planner command.</p></div>
+    <div><strong>4-week build</strong><p>Replay the same episodes through a world model, a safety guard, and a learned planner, then report uncovered slices and command substitutions.</p></div>
+    <div><strong>Success metric</strong><p>At least one guard or factual-anchor signal prevents a failure that aggregate driving score hides.</p></div>
+    <div><strong>Stop condition</strong><p>Coverage statements do not change audit selection, command intervention, or failure discovery.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Risk-slice schema, command-substitution log, factual/counterfactual pairs, and coverage-qualified scorecards.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 27/30</span></div>
+  <h3>Executable 3D memory stress suite</h3><p class="thesis">Evaluate 3D maps, generated worlds, and navigation memory by whether corrupted evidence changes target, stop, route, or base-placement decisions.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 3</span><span>moat 5</span><span>timing 4</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Assemble one indoor and one outdoor scene with object distractors, dynamic movers, and missing-view 3D evidence.</p></div>
+    <div><strong>4-week build</strong><p>Compare DreamFly-style memory, DaViNCi dynamic navigation, Seed2GS object extraction, Map-Det3D metric priors, and generated simulator scenes.</p></div>
+    <div><strong>Success metric</strong><p>Evidence corruption predicts a measurable route, stop, target, or base-placement change before final success drops.</p></div>
+    <div><strong>Stop condition</strong><p>3D or memory assets improve visualization quality but do not affect executable robot choices.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Evidence-corrupted 3D scenes, route and stop labels, map-update logs, target masks, and simulator-state manifests.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-13.json">intelligence/2026-08-13.json</a>.</footer>
+</body></html>
