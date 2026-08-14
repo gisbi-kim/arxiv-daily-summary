@@ -1,0 +1,325 @@
+#!/usr/bin/env python3
+"""Generate the 2026-08-14 Research Intelligence edition."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from gen_research_intelligence_20260811 import build_html
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE_PROMPT = "prompts/instruction_v20260713.md"
+
+
+RI_BY_DATE = {
+    "2026-08-14": {
+        "date": "2026-08-14",
+        "edition": "Research Intelligence",
+        "source_prompt": SOURCE_PROMPT,
+        "source_mode": "new",
+        "scope_note": (
+            "Daily edition from matching Friday /new listings: 107 non-replacement cs.CV rows, "
+            "36 cs.RO rows, 133 deduplicated papers, and 112 ROI papers. Tier A cards are conservative "
+            "abstract-only autopsies from the repository parser output; no figure/table claims are asserted."
+        ),
+        "executive_thesis": (
+            "The August 14 batch moves robotics and embodied AI toward pre-commit evidence: a robot should know when "
+            "to abort before contact, when a VLA internal state signals stalled progress, when an agent must acquire "
+            "another semantic-geometric view, and when a simulator or 3D representation is trustworthy enough to train "
+            "or evaluate control. ContactGuard, task-progress probes, FUSE, HumanoidVLN, H2R-Bench, BrainWAM, TRAPSBench, "
+            "and LocusGS all pressure the same decision boundary: before deploying a model, name the evidence that can "
+            "change, stop, route, or invalidate the next action."
+        ),
+        "decision_cards": [
+            {
+                "label": "Decision",
+                "title": "Monitoring has to fire before commitment",
+                "body": (
+                    "ContactGuard and VLA progress probes turn latent futures and residual streams into abort or stall signals "
+                    "before a contact-rich policy fails visibly."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Embodied agents must buy evidence actively",
+                "body": (
+                    "FUSE, SAP-Nav, Semantic Radiance Fields, and HumanoidVLN ask whether viewpoint choice, semantics, "
+                    "geometry, and embodiment physics change the executable route or interaction."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "World models need transfer diagnostics",
+                "body": (
+                    "H2R-Bench, DreamX-Phi, RGB-D handover generation, and BrainWAM evaluate generated futures by "
+                    "embodiment correctness, functional contact, and planning-relevant action representations."
+                ),
+            },
+        ],
+        "papers": [
+            {
+                "rank": 1,
+                "title": "ContactGuard: Pre-Contact Execution Monitoring with Action-Conditioned Latent World Models",
+                "arxiv_id": "2608.13438",
+                "fit": "contact-rich manipulation - latent world model - pre-contact abort signal",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Many manipulation monitors discover failure after the robot has already committed to contact.",
+                "friction": "Wrist-camera observations reveal contact well, but a bad approach can already push, miss, slip, or disturb the object.",
+                "hidden_premise": "A planned action chunk can be audited in latent visual space before contact authority is granted.",
+                "conceptual_move": "Predict the short-horizon consequence of the policy's own action chunk and abort when the predicted post-contact latent looks unsafe.",
+                "mechanism": "The abstract describes a latent world model trained from unlabeled robot trajectories plus a small labeled pre-contact failure probe.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The monitor anchors prediction before an imminent contact event and rolls forward under the policy's own actions."},
+                    {"trace": "[Abstract]", "claim": "It transfers to a live robot as a pre-contact abort signal without modifying the underlying policy."},
+                    {"trace": "[Inference]", "claim": "APRL should score warning lead time and false aborts before final manipulation success."},
+                ],
+                "falsification": "If aborts fire only after irreversible object motion, the model is a failure detector rather than a pre-contact monitor.",
+                "adversarial": "Latent prediction can reward visually common contacts; test novel object stiffness, gripper approach angle, and distractor motion.",
+                "thinking_tool": "Treat a planned action chunk as a hypothesis that must pass a latent future check.",
+                "transfer_boundary": "Strong for contact-rich manipulation with action chunks; weaker for black-box controllers that do not expose planned actions.",
+            },
+            {
+                "rank": 2,
+                "title": "Decoding Task Progress from VLA Representations",
+                "arxiv_id": "2608.13474",
+                "fit": "VLA interpretability - task progress probe - runtime monitoring",
+                "status": "Tier A - abstract-only",
+                "status_quo": "VLAs are approaching deployment while their internal task-state representation remains weakly instrumented.",
+                "friction": "A policy can appear active while internally stalled, and final success is too late to diagnose that state.",
+                "hidden_premise": "Task progress is encoded in activations strongly enough to be read without robot-specific labels.",
+                "conceptual_move": "Probe the residual stream for normalized time remaining and use the signal as a label-free OOD or stall detector.",
+                "mechanism": "The abstract reports a linearly readable progress signal in pi_0.5 activations that generalizes to unseen tasks.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "A single linear probe generalizes to unseen tasks and varies under language counterfactuals when trained on multi-prompt data."},
+                    {"trace": "[Abstract]", "claim": "The signal is useful for detecting stalled task progress but does not enable meaningful policy steering."},
+                    {"trace": "[Inference]", "claim": "APRL should separate monitoring value from steering authority when probing VLA internals."},
+                ],
+                "falsification": "If the progress probe tracks time elapsed rather than causal task state, it will fail under pauses, detours, and recovery behaviors.",
+                "adversarial": "Language counterfactual sensitivity can create prompt artifacts; test physically equivalent instructions and different action horizons.",
+                "thinking_tool": "Ask whether an internal signal is a monitor, a control knob, or merely a clock.",
+                "transfer_boundary": "Strong for deployed VLA monitoring; weaker for policies whose internals are inaccessible or heavily quantized.",
+            },
+            {
+                "rank": 3,
+                "title": "FUSE: Active Functional Affordance Grounding through Adaptive Semantic-Geometric Evidence Acquisition",
+                "arxiv_id": "2608.12683",
+                "fit": "active affordance grounding - semantic-geometric evidence - viewpoint planning",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Affordance grounding is often evaluated from fixed views that may not expose the function-relevant cue.",
+                "friction": "An object can satisfy a functional query only from a hidden handle, opening, support surface, or interaction region.",
+                "hidden_premise": "A grounded affordance answer should include the evidence-acquisition policy that made the answer possible.",
+                "conceptual_move": "Let the agent sequentially explore and select informative viewpoints using uncertainty-driven semantic-geometric evidence.",
+                "mechanism": "The abstract introduces Active Functional Affordance Grounding, FUSE, and a Habitat-based benchmark for active functional grounding.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "Existing methods lack mechanisms for deciding where to look when functional cues are occluded or incomplete."},
+                    {"trace": "[Abstract]", "claim": "FUSE combines explicit uncertainty-driven exploration with a learned amortized planner."},
+                    {"trace": "[Inference]", "claim": "APRL should log which additional view changes the target mask or interaction choice."},
+                ],
+                "falsification": "If performance comes from object identity priors rather than acquired functional evidence, the active grounding claim weakens.",
+                "adversarial": "Evaluate visually similar objects with different functional states and occluded affordance cues.",
+                "thinking_tool": "A functional affordance label is incomplete without the viewpoint path that justified it.",
+                "transfer_boundary": "Strong for object navigation and manipulation preconditions; weaker for tasks where function is visible in a single canonical view.",
+            },
+            {
+                "rank": 4,
+                "title": "HumanoidVLN: A Physics-Grounded Simulator and Benchmark for Vision-Language Navigation Across Diverse Humanoid Embodiments",
+                "arxiv_id": "2608.12860",
+                "fit": "humanoid VLN - physics-grounded benchmark - embodiment variation",
+                "status": "Tier A - abstract-only",
+                "status_quo": "VLN benchmarks often assume wheeled or abstract agents that do not expose humanoid locomotion constraints.",
+                "friction": "A route instruction can be feasible for one body but fail under another morphology, controller, or egocentric camera motion.",
+                "hidden_premise": "A VLN simulator is useful only if model, controller, and embodiment failures are separable.",
+                "conceptual_move": "Build a physics-grounded humanoid VLN benchmark spanning multiple robot bodies, path trackers, and 3DGS reconstructed scenes.",
+                "mechanism": "The abstract describes Isaac Sim, four humanoid configurations, hierarchical control, collision-aware episodes, and a sim-to-real pilot.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The benchmark covers robots from 10-12 lower-body DoF and heights from 1.17m to 1.80m."},
+                    {"trace": "[Abstract]", "claim": "A 20-episode sim-to-real pilot reports strong correlation between simulation and real navigation errors."},
+                    {"trace": "[Inference]", "claim": "APRL should score route following by embodiment-specific failure, not only language grounding."},
+                ],
+                "falsification": "If failures correlate mainly with controller tuning rather than VLN reasoning, the benchmark must expose that split explicitly.",
+                "adversarial": "Test low-light, stairs, narrow passages, moving obstacles, and camera oscillation to separate perception from locomotion constraints.",
+                "thinking_tool": "Embodiment is an experimental variable, not a nuisance condition.",
+                "transfer_boundary": "Strong for humanoid navigation and mobile robotics; less direct for tabletop manipulation.",
+            },
+            {
+                "rank": 5,
+                "title": "H2R-Bench: Benchmarking Human-to-Robot Manipulation Video Generation in World Models",
+                "arxiv_id": "2608.13049",
+                "fit": "human-to-robot video generation - cross-embodiment transfer - manipulation diagnostics",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Human manipulation videos are abundant, but robot demonstrations remain expensive and embodiment-specific.",
+                "friction": "A generated robot-centric video can look plausible while failing the functional contact or embodiment constraints that matter for training.",
+                "hidden_premise": "Human-to-robot generation should be evaluated as transfer of task events and object responses, not video quality alone.",
+                "conceptual_move": "Benchmark models that transform egocentric human demonstrations into robot manipulation videos under specified embodiments.",
+                "mechanism": "The abstract defines annotations for task goals, action events, functional contacts, object responses, and five evaluation dimensions.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The benchmark evaluates goal-state completion, action-event completion, functional contact transfer, embodiment correctness, and video quality."},
+                    {"trace": "[Abstract]", "claim": "It reports that current video world models often fail embodiment consistency, functional interaction, and task execution."},
+                    {"trace": "[Inference]", "claim": "APRL should use generated manipulation videos only after contact and embodiment transfer tests pass."},
+                ],
+                "falsification": "If metrics can be satisfied without improving robot policy learning, the benchmark remains a video diagnostic rather than a data asset test.",
+                "adversarial": "Evaluate left-right hand swaps, gripper geometry changes, hidden contact, and object dynamics that look visually plausible but are physically wrong.",
+                "thinking_tool": "Generated robot data needs functional contact validity before scale matters.",
+                "transfer_boundary": "Strong for manipulation data generation; weaker for tasks where human and robot embodiments share no action correspondence.",
+            },
+            {
+                "rank": 6,
+                "title": "BrainWAM: Action-Space Coordination of Semantic Priors and Predictive Dynamics for Autonomous Driving",
+                "arxiv_id": "2608.12854",
+                "fit": "autonomous driving VLA - world action model - action-space coordination",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Driving planners often emphasize either semantic reasoning from VLMs or predictive dynamics from world models.",
+                "friction": "A naive shared attention space can let semantic shortcuts dominate and suppress planning-relevant predictive dynamics.",
+                "hidden_premise": "Semantic priors and predictive futures should coordinate at the action representation rather than compete for token attention.",
+                "conceptual_move": "Create specialized semantic and world-model pathways that align at compact action representations for driving control.",
+                "mechanism": "The abstract describes action-space coordination and asynchronous rectified-flow inference with decoupled video and action denoising.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper identifies an attention-allocation mismatch in naive VLA and WAM combination."},
+                    {"trace": "[Abstract]", "claim": "It reports state-of-the-art performance on NAVSIM v1 and NAVSIM v2 under the described framework."},
+                    {"trace": "[Inference]", "claim": "APRL should test whether predictive dynamics changes the planned action under the same semantic scene label."},
+                ],
+                "falsification": "If gains come from benchmark-specific priors without safer counterfactual actions, the action-space coordination claim is narrow.",
+                "adversarial": "Stress rare maneuvers where semantic rules and predictive motion cues disagree, then inspect which pathway controls the action.",
+                "thinking_tool": "Combine priors at the action contract, not only in a shared representation pool.",
+                "transfer_boundary": "Strong for driving and mobile planning; less direct for manipulation without explicit future-dynamics channels.",
+            },
+            {
+                "rank": 7,
+                "title": "TRAPSBench: Vision-Language Models Encode but Fail to Express Epistemic Restraint",
+                "arxiv_id": "2608.13167",
+                "fit": "VLM abstention - visual uncertainty - output-stage restraint",
+                "status": "Tier A - abstract-only",
+                "status_quo": "VLMs are usually rewarded for answering, even when the visual evidence is insufficient.",
+                "friction": "A model can internally detect that an answer is unknowable but still output a confident response.",
+                "hidden_premise": "Reliability requires coupling hidden-state uncertainty to an explicit abstention interface.",
+                "conceptual_move": "Use matched physics video pairs where a targeted visual change makes the outcome undeterminable, then score both answers and abstentions.",
+                "mechanism": "The abstract introduces TRAPSBench, PECS, hidden-state answerability probes, and output-stage steering of a void direction.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "Across 16 VLMs, spontaneous restraint is poor and the best PECS is 0.292."},
+                    {"trace": "[Abstract]", "claim": "Hidden states encode answerability up to 0.91 AUROC, while outputs often fail to abstain."},
+                    {"trace": "[Inference]", "claim": "APRL should require a robot VLM to abstain before approving a visually underdetermined action."},
+                ],
+                "falsification": "If abstention improves only on synthetic physics pairs, transfer to real robot scenes with partial occlusion remains unproven.",
+                "adversarial": "Test uncertainty from occlusion, reflection, motion blur, and object disappearance rather than text-only impossibility.",
+                "thinking_tool": "A hidden uncertainty signal is not a safety feature until it changes the output contract.",
+                "transfer_boundary": "Strong for VLM decision gates and robot-scene QA; weaker for low-level control without language-mediated approvals.",
+            },
+            {
+                "rank": 8,
+                "title": "LocusGS: Spatially Grounded Tokens for Feed-Forward 3D Gaussian Splatting",
+                "arxiv_id": "2608.12825",
+                "fit": "feed-forward 3DGS - spatial anchors - structured scene tokens",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Query-based feed-forward 3DGS can decode Gaussians whose learned queries scatter across distant scene regions.",
+                "friction": "A latent scene token that lacks spatial coherence is hard to use as a map, object, or localization interface.",
+                "hidden_premise": "A 3D scene token should carry an explicit local support region rather than only a learned latent identity.",
+                "conceptual_move": "Augment each Gaussian query with a progressively refined 3D anchor center and support radius.",
+                "mechanism": "The abstract describes anchor-to-ray geometric bias for evidence aggregation and anchor-centered Gaussian decoding.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The authors observe that Gaussians decoded from the same query often scatter across distant scene regions."},
+                    {"trace": "[Abstract]", "claim": "Learned anchors form coherent spatial layouts and more structured Gaussian distributions."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate whether anchored scene tokens improve localization or object retrieval under geometry corruption."},
+                ],
+                "falsification": "If anchored tokens improve rendering but not localization, retrieval, or planning decisions, the robotics value remains indirect.",
+                "adversarial": "Attack with sparse views, dynamic objects, repeated structures, and missing geometry before treating anchors as map elements.",
+                "thinking_tool": "A 3D representation becomes robot-usable when tokens have spatial responsibility.",
+                "transfer_boundary": "Strong for map and simulator representation design; weaker for tasks that only need photorealistic novel views.",
+            },
+        ],
+        "synthesis": [
+            {
+                "title": "Execution monitors are shifting earlier in the rollout",
+                "links": "ContactGuard - VLA progress probes - TRAPSBench",
+                "facts": "The papers expose latent futures, residual-stream progress, and hidden answerability before failure or overconfident output.",
+                "inference": "APRL should require every monitor to report lead time, authority, and the condition that blocks the next action.",
+            },
+            {
+                "title": "Embodied evidence is becoming actively acquired",
+                "links": "FUSE - SAP-Nav - Semantic Radiance Fields - HumanoidVLN",
+                "facts": "The batch links viewpoint selection, semantic-free-space queries, humanoid physics, and active navigation to downstream choices.",
+                "inference": "The useful benchmark records which additional observation changed target, route, contact, or stop decisions.",
+            },
+            {
+                "title": "Generated worlds need embodiment and action contracts",
+                "links": "H2R-Bench - DreamX-Phi - RGB-D handover generation - BrainWAM",
+                "facts": "The papers score human-to-robot transfer, action-conditioned futures, RGB-D handover prediction, and semantic-dynamic action coordination.",
+                "inference": "Synthetic data should enter APRL only when functional contact, embodiment correctness, and action effect survive controlled stress.",
+            },
+        ],
+        "frontier_memory": [
+            {
+                "label": "Strengthening",
+                "history": "August 13 emphasized evidence contracts for adaptation, safety, memory, maps, and generation.",
+                "body": "August 14 strengthens the same axis with pre-contact aborts, task-progress probes, active evidence acquisition, and abstention gates.",
+            },
+            {
+                "label": "New signal",
+                "history": "Recent editions treated generation mostly as a simulator or stress-input source.",
+                "body": "Today adds cross-embodiment manipulation generation as a concrete diagnostic: functional contact and embodiment correctness become first-class metrics.",
+            },
+            {
+                "label": "Missing axis",
+                "history": "Prior VLA notes tracked action routing and adaptation but not ownership of monitor authority.",
+                "body": "The current batch still lacks a shared protocol for who can veto the next action: latent world model, activation probe, abstention head, or safety guard.",
+            },
+        ],
+        "strategy": [
+            {
+                "priority": "Build moat",
+                "title": "Pre-commit execution monitor benchmark",
+                "thesis": "Benchmark whether latent futures, VLA progress probes, and abstention signals can veto robot actions before irreversible contact or wrong-route commitment.",
+                "scores": {"fit": 5, "novelty": 5, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 5},
+                "one_week": "Collect short contact-rich episodes with planned action chunks, residual-stream progress traces, and manually labeled pre-contact failure windows.",
+                "four_week": "Compare ContactGuard-style latent futures, task-progress probes, and VLM abstention gates on identical object, viewpoint, and occlusion shifts.",
+                "success": "At least one monitor blocks a failing action with usable lead time while keeping false aborts below a predeclared threshold.",
+                "stop": "Signals fire only after contact, collapse under unseen objects, or cannot identify which action should be blocked.",
+                "asset": "Pre-contact clips, action chunks, latent-future traces, progress-probe logs, abstention labels, and veto outcomes.",
+            },
+            {
+                "priority": "Build moat",
+                "title": "Active embodied evidence harness",
+                "thesis": "Turn affordance, navigation, and semantic radiance-field tasks into a harness where every extra view must justify a target, route, or interaction change.",
+                "scores": {"fit": 5, "novelty": 4, "feasibility": 4, "moat": 5, "timing": 4, "evidence": 5},
+                "one_week": "Create two Habitat or reconstructed scenes with hidden functional cues, ambiguous object labels, and free-space or semantic query logs.",
+                "four_week": "Evaluate FUSE-style active views, SAP-Nav hierarchy, SRF simulators, and humanoid VLN routes under occlusion and embodiment constraints.",
+                "success": "The harness identifies which observation changed a grounded target, stop decision, route, or contact plan before task success is known.",
+                "stop": "Extra views improve confidence text but do not change executable decisions or reduce failure in hidden-cue scenes.",
+                "asset": "Viewpoint-action traces, semantic-geometric evidence maps, route decisions, target masks, and embodiment-specific failure labels.",
+            },
+            {
+                "priority": "Explore",
+                "title": "Human-to-robot synthetic data audit",
+                "thesis": "Test generated manipulation videos by functional contact and embodiment transfer before using them as robot-training data.",
+                "scores": {"fit": 5, "novelty": 5, "feasibility": 3, "moat": 4, "timing": 5, "evidence": 4},
+                "one_week": "Select one handover and one tool-use family, then label task events, contact moments, object responses, and robot embodiment constraints.",
+                "four_week": "Compare H2R-Bench dimensions, DreamX-Phi action-conditioned futures, and RGB-D handover generation against downstream policy imitation.",
+                "success": "Generated data improves policy behavior only when functional contact and embodiment correctness metrics also improve.",
+                "stop": "Video realism increases while contact timing, gripper geometry, or object response stays wrong.",
+                "asset": "Human videos, robot embodiment manifests, generated RGB-D clips, contact-transfer labels, and policy-learning deltas.",
+            },
+        ],
+    }
+}
+
+
+def main() -> int:
+    (ROOT / "intelligence").mkdir(exist_ok=True)
+    (ROOT / "posts").mkdir(exist_ok=True)
+    for date, data in RI_BY_DATE.items():
+        (ROOT / "intelligence" / f"{date}.json").write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        (ROOT / "posts" / f"{date}-research-intelligence.html").write_text(
+            build_html(data),
+            encoding="utf-8",
+            newline="\n",
+        )
+        print(f"wrote intelligence/{date}.json and posts/{date}-research-intelligence.html")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
