@@ -1,0 +1,248 @@
+{
+  "date": "2026-08-15",
+  "iso_week": "2026-W33",
+  "week_start": "2026-08-09",
+  "week_end": "2026-08-15",
+  "source_listing_date": "2026-08-14",
+  "source_mode": "pastweek",
+  "source_daily_artifacts": [
+    "2026-08-10",
+    "2026-08-11",
+    "2026-08-12",
+    "2026-08-13",
+    "2026-08-14"
+  ],
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "totals": {
+    "selected": 444,
+    "total_scanned": 1005
+  },
+  "daily_totals": {
+    "cv": 796,
+    "ro": 260,
+    "selected": 832,
+    "total_scanned": 1006
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 39,
+      "cv": 31,
+      "ro": 5,
+      "cvro": 3
+    },
+    "Robot Learning": {
+      "total": 73,
+      "cv": 5,
+      "ro": 54,
+      "cvro": 14
+    },
+    "Autonomous Driving": {
+      "total": 36,
+      "cv": 15,
+      "ro": 19,
+      "cvro": 2
+    },
+    "Foundation Models": {
+      "total": 60,
+      "cv": 58,
+      "ro": 1,
+      "cvro": 1
+    },
+    "Generation": {
+      "total": 93,
+      "cv": 84,
+      "ro": 4,
+      "cvro": 5
+    },
+    "Efficiency/Systems": {
+      "total": 62,
+      "cv": 56,
+      "ro": 4,
+      "cvro": 2
+    },
+    "Embodied AI": {
+      "total": 31,
+      "cv": 5,
+      "ro": 22,
+      "cvro": 4
+    },
+    "Safety/Alignment": {
+      "total": 50,
+      "cv": 41,
+      "ro": 8,
+      "cvro": 1
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA control moves from success-rate reporting to evidence-bearing execution contracts",
+      "representative_ids": [
+        "2608.06729",
+        "2608.07596",
+        "2608.11671",
+        "2608.13438",
+        "2608.13474",
+        "2608.11739"
+      ],
+      "why": "Earlier VLA evaluation often treated a rollout as a black-box pass or fail. The week repeatedly exposes the state that comes before the action: persistent world-ego memory, local cross-layer routing, structured demonstrations, pre-contact latent futures, and progress probes. That changes the lab question from which policy wins to which evidence field can explain or veto a wrong action early enough to recover.",
+      "confidence": "High — every weekday contributed a distinct VLA paper that exposes memory, routing, demonstration structure, progress, or veto evidence.",
+      "lab_action": "Run one manipulation suite with direct VLA, memory-augmented VLA, routed action decoder, structured-demonstration VLA, and pre-contact monitor variants; compare failure-prediction lead time, veto precision, recovery success, and the exact action chunk each evidence field changes."
+    },
+    {
+      "cluster": "World-action models become failure-conditioned planning and repair interfaces",
+      "representative_ids": [
+        "2608.06799",
+        "2608.07619",
+        "2608.11204",
+        "2608.10232",
+        "2608.11174",
+        "2608.12854",
+        "2608.13489"
+      ],
+      "why": "The world-model papers do not just ask for plausible futures. They ask whether physical state, geometry-aware latent state, surgical action state, failure-aware causal training, planning-relevant quality scores, or action-space coordination can change the next decision. World models are becoming interfaces for intervention, not only generators of better-looking videos.",
+      "confidence": "High — physical grounding, geometry, surgery, causal failure, quality diagnosis, driving, and manipulation all repeat the same planning-interface decision.",
+      "lab_action": "Compare visual-only, physical-state, geometry-aware, failure-causal, and action-conditioned world models on identical branches; measure whether each representation changes candidate action choice, contact failure, unsafe driving state, or recovery latency before final task score."
+    },
+    {
+      "cluster": "Robot data quality shifts from demonstration volume to action-sensitive contact and embodiment transfer",
+      "representative_ids": [
+        "2608.07045",
+        "2608.06827",
+        "2608.13049",
+        "2608.13028",
+        "2608.12416",
+        "2608.13014",
+        "2608.13489"
+      ],
+      "why": "The week treats data as useful only when it preserves the variables that actually move robot behavior: contact consistency, sparse real-to-sim alignment, human-to-robot embodiment transfer, RGB-D handover timing, synthesized dexterity, force estimation, and action-conditioned futures. The actionable distinction is no longer real versus synthetic; it is whether the data changes a policy boundary under the same contact and embodiment constraints.",
+      "confidence": "High — contact, handover, retargeting, synthetic dexterity, egocentric force, and action-conditioned generation form a shared data-selection axis.",
+      "lab_action": "Under a fixed data budget, compare random demos, contact-consistent retargets, sparse real-to-sim clips, human-to-robot generated clips, and failure-correction examples; score contact timing, force plausibility, embodiment mismatch, imitation delta, and OOD execution success."
+    },
+    {
+      "cluster": "Embodied navigation and geometry turn maps into executable evidence states",
+      "representative_ids": [
+        "2608.07267",
+        "2608.12683",
+        "2608.12707",
+        "2608.12860",
+        "2608.13095",
+        "2608.12825",
+        "2608.08949",
+        "2608.09146"
+      ],
+      "why": "Navigation and geometry papers converge on the same decision: the map or view must justify an action, not just describe the scene. World navigation conditioning, active affordance views, open-vocabulary object navigation, humanoid VLN physics, semantic radiance-field simulators, spatially grounded 3DGS tokens, endoscopic Gaussian SLAM, and neural submaps all expose sensor source, uncertainty, association, or embodiment constraints.",
+      "confidence": "High — geometry and embodied-navigation evidence recurs across 3DGS, SLAM, semantic maps, active views, and humanoid embodiment.",
+      "lab_action": "Build paired navigation and tabletop scenes where one extra view, semantic map field, submap update, or Gaussian token can change the route or grasp plan; measure relocalization time, association flips, active-view value, route recovery, and downstream manipulation or navigation success."
+    },
+    {
+      "cluster": "Reliability shifts from confidence calibration to early warning, abstention, routing, and attack-aware action guards",
+      "representative_ids": [
+        "2608.07065",
+        "2606.29699",
+        "2608.09448",
+        "2608.10835",
+        "2608.12127",
+        "2608.13167",
+        "2608.10393"
+      ],
+      "why": "Reliability papers this week split failure into separate operational families: calibrated intervention, visual-shift early warning, future-representation test-time training, token-level hallucination detection, cost-aware open-set routing, epistemic restraint, and unrestricted robotic attacks. A single confidence number is not enough when the useful signal may be a veto, abstention, router handoff, or attack trigger.",
+      "confidence": "Medium-High — the tasks differ, but the shared decision is when a runtime guard should stop, route, repair, or refuse an action.",
+      "lab_action": "Create failure-family splits for visual shift, ambiguous evidence, typographic or diffusion attack, and costly open-set queries; compare intervention threshold, abstention expression, route choice, false alarm, and unsafe-action prevention under the same episode labels."
+    },
+    {
+      "cluster": "Deployment budgets force selective correction rather than blanket scaling",
+      "representative_ids": [
+        "2608.07088",
+        "2608.10824",
+        "2608.12127",
+        "2608.12132",
+        "2608.12171",
+        "2608.07361"
+      ],
+      "why": "Efficiency appears throughout the week as a constraint on evidence, not just latency. Token pruning, introspection-gated cache reuse, router calibration, sparse video diffusion, compression, and planning-token probing all ask which signal can be removed without deleting the evidence needed for a safe action. This reframes efficiency as a preservation contract for task-relevant cues.",
+      "confidence": "Medium — efficiency signals are broad, but multiple papers connect budget decisions to retained visual, planning, routing, or generation evidence.",
+      "lab_action": "For each compression or routing policy, ablate retained region tokens, cache reuse, router choice, and planning-token depth; measure latency, memory, grounding error, failure-warning lead time, and downstream action delta rather than speed alone."
+    }
+  ],
+  "frontier_memory": {
+    "new": [
+      "Pre-contact execution monitoring and VLA progress decoding became explicit daily signals on August 14.",
+      "Human-to-robot manipulation generation moved from visual realism to contact and embodiment transfer metrics."
+    ],
+    "strengthening": [
+      "The August 10-14 sequence repeatedly strengthened an execution-evidence thesis: memory state, physical world state, causal failure state, active evidence, and abstention all precede the action.",
+      "Robot-usable geometry strengthened through navigation-conditioned 3D state, active affordance views, semantic maps, Gaussian tokens, SLAM memory, and submap loop closure."
+    ],
+    "commoditizing": [
+      "Generic VLA scaling, generic world-model video quality, and generic token compression look less defensible unless they preserve a measurable action-relevant evidence field."
+    ],
+    "contradiction": [
+      "Direct low-latency execution pulls toward fewer modules, while monitors, routers, and repair loops add diagnostic depth; the useful boundary must be measured per failure family."
+    ],
+    "missing_axis": [
+      "The week still lacks one common closed-loop protocol that evaluates VLA memory, world-state quality, map uncertainty, contact transfer, and abstention/routing in the same episodes."
+    ]
+  },
+  "strategy_board": [
+    {
+      "opportunity": "Pre-Commit VLA Evidence Protocol",
+      "portfolio": "Build moat",
+      "why_now": "The week produced repeated signals that useful VLA evidence appears before contact, completion, or final success.",
+      "contrarian_bet": "APRL should own the failure-evidence protocol rather than compete first on another policy backbone.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week_probe": "Instrument two manipulation tasks with persistent state, progress probe, latent future, abstention, and repair-decision traces.",
+      "four_week_build": "Compare memory VLA, routed action decoder, structured-demonstration VLA, pre-contact monitor, and task-progress probe under identical failure labels.",
+      "success_metric": "At least one evidence field predicts terminal failure two action chunks earlier with AUC >= 0.75 while keeping false vetoes below a declared threshold.",
+      "stop_condition": "If the fields do not beat previous-action error and task ID baselines, split the benchmark into contact-only and route-only failure families.",
+      "paper_path": "Execution evidence contracts for reliable VLA control.",
+      "asset_path": "Annotated APRL VLA rollout set with evidence traces, veto decisions, and recovery outcomes."
+    },
+    {
+      "opportunity": "Action-Sensitive Synthetic Manipulation Data Engine",
+      "portfolio": "Exploit",
+      "why_now": "The week made contact, force, embodiment, and action-conditioned futures the meaningful tests for synthetic or retargeted data.",
+      "contrarian_bet": "Select data by how it changes the learned action boundary, not by how realistic the clip looks.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 4
+      },
+      "one_week_probe": "Choose one handover and one dexterous task, then label contact time, force plausibility, embodiment mismatch, and failure-correction target.",
+      "four_week_build": "Train equal-budget policies from random demos, contact-consistent retargets, generated RGB-D clips, and failure-correction examples.",
+      "success_metric": "OOD success improves by at least 10 points only when contact and embodiment-transfer metrics also improve.",
+      "stop_condition": "If video realism improves without contact timing or policy improvement, stop using the generator as a data source.",
+      "paper_path": "Action-sensitive data selection for contact-rich robot imitation.",
+      "asset_path": "Retargeted and generated manipulation clips with contact, force, embodiment, and policy-delta labels."
+    },
+    {
+      "opportunity": "Robot-Usable Geometry and Active Evidence Harness",
+      "portfolio": "Build moat",
+      "why_now": "3D, SLAM, active navigation, and semantic-field papers all reframed maps as evidence states that must justify an action.",
+      "contrarian_bet": "APRL can avoid rendering-fidelity competition by owning task-grounded map validity and active-view value.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 4,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week_probe": "Build two scenes where an active view, semantic map update, Gaussian token, or submap correction changes route or grasp choice.",
+      "four_week_build": "Compare semantic map, Gaussian token, neural submap, and radiance-field simulator evidence under the same route and tabletop recovery tasks.",
+      "success_metric": "The evidence state explains at least three failure families and improves recovery or relocalization over a visual-only baseline.",
+      "stop_condition": "If the geometry fields only improve image metrics and not route or grasp decisions, narrow to localization-only claims.",
+      "paper_path": "Robot-usable geometry as an action evidence state.",
+      "asset_path": "APRL active-evidence scenes with map uncertainty, view value, route decision, and manipulation outcome labels."
+    }
+  ]
+}
