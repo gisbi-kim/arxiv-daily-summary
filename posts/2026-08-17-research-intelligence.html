@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-17 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-17 arXiv Research Intelligence</h1>
+<p class="lead">The August 17 batch pushes robotics toward explicit commitment contracts: a VLA should expose which tool, judge, progress signal, or latency path can change the next action; a world model should preserve belief, temporal-logic state, or failed predicate arguments rather than only rendering plausible futures; and a navigation or driving system should prove safety through matched events, certificates, and failure-discovery coverage before average success is trusted.</p><p class="scope">Daily edition from matching Monday /new listings: 89 non-replacement cs.CV rows, 32 cs.RO rows, 116 deduplicated papers, and 97 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure/table/full-text claims are asserted.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>VLAs are being wrapped with process interfaces</h3><p>ART, PRM-as-a-Judge, BICPO-VLA, ReflexVLA, and self-supervised on-policy distillation all ask which intermediate tool, progress curve, handoff state, or future prediction should control action authority.</p></article><article><span>Decision</span><h3>World models must remember verifiable predicates</h3><p>OpenBelief-Nav, hint2, Onto-EV-WM, ForgeWM, and Marionette separate belief, temporal logic, predicate repair, low-latency action futures, and explicit geometry so the future can be audited.</p></article><article><span>Decision</span><h3>Safety evaluation is moving to matched failures</h3><p>SSP, coverage-aware active evaluation, temporal barriers, tube certificates, and hazard-informed envelopes all make the tested event, risk metric, and allowed correction explicit.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.14047" target="_blank" rel="noopener">Evolve Vision-Language-Action Model into an Agent with On-the-fly Tool-use</a></h3>
+  <p class="fit">VLA tool use - modular action space - data-efficient generalization</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>End-to-end VLAs usually ask one policy head to cover the full continuous action space.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Dark scenes, novel viewpoints, and low-level perception gaps can make a monolithic action decoder spend data on skills that tools already solve.</p></div>
+    <div><h4>Hidden premise</h4><p>A VLA can learn when to call tool modules without losing the embodied action contract.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn the VLA into an agentic robot interface that injects low-level vision, affordance, and embodiment tools on demand.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>ART tunes VLA models to leverage off-the-shelf tool modules for vision, affordance, and embodiment enhancement.</span></li><li><strong>[Abstract]</strong><span>The authors report higher success than mainstream baselines on simulation and real-world tasks including dark pick-and-place and novel viewpoints.</span></li><li><strong>[Inference]</strong><span>APRL should measure which tool call changed the next action, not only whether the rollout succeeded.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a tool-injection framework, 30K tool-use trajectories, and long-trajectory tool-use reasoning training.</p></div>
+    <div><h4>Falsification frontier</h4><p>If tool calls improve easy visual cases but not out-of-view, low-light, or affordance-confusing cases, the method is extra routing overhead.</p></div>
+    <div><h4>Adversarial read</h4><p>Off-the-shelf tools may leak strong priors; test scenes where the correct tool output is misleading or unavailable.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat action generation as a tool-authority allocation problem.</p><p>Strong for modular robot stacks; weaker for hardware where useful tool interfaces are not exposed.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.14284" target="_blank" rel="noopener">PRM-as-a-Judge 1.5: A Toolkit for Robot Process Assessment</a></h3>
+  <p class="fit">robot process assessment - progress curves - failure-side diagnostics</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Robot evaluation often compresses a rollout into binary success or a coarse rule-based process score.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A policy can fail late after real progress, recover from drawdown, or succeed with fragile execution, and final success hides those differences.</p></div>
+    <div><h4>Hidden premise</h4><p>Dense progress curves can become evaluation evidence if the evaluator itself is reliability-tested.</p></div>
+    <div><h4>Conceptual move</h4><p>Convert rollout videos into process-reward-model judgments and fine metrics for failure-side progress, recovery, and success-side quality.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The toolkit turns rollout videos into dense progress curves and derives failure-side, recovery, and execution-quality metrics.</span></li><li><strong>[Abstract]</strong><span>It includes RoboPulse++ to evaluate process reward model reliability.</span></li><li><strong>[Inference]</strong><span>APRL should separate evaluator reliability from robot-policy quality when using video judges.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract introduces new metrics plus RoboPulse++ to test PRM reliability and a reproducible assessment suite.</p></div>
+    <div><h4>Falsification frontier</h4><p>If PRM curves correlate with visual smoothness rather than task-state progress, the judge is not measuring the robot process.</p></div>
+    <div><h4>Adversarial read</h4><p>Test occlusion, camera jitter, similar-looking subgoals, and failed recoveries that appear visually fluent.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Evaluate the trajectory shape, not only the terminal label.</p><p>Strong when rollout videos expose state progress; weaker for tactile or force-critical tasks hidden from camera.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.14379" target="_blank" rel="noopener">Reflex: Enabling Fast and Predictive Vision-Language-Action Models for Reaction-Critical Manipulation</a></h3>
+  <p class="fit">reaction-critical manipulation - VLA latency - latent future prediction</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA benchmarks usually emphasize static manipulation generalization and under-specify inference latency.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Dynamic manipulation can fail because the policy reasons correctly but reacts after the interaction window has closed.</p></div>
+    <div><h4>Hidden premise</h4><p>A useful VLA for dynamic tasks must couple temporal prediction with an explicit latency budget.</p></div>
+    <div><h4>Conceptual move</h4><p>Build ReflexBench for reaction-critical tasks and a faster VLA with latent future prediction, multi-frame fusion, and deployment optimizations.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>ReflexBench decouples simulator stepping from robot control and supports configurable latency.</span></li><li><strong>[Abstract]</strong><span>ReflexVLA combines latent future prediction, multi-frame temporal fusion, and reduced deployment latency.</span></li><li><strong>[Inference]</strong><span>APRL should report success as a function of allowed reaction time, not only task family.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes configurable latency under synchronous/asynchronous inference, batched encoding, and CUDA Graph replay.</p></div>
+    <div><h4>Falsification frontier</h4><p>If gains disappear when latency is equalized against strong baselines, the benefit is systems engineering rather than predictive representation.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress moving objects, delayed observations, and asynchronous controller updates separately.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Make reaction time an experimental variable in VLA evaluation.</p><p>Strong for dynamic manipulation; less direct for slow quasi-static tasks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.13923" target="_blank" rel="noopener">OpenBelief-Nav: Evidence-Preserving Object Memory for Open-Vocabulary Language-Guided Navigation</a></h3>
+  <p class="fit">open-vocabulary navigation - object belief memory - provenance</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Open-vocabulary scene graphs often fuse observations into one label or feature per object.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Early semantic commitment can erase minority but task-relevant hypotheses needed at instruction time.</p></div>
+    <div><h4>Hidden premise</h4><p>Navigation memory should preserve phrase, reliability, mask, and frame provenance until the task readout is known.</p></div>
+    <div><h4>Conceptual move</h4><p>Store observation-level evidence and maintain separate geometric and visual representations for task-specific readout.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The method retains observation-level phrases, reliability cues, and frame-mask provenance.</span></li><li><strong>[Abstract]</strong><span>The authors report improvements over early-commit readouts on ScanNet200/Replica and navigation trials.</span></li><li><strong>[Inference]</strong><span>APRL should keep conflicting object hypotheses alive until a robot action needs them resolved.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes vocabulary-independent object belief, fixed-vocabulary projection, free-form retrieval, and verified candidate attempts.</p></div>
+    <div><h4>Falsification frontier</h4><p>If belief preservation improves segmentation but not target selection under ambiguity, the memory is not action-relevant.</p></div>
+    <div><h4>Adversarial read</h4><p>Use objects with ambiguous labels, occluded affordances, and repeated instances to test when provenance changes the route.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Do not collapse semantic evidence before the downstream action asks its question.</p><p>Strong for navigation and scene memory; weaker for tasks with closed object vocabularies and canonical views.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.13678" target="_blank" rel="noopener">hint2: Hierarchical World Models for Inference-Time Temporal Logic Guidance</a></h3>
+  <p class="fit">temporal logic guidance - hierarchical world models - closed-loop policy constraints</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Language-conditioned policies generate short action chunks while temporal-logic constraints are evaluated over long trajectories.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A locally plausible chunk can violate a non-Markovian safety or ordering rule that only appears across the full task.</p></div>
+    <div><h4>Hidden premise</h4><p>High-level proposition transitions and low-level local dynamics can provide complementary guidance at inference time.</p></div>
+    <div><h4>Conceptual move</h4><p>Use hierarchical world models to guide short-horizon policies toward LTL satisfaction without retraining the policy.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper derives two guidance objectives from different abstraction levels of world models.</span></li><li><strong>[Abstract]</strong><span>The high-level model predicts action-induced transitions in task-relevant atomic propositions.</span></li><li><strong>[Inference]</strong><span>APRL should test whether temporal-logic guidance blocks the exact action that would violate the specification.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract separates high-level atomic-proposition progress through an automaton from low-level state-evolution safety guidance.</p></div>
+    <div><h4>Falsification frontier</h4><p>If LTL satisfaction improves only on specs with easy proposition labels, the guidance may not survive real perceptual uncertainty.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress ambiguous proposition detection, delayed effects, and safety rules that conflict with progress.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Split long-horizon constraints into proposition progress and local safety signals.</p><p>Strong for instruction-following manipulation with symbolic milestones; weaker when predicates cannot be grounded reliably.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.13901" target="_blank" rel="noopener">Ontology-Grounded World Models for Failure Diagnosis and Closed-Loop Repair in Physical AI Systems</a></h3>
+  <p class="fit">failure diagnosis - ontology interface - verification-gated repair</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>World-model repair can report quality scores without naming the failed task predicate or the allowed correction route.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A repair loop is hard to trust if failed predicates, arguments, and post-correction acceptance are not retained.</p></div>
+    <div><h4>Hidden premise</h4><p>Symbolic task-local records can make learned or heuristic proposers auditable without replacing the world model.</p></div>
+    <div><h4>Conceptual move</h4><p>Layer an ontology-grounded diagnosis and verification-gated correction interface above EV-WM.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Onto-EV-WM records unmet task predicates, route labels, and post-correction acceptance results.</span></li><li><strong>[Abstract]</strong><span>The interface keeps learned or heuristic proposers separate from native predicate verification.</span></li><li><strong>[Inference]</strong><span>APRL should require every repair proposal to carry the predicate it claims to fix.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes task-local TBox/ABox grounding, deterministic rule retention, route labels, and bounded retry verification.</p></div>
+    <div><h4>Falsification frontier</h4><p>If predicate records do not improve correction selection beyond a tuned continuous score, the ontology adds bookkeeping without control value.</p></div>
+    <div><h4>Adversarial read</h4><p>Test failures where the same visible state supports multiple missing predicates or where a repair fixes one predicate and breaks another.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Make failure repair answerable to named predicates and bounded retries.</p><p>Strong for task families with explicit predicates; weaker for open-ended manipulation where predicate design is unstable.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.14266" target="_blank" rel="noopener">Accelerating Large-scale Bundle Adjustment for LiDAR Mapping via Parallel Computing</a></h3>
+  <p class="fit">LiDAR mapping - parallel bundle adjustment - large-scale map consistency</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Bundle adjustment is central for globally consistent LiDAR maps but can be too slow for large-scale robotic mapping.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A mapping method that preserves accuracy but cannot process large point clouds under memory limits may not be deployable.</p></div>
+    <div><h4>Hidden premise</h4><p>Optimization speed can be a map-quality interface if residuals, Jacobians, Hessians, and solver increments stay faithful.</p></div>
+    <div><h4>Conceptual move</h4><p>Parallelize data loading, planar feature extraction, and majorization-minimization optimization for large-scale LiDAR BA.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper claims a fully parallel computing framework for LiDAR bundle adjustment.</span></li><li><strong>[Abstract]</strong><span>It reports up to tenfold computational efficiency while preserving mapping accuracy comparable to state-of-the-art methods.</span></li><li><strong>[Inference]</strong><span>APRL should compare speedups under loop-closure, dynamic objects, and memory-constrained mapping rather than only offline runtime.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes asynchronous GPU data loading, bottom-up voxelization, parallel residual/Jacobian/Hessian computation, and a parallel increment solver.</p></div>
+    <div><h4>Falsification frontier</h4><p>If speedups require benign planar scenes or large GPUs, the deployment value narrows.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress sparse structure, dynamic objects, non-planar geometry, and limited-memory GPU settings.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat mapping efficiency as part of the robot-usable map contract.</p><p>Strong for LiDAR mapping and long-range navigation; less direct for purely visual tabletop tasks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.13719" target="_blank" rel="noopener">Coverage Aware Active Evaluation for Failure Discovery with Paired Systems</a></h3>
+  <p class="fit">failure discovery - proxy systems - target-risk selection</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Autonomous-system testing often samples real target failures sparsely because target evaluations are expensive.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Proxy failures from simulators or related policies do not transfer cleanly to the real target system.</p></div>
+    <div><h4>Hidden premise</h4><p>Proxy signals are useful only after a local residual model corrects their target-risk error and keeps scenario coverage realistic.</p></div>
+    <div><h4>Conceptual move</h4><p>Combine proxy evaluations with limited target results to actively select diverse, well-supported failure scenarios.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The method learns a local predictor of target risk by correcting proxy failure signals.</span></li><li><strong>[Abstract]</strong><span>Across driving, manipulation, and quadruped tasks, it discovers up to two times as many failures as random sampling and active-learning baselines.</span></li><li><strong>[Inference]</strong><span>APRL should report which proxy failures transferred and which target failures proxies missed.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes control-variate-inspired residual modeling and a support-aware mutual-information objective.</p></div>
+    <div><h4>Falsification frontier</h4><p>If proxy correction overfits early target failures, it may stop discovering rare but severe new modes.</p></div>
+    <div><h4>Adversarial read</h4><p>Use proxy systems with systematic blind spots and hold out one failure family from initial target labels.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Spend real robot tests where proxy disagreement and scenario support jointly predict severe failure.</p><p>Strong for expensive robot or driving evaluations; weaker when target tests are already cheap and exhaustive.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Process interfaces are becoming the unit of VLA evaluation</h3><p class='links'>ART - PRM-as-a-Judge - BICPO-VLA - ReflexVLA</p><p><strong>Observed</strong> - The papers expose tool calls, progress curves, request-to-handoff state, and reaction latency as measurable decision interfaces.</p><p><strong>Inference</strong> - APRL should evaluate which interface changes action authority before accepting an end-to-end VLA improvement.</p></article><article><h3>World models are being asked to preserve predicates, not only pixels</h3><p class='links'>OpenBelief-Nav - hint2 - Onto-EV-WM - Marionette</p><p><strong>Observed</strong> - The batch preserves observation provenance, temporal-logic propositions, failed predicate arguments, and explicit world state.</p><p><strong>Inference</strong> - Robot-useful world models should be judged by the belief or predicate that changes a route, repair, or safety decision.</p></article><article><h3>Failure evaluation is shifting from score averages to certified event coverage</h3><p class='links'>SSP - coverage-aware active evaluation - aTTC-CBF - tube safety certificates</p><p><strong>Observed</strong> - The papers define matched safety events, target-risk sampling, anticipatory time-to-collision, and route safety tubes.</p><p><strong>Inference</strong> - A deployment benchmark should state which event was preserved, which correction is allowed, and which failure family remains uncovered.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 14 emphasized pre-commit evidence, active evidence acquisition, and world-model transfer diagnostics.</p><p>August 17 strengthens the same commitment-before-action axis with VLA tool routing, PRM process curves, temporal-logic guidance, and proxy-corrected failure discovery.</p></article><article><span>New signal</span><p class='history'>Recent notes treated robot memory mostly as navigation or VLA state.</p><p>OpenBelief-Nav and Onto-EV-WM add a sharper requirement: keep provenance, predicate arguments, and verification results until the robot knows which action needs them.</p></article><article><span>Missing axis</span><p class='history'>Prior editions repeatedly called for robot-usable geometry and safety diagnostics.</p><p>The current batch still lacks a shared protocol that joins geometry degradation, monitor authority, and closed-loop recovery in the same robot task.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Commitment-interface VLA benchmark</h3><p class="thesis">Measure whether tool calls, process curves, progress probes, handoff states, and reaction-latency controls actually veto or alter robot actions.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Select two manipulation tasks with low light, moving objects, and delayed handoff; log tool calls, progress curves, action chunks, and reaction latency.</p></div>
+    <div><strong>4-week build</strong><p>Compare ART-style tool routing, PRM process judging, BICPO handoff adaptation, and Reflex-style future prediction on identical episodes.</p></div>
+    <div><strong>Success metric</strong><p>At least one interface predicts or prevents a failure with usable lead time while preserving success on non-failure episodes.</p></div>
+    <div><strong>Stop condition</strong><p>Interfaces correlate only with final success and cannot identify which next action should change.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Paired videos, action chunks, tool-call traces, PRM curves, latency schedules, handoff-state labels, and veto outcomes.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 27/30</span></div>
+  <h3>Predicate-preserving robot world memory</h3><p class="thesis">Build a navigation/manipulation memory that keeps observation provenance, competing object beliefs, temporal-logic state, and failed predicate arguments until action time.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 3</span><span>moat 5</span><span>timing 4</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Construct five ambiguous object-goal scenes and two predicate-repair manipulation cases with retained frame-mask provenance and task predicates.</p></div>
+    <div><strong>4-week build</strong><p>Compare early-commit labels, belief-preserving memory, LTL-guided policy checks, and ontology-gated repair on the same tasks.</p></div>
+    <div><strong>Success metric</strong><p>Preserved evidence changes target selection or repair acceptance in cases where early commitment fails.</p></div>
+    <div><strong>Stop condition</strong><p>Provenance and predicates increase bookkeeping but do not alter route, repair, or stop decisions.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Belief records, frame-mask provenance, predicate traces, repair attempts, verification outcomes, and action-difference logs.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Exploit</span><span class="total">total 28/30</span></div>
+  <h3>Matched-event failure discovery harness</h3><p class="thesis">Own a testing harness where synthetic, simulated, proxy, and physical runs preserve the same event contract before failure rates are compared.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Define one driving or UAV event with topology, participant roles, timing, risk response, and allowed corrections preserved across proxy and target tests.</p></div>
+    <div><strong>4-week build</strong><p>Implement SSP-style event transfer audits plus coverage-aware target selection and a temporal-barrier or tube-certificate baseline.</p></div>
+    <div><strong>Success metric</strong><p>The harness finds a severe target failure missed by random or proxy-only sampling and explains which event field caused transfer failure.</p></div>
+    <div><strong>Stop condition</strong><p>Event matching is too loose to distinguish domain sensitivity from scenario-content changes.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Event specs, transfer audits, proxy/target paired outcomes, risk residuals, coverage maps, and certificate violation cases.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-17.json">intelligence/2026-08-17.json</a>.</footer>
+</body></html>
