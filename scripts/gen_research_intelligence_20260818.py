@@ -1,0 +1,326 @@
+#!/usr/bin/env python3
+"""Generate the 2026-08-18 Research Intelligence edition."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from gen_research_intelligence_20260811 import build_html
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE_PROMPT = "prompts/instruction_v20260713.md"
+
+
+RI_BY_DATE = {
+    "2026-08-18": {
+        "date": "2026-08-18",
+        "edition": "Research Intelligence",
+        "source_prompt": SOURCE_PROMPT,
+        "source_mode": "new",
+        "scope_note": (
+            "Daily edition from matching Tuesday /new listings: 269 non-replacement cs.CV rows, "
+            "104 cs.RO rows, 355 deduplicated papers, and 291 ROI papers. Tier A cards are "
+            "conservative abstract-only autopsies from the repository parser output; no figure, "
+            "table, or full-text claims are asserted."
+        ),
+        "executive_thesis": (
+            "The August 18 batch pushes robot intelligence toward runtime evidence control. "
+            "VLAs add process rewards, tactile residuals, counterfactual recovery, stop-aware chunking, "
+            "and test-time computation; maps become task-conditioned Gaussian or LiDAR memories that "
+            "decide what to update, ignore, or relight; and deployment benchmarks move toward "
+            "multi-view, flood, driving, and embodied safety harnesses that preserve the physical "
+            "condition behind each claim."
+        ),
+        "decision_cards": [
+            {
+                "label": "Decision",
+                "title": "VLA authority moves to runtime interfaces",
+                "body": (
+                    "CoRe, ViTaR, Robo-Dopamine 2.0, SparkVLA, and tau0-VLA all expose an intermediate "
+                    "recovery, contact, reward, stop, or search interface that can change the next robot action."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Maps are becoming selective control memories",
+                "body": (
+                    "SpotlessGS, MotionGS-SLAM, geometry-aware 3DGS mapping, GaussMemory, and HP2-SLAM "
+                    "ask when a map should relight, blur-model, allocate density, remember task objects, or rely on ICP."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Benchmarks preserve physical evidence",
+                "body": (
+                    "FloodReasonBench, CrossView, ScenarioCharacterization, MM-BEV, HarnessEval-W, and "
+                    "embodied-agent security work make the evaluated evidence path part of the deployment claim."
+                ),
+            },
+        ],
+        "papers": [
+            {
+                "rank": 1,
+                "title": "Imagining Recovery: Inference-Time Counterfactual Realignment for Vision-Language-Action Models",
+                "arxiv_id": "2608.14822",
+                "fit": "VLA recovery - counterfactual rollout - training-free realignment",
+                "status": "Tier A - abstract-only",
+                "status_quo": "A deployed VLA is usually expected to continue from the current observation or require failure data, retraining, or an external recovery agent.",
+                "friction": "Mid-episode goal changes, scene perturbations, and robot-state deviations can break a frozen policy even when a recent viable state still exists.",
+                "hidden_premise": "A synthetic continuation from a viable state can supply enough evidence to realign the physical robot without unsafe trial-and-error.",
+                "conceptual_move": "Treat recovery as counterfactual realignment: imagine the nominal continuation, minimally move robot and scene back onto it, then return control to the frozen policy.",
+                "mechanism": "The abstract describes detecting deviation, synthesizing observations from a recent viable state, and realigning the robot and scene before policy handoff.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "CoRe is a training-free framework that recovers a frozen VLA at inference time without failure data."},
+                    {"trace": "[Abstract]", "claim": "The authors report improved success and reduced physical restorations across simulators, VLA backbones, and real-world settings."},
+                    {"trace": "[Inference]", "claim": "APRL should measure whether imagined recovery changes the next action before more physical correction is attempted."},
+                ],
+                "falsification": "If counterfactual continuations only help small geometric perturbations but fail under contact-rich state uncertainty, the recovery authority is narrower than the headline suggests.",
+                "adversarial": "Stress false deviation detection, ambiguous viable states, and cases where the imagined observation is plausible but contact state is wrong.",
+                "thinking_tool": "Recover by testing the action path that should have happened, not by immediately retraining or handing control away.",
+                "transfer_boundary": "Strong for frozen VLA deployment with recoverable state deviations; weaker where the viable state is not observable or safe to reconstruct.",
+            },
+            {
+                "rank": 2,
+                "title": "ViTaR: Visuo-Tactile Residual Adaptation for Foundation VLA Manipulation",
+                "arxiv_id": "2608.15816",
+                "fit": "contact-rich manipulation - tactile residuals - bounded adaptation",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Foundation VLAs encode broad visual-semantic priors but often treat contact as hidden state or let tactile feedback directly rewrite action generation.",
+                "friction": "The same visual state can require different actions when contact is established, lost, or destabilized.",
+                "hidden_premise": "Tactile feedback should have bounded residual authority rather than unbounded control over the policy.",
+                "conceptual_move": "Reframe tactile sensing from a primary action-generating input into an execution-layer residual that corrects a VLA when contact evidence demands it.",
+                "mechanism": "The abstract positions tactile residual adaptation as a way to keep VLA priors while adding local contact sensitivity.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper names contact-rich deployment as a blind spot for foundation VLA manipulation."},
+                    {"trace": "[Abstract]", "claim": "It argues against both internal VLA modification and unbounded tactile influence over actions."},
+                    {"trace": "[Inference]", "claim": "APRL should separate visual-semantic intent from contact residual authority in manipulation evaluation."},
+                ],
+                "falsification": "If tactile residuals improve success only by overriding the VLA on most steps, the method is not a bounded adaptation layer.",
+                "adversarial": "Use contact loss, false tactile events, slippery objects, and visually identical contact states to test whether residual authority is calibrated.",
+                "thinking_tool": "Give contact a veto or correction channel, not a blank check to replace the policy.",
+                "transfer_boundary": "Strong for tactile manipulation; less direct for tasks where critical state is visual or proprioceptive rather than contact-based.",
+            },
+            {
+                "rank": 3,
+                "title": "Robo-Dopamine 2.0: History-Conditioned and OOD-Aware Process Reward Modeling for Robotic Manipulation",
+                "arxiv_id": "2608.15680",
+                "fit": "process reward - history conditioning - OOD manipulation failure",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Robot RL refinement often relies on sparse terminal success or static before-after visual rewards.",
+                "friction": "Static rewards cannot distinguish robust variations from task-invalid off-trajectory behavior under scene changes and compounding errors.",
+                "hidden_premise": "A reward model needs execution history and an OOD-sensitive comparison interface to score progress rather than appearance.",
+                "conceptual_move": "Turn visual reward modeling into a process assessment problem conditioned on trajectory history and distribution shift.",
+                "mechanism": "The abstract introduces a history- and OOD-aware process reward model with a pairwise prediction interface.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper states that learned visual reward models relying on static before-after observations suffer temporal ambiguity."},
+                    {"trace": "[Abstract]", "claim": "It proposes history-conditioned and OOD-aware process reward modeling for robotic manipulation."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate whether a reward curve predicts recoverable deviation before terminal failure."},
+                ],
+                "falsification": "If history conditioning correlates mainly with video length or scene identity, it may reward dataset artifacts instead of progress.",
+                "adversarial": "Compare trajectories with the same start and end frames but different contact mistakes, recovery paths, and object-state histories.",
+                "thinking_tool": "Use the shape of a trajectory as reward evidence, not just its first and last frames.",
+                "transfer_boundary": "Strong for long-horizon manipulation refinement; weaker for simple tasks with unambiguous terminal labels.",
+            },
+            {
+                "rank": 4,
+                "title": "GaussMemory: Task-Driven 3D Gaussian Scene Memory for Long-Horizon Robotic Manipulation",
+                "arxiv_id": "2608.14986",
+                "fit": "3D Gaussian memory - task-driven update - long-horizon manipulation",
+                "status": "Tier A - abstract-only",
+                "status_quo": "3D robot memories are often passive recorders that update visible elements through fixed rules.",
+                "friction": "A background wall and a grasp target should not receive the same update budget during long-horizon manipulation.",
+                "hidden_premise": "A robot can learn what to remember, update, or discard from task success rather than from hand-designed map heuristics.",
+                "conceptual_move": "Make 3D Gaussian scene memory task-driven: memory management becomes part of the manipulation policy's evidence contract.",
+                "mechanism": "The abstract argues for end-to-end learning of object precision, update aggressiveness, and discard behavior.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper says existing 3D memory systems treat critical objects and irrelevant background with equal importance."},
+                    {"trace": "[Abstract]", "claim": "It proposes active, task-driven spatial memory for long-horizon robotic manipulation."},
+                    {"trace": "[Inference]", "claim": "APRL should score map memory by whether it preserves the object state that changes the next manipulation step."},
+                ],
+                "falsification": "If learned memory improves rendering but not action recovery after occlusion or rearrangement, it is not task-driven enough.",
+                "adversarial": "Use distractor objects, occluded targets, and task switches where remembering the wrong object actively hurts the policy.",
+                "thinking_tool": "Treat memory update as a control decision with a downstream task metric.",
+                "transfer_boundary": "Strong for object-centric manipulation; weaker for pure localization where every geometric feature may carry tracking value.",
+            },
+            {
+                "rank": 5,
+                "title": "MotionGS-SLAM: Event-Modulated Gaussian Splatting for Motion-Blur Robust SLAM",
+                "arxiv_id": "2608.15024",
+                "fit": "3DGS SLAM - event camera - motion blur robustness",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Vision SLAM often treats motion blur as degraded input that should be restored before mapping.",
+                "friction": "Deblurring is ill-posed, and catastrophic tracking failure can occur when fast motion destroys frame-based evidence.",
+                "hidden_premise": "Event timing can constrain blur formation directly inside the Gaussian rendering and mapping model.",
+                "conceptual_move": "Move from removing blur artifacts to forward-modeling blur with event-modulated Gaussian rasterization.",
+                "mechanism": "The abstract describes an event-modulated Gaussian kernel that adapts rasterization using microsecond event evidence.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper says current vision SLAM can fail catastrophically under motion blur."},
+                    {"trace": "[Abstract]", "claim": "It reformulates blur handling as a constrained forward problem inside the rendering pipeline."},
+                    {"trace": "[Inference]", "claim": "APRL should compare event-constrained maps against frame-only maps under controlled angular velocity and lighting."},
+                ],
+                "falsification": "If gains vanish when blur is paired with low texture or dynamic objects, event modulation may only solve one degradation channel.",
+                "adversarial": "Stress fast camera rotation, low light, sparse event rates, and moving objects separately.",
+                "thinking_tool": "When perception is degraded, model the sensor failure mode rather than pretending the clean observation exists.",
+                "transfer_boundary": "Strong for event-camera SLAM; weaker for robots without asynchronous sensing.",
+            },
+            {
+                "rank": 6,
+                "title": "FloodReasonBench: Benchmarking VLM Reasoning Segmentation for Embodied Flood Response at the Edge",
+                "arxiv_id": "2608.15410",
+                "fit": "flood response - reasoning segmentation - edge embodied benchmark",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Reasoning segmentation benchmarks usually use generic visual scenes and ignore resource-constrained disaster response.",
+                "friction": "An embodied flood-response agent must ground mission language in water, roads, people, and hazards under edge compute limits.",
+                "hidden_premise": "A benchmark is useful for embodied response only if task accuracy and resource constraints are measured together.",
+                "conceptual_move": "Specialize reasoning segmentation into a flood-response benchmark with response-relevant targets and edge deployment constraints.",
+                "mechanism": "The abstract introduces FloodResponseSeg and evaluates VLM reasoning segmentation beyond generic scenes.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper states that existing benchmarks overlook flood-response domain and resource constraints."},
+                    {"trace": "[Abstract]", "claim": "It builds a flood-specific reasoning-segmentation dataset from real-world scenes and response-relevant targets."},
+                    {"trace": "[Inference]", "claim": "APRL should pair grounding accuracy with latency and action-critical hazard misses."},
+                ],
+                "falsification": "If flood-specific labels do not change route, rescue, or inspection decisions, the benchmark may remain perception-only.",
+                "adversarial": "Evaluate small hazards, reflective water, occluded roads, and cases where the most salient object is not the action-critical one.",
+                "thinking_tool": "A disaster benchmark should say which grounded pixel changes a physical response.",
+                "transfer_boundary": "Strong for edge embodied perception and field robotics; less direct for indoor manipulation.",
+            },
+            {
+                "rank": 7,
+                "title": "CrossView: Can Vision-Language Models Reason Across Cameras?",
+                "arxiv_id": "2608.15539",
+                "fit": "multi-camera reasoning - occlusion - evidence integration",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Video VLM benchmarks often assume one camera stream and treat more frames as the main scaling variable.",
+                "friction": "Real robots, vehicles, and security systems observe with simultaneous views where the needed evidence may exist only in a subset of cameras.",
+                "hidden_premise": "A VLM must choose and fuse camera evidence, not merely process a longer visual context.",
+                "conceptual_move": "Reframe video understanding as cross-camera evidence selection under overlap, occlusion, and divergent perspectives.",
+                "mechanism": "The abstract argues that multi-camera reasoning is fundamentally different from single-camera video understanding and that current models struggle.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper says multi-camera reasoning must resolve occlusions, decide which views matter, and integrate overlapping or diverging evidence."},
+                    {"trace": "[Abstract]", "claim": "It reports that current models struggle with this setting."},
+                    {"trace": "[Inference]", "claim": "APRL should report which camera changed the decision in a multi-view robot or driving task."},
+                ],
+                "falsification": "If failures are caused mostly by token length rather than view selection, the benchmark is a context-compression test rather than cross-view reasoning.",
+                "adversarial": "Use scenes where one camera is misleading, delayed, or occluded while another contains the decisive safety evidence.",
+                "thinking_tool": "Ask which viewpoint earns decision authority before fusing all views.",
+                "transfer_boundary": "Strong for multi-camera robots and driving; less direct for single-camera policies.",
+            },
+            {
+                "rank": 8,
+                "title": "Evidence of Absence: Cross-Modal Abductive Risk Perception to Sustain World Models When Vision Fails",
+                "arxiv_id": "2608.14952",
+                "fit": "world model risk - missing visual evidence - cross-modal abduction",
+                "status": "Tier A - abstract-only",
+                "status_quo": "World-state models assume visual observations populate entities, relations, context, and predictive cues.",
+                "friction": "Occlusion or visual degradation can remove exactly the evidence a robot needs to preserve risk predictions.",
+                "hidden_premise": "The absence of expected co-evidence from one modality can itself indicate a hidden cause when a complementary modality remains informative.",
+                "conceptual_move": "Sustain the world model through abductive cross-modal risk perception, instantiated with acoustic cues when vision fails.",
+                "mechanism": "The abstract describes microphone-array bearing and approach-rate evidence used when the primary visual modality is occluded or degraded.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper asks how to sustain a structured world-state model when visual observations are missing."},
+                    {"trace": "[Abstract]", "claim": "It treats absence of expected co-evidence as evidence of a hidden cause and instantiates the idea acoustically."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate whether missing visual evidence changes the stop, search, or avoidance action."},
+                ],
+                "falsification": "If acoustic evidence only recovers already obvious risks, abduction does not add control value.",
+                "adversarial": "Stress silent hazards, reflective visual clutter, delayed audio, and cases where absence indicates sensor failure rather than hidden object risk.",
+                "thinking_tool": "Missing evidence can be an action-relevant observation when the expected co-evidence should have appeared.",
+                "transfer_boundary": "Strong for degraded perception and mobile robots; weaker for tasks where complementary modalities are unavailable.",
+            },
+        ],
+        "synthesis": [
+            {
+                "title": "VLA adaptation is becoming authority allocation",
+                "links": "CoRe - ViTaR - Robo-Dopamine 2.0 - SparkVLA - tau0-VLA",
+                "facts": "The selected papers expose recovery imagination, tactile residuals, process rewards, stop-prefix ranking, and world-model-guided search as separate authority channels.",
+                "inference": "APRL should compare which channel changes a next action under the same perturbation before trusting terminal success gains.",
+            },
+            {
+                "title": "Robot maps now need update stop conditions",
+                "links": "GaussMemory - MotionGS-SLAM - SpotlessGS - HP2-SLAM - LightLoc++",
+                "facts": "The batch asks maps to handle task relevance, motion blur, illumination, LiDAR degeneracy, and sensor changes rather than only maximize reconstruction quality.",
+                "inference": "A map representation should be judged by when it updates, refuses evidence, or changes a downstream action.",
+            },
+            {
+                "title": "Evaluation is moving toward evidence provenance",
+                "links": "FloodReasonBench - CrossView - ScenarioCharacterization - HarnessEval-W - embodied security",
+                "facts": "The benchmark papers preserve domain, camera, scenario, resource, or trust-boundary evidence as part of the claimed result.",
+                "inference": "Deployment evaluation should explain which physical evidence path supports the score and which missing path would falsify it.",
+            },
+        ],
+        "frontier_memory": [
+            {
+                "label": "Strengthening",
+                "history": "August 17 emphasized commitment interfaces for tool use, process judging, world-model predicates, and matched safety events.",
+                "body": "August 18 strengthens the same commitment-before-action axis with tactile residual authority, counterfactual recovery, stop-aware action chunks, task-driven Gaussian memory, and multi-camera evidence selection.",
+            },
+            {
+                "label": "New signal",
+                "history": "Recent geometry notes focused on map quality, localization, and event or LiDAR efficiency.",
+                "body": "Today adds a sharper map-governance question: when should a Gaussian or LiDAR map allocate density, relight, reject blur, remember task objects, or stop updating?",
+            },
+            {
+                "label": "Missing axis",
+                "history": "Prior RI editions repeatedly called for robot-usable geometry and safety diagnostics.",
+                "body": "The current batch still lacks one shared benchmark that joins contact residuals, map update choices, multi-view evidence, and recovery authority inside the same closed-loop robot task.",
+            },
+        ],
+        "strategy": [
+            {
+                "priority": "Build moat",
+                "title": "Runtime-authority VLA benchmark",
+                "thesis": "Measure which runtime interface is allowed to alter, delay, or veto a VLA action under the same perturbation.",
+                "scores": {"fit": 5, "novelty": 5, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 5},
+                "one_week": "Run two manipulation tasks with object displacement, contact loss, and mid-episode instruction change; compare counterfactual recovery, tactile residuals, process rewards, and stop-aware chunking.",
+                "four_week": "Build a reusable harness that swaps recovery, residual, reward, stop, and test-time search modules around the same frozen VLA backbone.",
+                "success": "At least one interface predicts or prevents a failure earlier than terminal success while preserving non-perturbed success.",
+                "stop": "All interfaces rank episodes the same way as final success and cannot identify which next action should change.",
+                "asset": "Perturbation suite, action deltas, contact states, recovery proposals, reward curves, stop-prefix choices, and veto outcomes.",
+            },
+            {
+                "priority": "Build moat",
+                "title": "Task-driven Gaussian map governance",
+                "thesis": "Turn Gaussian and LiDAR mapping from passive reconstruction into a policy for update, relight, reject, remember, and discard decisions.",
+                "scores": {"fit": 5, "novelty": 5, "feasibility": 3, "moat": 5, "timing": 5, "evidence": 5},
+                "one_week": "Create a small scene set with dynamic lighting, camera motion blur, distractor objects, LiDAR degeneracy, and task-relevant occlusions.",
+                "four_week": "Compare SpotlessGS-style relighting, event-modulated blur modeling, geometry-aware density control, task-driven memory, and hybrid ICP under identical robot tasks.",
+                "success": "A map-update policy improves localization or manipulation recovery under at least two degradation families without increasing false stable memories.",
+                "stop": "Map governance only improves visual metrics and does not change downstream robot decisions.",
+                "asset": "Degraded multi-view scenes, event/LiDAR streams, Gaussian update traces, task object masks, and downstream action outcomes.",
+            },
+            {
+                "priority": "Explore",
+                "title": "Physical-evidence benchmark provenance",
+                "thesis": "Make every score identify the camera, modality, scenario field, resource budget, or trust boundary that supports the deployment claim.",
+                "scores": {"fit": 5, "novelty": 4, "feasibility": 4, "moat": 4, "timing": 5, "evidence": 4},
+                "one_week": "Choose one flood-response, driving, or indoor navigation task and mark which view, modality, scenario variable, and edge budget is decisive for action.",
+                "four_week": "Evaluate VLM segmentation, cross-view reasoning, scenario characterization, timely BEV perception, and embodied-agent attacks using the same provenance schema.",
+                "success": "The provenance schema exposes a model ranking reversal or a safety failure hidden by the aggregate score.",
+                "stop": "The provenance fields do not predict action errors beyond ordinary held-out accuracy.",
+                "asset": "Scenario cards, view-authority labels, modality-degradation cases, edge-budget traces, trust-boundary attacks, and action-impact annotations.",
+            },
+        ],
+    }
+}
+
+
+def main() -> int:
+    (ROOT / "intelligence").mkdir(exist_ok=True)
+    (ROOT / "posts").mkdir(exist_ok=True)
+    for date, data in RI_BY_DATE.items():
+        (ROOT / "intelligence" / f"{date}.json").write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        (ROOT / "posts" / f"{date}-research-intelligence.html").write_text(
+            build_html(data),
+            encoding="utf-8",
+            newline="\n",
+        )
+        print(f"wrote intelligence/{date}.json and posts/{date}-research-intelligence.html")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
