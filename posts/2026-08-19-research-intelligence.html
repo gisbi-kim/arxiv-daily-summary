@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-19 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-19 arXiv Research Intelligence</h1>
+<p class="lead">The August 19 batch keeps moving robot intelligence from representation size toward evidence authority. VLA and robot-control papers ask who may rewrite code, add force reflexes, compose skill blocks, or veto unsafe action chunks during execution. Geometry papers ask whether reconstruction objectives preserve metric scale, queryable instances, and uncertainty needed by a robot. Benchmark and VLM papers ask which visual, textual, scene-graph, or safety-specification evidence actually governs the final action.</p><p class="scope">Daily edition from matching Wednesday /new listings: 103 non-replacement cs.CV rows, 43 cs.RO rows, 141 deduplicated papers, and 114 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claims are asserted.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>Execution authority is split into measurable interfaces</h3><p>Teach-and-Grow, VLCP, UniReflex, and action-conditioned safety shields all expose a concrete interface that can compose, rewrite, correct, or reject the next robot action.</p></article><article><span>Decision</span><h3>Geometry must prove operational validity</h3><p>Scalix, InitFree BA, GroupForward, GenRec, and Jetson-ORB-SLAM3 push beyond visual reconstruction toward scale consistency, metric reconstruction, queryable instances, and edge-viable localization evidence.</p></article><article><span>Decision</span><h3>Benchmarks now isolate the evidence source</h3><p>ManiGuard, CondVLN, Which Source Wins, PROBE, and multi-view fusion diagnostics make the decisive cue or violated specification part of the claim, not an afterthought.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.17209" target="_blank" rel="noopener">Teach and Grow: An Agent-Centered Architecture for General Robot Learning</a></h3>
+  <p class="fit">general robot learning - skill blocks - retraining tax</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Generalist VLA or world-action policies are often treated as monolithic models that must be retrained when physical coverage is missing.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract frames unfamiliar objects, sensors, embodiments, and contacts as a recurring retraining tax because embodied data must be created by operating machines.</p></div>
+    <div><h4>Hidden premise</h4><p>Reusable closed-loop skill blocks can reduce the need to regenerate robot data when a new scene only requires recomposition or routing.</p></div>
+    <div><h4>Conceptual move</h4><p>Shift the unit of learning from one end-to-end policy to an agent that builds, grounds, composes, and revises executable Skill Blocks.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names the retraining tax as the cost of collecting new robot data, updating policy, and regression testing after coverage failure.</span></li><li><strong>[Abstract]</strong><span>It proposes a Skill Library of executable closed-loop behaviors for meaningful subgoals.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether a skill-block library reduces new-data burden under object, sensor, and contact shifts.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes converting a few successful demonstrations into subgoal behaviors, then grounding and composing them with learned or geometric tools while observing physical outcomes.</p></div>
+    <div><h4>Falsification frontier</h4><p>If most new scenes still require new physical data and policy updates, the architecture has not reduced the retraining tax.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress compositional tasks where a reused block is locally successful but globally violates the instruction or contact constraint.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Measure reuse as physical coverage expansion, not as a larger prompt or longer policy trace.</p><p>Strong for modular manipulation and navigation skills; weaker when the task requires a genuinely new contact primitive.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.16978" target="_blank" rel="noopener">VLCP: Vision Language Control Policy Closed-Loop Code Replanning for Robot Manipulation</a></h3>
+  <p class="fit">frozen VLM - code policy - closed-loop replanning</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Frozen VLM robot policies are often used open-loop or corrected by retrying a fixed policy or choosing a new subtask.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A failure can live in the generated control function itself, so retrying the same code lets the error compound inside an episode.</p></div>
+    <div><h4>Hidden premise</h4><p>A frontier VLM can use multi-view observations, proprioception, and state deltas to rewrite the failed control code without fine-tuning.</p></div>
+    <div><h4>Conceptual move</h4><p>Move closed-loop correction from subtask selection to the executable code layer.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper keeps the VLM frozen and has it emit short Python control functions without demonstrations or fine-tuning.</span></li><li><strong>[Abstract]</strong><span>It reports periodic re-observation and code rewriting within a single episode.</span></li><li><strong>[Inference]</strong><span>APRL should score when code revision prevents compounding error before terminal failure.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract says the VLM re-observes every K steps and rewrites the Python control function from the current scene and state delta.</p></div>
+    <div><h4>Falsification frontier</h4><p>If code rewrites mainly succeed by restarting simple subtasks rather than repairing the failed control law, the claimed correction level is weaker.</p></div>
+    <div><h4>Adversarial read</h4><p>Use tasks with misleading partial progress where rewriting code can break a previously valid contact or grasp state.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Localize a robot failure to the interface that can still be rewritten safely during execution.</p><p>Strong for scripted or tool-callable manipulation; weaker for high-rate force control where code generation latency is unacceptable.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.17386" target="_blank" rel="noopener">MANIGUARD: A Benchmark and Data Suite for Specification-Grounded Safety Evaluation and Improvement of Robotic Manipulation</a></h3>
+  <p class="fit">manipulation safety - LTL monitors - OOD perturbations</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Manipulation policies are commonly ranked by task success, while safety is inferred from aggregate behavior or learned judges.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A robot can complete a task while violating a contact, ordering, or workspace constraint that should have been specified independently.</p></div>
+    <div><h4>Hidden premise</h4><p>Safety must be monitored by explicit physics-grounded predicates while task success and OOD perturbation are held apart.</p></div>
+    <div><h4>Conceptual move</h4><p>Make safety specification an independent evaluation object with locked tasks, single-axis perturbations, and runtime automaton monitors.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The benchmark organizes contact-rich household manipulation into a skill by constraint taxonomy.</span></li><li><strong>[Abstract]</strong><span>Each task is evaluated under one in-distribution and four single-axis OOD perturbations with the safety specification fixed.</span></li><li><strong>[Inference]</strong><span>APRL should require safety predicates that can fail even when final task success is true.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes 200 locked base tasks, four OOD perturbations per task, and LTLf-grounded automaton monitors over physics-grounded predicates.</p></div>
+    <div><h4>Falsification frontier</h4><p>If predicate violations do not predict real robot damage, instability, or operator rejection, the specification is too formal but not physical enough.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress policies that exploit simulator tolerances, graze forbidden objects, or satisfy a goal after a transient unsafe contact.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Separate task success from specification satisfaction before ranking robot policies.</p><p>Strong for manipulation with clear physical predicates; less direct for open-ended social or language-only safety claims.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.17496" target="_blank" rel="noopener">Calibrated Predictive Safety for Heterogeneous Robots: An Action-Conditioned JEPA Framework with Model-Based Safety Shields</a></h3>
+  <p class="fit">action-conditioned world model - risk prediction - safety shield</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA policies generalize but do not certify execution-time risk, while classical planners respect constraints but do not transfer broadly.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A proposed action chunk can look semantically right while being physically unsafe for a specific embodiment.</p></div>
+    <div><h4>Hidden premise</h4><p>A frozen-encoder latent rollout can predict both progress and risk before execution when conditioned on action and embodiment.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn safety into a receding-horizon candidate-filtering contract: propose actions, roll them forward, score risk and progress, then shield per embodiment.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper explicitly contrasts broad VLA generalization with lack of execution-time guarantees.</span></li><li><strong>[Abstract]</strong><span>It proposes a pipeline that filters candidate chunks with calibrated risk, progress, uncertainty, and an embodiment-specific shield.</span></li><li><strong>[Inference]</strong><span>APRL should compare risk prediction lead time against shield intervention and final task success.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes K candidate action chunks, an action-conditioned JEPA, calibrated risk and progress heads, and deterministic safety shields.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the shield dominates decisions and the learned rollout adds little discrimination, the JEPA is not carrying safety authority.</p></div>
+    <div><h4>Adversarial read</h4><p>Use heterogeneous robots with similar observations but different kinematic limits so false embodiment generalization becomes visible.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Score an action before execution by both expected progress and embodiment-specific inadmissibility.</p><p>Strong for chunked robot policies; weaker for continuous contact regimes without reliable candidate rollouts.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.17553" target="_blank" rel="noopener">Scalix: Uncertainty-Aware Scale-Consistent Monocular SLAM</a></h3>
+  <p class="fit">monocular SLAM - metric scale - uncertainty-aware factor graph</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Monocular SLAM is attractive for compact robots but suffers scale ambiguity, while learned depth can be noisy and scale-inconsistent.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Robots under constant-velocity motion or sparse sensing can lose observability exactly when reliable metric scale is needed.</p></div>
+    <div><h4>Hidden premise</h4><p>Learned depth is useful only if its per-pixel and per-frame uncertainty can be represented inside geometric optimization.</p></div>
+    <div><h4>Conceptual move</h4><p>Fuse learned depth cues into a probabilistic factor-graph SLAM formulation with explicit scale and depth uncertainty.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies scale ambiguity and noisy scale-inconsistent learned depths as the target failure.</span></li><li><strong>[Abstract]</strong><span>It integrates learned depth cues into a probabilistic factor-graph formulation.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether uncertainty-aware scale improves downstream navigation, not only trajectory error.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes augmenting monocular depth models with per-pixel depth uncertainty and per-frame scale uncertainty for real-time metric-scale estimation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If scale consistency improves on benchmarks but fails under textureless, dynamic, or rolling terrain scenes, the uncertainty model is incomplete.</p></div>
+    <div><h4>Adversarial read</h4><p>Separate depth noise, scale drift, constant-velocity motion, and dynamic object contamination in controlled robot routes.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A learned geometry prior becomes robotic only when its uncertainty enters the estimator.</p><p>Strong for camera-only mobile robots; less direct when LiDAR or wheel odometry already supplies reliable metric scale.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.18028" target="_blank" rel="noopener">Initialization-Free Bundle Adjustment Revisited: A Controlled Experimental Study</a></h3>
+  <p class="fit">bundle adjustment - optimization reconstruction gap - controlled geometry evaluation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Initialization-free bundle adjustment is often judged by whether the optimization objective reaches a low value from random camera configurations.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A low object-space error can correspond to projective solutions that are not valid metric 3D reconstructions.</p></div>
+    <div><h4>Hidden premise</h4><p>Geometry optimization needs a reconstruction-validity check, not only an optimizer-success check.</p></div>
+    <div><h4>Conceptual move</h4><p>Evaluate InitFree BA with controlled ground truth that exposes the optimization-reconstruction gap.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper says existing evaluations primarily measure optimization success.</span></li><li><strong>[Abstract]</strong><span>It reports a previously overlooked gap between low OSE and valid Euclidean reconstruction.</span></li><li><strong>[Inference]</strong><span>APRL should require metric validity tests for any reconstruction used by a robot map or planner.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a unified framework combining OSE formulations with a Blender-based dataset generator with exact ground truth and controlled camera configurations.</p></div>
+    <div><h4>Falsification frontier</h4><p>If metric invalidity appears only in artificial camera setups, the practical risk for field reconstruction may be smaller.</p></div>
+    <div><h4>Adversarial read</h4><p>Test sparse views, repeated structure, planar scenes, and robot camera motion where low objective values can hide wrong scale or pose.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Do not treat a converged geometry objective as a robot-usable map without a metric reconstruction check.</p><p>Strong for SfM/SLAM evaluation; less direct for pure novel-view synthesis where metric use is not claimed.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.17318" target="_blank" rel="noopener">If, Then, Otherwise: Diagnosing Conditional Branching in Vision-Language Navigation</a></h3>
+  <p class="fit">VLN - conditional branching - scene graph predicates</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Vision-language navigation benchmarks usually reward following route-like instructions toward a fixed goal.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Real instructions can require if-then-otherwise branching, where the agent must observe evidence, choose a logical branch, and execute it.</p></div>
+    <div><h4>Hidden premise</h4><p>A navigation failure should be decomposed into perception, grounding, logical branch choice, and motion execution.</p></div>
+    <div><h4>Conceptual move</h4><p>Build scene-graph-grounded conditional instructions with controlled branch depth, dependency length, spatial composition, and evidence observability.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper states that existing evaluations provide limited control over conditional branch execution.</span></li><li><strong>[Abstract]</strong><span>It grounds branch conditions in verifiable 3D scene-graph predicates.</span></li><li><strong>[Inference]</strong><span>APRL should report whether an embodied agent chose the wrong branch or failed after a correct branch.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract introduces CondVLN, generated from verifiable 3D scene-graph predicates with controlled branching variables.</p></div>
+    <div><h4>Falsification frontier</h4><p>If branch failures collapse to ordinary perception misses, the logical diagnostic value is weaker than claimed.</p></div>
+    <div><h4>Adversarial read</h4><p>Use conditions where the relevant evidence is partly observable, temporally delayed, or conflicts with a language prior.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Make the decision branch itself an evaluated object before measuring navigation success.</p><p>Strong for VLN and mobile manipulation instructions; weaker for reactive locomotion without symbolic conditions.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.17205" target="_blank" rel="noopener">Which Source Wins? Task-Dependent Reliance in Vision-Language Models</a></h3>
+  <p class="fit">VLM reliability - modality conflict - task-dependent source reliance</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLMs are often assumed to fuse image and text evidence in a stable way across tasks.</p></div>
+    <div><h4>Friction / anomaly</h4><p>When image and text conflict and one source becomes harder to read, the model may shift reliance differently depending on task and evidence structure.</p></div>
+    <div><h4>Hidden premise</h4><p>Reliance is not a fixed model property; it is a task-conditioned arbitration behavior that must be tested under controlled conflict.</p></div>
+    <div><h4>Conceptual move</h4><p>Create paired conflicts and degrade one modality at a time to measure source preference shifts.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper reports opposite reliance-shift patterns between arithmetic conflicts and ChartQA-Conflict.</span></li><li><strong>[Abstract]</strong><span>The reversal persists after calibration for unimodal accuracy loss and after replacing charts with table images.</span></li><li><strong>[Inference]</strong><span>APRL should treat modality authority as an evaluated variable in robot perception-language systems.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes conflicts from arithmetic and ChartQA settings, legibility degradation, generated answers, and likelihood margins.</p></div>
+    <div><h4>Falsification frontier</h4><p>If source-reliance shifts do not predict action errors in embodied tasks, the diagnostic may remain VQA-specific.</p></div>
+    <div><h4>Adversarial read</h4><p>Use robot scenes where text instructions, gauges, labels, or charts conflict with visual evidence under controlled degradation.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask which source wins under conflict before trusting a multimodal explanation.</p><p>Strong for VLM-heavy inspection and navigation; less direct for low-level policies that do not arbitrate text and image evidence.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Runtime authority is the shared VLA decision</h3><p class='links'>Teach-and-Grow - VLCP - UniReflex - Calibrated Predictive Safety - Hydra-0</p><p><strong>Observed</strong> - The papers separately assign action authority to skill libraries, code rewrites, force reflexes, risk shields, and action-flow world models.</p><p><strong>Inference</strong> - APRL should compare which interface changes the next action under identical perturbations before trusting final success improvements.</p></article><article><h3>Robot-usable geometry needs validity checks</h3><p class='links'>Scalix - InitFree BA - GroupForward - GenRec - Jetson-ORB-SLAM3</p><p><strong>Observed</strong> - The geometry papers expose scale uncertainty, objective-validity gaps, instance grouping, reconstruction/generation boundaries, and edge feature fidelity.</p><p><strong>Inference</strong> - A reconstruction should be scored by localization, query, planning, and update consequences, not just visual or optimization metrics.</p></article><article><h3>Evidence provenance is becoming the benchmark axis</h3><p class='links'>ManiGuard - CondVLN - Which Source Wins - PROBE - PathoArgus</p><p><strong>Observed</strong> - The benchmark papers isolate safety predicates, conditional branches, modality reliance, manipulation-grounded answers, and evidence-chain availability.</p><p><strong>Inference</strong> - Deployment evaluation should identify the cue, specification, or physical state that made the answer or action valid.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 18 emphasized runtime evidence control through recovery, tactile residuals, process rewards, map governance, and multi-view evidence.</p><p>August 19 strengthens that axis with code replanning, skill-block composition, force reflexes, action-conditioned safety shields, and source-reliance diagnostics.</p></article><article><span>New signal</span><p class='history'>Recent geometry RI notes focused on Gaussian maps, event blur, relighting, LiDAR ICP, and task memory.</p><p>Today adds a more explicit geometry validity signal: low optimization error, fast edge SLAM, or feed-forward reconstruction is not enough unless metric scale, instance query, and uncertainty survive robot use.</p></article><article><span>Missing axis</span><p class='history'>Prior runs repeatedly called for closed-loop robot evaluation of maps, VLA authority, and reliability.</p><p>The current corpus still lacks one shared benchmark that puts modality conflict, conditional branching, specification monitors, map uncertainty, and action veto into the same robot episode.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Runtime-authority interface benchmark</h3><p class="thesis">Measure which interface is allowed to compose, rewrite, correct, or veto a robot action under the same perturbation.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Run two manipulation tasks with object displacement, language conflict, and contact loss; compare skill-block routing, code replanning, force reflexes, and risk-shield vetoes.</p></div>
+    <div><strong>4-week build</strong><p>Build a reusable harness that swaps authority interfaces around a common frozen VLA or scripted policy and exports action deltas, veto events, and recovery outcomes.</p></div>
+    <div><strong>Success metric</strong><p>At least one authority interface predicts or prevents a failure before terminal success changes while preserving clean-task behavior.</p></div>
+    <div><strong>Stop condition</strong><p>All interfaces make the same decisions as terminal success and cannot identify which next action should change.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Perturbation episodes, action deltas, contact traces, code revisions, reflex gates, safety vetoes, and recovery outcomes.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 28/30</span></div>
+  <h3>Robot-usable geometry validity protocol</h3><p class="thesis">Evaluate geometry systems by metric scale, uncertainty, instance queryability, update cost, and downstream robot action impact.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Construct a small route and tabletop scene with scale ambiguity, sparse views, dynamic distractors, lighting shift, and small queried objects.</p></div>
+    <div><strong>4-week build</strong><p>Compare monocular SLAM, InitFree BA, Gaussian grouping, reconstruction/generation splitting, and edge ORB-SLAM under the same navigation or retrieval tasks.</p></div>
+    <div><strong>Success metric</strong><p>A geometry validity metric predicts localization, retrieval, or manipulation failure better than photometric or optimizer scores alone.</p></div>
+    <div><strong>Stop condition</strong><p>Validity metrics do not change model ranking or downstream robot decisions beyond existing trajectory error.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Controlled scenes, scale ground truth, uncertainty traces, instance queries, edge latency, localization failures, and task outcomes.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 26/30</span></div>
+  <h3>Evidence-provenance robot benchmark</h3><p class="thesis">Make each robot answer or action identify the cue, modality, condition branch, or safety predicate that authorized it.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 3</span><span>moat 4</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create ten tabletop or navigation episodes with conflicting image/text cues, conditional instructions, hidden-object questions, and independent safety predicates.</p></div>
+    <div><strong>4-week build</strong><p>Evaluate VLM agents, navigation policies, and manipulation policies with source-reliance, branch-choice, and specification-violation labels.</p></div>
+    <div><strong>Success metric</strong><p>The provenance labels expose a failure hidden by aggregate success or answer accuracy.</p></div>
+    <div><strong>Stop condition</strong><p>Provenance labels do not predict action errors or safety violations beyond normal held-out accuracy.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Conflict scenes, branch predicates, safety specifications, modality degradations, manipulation-grounded questions, and action-impact labels.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-19.json">intelligence/2026-08-19.json</a>.</footer>
+</body></html>

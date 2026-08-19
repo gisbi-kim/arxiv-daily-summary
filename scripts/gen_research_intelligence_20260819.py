@@ -1,0 +1,327 @@
+#!/usr/bin/env python3
+"""Generate the 2026-08-19 Research Intelligence edition."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from gen_research_intelligence_20260811 import build_html
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE_PROMPT = "prompts/instruction_v20260713.md"
+
+
+RI_BY_DATE = {
+    "2026-08-19": {
+        "date": "2026-08-19",
+        "edition": "Research Intelligence",
+        "source_prompt": SOURCE_PROMPT,
+        "source_mode": "new",
+        "scope_note": (
+            "Daily edition from matching Wednesday /new listings: 103 non-replacement cs.CV rows, "
+            "43 cs.RO rows, 141 deduplicated papers, and 114 ROI papers. Tier A cards are "
+            "conservative abstract-only autopsies from the repository parser output; no figure, "
+            "table, full-text, code, or dataset-release claims are asserted."
+        ),
+        "executive_thesis": (
+            "The August 19 batch keeps moving robot intelligence from representation size toward "
+            "evidence authority. VLA and robot-control papers ask who may rewrite code, add force "
+            "reflexes, compose skill blocks, or veto unsafe action chunks during execution. "
+            "Geometry papers ask whether reconstruction objectives preserve metric scale, queryable "
+            "instances, and uncertainty needed by a robot. Benchmark and VLM papers ask which visual, "
+            "textual, scene-graph, or safety-specification evidence actually governs the final action."
+        ),
+        "decision_cards": [
+            {
+                "label": "Decision",
+                "title": "Execution authority is split into measurable interfaces",
+                "body": (
+                    "Teach-and-Grow, VLCP, UniReflex, and action-conditioned safety shields all expose "
+                    "a concrete interface that can compose, rewrite, correct, or reject the next robot action."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Geometry must prove operational validity",
+                "body": (
+                    "Scalix, InitFree BA, GroupForward, GenRec, and Jetson-ORB-SLAM3 push beyond visual "
+                    "reconstruction toward scale consistency, metric reconstruction, queryable instances, "
+                    "and edge-viable localization evidence."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Benchmarks now isolate the evidence source",
+                "body": (
+                    "ManiGuard, CondVLN, Which Source Wins, PROBE, and multi-view fusion diagnostics "
+                    "make the decisive cue or violated specification part of the claim, not an afterthought."
+                ),
+            },
+        ],
+        "papers": [
+            {
+                "rank": 1,
+                "title": "Teach and Grow: An Agent-Centered Architecture for General Robot Learning",
+                "arxiv_id": "2608.17209",
+                "fit": "general robot learning - skill blocks - retraining tax",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Generalist VLA or world-action policies are often treated as monolithic models that must be retrained when physical coverage is missing.",
+                "friction": "The abstract frames unfamiliar objects, sensors, embodiments, and contacts as a recurring retraining tax because embodied data must be created by operating machines.",
+                "hidden_premise": "Reusable closed-loop skill blocks can reduce the need to regenerate robot data when a new scene only requires recomposition or routing.",
+                "conceptual_move": "Shift the unit of learning from one end-to-end policy to an agent that builds, grounds, composes, and revises executable Skill Blocks.",
+                "mechanism": "The abstract describes converting a few successful demonstrations into subgoal behaviors, then grounding and composing them with learned or geometric tools while observing physical outcomes.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper names the retraining tax as the cost of collecting new robot data, updating policy, and regression testing after coverage failure."},
+                    {"trace": "[Abstract]", "claim": "It proposes a Skill Library of executable closed-loop behaviors for meaningful subgoals."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate whether a skill-block library reduces new-data burden under object, sensor, and contact shifts."},
+                ],
+                "falsification": "If most new scenes still require new physical data and policy updates, the architecture has not reduced the retraining tax.",
+                "adversarial": "Stress compositional tasks where a reused block is locally successful but globally violates the instruction or contact constraint.",
+                "thinking_tool": "Measure reuse as physical coverage expansion, not as a larger prompt or longer policy trace.",
+                "transfer_boundary": "Strong for modular manipulation and navigation skills; weaker when the task requires a genuinely new contact primitive.",
+            },
+            {
+                "rank": 2,
+                "title": "VLCP: Vision Language Control Policy Closed-Loop Code Replanning for Robot Manipulation",
+                "arxiv_id": "2608.16978",
+                "fit": "frozen VLM - code policy - closed-loop replanning",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Frozen VLM robot policies are often used open-loop or corrected by retrying a fixed policy or choosing a new subtask.",
+                "friction": "A failure can live in the generated control function itself, so retrying the same code lets the error compound inside an episode.",
+                "hidden_premise": "A frontier VLM can use multi-view observations, proprioception, and state deltas to rewrite the failed control code without fine-tuning.",
+                "conceptual_move": "Move closed-loop correction from subtask selection to the executable code layer.",
+                "mechanism": "The abstract says the VLM re-observes every K steps and rewrites the Python control function from the current scene and state delta.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper keeps the VLM frozen and has it emit short Python control functions without demonstrations or fine-tuning."},
+                    {"trace": "[Abstract]", "claim": "It reports periodic re-observation and code rewriting within a single episode."},
+                    {"trace": "[Inference]", "claim": "APRL should score when code revision prevents compounding error before terminal failure."},
+                ],
+                "falsification": "If code rewrites mainly succeed by restarting simple subtasks rather than repairing the failed control law, the claimed correction level is weaker.",
+                "adversarial": "Use tasks with misleading partial progress where rewriting code can break a previously valid contact or grasp state.",
+                "thinking_tool": "Localize a robot failure to the interface that can still be rewritten safely during execution.",
+                "transfer_boundary": "Strong for scripted or tool-callable manipulation; weaker for high-rate force control where code generation latency is unacceptable.",
+            },
+            {
+                "rank": 3,
+                "title": "MANIGUARD: A Benchmark and Data Suite for Specification-Grounded Safety Evaluation and Improvement of Robotic Manipulation",
+                "arxiv_id": "2608.17386",
+                "fit": "manipulation safety - LTL monitors - OOD perturbations",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Manipulation policies are commonly ranked by task success, while safety is inferred from aggregate behavior or learned judges.",
+                "friction": "A robot can complete a task while violating a contact, ordering, or workspace constraint that should have been specified independently.",
+                "hidden_premise": "Safety must be monitored by explicit physics-grounded predicates while task success and OOD perturbation are held apart.",
+                "conceptual_move": "Make safety specification an independent evaluation object with locked tasks, single-axis perturbations, and runtime automaton monitors.",
+                "mechanism": "The abstract describes 200 locked base tasks, four OOD perturbations per task, and LTLf-grounded automaton monitors over physics-grounded predicates.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The benchmark organizes contact-rich household manipulation into a skill by constraint taxonomy."},
+                    {"trace": "[Abstract]", "claim": "Each task is evaluated under one in-distribution and four single-axis OOD perturbations with the safety specification fixed."},
+                    {"trace": "[Inference]", "claim": "APRL should require safety predicates that can fail even when final task success is true."},
+                ],
+                "falsification": "If predicate violations do not predict real robot damage, instability, or operator rejection, the specification is too formal but not physical enough.",
+                "adversarial": "Stress policies that exploit simulator tolerances, graze forbidden objects, or satisfy a goal after a transient unsafe contact.",
+                "thinking_tool": "Separate task success from specification satisfaction before ranking robot policies.",
+                "transfer_boundary": "Strong for manipulation with clear physical predicates; less direct for open-ended social or language-only safety claims.",
+            },
+            {
+                "rank": 4,
+                "title": "Calibrated Predictive Safety for Heterogeneous Robots: An Action-Conditioned JEPA Framework with Model-Based Safety Shields",
+                "arxiv_id": "2608.17496",
+                "fit": "action-conditioned world model - risk prediction - safety shield",
+                "status": "Tier A - abstract-only",
+                "status_quo": "VLA policies generalize but do not certify execution-time risk, while classical planners respect constraints but do not transfer broadly.",
+                "friction": "A proposed action chunk can look semantically right while being physically unsafe for a specific embodiment.",
+                "hidden_premise": "A frozen-encoder latent rollout can predict both progress and risk before execution when conditioned on action and embodiment.",
+                "conceptual_move": "Turn safety into a receding-horizon candidate-filtering contract: propose actions, roll them forward, score risk and progress, then shield per embodiment.",
+                "mechanism": "The abstract describes K candidate action chunks, an action-conditioned JEPA, calibrated risk and progress heads, and deterministic safety shields.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper explicitly contrasts broad VLA generalization with lack of execution-time guarantees."},
+                    {"trace": "[Abstract]", "claim": "It proposes a pipeline that filters candidate chunks with calibrated risk, progress, uncertainty, and an embodiment-specific shield."},
+                    {"trace": "[Inference]", "claim": "APRL should compare risk prediction lead time against shield intervention and final task success."},
+                ],
+                "falsification": "If the shield dominates decisions and the learned rollout adds little discrimination, the JEPA is not carrying safety authority.",
+                "adversarial": "Use heterogeneous robots with similar observations but different kinematic limits so false embodiment generalization becomes visible.",
+                "thinking_tool": "Score an action before execution by both expected progress and embodiment-specific inadmissibility.",
+                "transfer_boundary": "Strong for chunked robot policies; weaker for continuous contact regimes without reliable candidate rollouts.",
+            },
+            {
+                "rank": 5,
+                "title": "Scalix: Uncertainty-Aware Scale-Consistent Monocular SLAM",
+                "arxiv_id": "2608.17553",
+                "fit": "monocular SLAM - metric scale - uncertainty-aware factor graph",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Monocular SLAM is attractive for compact robots but suffers scale ambiguity, while learned depth can be noisy and scale-inconsistent.",
+                "friction": "Robots under constant-velocity motion or sparse sensing can lose observability exactly when reliable metric scale is needed.",
+                "hidden_premise": "Learned depth is useful only if its per-pixel and per-frame uncertainty can be represented inside geometric optimization.",
+                "conceptual_move": "Fuse learned depth cues into a probabilistic factor-graph SLAM formulation with explicit scale and depth uncertainty.",
+                "mechanism": "The abstract describes augmenting monocular depth models with per-pixel depth uncertainty and per-frame scale uncertainty for real-time metric-scale estimation.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper identifies scale ambiguity and noisy scale-inconsistent learned depths as the target failure."},
+                    {"trace": "[Abstract]", "claim": "It integrates learned depth cues into a probabilistic factor-graph formulation."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate whether uncertainty-aware scale improves downstream navigation, not only trajectory error."},
+                ],
+                "falsification": "If scale consistency improves on benchmarks but fails under textureless, dynamic, or rolling terrain scenes, the uncertainty model is incomplete.",
+                "adversarial": "Separate depth noise, scale drift, constant-velocity motion, and dynamic object contamination in controlled robot routes.",
+                "thinking_tool": "A learned geometry prior becomes robotic only when its uncertainty enters the estimator.",
+                "transfer_boundary": "Strong for camera-only mobile robots; less direct when LiDAR or wheel odometry already supplies reliable metric scale.",
+            },
+            {
+                "rank": 6,
+                "title": "Initialization-Free Bundle Adjustment Revisited: A Controlled Experimental Study",
+                "arxiv_id": "2608.18028",
+                "fit": "bundle adjustment - optimization reconstruction gap - controlled geometry evaluation",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Initialization-free bundle adjustment is often judged by whether the optimization objective reaches a low value from random camera configurations.",
+                "friction": "A low object-space error can correspond to projective solutions that are not valid metric 3D reconstructions.",
+                "hidden_premise": "Geometry optimization needs a reconstruction-validity check, not only an optimizer-success check.",
+                "conceptual_move": "Evaluate InitFree BA with controlled ground truth that exposes the optimization-reconstruction gap.",
+                "mechanism": "The abstract describes a unified framework combining OSE formulations with a Blender-based dataset generator with exact ground truth and controlled camera configurations.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper says existing evaluations primarily measure optimization success."},
+                    {"trace": "[Abstract]", "claim": "It reports a previously overlooked gap between low OSE and valid Euclidean reconstruction."},
+                    {"trace": "[Inference]", "claim": "APRL should require metric validity tests for any reconstruction used by a robot map or planner."},
+                ],
+                "falsification": "If metric invalidity appears only in artificial camera setups, the practical risk for field reconstruction may be smaller.",
+                "adversarial": "Test sparse views, repeated structure, planar scenes, and robot camera motion where low objective values can hide wrong scale or pose.",
+                "thinking_tool": "Do not treat a converged geometry objective as a robot-usable map without a metric reconstruction check.",
+                "transfer_boundary": "Strong for SfM/SLAM evaluation; less direct for pure novel-view synthesis where metric use is not claimed.",
+            },
+            {
+                "rank": 7,
+                "title": "If, Then, Otherwise: Diagnosing Conditional Branching in Vision-Language Navigation",
+                "arxiv_id": "2608.17318",
+                "fit": "VLN - conditional branching - scene graph predicates",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Vision-language navigation benchmarks usually reward following route-like instructions toward a fixed goal.",
+                "friction": "Real instructions can require if-then-otherwise branching, where the agent must observe evidence, choose a logical branch, and execute it.",
+                "hidden_premise": "A navigation failure should be decomposed into perception, grounding, logical branch choice, and motion execution.",
+                "conceptual_move": "Build scene-graph-grounded conditional instructions with controlled branch depth, dependency length, spatial composition, and evidence observability.",
+                "mechanism": "The abstract introduces CondVLN, generated from verifiable 3D scene-graph predicates with controlled branching variables.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper states that existing evaluations provide limited control over conditional branch execution."},
+                    {"trace": "[Abstract]", "claim": "It grounds branch conditions in verifiable 3D scene-graph predicates."},
+                    {"trace": "[Inference]", "claim": "APRL should report whether an embodied agent chose the wrong branch or failed after a correct branch."},
+                ],
+                "falsification": "If branch failures collapse to ordinary perception misses, the logical diagnostic value is weaker than claimed.",
+                "adversarial": "Use conditions where the relevant evidence is partly observable, temporally delayed, or conflicts with a language prior.",
+                "thinking_tool": "Make the decision branch itself an evaluated object before measuring navigation success.",
+                "transfer_boundary": "Strong for VLN and mobile manipulation instructions; weaker for reactive locomotion without symbolic conditions.",
+            },
+            {
+                "rank": 8,
+                "title": "Which Source Wins? Task-Dependent Reliance in Vision-Language Models",
+                "arxiv_id": "2608.17205",
+                "fit": "VLM reliability - modality conflict - task-dependent source reliance",
+                "status": "Tier A - abstract-only",
+                "status_quo": "VLMs are often assumed to fuse image and text evidence in a stable way across tasks.",
+                "friction": "When image and text conflict and one source becomes harder to read, the model may shift reliance differently depending on task and evidence structure.",
+                "hidden_premise": "Reliance is not a fixed model property; it is a task-conditioned arbitration behavior that must be tested under controlled conflict.",
+                "conceptual_move": "Create paired conflicts and degrade one modality at a time to measure source preference shifts.",
+                "mechanism": "The abstract describes conflicts from arithmetic and ChartQA settings, legibility degradation, generated answers, and likelihood margins.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper reports opposite reliance-shift patterns between arithmetic conflicts and ChartQA-Conflict."},
+                    {"trace": "[Abstract]", "claim": "The reversal persists after calibration for unimodal accuracy loss and after replacing charts with table images."},
+                    {"trace": "[Inference]", "claim": "APRL should treat modality authority as an evaluated variable in robot perception-language systems."},
+                ],
+                "falsification": "If source-reliance shifts do not predict action errors in embodied tasks, the diagnostic may remain VQA-specific.",
+                "adversarial": "Use robot scenes where text instructions, gauges, labels, or charts conflict with visual evidence under controlled degradation.",
+                "thinking_tool": "Ask which source wins under conflict before trusting a multimodal explanation.",
+                "transfer_boundary": "Strong for VLM-heavy inspection and navigation; less direct for low-level policies that do not arbitrate text and image evidence.",
+            },
+        ],
+        "synthesis": [
+            {
+                "title": "Runtime authority is the shared VLA decision",
+                "links": "Teach-and-Grow - VLCP - UniReflex - Calibrated Predictive Safety - Hydra-0",
+                "facts": "The papers separately assign action authority to skill libraries, code rewrites, force reflexes, risk shields, and action-flow world models.",
+                "inference": "APRL should compare which interface changes the next action under identical perturbations before trusting final success improvements.",
+            },
+            {
+                "title": "Robot-usable geometry needs validity checks",
+                "links": "Scalix - InitFree BA - GroupForward - GenRec - Jetson-ORB-SLAM3",
+                "facts": "The geometry papers expose scale uncertainty, objective-validity gaps, instance grouping, reconstruction/generation boundaries, and edge feature fidelity.",
+                "inference": "A reconstruction should be scored by localization, query, planning, and update consequences, not just visual or optimization metrics.",
+            },
+            {
+                "title": "Evidence provenance is becoming the benchmark axis",
+                "links": "ManiGuard - CondVLN - Which Source Wins - PROBE - PathoArgus",
+                "facts": "The benchmark papers isolate safety predicates, conditional branches, modality reliance, manipulation-grounded answers, and evidence-chain availability.",
+                "inference": "Deployment evaluation should identify the cue, specification, or physical state that made the answer or action valid.",
+            },
+        ],
+        "frontier_memory": [
+            {
+                "label": "Strengthening",
+                "history": "August 18 emphasized runtime evidence control through recovery, tactile residuals, process rewards, map governance, and multi-view evidence.",
+                "body": "August 19 strengthens that axis with code replanning, skill-block composition, force reflexes, action-conditioned safety shields, and source-reliance diagnostics.",
+            },
+            {
+                "label": "New signal",
+                "history": "Recent geometry RI notes focused on Gaussian maps, event blur, relighting, LiDAR ICP, and task memory.",
+                "body": "Today adds a more explicit geometry validity signal: low optimization error, fast edge SLAM, or feed-forward reconstruction is not enough unless metric scale, instance query, and uncertainty survive robot use.",
+            },
+            {
+                "label": "Missing axis",
+                "history": "Prior runs repeatedly called for closed-loop robot evaluation of maps, VLA authority, and reliability.",
+                "body": "The current corpus still lacks one shared benchmark that puts modality conflict, conditional branching, specification monitors, map uncertainty, and action veto into the same robot episode.",
+            },
+        ],
+        "strategy": [
+            {
+                "priority": "Build moat",
+                "title": "Runtime-authority interface benchmark",
+                "thesis": "Measure which interface is allowed to compose, rewrite, correct, or veto a robot action under the same perturbation.",
+                "scores": {"fit": 5, "novelty": 5, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 5},
+                "one_week": "Run two manipulation tasks with object displacement, language conflict, and contact loss; compare skill-block routing, code replanning, force reflexes, and risk-shield vetoes.",
+                "four_week": "Build a reusable harness that swaps authority interfaces around a common frozen VLA or scripted policy and exports action deltas, veto events, and recovery outcomes.",
+                "success": "At least one authority interface predicts or prevents a failure before terminal success changes while preserving clean-task behavior.",
+                "stop": "All interfaces make the same decisions as terminal success and cannot identify which next action should change.",
+                "asset": "Perturbation episodes, action deltas, contact traces, code revisions, reflex gates, safety vetoes, and recovery outcomes.",
+            },
+            {
+                "priority": "Build moat",
+                "title": "Robot-usable geometry validity protocol",
+                "thesis": "Evaluate geometry systems by metric scale, uncertainty, instance queryability, update cost, and downstream robot action impact.",
+                "scores": {"fit": 5, "novelty": 4, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 5},
+                "one_week": "Construct a small route and tabletop scene with scale ambiguity, sparse views, dynamic distractors, lighting shift, and small queried objects.",
+                "four_week": "Compare monocular SLAM, InitFree BA, Gaussian grouping, reconstruction/generation splitting, and edge ORB-SLAM under the same navigation or retrieval tasks.",
+                "success": "A geometry validity metric predicts localization, retrieval, or manipulation failure better than photometric or optimizer scores alone.",
+                "stop": "Validity metrics do not change model ranking or downstream robot decisions beyond existing trajectory error.",
+                "asset": "Controlled scenes, scale ground truth, uncertainty traces, instance queries, edge latency, localization failures, and task outcomes.",
+            },
+            {
+                "priority": "Explore",
+                "title": "Evidence-provenance robot benchmark",
+                "thesis": "Make each robot answer or action identify the cue, modality, condition branch, or safety predicate that authorized it.",
+                "scores": {"fit": 5, "novelty": 5, "feasibility": 3, "moat": 4, "timing": 5, "evidence": 4},
+                "one_week": "Create ten tabletop or navigation episodes with conflicting image/text cues, conditional instructions, hidden-object questions, and independent safety predicates.",
+                "four_week": "Evaluate VLM agents, navigation policies, and manipulation policies with source-reliance, branch-choice, and specification-violation labels.",
+                "success": "The provenance labels expose a failure hidden by aggregate success or answer accuracy.",
+                "stop": "Provenance labels do not predict action errors or safety violations beyond normal held-out accuracy.",
+                "asset": "Conflict scenes, branch predicates, safety specifications, modality degradations, manipulation-grounded questions, and action-impact labels.",
+            },
+        ],
+    }
+}
+
+
+def main() -> int:
+    (ROOT / "intelligence").mkdir(exist_ok=True)
+    (ROOT / "posts").mkdir(exist_ok=True)
+    for date, data in RI_BY_DATE.items():
+        (ROOT / "intelligence" / f"{date}.json").write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        (ROOT / "posts" / f"{date}-research-intelligence.html").write_text(
+            build_html(data),
+            encoding="utf-8",
+            newline="\n",
+        )
+        print(f"wrote intelligence/{date}.json and posts/{date}-research-intelligence.html")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
