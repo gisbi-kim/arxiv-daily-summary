@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-20 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-20 arXiv Research Intelligence</h1>
+<p class="lead">The August 20 backfill is a compact but useful bridge between robot-usable geometry and deployment-grade manipulation evidence. GS-VLA, the agricultural tractor paper, SLAM/UAV evaluation papers, and 4D Gaussian reconstruction work ask whether geometry changes a real policy, field route, or map validity decision. SoftVTBench, LabDex, RoboEdit, and hidden-geometry grasping papers ask whether manipulation benchmarks preserve deformability, dexterity, human experience, and partial-view state instead of reporting success alone. APRL should read this day as a source-audited backfill: enough signal to define benchmark axes, not enough source evidence to make full-text mechanism claims.</p><p class="scope">Backfill edition from arXiv /pastweek date sections: 94 cs.CV rows, 38 cs.RO rows, 125 deduplicated papers, and 50 ROI papers. The /pastweek date-section source does not include abstracts, so Tier A cards are title/subject-only triage notes. No figure, table, method-section, code, dataset-release, or full-text claims are asserted.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>Geometry must affect a policy or field route</h3><p>GS-VLA, agricultural tractor navigation, UAV SLAM, visual odometry, and 4D Gaussian reconstruction titles all attach geometry to a policy, route, or validity test rather than leaving it as visual output.</p></article><article><span>Decision</span><h3>Manipulation benchmarks need material and hidden-state labels</h3><p>SoftVTBench, LabDex, PartialBiGrasp, and RoboEdit point toward benchmark assets that name deformability, laboratory dexterity, partial local geometry, and human video edits as separate evidence channels.</p></article><article><span>Decision</span><h3>World models are moving toward decision alignment</h3><p>DA-WAM, Decision-Metric Alignment, GigaBrain-WBC, and endovascular world-model control titles make future latent quality accountable to MPC, whole-body control, or navigation rather than video plausibility alone.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - title/subject-only backfill triage</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.19066" target="_blank" rel="noopener">GS-VLA: Plug-and-Play Viewpoint Canonicalization for Frozen VLA Policies via Gaussian Splatting</a></h3>
+  <p class="fit">Gaussian Splatting - frozen VLA - viewpoint canonicalization</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Frozen VLA policies are often evaluated as if camera viewpoint is a nuisance handled by data diversity or augmentation.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The title frames viewpoint canonicalization as a direct failure interface for frozen policies, which suggests that policy errors can begin before action decoding.</p></div>
+    <div><h4>Hidden premise</h4><p>A Gaussian scene representation can normalize viewpoint evidence without changing the policy backbone.</p></div>
+    <div><h4>Conceptual move</h4><p>Treat geometry as a plug-in policy-conditioning layer rather than a separate reconstruction artifact.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Title]</strong><span>The title links frozen VLA policies, viewpoint canonicalization, and Gaussian Splatting.</span></li><li><strong>[Subjects]</strong><span>The row is listed under cs.CV with artificial intelligence cross-category context.</span></li><li><strong>[Source mode]</strong><span>Backfill source lacks abstracts, so mechanism and experiment details require later official abstract or PDF reading.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Unknown from /pastweek title/subject rows; the safe claim is that Gaussian Splatting is positioned as the canonicalization tool.</p></div>
+    <div><h4>Falsification frontier</h4><p>If viewpoint canonicalization improves image alignment but does not change robot action robustness under camera shifts, the policy-facing geometry claim is weak.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress the method with calibration error, reflective objects, dynamic distractors, and wrist-camera views where Gaussian geometry may look stable but action evidence is wrong.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Before scaling VLA data, ask whether the camera frame can be canonicalized as a separate intervention.</p><p>Most relevant to camera-sensitive manipulation; weaker for policies dominated by force, tactile, or proprioceptive state.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - title/subject-only backfill triage</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.18701" target="_blank" rel="noopener">SoftVTBench: A Deformation-Aware Visuo-Tactile Dataset and Benchmark for Deformable-Object Manipulation</a></h3>
+  <p class="fit">deformable manipulation - visuo-tactile benchmark - material state</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Manipulation success is often reported on rigid or lightly deformable objects where visual state is enough to rank a policy.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Deformable objects can hide failure in material strain, contact distribution, or tactile state before final task failure appears.</p></div>
+    <div><h4>Hidden premise</h4><p>A useful deformable-object benchmark must expose tactile and deformation variables as first-class labels.</p></div>
+    <div><h4>Conceptual move</h4><p>Move deformable manipulation evaluation from final pose success to deformation-aware visuo-tactile evidence.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Title]</strong><span>The title names a deformation-aware visuo-tactile dataset and benchmark.</span></li><li><strong>[Subjects]</strong><span>The paper is listed under cs.RO.</span></li><li><strong>[Inference]</strong><span>APRL can use this as a cue to separate visual success from tactile/material-state success.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Unknown from /pastweek source; the title safely indicates a dataset and benchmark centered on deformation-aware visuo-tactile signals.</p></div>
+    <div><h4>Falsification frontier</h4><p>If tactile and deformation labels do not change policy ranking beyond image-only metrics, the benchmark adds little diagnostic value.</p></div>
+    <div><h4>Adversarial read</h4><p>Include cases where the object reaches a target pose but deformation, tearing, or contact distribution is unacceptable.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Score deformable manipulation by the hidden material state that would make reuse unsafe.</p><p>Direct for soft objects, cloth, food, and lab materials; less direct for rigid pick-place tasks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - title/subject-only backfill triage</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.18618" target="_blank" rel="noopener">LabDex: A Hierarchical Benchmark for Dexterous Manipulation in Laboratories</a></h3>
+  <p class="fit">dexterous manipulation - laboratory tasks - hierarchical benchmark</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Dexterous manipulation benchmarks often emphasize isolated primitives without a lab workflow hierarchy.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Laboratory manipulation fails through sequencing, tool handling, and local recovery, not only grasp success.</p></div>
+    <div><h4>Hidden premise</h4><p>A hierarchical benchmark can expose which subtask boundary, tool state, or local dexterity requirement causes failure.</p></div>
+    <div><h4>Conceptual move</h4><p>Make laboratory dexterity a benchmark hierarchy instead of a collection of independent manipulation tasks.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Title]</strong><span>The paper proposes a hierarchical benchmark for dexterous manipulation in laboratories.</span></li><li><strong>[Subjects]</strong><span>The paper is listed under cs.RO.</span></li><li><strong>[Inference]</strong><span>APRL should treat lab workflows as subtask-boundary diagnostics.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Unknown from title/subject rows; the title safely supports only benchmark scope and hierarchy.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the hierarchy does not identify different failure causes than flat success metrics, it is a packaging change rather than a diagnostic benchmark.</p></div>
+    <div><h4>Adversarial read</h4><p>Test tool handoff, liquid or granular transfer, occluded grip correction, and recovery after a wrong intermediate state.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Decompose lab manipulation by the task boundary where dexterity becomes the bottleneck.</p><p>Strong for laboratory automation and bimanual manipulation; weaker for locomotion or pure navigation.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - title/subject-only backfill triage</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.19085" target="_blank" rel="noopener">DA-WAM: Decision-Aligned Future Latents for Driving World Models</a></h3>
+  <p class="fit">driving world model - decision-aligned latent - future prediction</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Driving world models can be judged by future-video or latent prediction quality without proving that the latent changes a maneuver.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A future latent can be visually plausible while missing the variable that determines braking, lane choice, or avoidance.</p></div>
+    <div><h4>Hidden premise</h4><p>The future latent should be aligned to downstream decision variables, not only reconstruction or likelihood objectives.</p></div>
+    <div><h4>Conceptual move</h4><p>Make decision alignment the criterion for future latent usefulness in driving world models.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Title]</strong><span>The title names decision-aligned future latents for driving world models.</span></li><li><strong>[Subjects]</strong><span>The paper is listed under cs.RO, cs.AI, and machine learning context.</span></li><li><strong>[Inference]</strong><span>APRL should test whether future latents predict action changes under hazardous scene variables.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Unknown from /pastweek source; the safe claim is that the title explicitly binds future latents to driving decisions.</p></div>
+    <div><h4>Falsification frontier</h4><p>If decision-aligned latents do not alter trajectory quality under OOD or near-miss cases, alignment is not operational.</p></div>
+    <div><h4>Adversarial read</h4><p>Hold visual quality constant while changing a traffic light, pedestrian intent, or route constraint that should alter the planned action.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A world model latent is useful only if it preserves the variable that changes the next decision.</p><p>Direct for driving and mobile-robot planning; less direct for single-step perception tasks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - title/subject-only backfill triage</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.19075" target="_blank" rel="noopener">ReWEIGH the Evidence: Calibrating Token-Level Ordinal Visual Evidence to Mitigate Hallucinations in Large Vision-Language Models</a></h3>
+  <p class="fit">VLM hallucination - token-level evidence calibration - ordinal visual evidence</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLM reliability is often summarized by answer confidence or hallucination rate without exposing which visual tokens carried evidence.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A model can sound confident while visual evidence is weak, ordinally misread, or overruled by a language prior.</p></div>
+    <div><h4>Hidden premise</h4><p>Token-level visual evidence can be calibrated so that answers reflect evidence strength more faithfully.</p></div>
+    <div><h4>Conceptual move</h4><p>Move hallucination mitigation from post-hoc answer filtering to evidence-weight calibration at the token level.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Title]</strong><span>The title names token-level ordinal visual evidence calibration for hallucination mitigation.</span></li><li><strong>[Subjects]</strong><span>The paper is listed under cs.CV, cs.AI, and cs.CL.</span></li><li><strong>[Inference]</strong><span>Robot VLM evaluation should expose the visual evidence that authorized an answer or action.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Unknown from title/subject rows; the title safely supports the evidence-calibration framing.</p></div>
+    <div><h4>Falsification frontier</h4><p>If token-level calibration improves language metrics but not source-grounded action correctness, the transfer to robotics is limited.</p></div>
+    <div><h4>Adversarial read</h4><p>Use scenes with visually weak but task-critical cues, conflicting text labels, or ordinal measurements that can be confidently misread.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask whether a VLM's answer is backed by calibrated visual evidence before using it for action.</p><p>Strong for VLM-heavy inspection, gauges, labels, and navigation prompts; weaker for low-level policies without language arbitration.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - title/subject-only backfill triage</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.18292" target="_blank" rel="noopener">GuideFetch: A Task Coordination Framework for Concurrent Navigation and Object Retrieval in Assistive Robot Dogs</a></h3>
+  <p class="fit">assistive robot dogs - concurrent navigation and retrieval - task coordination</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Assistive robots are often evaluated as separate navigation or object-retrieval systems.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A real assistive robot dog must coordinate navigation and retrieval concurrently, where success can fail at the handoff between tasks.</p></div>
+    <div><h4>Hidden premise</h4><p>Coordination state is a separate control variable that should be measured apart from navigation or grasping alone.</p></div>
+    <div><h4>Conceptual move</h4><p>Frame assistive robot performance as concurrent task coordination.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Title]</strong><span>The title names concurrent navigation and object retrieval in assistive robot dogs.</span></li><li><strong>[Subjects]</strong><span>The row is cross-listed in cs.RO and cs.CV.</span></li><li><strong>[Inference]</strong><span>APRL should score coordination-state failure separately from navigation or manipulation failure.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Unknown from title/subject rows; the title safely indicates a coordination framework for concurrent navigation and retrieval.</p></div>
+    <div><h4>Falsification frontier</h4><p>If concurrent evaluation reduces to independent navigation and retrieval scores, the coordination claim is weak.</p></div>
+    <div><h4>Adversarial read</h4><p>Test delayed object discovery, wrong-object retrieval, route blockage, and user-priority changes during execution.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Make task coordination an explicit evaluated state in embodied systems.</p><p>Direct for mobile manipulation and assistive robots; less direct for fixed-base laboratory arms.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Geometry is moving into the policy loop</h3><p class='links'>GS-VLA - Agricultural Tractor - UAV SLAM - Visual Odometry - Depth Anything V4</p><p><strong>Observed</strong> - The selected titles attach geometry to frozen VLA viewpoint handling, field navigation, UAV SLAM or odometry evaluation, and dynamic 4D reconstruction.</p><p><strong>Inference</strong> - APRL should evaluate maps and reconstructions by action changes, localization recovery, and route stability.</p></article><article><h3>Benchmarks are becoming state-label assets</h3><p class='links'>SoftVTBench - LabDex - PartialBiGrasp - RoboEdit</p><p><strong>Observed</strong> - The robotics benchmark titles name deformation, lab dexterity, partial local geometry, and scalable human manipulation experience.</p><p><strong>Inference</strong> - The durable asset is a failure-state label set, not a larger collection of untyped demonstrations.</p></article><article><h3>World-model quality is being tied to decisions</h3><p class='links'>DA-WAM - Decision-Metric Alignment - GigaBrain-WBC - Progressive Experience Fusion</p><p><strong>Observed</strong> - World-model titles repeatedly mention decision alignment, control, navigation, or multi-task experience fusion.</p><p><strong>Inference</strong> - APRL should make future-state prediction answer which action would change, not just whether a video or latent looks plausible.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 18 and August 19 emphasized runtime evidence control and robot-usable geometry.</p><p>August 20 strengthens the same axis with VLA viewpoint canonicalization, field LiDAR navigation, UAV SLAM/VO evaluation, and manipulation benchmarks with tactile or partial-geometry state.</p></article><article><span>New signal</span><p class='history'>Recent RI notes had driving world models and safety shields, but less explicit decision-aligned latent wording.</p><p>DA-WAM and Decision-Metric Alignment make the latent-world-model objective directly accountable to the downstream decision metric.</p></article><article><span>Missing axis</span><p class='history'>Backfill source lacks abstracts and full text.</p><p>The current artifact should be treated as a triage map; full mechanism and experiment claims require official abstract/PDF follow-up before use in a proposal.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 26/30</span></div>
+  <h3>Policy-facing geometry stress suite</h3><p class="thesis">Test whether viewpoint canonicalization, metric SLAM, visual odometry, and field LiDAR cues change robot action robustness.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 3</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create camera-shift and field-route episodes with GS map, SLAM/VO, and LiDAR navigation variants around the same policy.</p></div>
+    <div><strong>4-week build</strong><p>Build a reusable route/manipulation suite that exports viewpoint error, scale drift, route recovery, and action deltas.</p></div>
+    <div><strong>Success metric</strong><p>A geometry intervention predicts or prevents a policy failure that success-only metrics hide.</p></div>
+    <div><strong>Stop condition</strong><p>Geometry variants do not change policy ranking or failure prediction under controlled camera and route shifts.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Camera-shift videos, route traces, scale checks, LiDAR navigation logs, and action-delta labels.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 25/30</span></div>
+  <h3>Manipulation state-label benchmark</h3><p class="thesis">Separate deformability, lab-tool hierarchy, partial-view geometry, human video edit quality, and reward transition labels.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 5</span><span>timing 4</span><span>evidence 3</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Annotate ten manipulation failures with material deformation, tool-subtask boundary, hidden local geometry, and recovery action labels.</p></div>
+    <div><strong>4-week build</strong><p>Turn the labels into a small benchmark that compares human-video-derived experience, reward models, and partial-view grasping.</p></div>
+    <div><strong>Success metric</strong><p>State labels explain a policy failure or recovery difference that final success does not.</p></div>
+    <div><strong>Stop condition</strong><p>Labels collapse to the same ranking as final success or cannot be annotated reliably.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Failure-state taxonomy, annotated clips, tactile/deformation notes, subtask hierarchy, and partial-view geometry labels.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 24/30</span></div>
+  <h3>Decision-aligned world-model probe</h3><p class="thesis">Evaluate whether future latents preserve the variable that changes a driving, navigation, or whole-body control decision.</p>
+  <div class="scores"><span>fit 4</span><span>novelty 5</span><span>feasibility 3</span><span>moat 4</span><span>timing 5</span><span>evidence 3</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Use three traffic or navigation scenes where one latent variable changes braking, route choice, or control recovery.</p></div>
+    <div><strong>4-week build</strong><p>Compare decision-aligned latent objectives with video-quality or reconstruction objectives under matched scenarios.</p></div>
+    <div><strong>Success metric</strong><p>Decision-aligned latents better predict action changes or near-miss avoidance than visual-quality scores.</p></div>
+    <div><strong>Stop condition</strong><p>Latent alignment improves no downstream decision metric under controlled scenario edits.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Edited scenarios, latent probes, decision deltas, near-miss labels, and control outcome traces.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-20.json">intelligence/2026-08-20.json</a>.</footer>
+</body></html>
