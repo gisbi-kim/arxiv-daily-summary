@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-21 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-21 arXiv Research Intelligence</h1>
+<p class="lead">The August 21 batch turns action generation into an evidence contract. VLA papers ask whether embodiment mismatch, continual skill learning, latent-action choices, tactile world-action forecasts, and whole-body factorization can be measured before a policy is declared adapted. Planning and autonomy papers ask whether scenario conditions, temporal logic, world-model grounding, reachability, and causal accident evidence should audit the plan before deployment. Geometry and VLM papers make the same move: registration, LiDAR odometry, sparse-view reconstruction, coverage guarantees, and evidence-gated TAMP are useful only when the decisive evidence path is visible.</p><p class="scope">Daily edition from matching Friday /new listings: 86 non-replacement cs.CV rows, 37 cs.RO rows, 115 deduplicated papers, and 95 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claims are asserted.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>VLA adaptation needs interface-level evidence</h3><p>Self-demonstrated VLA finetuning, OrthoSkillVLA, latent-action analysis, HiTac-WAM, and DECOWAM all expose a different interface where adaptation can succeed, forget, or lose physical meaning.</p></article><article><span>Decision</span><h3>Robot evaluation is becoming scenario-conditioned</h3><p>SCAPE, temporal-logic compilation for stream-based TAMP, world-model-grounded LLM navigation, SAGE, and DART-S all make the queried scenario or reachable state part of the performance claim.</p></article><article><span>Decision</span><h3>Generative and VLM systems must expose evidence paths</h3><p>VGI-BENCH, BeyondMasks, Question-Guided Evidence Acquisition, marginal-coverage audits, and Evidence-Gated TAMP ask whether the output is supported by the right visual, causal, physical, or observational evidence.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.19490" target="_blank" rel="noopener">Fine-Tuning VLAs with Self-Demonstrated Generative Control for Multi-Task Manipulation</a></h3>
+  <p class="fit">VLA finetuning - embodiment mismatch - self-demonstrated control</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA adaptation is often treated as in-domain expert-data finetuning on the target robot.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract states that even minor hardware mismatch can cause severe drops, while expert-task finetuning can degrade general VLA competence.</p></div>
+    <div><h4>Hidden premise</h4><p>A useful adaptation method must generate or reuse task evidence without destroying the pretrained semantic and action prior.</p></div>
+    <div><h4>Conceptual move</h4><p>Treat embodiment adaptation as a controlled self-demonstration problem rather than a simple supervised finetune.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names hardware-configuration mismatch as a cause of severe VLA performance drop.</span></li><li><strong>[Abstract]</strong><span>It says expert-task finetuning improves that task but harms general capabilities.</span></li><li><strong>[Inference]</strong><span>APRL should score adaptation by retained old-skill behavior as well as new-robot success.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The safe abstract-level claim is that generative control creates self-demonstrated data for multi-task manipulation under a new embodiment.</p></div>
+    <div><h4>Falsification frontier</h4><p>If self-demonstrated data improves only the expert task while old skills or unseen objects regress, the adaptation contract is weak.</p></div>
+    <div><h4>Adversarial read</h4><p>Test camera mount, gripper geometry, object pose, and instruction variants that isolate embodiment mismatch from semantic misunderstanding.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Measure VLA finetuning as a stability-plasticity trade-off at the robot interface.</p><p>Most relevant to new-arm or new-gripper deployment; less direct for purely language-side alignment.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.19574" target="_blank" rel="noopener">HiTac-WAM: A Hierarchical Tactile World Action Model for Contact-Rich Robot Manipulation</a></h3>
+  <p class="fit">tactile world-action model - contact hierarchy - action chunks</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>World-action models usually predict visual futures and actions, while tactile futures are treated as images or flat latent streams.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Contact-rich manipulation can fail because tactile states have physical dependencies that a flat latent may not preserve.</p></div>
+    <div><h4>Hidden premise</h4><p>Future touch should be forecast with a hierarchy that reflects contact physics across candidate action chunks.</p></div>
+    <div><h4>Conceptual move</h4><p>Move world-action modeling from visual prediction to hierarchical tactile state forecasting.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper contrasts existing tactile-aware variants with hierarchical physical dependencies.</span></li><li><strong>[Abstract]</strong><span>It forecasts a sequence of future tactile states for each candidate action chunk.</span></li><li><strong>[Inference]</strong><span>APRL should compare tactile forecast error against contact failure and recovery behavior.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes forecasting future tactile states for candidate action chunks before execution.</p></div>
+    <div><h4>Falsification frontier</h4><p>If tactile hierarchy improves prediction but not grasp correction, slip avoidance, or recovery, the world-action value is limited.</p></div>
+    <div><h4>Adversarial read</h4><p>Use contact transitions where visual state is stable but force distribution, slip, or deformation changes the correct next action.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Before acting, ask which hidden contact state must be forecast to make the action safe.</p><p>Strong for dexterous and deformable manipulation; weaker for navigation tasks without rich contact.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.19425" target="_blank" rel="noopener">SCAPE: Scenario-Conditioned Simulation-Augmented Policy Evaluation</a></h3>
+  <p class="fit">robot policy evaluation - scenario conditioning - sim-to-real bias</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Simulation-augmented robot evaluation often estimates average performance from limited real rollouts and many biased simulated rollouts.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A policy can look good on average while failing in the specific scenario family that matters for deployment.</p></div>
+    <div><h4>Hidden premise</h4><p>Simulation should be conditioned on scenario variables so that real-world evidence audits the failure family, not just the mean.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn policy evaluation into scenario-conditioned estimation under explicit sim-to-real bias.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies reliable performance evaluation as a central deployment bottleneck.</span></li><li><strong>[Abstract]</strong><span>It contrasts faithful real-world testing with biased scalable simulation.</span></li><li><strong>[Inference]</strong><span>APRL should report policy confidence per scenario family instead of one aggregate score.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract frames real testing as faithful but costly, simulation as scalable but biased, and SCAPE as scenario-conditioned evaluation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If scenario conditioning does not change confidence intervals or policy ranking, the method is not exposing hidden deployment risk.</p></div>
+    <div><h4>Adversarial read</h4><p>Choose scenarios where simulation is known to miss contact, lighting, terrain, or occlusion effects.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Evaluate a policy by the scenario that can break it, not by the average simulator proxy.</p><p>Strong for deployable robot policies; weaker for purely offline perception benchmarks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.19522" target="_blank" rel="noopener">LF-GICP: Parameter-Free Degeneracy-Aware LiDAR Odometry via a Voxel-Normal Localizability Field</a></h3>
+  <p class="fit">LiDAR odometry - degeneracy - localizability field</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Scan-to-map LiDAR odometry is often tuned per environment to handle degeneracy in corridors, tunnels, or other weakly constrained scenes.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract states that odometry can drift unboundedly along unobservable axes and existing handling requires environment-specific tuning.</p></div>
+    <div><h4>Hidden premise</h4><p>Localizability can be estimated from voxel-normal structure so the odometry system can identify weak axes without manual parameters.</p></div>
+    <div><h4>Conceptual move</h4><p>Make degeneracy a first-class field in the map rather than an after-the-fact tuning problem.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names tunnels and corridors as geometrically degenerate environments with unbounded drift along unobservable axes.</span></li><li><strong>[Abstract]</strong><span>It proposes a parameter-free voxel-normal localizability field.</span></li><li><strong>[Inference]</strong><span>APRL should score odometry by detecting unobservable axes before navigation fails.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract-level mechanism is a voxel-normal localizability field for parameter-free degeneracy-aware LiDAR odometry.</p></div>
+    <div><h4>Falsification frontier</h4><p>If localizability does not predict drift direction or recovery behavior in field routes, it is not robot-useful.</p></div>
+    <div><h4>Adversarial read</h4><p>Test corridors, tunnels, crop rows, repeated pillars, and dynamic-object contamination with matched ground-truth trajectories.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat map degeneracy as a warning signal that should alter navigation confidence.</p><p>Strong for LiDAR mobile robots; less direct for vision-only manipulation.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.19739" target="_blank" rel="noopener">Question-Guided Evidence Acquisition for Multimodal Visual Question Answering</a></h3>
+  <p class="fit">document VQA - deliberate perception - evidence acquisition</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Document and multimodal VQA often encode the page once and answer from whatever evidence the model extracted in that pass.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says small text, tables, visual cues, and topology trip models even when the page is already in context.</p></div>
+    <div><h4>Hidden premise</h4><p>The question should decide which evidence to acquire, inspect, or revisit before the model answers.</p></div>
+    <div><h4>Conceptual move</h4><p>Move VQA from fixed perception to slower, question-conditioned evidence acquisition.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper states that MLLMs can see a document but often cannot read it reliably.</span></li><li><strong>[Abstract]</strong><span>It names small text, tables, visual cues, and topology as failure cases.</span></li><li><strong>[Inference]</strong><span>Robot VLMs should acquire the missing view, cue, or region before authorizing an action.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract argues for deliberate perception rather than single-pass extraction; detailed mechanism requires full paper reading.</p></div>
+    <div><h4>Falsification frontier</h4><p>If question-guided acquisition improves document accuracy but does not reduce embodied action errors under missing evidence, transfer is limited.</p></div>
+    <div><h4>Adversarial read</h4><p>Use robot instructions where the relevant object label, gauge, or spatial relation is small, occluded, or topologically ambiguous.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Let the question define the next observation before producing the answer.</p><p>Strong for inspection, OCR, gauges, and form-like robot tasks; weaker for low-level control without explicit questions.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.20084" target="_blank" rel="noopener">Evidence-Gated Task and Motion Planning with Vision-Language Models</a></h3>
+  <p class="fit">VLM-TAMP - partial observability - evidence-gated subgoals</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLM-assisted TAMP can generate plausible subgoals from prior knowledge even when the required object evidence has not been observed.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract warns that under partial observability, unsupported subgoals can cause execution failures or unintended outcomes.</p></div>
+    <div><h4>Hidden premise</h4><p>A task planner should gate subgoals on explicit observational support, not only semantic plausibility.</p></div>
+    <div><h4>Conceptual move</h4><p>Make evidence availability a hard interface between VLM semantic planning and geometric execution.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names uncertain availability of goal-relevant objects under partial observability.</span></li><li><strong>[Abstract]</strong><span>It says VLM priors can generate unsupported subgoals that lead to failures or unintended outcomes.</span></li><li><strong>[Inference]</strong><span>APRL should require a visible evidence gate before geometric planning commits.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract-level mechanism is evidence-gated task and motion planning under partial observability.</p></div>
+    <div><h4>Falsification frontier</h4><p>If evidence gating only delays execution without reducing unsupported subgoals or failures, the gate is not useful.</p></div>
+    <div><h4>Adversarial read</h4><p>Hide goal objects, provide plausible but false priors, and vary when the robot can acquire the decisive observation.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Do not allow semantic priors to become motion goals until observation supports them.</p><p>Strong for long-horizon mobile manipulation; weaker for fully observed pick-place.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.19583" target="_blank" rel="noopener">VGI-BENCH: Probing Visual Intelligence in Video Generation Models</a></h3>
+  <p class="fit">video generation benchmark - evolving process - visual intelligence</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Video generation can be evaluated by plausibility or final-frame quality without testing whether the generated process obeys the task.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says benchmarks need valid evolving processes, not only plausible final states, and should be aligned with current video priors.</p></div>
+    <div><h4>Hidden premise</h4><p>A video generator's reasoning claim requires process-level tasks whose difficulty is calibrated and partially feasible.</p></div>
+    <div><h4>Conceptual move</h4><p>Evaluate video generation as visual intelligence over evolving processes.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper argues that benchmarks should require valid evolving processes rather than only plausible final states.</span></li><li><strong>[Abstract]</strong><span>It introduces VGI-BENCH with 27 tasks and 810 instances.</span></li><li><strong>[Inference]</strong><span>Robot world-model evaluation should separate visual realism from process validity.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract introduces 27 tasks and 810 instances organized for probing visual intelligence in video generation models.</p></div>
+    <div><h4>Falsification frontier</h4><p>If process tasks do not predict downstream planning or physical consistency, the benchmark remains generation-specific.</p></div>
+    <div><h4>Adversarial read</h4><p>Test videos where the final frame is plausible but contact order, object permanence, or causal timing is wrong.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask whether the generated process preserves the state transition that a planner would rely on.</p><p>Strong for world-model and simulation evaluation; less direct for single-image generation.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.20107" target="_blank" rel="noopener">BeyondMasks: Evaluating Causal and Physical Consistency in Video Object Removal</a></h3>
+  <p class="fit">video object removal - causal consistency - physical effects</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Object-removal evaluation often focuses on local masked-region fidelity.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract argues that real removal is a causal intervention: shadows, reflections, illumination, translucency, and dynamic traces must also change.</p></div>
+    <div><h4>Hidden premise</h4><p>A video edit should be judged by whether it updates the physical consequences of the removed object.</p></div>
+    <div><h4>Conceptual move</h4><p>Move object-removal evaluation from local inpainting quality to causal and physical consistency.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper states that object removal requires removing induced physical effects.</span></li><li><strong>[Abstract]</strong><span>It lists shadows, reflections, illumination changes, translucency, and dynamic traces.</span></li><li><strong>[Inference]</strong><span>Robot simulation edits should be rejected if physical side effects remain inconsistent.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract-level mechanism is an evaluation protocol for causal and physical consistency in video object removal.</p></div>
+    <div><h4>Falsification frontier</h4><p>If physical consistency metrics do not detect edits that break robot perception or planning, the evaluation is incomplete.</p></div>
+    <div><h4>Adversarial read</h4><p>Remove obstacles, humans, or tools from videos while checking contact shadows, reflections, and motion traces used by perception models.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat visual edits as interventions that must update all downstream physical evidence.</p><p>Strong for simulation and dataset editing; weaker for tasks where removed content has no physical consequence.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Adaptation is becoming an interface audit</h3><p class='links'>self-demonstrated VLA - OrthoSkillVLA - latent actions - HiTac-WAM - DECOWAM</p><p><strong>Observed</strong> - The selected robot-learning abstracts expose embodiment mismatch, forgetting, latent-action fragmentation, tactile hierarchy, and whole-body factorization.</p><p><strong>Inference</strong> - APRL should measure which interface changes the next action and which interface preserves old skill competence.</p></article><article><h3>Deployment evaluation is scenario-conditioned</h3><p class='links'>SCAPE - temporal-logic TAMP - world-model-grounded LLM planning - SAGE - DART-S</p><p><strong>Observed</strong> - The autonomy papers attach policy confidence to scenario variables, generated streams, physical world state, risk-weighted inspection, and reachable takeoff states.</p><p><strong>Inference</strong> - A deployable score should state which scenario family, constraint, or reachable state it covers.</p></article><article><h3>Evidence gates are replacing generic confidence</h3><p class='links'>Question-Guided Evidence Acquisition - Evidence-Gated TAMP - class-conditional coverage - SafeBranch - ArmorOCR</p><p><strong>Observed</strong> - The VLM and safety papers target missing observations, class tails, unsupported subgoals, unsafe branch pairs, and adversarial text localization.</p><p><strong>Inference</strong> - Robot agents should identify the evidence that authorizes an answer or motion goal before execution.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 18-20 repeatedly emphasized runtime evidence, robot-usable geometry, and benchmark-state labels.</p><p>August 21 strengthens the same thesis with scenario-conditioned evaluation, evidence-gated TAMP, tactile world-action forecasting, LiDAR degeneracy fields, and process-valid video-generation benchmarks.</p></article><article><span>New signal</span><p class='history'>Earlier weekly artifacts emphasized world-action models but less explicit embodiment-factor separation.</p><p>DECOWAM and HiTac-WAM make whole-body ego-motion/arm factorization and tactile hierarchy explicit interfaces for future-state prediction.</p></article><article><span>Contradiction</span><p class='history'>Recent VLA adaptation work wants broad transfer, while safety and evaluation papers require narrow evidence gates.</p><p>The useful research tension is whether gating, shielding, and scenario conditioning improve deployment without destroying the flexibility that made VLA policies attractive.</p></article><article><span>Missing axis</span><p class='history'>The repo still lacks a shared benchmark that connects VLA adaptation, evidence-gated planning, contact-state prediction, and map degeneracy in one episode.</p><p>APRL can own that missing axis by designing episodes where the same hidden evidence variable affects planning, contact, and localization decisions.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Evidence-gated mobile manipulation protocol</h3><p class="thesis">Require each VLM-TAMP subgoal, VLA action, and safety branch to cite the observation or predicate that authorizes execution.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create ten tasks with hidden goal objects, misleading language priors, branch-pair safety conflicts, and small visual evidence.</p></div>
+    <div><strong>4-week build</strong><p>Evaluate VLM-TAMP, VLA, and embodied-agent baselines with evidence availability, unauthorized subgoal, branch violation, and recovery labels.</p></div>
+    <div><strong>Success metric</strong><p>Evidence gates reduce unsupported subgoals or unsafe actions while preserving at least 90% of clean-task success.</p></div>
+    <div><strong>Stop condition</strong><p>If gates only delay execution and do not change failure or safety outcomes, narrow the protocol to observation acquisition.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Evidence-gated task set, observation labels, branch-pair predicates, subgoal authorization traces, and recovery outcomes.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 28/30</span></div>
+  <h3>Contact-and-whole-body world-action benchmark</h3><p class="thesis">Compare tactile hierarchy, latent actions, self-demonstrated VLA adaptation, and decoupled whole-body forecasts under the same contact-rich tasks.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 4</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Instrument one door traversal and one dexterous grasp task with tactile, ego-motion, arm-motion, and action-chunk labels.</p></div>
+    <div><strong>4-week build</strong><p>Train or evaluate equal-budget policies with self-demonstrated data, latent-action variants, tactile WAM, and decoupled whole-body WAM.</p></div>
+    <div><strong>Success metric</strong><p>A hidden contact or ego-motion label predicts the next-action correction before terminal success changes.</p></div>
+    <div><strong>Stop condition</strong><p>If hidden labels do not change policy ranking or recovery choice, split manipulation and locomotion tracks.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Contact traces, tactile forecasts, ego/arm action factors, latent-action labels, and whole-body recovery logs.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 25/30</span></div>
+  <h3>Scenario-conditioned deployment confidence</h3><p class="thesis">Turn simulation-augmented evaluation, temporal logic, risk-weighted inspection, and reachability into explicit scenario coverage claims.</p>
+  <div class="scores"><span>fit 4</span><span>novelty 4</span><span>feasibility 4</span><span>moat 4</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Define four scenario families: partial observability, degenerate map, dynamic obstacle, and reachability boundary.</p></div>
+    <div><strong>4-week build</strong><p>Compare policy confidence from real rollouts, simulation proxies, temporal-logic monitors, and reachability audits across those families.</p></div>
+    <div><strong>Success metric</strong><p>Scenario-conditioned confidence changes deployment decisions relative to one aggregate success estimate.</p></div>
+    <div><strong>Stop condition</strong><p>If confidence intervals and policy rankings remain unchanged across scenario families, keep only the cheapest evaluator.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Scenario taxonomy, monitor predicates, simulation-real pairs, reachability labels, and deployment confidence reports.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-21.json">intelligence/2026-08-21.json</a>.</footer>
+</body></html>

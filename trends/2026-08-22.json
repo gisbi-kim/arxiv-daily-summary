@@ -1,0 +1,250 @@
+{
+  "date": "2026-08-22",
+  "iso_week": "2026-W34",
+  "week_start": "2026-08-16",
+  "week_end": "2026-08-22",
+  "source_listing_date": "2026-08-21",
+  "source_mode": "pastweek",
+  "source_daily_artifacts": [
+    "2026-08-17",
+    "2026-08-18",
+    "2026-08-19",
+    "2026-08-20",
+    "2026-08-21"
+  ],
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "totals": {
+    "selected": 365,
+    "total_scanned": 852
+  },
+  "daily_totals": {
+    "cv": 641,
+    "ro": 254,
+    "selected": 647,
+    "total_scanned": 852
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 53,
+      "cv": 36,
+      "ro": 9,
+      "cvro": 8
+    },
+    "Robot Learning": {
+      "total": 82,
+      "cv": 4,
+      "ro": 66,
+      "cvro": 12
+    },
+    "Autonomous Driving": {
+      "total": 30,
+      "cv": 13,
+      "ro": 14,
+      "cvro": 3
+    },
+    "Foundation Models": {
+      "total": 41,
+      "cv": 39,
+      "ro": 0,
+      "cvro": 2
+    },
+    "Generation": {
+      "total": 67,
+      "cv": 54,
+      "ro": 11,
+      "cvro": 2
+    },
+    "Efficiency/Systems": {
+      "total": 36,
+      "cv": 34,
+      "ro": 2,
+      "cvro": 0
+    },
+    "Embodied AI": {
+      "total": 25,
+      "cv": 2,
+      "ro": 17,
+      "cvro": 6
+    },
+    "Safety/Alignment": {
+      "total": 31,
+      "cv": 25,
+      "ro": 5,
+      "cvro": 1
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA control shifts from policy outputs to runtime authority interfaces",
+      "representative_ids": [
+        "2608.14047",
+        "2608.14822",
+        "2608.17209",
+        "2608.16978",
+        "2608.19490",
+        "2608.19589",
+        "2608.19613"
+      ],
+      "why": "The week repeatedly exposes a measurable interface that can change a VLA action before terminal success is known: tool use, counterfactual recovery, skill-block composition, closed-loop code replanning, self-demonstrated adaptation, continual skill subspaces, and latent-action choices. This turns VLA evaluation from a single success rate into an authority audit over who may rewrite, route, adapt, or preserve an action.",
+      "confidence": "High - every weekday contributed a distinct VLA or robot-learning paper that localizes execution authority.",
+      "lab_action": "Run the same tabletop and mobile-manipulation perturbations through tool-use, recovery, skill-library, code-replanning, self-demonstration, skill-subspace, and latent-action variants; score next-action delta, old-skill forgetting, intervention timing, and clean-task success."
+    },
+    {
+      "cluster": "World-action models become pre-commit forecasts for contact, safety, and whole-body state",
+      "representative_ids": [
+        "2608.13678",
+        "2608.14986",
+        "2608.17496",
+        "2608.19085",
+        "2608.19574",
+        "2608.20114",
+        "2608.20284"
+      ],
+      "why": "World models this week were not just future-video generators. They carried temporal-logic state, Gaussian scene memory, action-conditioned risk, decision-aligned driving latents, tactile contact hierarchy, decoupled base-arm futures, and surgical visual-trajectory forecasts. The shared research decision is to forecast the hidden state that would make the next action unsafe, ineffective, or worth repairing.",
+      "confidence": "High - navigation, manipulation, driving, safety, tactile, whole-body, and surgical papers repeat the pre-commit forecast pattern.",
+      "lab_action": "Create paired episodes where visual plausibility stays high but predicate state, tactile state, base-arm coupling, risk, or trajectory future changes; compare world-action objectives by action correction, safety veto, and recovery outcome."
+    },
+    {
+      "cluster": "Robot-usable geometry is judged by operational validity rather than reconstruction quality",
+      "representative_ids": [
+        "2608.14266",
+        "2608.15024",
+        "2608.17553",
+        "2608.18028",
+        "2608.19066",
+        "2608.19522",
+        "2608.19536"
+      ],
+      "why": "Geometry papers repeatedly ask whether a map can survive robot use: LiDAR mapping must scale, event-modulated Gaussian SLAM must handle motion blur, monocular SLAM must carry uncertainty into scale, bundle adjustment must prove metric validity, GS-VLA must make viewpoint canonicalization affect a frozen policy, LiDAR odometry must reveal degeneracy axes, and registration must transfer across sensors and density shifts.",
+      "confidence": "High - 53 weekly 3D/Scene ROI papers plus multiple SLAM, LiDAR, Gaussian, BA, and registration signals trigger the geometry watch lens.",
+      "lab_action": "Compare SLAM, BA, Gaussian maps, viewpoint canonicalization, LiDAR odometry, and registration systems on corridors, tunnels, camera shifts, sparse views, dynamic objects, and sensor-density changes; score scale drift, localizability, registration failure, and downstream route or grasp recovery."
+    },
+    {
+      "cluster": "Reliability moves from confidence to evidence authorization and abstention state",
+      "representative_ids": [
+        "2608.13719",
+        "2608.15410",
+        "2608.17386",
+        "2608.17318",
+        "2608.17205",
+        "2608.19739",
+        "2608.20084",
+        "2608.19376"
+      ],
+      "why": "Reliability work made the evidence path explicit. Active evaluation searches for paired-system failures, flood response benchmarks preserve physical context, MANIGUARD separates task success from safety predicates, CondVLN isolates branch decisions, Which Source Wins tests modality authority, question-guided VQA acquires missing evidence, evidence-gated TAMP blocks unsupported subgoals, and conformal VLM audits show class tails can fail despite marginal coverage.",
+      "confidence": "High - safety, VLM, navigation, and TAMP papers independently expose authorization, abstention, or predicate evidence.",
+      "lab_action": "Build episodes with hidden objects, branch predicates, image-text conflict, flood-like degraded evidence, class-tail shifts, and safety constraints; compare answer accuracy, evidence acquisition, abstention, unsupported subgoal rate, predicate violation, and task outcome."
+    },
+    {
+      "cluster": "Benchmark assets shift from bigger datasets to hidden-state labels",
+      "representative_ids": [
+        "2608.18701",
+        "2608.18618",
+        "2608.19425",
+        "2608.19372",
+        "2608.19968",
+        "2608.20251",
+        "2608.20308"
+      ],
+      "why": "The strongest benchmark papers name the state that final success hides: deformable-object state, lab-subtask hierarchy, scenario family, spatially distributed tactile feedback, assembly dependency, simulation-ready door articulation, and occluded egocentric hand trajectories. The durable asset is a label taxonomy for failure and recovery, not merely more demonstrations.",
+      "confidence": "High - manipulation and evaluation papers repeat hidden-state labels across deformable, dexterous, scenario, tactile, assembly, door, and hand-motion settings.",
+      "lab_action": "Annotate a compact manipulation and loco-manipulation set with material deformation, subtask boundary, scenario family, tactile coverage, assembly dependency, articulated door state, and occluded hand trajectory; compare final success against each hidden-state label."
+    },
+    {
+      "cluster": "Generated worlds are tested by causal process validity, not local image realism",
+      "representative_ids": [
+        "2608.19583",
+        "2608.20107",
+        "2608.19556",
+        "2608.19723",
+        "2608.19085",
+        "2608.20284",
+        "2608.20336"
+      ],
+      "why": "Generative papers asked whether the output preserves the process a robot or planner would rely on. VGI-BENCH probes evolving processes, BeyondMasks demands causal and physical side effects after object removal, Stream4D attacks 4D drift, StreamSoccer uses bounded event memory, DA-WAM aligns latents with driving decisions, surgical WAM couples visual and trajectory futures, and WithEveryone binds identities to locations.",
+      "confidence": "Medium-High - generation, driving, surgical, and identity-grounding papers share process-validity evidence, though downstream robot use remains uneven.",
+      "lab_action": "Generate scenes where the final frame looks plausible but object permanence, contact order, physical side effects, route decision, surgical trajectory, event memory, or identity binding can fail; score planner action error and reject generated data that preserves appearance but breaks process state."
+    }
+  ],
+  "frontier_memory": {
+    "new": [
+      "Friday added explicit evidence-gated TAMP and class-conditional VLM coverage to the week-long evidence-authority theme.",
+      "Whole-body and tactile world-action models made hidden contact and base-arm factorization more explicit than earlier weekly artifacts."
+    ],
+    "strengthening": [
+      "Runtime interfaces repeated all week: tool use, counterfactual recovery, process rewards, code replanning, self-demonstration, latent actions, and safety gates.",
+      "Robot-usable geometry strengthened through Gaussian scene memory, MotionGS-SLAM, uncertainty-aware SLAM, bundle-adjustment validity, GS-VLA, and degeneracy-aware LiDAR odometry."
+    ],
+    "commoditizing": [
+      "Generic VLA scaling, generic video realism, and generic reconstruction quality look less defensible unless they expose an action-relevant evidence variable."
+    ],
+    "contradiction": [
+      "Flexible VLA behavior wants broad semantic transfer, while evidence gates, safety predicates, and scenario conditioning deliberately restrict when actions are allowed."
+    ],
+    "missing_axis": [
+      "No single benchmark yet ties VLA adaptation, evidence-gated planning, tactile forecasting, and map degeneracy into one closed-loop robot episode."
+    ]
+  },
+  "strategy_board": [
+    {
+      "opportunity": "Evidence-Gated Execution Benchmark",
+      "portfolio": "Build moat",
+      "why_now": "Every weekday produced a paper that asks which cue, predicate, memory, map, or latent is allowed to authorize an action.",
+      "contrarian_bet": "APRL should own the authorization protocol instead of competing first on another VLA backbone.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week_probe": "Create ten mobile-manipulation episodes with hidden objects, cue conflicts, safety predicates, and map degeneracy labels.",
+      "four_week_build": "Evaluate VLM-TAMP, VLA, tool-use, safety-shield, and map-aware policies with shared authorization traces.",
+      "success_metric": "Evidence labels predict or prevent at least three unsupported actions before terminal failure while preserving clean-task success.",
+      "stop_condition": "If authorization labels do not change policy ranking or recovery choice, split into planning-only and perception-only tracks.",
+      "paper_path": "Evidence-gated execution for reliable mobile manipulation.",
+      "asset_path": "APRL evidence-gated episodes with observations, predicates, map states, action deltas, and recovery outcomes."
+    },
+    {
+      "opportunity": "Contact and Whole-Body World-Action Suite",
+      "portfolio": "Build moat",
+      "why_now": "HiTac-WAM, DECOWAM, surgical WAM, DA-WAM, and safety JEPA make future-state quality accountable to candidate actions.",
+      "contrarian_bet": "Treat hidden tactile and body-state forecasts as the moat, not video fidelity or generic latent prediction.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 4,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week_probe": "Instrument one door traversal, one dexterous grasp, and one base-arm task with tactile, ego-motion, and action-chunk labels.",
+      "four_week_build": "Compare tactile WAM, whole-body WAM, decision-aligned latent, and action-conditioned safety models under matched episodes.",
+      "success_metric": "A hidden forecast variable predicts next-action correction or safety veto earlier than visual future quality.",
+      "stop_condition": "If hidden forecasts do not improve action correction beyond previous-action baselines, reduce scope to tactile-only tasks.",
+      "paper_path": "Pre-commit world-action evidence for contact-rich mobile manipulation.",
+      "asset_path": "Tactile traces, ego/arm action factors, action chunks, latent futures, and recovery labels."
+    },
+    {
+      "opportunity": "Robot-Usable Geometry Validity Protocol",
+      "portfolio": "Exploit",
+      "why_now": "The week connected geometry to policy viewpoint, scale, localizability, registration transfer, and route recovery.",
+      "contrarian_bet": "Avoid rendering-fidelity competition by owning the validity tests that determine whether a map can guide a robot.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 4
+      },
+      "one_week_probe": "Record two corridor and tabletop scenes with scale drift, repeated structure, dynamic objects, and camera shifts.",
+      "four_week_build": "Compare LiDAR odometry, monocular SLAM, Gaussian maps, BA, and registration systems on the same downstream route or grasp tasks.",
+      "success_metric": "A geometry validity metric predicts route or grasp failure better than photometric, APD, or optimizer scores.",
+      "stop_condition": "If validity metrics do not change downstream decisions, narrow the claim to localization diagnostics.",
+      "paper_path": "Operational validity tests for robot geometry and SLAM.",
+      "asset_path": "Scale ground truth, localizability fields, registration shifts, pose failures, and task outcome logs."
+    }
+  ]
+}
