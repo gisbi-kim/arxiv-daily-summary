@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-24 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-24 arXiv Research Intelligence</h1>
+<p class="lead">The August 24 batch turns robot intelligence into an authorization problem. VLA and robot-learning papers ask which temporal-logic rule, physical-attack certificate, future-token forecast, action-compression tolerance, tactile state, or task-precedence graph is allowed to change the next action. Geometry, VLM, and driving papers ask the same question for map updates, spatial-state reconstruction, video evidence routing, cooperative perception, and world-action rollouts. The useful APRL move is to build benchmarks where the hidden evidence variable must be named before the policy, planner, map, or compressed perception stack is trusted.</p><p class="scope">Daily edition from matching Monday /new listings: 103 non-replacement cs.CV rows, 37 cs.RO rows, 133 deduplicated papers, and 110 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claims are asserted.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>Action authority is being constrained before execution</h3><p>CertVLA, Logic-VLA, ForeTime-VLA, JND compression for VLA, and CARD all make the action interface visible: which attack mask, logic formula, future token, token perturbation, or belief route changed the chosen action.</p></article><article><span>Decision</span><h3>Manipulation evidence is moving into hardware and contact state</h3><p>VT-MUSE, Koala Gripper, ViTacPhys, hybrid roller-jamming, TaPeR, and demonstration-unlearning audits ask whether contact, physical property, gripper design, or task graph evidence survives into closed-loop behavior.</p></article><article><span>Decision</span><h3>Geometry and VLMs are evaluated by auditable state variables</h3><p>TopoSurfel, VisTa3D, M2Depth, Stream3Dv2, IMU-free state estimation, StateSight, EviRank, and spatial-verification agents all expose intermediate state rather than accepting final visual quality or final answer accuracy.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.20791" target="_blank" rel="noopener">CertVLA: Certified Defense against Physical Visual Attacks for Vision-Language-Action Models</a></h3>
+  <p class="fit">VLA safety - physical patch defense - closed-loop action certificate</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Certified visual defenses usually certify discrete labels, while VLA policies output continuous temporally correlated actions.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract states that localized physical perturbations can attack VLA policies and that existing patch defenses do not directly certify closed-loop control.</p></div>
+    <div><h4>Hidden premise</h4><p>A safety claim for VLA deployment must certify behavior over a rollout, not only one visual query or one class label.</p></div>
+    <div><h4>Conceptual move</h4><p>Convert patch robustness into an action-consistency certificate with calibrated episode-level coverage.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies localized physical perturbations as a VLA vulnerability.</span></li><li><strong>[Abstract]</strong><span>It proposes calibrated behaviorally consistent actions and rollout-level certificates.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether safety defenses preserve the action trajectory, not only visual classification.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes behaviorally consistent action regions, deterministic covering masks, and query-level decisions conjoined over a closed-loop rollout.</p></div>
+    <div><h4>Falsification frontier</h4><p>If certified action coverage holds only for masks that do not affect contact-relevant pixels or if rollout success still fails under allowed patches, the certificate is too weak.</p></div>
+    <div><h4>Adversarial read</h4><p>Test adaptive patches on grippers, target objects, signs, and background regions while separating perception error from action deviation.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Turn safety into an action-authority certificate with an explicit threat model and rollout boundary.</p><p>Strong for camera-conditioned VLA control; less direct for proprioception-only or map-based controllers.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.20556" target="_blank" rel="noopener">Logic-VLA: A Temporal Logic Conditioned Vision-Language-Action Model</a></h3>
+  <p class="fit">VLA - temporal logic conditioning - safety-critical requirements</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Natural-language robot instructions can be underspecified when the task has temporal or safety-critical constraints.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract argues that natural language may not precisely specify spatiotemporal requirements on resulting behavior.</p></div>
+    <div><h4>Hidden premise</h4><p>A VLA policy should accept formal requirements at inference time without sacrificing the nominal language task.</p></div>
+    <div><h4>Conceptual move</h4><p>Condition VLA behavior on Signal Temporal Logic specifications and optimize satisfying versus violating rollouts.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper frames temporal logic as an inference-time conditioning signal for VLA behavior.</span></li><li><strong>[Abstract]</strong><span>It evaluates closed-loop quadcopter navigation across randomized photorealistic environments.</span></li><li><strong>[Inference]</strong><span>APRL should require temporal predicates to be visible in the policy evaluation contract.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract names an STL syntax-graph encoder, STL-conditioned supervised finetuning, and trajectory-level preference optimization.</p></div>
+    <div><h4>Falsification frontier</h4><p>If unseen STL formulas raise requirement satisfaction but damage ordinary task completion, the logic interface is not yet robust.</p></div>
+    <div><h4>Adversarial read</h4><p>Use conflicting natural-language and STL constraints, unseen formulas, and perceptual ambiguity that hides a predicate boundary.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Separate what the task asks from what the trajectory is forbidden or required to do over time.</p><p>Strong for navigation and sequential manipulation; weaker for one-shot static perception tasks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.20735" target="_blank" rel="noopener">ForeTime-VLA: Causal Future-Token Distillation from a World Action Model for Conveyor-Belt Manipulation</a></h3>
+  <p class="fit">VLA manipulation - future-token distillation - contact anticipation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Many VLA finetunes condition on the current observation even when moving-object manipulation requires future contact anticipation.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract states that running a video-scale world-action teacher or imagining future frames at deployment is costly.</p></div>
+    <div><h4>Hidden premise</h4><p>Future information can be compressed into causal tokens that preserve action-relevant transition timing.</p></div>
+    <div><h4>Conceptual move</h4><p>Distill a future-aware action-equivalent representation from a world-action model into a causal VLA policy.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names anticipation of contact events as central for moving-object manipulation.</span></li><li><strong>[Abstract]</strong><span>It predicts a whitened future-aware target and normalized time-to-transition from an eight-frame history.</span></li><li><strong>[Inference]</strong><span>APRL should score future-token usefulness by earlier action correction before contact.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes four future tokens, a phase token, manipulation phase, time-to-transition, and action-expert conditioning.</p></div>
+    <div><h4>Falsification frontier</h4><p>If future tokens improve training loss but do not shift pre-contact actions or recovery timing, they are not action-equivalent.</p></div>
+    <div><h4>Adversarial read</h4><p>Vary belt speed, occlusion, object slip, and phase boundary labels to isolate future anticipation from memorized timing.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask which minimal future variable must be causal at inference for contact timing to improve.</p><p>Strong for conveyor, catching, and moving-object manipulation; weaker for static pick-place tasks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.21290" target="_blank" rel="noopener">VT-MUSE: Multimodal Unified Sequential Visuotactile Representation Learning for Manipulation</a></h3>
+  <p class="fit">visuotactile manipulation - sequential contact dynamics - cross-modal representation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Visuotactile pipelines often encode modalities independently and fuse only current-step observations.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says independent encoding limits fine-grained cross-modal dependencies and overlooks temporal contact evolution.</p></div>
+    <div><h4>Hidden premise</h4><p>A manipulation representation should retain global visual context and local tactile dynamics across time.</p></div>
+    <div><h4>Conceptual move</h4><p>Learn sequential visuotactile latents through cross-modal temporal alignment and masked-view consistency.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies current-step fusion as insufficient for temporal contact dynamics.</span></li><li><strong>[Abstract]</strong><span>It predicts tactile depth changes while reconstructing masked recent visual observations.</span></li><li><strong>[Inference]</strong><span>APRL should measure contact-dynamics prediction against recovery and grasp-stability changes.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a two-stage framework with modality-specific encoders, a conditional variational latent model, visual reconstruction, and tactile-depth prediction.</p></div>
+    <div><h4>Falsification frontier</h4><p>If temporal visuotactile latents do not improve failure prediction under slip, deformation, or occlusion, the representation is not control-relevant.</p></div>
+    <div><h4>Adversarial read</h4><p>Use visually stable but tactile-changing objects and tactile-stable but visually occluded grasps to separate modality dependence.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat contact as a temporal state variable, not an auxiliary sensor feature.</p><p>Strong for contact-rich manipulation; weaker for tasks without tactile sensing or contact state labels.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.20740" target="_blank" rel="noopener">VisTa3D: A Dataset and Benchmark for Thin Object Reconstruction from Vision, Tactile, and 3D Point Clouds</a></h3>
+  <p class="fit">thin-object reconstruction - tactile geometry - benchmark</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>3D reconstruction benchmarks often reward dense visible surfaces and under-test thin, deformable, or contact-inferred geometry.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says current reconstruction models underperform on thin objects because such objects occupy little image and point-cloud volume.</p></div>
+    <div><h4>Hidden premise</h4><p>Tactile response maps can add local shape and deformation evidence unavailable to vision or range alone.</p></div>
+    <div><h4>Conceptual move</h4><p>Make thin-object reconstruction a multimodal benchmark with synchronized RGB, depth, tactile, IMU, pose, calibration, and laser-scan ground truth.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names thin-object low fidelity as a measurable failure of current 3D reconstruction models.</span></li><li><strong>[Abstract]</strong><span>It collects synchronized visual, depth, tactile, inertial, pose, calibration, segmentation, and laser-scanned ground truth data.</span></li><li><strong>[Inference]</strong><span>APRL should test robot maps on objects whose useful geometry is contact-revealed, not only visually visible.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract introduces VisTa3D, 387 scenes, 70 thin objects, 17 environments, and a visuospatial-tactile fusion baseline.</p></div>
+    <div><h4>Falsification frontier</h4><p>If tactile fusion improves reconstruction metrics but not grasp, insertion, or collision avoidance, the geometry is not robot-usable.</p></div>
+    <div><h4>Adversarial read</h4><p>Use wires, straps, sheets, and transparent or deformable thin objects where vision is ambiguous but contact is informative.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Benchmark reconstruction by the missing physical evidence a robot needs to act.</p><p>Strong for manipulation and inspection; less direct for open outdoor mapping.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.20414" target="_blank" rel="noopener">StateSight: Benchmarking Latent Spatial-State Reconstruction in Vision-Language Models</a></h3>
+  <p class="fit">VLM spatial reasoning - latent state reconstruction - benchmark</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Broad VLM benchmarks mix perception, OCR, prior knowledge, language, and reasoning, making spatial-state failure hard to isolate.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract reports that VLMs trail humans on cube-net, occluded tower, and connected-component spatial tasks.</p></div>
+    <div><h4>Hidden premise</h4><p>A useful spatial-reasoning benchmark should have deterministic oracle labels and isolate latent spatial structure from semantic priors.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn VLM spatial evaluation into controlled latent-state reconstruction tasks with exact-match scoring and human baselines.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper isolates latent spatial structure from mixed broad benchmark factors.</span></li><li><strong>[Abstract]</strong><span>It reports human baselines exceeding tested VLMs on every task family.</span></li><li><strong>[Inference]</strong><span>APRL should test embodied VLM plans against hidden spatial-state reconstruction before action.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes procedurally generated cube-net, occluded cube-tower, and connected-component tasks, each with 300 prompts.</p></div>
+    <div><h4>Falsification frontier</h4><p>If spatial-state scores do not predict navigation, manipulation, or inspection failures, the benchmark remains cognitive rather than embodied.</p></div>
+    <div><h4>Adversarial read</h4><p>Add robot camera viewpoints, occluded supports, and distractor object priors so answer fluency cannot replace spatial state.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask whether the model reconstructed the latent state that a planner would need.</p><p>Strong for VLM planning audits; weaker for low-level geometry pipelines that already expose metric state.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.20430" target="_blank" rel="noopener">RISE: Adaptive Imagination for World Action Models</a></h3>
+  <p class="fit">driving world-action model - adaptive rollout budget - risk supervision</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>World-action models often spend a fixed future-rollout budget regardless of scene risk or planning benefit.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says fixed imagination budgets are inefficient because factual logs expose only one realized future.</p></div>
+    <div><h4>Hidden premise</h4><p>A planner should continue imagining only when the current rollout prefix reveals risk and additional rollout is expected to improve planning.</p></div>
+    <div><h4>Conceptual move</h4><p>Make world-action imagination an adaptive Roll/Stop decision supervised by counterfactual driving futures.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper frames imagination budget as a scene-dependent planning decision.</span></li><li><strong>[Abstract]</strong><span>It constructs CounterDrive with diverse outcomes, risk levels, and expert verification.</span></li><li><strong>[Inference]</strong><span>APRL should score world models by whether extra rollout changes the decision in high-risk scenes.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a latent evaluator, rollout gate, expected planning benefit, compute cost, and CounterDrive risk supervision.</p></div>
+    <div><h4>Falsification frontier</h4><p>If adaptive imagination does not change action or risk ranking in rare hazards, it is only a compute scheduler.</p></div>
+    <div><h4>Adversarial read</h4><p>Use counterfactual scenes where more imagination reveals a collision, but visually similar low-risk scenes should stop early.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Allocate world-model rollout budget where the expected decision value is highest.</p><p>Strong for driving and long-horizon planning; less direct for short-horizon manipulation without future branching.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.21247" target="_blank" rel="noopener">Just Noticeable Difference Modeling for Token Compression in Vision-Language-Action Models</a></h3>
+  <p class="fit">VLA efficiency - token compression - action tolerance</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Token pruning and cache reuse often rely on visual similarity, attention, or saliency as indirect importance signals.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract argues that embodied tokens directly affect latency-sensitive closed-loop action prediction, so visual importance can miss action deviation.</p></div>
+    <div><h4>Hidden premise</h4><p>Safe compression should be defined by how much a token can change before downstream action deviates unacceptably.</p></div>
+    <div><h4>Conceptual move</h4><p>Borrow just noticeable difference as a receiver-dependent tolerance for VLA token compression.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper says embodied-agent tokens affect closed-loop robot action prediction.</span></li><li><strong>[Abstract]</strong><span>It identifies action deviation tolerance as the key factor for safe compression.</span></li><li><strong>[Inference]</strong><span>APRL should compare compression by action delta, not only token count or latency.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract frames machine-oriented JND around downstream machine responses rather than human visual perception.</p></div>
+    <div><h4>Falsification frontier</h4><p>If JND-guided compression preserves benchmark action deltas but fails under rare contact or safety states, tolerance was under-specified.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress tokens that look redundant visually but encode grasp pose, obstacle boundary, small sign text, or temporal phase.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Define efficiency by the smallest representation change that alters the robot action.</p><p>Strong for VLA deployment; weaker for offline captioning or retrieval without action consequences.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>VLA action interfaces now need explicit authorizers</h3><p class='links'>CertVLA - Logic-VLA - ForeTime-VLA - JND-VLA - CARD</p><p><strong>Observed</strong> - The selected abstracts expose patch certificates, temporal-logic formulas, future contact tokens, token tolerance, and belief-to-action routing.</p><p><strong>Inference</strong> - A VLA benchmark should record which authorizer changed the action and which hidden condition would make that authorizer invalid.</p></article><article><h3>Contact and geometry are becoming state-reconstruction problems</h3><p class='links'>VT-MUSE - ViTacPhys - Koala Gripper - VisTa3D - Stream3Dv2 - ASV coastline localization</p><p><strong>Observed</strong> - The batch repeatedly uses tactile histories, physical-property estimates, gripper/data co-design, thin-object ground truth, streaming 3D fusion, and coastline constraints.</p><p><strong>Inference</strong> - APRL should link representation quality to the physical state the controller needs, not just to final visual fidelity.</p></article><article><h3>World models and VLMs are moving toward evidence routing</h3><p class='links'>RISE - WA-JEPA - Route2Look - EviRank - StateSight - spatial CT verification</p><p><strong>Observed</strong> - World-action and VLM papers expose rollout budget, future latents, query-adaptive evidence tools, structured relevance packages, and deterministic spatial checks.</p><p><strong>Inference</strong> - Evaluation should ask whether the system acquired the right evidence before answering or planning.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 18-21 emphasized runtime evidence gates, robot-facing geometry, and scenario-conditioned evaluation.</p><p>August 24 strengthens the same axis with certified VLA rollouts, temporal logic conditioning, future-token distillation, action-tolerance compression, and auditable spatial-state reconstruction.</p></article><article><span>New signal</span><p class='history'>Recent daily artifacts discussed VLA adaptation and world-action models mostly as policy or latent-interface problems.</p><p>Today adds a sharper certification/evidence layer: CertVLA and JND-VLA ask what perturbation can be allowed before closed-loop action changes.</p></article><article><span>Commoditizing</span><p class='history'>Video, generation, and VLM papers repeatedly offer new model variants.</p><p>The crowded axis is model naming; the defensible axis is whether the paper exposes a reusable benchmark variable such as spatial state, physical consistency, evidence package, or rollout-risk label.</p></article><article><span>Missing axis</span><p class='history'>The repo still lacks one shared suite joining VLA safety, tactile manipulation, geometry observability, and world-action rollout value.</p><p>APRL can own that gap by building episodes where the same hidden state controls safety authorization, tactile recovery, localization confidence, and future-rollout budget.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Action-authority audit for VLA deployment</h3><p class="thesis">Require VLA actions to declare whether they were authorized by a safety certificate, logic predicate, future token, tactile state, or action-tolerance rule.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create ten manipulation and drone-navigation tasks with physical patches, unseen STL predicates, moving-object phase shifts, and action-token compression variants.</p></div>
+    <div><strong>4-week build</strong><p>Evaluate CertVLA-style masking, Logic-VLA-style predicates, ForeTime-style future tokens, and JND compression under matched closed-loop episodes.</p></div>
+    <div><strong>Success metric</strong><p>The declared authorizer predicts action deviation, requirement violation, or recovery timing before terminal success changes.</p></div>
+    <div><strong>Stop condition</strong><p>If authorizer labels do not change policy ranking or failure prediction, narrow the suite to the single strongest interface.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Closed-loop episodes, patch masks, STL predicates, future-token labels, action-delta tolerances, and rollout authorization traces.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 27/30</span></div>
+  <h3>Thin-contact geometry benchmark</h3><p class="thesis">Connect thin-object reconstruction, tactile histories, physical-property estimates, and gripper co-design to manipulation outcomes.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 5</span><span>timing 4</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Select five thin or deformable objects and collect synchronized RGB-D, tactile response, gripper pose, and slip or deformation labels.</p></div>
+    <div><strong>4-week build</strong><p>Compare visual-only reconstruction, tactile-augmented reconstruction, visuotactile policy latents, and physical-property-aware grasping on the same objects.</p></div>
+    <div><strong>Success metric</strong><p>Tactile or physical-property evidence predicts grasp recovery, collision avoidance, or insertion success beyond visual reconstruction quality.</p></div>
+    <div><strong>Stop condition</strong><p>If tactile evidence only improves offline reconstruction metrics, split the benchmark into perception and control tracks.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Thin-object scenes, tactile maps, object physical-property labels, gripper interaction traces, and robot-usable geometry scores.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 25/30</span></div>
+  <h3>Evidence-routing world-model evaluator</h3><p class="thesis">Measure whether extra imagination, video evidence routing, and cooperative perception change decisions only when risk or missing evidence justifies the cost.</p>
+  <div class="scores"><span>fit 4</span><span>novelty 4</span><span>feasibility 4</span><span>moat 4</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Define driving and mobile-robot scenes with low-risk stop cases, high-risk rollout-needed cases, occluded roadside evidence, and stale collaborator messages.</p></div>
+    <div><strong>4-week build</strong><p>Compare fixed-rollout WAMs, RISE-style adaptive imagination, Route2Look-style evidence acquisition, and cooperative-perception anchors.</p></div>
+    <div><strong>Success metric</strong><p>Adaptive evidence routing reduces compute on easy scenes and changes the action or confidence on high-risk scenes.</p></div>
+    <div><strong>Stop condition</strong><p>If routing decisions correlate only with scene length or token count, remove the model and keep a cheaper heuristic baseline.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Risk-labeled counterfactual scenes, evidence-acquisition logs, cooperative message perturbations, and rollout-value labels.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-24.json">intelligence/2026-08-24.json</a>.</footer>
+</body></html>
