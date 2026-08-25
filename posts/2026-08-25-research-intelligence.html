@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-25 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-25 arXiv Research Intelligence</h1>
+<p class="lead">The August 25 batch makes robot and multimodal systems answer a harder question: what evidence is allowed to change an action, a map, a memory, or a generated future? VLA papers expose prompt authority, typed spatial readouts, event-gated memory, intent distillation, and modality masking as explicit control interfaces. Geometry and SLAM papers ask when a map can remain localizable, updatable, private, or semantically stable. World-action and driving papers move away from video fidelity toward future state, view-invariant action coordinates, risk objects, and behavior-aware simulators. The APRL move is to own evaluation episodes where the evidence variable must be named before the policy, planner, mapper, or VLM answer is trusted.</p><p class="scope">Daily edition from matching Tuesday /new listings: 234 non-replacement cs.CV rows, 92 cs.RO rows, 307 deduplicated papers, and 254 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claims are asserted.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>VLA control now needs an authority boundary</h3><p>TOWN-VLA, Pointing-VLA, UniMem, INDI, modality masking, and CounterAlign all ask which prompt, spatial target, memory update, intent label, modality, or negative action evidence is permitted to alter the executed action.</p></article><article><span>Decision</span><h3>Maps are becoming evidence-managed robot state</h3><p>AquaFlow, SuperMap, Spotter, GeoWAM, robust global SfM, and M3ISR treat geometry as a state whose pose, semantics, privacy, dynamic update, and compression behavior must remain inspectable.</p></article><article><span>Decision</span><h3>Reasoning budgets are routed before expensive perception</h3><p>GapSight, long-video RAG, acoustic triage, FOVEA, VIG, and GuardianBench shift evaluation from final answer quality toward whether the system acquired the right local, temporal, audio, or risk evidence before answering.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.23224" target="_blank" rel="noopener">Think Only When Needed: Prompt-Authority Control for Selective Slow-Path Intervention in Vision-Language-Action Manipulation</a></h3>
+  <p class="fit">VLA manipulation - prompt authority - selective intervention</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Retrieval-augmented VLA work often treats retrieved text as harmless context once it improves language-side reasoning.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract reports that raw appended text can collapse VLA execution, so prompt form itself becomes a control intervention.</p></div>
+    <div><h4>Hidden premise</h4><p>A deployed VLA should preserve its base prompt unless an explicit compatibility rule authorizes a canonical replacement.</p></div>
+    <div><h4>Conceptual move</h4><p>Separate slow-path candidate generation from permission to alter the executed policy input.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies prompt-form collapse when appended text enters a frozen VLA policy.</span></li><li><strong>[Abstract]</strong><span>It frames retrieved text as a control intervention requiring an authorization contract.</span></li><li><strong>[Inference]</strong><span>APRL should test retrieval, memory, and tool text by action delta, not only semantic helpfulness.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a prompt-authority interface that authorizes a compact canonical instruction or restores the original Base prompt.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the compatibility rule only restores base behavior on easy tasks and cannot authorize genuinely useful corrections, it is a guardrail rather than a reasoning interface.</p></div>
+    <div><h4>Adversarial read</h4><p>Use meaningful, irrelevant, adversarial, and length-matched prompts under identical visual states to separate semantic benefit from prompt-form disturbance.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat every text injection into a robot policy as an actuator with an authority boundary.</p><p>Direct for VLA manipulation and retrieval-augmented policies; weaker for modular stacks where language never touches the low-level controller.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.23138" target="_blank" rel="noopener">Pointing-VLA: Typed Spatial Grounding Interfaces for Vision-Language-Action Manipulation</a></h3>
+  <p class="fit">VLA manipulation - typed spatial readout - execution contract</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Spatial grounding in VLA policies is often exposed through text coordinates or opaque action tokens.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract argues that serializing geometry as language creates brittle interfaces between multimodal reasoning and execution.</p></div>
+    <div><h4>Hidden premise</h4><p>Different manipulation stages need different spatial targets, so one generic grounding channel is under-specified.</p></div>
+    <div><h4>Conceptual move</h4><p>Use typed hidden-state spatial readouts for points, object-functional grounding heatmaps, and visual trajectories.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper proposes geometry-specific heads rather than text-serialized coordinates.</span></li><li><strong>[Abstract]</strong><span>It reports physical pick-place deployments and a collision-enabled CuRobo execution setting.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether typed spatial outputs reduce stage-specific failures.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract assigns PICK to source-conditioned object-functional grounding and PLACE to pointing, turning geometry into a stage-aligned contract.</p></div>
+    <div><h4>Falsification frontier</h4><p>If typed heads improve benchmark averages but fail when PICK and PLACE require different occlusion or contact evidence, the interface is not stage-aligned enough.</p></div>
+    <div><h4>Adversarial read</h4><p>Swap target-source ambiguity, distractor affordances, occlusion, and collision constraints to see which head changes the action incorrectly.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Do not ask one representation to carry all spatial intent; type the interface by execution stage.</p><p>Strong for pick-place and mobile manipulation; less direct for navigation policies whose spatial targets are already explicit waypoints.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.22869" target="_blank" rel="noopener">UniMem: Unifying Multimodal Memory and Control for Vision-Language-Action Models</a></h3>
+  <p class="fit">VLA memory - event-gated keyframes - non-Markovian control</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Long-horizon VLA memory is often bolted on as an external VLM memory manager or a fixed historical-frame window.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says arbitrary fixed-interval frames can degrade performance and external VLM memory creates a fractured pipeline.</p></div>
+    <div><h4>Hidden premise</h4><p>A useful robot memory should update only at events that preserve action-relevant state while staying inside the control backbone.</p></div>
+    <div><h4>Conceptual move</h4><p>Unify high-level multimodal memory and low-level control with event classification, keyframe encoding, and cached spatial memory.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies non-Markovian tasks as a failure case for current VLA policies.</span></li><li><strong>[Abstract]</strong><span>It argues that fixed historical-frame selection can hurt rather than help.</span></li><li><strong>[Inference]</strong><span>APRL should score memory by whether event choice predicts future action correction.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes event-triggered memory updates, keyframe encoding, and keyframe caching to retain dense spatial information.</p></div>
+    <div><h4>Falsification frontier</h4><p>If event-gated memory helps only on scripted long-horizon tasks but not under distractor events or changed subgoal order, the memory trigger is too narrow.</p></div>
+    <div><h4>Adversarial read</h4><p>Insert visually salient but task-irrelevant events, delayed object moves, and repeated subgoals to test whether memory updates are action-relevant.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Memory should be evaluated as an update policy, not as a larger context window.</p><p>Direct for non-Markovian manipulation; weaker for one-step reaching or tasks whose state is fully observable at execution time.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.22906" target="_blank" rel="noopener">AquaFlow: A Monocular Gaussian Splatting SLAM for Underwater Streaming Reconstruction</a></h3>
+  <p class="fit">underwater SLAM - Gaussian streaming reconstruction - degraded visual media</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Streaming 3DGS reconstruction methods often assume visual conditions where pose tracking and scene geometry remain photometrically reliable.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract names light attenuation and scattering as causes of pose degradation and distorted underwater scene geometry.</p></div>
+    <div><h4>Hidden premise</h4><p>A robot-usable underwater map needs media-aware pose and pointmap estimates before Gaussian initialization can be trusted.</p></div>
+    <div><h4>Conceptual move</h4><p>Adapt a 3D vision foundation model to underwater data and use medium-guided incremental Gaussian initialization for streaming mapping.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies underwater optical degradation as a tracking and geometry failure source.</span></li><li><strong>[Abstract]</strong><span>It proposes a monocular Gaussian Splatting streaming reconstruction framework for underwater scenes.</span></li><li><strong>[Inference]</strong><span>APRL should judge map quality by localization recovery under optical degradation, not just rendering fidelity.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes robust pose and pointmap estimation, medium-guided initialization, and a hybrid structured plus disordered scene representation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If reconstructions look better but relocalization, loop closure, or navigation recovery do not improve under turbidity, the mapping state is not robot-usable.</p></div>
+    <div><h4>Adversarial read</h4><p>Vary scattering, lighting, moving fauna, textureless seabed, and viewpoint gaps while measuring pose drift and downstream route recovery.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat the sensing medium as a map-state variable rather than an image pre-processing nuisance.</p><p>Strong for underwater inspection and degraded-vision SLAM; less direct for clean indoor RGB-D mapping.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.22896" target="_blank" rel="noopener">SuperMap: A Spatio-Temporal SLAM System for Visual-Language Navigation</a></h3>
+  <p class="fit">semantic SLAM - long-term object identity - visual-language navigation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Open-vocabulary perception is often fused into maps as if labels were stable observations of persistent objects.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says foundation-model predictions are intermittent and view-dependent, causing identity drift and stale semantics in mapping pipelines.</p></div>
+    <div><h4>Hidden premise</h4><p>Language-guided navigation needs a map that can reactivate object identities and prune outdated content as the environment changes.</p></div>
+    <div><h4>Conceptual move</h4><p>Combine high-frequency geometric SLAM with asynchronous open-vocabulary perception and confidence-managed 4D object memory.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper frames stale semantics and identity drift as map-level failures.</span></li><li><strong>[Abstract]</strong><span>It proposes consistency-driven mapping for stable object identity and pruning under occlusion or scene change.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate semantic maps by query success after object disappearance, reappearance, and label flips.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract names 3D-aware instance association, reactivation, and existence-label confidence updates for a queryable spatio-temporal scene graph.</p></div>
+    <div><h4>Falsification frontier</h4><p>If confidence updates preserve stale objects under real rearrangement, the map may improve language retrieval while hurting navigation.</p></div>
+    <div><h4>Adversarial read</h4><p>Move, hide, rename, and replace objects across revisits while measuring object identity, query routing, and navigation success.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A semantic map must have object existence and label confidence with explicit decay and reactivation rules.</p><p>Strong for long-term indoor navigation; less direct for short static episodes or metric-only localization.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.23486" target="_blank" rel="noopener">GeoWAM: Visual Geometry World Action Models for Autonomous Driving</a></h3>
+  <p class="fit">driving WAM - point-cloud state - action-aligned world model</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Driving world-action models often use pixel future prediction as the shared state for scene dynamics and ego action.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract argues pixels entangle geometry and motion with texture and illumination, leaving driving actions only indirectly represented.</p></div>
+    <div><h4>Hidden premise</h4><p>Driving actions live in geometric space, so the world model should predict a state representation aligned with that space.</p></div>
+    <div><h4>Conceptual move</h4><p>Move WAM state from visual frames toward point-cloud geometry that directly encodes rigid and non-rigid transformations.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies pixel-space dynamics as an indirect representation for driving.</span></li><li><strong>[Abstract]</strong><span>It proposes geometry, represented by point clouds, as the WAM state space.</span></li><li><strong>[Inference]</strong><span>APRL should compare pixel-WAM and geometry-WAM failures on action-changing scene dynamics.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract frames point clouds as a more natural dynamics state for future evolution and ego-trajectory prediction.</p></div>
+    <div><h4>Falsification frontier</h4><p>If point-cloud state improves geometry metrics but not object-risk localization or ego-trajectory recovery, the state is not action-aligned enough.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress illumination, texture, articulated traffic participants, occluded risks, and long-range depth sparsity while measuring action change.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Choose the world-model state by the coordinate system where the action is executed.</p><p>Direct for driving and mobile robots; less direct for image-editing world models without executable actions.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.21762" target="_blank" rel="noopener">Learning to Look Again: Loss-Gap Supervision for Free-form Crop Routing in Vision-Language Models</a></h3>
+  <p class="fit">VLM evidence routing - selective crop review - model-specific failure signal</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLM detail failures are often addressed by allocating more visual tokens globally or by using fixed crops.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says the answer can be visible but lost after compression into a low-resolution global view, while more tokens can waste compute or hurt global-context tasks.</p></div>
+    <div><h4>Hidden premise</h4><p>A re-reading policy should be supervised by whether a crop reduces the target model's own answer loss.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn local visual evidence acquisition into a free-form crop-routing decision learned from global-versus-crop loss gaps.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper frames many detail-centric errors as evidence loss during visual compression.</span></li><li><strong>[Abstract]</strong><span>It uses the target VLM's own loss gap to label useful crop reviews.</span></li><li><strong>[Inference]</strong><span>APRL should route expensive visual perception only when the missing evidence can change a downstream action.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes comparing answer loss or option margin under global-only and crop-augmented views, then distilling useful crops into a lightweight router.</p></div>
+    <div><h4>Falsification frontier</h4><p>If loss-gap crops improve VQA but fail to predict manipulation, inspection, or navigation decisions, the router remains answer-centric.</p></div>
+    <div><h4>Adversarial read</h4><p>Use small signs, grasp-relevant contact regions, occluded defects, and distractor crops where local evidence conflicts with global context.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Budget perception by the marginal decision value of looking again.</p><p>Strong for VLM inspection and detail-centric embodied prompts; weaker for sensors where the bottleneck is temporal or tactile, not image resolution.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.21928" target="_blank" rel="noopener">GuardianBench: A Same-Scene Instruction-Contrastive Benchmark for Latent Contextual Risk in Embodied AI</a></h3>
+  <p class="fit">embodied safety - instruction contrast - latent contextual risk</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Embodied safety benchmarks often vary scenes or dynamics, allowing models to rely on scene-level risk priors.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says a safe scene and a benign instruction can become hazardous only in composition, and models show instruction-insensitive verdicts.</p></div>
+    <div><h4>Hidden premise</h4><p>A safety benchmark should fix the scene and vary only the instruction to isolate whether the model understands contextual risk.</p></div>
+    <div><h4>Conceptual move</h4><p>Use same-scene Safe/Unsafe instruction pairs grounded in safety standards to test latent risk sensitivity.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The benchmark uses same-scene Safe/Unsafe contrastive pairs across hazard categories.</span></li><li><strong>[Abstract]</strong><span>The abstract reports low pair accuracy caused by approving both instructions under a fixed scene.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate robot safety by instruction-conditioned permission, not by scene risk alone.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes 3,024 instruction-scene examples and a rationale audit that localizes instruction-insensitive failure modes.</p></div>
+    <div><h4>Falsification frontier</h4><p>If models improve by memorizing benchmark hazard wording rather than changing action permission, the benchmark will not transfer to robots.</p></div>
+    <div><h4>Adversarial read</h4><p>Hold scene constant while swapping instructions that differ only in user role, timing, tool affordance, or irreversible consequence.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Safety is a composition of instruction, scene, capability, and consequence; holding one fixed reveals shortcut approval.</p><p>Strong for embodied VLM safety and task permission; weaker for low-level collision avoidance without language goals.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>VLA papers are exposing who may change the action</h3><p class='links'>TOWN-VLA - Pointing-VLA - UniMem - INDI - M3 - CounterAlign</p><p><strong>Observed</strong> - The selected abstracts expose prompt compatibility, typed spatial heads, event memory updates, distilled intent, modality masking, and counterfactual negative supervision.</p><p><strong>Inference</strong> - A VLA benchmark should report which authority changed the motor command and which stress condition invalidates that authority.</p></article><article><h3>Geometry papers are moving from reconstruction artifacts to map governance</h3><p class='links'>AquaFlow - SuperMap - Spotter - robust global SfM - M3ISR - RoboShape</p><p><strong>Observed</strong> - The batch repeatedly names degraded media, stale semantics, GPS drift, view-graph outliers, controlled camera geometry, and privacy leakage as map-state problems.</p><p><strong>Inference</strong> - APRL should score maps by localizability, update correctness, privacy leakage, and downstream task recovery rather than by visual quality alone.</p></article><article><h3>Reasoning systems are budgeting evidence before answering</h3><p class='links'>GapSight - DAGC long-video RAG - acoustic triage - FOVEA - VIG - GuardianBench</p><p><strong>Observed</strong> - The papers route crops, temporal chunks, audio windows, focused visual evidence, compressed reasoning tokens, and same-scene instruction contrasts.</p><p><strong>Inference</strong> - Embodied VLM evaluation should ask when additional evidence was purchased, whether it changed the decision, and when the system should abstain.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 21 and August 24 emphasized action authorization, robot-facing geometry, runtime evidence routes, and world-action risk.</p><p>August 25 strengthens the same axis with prompt authority, typed spatial readouts, event-gated memory, geometry WAMs, and evidence-routed perception budgets.</p></article><article><span>New signal</span><p class='history'>Recent daily artifacts treated VLA memory and retrieval mostly as helpful context providers.</p><p>Today makes the authority boundary sharper: text, memory, spatial heads, and intent labels are not context until they have permission to change the action.</p></article><article><span>Commoditizing</span><p class='history'>The repo has repeatedly seen new world-model, VLM, and 3DGS variants.</p><p>The crowded axis is model form. The defensible axis is a measurable evidence contract: action delta, localizability, update validity, risk-object identity, or crop value.</p></article><article><span>Missing axis</span><p class='history'>Prior reports still lack one shared suite that joins VLA prompt authority, semantic map aging, and evidence-budgeted VLM perception.</p><p>APRL can own episodes where a wrong prompt, stale object, hidden risk, or missing crop causes the same downstream action to fail.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>VLA authority-boundary benchmark</h3><p class="thesis">Measure when prompt text, memory updates, spatial readouts, intent labels, and modality masking are allowed to change a VLA action.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create twenty replay states across bimanual pick-place, long-horizon manipulation, and instruction-ambiguous tasks with controlled text, memory, spatial, and modality interventions.</p></div>
+    <div><strong>4-week build</strong><p>Compare Base VLA, prompt-authority gating, typed spatial heads, event-gated memory, intent distillation, and modality masking under the same closed-loop episodes.</p></div>
+    <div><strong>Success metric</strong><p>The benchmark predicts action divergence, discontinuity, or task failure before terminal success changes.</p></div>
+    <div><strong>Stop condition</strong><p>If all interventions rank methods the same as ordinary success rate, reduce the suite to the single strongest failure family.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Prompt intervention pairs, memory-event labels, typed spatial targets, modality masks, action-delta traces, and failure-family annotations.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 28/30</span></div>
+  <h3>Robot-usable map governance suite</h3><p class="thesis">Evaluate maps by when they should update, forget, hide, relocalize, or expose semantics for a downstream robot task.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Assemble degraded underwater clips, indoor object-revisit scenes, GPS-degraded facades, and privacy-sensitive point clouds with named map-state perturbations.</p></div>
+    <div><strong>4-week build</strong><p>Compare 3DGS SLAM, semantic 4D maps, facade localization, SfM pruning, and privacy encoders under localization, navigation, and information-leakage metrics.</p></div>
+    <div><strong>Success metric</strong><p>A map-governance variable changes method ranking relative to rendering quality or ordinary pose error.</p></div>
+    <div><strong>Stop condition</strong><p>If governance labels do not predict downstream task recovery, split mapping and privacy tracks before scaling data collection.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Map update and decay labels, object identity timelines, localization recovery cases, privacy leakage probes, and robot-usable geometry scores.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 26/30</span></div>
+  <h3>Evidence-budgeted embodied VLM evaluator</h3><p class="thesis">Force VLM agents to decide whether a crop, temporal chunk, audio cue, focused visual evidence path, or same-scene instruction contrast is worth paying for.</p>
+  <div class="scores"><span>fit 4</span><span>novelty 5</span><span>feasibility 4</span><span>moat 4</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create inspection and navigation prompts with small defects, hidden signs, long-video evidence, audio pre-cues, and same-scene safe versus unsafe instructions.</p></div>
+    <div><strong>4-week build</strong><p>Compare direct VLM answers, crop routing, temporal graph retrieval, audio-first triage, focused speculative decoding, and abstention policies.</p></div>
+    <div><strong>Success metric</strong><p>Evidence purchase improves decision accuracy only in cases where the added evidence changes action permission or hazard assessment.</p></div>
+    <div><strong>Stop condition</strong><p>If routing decisions correlate only with image size, video length, or token count, replace learned routers with a cheaper uncertainty baseline.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Evidence-cost annotations, crop and temporal mappings, audio triage labels, same-scene risk pairs, and action-permission outcomes.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-25.json">intelligence/2026-08-25.json</a>.</footer>
+</body></html>
