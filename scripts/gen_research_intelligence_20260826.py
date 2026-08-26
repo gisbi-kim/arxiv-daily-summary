@@ -1,0 +1,338 @@
+#!/usr/bin/env python3
+"""Generate the 2026-08-26 Research Intelligence edition."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from gen_research_intelligence_20260811 import build_html
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE_PROMPT = "prompts/instruction_v20260713.md"
+
+
+RI_BY_DATE = {
+    "2026-08-26": {
+        "date": "2026-08-26",
+        "edition": "Research Intelligence",
+        "source_prompt": SOURCE_PROMPT,
+        "source_mode": "new",
+        "scope_note": (
+            "Daily edition from matching Wednesday /new listings: 112 non-replacement cs.CV rows, "
+            "42 cs.RO rows, 149 deduplicated papers, and 124 ROI papers. Tier A cards are "
+            "conservative abstract-only autopsies from the repository parser output; no figure, "
+            "table, full-text, code, or dataset-release claims are asserted."
+        ),
+        "executive_thesis": (
+            "The August 26 batch asks whether robot systems can prove that a predictive state, "
+            "adaptation path, or perception shortcut still has authority over the next action. "
+            "World-action papers probe whether generated futures actually follow actions, whether "
+            "imagination should be consumed off the critical path, and whether prediction credit "
+            "must be settled after execution. VLA and manipulation papers split adaptation into "
+            "latency, skill retrieval, gripper embodiment, contact events, and trajectory tokens. "
+            "Geometry and simulation papers move from attractive 3D assets to physically executable "
+            "worlds, while safety papers replace average success with resilience, constraints, and "
+            "sensor-degradation contracts. APRL's useful move is to own tests where a world model, "
+            "map, cache, or adaptation module must state exactly when it may change behavior."
+        ),
+        "decision_cards": [
+            {
+                "label": "Decision",
+                "title": "World models must prove action faithfulness",
+                "body": (
+                    "WorldEcho, DreamLedger, TrAct, LAWA, GlanceWAM, GaussianWAM, and LeFlow all "
+                    "treat predicted futures as control evidence that needs a testable contract, "
+                    "not just a visually plausible rollout."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Robot adaptation is becoming interface-specific",
+                "body": (
+                    "Latency-aware RL, hierarchical skill retrieval, gripper-aware VLA, contact "
+                    "interaction discovery, trajectory-level action tokens, and TAMP operator "
+                    "learning all isolate the interface that makes a demonstration transferable."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Safety evaluation is moving into trajectories",
+                "body": (
+                    "Resilience metrics, emergency-vehicle scenarios, asymmetric sensor degradation, "
+                    "adaptive LiDAR reserves, STL-MPPI, and rollout-guided DAgger ask how a system "
+                    "recovers inside the trajectory rather than whether the final score looks safe."
+                ),
+            },
+        ],
+        "papers": [
+            {
+                "rank": 1,
+                "title": "Do Robotic World Models Really Follow Actions? Diagnosing and Aligning Action-Conditioned Generation for Policy Learning",
+                "arxiv_id": "2608.24885",
+                "fit": "robotic world models - action-conditioned generation - policy evaluation",
+                "status": "Tier A - abstract-only",
+                "status_quo": "World-action models are often trusted as learned simulators when their videos look plausible on expert-like demonstrations.",
+                "friction": "The abstract argues that benchmarks under-test off-expert actions, leaving the action-following assumption unverified.",
+                "hidden_premise": "A generated future should be judged by whether it preserves the action's geometric and trajectory consequences, not only visual integrity.",
+                "conceptual_move": "Turn world-model evaluation into a probe over a broader action distribution with action alignment as the central failure variable.",
+                "mechanism": "The abstract describes WorldEcho as a diagnosis and alignment setup for arbitrary valid actions using visual integrity and SE(3) trajectory agreement.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper identifies off-expert action following as under-evaluated in robotic world models."},
+                    {"trace": "[Abstract]", "claim": "It frames generated futures as evidence for policy learning only if they reflect the commanded action."},
+                    {"trace": "[Inference]", "claim": "APRL should treat action-faithfulness error as a release gate for learned simulators."},
+                ],
+                "falsification": "If action alignment improves on sampled probes but fails under contact-rich or recovery actions, the simulator remains unsafe for policy improvement.",
+                "adversarial": "Stress valid but rare actions, wrong-way recovery, and contact discontinuities to separate visual plausibility from executable dynamics.",
+                "thinking_tool": "Ask whether the imagined future follows the action before asking whether it looks realistic.",
+                "transfer_boundary": "Direct for WAM-based policy learning; weaker for passive video prediction with no downstream control loop.",
+            },
+            {
+                "rank": 2,
+                "title": "DreamLedger: Execution-Settled Credit Files for World-Model Imagination in Robot Decision Loops",
+                "arxiv_id": "2608.23863",
+                "fit": "world-model reliability - deployment credit - prediction settlement",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Robot world-model reliability is often expressed as an instantaneous internal confidence or uncertainty value.",
+                "friction": "The abstract says reliability should be a persistent object indexed by condition, region, horizon, and actual execution outcomes.",
+                "hidden_premise": "A robot should consult historical settlement records before consuming a prediction in a similar operating context.",
+                "conceptual_move": "Register consumed predictions as claims and settle them against later reality so imagination has an operational credit history.",
+                "mechanism": "The abstract describes execution-settled credit files that record whether consumed predictions were borne out after deployment.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper treats each consumed prediction as a claim that can be settled against reality."},
+                    {"trace": "[Abstract]", "claim": "It indexes reliability by operating condition, region, and prediction horizon."},
+                    {"trace": "[Inference]", "claim": "APRL should keep world-model credit by failure family, not by aggregate model name."},
+                ],
+                "falsification": "If ledger scores fail to predict which future predictions should be trusted, the file is post-hoc logging rather than control evidence.",
+                "adversarial": "Evaluate repeated routes with changed lighting, moved objects, delayed contacts, and longer horizons to test whether settled credit transfers.",
+                "thinking_tool": "A prediction earns authority only after previous predictions in the same condition have been settled.",
+                "transfer_boundary": "Strong for repeated robot deployments; less direct for one-off offline generation without outcome settlement.",
+            },
+            {
+                "rank": 3,
+                "title": "Learning to Act While Waiting: RL Finetuning of Generalist Robot Policies Under Inference Latency",
+                "arxiv_id": "2608.23831",
+                "fit": "VLA latency - deployment RL - effective dynamics",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Generalist robot policies are usually fine-tuned as if model inference latency were outside the environment dynamics.",
+                "friction": "The abstract says severe inference latency can cause pauses or jerky movements and can break the Markov assumption behind standard RL.",
+                "hidden_premise": "A deployed VLA adaptation algorithm must model what the robot can safely do while waiting for the next expensive action.",
+                "conceptual_move": "Make inference delay part of the control problem instead of treating it as an implementation nuisance.",
+                "mechanism": "The abstract frames latency-aware RL fine-tuning as a way to improve generalist policies under changed effective dynamics.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper names inference latency as a source of changed environment dynamics."},
+                    {"trace": "[Abstract]", "claim": "It argues standard RL can fail when the waiting behavior is not accounted for."},
+                    {"trace": "[Inference]", "claim": "APRL should benchmark action quality, wait-state safety, and terminal success together."},
+                ],
+                "falsification": "If latency-aware fine-tuning helps only in slow simulations and not on hardware-timed control loops, the adaptation target is incomplete.",
+                "adversarial": "Sweep model latency, actuator hold policy, object motion, and contact timing to see when waiting becomes the dominant failure mode.",
+                "thinking_tool": "Treat inference time as a control variable with its own failure modes.",
+                "transfer_boundary": "Direct for VLA and large-policy deployment; weaker for small controllers whose action latency is negligible.",
+            },
+            {
+                "rank": 4,
+                "title": "Hierarchical Skill Retrieval for Data-Efficient Adaptation of Vision-Language-Action Models",
+                "arxiv_id": "2608.24042",
+                "fit": "VLA adaptation - skill retrieval - limited demonstrations",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Retrieval for VLA adaptation often matches demonstrations by visual similarity, state-action features, or task-level language alone.",
+                "friction": "The abstract argues that these criteria can miss the hierarchical structure of long-horizon manipulation skills.",
+                "hidden_premise": "A small demonstration budget is useful only if retrieved examples align with the subskill currently being adapted.",
+                "conceptual_move": "Use hierarchical skill retrieval rather than flat task matching for data-efficient VLA adaptation.",
+                "mechanism": "The abstract describes retrieving reusable skill structure from existing demonstrations to adapt to new manipulation tasks.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper identifies limited task-specific demonstrations as a VLA adaptation bottleneck."},
+                    {"trace": "[Abstract]", "claim": "It argues visual or task-level matching can overlook long-horizon skill hierarchy."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate retrieved demonstrations by subskill transfer, not only nearest visual match."},
+                ],
+                "falsification": "If hierarchical retrieval does not outperform flat retrieval when task order or contact stage changes, the hierarchy is not carrying the useful transfer variable.",
+                "adversarial": "Swap subgoal order, gripper type, and contact state while holding object category fixed to expose false skill matches.",
+                "thinking_tool": "A retrieved demo should be matched to the current subskill, not to the whole episode label.",
+                "transfer_boundary": "Strong for long-horizon manipulation; weaker for single-step tasks with little skill composition.",
+            },
+            {
+                "rank": 5,
+                "title": "GaussianWAM: Distilling Geometry and Semantics from 3D Gaussian Fields into World-Action Models",
+                "arxiv_id": "2608.24714",
+                "fit": "3D Gaussian fields - semantic geometry - WAM supervision",
+                "status": "Tier A - abstract-only",
+                "status_quo": "World-action models usually optimize video latents for future visual prediction rather than cross-view geometry or localized object semantics.",
+                "friction": "The abstract says video latents are not explicitly encouraged to preserve the structure that manipulation needs across views.",
+                "hidden_premise": "A WAM should inherit geometric and semantic supervision at training time if downstream policy learning depends on object-local state.",
+                "conceptual_move": "Use a 3D Gaussian field as a representation-enhancement teacher for world-action model latents.",
+                "mechanism": "The abstract describes organizing geometric and semantic supervision through synchronized multi-view data and a 3D Gaussian field.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper identifies cross-view geometric structure and object semantics as missing in ordinary WAM latents."},
+                    {"trace": "[Abstract]", "claim": "It proposes distilling geometry and semantics from 3D Gaussian fields into WAM training."},
+                    {"trace": "[Inference]", "claim": "APRL should test whether Gaussian supervision changes manipulation failure under viewpoint shifts."},
+                ],
+                "falsification": "If Gaussian supervision improves representation probes but not closed-loop action selection, it is not yet robot-usable evidence.",
+                "adversarial": "Use viewpoint swaps, object relocation, occlusion, and distractor semantics to test whether the latent preserves the correct control variable.",
+                "thinking_tool": "A geometry teacher matters only if its distilled state changes the policy under spatial stress.",
+                "transfer_boundary": "Strong for multi-view manipulation WAMs; weaker for monocular tasks where 3D supervision is unavailable.",
+            },
+            {
+                "rank": 6,
+                "title": "NeoWorld-Pro: Programming Interactive Scenes from Monocular Images for Embodied Simulation",
+                "arxiv_id": "2608.24212",
+                "fit": "embodied simulation - monocular scene programming - interactive assets",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Image-to-3D scene reconstruction often produces static geometry that looks plausible but lacks physical grounding and interactive behavior.",
+                "friction": "The abstract names the lack of physical grounding and scene-level interactivity as blockers for embodied simulation assets.",
+                "hidden_premise": "A scene reconstructed from an image becomes useful for robots only when it can be executed as an interactive environment.",
+                "conceptual_move": "Reformulate monocular scene reconstruction as procedural programming for interactive 3D environments.",
+                "mechanism": "The abstract describes using MLLM reasoning and code synthesis to convert a single image into a programmable scene.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper targets simulation-ready scenes rather than only recovered 3D surfaces."},
+                    {"trace": "[Abstract]", "claim": "It frames procedural programming as the bridge from monocular images to interactive environments."},
+                    {"trace": "[Inference]", "claim": "APRL should grade scene assets by whether robot tasks can be executed, perturbed, and repeated inside them."},
+                ],
+                "falsification": "If generated programs reproduce appearance but fail contact, support, or affordance tests, they are not embodied simulation assets.",
+                "adversarial": "Test support constraints, object articulation, collision, scale, and task success under changed camera viewpoints.",
+                "thinking_tool": "Scene generation should output an executable environment contract, not just a 3D reconstruction.",
+                "transfer_boundary": "Strong for simulator construction and benchmark asset creation; less direct for real-time SLAM.",
+            },
+            {
+                "rank": 7,
+                "title": "Resilience Matters for Embodied Agents System: New Metrics, Systematic Evaluation, and Optimization",
+                "arxiv_id": "2608.23839",
+                "fit": "embodied agent evaluation - resilience metrics - recovery dynamics",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Embodied-agent evaluation often collapses full trajectories into success rate or coarse safety scores.",
+                "friction": "The abstract argues that outcome-centric metrics obscure how agents recover, stabilize, and maintain function during perturbations.",
+                "hidden_premise": "A deployable embodied system needs trajectory-level resilience signals before final outcome is known.",
+                "conceptual_move": "Define resilience as a dynamic property and evaluate recovery and stabilization processes systematically.",
+                "mechanism": "The abstract names new metrics, systematic evaluation, and optimization focused on open-world physical deployment quality.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper criticizes success-rate and safety-score metrics for hiding execution dynamics."},
+                    {"trace": "[Abstract]", "claim": "It defines resilience around recovery, stabilization, and function maintenance."},
+                    {"trace": "[Inference]", "claim": "APRL should score policies by recovery curve and intervention timing, not only terminal success."},
+                ],
+                "falsification": "If resilience metrics do not predict later task failure or human trust under new perturbations, they are descriptive rather than actionable.",
+                "adversarial": "Perturb visibility, map accuracy, operator instructions, and actuator timing while measuring recovery speed and failure recurrence.",
+                "thinking_tool": "Evaluate the shape of recovery, not just the endpoint.",
+                "transfer_boundary": "Strong for navigation and embodied agents; less direct for single-frame perception models.",
+            },
+            {
+                "rank": 8,
+                "title": "Variance-Guided Spatial Attention Fusion for Robust End-to-End Driving under Asymmetric Sensor Degradation",
+                "arxiv_id": "2608.24366",
+                "fit": "multimodal driving - sensor degradation - reliability-guided fusion",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Camera-LiDAR fusion pipelines often assume a modality-level reliability decision or fuse features before localized corruption is exposed.",
+                "friction": "The abstract says either an entire modality or only a localized region can be corrupted while other regions remain useful.",
+                "hidden_premise": "Robust driving requires dense reliability supervision that calibrates feature trust against physical fault severity.",
+                "conceptual_move": "Guide spatial attention fusion by variance so degraded features are downweighted before they bias the planner.",
+                "mechanism": "The abstract describes variance-guided spatial attention under asymmetric camera and LiDAR degradation.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper identifies asymmetric sensor degradation as a failure case for multimodal driving."},
+                    {"trace": "[Abstract]", "claim": "It argues the key is dense reliability supervision calibrated to physical fault severity."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate sensor fusion by planner error under localized faults."},
+                ],
+                "falsification": "If variance attention improves perception metrics but not closed-loop driving recovery under localized corruption, reliability is not reaching the planner.",
+                "adversarial": "Create camera-only, LiDAR-only, localized, severity-graded, and time-varying degradation while measuring planning deviation and recovery.",
+                "thinking_tool": "Trust should be spatially localized before fusion, not assigned to a whole modality after failure.",
+                "transfer_boundary": "Direct for multimodal driving and field robots; weaker for single-sensor systems.",
+            },
+        ],
+        "synthesis": [
+            {
+                "title": "Action-conditioned prediction is becoming a falsifiable object",
+                "links": "WorldEcho - DreamLedger - TrAct - LAWA - GaussianWAM",
+                "facts": "The abstracts focus on off-expert actions, settled prediction credit, visual tracks, latent actions, and Gaussian geometry as ways to make imagined futures accountable.",
+                "inference": "A robot world model should be released only with tests that show which actions it follows and which operating conditions revoke trust.",
+            },
+            {
+                "title": "Adaptation papers are naming the transfer interface",
+                "links": "Latency-aware RL - hierarchical skill retrieval - gripper-aware VLA - contact-rich LfD - CAT",
+                "facts": "The batch separates latency, subskill hierarchy, embodiment-specific grippers, contact events, and trajectory-level tokens.",
+                "inference": "APRL should stop treating demonstrations as homogeneous data and test the interface variable that actually transfers across tasks.",
+            },
+            {
+                "title": "Safety is moving from labels to recoverable trajectories",
+                "links": "Resilience - SIREN-Bench - VGSAF - CARE - STL-MPPI - RoG-DAgger",
+                "facts": "The papers introduce recovery metrics, emergency-vehicle scenarios, degradation-aware fusion, first-sighting LiDAR reserves, temporal-logic constraints, and rollout-guided post-training.",
+                "inference": "The relevant safety evidence is how the system behaves before and after a perturbation, not only the final success or collision label.",
+            },
+        ],
+        "frontier_memory": [
+            {
+                "label": "Strengthening",
+                "history": "August 24 and August 25 already emphasized action authorization, map governance, and evidence-routed perception.",
+                "body": "August 26 strengthens that axis by making world-model futures, VLA adaptation, gripper embodiment, latency, and sensor degradation explicit authority variables.",
+            },
+            {
+                "label": "New signal",
+                "history": "Recent runs treated world-action models mostly as future-state or risk-object predictors.",
+                "body": "Today adds a sharper falsification question: do generated futures actually follow arbitrary valid actions, and can their deployment credit be settled later?",
+            },
+            {
+                "label": "Commoditizing",
+                "history": "The repo repeatedly sees new diffusion, tokenizer, cache, and 3D asset variants.",
+                "body": "The crowded axis is architecture form; the defensible axis is a measured contract for action faithfulness, recovery, physical executability, or evidence preservation.",
+            },
+            {
+                "label": "Missing axis",
+                "history": "Prior reports still lack one shared suite connecting WAM action faithfulness, VLA latency, map executability, and sensor-degradation recovery.",
+                "body": "APRL can own episodes where a wrong future, delayed action, non-executable scene, or corrupted sensor changes the same downstream robot behavior.",
+            },
+        ],
+        "strategy": [
+            {
+                "priority": "Build moat",
+                "title": "World-model action-faithfulness suite",
+                "thesis": "Test whether imagined futures follow rare but valid robot actions before using them for policy learning or planning.",
+                "scores": {"fit": 5, "novelty": 5, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 5},
+                "one_week": "Build twenty manipulation and driving states with expert, recovery, off-expert, and contact-changing actions plus ground-truth state deltas.",
+                "four_week": "Compare pixel WAMs, latent-action WAMs, visual-track WAMs, Gaussian-supervised WAMs, and generative latent planners under identical actions.",
+                "success": "Action-faithfulness error predicts which imagined rollouts improve or damage downstream policy choice.",
+                "stop": "If visual-integrity scores rank methods the same as action-faithfulness tests, keep only the cheapest rollout probe.",
+                "asset": "Action probes, SE(3) and contact-state deltas, prediction-settlement records, horizon labels, and downstream policy-change traces.",
+            },
+            {
+                "priority": "Build moat",
+                "title": "Latency and interface-aware VLA adaptation grid",
+                "thesis": "Separate latency, skill retrieval, gripper embodiment, contact events, and trajectory tokens as independent adaptation variables.",
+                "scores": {"fit": 5, "novelty": 4, "feasibility": 4, "moat": 5, "timing": 5, "evidence": 5},
+                "one_week": "Create paired episodes where only inference latency, subskill order, gripper type, contact event, or trajectory parameterization changes.",
+                "four_week": "Evaluate Base VLA, latency-aware RL, hierarchical retrieval, gripper-aware VLA, contact-rich LfD, and CAT-style trajectory tokens.",
+                "success": "The grid exposes different failure rankings than ordinary few-shot success rate.",
+                "stop": "If every interface variable collapses to task difficulty, split the suite into gripper/contact and latency/control subtracks.",
+                "asset": "Timed action traces, subskill labels, gripper affordance annotations, contact transition labels, trajectory-token probes, and failure-family splits.",
+            },
+            {
+                "priority": "Explore",
+                "title": "Executable scene and recovery benchmark",
+                "thesis": "Grade generated 3D scenes and multimodal autonomy stacks by whether they support physical execution and recovery under perturbation.",
+                "scores": {"fit": 5, "novelty": 4, "feasibility": 3, "moat": 4, "timing": 5, "evidence": 4},
+                "one_week": "Convert ten monocular scenes and traffic cases into support, collision, articulation, sensor-degradation, and emergency-response tests.",
+                "four_week": "Compare NeoWorld-style programming, mesh-to-physics assets, 3D reconstruction baselines, SIREN scenarios, and degradation-aware driving fusion.",
+                "success": "Physical executability or recovery metrics change method ranking relative to appearance quality or perception AP.",
+                "stop": "If generated scenes cannot support repeatable robot tasks, narrow the benchmark to map-validity and driving recovery first.",
+                "asset": "Executable scene programs, physical constraint tests, sensor-fault schedules, emergency interaction scripts, recovery curves, and task-success deltas.",
+            },
+        ],
+    }
+}
+
+
+def main() -> int:
+    (ROOT / "intelligence").mkdir(exist_ok=True)
+    (ROOT / "posts").mkdir(exist_ok=True)
+    for date, data in RI_BY_DATE.items():
+        (ROOT / "intelligence" / f"{date}.json").write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        (ROOT / "posts" / f"{date}-research-intelligence.html").write_text(
+            build_html(data),
+            encoding="utf-8",
+            newline="\n",
+        )
+        print(f"wrote intelligence/{date}.json and posts/{date}-research-intelligence.html")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
