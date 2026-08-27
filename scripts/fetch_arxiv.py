@@ -132,7 +132,7 @@ def main():
     mode = sys.argv[1]  # "new" or "pastweek"
     cat = sys.argv[2]   # "cs.CV" etc.
     if mode == "new":
-        url = f"https://arxiv.org/list/{cat}/new"
+        url = f"https://arxiv.org/list/{cat}/new?skip=0&show=2000"
         include_abs = True
     elif mode == "pastweek":
         url = f"https://arxiv.org/list/{cat}/pastweek?skip=0&show=2000"

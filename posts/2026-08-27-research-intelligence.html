@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-08-27 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-08-27 arXiv Research Intelligence</h1>
+<p class="lead">The August 27 batch is about turning broad model capability into accountable control variables. VLA and WAM papers ask which geometric, temporal, tactile, retrieval, or embodiment interface actually changes an action. Mapping and 3D reconstruction papers make pose, calibration, weather, water, and LiDAR supervision part of the release contract rather than background assumptions. Driving and multi-robot papers push risk evidence into trajectories before a planner commits, while VLM papers replace fluent answers with point, rubric, benchmark, and retrieval evidence. APRL's strongest move is to own evaluation suites where a policy, map, world model, or visual reasoner must expose the evidence that grants or revokes permission to act.</p><p class="scope">Daily edition from matching Thursday /new listings: 107 non-replacement cs.CV rows, 51 cs.RO rows, 154 deduplicated papers, and 124 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claims are asserted.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>Robot foundation models are becoming interface contracts</h3><p>GaussVLA, V-Link, StreamPI, Zero-WAM, 4DGS-WAM, and ConfAL-WM all ask which spatial, temporal, or confidence interface lets a robot trust a large model output.</p></article><article><span>Decision</span><h3>Manipulation adaptation is moving into execution time</h3><p>RA-VLA, TacForcing, VISTA, LM-X, MA-VLA, and unified action geometry papers separate retrieval, contact, tactile feedback, progress, uncertainty, and embodiment as control variables.</p></article><article><span>Decision</span><h3>Autonomy evidence must arrive before commitment</h3><p>CoRE, TAU-Agent, SkyDrive, DESCENT, Gating Before Commitment, game-structure measurement, and trust-aware rollout planning treat risk as a trajectory signal rather than a final label.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.24959" target="_blank" rel="noopener">GaussVLA: Geometry-Aware Spatial Reasoning for Vision-Language-Action Model</a></h3>
+  <p class="fit">VLA spatial reasoning - 3D Gaussian tokens - action grounding</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA policies often pass flat 2D patch tokens into an action head and hope depth or semantics are recovered implicitly.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract argues that dense monocular depth gives scalar values but not structured surface orientation, confidence, or compact geometry for action prediction.</p></div>
+    <div><h4>Hidden premise</h4><p>A robot action should be conditioned on a compressed geometric object that carries uncertainty and salient spatial structure, not only image patches.</p></div>
+    <div><h4>Conceptual move</h4><p>Reframe VLA perception as Gaussian-token spatial reasoning plus depth-aware chain-of-thought for action selection.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies flat 2D patch tokens as lacking intrinsic geometric structure for VLA action prediction.</span></li><li><strong>[Abstract]</strong><span>It proposes compact 3D Gaussian tokens that pool geometrically salient regions with learned queries.</span></li><li><strong>[Inference]</strong><span>APRL should test whether Gaussian-token reasoning changes manipulation failures under viewpoint and depth-confidence shifts.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract names a Gaussian Spatial Tokenizer and depth-aware reasoning module as the route from frozen semantic/depth features to compact 3D evidence.</p></div>
+    <div><h4>Falsification frontier</h4><p>If Gaussian tokens improve language or perception probes but do not change action selection under spatial stress, the interface is not yet control-relevant.</p></div>
+    <div><h4>Adversarial read</h4><p>Use object pose swaps, depth noise, partial occlusion, and distractor geometry to separate real spatial reasoning from benchmark-specific token regularization.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask which geometric evidence enters the action head and when it changes the motor command.</p><p>Direct for VLA manipulation and mobile manipulation; weaker for tasks where explicit geometry is already supplied by a trusted state estimator.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.26103" target="_blank" rel="noopener">Zero-WAM: In-Context World-Action Modeling from Human Videos for Open-Ended Task Generalization</a></h3>
+  <p class="fit">world-action modeling - human video context - task generalization</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Cross-task robot generalization is usually handled through parameter updates, large robot datasets, or text task descriptions.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says language alone is a weak task specification for manipulation because it omits rich visual evolution of the intended task.</p></div>
+    <div><h4>Hidden premise</h4><p>Human videos can act as executable task context only if the model preserves which state changes matter for the robot, not only the appearance sequence.</p></div>
+    <div><h4>Conceptual move</h4><p>Bring in-context learning to robot manipulation by using human video as the task specification for a world-action model.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names zero-shot cross-task generalization as a central robot learning challenge.</span></li><li><strong>[Abstract]</strong><span>It argues that human video gives richer cues about intended task evolution than language.</span></li><li><strong>[Inference]</strong><span>APRL should benchmark which human-video cues transfer to robot actions and which become misleading appearance priors.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract frames human-video context as a way to specify open-ended manipulation tasks without parameter updates.</p></div>
+    <div><h4>Falsification frontier</h4><p>If human-video context helps only when embodiment, viewpoint, and object dynamics match the robot setup, the method is not open-ended generalization.</p></div>
+    <div><h4>Adversarial read</h4><p>Vary embodiment, camera viewpoint, hand-object contact, and irrelevant human motion while measuring robot action deviation and task success.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat demonstrations as task-specification evidence, then test which parts survive the human-to-robot boundary.</p><p>Useful for open-ended manipulation; less direct for low-level control where human video lacks actuator-relevant timing.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.25956" target="_blank" rel="noopener">4DGS-WAM: Bridging Past and Future with an Object-Centric World Action Model based on 4D Gaussian Splatting</a></h3>
+  <p class="fit">4D Gaussian world-action model - object-centric dynamics - future prediction</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Many WAMs operate on 2D visual streams that can repeatedly process redundant background and hide object-level spatial dynamics.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says 2D visual WAMs lack explicit spatial structure for individual objects, while point clouds are hard to align and accumulate across views.</p></div>
+    <div><h4>Hidden premise</h4><p>A control-useful world model should separate dynamic objects from static background so future actor actions can be evaluated geometrically.</p></div>
+    <div><h4>Conceptual move</h4><p>Use 4D Gaussian Splatting as the object-centric state substrate for bridging past observations and predicted futures.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper contrasts 2D WAMs with explicit 4D Gaussian representations for object and background structure.</span></li><li><strong>[Abstract]</strong><span>It targets future prediction through object transformations rather than only whole-frame visual quality.</span></li><li><strong>[Inference]</strong><span>APRL should ask whether 4DGS state reduces action-faithfulness error under object motion and occlusion.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes modeling dynamic objects and static background separately, with policy-predicted actor actions and world-model transformations.</p></div>
+    <div><h4>Falsification frontier</h4><p>If object-centric 4DGS improves rendering but not action-conditioned state prediction, the representation is not yet a robot world model.</p></div>
+    <div><h4>Adversarial read</h4><p>Test moving-object swaps, static-background changes, occlusions, and contact transitions while measuring future object pose and policy decisions.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Separate what can move, what should stay fixed, and what action is allowed to transform.</p><p>Strong for object-centric manipulation and driving scenes; weaker for texture-only video generation.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.25585" target="_blank" rel="noopener">RA-VLA: Retrieval-Augmented VLA for Test-Time Adaptation</a></h3>
+  <p class="fit">VLA test-time adaptation - retrieval - executable actions</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>In-context imitation often assumes that retrieving similar demonstrations is enough to adapt a VLA at test time.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract argues that superficial retrieval and behavioral inertia can prevent expert context from becoming executable action.</p></div>
+    <div><h4>Hidden premise</h4><p>A retrieved context is useful only if it overcomes pretrained policy inertia at the moment of action generation.</p></div>
+    <div><h4>Conceptual move</h4><p>Treat retrieval as an adaptation operator whose success must be measured through changed executable behavior, not context similarity.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies brittleness under novel task distributions as a VLA limitation.</span></li><li><strong>[Abstract]</strong><span>It names superficial retrieval and behavioral inertia as adaptation bottlenecks.</span></li><li><strong>[Inference]</strong><span>APRL should test when retrieved examples actually alter action choice before terminal success changes.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a retrieval-augmented VLA framework designed to translate expert context into actions under novel task distributions.</p></div>
+    <div><h4>Falsification frontier</h4><p>If retrieval improves nearest-neighbor similarity but the action distribution stays anchored to pretrained priors, the adaptation is cosmetic.</p></div>
+    <div><h4>Adversarial read</h4><p>Use visually similar demonstrations with different contact order, object affordance, or goal constraint to expose false retrieval authority.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Evaluate retrieval by the action it changes, not the example it returns.</p><p>Direct for VLA adaptation; weaker for policies with explicit symbolic task planners that already separate retrieval from control.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.25798" target="_blank" rel="noopener">TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback</a></h3>
+  <p class="fit">contact-rich manipulation - tactile feedback - streaming action generation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Chunk-based VLA policies often predict an action segment from pre-execution observations and handle fast contact changes with separate controllers.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says contact states can evolve within an action horizon, making pre-chunk tactile conditioning stale during execution.</p></div>
+    <div><h4>Hidden premise</h4><p>A manipulation policy must refresh contact evidence while the action is unfolding, not only before the chunk starts.</p></div>
+    <div><h4>Conceptual move</h4><p>Make tactile feedback part of streaming action generation instead of delegating it to a separate reactive controller.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies stale tactile conditioning as a failure mode for chunk-based VLA policies.</span></li><li><strong>[Abstract]</strong><span>It proposes streaming action generation that uses tactile feedback during execution.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether tactile refresh changes recovery timing and contact stability.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract frames TacForcing as incorporating execution-time tactile feedback inside the action-generation process.</p></div>
+    <div><h4>Falsification frontier</h4><p>If streaming tactile feedback does not improve failures with slipping, contact transitions, or occlusion, the added channel is not carrying the decisive state.</p></div>
+    <div><h4>Adversarial read</h4><p>Sweep slip, compliance, occlusion, and object material while comparing chunk-only, reactive-controller, and streaming-action policies.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat contact as a state that expires inside the action horizon.</p><p>Direct for contact-rich manipulation; weaker for free-space reaching with little tactile ambiguity.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.25401" target="_blank" rel="noopener">PIVOT: A Multi-Trajectory Dataset and Testbed for Pose, Intrinsics, and Novel Viewpoint Evaluation in Real-World 3D Reconstruction</a></h3>
+  <p class="fit">3D reconstruction evaluation - pose and intrinsics - robot viewpoint shift</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>NeRF and 3DGS methods are often evaluated with reconstruction-friendly trajectories, optimized camera poses, and held-out views similar to training paths.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract argues these assumptions can obscure performance when robots use measured poses, reusable calibration, and structurally different camera paths.</p></div>
+    <div><h4>Hidden premise</h4><p>Robot-usable reconstruction should be tested under camera and trajectory conditions that match deployment, not only clean novel-view synthesis settings.</p></div>
+    <div><h4>Conceptual move</h4><p>Move 3D reconstruction evaluation from appearance quality to pose, intrinsics, and trajectory robustness.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies reconstruction-friendly trajectories and optimized camera assumptions as benchmark weaknesses.</span></li><li><strong>[Abstract]</strong><span>It introduces PIVOT for measured poses, reusable camera calibration, and structurally different camera paths.</span></li><li><strong>[Inference]</strong><span>APRL should grade map representations by robot camera trajectories and calibration stress.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract introduces a multi-trajectory testbed oriented around pose, intrinsics, and novel viewpoint evaluation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If PIVOT rankings still track ordinary clean novel-view benchmarks, the new protocol may not expose a deployment-relevant failure.</p></div>
+    <div><h4>Adversarial read</h4><p>Use robot-like viewpoint shifts, calibration reuse, pose noise, and held-out trajectories unlike training paths.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A reconstruction benchmark should attack the camera assumptions a robot cannot guarantee.</p><p>Direct for mapping and robot scene assets; less direct for artistic 3D generation where camera calibration is not a deployment contract.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.25427" target="_blank" rel="noopener">SUPER ODOMETRY 2.0: Resilient Odometry via Hierarchical Adaptation</a></h3>
+  <p class="fit">resilient odometry - sensor degradation - hierarchical adaptation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Odometry systems often rely on a fixed fusion recipe that assumes sensors degrade within expected environmental limits.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract names smoke, sandstorms, snow, and low-light conditions as severe degradations that threaten robot safety and functionality.</p></div>
+    <div><h4>Hidden premise</h4><p>A field odometry stack should adapt at multiple levels before state estimation becomes unrecoverable.</p></div>
+    <div><h4>Conceptual move</h4><p>Define resilient odometry as hierarchical adaptation across feature selection, sensing, fusion, and higher-level recovery.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies severe sensory degradation as a failure mode for existing odometry systems.</span></li><li><strong>[Abstract]</strong><span>It proposes hierarchical modules for adaptability under changing environmental conditions.</span></li><li><strong>[Inference]</strong><span>APRL should connect odometry confidence to downstream navigation recovery, not only trajectory error.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a sensor fusion framework that dynamically adapts to varying levels of environmental degradation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If adaptation lowers trajectory error but does not improve mission recovery or failure prediction under degradation, the hierarchy is incomplete.</p></div>
+    <div><h4>Adversarial read</h4><p>Test low light, smoke, dust, snow, feature scarcity, and dynamic-object interference while measuring localization drift and recovery action.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat odometry as a resilience system with staged fallbacks, not a single estimator.</p><p>Strong for field robots and autonomous navigation; weaker for static indoor datasets with mild sensor change.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.26074" target="_blank" rel="noopener">Gating Before Commitment: Anticipating Intent Divergence to Prevent Post-Interaction Decision Failures in Autonomous Driving</a></h3>
+  <p class="fit">driving interaction risk - intent divergence - pre-commitment gating</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Autonomous driving planners often treat intent interpretation as upstream context and commit to a maneuver once a trajectory is selected.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract argues that intent misinterpretation during vehicle interactions causes recurring planning failures.</p></div>
+    <div><h4>Hidden premise</h4><p>A planner needs a pre-commitment gate that can revoke a maneuver when intent and geometry start to diverge.</p></div>
+    <div><h4>Conceptual move</h4><p>Move interaction understanding into a decision layer that gates the planned maneuver before commitment.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper names intent misinterpretation as a source of post-interaction planning failures.</span></li><li><strong>[Abstract]</strong><span>It frames divergence scoring as a gate before the maneuver is committed.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether early divergence signals create recoverable windows before constraint violation.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a language-guided intent module that computes smoothed intent-geometry divergence upstream of a corridor envelope.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the gate fires only after a recoverable trajectory is gone, it is an explanation layer rather than a safety layer.</p></div>
+    <div><h4>Adversarial read</h4><p>Replay ambiguous negotiation, off-road departure, late yielding, and adversarial descriptor cases while measuring warning lead time and plan repair.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Safety evidence has to arrive before commitment, not after failure attribution.</p><p>Direct for interactive driving and multi-robot navigation; weaker for isolated single-agent planning without intent coupling.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>VLA/WAM papers are naming the state that grants action authority</h3><p class='links'>GaussVLA - V-Link - StreamPI - Zero-WAM - 4DGS-WAM - ConfAL-WM</p><p><strong>Observed</strong> - The abstracts focus on 3D Gaussian tokens, recovered visual representations, streaming temporal units, human-video context, object-centric 4D state, and confidence-guided active learning.</p><p><strong>Inference</strong> - The shared decision is to expose which intermediate state is allowed to change a robot action under distribution shift.</p></article><article><h3>Contact and embodiment are becoming online variables</h3><p class='links'>RA-VLA - TacForcing - VISTA - LM-X - MA-VLA - UCAG-P</p><p><strong>Observed</strong> - The batch separates retrieval authority, execution-time tactile feedback, visual contact deformation, progress/event/uncertainty prediction, arm assignment, and camera-centric action geometry.</p><p><strong>Inference</strong> - APRL should evaluate adaptation by when the interface changes the action, not by a final few-shot success score alone.</p></article><article><h3>Risk evidence is moving upstream of planner commitment</h3><p class='links'>CoRE - TAU-Agent - SkyDrive - DESCENT - Gating Before Commitment - Trust-aware Rollout Planning</p><p><strong>Observed</strong> - The abstracts use temporal/entity risk evidence, retrieval-selected anomaly evidence, aerial adaptation, topology-constrained forecasting, intent divergence, and trust monitors.</p><p><strong>Inference</strong> - A safety benchmark should measure warning lead time and repair windows before the policy crosses the constraint boundary.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 24-26 already emphasized action authorization, evidence routing, WAM action faithfulness, and physically executable scene assets.</p><p>August 27 strengthens the same axis with geometry-aware VLA tokens, object-centric 4D WAMs, tactile streaming, retrieval adaptation, and pre-commitment driving gates.</p></article><article><span>New signal</span><p class='history'>Recent reports had geometry and WAM as adjacent streams.</p><p>Today merges them directly: GaussVLA and 4DGS-WAM make 3D Gaussian structure part of the action interface rather than only a scene representation.</p></article><article><span>Commoditizing</span><p class='history'>Tokenizer, pruning, diffusion, and adapter variants continue to appear across daily batches.</p><p>The crowded implementation axis is less valuable than measured evidence preservation: which token, adapter, retrieval, or verifier prevents a wrong action.</p></article><article><span>Missing axis</span><p class='history'>The repo still lacks a single benchmark that joins VLA geometry, tactile feedback, odometry degradation, and driving interaction risk.</p><p>APRL can own a cross-task permission-to-act suite where wrong geometry, stale contact, drifting localization, and late intent evidence are evaluated with the same recovery logic.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Permission-to-act interface suite</h3><p class="thesis">Evaluate whether geometry tokens, retrieved examples, tactile streams, temporal memory, and uncertainty signals actually change robot actions under stress.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 5</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Build paired manipulation cases where only geometry confidence, retrieved context, tactile event, temporal history, or embodiment mapping is corrupted.</p></div>
+    <div><strong>4-week build</strong><p>Compare V-Link, GaussVLA-style geometry, RA-VLA retrieval, TacForcing-style tactile refresh, StreamPI temporal modeling, and UCAG-style action geometry proxies.</p></div>
+    <div><strong>Success metric</strong><p>The suite predicts action changes and failure onset earlier than terminal success or average task score.</p></div>
+    <div><strong>Stop condition</strong><p>If all interface variables produce the same ranking as ordinary task difficulty, split the work into geometry and contact subtracks.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Stress episodes, interface-corruption labels, action-change traces, contact and geometry confidence logs, recovery-window annotations, and protocol templates.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 28/30</span></div>
+  <h3>Robot-usable mapping degradation benchmark</h3><p class="thesis">Turn pose, intrinsics, underwater turbidity, LiDAR annotation, odometry degradation, and orchard graph navigation into one mapping validity contract.</p>
+  <div class="scores"><span>fit 5</span><span>novelty 4</span><span>feasibility 4</span><span>moat 5</span><span>timing 5</span><span>evidence 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Assemble ten mapping episodes with trajectory shift, calibration perturbation, turbidity or low-light degradation, and downstream route-following tasks.</p></div>
+    <div><strong>4-week build</strong><p>Compare 3DGS, point-cloud, feature-field, odometry-fusion, graph-navigation, and learned-waypoint pipelines under the same robot-camera stress cases.</p></div>
+    <div><strong>Success metric</strong><p>Robot task success and recovery curves reorder methods relative to clean novel-view or trajectory-error scores.</p></div>
+    <div><strong>Stop condition</strong><p>If downstream tasks cannot be repeated consistently, narrow the benchmark to pose/intrinsics and odometry degradation first.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Trajectory splits, calibration perturbations, degradation schedules, map-validity checks, navigation outcomes, and reproducible recovery curves.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 25/30</span></div>
+  <h3>Pre-commitment risk evidence board</h3><p class="thesis">Measure whether temporal, entity, topology, intent, and trust evidence arrives early enough to repair a driving or multi-robot plan.</p>
+  <div class="scores"><span>fit 4</span><span>novelty 5</span><span>feasibility 3</span><span>moat 4</span><span>timing 5</span><span>evidence 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Replay ambiguous vehicle interactions and multi-robot spoofing cases with annotated divergence onset, evidence source, and recoverable window.</p></div>
+    <div><strong>4-week build</strong><p>Compare risk-evidence localization, retrieval-agent explanations, aerial adaptation, topology-constrained forecasting, intent gating, and trust-aware rollout monitors.</p></div>
+    <div><strong>Success metric</strong><p>Evidence lead time predicts whether a planner can repair before corridor, collision, or assignment failure.</p></div>
+    <div><strong>Stop condition</strong><p>If evidence is only explanatory after commitment, move the effort to offline failure taxonomy instead of online planning.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Interaction clips, entity-risk intervals, topology constraints, intent-divergence traces, trust-monitor outputs, and repair-window metrics.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-08-27.json">intelligence/2026-08-27.json</a>.</footer>
+</body></html>
