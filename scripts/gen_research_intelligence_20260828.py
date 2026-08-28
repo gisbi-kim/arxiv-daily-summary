@@ -1,0 +1,360 @@
+#!/usr/bin/env python3
+"""Generate the 2026-08-28 Research Intelligence edition."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from gen_research_intelligence_20260811 import build_html
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE_PROMPT = "prompts/instruction_v20260713.md"
+
+
+RI_BY_DATE = {
+    "2026-08-28": {
+        "date": "2026-08-28",
+        "edition": "Research Intelligence",
+        "source_prompt": SOURCE_PROMPT,
+        "source_mode": "new",
+        "scope_note": (
+            "Daily edition from matching Friday /new listings: 114 non-replacement cs.CV rows, "
+            "46 cs.RO rows, 151 deduplicated papers, and 125 ROI papers. Tier A cards are "
+            "conservative abstract-only autopsies from the repository parser output; no figure, "
+            "table, full-text, code, or dataset-release claims are asserted."
+        ),
+        "executive_thesis": (
+            "The August 28 batch asks when an intelligent robot, VLM, or world model should be trusted before it acts. "
+            "VLA papers no longer treat failure as a terminal label: TrapVLA turns failure into a controlled attack target, "
+            "FLARE treats recovery as an online policy decision, TemporalFlow-VLA makes ordered execution history a control variable, "
+            "and FlashVLA puts latency and asynchronous action continuity into the action interface. "
+            "World-model papers shift from visually plausible rollouts toward cross-embodiment physical simulators, revisit-memory calibration, "
+            "probabilistic alignment, and dynamic embodied scenes. "
+            "Geometry papers make 3D reconstruction useful only when pose, calibration, LiDAR sparsity, multi-agent alignment, contact, and compute budget survive deployment. "
+            "APRL's strongest opening is to own evaluation assets that decide whether evidence arrives early enough to change, repair, or veto the next action."
+        ),
+        "decision_cards": [
+            {
+                "label": "Decision",
+                "title": "VLA failure is becoming programmable and recoverable",
+                "body": (
+                    "TrapVLA, FLARE, TemporalFlow-VLA, FlashVLA, GRAFT, and Arrive-and-Survive all locate failure before final success: "
+                    "configured action residuals, retry/reset skills, execution history, streaming chunks, grounded online reward, and one-bit termination."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "World models need memory contracts",
+                "body": (
+                    "CLAP, Riemann-1.0, WALL-SS, SpatialCrafter, R2M-Bench, PAWBench, and GameWAM ask whether generated futures preserve "
+                    "the physical state, revisit memory, action condition, and uncertainty distribution that downstream control needs."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Geometry is judged by deployment damage",
+                "body": (
+                    "CGS-SLAM, DPA-I2P, GSSC, laboratory reconstruction benchmarking, underwater contact localization, and LiDAR calibration papers "
+                    "turn pose error, compute budget, sensor sparsity, drift, and contact events into explicit release conditions."
+                ),
+            },
+        ],
+        "papers": [
+            {
+                "rank": 1,
+                "title": "TrapVLA: Trapping Vision-Language-Action Models in Configured Failure Modes",
+                "arxiv_id": "2608.26578",
+                "fit": "VLA safety - configured failures - action residual attacks",
+                "status": "Tier A - abstract-only",
+                "status_quo": "VLA backdoor or robustness tests often count any task failure as a successful attack.",
+                "friction": "The abstract argues that safety evaluation is weaker if it cannot specify how the robot should fail, such as a controlled positional grasp offset.",
+                "hidden_premise": "A dangerous VLA attack is not only a failure trigger; it is a controllable mapping from stealthy prompt evidence to a chosen action residual.",
+                "conceptual_move": "Reframe VLA backdoors from binary success/failure into configured failure fidelity across named failure modes.",
+                "mechanism": "The abstract describes synthetic target trajectories, an automated configured-failure benchmark, and trigger-induced sparse action residual learning.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper defines Configured Failure Trapping as requiring control over the robot failure mode."},
+                    {"trace": "[Abstract]", "claim": "It introduces Trap-LIBERO and Trap-RoboTwin across four representative failure modes."},
+                    {"trace": "[Inference]", "claim": "APRL should score failure attacks by action-residual shape and recovery opportunity, not only terminal task failure."},
+                ],
+                "falsification": "If configured residuals do not transfer beyond narrow simulator triggers, the threat is closer to benchmark overfitting than general VLA risk.",
+                "adversarial": "Test visually similar clean prompts, paraphrased triggers, object-pose changes, and recovery monitors to separate stealth from ordinary brittleness.",
+                "thinking_tool": "Measure how a failure is shaped before asking whether the task failed.",
+                "transfer_boundary": "Direct for VLA safety and manipulation; weaker for controllers whose action residuals are constrained by certified low-level safety layers.",
+            },
+            {
+                "rank": 2,
+                "title": "FLARE: A Failure-Aware Framework for Autonomous Correction and Recovery in Visual-Language Robotic Manipulation",
+                "arxiv_id": "2608.26645",
+                "fit": "VLA recovery - retry/reset arbitration - contact-rich manipulation",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Robot imitation datasets usually teach monotonic, failure-free demonstrations and leave missed grasps or collisions outside the policy distribution.",
+                "friction": "The abstract says this creates brittle VLAs that cannot recover from missed grasps, dropped objects, or unexpected collisions.",
+                "hidden_premise": "Recovery must be represented as a policy branch with its own object-centric reset skills, not as a rare outlier in the same demonstration stream.",
+                "conceptual_move": "Split manipulation execution into retry segments for recoverable deviations and reset skills for state-breaking OOD failures.",
+                "mechanism": "The abstract combines perturbation/bridging demonstrations, offline MLLM failure analysis, a reset-skill library, and an online MLLM monitor.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper identifies failure-free demonstration training as a source of poor recovery."},
+                    {"trace": "[Abstract]", "claim": "It proposes Retry and Reset mechanisms with online arbitration between task execution and reset skills."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate recovery timing and reset choice before final task success."},
+                ],
+                "falsification": "If reset arbitration succeeds only on curated failure videos and not live contact errors, the recovery interface is not deployable.",
+                "adversarial": "Inject missed grasps, dropped objects, wrong object poses, and collision-induced layout changes while measuring when the monitor switches policy.",
+                "thinking_tool": "Treat recovery as a first-class action option, not an exception handler after failure.",
+                "transfer_boundary": "Strong for long-horizon manipulation; less direct for locomotion where reset skills may be physically impossible during execution.",
+            },
+            {
+                "rank": 3,
+                "title": "TemporalFlow-VLA: Learning Physically Grounded Execution History for Long-Horizon Robot Manipulation",
+                "arxiv_id": "2608.26821",
+                "fit": "VLA memory - temporal flow supervision - long-horizon manipulation",
+                "status": "Tier A - abstract-only",
+                "status_quo": "History conditioning is often treated as appending past frames to a policy context.",
+                "friction": "The abstract says visually similar states can require different actions depending on recent execution, and raw historical frames do not reliably encode that change.",
+                "hidden_premise": "The policy needs a compact history variable supervised by physical robot geometry and state change, even if that supervision is removed at deployment.",
+                "conceptual_move": "Use robot-surface temporal flow as a training-only target for execution-aligned temporal queries consumed by the action expert.",
+                "mechanism": "The abstract describes recorded robot states, calibrated cameras, robot geometry, temporal queries, asynchronous feature caching, and single-frame-level sampling latency.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper names ordered execution history as necessary for multi-stage manipulation."},
+                    {"trace": "[Abstract]", "claim": "Controlled history interventions show action prediction depends on historical content and temporal order."},
+                    {"trace": "[Inference]", "claim": "APRL should corrupt history order and measure which action choices flip before final success changes."},
+                ],
+                "falsification": "If temporal queries help only on benchmark long tasks but not on contact or object-state reversals, the learned history may be task-script memory.",
+                "adversarial": "Swap visually similar states with different prior contact events, shuffle history order, and delay feature-cache updates.",
+                "thinking_tool": "Ask what physical event history the action head can still observe.",
+                "transfer_boundary": "Direct for multi-stage manipulation; weaker for one-shot reaching tasks with little state aliasing.",
+            },
+            {
+                "rank": 4,
+                "title": "CLAP: Cross-Embodiment Video World Models are Zero-Shot Physical Simulators",
+                "arxiv_id": "2608.27406",
+                "fit": "cross-embodiment world models - physical simulation - action conditioning",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Action-conditioned video models are commonly trained for a single robot embodiment and cannot easily use heterogeneous human or robot videos.",
+                "friction": "The abstract says cross-embodiment learning is hard because actions differ sharply across platforms and are often absent in human videos.",
+                "hidden_premise": "Universal physical regularities can be learned across actors if action spaces are reconciled through end-effector, language, and latent actions.",
+                "conceptual_move": "Treat cross-embodiment video generation as a zero-shot physical simulator rather than a single-embodiment rollout model.",
+                "mechanism": "The abstract describes curriculum learning from unlabeled video with latent actions, then grounding in end-effector action spaces for deployment.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper proposes reconciling disparate action spaces with end-effector poses, language instructions, and latent actions."},
+                    {"trace": "[Abstract]", "claim": "It targets cross-embodiment action-conditioned video generation spanning human and robotic agents."},
+                    {"trace": "[Inference]", "claim": "APRL should measure which physical invariants survive morphology changes and which become misleading priors."},
+                ],
+                "falsification": "If zero-shot transfer disappears when camera, contact timing, or morphology changes independently, the simulator is not embodiment-invariant enough.",
+                "adversarial": "Use the same task with different grippers, viewpoints, and action parameterizations while measuring predicted contact sequence and policy correction value.",
+                "thinking_tool": "Separate physical law transfer from action-code transfer.",
+                "transfer_boundary": "Useful for simulation and manipulation planning; risky for force-sensitive tasks without validated contact dynamics.",
+            },
+            {
+                "rank": 5,
+                "title": "CGS-SLAM: Collaborative Gaussian Splatting based SLAM for Multi-Agent Reconstruction",
+                "arxiv_id": "2608.26868",
+                "fit": "3DGS SLAM - multi-agent reconstruction - RGB-inertial mapping",
+                "status": "Tier A - abstract-only",
+                "status_quo": "3DGS SLAM often assumes RGB-D input or a single-agent mapping pipeline.",
+                "friction": "The abstract says consumer smartphones lack RGB-D and that few methods integrate 3DGS into collaborative mapping.",
+                "hidden_premise": "Collaborative map quality depends on when agents share keyframes and how global alignment repairs local scale or overlap errors.",
+                "conceptual_move": "Make 3DGS SLAM a hybrid decentralized/centralized multi-agent system using RGB and inertial data.",
+                "mechanism": "The abstract describes inertial local tracking, metric monocular depth, shared keyframe encodings, dynamic keyframing, and VGGT-based server alignment.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The method targets GNSS-denied collaborative mapping with RGB and inertial inputs."},
+                    {"trace": "[Abstract]", "claim": "Shared keyframe encodings and central view alignment are used to align submaps."},
+                    {"trace": "[Inference]", "claim": "APRL should test communication timing and overlap quality as map-validity variables."},
+                ],
+                "falsification": "If collaborative alignment improves rendering but not relocalization or navigation, the 3DGS map remains a visual asset rather than a robot map.",
+                "adversarial": "Stress low-overlap routes, drifting inertial priors, inconsistent scale, and delayed keyframe sharing.",
+                "thinking_tool": "A collaborative map should be scored by whether another robot can localize and act in it.",
+                "transfer_boundary": "Strong for multi-robot mapping; weaker for single-object reconstruction where collaboration is irrelevant.",
+            },
+            {
+                "rank": 6,
+                "title": "Cross-Platform Benchmark of Neural 3D Reconstruction for Autonomous Laboratory Robots",
+                "arxiv_id": "2608.26383",
+                "fit": "robot reconstruction benchmark - compute budget - actionable object geometry",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Neural 3D reconstruction is often compared by view synthesis quality without the robot compute stack that must run it.",
+                "friction": "The abstract says real-time viability across GPU devices and onboard compute remains poorly characterized for laboratory robots.",
+                "hidden_premise": "A reconstruction method is useful only if fidelity, latency, and downstream manipulation adequacy fit the control loop budget.",
+                "conceptual_move": "Benchmark NeRF, 3DGS, and feed-forward single-image reconstruction across the compute platforms a lab robot can actually use.",
+                "mechanism": "The abstract compares training/rendering on devices from single-board computers to servers and places SAM3D on the same latency/fidelity axes.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper evaluates neural 3D reconstruction across GPU-enabled platforms for autonomous laboratory robots."},
+                    {"trace": "[Abstract]", "claim": "It argues onboard compute is insufficient for full per-scene optimization at interactive rates."},
+                    {"trace": "[Inference]", "claim": "APRL should design tiered reconstruction pipelines rather than choose a single highest-fidelity method."},
+                ],
+                "falsification": "If downstream manipulation succeeds with cheaper geometry, expensive per-scene optimization may be unnecessary for the robot task.",
+                "adversarial": "Compare reconstruction rankings under grasp pose estimation, occluded objects, shiny labware, and strict control-loop latency.",
+                "thinking_tool": "Benchmark 3D maps on the compute platform that owns the next action.",
+                "transfer_boundary": "Direct for lab robotics and manipulation; weaker for offline visualization where latency is not binding.",
+            },
+            {
+                "rank": 7,
+                "title": "Finding the Right Evidence: Factor-Guided Coarse-to-Fine Reasoning for Long Videos",
+                "arxiv_id": "2608.26355",
+                "fit": "long-video QA - option-discriminative evidence - retrieval reasoning",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Long-video systems often improve cue retrieval but still answer from broad topical relevance or answer-side priors.",
+                "friction": "The abstract says prior agentic systems retrieve more cues than direct VLM inference but do not achieve matching answer-accuracy gains.",
+                "hidden_premise": "The decisive evidence is the cue that separates plausible answer options, not any cue relevant to the question topic.",
+                "conceptual_move": "Use question factors first, then candidate answers to request contrastive evidence from a clip index.",
+                "mechanism": "The abstract describes Progressive Acquisition of Critical Evidence with factor-guided indexing and option-aware verification queries.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper identifies option-discriminative evidence as the bottleneck in long-video QA."},
+                    {"trace": "[Abstract]", "claim": "It reports improved cue recovery and accuracy on MMR-V and transfer gains on several long-video benchmarks."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate whether evidence retrieval changes robot action permission, not only answer correctness."},
+                ],
+                "falsification": "If factor retrieval finds plausible clips but cannot reject the wrong action option, the evidence is still topical rather than decisive.",
+                "adversarial": "Use near-miss options, visually similar clips, and missing temporal cues to test option-specific rejection.",
+                "thinking_tool": "Ask which evidence distinguishes the dangerous alternative.",
+                "transfer_boundary": "Useful for video reasoning and embodied memory; less direct for low-level control without discrete candidate actions.",
+            },
+            {
+                "rank": 8,
+                "title": "R2M-Bench: Evaluating Revisit Memory via Relative Consistency in Interactive Video World Models",
+                "arxiv_id": "2608.27328",
+                "fit": "interactive world models - revisit memory - relative consistency",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Interactive video world models can score well on raw similarity even when they only move slowly or preserve generic visual stability.",
+                "friction": "The abstract argues that absolute revisit scores can confuse real memory with rendering stability, repetitive content, or failed motion.",
+                "hidden_premise": "A revisit-memory metric must compare return frames against same-rollout controls, not only first-return appearance similarity.",
+                "conceptual_move": "Define MemoryGain and Normalized Memory Ratio by comparing revisit pairs with gap-matched non-revisit and short-range controls.",
+                "mechanism": "The abstract describes 100 scenes, leave-and-return trajectories, and relative calibration over appearance, identity, geometry, and persistent state.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The benchmark evaluates observable revisit-selective consistency rather than raw revisit similarity."},
+                    {"trace": "[Abstract]", "claim": "It reports lower correlation with generated motion than raw revisit similarity, reducing a slow-motion shortcut."},
+                    {"trace": "[Inference]", "claim": "APRL should borrow relative controls for robot memory benchmarks where staying still can fake consistency."},
+                ],
+                "falsification": "If the metric rewards visual texture memory without preserving actionable geometry or task state, it remains a video metric.",
+                "adversarial": "Introduce dynamic objects, forced camera returns, and task-relevant object moves to separate visual revisit from control memory.",
+                "thinking_tool": "Always compare memory against a same-rollout no-revisit control.",
+                "transfer_boundary": "Strong for embodied world-model evaluation; weaker for static image generation.",
+            },
+            {
+                "rank": 9,
+                "title": "Barrier Function Conformal Safety Clearance Certification with CVaR for Driving Trajectory Selection",
+                "arxiv_id": "2608.26533",
+                "fit": "driving safety - conformal certification - plan-time clearance",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Motion planners may rank candidate trajectories without certifying the realized safety clearance of the selected trajectory.",
+                "friction": "The abstract says plan-time margins can diverge from exact oriented-bounding-box safety clearance after interactions and prediction errors.",
+                "hidden_premise": "A selected trajectory should carry a calibrated certificate that lower-bounds clearance independently of predictor correctness.",
+                "conceptual_move": "Combine differentiable separating-axis barrier margins, sampled lower-tail CVaR, and post-selection conformal calibration.",
+                "mechanism": "The abstract evaluates plan-time margins and conformal correction on frozen nuPlan sessions with native PDM closed-loop proposals.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper calibrates the gap between plan-time margin and realized safety clearance."},
+                    {"trace": "[Abstract]", "claim": "It reports exact-clearance coverage above a 90% target across evaluated statistics."},
+                    {"trace": "[Inference]", "claim": "APRL should attach calibrated clearance certificates to robot action proposals before execution."},
+                ],
+                "falsification": "If certificates hold statistically but do not change selected trajectories under rare near-miss cases, the safety signal is not operational.",
+                "adversarial": "Evaluate distribution shift, dense traffic, adversarial cut-ins, and low-probability collision modes separately from average clearance.",
+                "thinking_tool": "A plan should prove its remaining safety margin before commitment.",
+                "transfer_boundary": "Direct for driving and multi-robot motion planning; less direct for manipulation unless clearance can be represented over contact geometry.",
+            },
+        ],
+        "synthesis": [
+            {
+                "title": "Failures are becoming labels with geometry",
+                "links": "TrapVLA - FLARE - TemporalFlow-VLA - FlashVLA - Arrive and Survive",
+                "facts": "The abstracts separate configured failure mode, retry/reset recovery, ordered execution history, streaming action continuity, and one-bit failure termination.",
+                "inference": "The shared decision is to move failure evidence upstream so a robot can repair or veto an action before the episode is over.",
+            },
+            {
+                "title": "World models now need controls, not just videos",
+                "links": "CLAP - Riemann-1.0 - WALL-SS - SpatialCrafter - R2M-Bench - PAWBench",
+                "facts": "The batch emphasizes cross-embodiment action spaces, causal action-state sequences, next-scale autoregression, 3D proxies, revisit controls, and probabilistic alignment.",
+                "inference": "APRL should score world models by action-conditioned state validity, memory gain over controls, and distribution-level consistency under repeated attempts.",
+            },
+            {
+                "title": "Maps are entering release gates",
+                "links": "CGS-SLAM - DPA-I2P - GSSC - Cross-platform 3D benchmark - Contact-aided localization - LiDAR calibration",
+                "facts": "The geometry papers expose camera-point-cloud registration, LiDAR completion, multi-agent 3DGS alignment, compute platform limits, contact factors, and extrinsic drift.",
+                "inference": "The useful map is the one whose pose, scale, contact, calibration, and latency errors can be bounded before the robot trusts it.",
+            },
+        ],
+        "frontier_memory": [
+            {
+                "label": "Strengthening",
+                "history": "August 24-27 repeatedly emphasized action authorization, evidence routing, 4D/WAM state, and robot-usable geometry.",
+                "body": "August 28 strengthens the same axis with configured VLA failures, online reset arbitration, physically supervised execution history, and calibrated driving clearance.",
+            },
+            {
+                "label": "New signal",
+                "history": "Recent reports had world-model memory, but fewer same-day papers attacked metric shortcuts directly.",
+                "body": "R2M-Bench and PAWBench make memory and probabilistic alignment benchmark requirements rather than aesthetic properties of generated video.",
+            },
+            {
+                "label": "Commoditizing",
+                "history": "Token pruning, adapters, compression, and diffusion variants keep recurring across the last four weeks.",
+                "body": "The crowded implementation axis is less useful than evidence preservation: which token, cache, geometry, or adapter remains necessary for the next action.",
+            },
+            {
+                "label": "Missing axis",
+                "history": "The repo still lacks a unified benchmark joining VLA attack/recovery, geometry drift, world-model memory, and plan-time safety margin.",
+                "body": "APRL can own a permission-and-repair protocol where failures are configured, evidence arrival is timestamped, and recovery authority is measured across tasks.",
+            },
+        ],
+        "strategy": [
+            {
+                "priority": "Build moat",
+                "title": "Configured failure and recovery suite",
+                "thesis": "Make VLA failure controllable, timestamped, and recoverable by combining configured attack residuals, retry/reset arbitration, temporal history, and streaming actions.",
+                "scores": {"fit": 5, "asymmetry": 5, "timing": 5, "tractability": 4, "moat": 5, "depth": 5},
+                "one_week": "Build paired LIBERO/RoboTwin episodes with grasp-offset triggers, missed grasps, dropped objects, shuffled history, and asynchronous action-buffer delay.",
+                "four_week": "Compare TrapVLA-style failure residuals, FLARE-style retry/reset, TemporalFlow history, FlashVLA streaming, and safe-goal failure termination under the same perturbations.",
+                "success": "The benchmark distinguishes configured failure fidelity, recovery lead time, and terminal success in at least three separate failure families.",
+                "stop": "If perturbations only change task difficulty and not the identity or timing of failure, split the suite into attack and recovery subtracks.",
+                "paper_path": "A failure taxonomy plus evaluation protocol paper for VLA safety and recovery.",
+                "asset_path": "Configured-failure episodes, trigger/action-residual labels, reset-skill annotations, history-order perturbations, and recovery-window metrics.",
+                "asset": "Configured-failure episodes, trigger/action-residual labels, reset-skill annotations, history-order perturbations, and recovery-window metrics.",
+            },
+            {
+                "priority": "Build moat",
+                "title": "Robot-usable geometry release gate",
+                "thesis": "Require every reconstruction or localization method to report pose, calibration, contact, sensor degradation, compute, and downstream task validity.",
+                "scores": {"fit": 5, "asymmetry": 5, "timing": 5, "tractability": 4, "moat": 5, "depth": 5},
+                "one_week": "Assemble small RGB-inertial, LiDAR, underwater contact, and lab-object cases with known pose drift, calibration error, sparse sensing, and compute limits.",
+                "four_week": "Compare 3DGS SLAM, image-to-point-cloud registration, LiDAR completion, contact-aided factor graphs, and feed-forward reconstruction in the same task loop.",
+                "success": "Downstream localization, route-following, or grasp outcomes reorder methods relative to clean reconstruction quality.",
+                "stop": "If deployment outcomes track ordinary reconstruction metrics, narrow the gate to calibration and compute first.",
+                "paper_path": "A robot-map validity paper centered on release gates instead of rendering quality.",
+                "asset_path": "Pose/calibration perturbations, sensor-degradation cases, compute budgets, contact-factor logs, route/grasp outcomes, and validation scripts.",
+                "asset": "Pose/calibration perturbations, sensor-degradation cases, compute budgets, contact-factor logs, route/grasp outcomes, and validation scripts.",
+            },
+            {
+                "priority": "Explore",
+                "title": "World-model memory and alignment harness",
+                "thesis": "Test whether generated futures preserve actionable physical state, revisit memory, and outcome distribution rather than only smooth video.",
+                "scores": {"fit": 4, "asymmetry": 5, "timing": 5, "tractability": 3, "moat": 4, "depth": 5},
+                "one_week": "Create leave-and-return manipulation and navigation clips with matched non-revisit controls, stochastic outcomes, and object-state probes.",
+                "four_week": "Evaluate CLAP, Riemann-style WAMs, WALL-SS-like autoregression, SpatialCrafter proxies, R2M relative memory, and PAWBench probabilistic alignment criteria.",
+                "success": "Relative memory and probabilistic-alignment scores predict action correction or simulation usefulness better than raw frame similarity.",
+                "stop": "If the metrics cannot distinguish generic temporal stability from task-relevant state memory, keep the work as a video metric survey.",
+                "paper_path": "A benchmark paper on actionable memory and uncertainty for embodied world models.",
+                "asset_path": "Return trajectories, gap-matched controls, stochastic outcome sets, object-state labels, world-model rollouts, and action-validity metrics.",
+                "asset": "Return trajectories, gap-matched controls, stochastic outcome sets, object-state labels, world-model rollouts, and action-validity metrics.",
+            },
+        ],
+    }
+}
+
+
+def main() -> int:
+    (ROOT / "intelligence").mkdir(exist_ok=True)
+    (ROOT / "posts").mkdir(exist_ok=True)
+    for date, data in RI_BY_DATE.items():
+        (ROOT / "intelligence" / f"{date}.json").write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        (ROOT / "posts" / f"{date}-research-intelligence.html").write_text(
+            build_html(data),
+            encoding="utf-8",
+            newline="\n",
+        )
+        print(f"wrote intelligence/{date}.json and posts/{date}-research-intelligence.html")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
