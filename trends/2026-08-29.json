@@ -1,0 +1,292 @@
+{
+  "date": "2026-08-29",
+  "iso_week": "2026-W35",
+  "week_start": "2026-08-23",
+  "week_end": "2026-08-29",
+  "source_listing_date": "2026-08-28",
+  "source_mode": "pastweek",
+  "source_daily_artifacts": [
+    "2026-08-24",
+    "2026-08-25",
+    "2026-08-26",
+    "2026-08-27",
+    "2026-08-28"
+  ],
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "totals": {
+    "selected": 399,
+    "total_scanned": 893
+  },
+  "daily_totals": {
+    "cv": 670,
+    "ro": 268,
+    "selected": 737,
+    "total_scanned": 894
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 43,
+      "cv": 30,
+      "ro": 9,
+      "cvro": 4
+    },
+    "Robot Learning": {
+      "total": 89,
+      "cv": 7,
+      "ro": 69,
+      "cvro": 13
+    },
+    "Autonomous Driving": {
+      "total": 24,
+      "cv": 6,
+      "ro": 13,
+      "cvro": 5
+    },
+    "Foundation Models": {
+      "total": 51,
+      "cv": 48,
+      "ro": 1,
+      "cvro": 2
+    },
+    "Generation": {
+      "total": 76,
+      "cv": 69,
+      "ro": 5,
+      "cvro": 2
+    },
+    "Efficiency/Systems": {
+      "total": 58,
+      "cv": 51,
+      "ro": 6,
+      "cvro": 1
+    },
+    "Embodied AI": {
+      "total": 20,
+      "cv": 5,
+      "ro": 11,
+      "cvro": 4
+    },
+    "Safety/Alignment": {
+      "total": 38,
+      "cv": 30,
+      "ro": 6,
+      "cvro": 2
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA authority moves from broad context injection to pre-failure recovery interfaces",
+      "representative_ids": [
+        "2608.23224",
+        "2608.23138",
+        "2608.24959",
+        "2608.26578",
+        "2608.26645",
+        "2608.26821"
+      ],
+      "why": "Earlier VLA work often treated language, retrieval, memory, and geometry as helpful context. This week makes them control interfaces that can disturb or authorize an action: prompt changes need permission, pointing and Gaussian tokens expose spatial state, configured failures reveal dangerous residuals, recovery becomes a branch, and execution history becomes a supervised state variable. VLA evaluation should therefore measure when an interface changes the motor command, not only whether the final task succeeds.",
+      "confidence": "High - five consecutive weekday artifacts include independent VLA authority, geometry, failure, recovery, and history signals.",
+      "lab_action": "Run LIBERO, RoboCasa, and one APRL tabletop task with matched visual states while varying prompt authority, pointing target, Gaussian token, configured trigger, recovery branch, and history order; compare action delta, intervention timing, object-generalization success, and pre-failure warning."
+    },
+    {
+      "cluster": "World-action models are judged by action-faithful futures and relative memory controls",
+      "representative_ids": [
+        "2608.24885",
+        "2608.23863",
+        "2608.24714",
+        "2608.25956",
+        "2608.27406",
+        "2608.27328"
+      ],
+      "why": "The week repeatedly rejects pretty rollouts as sufficient evidence. Robotic world models are probed for action following, imagined predictions are settled against later reality, Gaussian scene fields become WAM teachers, 4D Gaussian object state bridges past and future, cross-embodiment videos are treated as physical simulators, and revisit memory is measured against controls that stop slow-motion shortcuts. The shared decision is to ask whether a generated future preserves the state that would change a robot action.",
+      "confidence": "High - robot, driving, Gaussian, cross-embodiment, and video-memory papers repeat the same action-faithfulness contract.",
+      "lab_action": "Create valid but rare robot actions, revisit paths, gripper changes, and object-motion edits where visual plausibility can stay high; compare WAM variants by SE(3) consequence agreement, contact-order preservation, revisit-memory gain, and policy correction value."
+    },
+    {
+      "cluster": "Manipulation learning shifts from demonstration volume to contact and embodiment diagnostics",
+      "representative_ids": [
+        "2608.21290",
+        "2608.20546",
+        "2608.21355",
+        "2608.24741",
+        "2608.25798",
+        "2608.27079"
+      ],
+      "why": "The manipulation papers do not simply ask for more demonstrations. They expose which state is missing from the demonstration stream: visuotactile temporal alignment, hardware-specific data capture, human visual-tactile physical properties, physical interaction discovery, tactile refresh during action chunks, and online reinforcement adaptation for fine-grained manipulation. The weekly signal is that contact state should be an evaluated variable, not a hidden nuisance.",
+      "confidence": "High - tactile, gripper, contact-rich, and online-adaptation papers arrive from separate groups and point to the same missing state.",
+      "lab_action": "Use one deformable, one thin-object, and one tool-use manipulation task; ablate tactile history, gripper geometry, material property, contact transition, and online adaptation while scoring slip onset, reset choice, final success, and action-chunk correction."
+    },
+    {
+      "cluster": "Robot-usable geometry becomes a release gate for maps, calibration, and reconstruction stacks",
+      "representative_ids": [
+        "2608.22906",
+        "2608.22896",
+        "2608.25401",
+        "2608.25427",
+        "2608.26868",
+        "2608.26383"
+      ],
+      "why": "The geometry watch lens is strongly triggered. Underwater Gaussian SLAM, spatio-temporal VLN maps, multi-trajectory reconstruction tests, resilient odometry, collaborative 3DGS SLAM, and cross-platform lab-robot reconstruction benchmarks all move beyond appearance quality. They ask whether the map, calibration, odometry, and compute stack survive the conditions under which a robot must localize, navigate, or manipulate.",
+      "confidence": "High - 43 weekly 3D/Scene ROI papers plus repeated SLAM, LiDAR, Gaussian, calibration, odometry, and robot-compute evidence.",
+      "lab_action": "Compare NeRF, 3DGS, feed-forward reconstruction, SLAM, odometry, and registration pipelines on the same robot camera trajectories, low-overlap routes, tilted surfaces, underwater or lab-object scenes, delayed map sharing, and onboard compute budgets; score scale drift, relocalization, grasp or route success, and update latency."
+    },
+    {
+      "cluster": "VLM reasoning moves from final answer scoring to evidence acquisition and calibration units",
+      "representative_ids": [
+        "2608.20414",
+        "2608.21762",
+        "2608.23011",
+        "2608.24966",
+        "2608.26355",
+        "2608.27417",
+        "2608.27004"
+      ],
+      "why": "Foundation-model reliability papers repeatedly name the evidence unit that should be inspected before trusting an answer. Latent spatial state, crop routing, long-video evidence granularity, hallucination heads, factor-guided clip retrieval, visual retrieval heads, and medical VLM calibration all make fluent output secondary to whether the model can locate, request, and calibrate the evidence that supports it.",
+      "confidence": "High - spatial-state, long-video, medical, hallucination, and retrieval-head papers independently expose evidence-acquisition failure modes.",
+      "lab_action": "Build a compact VLM evaluation with hidden spatial relations, long-video distractors, medical uncertainty, and hallucination-prone object mentions; compare answer accuracy, evidence localization, crop or clip request quality, confidence calibration, and abstention under the same questions."
+    },
+    {
+      "cluster": "Autonomy certification moves from closed-course outcomes to pre-commit risk and clearance guarantees",
+      "representative_ids": [
+        "2608.21928",
+        "2608.23839",
+        "2608.24094",
+        "2608.25344",
+        "2608.26074",
+        "2608.26533",
+        "2608.26669"
+      ],
+      "why": "Autonomy evaluation is no longer just pass or fail at the route level. Same-scene risk benchmarks, resilience metrics, emergency-vehicle generation, driving risk evidence, intent-divergence gating, conformal clearance certification, and independent public-road LiDAR tests all move the decision point before the maneuver commits. The useful artifact is a risk trajectory that can veto or rerank a plan before the failure is visible in terminal metrics.",
+      "confidence": "High - embodied, driving, public-road, safety-certification, and multi-agent evidence repeats the pre-commit risk pattern.",
+      "lab_action": "Construct public-road, warehouse, and mobile-robot scenarios with same-scene unsafe instructions, emergency vehicles, intent divergence, dense interactions, and clearance tails; compare closed-loop success, near miss, certified margin, intervention timing, and recovery behavior."
+    },
+    {
+      "cluster": "Efficiency research shifts from cheaper inference to action-critical evidence preservation",
+      "representative_ids": [
+        "2608.21247",
+        "2608.23921",
+        "2608.24063",
+        "2608.25332",
+        "2608.27206",
+        "2608.26806",
+        "2608.26948"
+      ],
+      "why": "Compression and pruning papers are strongest when they state which evidence must survive the speedup. JND-based VLA token compression, head-adaptive token pruning, VLM cache pruning, critical-token head pruning, condense-and-extract inference, multi-image token pruning, and simple 3DGS compression all imply that latency is not the release criterion. A faster model must still preserve the spatial, visual, or map evidence needed by the downstream action.",
+      "confidence": "Medium-High - efficiency papers share the evidence-preservation decision, though their benchmarks are still fragmented across VLA, VLM, and 3DGS settings.",
+      "lab_action": "For the same VLA, VLM, and 3DGS tasks, sweep token budget, cache pruning, attention-head pruning, low-bit quantization, and map compression; compare latency and memory against spatial grounding error, action delta, localization failure, and downstream task success."
+    }
+  ],
+  "frontier_memory": {
+    "new": [
+      "Configured VLA failure fidelity and recovery arbitration became explicit Friday signals rather than generic robustness language.",
+      "Cross-platform lab-robot reconstruction made compute ownership part of the geometry release gate.",
+      "Relative revisit-memory controls gave world-model memory a way to avoid rewarding slow or static videos."
+    ],
+    "strengthening": [
+      "VLA authority repeated across prompt permission, typed pointing, memory, Gaussian spatial reasoning, failure traps, recovery, and execution history.",
+      "World-action model evaluation strengthened around action-faithfulness, credit settlement, Gaussian state, cross-embodiment physics, and memory controls.",
+      "Robot-usable geometry strengthened through underwater SLAM, VLN maps, multi-trajectory reconstruction, resilient odometry, collaborative 3DGS SLAM, and lab-robot compute benchmarks."
+    ],
+    "commoditizing": [
+      "Generic VLA context injection, generic video realism, generic 3D reconstruction fidelity, and generic pruning claims look weak unless they expose a control-relevant evidence variable."
+    ],
+    "contradiction": [
+      "Broad-context VLAs want more prompt, memory, retrieval, and geometry input, while the strongest safety papers insist those inputs need explicit authority boundaries before they touch actions."
+    ],
+    "missing_axis": [
+      "No weekly paper yet ties configured VLA failures, tactile refresh, robot-usable maps, evidence-gated VLM reasoning, and conformal safety clearance in one closed-loop robot benchmark."
+    ]
+  },
+  "strategy_board": [
+    {
+      "opportunity": "Pre-Failure VLA Recovery Benchmark",
+      "portfolio": "Build moat",
+      "why_now": "The same week produced configured VLA traps, autonomous correction, execution history, prompt authority, and geometry-aware VLA reasoning.",
+      "what_others_optimize": "Most papers still optimize final task success, isolated robustness, or context usefulness.",
+      "our_contrarian_bet": "APRL should own the failure-shape and recovery-timing protocol before competing on another VLA backbone.",
+      "required_moat": "Named failure modes, reset/retry labels, action residual traces, contact events, and recovery outcomes from reproducible robot episodes.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "score_rationale": {
+        "strategic_fit": "Matches APRL manipulation, robot perception, and evaluation strengths.",
+        "asymmetry": "Small labs can win by owning hard failure episodes rather than training scale.",
+        "timing": "Failure-mode benchmarks are appearing before a standard protocol has hardened.",
+        "tractability": "A ten-episode tabletop probe is feasible within one week.",
+        "defensibility": "The moat is the curated failure taxonomy and recovery trace dataset.",
+        "scientific_depth": "The research question separates failure onset, recovery authority, and terminal success."
+      },
+      "one_week_probe": "Build ten tabletop episodes with prompt perturbation, object pose shift, occlusion, missed grasp, and configured residual targets.",
+      "four_week_build": "Evaluate base VLA, prompt-authority VLA, recovery VLA, history-conditioned VLA, and geometry-token VLA under the same failures.",
+      "success_metric": "A pre-failure variable predicts or improves recovery at least two action chunks before terminal failure on three failure families.",
+      "stop_condition": "Stop if recovery labels do not change policy ranking or intervention timing beyond final success rate.",
+      "paper_path": "Configured failure recovery as an evaluation protocol for vision-language-action manipulation.",
+      "asset_path": "APRL VLA failure-mode episodes with action residuals, prompts, contact states, resets, and recovery traces."
+    },
+    {
+      "opportunity": "Action-Faithful World-Action Release Gate",
+      "portfolio": "Explore",
+      "why_now": "WorldEcho, DreamLedger, GaussianWAM, 4DGS-WAM, CLAP, and R2M-Bench all challenge plausible future generation as a sufficient signal.",
+      "what_others_optimize": "Video quality, short-horizon rollout plausibility, or single-embodiment imitation.",
+      "our_contrarian_bet": "A learned simulator should be blocked from policy learning unless it preserves action consequences, contact order, and revisit state.",
+      "required_moat": "Matched actions, counterfactual futures, revisit controls, contact annotations, and downstream correction measurements.",
+      "scores": {
+        "strategic_fit": 4,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 3,
+        "defensibility": 4,
+        "scientific_depth": 5
+      },
+      "score_rationale": {
+        "strategic_fit": "World-action modeling is adjacent to APRL robot execution and perception.",
+        "asymmetry": "The benchmark can expose failures in larger generative systems without matching their scale.",
+        "timing": "Multiple groups are now naming action-faithfulness but no shared release gate exists.",
+        "tractability": "A small valid-action probe is feasible, but model integration may take more than one week.",
+        "defensibility": "Counterfactual action traces and revisit controls become reusable assets.",
+        "scientific_depth": "It tests whether imagination carries causal action state rather than visual texture."
+      },
+      "one_week_probe": "Create paired rare-action and revisit episodes for two manipulation tasks and one mobile-navigation route.",
+      "four_week_build": "Compare video WAM, Gaussian WAM, and cross-embodiment WAM outputs against action consequence, contact, and policy-correction labels.",
+      "success_metric": "Action-faithfulness errors predict policy degradation better than visual similarity or frame-level consistency.",
+      "stop_condition": "Stop if action-faithfulness probes rank models the same as ordinary video-quality scores.",
+      "paper_path": "Action-faithful imagination as a release gate for robot world-action models.",
+      "asset_path": "Counterfactual action futures, revisit controls, contact-state labels, and policy-correction outcomes."
+    },
+    {
+      "opportunity": "Robot-Usable Geometry Validity Suite",
+      "portfolio": "Exploit",
+      "why_now": "W35 tied Gaussian SLAM, VLN maps, trajectory-aware reconstruction, odometry adaptation, collaborative maps, and lab-robot compute into one evaluation need.",
+      "what_others_optimize": "Rendering fidelity, isolated SLAM drift, or benchmark scores detached from the robot compute loop.",
+      "our_contrarian_bet": "A map is publishable for robotics only if it predicts localization, route, grasp, or update failure under deployment-like camera and compute conditions.",
+      "required_moat": "Robot trajectories, calibration stress, compute profiles, relocalization traces, dynamic-object failures, and downstream task outcomes.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 4
+      },
+      "score_rationale": {
+        "strategic_fit": "Directly matches APRL SLAM, robot perception, and autonomous lab-robot interests.",
+        "asymmetry": "Validity episodes can beat generic reconstruction scale by owning deployment conditions.",
+        "timing": "3DGS, feed-forward reconstruction, and SLAM are converging before robotics-specific gates are settled.",
+        "tractability": "A corridor and lab-object benchmark can start with existing sensors.",
+        "defensibility": "Repeated robot trajectories and compute traces are hard to reproduce casually.",
+        "scientific_depth": "It links map representation quality to action-level consequences."
+      },
+      "one_week_probe": "Record two robot-camera paths with repeated structures, pose noise, dynamic objects, shiny labware, and onboard/desktop compute profiles.",
+      "four_week_build": "Benchmark NeRF, 3DGS, feed-forward reconstruction, SLAM, odometry, and registration under the same route and grasp tasks.",
+      "success_metric": "A geometry validity score predicts downstream relocalization, grasp, or route failure better than PSNR-like reconstruction scores.",
+      "stop_condition": "Stop if downstream failures are explained entirely by ordinary pose error without representation-specific effects.",
+      "paper_path": "Operational validity tests for robot-usable geometry and neural reconstruction.",
+      "asset_path": "Robot camera trajectories, calibration files, compute profiles, map updates, pose failures, and task outcomes."
+    }
+  ]
+}
