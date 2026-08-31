@@ -1,0 +1,449 @@
+{
+  "date": "2026-08-31",
+  "edition": "Research Intelligence",
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "source_mode": "new",
+  "scope_note": "Daily edition from matching Monday /new listings: 93 non-replacement cs.CV rows, 30 cs.RO rows, 120 deduplicated papers, and 104 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claims are asserted.",
+  "executive_thesis": "The August 31 batch is about replacing visually plausible or language-plausible outputs with release contracts that can be tested before a robot acts, a map is trusted, or an answer is accepted. Metric-aware geometry papers argue that relative reconstruction is not enough for action units. VLA and TAMP papers move current-frame policies toward planning horizons, deictic instructions, event-triggered replanning, and contact-aware exploration. World-model and video papers ask whether executable code, layer-routed memory, and object-centric particles preserve the state that downstream control needs. VLM papers make evidence search conditional on the current cue and candidate answer, while safety papers externalize alarms, formal repair, ASR ambiguity, and QoS constraints. APRL's opening is to own evaluation assets where metric geometry, future evidence, and runtime alarms decide whether the system is allowed to continue.",
+  "decision_cards": [
+    {
+      "label": "Decision",
+      "title": "Geometry must enter action coordinates",
+      "body": "MAGP, GeoFF3D, uScenes, Ex-Sim(3)-Reg, GAAT, and underwater or forest deployment papers all attack the same gap: geometry can look consistent while scale, alignment, sensing ambiguity, or onboard constraints make it unusable for robot decisions."
+    },
+    {
+      "label": "Decision",
+      "title": "Policies need horizon and repair triggers",
+      "body": "VLAct, PHR-VLA, DeicticVLA, ROBUST TAMP, contact-guided RL, bin picking, and AcrossVAM treat robot execution as an interface among future dynamics, user pointing, partial observation, deadlock recovery, contact evidence, and object-centric prediction."
+    },
+    {
+      "label": "Decision",
+      "title": "Evidence is conditional and auditable",
+      "body": "Temporal Tree of Thought, StreamEMS, Conditional Visual Evidence Utility, WALDO, CURA, PanelShield, and voice-safety papers ask which cue, memory, alarm, or formal check changes the decision instead of merely improving a final score."
+    }
+  ],
+  "papers": [
+    {
+      "rank": 1,
+      "title": "Beyond Relative Geometry: Metric-Aware Geometry Perception for Robotics",
+      "arxiv_id": "2608.27497",
+      "fit": "robot geometry - metric scale - action alignment",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Embodied models can use relative reconstruction while leaving scale and distance arbitrary.",
+      "friction": "The abstract says relative geometry varies across scenes, viewpoints, and input configurations, blocking direct alignment with real-world robot actions.",
+      "hidden_premise": "A geometry module is useful for action only if object dimensions and distances remain calibrated across the observations that feed the policy.",
+      "conceptual_move": "Reframe geometry perception from relative 3D reconstruction into metric-aware action support.",
+      "mechanism": "The abstract describes an end-to-end plug-and-play framework intended to recover metric geometry that can be aligned with robotic actions.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper identifies arbitrary scale in existing reconstructions as a robotics bottleneck."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It frames metric geometry as necessary for actions defined in real-world scale."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should score geometric perception by action error under scale and viewpoint shifts, not only reconstruction appearance."
+        }
+      ],
+      "falsification": "If task success is insensitive to metric calibration after controlling for visual appearance, the metric-aware claim is weaker for that robot task.",
+      "adversarial": "Stress repeated objects, viewpoint changes, object-size priors, and camera intrinsics so relative geometry cannot fake metric consistency.",
+      "thinking_tool": "Ask whether a recovered scene can name distances in the units the controller uses.",
+      "transfer_boundary": "Direct for manipulation, grasping, and navigation; weaker for purely semantic VLM tasks where metric distance is not consumed."
+    },
+    {
+      "rank": 2,
+      "title": "PHR-VLA: Planning Horizon Reasoning for Vision-Language-Action Models",
+      "arxiv_id": "2608.27609",
+      "fit": "VLA planning horizon - future dynamics - contact-rich manipulation",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Many VLAs condition action prediction primarily on the current observation and instruction.",
+      "friction": "The abstract argues that contact-rich manipulation requires reasoning over future task dynamics rather than reactive mapping alone.",
+      "hidden_premise": "A lightweight future head can teach the VLA which latent future state matters without turning deployment into a heavy planner.",
+      "conceptual_move": "Move VLA supervision from immediate action labels toward privileged planning-horizon representations during training.",
+      "mechanism": "The abstract describes aligning internal representations with future dynamics through an auxiliary future head.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper states that current-observation conditioning is insufficient for fine-grained contact manipulation."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It introduces planning-horizon reasoning through privileged latent future representations."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should corrupt future state variables and measure when the policy changes before terminal success changes."
+        }
+      ],
+      "falsification": "If horizon representations only improve tasks with obvious scripted sequences, the method may encode dataset phase rather than physical future dynamics.",
+      "adversarial": "Swap visually similar states with different future contact outcomes and compare action deltas against a current-frame baseline.",
+      "thinking_tool": "Use future-state prediction as a probe of what the action head is allowed to ignore.",
+      "transfer_boundary": "Strong for multi-step manipulation; less direct for one-step pick tasks or controllers with explicit model-predictive planning."
+    },
+    {
+      "rank": 3,
+      "title": "Plan Along the Way: Event-Triggered Foundation-Model Planning for TAMP Execution in Partially Observable Manipulation",
+      "arxiv_id": "2608.28075",
+      "fit": "reactive TAMP - partial observability - event-triggered replanning",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Foundation-model TAMP often assumes a sufficiently specified scene before execution or replans after an obvious failure.",
+      "friction": "The abstract says a plan may execute successfully yet still be insufficient for task completion when hidden task-relevant objects or conditions are discovered late.",
+      "hidden_premise": "Replanning should be triggered by newly discovered task relevance, not only by subgoal failure.",
+      "conceptual_move": "Turn TAMP from one-shot decomposition into event-triggered execution that revises the plan under partial observability.",
+      "mechanism": "The abstract describes a modular LLM/VLM-guided planning framework that reacts to unseen task-relevant and non-task-relevant objects during execution.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper identifies incomplete scene information as a failure source for TAMP execution."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It proposes event-triggered foundation-model planning during manipulation."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should evaluate whether the trigger fires before wasted motion or unsafe contact, not only whether the final task is solved."
+        }
+      ],
+      "falsification": "If triggers occur only after a subgoal already fails, the method is a late recovery layer rather than an event-aware planner.",
+      "adversarial": "Hide relevant objects, introduce distractors, and perturb discovery order while measuring unnecessary motions, trigger timing, and completion.",
+      "thinking_tool": "A planner should revise when new evidence changes task sufficiency, not when the robot has already failed.",
+      "transfer_boundary": "Direct for partially observable manipulation; weaker for fully observed industrial cells with fixed object inventories."
+    },
+    {
+      "rank": 4,
+      "title": "Beyond Data Scaling: Representation-Centric Continued Pre-training for Vision-Language-Action Models",
+      "arxiv_id": "2608.27550",
+      "fit": "VLA pretraining - fixed robot-data budget - transferable visual-action representation",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Generalist VLA scaling often treats more robot trajectories as the main route to better policies.",
+      "friction": "The abstract says robot trajectories are costly and sparse relative to web-scale image-text data, so a fixed data budget exposes representation quality as the bottleneck.",
+      "hidden_premise": "The useful pretraining target is not more imitation of logged actions but a visual-action representation that transfers across embodiments and tasks.",
+      "conceptual_move": "Move continued pretraining from data-volume scaling toward representation-centric use of heterogeneous robot data.",
+      "mechanism": "The abstract describes a VLA-oriented VLM backbone trained on broad multi-embodiment robot data before task-specific fine-tuning.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper frames robot-data scarcity as a central constraint for generalist VLAs."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It proposes VLAct as continued pretraining over heterogeneous multi-embodiment robot data."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should separate data quantity from representation transfer under a fixed collection budget."
+        }
+      ],
+      "falsification": "If gains collapse on unseen manipulation geometry or new sensors, the representation may be task-family memorization.",
+      "adversarial": "Hold robot-data hours fixed and vary embodiment diversity, camera pose, object geometry, and downstream contact tasks.",
+      "thinking_tool": "Treat robot data as scarce evidence whose representation value must be measured per action family.",
+      "transfer_boundary": "Strong for VLA pretraining decisions; weaker for narrow single-cell automation where collection cost is low and distribution is fixed."
+    },
+    {
+      "rank": 5,
+      "title": "Code as Worlds: Agentic Discovery of Executable World Representations for Physical Reasoning",
+      "arxiv_id": "2608.27549",
+      "fit": "physical reasoning - executable world representations - intervention",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Vision-language models can describe physical events while lacking explicit state variables, parameters, and dynamics.",
+      "friction": "The abstract argues that reliable reasoning about how the world evolves and responds to interventions needs compact executable representations.",
+      "hidden_premise": "Physical understanding becomes more testable when the world model can be run, inspected, and revised as code.",
+      "conceptual_move": "Represent physical worlds through executable code rather than only language descriptions or latent visual embeddings.",
+      "mechanism": "The abstract describes expressing physical composition, dynamic evolution, and visual appearance as executable world representations.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper says VLMs often lack explicit representations of object states, physical parameters, and governing dynamics."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It introduces Code-as-World as executable world representations for physical reasoning."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should require world-model claims to expose editable state variables before using them for robot planning."
+        }
+      ],
+      "falsification": "If executable code fits visible demos but fails counterfactual interventions, it is a compact description rather than a physical model.",
+      "adversarial": "Run counterfactual object-property, contact, and force changes that preserve visual context but require different dynamics.",
+      "thinking_tool": "Prefer world representations whose assumptions can be executed and broken.",
+      "transfer_boundary": "Useful for symbolic-physical planning and simulation; risky for deformable or contact-rich domains without calibrated dynamics."
+    },
+    {
+      "rank": 6,
+      "title": "LayerRecall: A State-Conditioned Memory Router for Long-Horizon Consistency in Video Generation",
+      "arxiv_id": "2608.28460",
+      "fit": "long-video generation - layer-selective memory - state-conditioned retrieval",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Autoregressive video diffusion often keeps a bounded recent context and treats nonlocal memory access as a generic cache.",
+      "friction": "The abstract says recency-based caching evicts cues needed when subjects, objects, scenes, or attributes reappear.",
+      "hidden_premise": "Different generation layers need different memory horizons, so retrieval must be conditioned on current state and layer role.",
+      "conceptual_move": "Turn long-range memory from a global archive into a state-conditioned, layer-selective routing decision.",
+      "mechanism": "The abstract describes layer preferences for current, recent, and distant context and introduces current-conditioned layer-selective retrieval.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper identifies recency-based caching as insufficient for reappearing subjects, objects, scenes, and attributes."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It reports that video DiT layers exhibit distinct preferences for current, recent, and distant context."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL can borrow layer-specific memory probes for embodied world models where revisits must preserve actionable state."
+        }
+      ],
+      "falsification": "If routed memory preserves texture but not object pose or affordance, it is not sufficient for robot world modeling.",
+      "adversarial": "Force leave-and-return scenes with object moves, occlusions, and action-relevant state changes rather than appearance-only revisits.",
+      "thinking_tool": "Ask where in the model a memory should be retrieved, not only what should be stored.",
+      "transfer_boundary": "Strong for video and world-model evaluation; indirect for control unless linked to action-state prediction."
+    },
+    {
+      "rank": 7,
+      "title": "GeoFF3D: Coordinate-Anchored Feed-Forward Reconstruction for Large-Scale UAV Mapping",
+      "arxiv_id": "2608.28288",
+      "fit": "feed-forward reconstruction - UAV mapping - coordinate anchoring",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Feed-forward 3D reconstruction commonly recovers local or internally normalized geometry over a bounded image set.",
+      "friction": "The abstract says large-scale UAV mapping needs multi-chunk aggregation, while full Sim(3) alignment is unstable for near-collinear trajectories.",
+      "hidden_premise": "Large-scale mapping requires preserving world-frame coordinates during prediction, not repairing scale afterward.",
+      "conceptual_move": "Anchor feed-forward reconstruction to georeferenced camera translations and gravity-aligned metric frames.",
+      "mechanism": "The abstract describes a coordinate-anchored model and spatial large-scale reconstruction framework for scalable aggregation.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper identifies bounded-image local frames as a barrier to large-scale UAV mapping."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It uses georeferenced translations and optional geometric priors to predict poses and dense point maps in a metric frame."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should score feed-forward geometry by global drift and robot route reuse, not only chunk-level reconstruction."
+        }
+      ],
+      "falsification": "If coordinate anchoring fails under weak GPS, repetitive terrain, or loop closure stress, the method may not replace SLAM aggregation.",
+      "adversarial": "Use near-collinear flights, sparse GPS priors, altitude changes, and revisited areas to compare scale drift and relocalization.",
+      "thinking_tool": "A foundation geometry model must keep the coordinate frame useful after chunking.",
+      "transfer_boundary": "Strong for UAV and field mapping; weaker for tabletop scenes where global frame anchoring is unnecessary."
+    },
+    {
+      "rank": 8,
+      "title": "Conditional Visual Evidence Utility: State-Dependent Rank Reversals in Frozen Vision-Language Encoders",
+      "arxiv_id": "2608.28316",
+      "fit": "VLM evidence utility - conditional cue ranking - visual search",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Visual evidence is often ranked once using static salience or feature importance scores.",
+      "friction": "The abstract says a cue's value can change after another cue has been observed, creating state-dependent rank reversals.",
+      "hidden_premise": "An evidence policy must account for the current acquisition state and candidate overlap, not only global cue importance.",
+      "conceptual_move": "Measure conditional marginal utility for visual cues in controlled compositional search.",
+      "mechanism": "The abstract describes independently exposed color, shape, and texture cues and reports rank reversals in frozen OpenCLIP and SigLIP.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper studies conditional marginal utility after one cue has already been observed."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It reports robust state-dependent rank reversals in held-out scenes."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should route robot perception queries based on what evidence is still decision-changing."
+        }
+      ],
+      "falsification": "If rank reversals disappear in natural embodied scenes, controlled compositional search may overstate deployment relevance.",
+      "adversarial": "Test visually confusable tools, occluded objects, and action candidates where the next cue should reject a dangerous alternative.",
+      "thinking_tool": "Evidence value is a function of what the system already knows.",
+      "transfer_boundary": "Useful for VLM and robot grounding; less direct for dense regression tasks without discrete cue acquisition."
+    },
+    {
+      "rank": 9,
+      "title": "CURA: Certified Runtime Alarms for Computer-Use Agents",
+      "arxiv_id": "2608.27808",
+      "fit": "agent safety - runtime alarms - external oversight",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Agent oversight often depends on the model's self-report of failure or uncertainty.",
+      "friction": "The abstract says self-report fails where oversight matters: many failed OSWorld tasks end with success claims and no blocker acknowledgement.",
+      "hidden_premise": "Safety-critical agents need an external read-only monitor whose authority does not rely on the executing model's introspection.",
+      "conceptual_move": "Certify runtime alarms from harness-visible telemetry rather than internal model state or extra LLM calls.",
+      "mechanism": "The abstract describes a read-only feasibility gate, planner, GUI executor, and external monitor that reads telemetry.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper reports frequent false success claims after failures in OSWorld tasks."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It introduces CURA as an external monitor using harness-visible telemetry."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should apply the same external-alarm pattern to robot autonomy claims before action execution."
+        }
+      ],
+      "falsification": "If alarms correlate with task difficulty but cannot localize actionable failure causes, certification may add stops without repair value.",
+      "adversarial": "Evaluate silent perception failures, partial task completion, and false success claims under tasks where telemetry is incomplete.",
+      "thinking_tool": "Do not let the actor be the only witness to its own failure.",
+      "transfer_boundary": "Direct for agent and robot autonomy supervision; weaker for offline batch perception where runtime authority is absent."
+    },
+    {
+      "rank": 10,
+      "title": "PanelShield: Verifiable Closed-Loop Safe Planning for Robotic Industrial Panel Operation",
+      "arxiv_id": "2608.28305",
+      "fit": "robot safety - formal verification - manual-grounded repair",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Foundation-model planners can produce semantically plausible industrial actions without computable safety guarantees.",
+      "friction": "The abstract argues that panel operation must satisfy localizable manual constraints and safety regulations during execution.",
+      "hidden_premise": "Safety evidence must be grounded in task-relevant manual text and formal checks that can reject or repair an action sequence.",
+      "conceptual_move": "Turn foundation-model planning into parameterized primitive sequences guarded by dual formal verification and closed-loop repair.",
+      "mechanism": "The abstract describes manual-evidence extraction, parameterized action primitives, violation detection, and repair.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper identifies missing computable and reproducible violation detection in foundation-model planners."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It proposes a verifiable closed-loop safety planning framework for industrial panel operation."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should convert natural-language procedures into localizable action constraints before using LLM planners on robots."
+        }
+      ],
+      "falsification": "If formal checks reject obvious errors but cannot repair ambiguous manual constraints, the system may remain brittle in real operations.",
+      "adversarial": "Use manuals with conditional clauses, missing states, and conflicting safety constraints while measuring violation localization and repair success.",
+      "thinking_tool": "A robot plan should carry a machine-checkable reason it is allowed.",
+      "transfer_boundary": "Strong for structured industrial tasks; less direct for open-world manipulation with no authoritative procedure document."
+    }
+  ],
+  "synthesis": [
+    {
+      "title": "Robot geometry is becoming a release gate",
+      "links": "MAGP - GeoFF3D - uScenes - Ex-Sim(3)-Reg - GAAT",
+      "facts": "The abstracts identify arbitrary scale, multi-chunk coordinate drift, underwater elevation ambiguity, 2D-3D outliers, and multimodal parallax as practical geometry failures.",
+      "inference": "APRL should judge reconstruction by downstream action error, route reuse, and calibration sensitivity rather than clean visual fidelity alone."
+    },
+    {
+      "title": "Execution policies are gaining delayed evidence",
+      "links": "VLAct - PHR-VLA - DeicticVLA - ROBUST TAMP - AcrossVAM",
+      "facts": "The papers expose fixed robot-data budgets, future dynamics, pointing/gesture grounding, hidden scene discovery, and object-centric motion prediction.",
+      "inference": "The common decision is to delay commitment until representation, horizon, user reference, or newly observed scene evidence changes the next action."
+    },
+    {
+      "title": "Safety is moving outside model self-belief",
+      "links": "CURA - PanelShield - When Robots Mishear Us - LUCID",
+      "facts": "The batch includes external runtime alarms, formal safety repair, ASR-induced unsafe embodied instructions, and digital-twin QoS control.",
+      "inference": "A deployed robot stack needs separate authorities for action permission, communication feasibility, and unsafe instruction repair."
+    }
+  ],
+  "frontier_memory": [
+    {
+      "label": "Strengthening",
+      "history": "August 24-28 repeatedly emphasized evidence-before-action, robot-usable geometry, VLA recovery, and world-model memory.",
+      "body": "August 31 strengthens that line with metric-aware geometry, planning-horizon VLAs, event-triggered TAMP, layer-routed video memory, and external safety alarms."
+    },
+    {
+      "label": "New signal",
+      "history": "Recent daily editions discussed geometry validity but less often linked metric units and feed-forward reconstruction to field-scale mapping.",
+      "body": "MAGP and GeoFF3D make scale, coordinate anchoring, and large-scale aggregation explicit action-facing constraints."
+    },
+    {
+      "label": "Commoditizing",
+      "history": "Token compression, video memory, VLM attention, and diffusion variants keep appearing across the last four weeks.",
+      "body": "The useful differentiation is not another compression ratio; it is whether compressed tokens, KV entries, events, or 3DGS parameters preserve decision-changing evidence."
+    },
+    {
+      "label": "Missing axis",
+      "history": "The repo still has separate notes for VLA, mapping, VLM evidence, and runtime safety.",
+      "body": "APRL can combine them into one permission protocol where metric geometry, future evidence, and external alarms jointly decide action release."
+    }
+  ],
+  "strategy": [
+    {
+      "priority": "Build moat",
+      "portfolio": "Build moat",
+      "title": "Metric-geometry action contract",
+      "opportunity": "Metric-geometry action contract",
+      "thesis": "Make reconstruction methods report whether scale, pose, correspondence, and sensor ambiguity preserve the robot action they are supposed to support.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week": "Build a small manipulation and UAV-mapping probe with metric objects, repeated viewpoints, sparse sonar/LiDAR cases, and known extrinsic perturbations.",
+      "one_week_probe": "Build a small manipulation and UAV-mapping probe with metric objects, repeated viewpoints, sparse sonar/LiDAR cases, and known extrinsic perturbations.",
+      "four_week": "Compare MAGP-style metric geometry, feed-forward reconstruction, MVS compression, I2P pruning, and multimodal UAV alignment on downstream route and grasp decisions.",
+      "four_week_build": "Compare MAGP-style metric geometry, feed-forward reconstruction, MVS compression, I2P pruning, and multimodal UAV alignment on downstream route and grasp decisions.",
+      "success": "At least one downstream action ranking changes relative to clean reconstruction or alignment metrics.",
+      "success_metric": "At least one downstream action ranking changes relative to clean reconstruction or alignment metrics.",
+      "stop": "If route and grasp decisions track ordinary reconstruction scores under every perturbation, narrow the protocol to metric-scale calibration only.",
+      "stop_condition": "If route and grasp decisions track ordinary reconstruction scores under every perturbation, narrow the protocol to metric-scale calibration only.",
+      "paper_path": "A robot-usable geometry release-gate paper connecting metric reconstruction to action-level error.",
+      "asset_path": "Metric objects, coordinate-anchored maps, sensor ambiguity cases, extrinsic drift scripts, and route/grasp outcome labels.",
+      "asset": "Metric objects, coordinate-anchored maps, sensor ambiguity cases, extrinsic drift scripts, and route/grasp outcome labels."
+    },
+    {
+      "priority": "Explore",
+      "portfolio": "Explore",
+      "title": "Horizon-conditioned VLA repair benchmark",
+      "opportunity": "Horizon-conditioned VLA repair benchmark",
+      "thesis": "Measure when future dynamics, deictic user intent, hidden object discovery, and contact evidence should revise a VLA or TAMP plan before failure.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 4,
+        "scientific_depth": 5
+      },
+      "one_week": "Create paired episodes with identical current frames but different future contact outcomes, pointing targets, hidden objects, and deadlock states.",
+      "one_week_probe": "Create paired episodes with identical current frames but different future contact outcomes, pointing targets, hidden objects, and deadlock states.",
+      "four_week": "Evaluate VLAct-style pretraining, PHR-VLA future heads, DeicticVLA instruction modes, ROBUST TAMP triggers, and contact-guided exploration in one stress grid.",
+      "four_week_build": "Evaluate VLAct-style pretraining, PHR-VLA future heads, DeicticVLA instruction modes, ROBUST TAMP triggers, and contact-guided exploration in one stress grid.",
+      "success": "The benchmark separates policies that recover before contact failure from policies that only improve final success rate.",
+      "success_metric": "The benchmark separates policies that recover before contact failure from policies that only improve final success rate.",
+      "stop": "If all methods fail for the same obvious visibility reasons, split the suite into perception disambiguation and horizon reasoning tracks.",
+      "stop_condition": "If all methods fail for the same obvious visibility reasons, split the suite into perception disambiguation and horizon reasoning tracks.",
+      "paper_path": "A VLA execution-evidence paper centered on planning-horizon and repair-trigger diagnostics.",
+      "asset_path": "Current-frame aliases, future-state labels, deictic masks, hidden-object triggers, contact events, and recovery timing metrics.",
+      "asset": "Current-frame aliases, future-state labels, deictic masks, hidden-object triggers, contact events, and recovery timing metrics."
+    },
+    {
+      "priority": "Build moat",
+      "portfolio": "Build moat",
+      "title": "Runtime evidence alarm and repair gate",
+      "opportunity": "Runtime evidence alarm and repair gate",
+      "thesis": "Attach independent alarms and formal repair checks to agent or robot actions whenever model self-report, ASR input, or network QoS can silently corrupt execution.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 3,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week": "Instrument one computer-use or robot-control task with external telemetry alarms, manual-derived action constraints, ASR perturbations, and QoS state changes.",
+      "one_week_probe": "Instrument one computer-use or robot-control task with external telemetry alarms, manual-derived action constraints, ASR perturbations, and QoS state changes.",
+      "four_week": "Compare CURA-style external alarms, PanelShield-style formal repair, ASR ambiguity filters, and digital-twin QoS arbitration under shared failure labels.",
+      "four_week_build": "Compare CURA-style external alarms, PanelShield-style formal repair, ASR ambiguity filters, and digital-twin QoS arbitration under shared failure labels.",
+      "success": "The gate catches false success, unsafe instruction acceptance, or QoS-induced action risk before execution in at least two task families.",
+      "success_metric": "The gate catches false success, unsafe instruction acceptance, or QoS-induced action risk before execution in at least two task families.",
+      "stop": "If alarms mostly duplicate final failure labels and cannot trigger repair, keep them as diagnostics rather than action gates.",
+      "stop_condition": "If alarms mostly duplicate final failure labels and cannot trigger repair, keep them as diagnostics rather than action gates.",
+      "paper_path": "A runtime-permission protocol paper for embodied agents with external alarms and verifiable repair.",
+      "asset_path": "Telemetry traces, manual constraint graphs, ASR confusion cases, QoS perturbations, alarm labels, and repair outcomes.",
+      "asset": "Telemetry traces, manual constraint graphs, ASR confusion cases, QoS perturbations, alarm labels, and repair outcomes."
+    }
+  ]
+}

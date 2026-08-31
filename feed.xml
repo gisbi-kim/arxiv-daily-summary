@@ -6,8 +6,22 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 29 Aug 2026 15:10:06 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 31 Aug 2026 15:08:56 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>2026-08-31 arXiv Research Intelligence</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-08-31-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-08-31-research-intelligence.html</guid>
+      <pubDate>Mon, 31 Aug 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[arXiv Daily Briefing 2026-08-31]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-08-31 (Mon)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-08-31.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-08-31.html</guid>
+      <pubDate>Mon, 31 Aug 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 93건, cs.RO 30건이고 dedupe 후 120건 중 104건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Foundation Models 21편, Generation 18편, 3D/Scene 16편입니다. Monday /new produced 120 deduplicated non-replacement papers and 104 ROI papers. Foundation Models are the largest bucket, but the APRL-relevant signal is the convergence of metric geometry, planning-horizon control, world-model memory, evidence-c…]]></description>
+    </item>
     <item>
       <title>arXiv Weekly Briefing - 2026-W35</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-08-29-weekly.html</link>
@@ -413,20 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-23-research-intelligence.html</guid>
       <pubDate>Thu, 23 Jul 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[오늘 배치의 공통 신호는 로봇 foundation model 연구가 더 큰 backbone보다 실행 상태를 어떻게 만들고, 검증하고, 실패 후 다시 들어올지를 묻기 시작했다는 점입니다. KineBench와 PerceptDrive는 video/world-action model을 pixel score가 아니라 kinematic grounding, trajectory metric, expert routing으로 판정합니다. EgoRecovery와 LENS는 더 많은 성공 demo를 모으는 대신 failure state, corrective intent, task-relevant scene abstraction을 훈련 신호로 바꿉니다. NavVerse와 EA-Nav는 navig…]]></description>
-    </item>
-    <item>
-      <title>arXiv Daily Briefing — 2026-07-23 (Thu)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-23.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-23.html</guid>
-      <pubDate>Thu, 23 Jul 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 /new는 cs.CV 88건, cs.RO 34건이고 dedupe 후 117건 중 102건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Generation 20편, Foundation Models 16편, Robot Learning 15편입니다. Generation 20편, Foundation Models 16편, Robot Learning 15편, Efficiency/Systems 14편, Autonomous Driving 13편이 크지만, robotics 관점의 공통 축은 model family가 아니라 state contract, recovery data, embodiment-aware safety, and trajectory-level evidence audit입…]]></description>
-    </item>
-    <item>
-      <title>2026-07-22 심층판</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-22-research-intelligence.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-22-research-intelligence.html</guid>
-      <pubDate>Wed, 22 Jul 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[7월 22일 배치의 강한 신호는 robotics foundation model 연구가 모델 출력 자체보다 실행 계약을 어떻게 명시하고 검증할지로 이동했다는 점입니다. Masked Visual Actions와 WorldScape Policy 2.0은 action을 token이 아니라 visual trajectory, event memory, latent subgoal state로 바꿔 world model이 실행 가능성을 예측하게 만듭니다. Agentic Real2Sim은 실제 episode를 simulator twin으로 바꾸려면 geometry뿐 아니라 object state, physical prior, critic loop가 필요하다고 보고, OREN-Bubble*…]]></description>
     </item>
   </channel>
 </rss>
