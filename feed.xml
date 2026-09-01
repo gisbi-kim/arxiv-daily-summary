@@ -6,8 +6,22 @@
     <atom:link href="https://gisbi-kim.github.io/arxiv-daily-summary/feed.xml" rel="self" type="application/rss+xml" />
     <description>cs.CV · cs.RO arXiv new submissions, bucketed by lab ROI (3D/Scene, Robot Learning, Autonomous Driving, Foundation Models, Generation, Efficiency, Embodied AI, Safety). Daily briefing with insights and cross-domain contrast.</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 31 Aug 2026 15:08:56 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2026 15:11:08 +0900</lastBuildDate>
     <ttl>720</ttl>
+    <item>
+      <title>2026-09-01 arXiv Research Intelligence</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-09-01-research-intelligence.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-09-01-research-intelligence.html</guid>
+      <pubDate>Tue, 01 Sep 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[arXiv Daily Briefing 2026-09-01]]></description>
+    </item>
+    <item>
+      <title>arXiv Daily Briefing — 2026-09-01 (Tue)</title>
+      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-09-01.html</link>
+      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-09-01.html</guid>
+      <pubDate>Tue, 01 Sep 2026 09:00:00 +0900</pubDate>
+      <description><![CDATA[오늘 /new는 cs.CV 316건, cs.RO 88건이고 dedupe 후 386건 중 311건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Generation 58편, Foundation Models 53편, 3D/Scene 47편입니다. Tuesday /new produced 386 deduplicated non-replacement papers and 311 ROI papers. Generation and Foundation Models are large buckets, but the APRL signal is the convergence of metric geometry, evidence-eligible VLA updates, tactile/contact infras…]]></description>
+    </item>
     <item>
       <title>2026-08-31 arXiv Research Intelligence</title>
       <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-08-31-research-intelligence.html</link>
@@ -413,20 +427,6 @@
       <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-24-research-intelligence.html</guid>
       <pubDate>Fri, 24 Jul 2026 09:00:00 +0900</pubDate>
       <description><![CDATA[오늘 배치의 공통 신호는 로봇 foundation model 연구가 모델 크기보다 실행 계약을 어떻게 검증할지로 이동했다는 점입니다. HyWorldVLA는 pixel world model과 latent world model의 장단점을 hybrid supervision으로 묶고, Scale Up Strategically와 AXIS는 robot data scaling을 무작정 더 모으는 문제가 아니라 bias factor와 growable benchmark snapshot을 설계하는 문제로 바꿉니다. FORGE-plus는 frozen LLM을 force authority가 아니라 slow supervisory budget으로 제한하고, GLAM-SLAM과 HGeo-TopoM…]]></description>
-    </item>
-    <item>
-      <title>arXiv Daily Briefing — 2026-07-24 (Fri)</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-24.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-24.html</guid>
-      <pubDate>Fri, 24 Jul 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 /new는 cs.CV 107건, cs.RO 35건이고 dedupe 후 135건 중 117건이 ROI 버킷에 걸렸습니다. 상위 버킷은 Generation 23편, Safety/Alignment 19편, 3D/Scene 16편입니다. Generation 23편, Safety/Alignment 19편, 3D/Scene과 Robot Learning이 각각 16편으로 크지만, robotics 관점의 공통 축은 bucket 크기가 아니라 hybrid world-state contract, bias-aware data scaling, robot-usable geometry, bounded supervision입니다.]]></description>
-    </item>
-    <item>
-      <title>2026-07-23 심층판</title>
-      <link>https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-23-research-intelligence.html</link>
-      <guid isPermaLink="true">https://gisbi-kim.github.io/arxiv-daily-summary/posts/2026-07-23-research-intelligence.html</guid>
-      <pubDate>Thu, 23 Jul 2026 09:00:00 +0900</pubDate>
-      <description><![CDATA[오늘 배치의 공통 신호는 로봇 foundation model 연구가 더 큰 backbone보다 실행 상태를 어떻게 만들고, 검증하고, 실패 후 다시 들어올지를 묻기 시작했다는 점입니다. KineBench와 PerceptDrive는 video/world-action model을 pixel score가 아니라 kinematic grounding, trajectory metric, expert routing으로 판정합니다. EgoRecovery와 LENS는 더 많은 성공 demo를 모으는 대신 failure state, corrective intent, task-relevant scene abstraction을 훈련 신호로 바꿉니다. NavVerse와 EA-Nav는 navig…]]></description>
     </item>
   </channel>
 </rss>

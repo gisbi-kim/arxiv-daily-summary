@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-09-01 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-09-01 arXiv Research Intelligence</h1>
+<p class="lead">The September 1 batch turns perception and robot learning into release-contract design. Geometry papers ask whether a representation can preserve metric state, topology, temporal order, and optical failure information well enough for a robot to act. VLA and driving papers expose a different failure: high-scoring demonstrations, traffic-rule averages, or stream samples can push a policy update away from safe behavior unless the update is made eligible by the right evidence. Tactile and dexterous world-model papers make contact sensing and visuo-tactile data infrastructure first-class assets. VLM papers move from global visual tokens to state-conditioned evidence retrieval, while robustness papers separate nuisance shift, compression loss, calibration attack, and dense-prediction structure before deployment claims are trusted. APRL's opening is to own the evaluation harness where geometry, contact, memory, and evidence gates decide when an autonomous system may continue.</p><p class="scope">Daily edition from matching Tuesday /new listings: 316 non-replacement cs.CV rows, 88 cs.RO rows, 386 deduplicated papers, and 311 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claims are asserted.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>Geometry must survive action use</h3><p>SkyReg, ReconSplat, RoSe-SLAM, OptiGeo, SeqAlign3DVG, and VISTA all reject the idea that a visually plausible 3D product is enough; each makes coordinate alignment, dynamic mapping, ordered grounding, optical degradation, or missing depth an action-facing variable.</p></article><article><span>Decision</span><h3>Policy updates need eligibility evidence</h3><p>Multi-trajectory VLA driving, RedLight-VLA, FrameScope, AdaptAV, InfraOcc, and Driving on Memory all ask which rare event, stream frame, oracle label, static scaffold, or memory variable should be allowed to change a policy before the next deployment decision.</p></article><article><span>Decision</span><h3>Embodiment needs contact assets</h3><p>Haptic Foundation Models, N0-Foundation, Motus2, AnyWorld, sliding palpation, and tactile sensors move robot learning away from vision-only imitation and toward reusable contact data, tactile representations, and world-model interfaces that can be inspected after failure.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.28891" target="_blank" rel="noopener">Pixel-wise Geo-registration of Drone and Satellite Images</a></h3>
+  <p class="fit">dense geo-registration - drone/satellite alignment - metric map supervision</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Cross-view localization is often judged by one GPS coordinate for a whole image.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says that single-coordinate labels leave dense geodetic alignment underexplored even when every pixel may need a real-world location.</p></div>
+    <div><h4>Hidden premise</h4><p>A robot or UAV map is actionable only if image evidence remains aligned at the pixel and coordinate-frame level.</p></div>
+    <div><h4>Conceptual move</h4><p>Move cross-view localization from image-level retrieval to pixel-wise geo-registration with dense supervision.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Existing benchmarks largely provide only GPS labels, limiting evaluation to one coordinate per image.</span></li><li><strong>[Abstract]</strong><span>SkyReg provides dense per-pixel geo-location supervision for drone-to-satellite registration.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate aerial mapping by downstream route and relocalization error, not image retrieval alone.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes SkyReg as a dataset and benchmark with per-pixel geo-location supervision across orthographic, perspective, urban, rural, and mixed settings.</p></div>
+    <div><h4>Falsification frontier</h4><p>If dense pixel alignment does not improve route reuse or relocalization under viewpoint changes, the benchmark may be over-serving map aesthetics.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress repetitive roads, altitude changes, partial occlusion, and weather differences where image-level retrieval can appear correct while local alignment fails.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask whether each pixel can be put into the coordinate system used by navigation.</p><p>Strong for UAV and outdoor mapping; less direct for indoor manipulation without a global geodetic frame.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.29003" target="_blank" rel="noopener">RoSe-SLAM: Robust Semantic-Aware Gaussian Splatting SLAM from Dynamic Monocular Videos</a></h3>
+  <p class="fit">Gaussian SLAM - dynamic scenes - semantic tracking and mapping</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Many SLAM and Gaussian mapping systems assume static scene structure when fusing observations.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says conventional SLAM accuracy degrades in dynamic and unstructured environments because static assumptions fail.</p></div>
+    <div><h4>Hidden premise</h4><p>Semantic features from foundation models can identify which visual evidence should influence tracking and mapping in dynamic scenes.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn Gaussian Splatting SLAM into a semantic-aware dynamic-scene filtering and reconstruction problem.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies dynamic and unstructured scenes as a source of SLAM degeneration.</span></li><li><strong>[Abstract]</strong><span>RoSe-SLAM uses semantic scene understanding from uncalibrated monocular inputs.</span></li><li><strong>[Inference]</strong><span>APRL should treat map updates as decisions that can reject transient or dynamic evidence.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes distilling semantic features from a 2D foundation model to enhance dynamic tracking and mapping performance.</p></div>
+    <div><h4>Falsification frontier</h4><p>If semantic filtering preserves visual quality but not camera tracking or relocalization under dynamic objects, the action-facing claim is weak.</p></div>
+    <div><h4>Adversarial read</h4><p>Use moving people, repeated texture, and temporary occluders to test whether semantic updates prevent map corruption rather than only clean renderings.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A map update is a controlled action, not passive accumulation.</p><p>Direct for mobile robots and dynamic mapping; weaker for static object scans where transient evidence is absent.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.30122" target="_blank" rel="noopener">Aligning Multi-Trajectory Supervision with Policy Optimization for VLA Driving</a></h3>
+  <p class="fit">VLA driving - multi-trajectory supervision - GRPO alignment</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Multi-trajectory imitation treats high-scoring candidate futures as broadly useful supervision for a driving policy.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says some high-scoring trajectories can degrade later GRPO because their advantage estimates are misaligned with what the current policy can safely realize.</p></div>
+    <div><h4>Hidden premise</h4><p>A demonstration should become policy supervision only when it is feasible under the current policy distribution and safe-behavior constraints.</p></div>
+    <div><h4>Conceptual move</h4><p>Move VLA driving supervision from best-looking trajectory selection to policy-optimization-aligned eligibility.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>High-scoring trajectories can induce advantage estimates misaligned with the current policy's feasible behavior distribution.</span></li><li><strong>[Abstract]</strong><span>The paper proposes aligning multi-trajectory supervision with policy optimization.</span></li><li><strong>[Inference]</strong><span>APRL should test whether selected demonstrations change safe recovery behavior, not only imitation loss.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract frames the method as correcting policy-gradient bias induced by infeasible noisy trajectories.</p></div>
+    <div><h4>Falsification frontier</h4><p>If alignment improves only benchmark reward but not rare unsafe maneuver recovery, it may still be optimizing the wrong eligibility signal.</p></div>
+    <div><h4>Adversarial read</h4><p>Construct visually plausible but infeasible trajectory candidates at intersections and measure policy drift from safe compliant behavior.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A good demonstration is not automatically a good policy update.</p><p>Strong for VLA driving and robot policies trained with multiple candidate futures; less direct for deterministic expert demonstrations.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.28656" target="_blank" rel="noopener">RedLight-VLA: Models for traffic-rule grounding and behavioral emphasis in driving policies</a></h3>
+  <p class="fit">traffic-rule grounding - rare maneuver weighting - VLA driving</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Behavior cloning averages trajectory loss over common driving behavior, so rare rule-governed events can be underweighted.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says braking and launching at signalized intersections contribute little to averaged trajectory loss and fused representations lack explicit traffic-light and stop-line supervision.</p></div>
+    <div><h4>Hidden premise</h4><p>Rare legal maneuvers need explicit behavioral emphasis and perception targets even when manual rule annotation is unavailable.</p></div>
+    <div><h4>Conceptual move</h4><p>Reframe driving VLA training around rare traffic-rule state and longitudinal behavior rather than average trajectory fit.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Behavior-cloned VLA driving policies struggle with rare rule-governed maneuvers at signalized intersections.</span></li><li><strong>[Abstract]</strong><span>The method emphasizes rare deceleration and acceleration using trajectory-derived behavioral reweighting.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether rule evidence changes the policy before a red-light violation, not after a final score.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes trajectory-derived behavioral reweighting and generated perception targets for governing traffic-light and stop-line state.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the reweighting helps only canonical intersections and fails on occluded or unusual signal layouts, it may memorize scenario templates.</p></div>
+    <div><h4>Adversarial read</h4><p>Vary stop-line visibility, traffic-light phase ambiguity, lead-vehicle motion, and launch timing while measuring violation-before-action signals.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Make rare rule states loud enough to compete with average imitation loss.</p><p>Direct for driving policies; transferable to manipulation only when rare safety states can be derived from trajectory structure.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.29601" target="_blank" rel="noopener">$\mathcal{N}_0$-Foundation: Towards the Age of Tactile Intelligence</a></h3>
+  <p class="fit">tactile foundation model - data infrastructure - embodied manipulation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Generalist robot learning often treats touch as an auxiliary sensor behind vision and language.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says tactile-enabled embodied manipulation needs sensing hardware, large-scale multimodal data, tactile representation learning, and standardized evaluation together.</p></div>
+    <div><h4>Hidden premise</h4><p>Touch becomes a foundation-model substrate only when hardware, data collection, representation learning, and benchmarks are co-designed.</p></div>
+    <div><h4>Conceptual move</h4><p>Move tactile manipulation from task-specific sensing to an integrated tactile intelligence infrastructure.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper integrates tactile sensing hardware, large-scale multimodal data, tactile representation learning, and standardized evaluation.</span></li><li><strong>[Abstract]</strong><span>It reports NeoData with synchronized visual and tactile data across robot embodiments and UMI demonstrations.</span></li><li><strong>[Inference]</strong><span>APRL should treat tactile data as a reusable asset with contact-failure labels, not an add-on sensor stream.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a vision-based tactile sensor, tactile UMI, synchronized visuo-tactile collection, NeoData, and standardized evaluation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If tactile representations do not separate visually identical contact states, the infrastructure may not justify its collection cost.</p></div>
+    <div><h4>Adversarial read</h4><p>Use transparent, deformable, slippery, and small industrial components where visual features are ambiguous but contact traces should differ.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask what touch can disambiguate that vision cannot observe.</p><p>Strong for contact-rich manipulation and inspection; weaker for navigation tasks with sparse physical contact.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.30237" target="_blank" rel="noopener">Motus2: A Self-Evolving General World Model for Dexterous Manipulation</a></h3>
+  <p class="fit">dexterous manipulation - self-evolving world model - policy/simulator/evaluator loop</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>World models are often used as simulators with an action head appended afterward.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says existing models typically append action output to a world simulator without coupling perception, prediction, action, evaluation, and improvement into a closed decision-and-learning loop.</p></div>
+    <div><h4>Hidden premise</h4><p>A manipulation world model is more useful when policy, simulator, and evaluator share a loop that can improve from its own interaction evidence.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn the world model from a rollout generator into a self-evolving manipulation system with multiple control interfaces.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>General embodied agents should perceive, predict, act, evaluate, and improve within a unified system.</span></li><li><strong>[Abstract]</strong><span>Motus2 exposes policy, simulator, and evaluation interfaces in one self-evolving world model.</span></li><li><strong>[Inference]</strong><span>APRL should score whether evaluator feedback changes later dexterous behavior, not only video prediction quality.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes shared-weight interfaces for policy, action-conditioned simulation, and evaluation, plus model and data scaling.</p></div>
+    <div><h4>Falsification frontier</h4><p>If self-evolution improves simulated rollouts but not contact-rich real or held-out manipulation, the evaluator may reinforce simulator shortcuts.</p></div>
+    <div><h4>Adversarial read</h4><p>Use object slip, hidden contact, and tactile-only disambiguation where visual rollouts can look correct while manipulation fails.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>World models should leave an inspectable improvement trace after each failed action.</p><p>Strong for dexterous manipulation; less direct for perception-only systems without action feedback.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.29114" target="_blank" rel="noopener">CGFM-Nav: Cognitive Graph-Field Memory for Semantic-Guided Lifelong Multimodal Embodied Navigation</a></h3>
+  <p class="fit">lifelong navigation - graph-field memory - semantic retrieval and exploration</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Navigation systems often separate explicit semantic memory from continuous spatial exploration guidance.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says current environment representations struggle to jointly support accumulated observations, target retrieval, and continuous exploration in unseen regions.</p></div>
+    <div><h4>Hidden premise</h4><p>Long-horizon navigation needs a memory substrate that is both relational and spatially continuous.</p></div>
+    <div><h4>Conceptual move</h4><p>Represent navigation memory as a coupled multimodal scene graph and continuous graph field.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>VLN requires agents to reason over accumulated observations while exploring unseen regions.</span></li><li><strong>[Abstract]</strong><span>CGFM couples explicit relational memory with continuous spatial intuition.</span></li><li><strong>[Inference]</strong><span>APRL should test whether memory improves recovery after revisiting changed or ambiguous spaces.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes organizing objects, spatial relations, and visual observations into a persistent scene representation for target retrieval and long-horizon reasoning.</p></div>
+    <div><h4>Falsification frontier</h4><p>If graph-field memory improves only target lookup but not route recovery under changed layouts, it is not enough for lifelong deployment.</p></div>
+    <div><h4>Adversarial read</h4><p>Evaluate repeated visits, moved objects, misleading semantic priors, and dead-end exploration where old memory can become harmful.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Navigation memory should be scored by recovery value, not storage completeness.</p><p>Strong for VLN/ObjectNav and field robots; weaker for one-shot paths with no revisits.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.28698" target="_blank" rel="noopener">State-Conditioned Visual Evidence Retrieval for Fine-Grained Perception in Document Vision-Language Models</a></h3>
+  <p class="fit">VLM evidence retrieval - decoding-state conditioning - document perception</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Document VLMs repeatedly access globally compressed visual tokens while decoding fine-grained answers.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says visual evidence for each prediction is localized and conditioned on the current decoding state, but current representations are accessed in full every step.</p></div>
+    <div><h4>Hidden premise</h4><p>A perception system should retrieve only the evidence that can change the current prediction state.</p></div>
+    <div><h4>Conceptual move</h4><p>Formulate fine-grained perception as state-conditioned retrieval instead of global visual-token reuse.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Document parsing demands fine-grained visual perception beyond typical vision-language tasks.</span></li><li><strong>[Abstract]</strong><span>Visual evidence for each prediction is localized and conditioned on current decoding state.</span></li><li><strong>[Inference]</strong><span>APRL can reuse this idea for robot perception queries where only some cues are action-changing.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes retrieving visual evidence conditioned on the current decoding state for document parsing.</p></div>
+    <div><h4>Falsification frontier</h4><p>If state-conditioned retrieval saves compute but misses rare safety cues, the evidence policy is efficient but unsafe.</p></div>
+    <div><h4>Adversarial read</h4><p>Test cluttered labels, visually similar objects, and action preconditions where a small missed region flips the decision.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Evidence value is conditional on the decision currently being made.</p><p>Direct for fine-grained VLM parsing and robot grounding; less direct for dense regression without discrete prediction states.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#9</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.29374" target="_blank" rel="noopener">Think, Look, and Revise: Inconsistency-Aware Visual Self-Correction in MLLMs</a></h3>
+  <p class="fit">MLLM self-correction - tool verification - inconsistency detection</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Tool-augmented multimodal reasoning often trusts external tool outputs as if they were reliable evidence.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says existing approaches rarely verify tool outputs, limiting their ability to detect and recover from perceptual tool failures.</p></div>
+    <div><h4>Hidden premise</h4><p>A visual reasoning system needs a separate inconsistency signal before it can safely revise a tool-supported answer.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn visual self-correction into a loop that detects inconsistency between model reasoning, visual evidence, and tool outputs.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Existing tool-augmented approaches rarely verify tool outputs.</span></li><li><strong>[Abstract]</strong><span>The paper proposes inconsistency-aware visual self-correction.</span></li><li><strong>[Inference]</strong><span>APRL should require robot VLM agents to localize which evidence or tool output triggered revision.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes ReVISE as an inconsistency-aware framework for multimodal reasoning with external tools.</p></div>
+    <div><h4>Falsification frontier</h4><p>If revisions mainly follow model confidence rather than visual inconsistency, the system may still be self-reporting uncertainty.</p></div>
+    <div><h4>Adversarial read</h4><p>Inject depth, detector, and OCR tool errors that are plausible but action-critical, then measure whether the agent revises before acting.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Do not repair a decision until the inconsistent evidence has a name.</p><p>Strong for tool-using VLM agents; weaker for closed-form perception modules without external tool calls.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#10</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2608.29112" target="_blank" rel="noopener">NFAD: Nuisance-Filtered Anomaly Detection Under Distribution Shift</a></h3>
+  <p class="fit">anomaly detection - nuisance shift - deployment reliability</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Industrial anomaly detection benchmarks often assume controlled acquisition conditions and near-saturated benchmark performance.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says illumination, background, viewpoint, and other environmental shifts can move normal samples away from the learned normal distribution and cause false anomaly responses.</p></div>
+    <div><h4>Hidden premise</h4><p>A deployment-ready anomaly detector must separate defect evidence from nuisance variation before raising an alarm.</p></div>
+    <div><h4>Conceptual move</h4><p>Reframe anomaly detection under distribution shift as nuisance filtering in feature space.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Strong benchmark performance does not necessarily transfer to real-world deployment.</span></li><li><strong>[Abstract]</strong><span>Environmental factors can shift normal samples and cause false anomaly responses.</span></li><li><strong>[Inference]</strong><span>APRL should separate environmental nuisance from physical failure before using anomaly alarms as robot release gates.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes explicitly modeling nuisance variation from changing imaging conditions without source data or target labels.</p></div>
+    <div><h4>Falsification frontier</h4><p>If nuisance filtering suppresses real defects under coupled lighting and geometry changes, the alarm becomes safer-looking but less useful.</p></div>
+    <div><h4>Adversarial read</h4><p>Pair true small defects with illumination, viewpoint, and background shifts to test false suppression and false alarm trade-offs.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>An alarm should say what changed: the world, the sensor, or the object.</p><p>Direct for inspection and safety gates; less direct for policy learning unless alarms control action permission.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Metric and semantic geometry are converging</h3><p class='links'>SkyReg - ReconSplat - RoSe-SLAM - OptiGeo - SeqAlign3DVG</p><p><strong>Observed</strong> - The abstracts expose dense geo-registration, unobserved-view reconstruction, dynamic semantic Gaussian SLAM, optical depth failures, and temporally aligned 3D grounding.</p><p><strong>Inference</strong> - The shared decision is to score geometry by whether a later robot state, route, grounding decision, or map update remains valid.</p></article><article><h3>Robot updates now require evidence eligibility</h3><p class='links'>VLA driving - RedLight-VLA - FrameScope - AdaptAV - Driving on Memory</p><p><strong>Observed</strong> - The papers identify infeasible trajectories, rare traffic-rule events, temporally valuable stream frames, cloud oracle retraining, and memory variables as update selectors.</p><p><strong>Inference</strong> - APRL should benchmark not only whether adaptation helps, but which evidence is allowed to change the deployed policy.</p></article><article><h3>Contact, memory, and alarms are becoming durable lab assets</h3><p class='links'>N0-Foundation - Motus2 - CGFM-Nav - state-conditioned retrieval - NFAD</p><p><strong>Observed</strong> - The batch includes tactile data infrastructure, self-evolving dexterous world models, persistent navigation memory, conditional evidence retrieval, and nuisance-filtered anomaly detection.</p><p><strong>Inference</strong> - The lab asset should be a reusable release-gate suite where contact traces, memory state, visual evidence, and nuisance labels explain failures before final success changes.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 24-31 repeatedly emphasized robot-usable geometry, execution diagnosis, world-model memory, and external safety gates.</p><p>September 1 strengthens that axis with dense geo-registration, dynamic Gaussian SLAM, optic-failure depth, tactile infrastructure, and state-conditioned VLM evidence retrieval.</p></article><article><span>New signal</span><p class='history'>Recent editions discussed VLA and world-model memory mostly through visual or language evidence.</p><p>Today adds a stronger tactile/contact layer: N0-Foundation, Haptic Foundation Models, sliding palpation, and compact tactile sensors frame touch as infrastructure rather than an accessory.</p></article><article><span>Commoditizing</span><p class='history'>Compression, cache acceleration, and efficient perception have appeared throughout the last four weeks.</p><p>The differentiator is no longer smaller representations alone; it is whether compressed features preserve occupancy, event timing, semantic targets, and action-changing evidence.</p></article><article><span>Missing axis</span><p class='history'>The repo still tends to discuss geometry, VLA adaptation, tactile sensing, and anomaly gates as separate opportunities.</p><p>APRL can own their intersection: a release protocol where map state, tactile contact, memory, and evidence retrieval jointly decide whether to act or adapt.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Metric-state geometry release suite</h3><p class="thesis">Make drone, SLAM, optical-depth, and 3D grounding systems prove that their geometry remains usable for route, grasp, and relocalization decisions.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 5</span><span>timing 5</span><span>tractability 4</span><span>defensibility 5</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Build a small set of drone-satellite, dynamic indoor, transparent-object, and ordered 3D grounding probes with known metric perturbations.</p></div>
+    <div><strong>4-week build</strong><p>Compare geo-registration, Gaussian SLAM, feed-forward reconstruction, monocular depth, and 3D grounding on downstream route reuse, grasp error, and relocalization.</p></div>
+    <div><strong>Success metric</strong><p>At least one method ranking reverses when judged by downstream robot state error instead of reconstruction or answer score.</p></div>
+    <div><strong>Stop condition</strong><p>If all downstream decisions track ordinary reconstruction metrics under every perturbation, narrow the suite to dynamic-scene SLAM only.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Dense geo labels, dynamic-map clips, transparent-object depth cases, ordered 3D grounding sequences, perturbation scripts, and robot-state outcomes.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 28/30</span></div>
+  <h3>Contact-state foundation asset</h3><p class="thesis">Treat tactile foundation models and dexterous world models as a shared contact-state dataset and evaluator rather than a collection of sensors.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 5</span><span>timing 5</span><span>tractability 3</span><span>defensibility 5</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Capture a small visuo-tactile manipulation set with transparent, deformable, slippery, and sub-centimetre components under paired visual aliases.</p></div>
+    <div><strong>4-week build</strong><p>Evaluate tactile representations, dexterous world-model feedback, real-to-sim demonstration generation, and tactile anomaly detectors on the same contact-failure labels.</p></div>
+    <div><strong>Success metric</strong><p>Tactile/contact state predicts or separates at least two failures that a vision-only policy treats as identical.</p></div>
+    <div><strong>Stop condition</strong><p>If contact traces add no predictive value beyond visual geometry and force thresholds, keep tactile sensing for narrow inspection tasks only.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Synchronized video, tactile imprints, contact labels, visual aliases, digital-twin variants, and failure-to-recovery traces.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 27/30</span></div>
+  <h3>Evidence-eligible autonomy update gate</h3><p class="thesis">Before a driving or robot policy adapts, identify which rare rule state, stream frame, oracle label, memory variable, or nuisance-filtered alarm makes the update safe.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 4</span><span>timing 5</span><span>tractability 4</span><span>defensibility 4</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create paired driving and manipulation episodes where candidate updates are supported by different evidence sources but lead to conflicting action changes.</p></div>
+    <div><strong>4-week build</strong><p>Compare trajectory eligibility, rare-rule reweighting, stream active learning, cloud-oracle adaptation, state-conditioned retrieval, and nuisance-filtered alarms in one update protocol.</p></div>
+    <div><strong>Success metric</strong><p>The protocol rejects at least one high-scoring but unsafe update and accepts one rare-event update that improves recovery.</p></div>
+    <div><strong>Stop condition</strong><p>If update eligibility collapses to final reward or confidence, split adaptation from safety gating and publish the negative result.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Candidate trajectories, rare-rule labels, stream valuation metadata, oracle disagreements, memory states, nuisance labels, and before-action decisions.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-09-01.json">intelligence/2026-09-01.json</a>.</footer>
+</body></html>
