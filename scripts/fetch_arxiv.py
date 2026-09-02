@@ -16,6 +16,7 @@ import io
 import json
 import re
 import sys
+import time
 import urllib.request
 import html as htmllib
 
@@ -28,7 +29,16 @@ UA = "Mozilla/5.0 (arxiv-daily-summary helper)"
 
 
 def fetch(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    sep = "&" if "?" in url else "?"
+    fresh_url = f"{url}{sep}_={int(time.time())}"
+    req = urllib.request.Request(
+        fresh_url,
+        headers={
+            "User-Agent": UA,
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        },
+    )
     with urllib.request.urlopen(req, timeout=60) as r:
         return r.read().decode("utf-8", errors="replace")
 

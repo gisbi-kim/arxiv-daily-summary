@@ -15,6 +15,7 @@ import io
 import json
 import re
 import sys
+import time
 import urllib.request
 
 from fetch_arxiv import parse_papers
@@ -30,7 +31,16 @@ SECTION_RE = re.compile(r"<h3[^>]*>(.*?)</h3>", re.I | re.S)
 
 
 def fetch(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    sep = "&" if "?" in url else "?"
+    fresh_url = f"{url}{sep}_={int(time.time())}"
+    req = urllib.request.Request(
+        fresh_url,
+        headers={
+            "User-Agent": UA,
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        },
+    )
     with urllib.request.urlopen(req, timeout=60) as r:
         return r.read().decode("utf-8", errors="replace")
 

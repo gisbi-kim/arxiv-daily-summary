@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-09-02 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-09-02 arXiv Research Intelligence</h1>
+<p class="lead">The September 2 batch moves autonomy from model capability claims to evidence contracts at the moment of action. Geometry papers ask when a 3D map, scene graph, or correspondence set is fresh enough to support navigation and manipulation. VLA papers break monolithic action emission into typed motor programs, prerequisite checks, adaptive chunk stops, and contact-valued actions. Driving papers replace rare-object recognition with counterfactual action permission and long-horizon risk. VLM papers expose whether the model actually used the visual evidence, while streaming and compression papers ask when to spend more tokens, bandwidth, or compute. APRL's opening is to own the test harness that decides whether geometry, memory, contact, and evidence are sufficient before a robot adapts or acts.</p><p class="scope">Daily edition from matching Wednesday /new listings: 152 non-replacement cs.CV rows, 50 cs.RO rows, 197 deduplicated papers, and 167 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claims are asserted unless the abstract itself states them.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>3D state needs freshness gates</h3><p>VOIM, DSG, HitMem, On-the-Fly3R, and adaptive bundle adjustment all treat mapping as a decision about accumulated evidence, stale memory, dynamic objects, or correspondence risk.</p></article><article><span>Decision</span><h3>VLA execution needs typed contracts</h3><p>REFACTOR-VLA, EmbodiedSkills, adaptive action chunking, Facet-0, and negation-constrained grasping ask what abstraction, prerequisite, stop signal, or contact consequence makes an action executable.</p></article><article><span>Decision</span><h3>VLM answers need evidence tests</h3><p>VeriOCRBench, the Visual Insensitivity Gap, visual-origin hallucination diagnostics, scale equivariance, render ceilings, and StreamScout separate answer fluency from evidence use.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.00775" target="_blank" rel="noopener">VOIM: Training-Free Open-Vocabulary 3D Instance Mapping for RGB-D and Monocular SLAM</a></h3>
+  <p class="fit">open-vocabulary 3D instance mapping - deferred labels - voxel evidence accumulation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Online open-vocabulary mapping often labels instances at first detection, when view evidence is sparse.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says first-detection commitment is weak and that room scale becomes label-limited while building scale becomes drift-limited.</p></div>
+    <div><h4>Hidden premise</h4><p>A map label should be committed only after enough multi-view voxel evidence has accumulated for the robot's operating scale.</p></div>
+    <div><h4>Conceptual move</h4><p>Move open-vocabulary SLAM from instant 2D label projection to deferred voxel-grounded instance management.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>VOIM defers label and instance decisions until multi-view voxel evidence accumulates.</span></li><li><strong>[Abstract]</strong><span>The paper reports stronger ScanNet++ mIoU than OVO-SLAM under several perception configurations.</span></li><li><strong>[Inference]</strong><span>APRL should treat semantic map labels as release decisions rather than passive annotations.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes accumulating soft evidence from off-the-shelf perception per voxel across views, then resolving free-form queries to object instances.</p></div>
+    <div><h4>Falsification frontier</h4><p>If deferred labels do not improve downstream object retrieval or navigation under drift, the mapping gain may stay semantic rather than robot-usable.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress repetitive objects, room-to-building scale drift, monocular-only operation, and query classes that require fine part boundaries.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Delay semantic commitment until the map has accumulated action-relevant evidence.</p><p>Direct for open-vocabulary navigation maps; weaker for short-horizon manipulation where labels are verified by contact.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.00950" target="_blank" rel="noopener">HitMem: Hierarchical Temporal 3D Memory with Multi-Modal Context-Aware Retrieval for Dynamic Environments</a></h3>
+  <p class="fit">dynamic 3D memory - stale representation decay - object relocation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Embodied-agent memory frameworks often assume that mapped objects remain valid until globally re-explored.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says displaced objects cause memory-observation conflicts, costly geometric recomputation, and inefficient global re-exploration.</p></div>
+    <div><h4>Hidden premise</h4><p>Long-horizon memory is useful only if the agent can tell stale state from recoverable relocation hypotheses.</p></div>
+    <div><h4>Conceptual move</h4><p>Represent 3D memory as a temporal topological graph with decay and specialized retrieval when displacement is detected.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>HitMem uses temporal decay to regulate memory activeness and reduce stale representation impact.</span></li><li><strong>[Abstract]</strong><span>It reports improved relocation accuracy, exploration cost, and task execution on Dyna-THOR.</span></li><li><strong>[Inference]</strong><span>APRL should score memory by recovery value after scene change, not by map completeness.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes semantic, spatial, and temporal memory features plus a two-stage retrieval process using trajectory constraints and class affinities.</p></div>
+    <div><h4>Falsification frontier</h4><p>If retrieval succeeds only in simulator-style object moves and fails under real partial observations, the memory contract is too narrow.</p></div>
+    <div><h4>Adversarial read</h4><p>Move objects without direct observation, add semantic distractors, and vary revisit delay to test stale-memory rejection.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A memory item should expire unless it still helps a later action.</p><p>Strong for lifelong ObjectNav and mobile manipulation; less direct for one-shot tasks without revisits.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.01215" target="_blank" rel="noopener">REFACTOR-VLA: Unsupervised Library Learning of Typed Motor Programs</a></h3>
+  <p class="fit">typed motor programs - behavioral equivalence - reusable VLA skills</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Many VLA models emit raw actions or short chunks without reusable abstractions, making long-horizon behavior hard to interpret.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says existing skill-discovery methods avoid the hard question of when two action sequences are behaviorally equivalent for the robot.</p></div>
+    <div><h4>Hidden premise</h4><p>A useful skill library must preserve return and compress behavior only when rollout-equivalence supports the abstraction.</p></div>
+    <div><h4>Conceptual move</h4><p>Learn typed motor-program fragments through a wake/sleep loop and admit abstractions through description-length and return-preservation gates.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Increasing the world model from 188M to 430M worsened performance on all four LIBERO suites.</span></li><li><strong>[Abstract]</strong><span>The sleep phase yields a real-LIBERO task-language library and rewrites sampled demonstrations.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate skill abstraction by behavioral equivalence and recovery value, not scale alone.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a Behavioral-Equivalence Kernel from learned world-model rollouts and a library-conditioned rectified-flow decoder.</p></div>
+    <div><h4>Falsification frontier</h4><p>If typed abstractions improve imitation metrics but fail under changed object geometry or task order, the library is syntactic rather than behavioral.</p></div>
+    <div><h4>Adversarial read</h4><p>Test whether admitted programs preserve return under unseen object layouts, partial failures, and reordered subgoals.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask when two action sequences are the same behavior for this robot.</p><p>Strong for long-horizon manipulation; weaker for reactive control where behavior equivalence is too local.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.01281" target="_blank" rel="noopener">EmbodiedSkills: A Unified Framework for Orchestrating, Training, and Deploying VLA Agents</a></h3>
+  <p class="fit">VLA orchestration - prerequisite checks - post-action verification</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Action prediction or model-generated skill selection is often treated as sufficient evidence for execution.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says long-horizon tasks need perception, planning, execution, verification, and recovery as physical state evolves.</p></div>
+    <div><h4>Hidden premise</h4><p>A VLA action should become executable only after prerequisites are checked and outcome verification is available.</p></div>
+    <div><h4>Conceptual move</h4><p>Treat each skill decision as an execution proposal inside a fixed shared executable-skill interface.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The runtime checks prerequisites before execution and verifies outcomes afterward.</span></li><li><strong>[Abstract]</strong><span>The framework records planning, execution, verification, and recovery events as structured trajectories.</span></li><li><strong>[Inference]</strong><span>APRL should separate skill proposal quality from execution permission and recovery quality.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract links high-level skill selection, bounded low-level VLA execution, post-action verification, and structured trajectory records.</p></div>
+    <div><h4>Falsification frontier</h4><p>If verification records do not predict or improve recovery on memory-dependent tasks, the agent layer may only document failures.</p></div>
+    <div><h4>Adversarial read</h4><p>Inject stale object state, invalid skill preconditions, and wrong recovery choices to test whether the interface rejects actions before harm.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Every skill call is a proposal that needs preconditions and an after-action audit.</p><p>Direct for VLA agents and skill-based manipulation; less direct for end-to-end reflex policies with no skill boundary.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.00908" target="_blank" rel="noopener">Knowing When to Stop: Adaptive Action Chunking via Internal Cross-Attention Dynamics in VLAs</a></h3>
+  <p class="fit">adaptive action chunking - internal attention entropy - online stop signal</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Fixed action chunks trade inference cost against accuracy and can keep executing after observations stop grounding the plan.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says long chunks become misaligned with newly observed states, while short chunks can create oscillatory behavior.</p></div>
+    <div><h4>Hidden premise</h4><p>The action expert's attention dynamics can reveal when the current observation no longer supports further open-loop execution.</p></div>
+    <div><h4>Conceptual move</h4><p>Use sustained high-entropy plateaus in action-to-observation cross-attention to truncate the execution horizon at inference time.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Cross-attention becomes dispersed and rises toward a plateau as prediction horizon extends.</span></li><li><strong>[Abstract]</strong><span>The method improves average task success over fixed-horizon and adaptive chunking baselines.</span></li><li><strong>[Inference]</strong><span>APRL should score when a policy stops, not only which action it emits.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a training-free stop mechanism using attention weights already computed by the policy.</p></div>
+    <div><h4>Falsification frontier</h4><p>If attention entropy reacts after physical contact failure has already begun, it is a post-hoc diagnostic rather than a useful stop signal.</p></div>
+    <div><h4>Adversarial read</h4><p>Use visually similar states with different contact constraints to test whether entropy tracks grounding or only sequence length.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A policy needs a grounded reason to continue open-loop execution.</p><p>Strong for chunked VLA manipulation; less direct for controllers with continuous state feedback at every command.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.01596" target="_blank" rel="noopener">Facet-0: A Robotic Foundation Model for Contact-Rich Precise Manipulation</a></h3>
+  <p class="fit">contact-rich manipulation - action-wrench proposals - precise assembly</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Precise manipulation is often evaluated by task progress or final pose without representing contact consequences explicitly.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says sub-millimeter assembly needs spatial precision, compliant interaction, and robustness to contact failures.</p></div>
+    <div><h4>Hidden premise</h4><p>A manipulation foundation model should predict the future wrench profile its action is expected to induce.</p></div>
+    <div><h4>Conceptual move</h4><p>Unify multimodal representation learning and RL around joint action-wrench proposals and contact-selective credit.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Facet-0 generates each action chunk with a future wrist-wrench profile.</span></li><li><strong>[Abstract]</strong><span>It reports 82 percent mean success on five sub-millimeter computer-assembly tasks.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate contact prediction as a first-class action-release variable.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes causal wrench history aligned with vision-language semantics, a distributional Action-Wrench Critic, and bounded on-robot adaptation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If wrench prediction helps only the reported assembly cells and fails on new fixtures, the contact representation may be task-specific.</p></div>
+    <div><h4>Adversarial read</h4><p>Hold visual progress constant while changing friction, insertion tolerance, and compliance to see whether contact value changes action choice.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat the expected contact consequence as part of the action.</p><p>Strong for force-sensitive assembly; weaker for free-space manipulation with sparse contact.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.00242" target="_blank" rel="noopener">CoLT-Drive: Counterfactual Long-Tail Benchmarking and Knowledge-Preserving Adaptation for Driving Affordance Prediction</a></h3>
+  <p class="fit">long-tail driving - counterfactual objects - decision-level affordance prediction</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Long-tail driving failures are commonly treated as rare-object recognition errors.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract argues the decision-critical question is whether an unusual object changes the ego vehicle's feasible high-level actions.</p></div>
+    <div><h4>Hidden premise</h4><p>A driving model should preserve open-world knowledge while adapting only the decision regimes where rare objects change affordance.</p></div>
+    <div><h4>Conceptual move</h4><p>Reframe long-tail driving as counterfactual meta-action prediction under otherwise fixed scenes.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>CoLT-Drive measures whether models predict acceptable longitudinal-lateral action pairs after rare-object insertion.</span></li><li><strong>[Abstract]</strong><span>KPA reports higher CoLT-Drive pair accuracy than pretrained and LoRA-SFT baselines.</span></li><li><strong>[Inference]</strong><span>APRL should ask whether a perception change actually changes feasible robot action.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a benchmark that inserts rare objects and a knowledge-preserving adaptation method with regime-aware LoRA experts.</p></div>
+    <div><h4>Falsification frontier</h4><p>If counterfactual inserts do not predict closed-loop intervention or collision outcomes, the affordance benchmark may remain image-level.</p></div>
+    <div><h4>Adversarial read</h4><p>Pair rare-object recognition with unchanged action, and ordinary-object recognition with action-critical context, to test false causal links.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Long-tail perception matters only when it changes the feasible action set.</p><p>Direct for driving and mobile robots; transferable to manipulation when counterfactual object state changes affordance.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.00232" target="_blank" rel="noopener">Beyond Blind Compliance: Benchmarking Task Verification in OCR Reasoning</a></h3>
+  <p class="fit">OCR reasoning reliability - invalid task detection - root-cause diagnosis</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>OCR-centric MLLM benchmarks often assume each visual question is valid and answerable.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says real tasks can contain illegible text, occluded evidence, nonexistent targets, contradictions, or missing variables.</p></div>
+    <div><h4>Hidden premise</h4><p>A multimodal model should verify whether image premise, text premise, and question define an executable task before answering.</p></div>
+    <div><h4>Conceptual move</h4><p>Separate OCR reasoning into task verification, root-cause diagnosis, and over-refusal measurement.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>VeriOCRBench contains 1,600 invalid tasks and 200 trap-free controls.</span></li><li><strong>[Abstract]</strong><span>Evaluating 15 MLLMs reveals blind compliance, diagnosis failures, and prompt-induced over-refusal.</span></li><li><strong>[Inference]</strong><span>APRL should require robot VLMs to reject invalid or under-evidenced action queries.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes VeriOCRBench with trap-injected invalid tasks across visual, contextual, factual, and logical dimensions.</p></div>
+    <div><h4>Falsification frontier</h4><p>If task verification raises over-refusal on valid robot instructions, safety improves at the expense of usable autonomy.</p></div>
+    <div><h4>Adversarial read</h4><p>Create action questions with missing visual targets, contradictory language, and partially occluded preconditions.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Before answering, verify that the task is executable from the available evidence.</p><p>Direct for document and text-rich visual reasoning; useful for robot instruction validation when evidence can be formalized.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#9</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.00868" target="_blank" rel="noopener">The Visual Insensitivity Gap: Diagnosing When Vision-Language Models Fail to Use Visual Evidence</a></h3>
+  <p class="fit">VLM visual evidence use - per-sample sensitivity - conditional abstention</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Aggregate multimodal accuracy assumes the model used the image evidence when producing an answer.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says blurring question-relevant regions can leave next-token distributions nearly unchanged on many samples.</p></div>
+    <div><h4>Hidden premise</h4><p>Reliability needs a sample-level measure of whether visual evidence can actually influence the language output.</p></div>
+    <div><h4>Conceptual move</h4><p>Define the Visual Sensitivity Index as a conditional diagnostic for vision-ignoring failure.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper reports visual insensitivity on 40 to 97 percent of samples across six VLMs and three benchmarks.</span></li><li><strong>[Abstract]</strong><span>Vision towers can distinguish perturbed images while answer tokens often barely change.</span></li><li><strong>[Inference]</strong><span>APRL should measure whether visual cues can veto a robot answer before the action is issued.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract compares perturbation sensitivity, model rankings, vision-tower probes, and answer-token changes across models and benchmarks.</p></div>
+    <div><h4>Falsification frontier</h4><p>If sensitivity does not predict unsafe action decisions, it should be an auxiliary alarm rather than a release gate.</p></div>
+    <div><h4>Adversarial read</h4><p>Blur or mask the exact region that justifies a grasp, turn, or inspection decision and measure whether the command changes.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Do not trust a visual answer until the relevant visual evidence can change it.</p><p>Strong for VLM decision gates; less direct for dense perception modules without language decoding.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#10</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.00291" target="_blank" rel="noopener">StreamScout: Learning When to Look Deeper for Streaming Video Understanding</a></h3>
+  <p class="fit">streaming video understanding - adaptive evidence escalation - token budget control</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Streaming systems often use a fixed-cost memory access procedure for every query.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says queries differ in the depth of visual evidence required, so memory access depth matters as much as memory content.</p></div>
+    <div><h4>Hidden premise</h4><p>A video agent should stop when current evidence is sufficient and escalate only when the question demands more visual context.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn streaming understanding into a stop-or-escalate cascade over timeline, recent frames, uniform look-back, and salient retrieval.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>StreamScout progressively augments a lightweight timeline with deeper visual views only when needed.</span></li><li><strong>[Abstract]</strong><span>It reports improved benchmark performance with reduced token use and faster answering on OVO-Bench.</span></li><li><strong>[Inference]</strong><span>APRL should score evidence escalation by action error avoided per token or second.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes distilling an empirical competence boundary and refining stopping behavior with reinforcement learning.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the stop policy misses rare safety cues, token savings become a deployment risk rather than efficiency.</p></div>
+    <div><h4>Adversarial read</h4><p>Use long robot videos where the decisive event is old, brief, or visually small, and measure premature-stop failures.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Evidence access has an action-dependent budget, not a fixed recipe.</p><p>Strong for long-video robot assistants; less direct for short episodes where all evidence fits in context.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#11</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.00188" target="_blank" rel="noopener">ZimaBlue: Evolving Generalizable World Action Models through Scalable Video Pre-training</a></h3>
+  <p class="fit">world action models - scalable video pretraining - slow-fast control</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Robot control generalization is limited by expensive action-labeled trajectories.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says egocentric videos contain broad physical experience but lack direct robot actions.</p></div>
+    <div><h4>Hidden premise</h4><p>Action-free video becomes useful for control only after it is grounded into a robot action representation and deployment branch.</p></div>
+    <div><h4>Conceptual move</h4><p>Use causal video pretraining, video-action mid-training, and target-robot specialization to build a world action model.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>ZimaBlue trains from human and robot egocentric video before robot-specific grounding.</span></li><li><strong>[Abstract]</strong><span>The abstract reports zero-shot real-robot success gains when scaling embodied video.</span></li><li><strong>[Inference]</strong><span>APRL should test whether video-pretrained dynamics improve contact and recovery, not just imitation.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a Slow world model for spatiotemporal representations and a Fast branch for 30 Hz action prediction.</p></div>
+    <div><h4>Falsification frontier</h4><p>If gains disappear on tasks where action semantics differ from human videos, scale may be memorizing visual priors.</p></div>
+    <div><h4>Adversarial read</h4><p>Compare unseen task transfer with matched visual appearance but different action consequences.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Video scale matters only after it is grounded into executable action variables.</p><p>Strong for manipulation with rich egocentric priors; weaker for sensors or embodiments absent from video pretraining.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Map state is becoming an update policy</h3><p class='links'>VOIM - DSG - HitMem - On-the-Fly3R - depth-map bundle adjustment</p><p><strong>Observed</strong> - The abstracts cover deferred instance labels, dynamic scene-graph updates, temporal memory decay, validation-rejection-retry for UAV reconstruction, and correspondence-free registration.</p><p><strong>Inference</strong> - The shared decision is to treat map updates and memory retrieval as release gates whose failure propagates into route, grasp, or localization decisions.</p></article><article><h3>VLA papers are exposing action contracts</h3><p class='links'>REFACTOR-VLA - EmbodiedSkills - adaptive action chunking - Facet-0 - NegGrasp</p><p><strong>Observed</strong> - The papers separately define behavioral equivalence, executable-skill prerequisites, attention-based stop signals, action-wrench consequences, and negation constraints.</p><p><strong>Inference</strong> - APRL should benchmark the interface that authorizes an action: skill type, prerequisite, stop signal, contact prediction, or forbidden-region evidence.</p></article><article><h3>Evidence use is replacing answer confidence</h3><p class='links'>VeriOCRBench - Visual Insensitivity Gap - visual-origin hallucination - StreamScout - AI traffic coding</p><p><strong>Observed</strong> - The batch tests invalid task detection, whether visual perturbations affect token distributions, hallucination boundaries, adaptive evidence escalation, and compressed visual-token payloads.</p><p><strong>Inference</strong> - Robot VLMs should be evaluated by whether the right evidence changes the action under a bounded resource budget.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>Late-August editions repeatedly emphasized robot-usable geometry, execution diagnosis, tactile/contact assets, and external release gates.</p><p>September 2 strengthens that direction with dynamic 3D memory, correspondence-free industrial registration, typed VLA programs, contact-valued actions, and evidence-use diagnostics.</p></article><article><span>New signal</span><p class='history'>Recent VLA notes focused on adaptation eligibility and memory, but less on whether action chunks themselves know when to stop.</p><p>Adaptive chunking and EmbodiedSkills make execution termination and prerequisite checking explicit variables rather than hidden runtime behavior.</p></article><article><span>Commoditizing</span><p class='history'>Visual token pruning and compression have appeared often in the last four weeks.</p><p>The differentiator is now the retained decision-changing evidence: spatial coverage, coarse geometry, query-specific memory, and grounded speculative decoding.</p></article><article><span>Missing axis</span><p class='history'>Geometry, VLA execution, and VLM evidence reliability are usually evaluated separately.</p><p>APRL can own their intersection by testing whether stale maps, invalid visual evidence, and contact uncertainty jointly veto actions.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Dynamic 3D memory freshness suite</h3><p class="thesis">Make semantic maps, scene graphs, and temporal memory prove that each update remains usable after object motion, drift, and partial observation.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 5</span><span>timing 5</span><span>tractability 4</span><span>defensibility 5</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Build a small indoor and workcell probe with moved objects, stale labels, correspondence ambiguity, and known route or grasp consequences.</p></div>
+    <div><strong>4-week build</strong><p>Compare voxel label deferral, dynamic scene graphs, temporal 3D memory, online UAV reconstruction checks, and depth-map registration on the same action outcomes.</p></div>
+    <div><strong>Success metric</strong><p>At least one method ranking reverses when judged by relocation, grasp, or relocalization instead of map or segmentation quality alone.</p></div>
+    <div><strong>Stop condition</strong><p>If stale-state perturbations do not change downstream action, narrow the suite to dynamic indoor scene graphs only.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Moved-object scenes, stale-map snapshots, correspondence ambiguity clips, route/grasp outcomes, and freshness labels.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 27/30</span></div>
+  <h3>Typed VLA execution contract</h3><p class="thesis">Separate VLA action emission into typed skill abstraction, prerequisite validity, adaptive stop timing, and predicted contact consequence.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 4</span><span>timing 5</span><span>tractability 4</span><span>defensibility 4</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Run paired LIBERO/RoboTwin tasks where the same current observation requires different chunk lengths, forbidden contacts, or skill preconditions.</p></div>
+    <div><strong>4-week build</strong><p>Evaluate typed motor libraries, EmbodiedSkills-style checks, attention stop signals, and action-wrench prediction on recovery and contact failures.</p></div>
+    <div><strong>Success metric</strong><p>The contract rejects at least one plausible but invalid action and predicts one contact failure before final task loss.</p></div>
+    <div><strong>Stop condition</strong><p>If contracts collapse to final success labels, split abstraction, precondition, stop, and contact probes into separate negative-result studies.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Typed skill traces, precondition labels, attention entropy curves, action-wrench predictions, forbidden-region masks, and recovery outcomes.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 28/30</span></div>
+  <h3>Evidence-use gate for robot VLMs</h3><p class="thesis">Before a robot VLM answers or acts, verify that the needed visual evidence exists, changes the decision, and justifies any extra token or compute cost.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 4</span><span>timing 5</span><span>tractability 5</span><span>defensibility 4</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create robot instruction queries with missing targets, blurred decisive regions, scale changes, and old short safety cues.</p></div>
+    <div><strong>4-week build</strong><p>Compare invalid-task verification, visual sensitivity, scale equivariance, render ceilings, StreamScout escalation, and visual-token compression on action permission.</p></div>
+    <div><strong>Success metric</strong><p>The gate catches at least two visually fluent but under-evidenced actions while preserving valid low-cost answers.</p></div>
+    <div><strong>Stop condition</strong><p>If evidence-use tests do not predict action error beyond model confidence, keep them as diagnostics rather than runtime gates.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Invalid action queries, visual perturbation masks, scale-equivariant videos, old-event retrieval labels, token budgets, and action outcomes.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-09-02.json">intelligence/2026-09-02.json</a>.</footer>
+</body></html>
