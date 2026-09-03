@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-09-03 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-09-03 arXiv Research Intelligence</h1>
+<p class="lead">The September 3 batch is about action admission under partial, delayed, or duplicated evidence. Geometry papers ask whether multi-view tracks, surgical surfaces, weak map labels, and panoramic UAV streams are reliable enough to define the robot's metric frame. Contact and humanoid papers turn grasping, assistive care, odometry, and emergency stopping into release decisions that must account for contact quality, uncertainty, and recoverability. World-model papers stop treating imagined rollouts as open-loop scores and instead ask which future is reliable after feedback. Driving and VLM papers make the same move at system level: scenario generators, trajectory scorers, hallucination detectors, and streaming retrievers must prove that evidence changes the feasible action before the system acts. APRL's opening is to own the evaluation harness that counts evidence only when it is independent, physically grounded, and capable of vetoing an unsafe robot action.</p><p class="scope">Daily edition from matching Thursday /new listings: 136 non-replacement cs.CV rows, 38 cs.RO rows, 168 deduplicated papers, and 139 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claims are asserted unless the abstract itself states them.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>Metric geometry needs action tests</h3><p>TAPVid-MV, MV-dVRK, AutoCompass, FOCUS, and the UAV platform all expose that pose, correspondence, view coverage, and odometry confidence must be judged by downstream robot decisions.</p></article><article><span>Decision</span><h3>Contact evidence must authorize action</h3><p>DemoMimic, MS-MEM, Safe-Stop, and the assistive-care benchmark ask whether a robot has enough contact, uncertainty, or recoverability evidence to continue, manipulate, or stop.</p></article><article><span>Decision</span><h3>Agreement is not corroboration</h3><p>PACT, CADMP, Temporal Causal Drive, TempoGround, and ShallowStream separate repeated computation or fluent answers from separately countable visual evidence.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.01899" target="_blank" rel="noopener">TAPVid-MV: A Benchmark for Tracking Any Point in 3D Across Multiple Views</a></h3>
+  <p class="fit">multi-view point tracking - geometry recovery bottleneck - robotics benchmark</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Point-tracking benchmarks often test a single video or static multi-camera rig, so 3D correspondence and geometry errors are entangled.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says no existing benchmark tests long-term 3D point tracking across synchronized moving views, and multi-view trackers do not consistently beat monocular trackers.</p></div>
+    <div><h4>Hidden premise</h4><p>A point track is action-usable only if correspondence and recovered geometry can be separated under occlusion and camera motion.</p></div>
+    <div><h4>Conceptual move</h4><p>Move tracking evaluation from image-space persistence to calibrated multi-view 3D correspondence with verified tracks.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>TAPVid-MV contains 1,142 calibrated camera streams and 109,769 point tracks across seven subsets.</span></li><li><strong>[Abstract]</strong><span>More than 30 baselines are evaluated, and no method comes close to solving the task.</span></li><li><strong>[Inference]</strong><span>APRL should score 3D tracking by whether geometry recovery or correspondence error changes robot state estimation.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The benchmark uses depth, LiDAR, SLAM/SfM points, human meshes, posed object meshes, and simulation to build visually verified tracks across 284 sequences.</p></div>
+    <div><h4>Falsification frontier</h4><p>If multi-view 3D tracking errors do not change relocalization, grasp, or navigation decisions, the benchmark may stay perception-centric.</p></div>
+    <div><h4>Adversarial read</h4><p>Test dynamic occlusion, moving cameras, and repeated geometry where correspondence can look right while metric depth is wrong.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Separate correspondence failure from geometry recovery failure before using tracks as robot state.</p><p>Strong for multi-camera robots, AR, and driving; less direct for single fixed-camera manipulation unless lifted through a 3D state estimator.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.02717" target="_blank" rel="noopener">MV-dVRK: A Multi-Viewpoint Benchmark for Spatial Surgical Perception</a></h3>
+  <p class="fit">surgical multi-view reconstruction - pose ground truth - foundation model stress test</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Surgical perception often inherits general sparse-view reconstruction claims without endoscopic multi-view ground truth.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says real multi-viewpoint surgical data are rare and that clinical telerobots usually deploy a single stereo camera.</p></div>
+    <div><h4>Hidden premise</h4><p>A spatial surgical perception method should be evaluated against scanner-validated geometry and pose, not only plausible rendered surfaces.</p></div>
+    <div><h4>Conceptual move</h4><p>Create exposure-synchronized multi-stereo surgical views with dense SfM reference geometry and sparse-view test sets.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The static subset provides dense SfM geometry validated against an industrial 3D scanner plus ground-truth poses.</span></li><li><strong>[Abstract]</strong><span>With three viewpoints, optimization-based multi-view methods cover 67 percent of ground-truth surface within 1 mm, while feed-forward foundation models cover 43 percent.</span></li><li><strong>[Inference]</strong><span>APRL should keep optimization and foundation geometry baselines in the same robot-usable tolerance frame.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The benchmark compares zero-shot monocular, stereo, multi-stereo, and multi-view reconstruction as viewpoints increase.</p></div>
+    <div><h4>Falsification frontier</h4><p>If scanner tolerance does not predict surgical tool localization or deformation tracking, surface coverage is not enough.</p></div>
+    <div><h4>Adversarial read</h4><p>Vary tissue deformation, specular highlights, and viewpoint count to see when foundation reconstructions become unsafe for instrument planning.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Use task tolerance to decide whether a reconstruction is usable, not only visually plausible.</p><p>Direct for surgical and constrained-workspace perception; weaker for large outdoor maps with different error budgets.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.01662" target="_blank" rel="noopener">Not All Agreement Counts as Corroboration: Provenance-Conserving Multi-View Fusion for Typed Action Admission in Human-Robot Collaboration</a></h3>
+  <p class="fit">provenance-conserving evidence fusion - typed action admission - human-robot collaboration</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Embodied systems can treat repeated agreement as stronger evidence even when all predictions came from the same observation.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says predictive agreement alone does not determine whether evidence warrants action because evidential origin matters.</p></div>
+    <div><h4>Hidden premise</h4><p>A robot should count support only across independent provenance units, then map unmet release conditions to hold, confirm, or fallback.</p></div>
+    <div><h4>Conceptual move</h4><p>Treat evidence countability as a relational variable for action admission instead of a local confidence score.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Within-camera duplication leaves 720 typed responses per checkpoint unchanged.</span></li><li><strong>[Abstract]</strong><span>Camera-grouped PACT admits 47 of 57 reference-consistent candidates with no observed reference-inconsistent admission in 60 episodes.</span></li><li><strong>[Inference]</strong><span>APRL should distinguish computational multiplicity from evidence multiplicity before authorizing actions.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>PACT retains support shared within each provenance unit and accumulates only across countable units under a supplied partition.</p></div>
+    <div><h4>Falsification frontier</h4><p>If provenance partitions are unavailable or wrong, the release gate may reject useful evidence or admit correlated errors.</p></div>
+    <div><h4>Adversarial read</h4><p>Duplicate one camera, create correlated occlusions, and swap provenance partitions while keeping predictions fixed.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Agreement is corroboration only when the sources are separately countable.</p><p>Strong for multi-camera collaboration and typed action gates; less direct for single-sensor policies without provenance metadata.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.02358" target="_blank" rel="noopener">Humanoid Safe Stop via Learned Stoppability Value</a></h3>
+  <p class="fit">humanoid emergency stop - reach-avoid value - task-agnostic fallback</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Emergency-stop behavior is often a fixed maneuver triggered without asking whether a safe stop is feasible from the current physical state.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says committing to a fixed stop can be unsafe when the robot is already outside recoverable conditions.</p></div>
+    <div><h4>Hidden premise</h4><p>A stop command should be admitted only when independent estimators agree that stopping remains reachable and safe.</p></div>
+    <div><h4>Conceptual move</h4><p>Cast emergency stopping as a reach-avoid problem with learned stop probability and Hamilton-Jacobi reachability estimators.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The stop policy and estimators are task-agnostic and transfer across upstream tasks without retraining.</span></li><li><strong>[Abstract]</strong><span>Safe-Stop commits only when both estimators indicate that stopping remains feasible.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate emergency interventions by recoverability agreement, not command latency alone.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Safe-Stop combines the two estimates and falls back to a damping policy when stopping is not feasible.</p></div>
+    <div><h4>Falsification frontier</h4><p>If estimator agreement fails under terrain, contact, or payload shifts, the task-agnostic claim becomes a simulator-specific safety layer.</p></div>
+    <div><h4>Adversarial read</h4><p>Trigger stops near balance limits, partial foot support, pushes, and perception dropouts to measure false commit and false fallback.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A safety action still needs an admission test.</p><p>Strong for humanoid locomotion and mobile manipulation; less direct for quasi-static arms where a fixed brake may be sufficient.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.02402" target="_blank" rel="noopener">A Physics-Consistent Benchmark for Contact-Rich Human-Robot Interaction in Assistive Care</a></h3>
+  <p class="fit">contact-rich HRI benchmark - force safety - leak-free scorer protocol</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Task-level success can hide physical interaction failures when a robot touches a human body.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says assistive care requires a physically responsive human, interaction-quality assessment, and a leak-free observer-scorer protocol.</p></div>
+    <div><h4>Hidden premise</h4><p>A care robot policy is not successful unless correct region, task completion, and force safety all hold under physically calibrated response.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn robot-assisted bathing into a physics-consistent benchmark with deformable passive human response and frozen evaluation roles.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>An LLM-augmented state machine drops from 72.9 percent task success to 56.4 percent after correct-region and force-safety screening.</span></li><li><strong>[Abstract]</strong><span>VoxPoser produces lighter and more stable contact but completes only 27.9 percent of trials.</span></li><li><strong>[Inference]</strong><span>APRL should report contact quality as a first-class outcome beside task completion.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Region-wise simulated responses are calibrated against force-indentation measurements from Franka impedance pushes on a care manikin.</p></div>
+    <div><h4>Falsification frontier</h4><p>If simulated passive response fails to predict real caregiver or patient interaction, the benchmark should be narrowed to preclinical protocol testing.</p></div>
+    <div><h4>Adversarial read</h4><p>Hold task completion constant while varying force, region correctness, deformation, and scorer visibility.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A completed contact task can still be a failed interaction.</p><p>Strong for assistive care and contact-rich HRI; less direct for non-contact navigation.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.02531" target="_blank" rel="noopener">Spatially Aware World Action Model via Geometric Latent Diffusion</a></h3>
+  <p class="fit">world action model - depth prediction - geometric latent diffusion</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>World Action Models can inherit video priors while operating only on RGB observations.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says prevailing WAMs do not leverage 3D information even though robot action depends on geometric state.</p></div>
+    <div><h4>Hidden premise</h4><p>A frozen video backbone can become action-useful if depth is encoded into the same bounded latent domain as RGB.</p></div>
+    <div><h4>Conceptual move</h4><p>Repurpose pretrained video diffusion for joint action, RGB, and depth prediction inside one backbone.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>SA-WAM jointly predicts future observations, actions, and depth.</span></li><li><strong>[Abstract]</strong><span>The paper reports strong RoboCasa, LIBERO-Plus, and real UR5 randomized-environment results.</span></li><li><strong>[Inference]</strong><span>APRL should test whether predicted depth quality explains rollout success rather than treating WAM video quality as enough.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>SA-WAM uses a nonlinear depth encoding compatible with the frozen VAE tokenizer, preserving pretrained priors while adding geometry.</p></div>
+    <div><h4>Falsification frontier</h4><p>If depth prediction improves visual futures but not recovery under geometry perturbation, the 3D channel is not operational.</p></div>
+    <div><h4>Adversarial read</h4><p>Perturb depth scale, occluding objects, and contact surfaces while holding RGB appearance similar.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A world model's useful variable is the future state feature that changes action.</p><p>Strong for manipulation with RGB-D-like structure; weaker for tactile or force-dominated tasks without visual depth cues.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.02811" target="_blank" rel="noopener">Do Better Imagined Rollouts Mean Better Robot Control? A Controlled Study of World-Model Evaluation Under Feedback</a></h3>
+  <p class="fit">world-model evaluation - feedback correction schedule - closed-loop ranking</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Predictive models for robotics are often judged by open-loop rollout accuracy over a fixed horizon.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract shows that closed-loop robots act, receive measurements, update state, and recompute control, so rollout metrics can rank estimators differently.</p></div>
+    <div><h4>Hidden premise</h4><p>A rollout benchmark is informative only if its prediction horizon and measurement-update schedule match the feedback pattern of deployment.</p></div>
+    <div><h4>Conceptual move</h4><p>Evaluate predictive models across replay, measurement-free rollout, and closed-loop tracking under controlled sensing conditions.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Rollout error selects a different estimator from the closed-loop optimum in 18 of 24 sensing conditions.</span></li><li><strong>[Abstract]</strong><span>Replay RMSE correlates more strongly with closed-loop cross-track RMSE than rollout error.</span></li><li><strong>[Inference]</strong><span>APRL should publish the correction schedule whenever using imagined rollouts to justify robot control.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The study varies rollout horizon and measurement-update interval in a differential-drive path-tracking task with biased odometry and intermittent landmarks.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the same mismatch does not appear in richer manipulation or locomotion controllers, the result may be estimator-task specific.</p></div>
+    <div><h4>Adversarial read</h4><p>Vary landmark dropouts, odometry bias, correction interval, and planning horizon while measuring closed-loop task ranking.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A prediction horizon without a correction schedule is an incomplete robot metric.</p><p>Strong for state-estimation and planning loops; less direct for fully reactive policies without explicit rollout evaluation.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.02270" target="_blank" rel="noopener">CrashDiffuser: VLM-Guided Collision Intent Reasoning for Fine-Grained Safety-Critical Traffic Scenario Generation</a></h3>
+  <p class="fit">traffic scenario generation - collision intent - closed-loop adversarial trajectories</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Safety-critical driving generators often try to induce collisions without controlling the contact mode that makes the scenario diagnostic.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says fine-grained safety evaluation requires a target collision and specified head, rear, or side contact region.</p></div>
+    <div><h4>Hidden premise</h4><p>A scenario generator is useful only if semantic collision intent survives continuous trajectory synthesis and replanning.</p></div>
+    <div><h4>Conceptual move</h4><p>Decouple semantic collision reasoning from trajectory generation through a hierarchical collision-intent interface.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>CrashDiffuser targets specified contact regions rather than collision occurrence alone.</span></li><li><strong>[Abstract]</strong><span>The framework uses collision-guided sampling, candidate selection, and short-horizon replanning.</span></li><li><strong>[Inference]</strong><span>APRL should define failure scenarios by the intervention they test, not by accident labels alone.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>A VLM extracts context and predicts structured action tuples that condition a diffusion trajectory generator with closed-loop replanning.</p></div>
+    <div><h4>Falsification frontier</h4><p>If generated contact modes do not transfer to closed-loop planner failures, the semantic intent layer may be overfitting simulator reactions.</p></div>
+    <div><h4>Adversarial read</h4><p>Ask for the same collision region under different right-of-way, visibility, and reaction-time assumptions.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A stress scenario needs a typed failure intent, not just an extreme outcome.</p><p>Direct for driving and multi-robot safety; transferable to manipulation if contact-region intent is defined.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#9</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.02028" target="_blank" rel="noopener">Detecting Object Hallucinations in Large Vision-Language Models via Cross-Modal Attention Drifts and Mask-Based Verification</a></h3>
+  <p class="fit">VLM hallucination detection - attention drift - targeted masking</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Object-hallucination detectors can inspect attention at one layer without verifying whether the predicted object depends on the image region.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says visual grounding evolves across layers, so abrupt cross-modal attention transitions may reveal unstable predictions.</p></div>
+    <div><h4>Hidden premise</h4><p>A visual claim should pass both internal grounding-stability and external region-masking sensitivity checks.</p></div>
+    <div><h4>Conceptual move</h4><p>Combine adjacent-layer cross-modal attention drift with targeted mask-based verification in a lightweight detector.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Attention drift and prediction sensitivity are treated as complementary evidence for hallucination detection.</span></li><li><strong>[Abstract]</strong><span>The method is lightweight and targets object hallucination in representative open-source LVLMs.</span></li><li><strong>[Inference]</strong><span>APRL robot VLM gates should require a command to depend on the visual region that justifies it.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>CADMP finds the largest drift transition, locates visually relevant regions, and measures prediction-probability change after masking.</p></div>
+    <div><h4>Falsification frontier</h4><p>If masking sensitivity is high for irrelevant but correlated regions, CADMP can mistake shortcut evidence for grounding.</p></div>
+    <div><h4>Adversarial read</h4><p>Mask grasp targets, distractors, and correlated background separately while measuring whether the action text changes.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A visual claim is weak unless targeted evidence removal can change it.</p><p>Strong for object-referential robot instructions; less direct for pure language planning.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#10</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.02780" target="_blank" rel="noopener">ShallowStream: Index Shallow then Answer Deep for Streaming Video Understanding</a></h3>
+  <p class="fit">streaming video understanding - shallow KV index - evidence retrieval budget</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Streaming MLLM systems often repeatedly process frames through full-depth prefill, causing high latency and growing KV cache cost.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says existing efficiency methods overlook model depth as a dimension of streaming video budget.</p></div>
+    <div><h4>Hidden premise</h4><p>Shallow layers can maintain enough always-on evidence to select frames before the expensive deep answer pass.</p></div>
+    <div><h4>Conceptual move</h4><p>Separate shallow continuous indexing from deep query-time answering with diversity-aware evidence selection.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The method reduces per-frame prefill latency and 10-second end-to-end latency by up to 52.1x and 11.9x.</span></li><li><strong>[Abstract]</strong><span>It maintains performance on par with the strongest existing streaming methods.</span></li><li><strong>[Inference]</strong><span>APRL should score efficiency by missed decisive events per latency saved.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>ShallowStream builds an always-on lightweight index using shallow-layer KV cache and uses shallow attention scores to retrieve context frames.</p></div>
+    <div><h4>Falsification frontier</h4><p>If shallow indexing misses rare safety cues, the latency gain trades away action-relevant evidence.</p></div>
+    <div><h4>Adversarial read</h4><p>Place the decisive robot event in old, brief, low-salience frames and measure retrieval before action permission.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Efficiency is acceptable only when the cheap index preserves decision-changing evidence.</p><p>Strong for long-horizon robot assistants and surveillance; less direct for short closed-loop control windows.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Geometry papers are defining action frames</h3><p class='links'>TAPVid-MV - MV-dVRK - AutoCompass - FOCUS - UAV panorama</p><p><strong>Observed</strong> - The abstracts cover calibrated multi-view tracks, scanner-validated surgical surfaces, weak-label map matching, foot-observation confidence, and parallax-aware panoramic sensing.</p><p><strong>Inference</strong> - The shared decision is to stop asking whether geometry looks plausible and ask whether pose, correspondence, and confidence are reliable enough to release an action.</p></article><article><h3>Contact and safety papers turn continuation into a gate</h3><p class='links'>DemoMimic - MS-MEM - Safe-Stop - assistive-care HRI - PACT</p><p><strong>Observed</strong> - The batch separates contact geometry, collateral disturbance, recoverability, force safety, and provenance countability.</p><p><strong>Inference</strong> - APRL should benchmark when a robot may continue manipulating, stop, ask for confirmation, or fall back under incomplete physical evidence.</p></article><article><h3>World-model and VLM papers demand delayed verification</h3><p class='links'>SA-WAM - WCD - imagined-rollout study - CADMP - ShallowStream</p><p><strong>Observed</strong> - The papers evaluate geometric world actions, self-verifying futures, feedback schedules, visual masking sensitivity, and shallow evidence retrieval.</p><p><strong>Inference</strong> - The useful system variable is not prediction quality alone; it is whether delayed or targeted evidence changes the action before deployment risk accumulates.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>Late-August and early-September editions emphasized robot-usable geometry, execution contracts, and evidence gates.</p><p>September 3 strengthens that direction with TAPVid-MV, MV-dVRK, PACT, Safe-Stop, MS-MEM, CADMP, and ShallowStream.</p></article><article><span>New signal</span><p class='history'>Recent notes focused on VLA action permission and dynamic map freshness.</p><p>Today adds a sharper provenance axis: evidence can agree without being separately countable, so multi-view systems need source-aware action admission.</p></article><article><span>Contradiction</span><p class='history'>World-model work often treats longer imagined futures as better planning evidence.</p><p>The controlled rollout study shows that long measurement-free rollouts can rank estimators differently from closed-loop behavior.</p></article><article><span>Missing axis</span><p class='history'>Geometry, contact, and VLM reliability are still mostly evaluated in separate literatures.</p><p>APRL can own the combined gate: metric frame validity, contact recoverability, and visual provenance must jointly authorize robot action.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Provenance-aware action admission suite</h3><p class="thesis">Build a benchmark where multi-view visual agreement, map evidence, and contact signals only count when their origins are independently useful for action.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 5</span><span>timing 5</span><span>tractability 4</span><span>defensibility 5</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create a small multi-camera manipulation probe with duplicated views, independent views, masked targets, and typed hold/confirm/fallback labels.</p></div>
+    <div><strong>4-week build</strong><p>Compare PACT-style provenance fusion, standard confidence fusion, targeted masking, and contact-state checks on the same action-admission outcomes.</p></div>
+    <div><strong>Success metric</strong><p>At least one method admits duplicated agreement but rejects under provenance-aware counting, with a measurable reduction in unsafe action permission.</p></div>
+    <div><strong>Stop condition</strong><p>If provenance partitions do not change action decisions beyond ordinary confidence thresholds, keep the result as a diagnostic note.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Synchronized multi-view episodes, provenance partitions, target masks, contact labels, admission decisions, and fallback outcomes.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 28/30</span></div>
+  <h3>Feedback-faithful world-model evaluation</h3><p class="thesis">Evaluate robot world models under the same measurement-update schedule, horizon, and state corrections they will face during control.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 4</span><span>timing 5</span><span>tractability 5</span><span>defensibility 4</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Replay a simple mobile or manipulation controller with paired measurement-free, intermittent-update, and closed-loop evaluation traces.</p></div>
+    <div><strong>4-week build</strong><p>Compare SA-WAM-style geometric futures, sparse residual world models, WCD selection, and conventional rollout metrics on action ranking under feedback.</p></div>
+    <div><strong>Success metric</strong><p>A feedback-matched metric predicts closed-loop ranking better than open-loop rollout error on at least two sensing or contact degradation families.</p></div>
+    <div><strong>Stop condition</strong><p>If all metrics rank controllers identically after realistic feedback is included, narrow the project to the failure conditions where rollout metrics diverge.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Rollout traces, measurement-update schedules, sensing outages, contact perturbations, closed-loop rankings, and mismatch labels.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 27/30</span></div>
+  <h3>Contact-first assistive manipulation benchmark</h3><p class="thesis">Use assistive-care and dexterous manipulation tasks to rank policies by correct contact, force safety, recoverability, and disturbance, not task completion alone.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 4</span><span>timing 5</span><span>tractability 3</span><span>defensibility 5</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Construct a tabletop proxy with local contact geometry, force thresholds, forbidden regions, and collateral-disturbance scoring.</p></div>
+    <div><strong>4-week build</strong><p>Evaluate DemoMimic-style local contact, MS-MEM action selection, torque-sampling MPPI, and assistive-care scorers on paired contact-safe and task-success conditions.</p></div>
+    <div><strong>Success metric</strong><p>A policy with similar task success is separated by force safety, region correctness, or disturbance in a way that predicts human-observer acceptance.</p></div>
+    <div><strong>Stop condition</strong><p>If contact metrics remain redundant with task success in the proxy, move the project to real tactile or compliant HRI data before claiming novelty.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Contact patches, force traces, region labels, disturbance maps, human-observer scores, and task outcomes.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-09-03.json">intelligence/2026-09-03.json</a>.</footer>
+</body></html>

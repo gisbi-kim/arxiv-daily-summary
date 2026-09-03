@@ -1,0 +1,1288 @@
+{
+  "date": "2026-09-03",
+  "daily_thesis": "The 2026-09-03 batch is about action admission when evidence is multi-view, physical, delayed, or compressed. Geometry papers turn tracking, surgical reconstruction, weak map labels, panoramic UAV sensing, and humanoid odometry into questions about whether the metric frame is trustworthy enough for action. Manipulation and HRI papers ask whether contact geometry, map uncertainty, force safety, and stoppability should authorize continuation, intervention, or fallback. World-model papers challenge open-loop imagination scores by tying rollout quality to feedback schedules, sparse change, depth, and self-verification. Driving, VLM, and edge-system papers then widen the same contract: generated scenarios, trajectory scorers, hallucination detectors, streaming retrievers, and quantized models must prove that the retained evidence changes the decision before a robot acts.",
+  "clusters": [
+    {
+      "cluster": "Geometry evaluation moves from plausible structure to metric frames that can release robot action",
+      "why": "기존 geometry 평가는 reconstruction이나 localization이 그럴듯한지에 머무르기 쉽지만, 로봇은 correspondence, pose, view coverage, foot observation confidence가 잘못되면 바로 잘못된 행동을 낸다. TAPVid-MV는 3D point tracking에서 geometry recovery와 correspondence error를 분리해야 한다고 보여주고, MV-dVRK는 surgical surface를 scanner-validated tolerance로 재며, AutoCompass와 UAV panoramic sensing은 noisy pose labels와 parallax가 downstream place recognition을 흔드는 지점을 드러낸다. FOCUS와 humanoid retargeting은 contact or point-cloud evidence가 kinematic state를 얼마나 믿게 해 주는지 묻는다. APRL은 visual fidelity가 아니라 relocalization, route choice, footstep safety, surgical tool pose, and grasp frame이 바뀌는 조건으로 geometry를 평가해야 한다.",
+      "confidence": "High",
+      "confidence_note": "Six papers independently connect multi-view tracks, surgical surface geometry, weak-map localization, panoramic UAV perception, foot-observation confidence, and point-cloud correspondence.",
+      "lab_action": "Multi-camera indoor, surgical workspace, public-map localization, UAV surround vision, and humanoid locomotion episodes에서 viewpoint count, correspondence ambiguity, weak pose labels, parallax depth, foot-contact reliability를 ablation하고 relocalization success, surgical surface tolerance, route deviation, footstep slip, action-frame error를 비교한다.",
+      "importance_tags": [
+        "[경고신호]",
+        "[데이터전환]",
+        "[실사용전환]",
+        "[평가축]"
+      ],
+      "papers": [
+        {
+          "title": "TAPVid-MV: A Benchmark for Tracking Any Point in 3D Across Multiple Views",
+          "arxiv": "https://arxiv.org/abs/2609.01899",
+          "importance_tags": [
+            "[평가축]",
+            "[데이터전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Geometry Maps",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "MV-dVRK: A Multi-Viewpoint Benchmark for Spatial Surgical Perception",
+          "arxiv": "https://arxiv.org/abs/2609.02717",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Geometry Maps",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "AutoCompass: Accurate Visual Localization on Public Maps by Learning from Weak Labels",
+          "arxiv": "https://arxiv.org/abs/2609.02798",
+          "importance_tags": [
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Geometry Maps",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "From Multi-Fisheye Sensing to Panoramic Perception: A Parallax-Aware Onboard Platform for Ultra-Low-Altitude UAVs",
+          "arxiv": "https://arxiv.org/abs/2609.02319",
+          "importance_tags": [
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Geometry Maps",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "FOCUS: Foot Observation Confidence for Robust Humanoid Proprioceptive Odometry",
+          "arxiv": "https://arxiv.org/abs/2609.02222",
+          "importance_tags": [
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Unified Motion Retargeting for Humanoids with Learned Point Cloud Correspondence",
+          "arxiv": "https://arxiv.org/abs/2609.02134",
+          "importance_tags": [
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
+    {
+      "cluster": "Contact-rich robot action shifts from task completion to continuation and fallback permission",
+      "why": "Task success 하나로 contact-rich robot을 평가하면 안전하지 않은 힘, 잘못된 접촉 위치, 과도한 scene disturbance, or duplicate evidence를 놓친다. DemoMimic은 local contact geometry가 object-generalization의 조건이라고 보고, torque-sampling MPPI와 MS-MEM은 force or uncertainty를 action selection에 넣으며, Safe-Stop은 stop 자체도 reachability agreement가 있어야 실행한다고 본다. Assistive-care benchmark와 PACT는 완료율 뒤의 force safety, observer leakage, provenance countability를 action admission 조건으로 분리한다. APRL은 manipulation과 HRI에서 continue, stop, confirm, fallback을 task-level result보다 먼저 판단하는 release gate를 가져야 한다.",
+      "confidence": "High",
+      "confidence_note": "Contact geometry, force-aware control, learned stoppability, assistive HRI scoring, disturbance-aware mapping, and provenance-conserving fusion all target action permission.",
+      "lab_action": "Dexterous manipulation, shelf retrieval, assistive-care wiping, humanoid stop, and multi-view collaboration tasks에서 local contact geometry, force threshold, map uncertainty, collateral disturbance, provenance partition, reach-avoid value를 독립 조건으로 두고 continuation permission, fallback timing, force violation, task recovery를 비교한다.",
+      "importance_tags": [
+        "[경고신호]",
+        "[데이터전환]",
+        "[실사용전환]",
+        "[평가축]"
+      ],
+      "papers": [
+        {
+          "title": "One Demonstration, Many Objects: Generalizing Manipulation via Local Contact Geometry",
+          "arxiv": "https://arxiv.org/abs/2609.01938",
+          "importance_tags": [
+            "[데이터전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Real-Time Dynamics-Based Torque-Sampling MPPI for Compliant and Force Aware Manipulation",
+          "arxiv": "https://arxiv.org/abs/2609.02020",
+          "importance_tags": [
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Humanoid Safe Stop via Learned Stoppability Value",
+          "arxiv": "https://arxiv.org/abs/2609.02358",
+          "importance_tags": [
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "A Physics-Consistent Benchmark for Contact-Rich Human-Robot Interaction in Assistive Care",
+          "arxiv": "https://arxiv.org/abs/2609.02402",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "MS-MEM: Multi-Skill Manipulation-Enhanced Mapping via Uncertainty- and Disturbance-Aware Action Selection",
+          "arxiv": "https://arxiv.org/abs/2609.02493",
+          "importance_tags": [
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Not All Agreement Counts as Corroboration: Provenance-Conserving Multi-View Fusion for Typed Action Admission in Human-Robot Collaboration",
+          "arxiv": "https://arxiv.org/abs/2609.01662",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Embodied AI",
+            "class": "Navigation and Planning",
+            "order": "Instruction Following",
+            "genus": "Long-Horizon Agents",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
+    {
+      "cluster": "World-model evaluation moves from imagined quality to feedback-matched action reliability",
+      "why": "World model을 open-loop rollout이나 plausible video로만 보면 controller가 실제 feedback을 받는 순간 어떤 모델이 좋은지 바뀔 수 있다. imagined-rollout study는 measurement update schedule을 빼면 estimator ranking이 closed-loop optimum과 어긋날 수 있음을 보이고, SA-WAM은 depth-aware future를 action prediction과 함께 묶으며, sparse residual world models는 whole-scene prediction 대신 change gate를 둔다. World-Coherent Decoding, SolarWM, and humanoid visual locomotion은 future selection, long-horizon interaction data, and foothold anticipation이 feedback loop 안에서 평가되어야 한다고 말한다. APRL은 WAM benchmark에서 prediction horizon, correction interval, geometric state, change sparsity, and action success를 같은 closed-loop protocol로 묶어야 한다.",
+      "confidence": "High",
+      "confidence_note": "Six papers connect feedback schedule, geometric WAMs, sparse change models, self-verifying futures, open long-horizon data, and humanoid foothold anticipation.",
+      "lab_action": "Mobile path tracking, RoboCasa/LIBERO manipulation, tabletop pushing, humanoid foothold, and long-horizon video-control tasks에서 rollout horizon, measurement-update interval, depth encoding, residual change gate, future-candidate verifier, open-data mixture를 ablation하고 closed-loop ranking, recovery success, action delta, state drift를 비교한다.",
+      "importance_tags": [
+        "[경고신호]",
+        "[방법전환]",
+        "[실사용전환]",
+        "[평가축]"
+      ],
+      "papers": [
+        {
+          "title": "Do Better Imagined Rollouts Mean Better Robot Control? A Controlled Study of World-Model Evaluation Under Feedback",
+          "arxiv": "https://arxiv.org/abs/2609.02811",
+          "importance_tags": [
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Perception and Mapping",
+            "class": "State Estimation",
+            "order": "SLAM and Odometry",
+            "genus": "Geometry Maps",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Spatially Aware World Action Model via Geometric Latent Diffusion",
+          "arxiv": "https://arxiv.org/abs/2609.02531",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Modeling What Changes: Sparse, Residual World Models for Object-Centric Manipulation",
+          "arxiv": "https://arxiv.org/abs/2609.02046",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "World-Coherent Decoding: Self-Verifying Test-Time Planning for World Action Models",
+          "arxiv": "https://arxiv.org/abs/2609.02159",
+          "importance_tags": [
+            "[경고신호]",
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Model Compression",
+            "order": "Token and Cache Efficiency",
+            "genus": "Deployment",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "SolarWM: Open Data and Scalable Training for Long-Horizon Video World Models",
+          "arxiv": "https://arxiv.org/abs/2609.02886",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "Generative Simulation",
+            "order": "Action-Conditioned Worlds",
+            "genus": "Control Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "World-Model-Augmented Visual Locomotion for Humanoids on Foothold-Constrained Terrain",
+          "arxiv": "https://arxiv.org/abs/2609.02542",
+          "importance_tags": [
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Robot Learning",
+            "class": "Policy Learning",
+            "order": "Vision-Language-Action",
+            "genus": "Embodied Control",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
+    {
+      "cluster": "Driving autonomy shifts from scenario generation to decision-transfer proof under risk",
+      "why": "Autonomous-driving evaluation이 scenario novelty나 proxy loss 개선에서 멈추면 실제 planner가 어떤 action을 바꾸는지 검증하지 못한다. VIPS는 V2I pseudo-simulation으로 error accumulation과 recovery를 보려 하고, designed trajectory samples and DiffuSearch는 candidate trajectory scoring and diffusion objectives를 decision boundary 가까이 밀어 넣는다. CrashDiffuser는 collision occurrence가 아니라 contact region intent를 조건으로 만들며, Proxy-to-Decision Transfer는 future-aware proxy improvement가 selected trajectory utility로 옮겨갔는지 분해한다. APRL은 driving and multi-robot safety에서 scenario generation, trajectory score, LiDAR robustness, and risk-aware diffusion이 feasible action set을 실제로 바꾸는지 확인해야 한다.",
+      "confidence": "High",
+      "confidence_note": "Driving papers cover action-grounded survey evidence, V2I planning, scorer samples, diffusion planning, contact-region scenario generation, proxy-to-decision checks, LiDAR robustness, and risk-aware offline RL.",
+      "lab_action": "Urban intersections, V2I occlusions, highway risk, LiDAR adverse-weather, and collision-intent scenarios에서 trajectory perturbation axis, infrastructure message, diffusion objective alignment, contact-region target, proxy score margin, coarse-label robustness를 stress split으로 만들고 selected action change, safety violation, recovery timing, closed-loop utility를 비교한다.",
+      "importance_tags": [
+        "[경고신호]",
+        "[방법전환]",
+        "[실사용전환]",
+        "[평가축]"
+      ],
+      "papers": [
+        {
+          "title": "Beyond Textual Chain-of-Thought: A Survey on Action-Grounded Reasoning in Autonomous Driving",
+          "arxiv": "https://arxiv.org/abs/2609.01659",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Simulation and World Models",
+            "class": "Generative Simulation",
+            "order": "Action-Conditioned Worlds",
+            "genus": "Control Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "VIPS: Vehicle-Infrastructure Cooperative Planning Benchmark via Pseudo-Simulation",
+          "arxiv": "https://arxiv.org/abs/2609.02462",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Designing Versatile Samples for Learned Trajectory Scoring",
+          "arxiv": "https://arxiv.org/abs/2609.01799",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "DiffuSearch: How Hybrid Trajectory Planning Benefits from Aligned Objectives in Diffusion and Action Space",
+          "arxiv": "https://arxiv.org/abs/2609.02252",
+          "importance_tags": [
+            "[평가축]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "CrashDiffuser: VLM-Guided Collision Intent Reasoning for Fine-Grained Safety-Critical Traffic Scenario Generation",
+          "arxiv": "https://arxiv.org/abs/2609.02270",
+          "importance_tags": [
+            "[경고신호]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "From Proxy Learning to Driving Decisions: A Transfer-Based Framework for Evaluating Future-Aware Autonomous Driving Planners",
+          "arxiv": "https://arxiv.org/abs/2609.02688",
+          "importance_tags": [
+            "[경고신호]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "ROBOTICS",
+            "phylum": "Autonomous Systems",
+            "class": "Driving",
+            "order": "Planning and Perception",
+            "genus": "Closed-Loop Evaluation",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
+    {
+      "cluster": "VLM reliability moves from confident answers to evidence provenance and state persistence",
+      "why": "VLM이 자신 있게 대답하거나 hallucination score를 낮춘다고 해서 visual evidence를 제대로 썼다는 뜻은 아니다. faithfulness 재평가는 hallucination mitigation이 보수적 답변으로 object recall을 줄일 수 있다고 보고, Temporal Causal Drive는 decoding 단계에서 visual, question, prefix influence를 분리한다. CADMP, YesTrack, TempoGround, RVSD, ViSAR, and PACT는 attention drift, masked evidence, yes/no verification, object presence state, semantic retrieval, provenance countability를 통해 answer가 어떤 evidence에 의해 허가됐는지 묻는다. APRL robot VLM은 final answer보다 target absence, identity drift, duplicate-view agreement, retrieved crop, and visual-cue masking이 action permission을 바꾸는지 평가해야 한다.",
+      "confidence": "High",
+      "confidence_note": "Seven VLM and embodied papers independently test hallucination trade-offs, causal source influence, attention drift, yes/no tracking, streaming state, sparse retrieval, and adaptive visual retrieval.",
+      "lab_action": "Robot instruction QA, multi-object tracking, streaming grounding, document/tool panels, and multi-camera action admission에서 target mask, duplicate provenance, old-frame retrieval, object enter/leave state, top-k page budget, and answer conservativeness를 ablation하고 refusal precision, identity drift, unsafe command rate, evidence-use sensitivity를 비교한다.",
+      "importance_tags": [
+        "[경고신호]",
+        "[실사용전환]",
+        "[평가축]"
+      ],
+      "papers": [
+        {
+          "title": "Does Playing it Safe Count as Faithfulness? Reassessing LVLM Hallucination Mitigation Methods",
+          "arxiv": "https://arxiv.org/abs/2609.01888",
+          "importance_tags": [
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Who Drives the Probability Game of VLMs? A Temporal Causal Drive Evaluation Framework",
+          "arxiv": "https://arxiv.org/abs/2609.02000",
+          "importance_tags": [
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Detecting Object Hallucinations in Large Vision-Language Models via Cross-Modal Attention Drifts and Mask-Based Verification",
+          "arxiv": "https://arxiv.org/abs/2609.02028",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "YesTrack: Referring Multi-Object Tracking via MLLM-based Yes/No Verification",
+          "arxiv": "https://arxiv.org/abs/2609.02318",
+          "importance_tags": [
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "TempoGround: State-Aware Streaming Visual Grounding with Vision-Language Models",
+          "arxiv": "https://arxiv.org/abs/2609.02359",
+          "importance_tags": [
+            "[평가축]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "RVSD: Retrieval Vision Sparse Decoding for Mitigating Visual Hallucinations in Large Vision-Language Models",
+          "arxiv": "https://arxiv.org/abs/2609.02731",
+          "importance_tags": [
+            "[평가축]",
+            "[경고신호]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Foundation Models",
+            "class": "Multimodal Learning",
+            "order": "Vision-Language Models",
+            "genus": "Reasoning and Reliability",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    },
+    {
+      "cluster": "Deployment efficiency moves from lower cost to critical evidence retention under hardware limits",
+      "why": "Edge deployment에서 latency, bitrate, or quantization loss만 줄이면 어떤 evidence가 사라졌는지 모른다. FORGE와 SCULPT는 integer-only or PTQ-ready models가 distribution shift and activation outliers under hardware constraints를 견뎌야 한다고 보고, AllocEmbed와 ShallowStream은 visual budget을 frame count, resolution, shallow index, and deep answer pass로 나눈다. space robotics segmentation은 low light, onboard compute, and radiation fault exposure를 함께 다루고, WCD and video compression work ask whether cheap futures or compressed streams retain action-relevant cues. APRL은 cost reduction을 decisive-cue retention, fault exposure, streaming miss, and downstream action delta로 검증해야 한다.",
+      "confidence": "High",
+      "confidence_note": "Microcontroller TTA, PTQ readiness, adaptive video allocation, space-robotics acceleration, shallow streaming, WAM verification, and video compression all make cost a release-gate problem.",
+      "lab_action": "Microcontroller vision, lunar segmentation, streaming robot video, split VLM retrieval, and WAM planning tasks에서 integer-only adaptation, clipping bounds, frame-resolution allocation, DPU criticality mitigation, shallow-layer index depth, compression level을 ablation하고 decisive cue recall, fault-triggered error, latency-energy cost, downstream action delta를 비교한다.",
+      "importance_tags": [
+        "[방법전환]",
+        "[실사용전환]",
+        "[통합정리]",
+        "[평가축]"
+      ],
+      "papers": [
+        {
+          "title": "FORGE: Forward-Only Test-Time Adaptation for Integer-Only Vision Models on Microcontrollers",
+          "arxiv": "https://arxiv.org/abs/2609.01683",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Model Compression",
+            "order": "Token and Cache Efficiency",
+            "genus": "Deployment",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "SCULPT: Training Edge Vision Models for Post-Training Quantization Readiness",
+          "arxiv": "https://arxiv.org/abs/2609.01743",
+          "importance_tags": [
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Model Compression",
+            "order": "Token and Cache Efficiency",
+            "genus": "Deployment",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Allocate Before You Embed: Adaptive Visual Input Allocation for Video Embeddings",
+          "arxiv": "https://arxiv.org/abs/2609.01778",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[통합정리]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Model Compression",
+            "order": "Token and Cache Efficiency",
+            "genus": "Deployment",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "Hardware-Accelerated Instance Segmentation for Resource-Constrained Space Robotics with Criticality Analysis",
+          "arxiv": "https://arxiv.org/abs/2609.02219",
+          "importance_tags": [
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Model Compression",
+            "order": "Token and Cache Efficiency",
+            "genus": "Deployment",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "ShallowStream: Index Shallow then Answer Deep for Streaming Video Understanding",
+          "arxiv": "https://arxiv.org/abs/2609.02780",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Efficient ML Systems",
+            "class": "Model Compression",
+            "order": "Token and Cache Efficiency",
+            "genus": "Deployment",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        },
+        {
+          "title": "VoRTeC: Taming Foundation Flow for One-step Real time Video Compression",
+          "arxiv": "https://arxiv.org/abs/2609.02291",
+          "importance_tags": [
+            "[평가축]",
+            "[실사용전환]",
+            "[방법전환]"
+          ],
+          "phylogeny": {
+            "source": "CVML",
+            "phylum": "Generative Modeling",
+            "class": "Image and Video Generation",
+            "order": "World Models",
+            "genus": "Controllable Synthesis",
+            "confidence": "Medium",
+            "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+          }
+        }
+      ]
+    }
+  ],
+  "research_topics": [
+    {
+      "title": "Provenance-aware action-admission benchmark",
+      "claim": "Build multi-camera robot episodes where duplicated agreement, independent views, target masks, and contact evidence decide hold, confirm, fallback, or execute."
+    },
+    {
+      "title": "Feedback-faithful world-model metric",
+      "claim": "Evaluate WAMs and predictive estimators with explicit rollout horizon, measurement-update interval, sparse-change gate, and closed-loop action ranking."
+    },
+    {
+      "title": "Contact-safe continuation protocol",
+      "claim": "Separate task success from force safety, local contact geometry, collateral disturbance, and learned recoverability in manipulation and assistive-care settings."
+    },
+    {
+      "title": "Critical-evidence edge deployment test",
+      "claim": "Measure whether quantization, shallow streaming, adaptive frame allocation, and hardware fault mitigation preserve the cues that actually change robot action."
+    }
+  ],
+  "must_read": [
+    {
+      "title": "TAPVid-MV: A Benchmark for Tracking Any Point in 3D Across Multiple Views",
+      "arxiv": "https://arxiv.org/abs/2609.01899",
+      "why": "SLAM/reconstruction 계열 실험의 map representation 후보로 볼 만합니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[데이터전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Perception and Mapping",
+        "class": "State Estimation",
+        "order": "SLAM and Odometry",
+        "genus": "Geometry Maps",
+        "confidence": "Medium",
+        "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "MV-dVRK: A Multi-Viewpoint Benchmark for Spatial Surgical Perception",
+      "arxiv": "https://arxiv.org/abs/2609.02717",
+      "why": "SLAM/reconstruction 계열 실험의 map representation 후보로 볼 만합니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[실사용전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Perception and Mapping",
+        "class": "State Estimation",
+        "order": "SLAM and Odometry",
+        "genus": "Geometry Maps",
+        "confidence": "Medium",
+        "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "AutoCompass: Accurate Visual Localization on Public Maps by Learning from Weak Labels",
+      "arxiv": "https://arxiv.org/abs/2609.02798",
+      "why": "SLAM/reconstruction 계열 실험의 map representation 후보로 볼 만합니다.",
+      "importance_tags": [
+        "[평가축]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Perception and Mapping",
+        "class": "State Estimation",
+        "order": "SLAM and Odometry",
+        "genus": "Geometry Maps",
+        "confidence": "Medium",
+        "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "From Multi-Fisheye Sensing to Panoramic Perception: A Parallax-Aware Onboard Platform for Ultra-Low-Altitude UAVs",
+      "arxiv": "https://arxiv.org/abs/2609.02319",
+      "why": "SLAM/reconstruction 계열 실험의 map representation 후보로 볼 만합니다.",
+      "importance_tags": [
+        "[평가축]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Perception and Mapping",
+        "class": "State Estimation",
+        "order": "SLAM and Odometry",
+        "genus": "Geometry Maps",
+        "confidence": "Medium",
+        "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "FOCUS: Foot Observation Confidence for Robust Humanoid Proprioceptive Odometry",
+      "arxiv": "https://arxiv.org/abs/2609.02222",
+      "why": "VLA/robot policy ablation의 구조 변수로 넣을 가치가 있습니다.",
+      "importance_tags": [
+        "[경고신호]",
+        "[실사용전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Learning",
+        "class": "Policy Learning",
+        "order": "Vision-Language-Action",
+        "genus": "Embodied Control",
+        "confidence": "Medium",
+        "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "Unified Motion Retargeting for Humanoids with Learned Point Cloud Correspondence",
+      "arxiv": "https://arxiv.org/abs/2609.02134",
+      "why": "VLA/robot policy ablation의 구조 변수로 넣을 가치가 있습니다.",
+      "importance_tags": [
+        "[실사용전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Learning",
+        "class": "Policy Learning",
+        "order": "Vision-Language-Action",
+        "genus": "Embodied Control",
+        "confidence": "Medium",
+        "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "One Demonstration, Many Objects: Generalizing Manipulation via Local Contact Geometry",
+      "arxiv": "https://arxiv.org/abs/2609.01938",
+      "why": "VLA/robot policy ablation의 구조 변수로 넣을 가치가 있습니다.",
+      "importance_tags": [
+        "[데이터전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Learning",
+        "class": "Policy Learning",
+        "order": "Vision-Language-Action",
+        "genus": "Embodied Control",
+        "confidence": "Medium",
+        "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "Real-Time Dynamics-Based Torque-Sampling MPPI for Compliant and Force Aware Manipulation",
+      "arxiv": "https://arxiv.org/abs/2609.02020",
+      "why": "VLA/robot policy ablation의 구조 변수로 넣을 가치가 있습니다.",
+      "importance_tags": [
+        "[경고신호]",
+        "[실사용전환]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Learning",
+        "class": "Policy Learning",
+        "order": "Vision-Language-Action",
+        "genus": "Embodied Control",
+        "confidence": "Medium",
+        "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "Humanoid Safe Stop via Learned Stoppability Value",
+      "arxiv": "https://arxiv.org/abs/2609.02358",
+      "why": "VLA/robot policy ablation의 구조 변수로 넣을 가치가 있습니다.",
+      "importance_tags": [
+        "[경고신호]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Learning",
+        "class": "Policy Learning",
+        "order": "Vision-Language-Action",
+        "genus": "Embodied Control",
+        "confidence": "Medium",
+        "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    },
+    {
+      "title": "A Physics-Consistent Benchmark for Contact-Rich Human-Robot Interaction in Assistive Care",
+      "arxiv": "https://arxiv.org/abs/2609.02402",
+      "why": "VLA/robot policy ablation의 구조 변수로 넣을 가치가 있습니다.",
+      "importance_tags": [
+        "[평가축]",
+        "[경고신호]"
+      ],
+      "phylogeny": {
+        "source": "ROBOTICS",
+        "phylum": "Robot Learning",
+        "class": "Policy Learning",
+        "order": "Vision-Language-Action",
+        "genus": "Embodied Control",
+        "confidence": "Medium",
+        "rationale": "제목, subject, ROI 버킷을 기준으로 canonical taxonomy의 가장 가까운 계통에 매핑했습니다."
+      }
+    }
+  ],
+  "phylogeny_tags": [
+    {
+      "paper": "https://arxiv.org/abs/2609.01899",
+      "source": "ROBOTICS",
+      "lineage": "Perception and Mapping > State Estimation > SLAM and Odometry > Geometry Maps"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02717",
+      "source": "ROBOTICS",
+      "lineage": "Perception and Mapping > State Estimation > SLAM and Odometry > Geometry Maps"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02798",
+      "source": "ROBOTICS",
+      "lineage": "Perception and Mapping > State Estimation > SLAM and Odometry > Geometry Maps"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02319",
+      "source": "ROBOTICS",
+      "lineage": "Perception and Mapping > State Estimation > SLAM and Odometry > Geometry Maps"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02222",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02134",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.01938",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02020",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02358",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02402",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02493",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.01662",
+      "source": "ROBOTICS",
+      "lineage": "Embodied AI > Navigation and Planning > Instruction Following > Long-Horizon Agents"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02811",
+      "source": "ROBOTICS",
+      "lineage": "Perception and Mapping > State Estimation > SLAM and Odometry > Geometry Maps"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02531",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02046",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02159",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Model Compression > Token and Cache Efficiency > Deployment"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02886",
+      "source": "ROBOTICS",
+      "lineage": "Simulation and World Models > Generative Simulation > Action-Conditioned Worlds > Control Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02542",
+      "source": "ROBOTICS",
+      "lineage": "Robot Learning > Policy Learning > Vision-Language-Action > Embodied Control"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.01659",
+      "source": "ROBOTICS",
+      "lineage": "Simulation and World Models > Generative Simulation > Action-Conditioned Worlds > Control Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02462",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Systems > Driving > Planning and Perception > Closed-Loop Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.01799",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Systems > Driving > Planning and Perception > Closed-Loop Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02252",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Systems > Driving > Planning and Perception > Closed-Loop Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02270",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Systems > Driving > Planning and Perception > Closed-Loop Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02688",
+      "source": "ROBOTICS",
+      "lineage": "Autonomous Systems > Driving > Planning and Perception > Closed-Loop Evaluation"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.01888",
+      "source": "CVML",
+      "lineage": "Foundation Models > Multimodal Learning > Vision-Language Models > Reasoning and Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02000",
+      "source": "CVML",
+      "lineage": "Foundation Models > Multimodal Learning > Vision-Language Models > Reasoning and Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02028",
+      "source": "CVML",
+      "lineage": "Foundation Models > Multimodal Learning > Vision-Language Models > Reasoning and Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02318",
+      "source": "CVML",
+      "lineage": "Foundation Models > Multimodal Learning > Vision-Language Models > Reasoning and Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02359",
+      "source": "CVML",
+      "lineage": "Foundation Models > Multimodal Learning > Vision-Language Models > Reasoning and Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02731",
+      "source": "CVML",
+      "lineage": "Foundation Models > Multimodal Learning > Vision-Language Models > Reasoning and Reliability"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.01683",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Model Compression > Token and Cache Efficiency > Deployment"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.01743",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Model Compression > Token and Cache Efficiency > Deployment"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.01778",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Model Compression > Token and Cache Efficiency > Deployment"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02219",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Model Compression > Token and Cache Efficiency > Deployment"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02780",
+      "source": "CVML",
+      "lineage": "Efficient ML Systems > Model Compression > Token and Cache Efficiency > Deployment"
+    },
+    {
+      "paper": "https://arxiv.org/abs/2609.02291",
+      "source": "CVML",
+      "lineage": "Generative Modeling > Image and Video Generation > World Models > Controllable Synthesis"
+    }
+  ],
+  "source_listing_date": "2026-09-03",
+  "source_mode": "new",
+  "daily_new_counts": {
+    "cv": 136,
+    "ro": 38,
+    "scope": "new+cross; replacements excluded"
+  },
+  "paper_autopsies": [
+    {
+      "arxiv_id": "2609.01899",
+      "title": "TAPVid-MV: A Benchmark for Tracking Any Point in 3D Across Multiple Views",
+      "bucket": "3D/Scene",
+      "reading_depth": "Tier A - abstract-only",
+      "problem": "Multi-camera systems are increasingly practical for robotics, AR/VR, and autonomous driving because complementary views reduce depth ambiguity and preserve visibility under occlusion. Existing point-tracking benchmarks, however, focus on a single video or static multi-camera rigs. None test long-term 3D point tracking across several synchronized views under ",
+      "method": "See Research Intelligence edition for abstract evidence trace and falsification note.",
+      "meaning": "Included because it supports today's action-admission thesis."
+    },
+    {
+      "arxiv_id": "2609.02717",
+      "title": "MV-dVRK: A Multi-Viewpoint Benchmark for Spatial Surgical Perception",
+      "bucket": "3D/Scene",
+      "reading_depth": "Tier A - abstract-only",
+      "problem": "Large-scale training and refined optimization techniques have greatly improved sparse multi-view 3D reconstruction. Despite their relevance to surgery, such methods have never before been rigorously evaluated on real endoscopic images. Current clinical telerobots deploy a single stereo camera inside the patient, making multi-viewpoint data extremely rare. Th",
+      "method": "See Research Intelligence edition for abstract evidence trace and falsification note.",
+      "meaning": "Included because it supports today's action-admission thesis."
+    },
+    {
+      "arxiv_id": "2609.01662",
+      "title": "Not All Agreement Counts as Corroboration: Provenance-Conserving Multi-View Fusion for Typed Action Admission in Human-Robot Collaboration",
+      "bucket": "Embodied AI",
+      "reading_depth": "Tier A - abstract-only",
+      "problem": "For embodied systems, predictive agreement alone does not determine whether evidence warrants action; evidential origin matters. Repeated inference over one observation can multiply agreement without adding evidence, while source-local values do not reveal whether outputs have separately countable origins. PACT treats evidence countability as a relational va",
+      "method": "See Research Intelligence edition for abstract evidence trace and falsification note.",
+      "meaning": "Included because it supports today's action-admission thesis."
+    },
+    {
+      "arxiv_id": "2609.02358",
+      "title": "Humanoid Safe Stop via Learned Stoppability Value",
+      "bucket": "Robot Learning",
+      "reading_depth": "Tier A - abstract-only",
+      "problem": "Humanoid robots responding to emergency stop commands typically execute a fixed maneuver, without reasoning about whether a safe stop is actually feasible from the current state. We cast emergency stopping as a reach-avoid problem and propose Safe-Stop, a task-agnostic framework that pairs a learned stop policy with learned stoppability estimators. The estim",
+      "method": "See Research Intelligence edition for abstract evidence trace and falsification note.",
+      "meaning": "Included because it supports today's action-admission thesis."
+    },
+    {
+      "arxiv_id": "2609.02402",
+      "title": "A Physics-Consistent Benchmark for Contact-Rich Human-Robot Interaction in Assistive Care",
+      "bucket": "Robot Learning",
+      "reading_depth": "Tier A - abstract-only",
+      "problem": "Conventional task-level evaluation asks whether a robot policy completes a specified action, but can miss failures that emerge only during physical human contact. This limitation is critical in contact-rich assistive tasks, where meaningful evaluation requires a physically responsive human, interaction-quality assessment beyond task success, and a leak-free ",
+      "method": "See Research Intelligence edition for abstract evidence trace and falsification note.",
+      "meaning": "Included because it supports today's action-admission thesis."
+    },
+    {
+      "arxiv_id": "2609.02531",
+      "title": "Spatially Aware World Action Model via Geometric Latent Diffusion",
+      "bucket": "Robot Learning",
+      "reading_depth": "Tier A - abstract-only",
+      "problem": "World Action Models (WAMs) leverage the capabilities of large-scale pretrained video diffusion models to jointly predict future observations and actions, inheriting rich visual and physical priors from internet-scale video. This has made them a promising paradigm for robot policy learning, yet the prevailing models operate exclusively on RGB observations and",
+      "method": "See Research Intelligence edition for abstract evidence trace and falsification note.",
+      "meaning": "Included because it supports today's action-admission thesis."
+    },
+    {
+      "arxiv_id": "2609.02811",
+      "title": "Do Better Imagined Rollouts Mean Better Robot Control? A Controlled Study of World-Model Evaluation Under Feedback",
+      "bucket": "3D/Scene",
+      "reading_depth": "Tier A - abstract-only",
+      "problem": "Predictive models are increasingly used in robotics for state estimation, planning, control, and policy evaluation, yet they are often judged by open-loop prediction accuracy over a fixed horizon. In closed-loop operation, a robot repeatedly acts, receives new measurements, updates its state estimate, and recomputes control. We study this difference in a dif",
+      "method": "See Research Intelligence edition for abstract evidence trace and falsification note.",
+      "meaning": "Included because it supports today's action-admission thesis."
+    },
+    {
+      "arxiv_id": "2609.02270",
+      "title": "CrashDiffuser: VLM-Guided Collision Intent Reasoning for Fine-Grained Safety-Critical Traffic Scenario Generation",
+      "bucket": "Autonomous Driving",
+      "reading_depth": "Tier A - abstract-only",
+      "problem": "Generating safety-critical scenarios is essential for evaluating autonomous driving systems. However, existing generators primarily focus on inducing collisions and offer limited control over where contact occurs on the target vehicle. In this paper, we study fine-grained safety-critical scenario generation, where success requires both a target collision and",
+      "method": "See Research Intelligence edition for abstract evidence trace and falsification note.",
+      "meaning": "Included because it supports today's action-admission thesis."
+    },
+    {
+      "arxiv_id": "2609.02028",
+      "title": "Detecting Object Hallucinations in Large Vision-Language Models via Cross-Modal Attention Drifts and Mask-Based Verification",
+      "bucket": "Foundation Models",
+      "reading_depth": "Tier A - abstract-only",
+      "problem": "Despite recent advances in large vision-language models (LVLMs), object hallucination remains a major barrier to their reliable deployment. Existing detection methods often characterize visual grounding using attention from individual layers, leaving its evolution across layers underexplored. We propose CADMP, a lightweight object hallucination detection fra",
+      "method": "See Research Intelligence edition for abstract evidence trace and falsification note.",
+      "meaning": "Included because it supports today's action-admission thesis."
+    },
+    {
+      "arxiv_id": "2609.02780",
+      "title": "ShallowStream: Index Shallow then Answer Deep for Streaming Video Understanding",
+      "bucket": "Efficiency/Systems",
+      "reading_depth": "Tier A - abstract-only",
+      "problem": "Streaming video understanding is a critical capability for real-world applications, including embodied intelligence, autonomous driving, industrial monitoring, surveillance and early warning, and wearable assistants. However, processing continuous video streams with multimodal large language models (MLLMs) is computationally expensive. Existing efforts have ",
+      "method": "See Research Intelligence edition for abstract evidence trace and falsification note.",
+      "meaning": "Included because it supports today's action-admission thesis."
+    }
+  ],
+  "frontier_memory": [
+    {
+      "label": "Strengthening",
+      "history": "Late-August and early-September editions emphasized robot-usable geometry, execution contracts, and evidence gates.",
+      "body": "September 3 strengthens that direction with TAPVid-MV, MV-dVRK, PACT, Safe-Stop, MS-MEM, CADMP, and ShallowStream."
+    },
+    {
+      "label": "New signal",
+      "history": "Recent notes focused on VLA action permission and dynamic map freshness.",
+      "body": "Today adds a sharper provenance axis: evidence can agree without being separately countable, so multi-view systems need source-aware action admission."
+    },
+    {
+      "label": "Contradiction",
+      "history": "World-model work often treats longer imagined futures as better planning evidence.",
+      "body": "The controlled rollout study shows that long measurement-free rollouts can rank estimators differently from closed-loop behavior."
+    },
+    {
+      "label": "Missing axis",
+      "history": "Geometry, contact, and VLM reliability are still mostly evaluated in separate literatures.",
+      "body": "APRL can own the combined gate: metric frame validity, contact recoverability, and visual provenance must jointly authorize robot action."
+    }
+  ],
+  "strategy_board": [
+    {
+      "priority": "Build moat",
+      "portfolio": "Build moat",
+      "title": "Provenance-aware action admission suite",
+      "opportunity": "Provenance-aware action admission suite",
+      "thesis": "Build a benchmark where multi-view visual agreement, map evidence, and contact signals only count when their origins are independently useful for action.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week": "Create a small multi-camera manipulation probe with duplicated views, independent views, masked targets, and typed hold/confirm/fallback labels.",
+      "one_week_probe": "Create a small multi-camera manipulation probe with duplicated views, independent views, masked targets, and typed hold/confirm/fallback labels.",
+      "four_week": "Compare PACT-style provenance fusion, standard confidence fusion, targeted masking, and contact-state checks on the same action-admission outcomes.",
+      "four_week_build": "Compare PACT-style provenance fusion, standard confidence fusion, targeted masking, and contact-state checks on the same action-admission outcomes.",
+      "success": "At least one method admits duplicated agreement but rejects under provenance-aware counting, with a measurable reduction in unsafe action permission.",
+      "success_metric": "At least one method admits duplicated agreement but rejects under provenance-aware counting, with a measurable reduction in unsafe action permission.",
+      "stop": "If provenance partitions do not change action decisions beyond ordinary confidence thresholds, keep the result as a diagnostic note.",
+      "stop_condition": "If provenance partitions do not change action decisions beyond ordinary confidence thresholds, keep the result as a diagnostic note.",
+      "paper_path": "A robot action-admission paper connecting multi-view provenance, visual grounding, and contact-state evidence.",
+      "asset_path": "Synchronized multi-view episodes, provenance partitions, target masks, contact labels, admission decisions, and fallback outcomes.",
+      "asset": "Synchronized multi-view episodes, provenance partitions, target masks, contact labels, admission decisions, and fallback outcomes."
+    },
+    {
+      "priority": "Build moat",
+      "portfolio": "Build moat",
+      "title": "Feedback-faithful world-model evaluation",
+      "opportunity": "Feedback-faithful world-model evaluation",
+      "thesis": "Evaluate robot world models under the same measurement-update schedule, horizon, and state corrections they will face during control.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 5,
+        "defensibility": 4,
+        "scientific_depth": 5
+      },
+      "one_week": "Replay a simple mobile or manipulation controller with paired measurement-free, intermittent-update, and closed-loop evaluation traces.",
+      "one_week_probe": "Replay a simple mobile or manipulation controller with paired measurement-free, intermittent-update, and closed-loop evaluation traces.",
+      "four_week": "Compare SA-WAM-style geometric futures, sparse residual world models, WCD selection, and conventional rollout metrics on action ranking under feedback.",
+      "four_week_build": "Compare SA-WAM-style geometric futures, sparse residual world models, WCD selection, and conventional rollout metrics on action ranking under feedback.",
+      "success": "A feedback-matched metric predicts closed-loop ranking better than open-loop rollout error on at least two sensing or contact degradation families.",
+      "success_metric": "A feedback-matched metric predicts closed-loop ranking better than open-loop rollout error on at least two sensing or contact degradation families.",
+      "stop": "If all metrics rank controllers identically after realistic feedback is included, narrow the project to the failure conditions where rollout metrics diverge.",
+      "stop_condition": "If all metrics rank controllers identically after realistic feedback is included, narrow the project to the failure conditions where rollout metrics diverge.",
+      "paper_path": "A world-model evaluation paper that defines correction schedule as part of the metric contract.",
+      "asset_path": "Rollout traces, measurement-update schedules, sensing outages, contact perturbations, closed-loop rankings, and mismatch labels.",
+      "asset": "Rollout traces, measurement-update schedules, sensing outages, contact perturbations, closed-loop rankings, and mismatch labels."
+    },
+    {
+      "priority": "Explore",
+      "portfolio": "Explore",
+      "title": "Contact-first assistive manipulation benchmark",
+      "opportunity": "Contact-first assistive manipulation benchmark",
+      "thesis": "Use assistive-care and dexterous manipulation tasks to rank policies by correct contact, force safety, recoverability, and disturbance, not task completion alone.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 3,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week": "Construct a tabletop proxy with local contact geometry, force thresholds, forbidden regions, and collateral-disturbance scoring.",
+      "one_week_probe": "Construct a tabletop proxy with local contact geometry, force thresholds, forbidden regions, and collateral-disturbance scoring.",
+      "four_week": "Evaluate DemoMimic-style local contact, MS-MEM action selection, torque-sampling MPPI, and assistive-care scorers on paired contact-safe and task-success conditions.",
+      "four_week_build": "Evaluate DemoMimic-style local contact, MS-MEM action selection, torque-sampling MPPI, and assistive-care scorers on paired contact-safe and task-success conditions.",
+      "success": "A policy with similar task success is separated by force safety, region correctness, or disturbance in a way that predicts human-observer acceptance.",
+      "success_metric": "A policy with similar task success is separated by force safety, region correctness, or disturbance in a way that predicts human-observer acceptance.",
+      "stop": "If contact metrics remain redundant with task success in the proxy, move the project to real tactile or compliant HRI data before claiming novelty.",
+      "stop_condition": "If contact metrics remain redundant with task success in the proxy, move the project to real tactile or compliant HRI data before claiming novelty.",
+      "paper_path": "A contact-rich evaluation paper focused on release conditions for assistive and dexterous robot action.",
+      "asset_path": "Contact patches, force traces, region labels, disturbance maps, human-observer scores, and task outcomes.",
+      "asset": "Contact patches, force traces, region labels, disturbance maps, human-observer scores, and task outcomes."
+    }
+  ],
+  "tiering_note": "Research Intelligence uses repository parser abstracts for selected Tier A papers. No figure/table/full-text claims are asserted in this conservative automation run.",
+  "research_intelligence": {
+    "html": "posts/2026-09-03-research-intelligence.html",
+    "json": "intelligence/2026-09-03.json",
+    "source_prompt": "prompts/instruction_v20260713.md"
+  }
+}
