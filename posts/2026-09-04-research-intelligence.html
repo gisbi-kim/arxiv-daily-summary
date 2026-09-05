@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-09-04 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-09-04 arXiv Research Intelligence</h1>
+<p class="lead">The September 4 batch turns evidence budgeting into the center of robot intelligence. Geometry papers ask which pose, Doppler, wire, semantic-map, or reconstruction signal remains reliable enough to define an action frame. Robot learning papers reject raw demonstration volume and instead gate training through modality relevance, web-video retrieval, real-to-sim evaluation, world-model imagination schedules, and action-sufficient intermediate features. World-model papers make the same move at the future-state layer: imagined futures, camera actions, and physical events matter only when they preserve consequences that change control. VLM, safety, and systems papers then attack the output layer by asking whether the answer, compressed token set, privacy-preserving export, restored image, or runtime monitor kept the evidence needed for a safe decision.</p><p class="scope">Daily edition from matching Friday /new listings: 112 non-replacement cs.CV rows, 48 cs.RO rows, 151 deduplicated papers, and 128 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claim is asserted unless the abstract itself states it.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>Evidence has to earn action authority</h3><p>EGR, GIFT, FailBench, CoverPruner, and PZR all convert a score into a question about which sensor, feature, token, or uncertainty set is allowed to affect the next decision.</p></article><article><span>Decision</span><h3>Geometry is becoming a failure contract</h3><p>Scal3R, TRaIL-Odom, WireSeg-32K, and robotic weld mapping all judge geometry by drift, contact consistency, sensor degeneracy, and downstream robot use rather than appearance alone.</p></article><article><span>Decision</span><h3>World models need bounded intervention</h3><p>WISE, WorldReward, VeriPhy, physically grounded JEPA, and RIWM treat imagination as a scheduled, audited, and risk-qualified intervention instead of an always-trusted simulator.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.03142" target="_blank" rel="noopener">Sensing Which Modality Matters: Evidence-Gated Regularization for Robust VLA Policies</a></h3>
+  <p class="fit">VLA robustness - modality relevance - real-robot occlusion and distractor tests</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Multimodal VLA policies often fuse every available sensor and hope training will ignore nuisance correlations.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract names modality entanglement: low-evidence sensors can still dominate under occlusion or distractors, while one informative sensor may not be sufficient.</p></div>
+    <div><h4>Hidden premise</h4><p>A policy should become invariant to low-evidence sensors and sufficient on high-evidence sensors before multimodal fusion is trusted.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn sensor fusion into a per-frame, per-sensor evidence gate that regularizes the training objective without inference-time overhead.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper introduces a BEHAVIOR-1K diagnostic suite and 47 rollout-based skills for modality entanglement.</span></li><li><strong>[Abstract]</strong><span>It reports gains under uninformative-sensor corruption, single-sensor fallback, and physical-object distractors on two real robot embodiments.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether each sensor actually changes action safety before treating more modalities as stronger evidence.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>EGR derives task-relevance signals and applies state-conditional consistency objectives for low-evidence invariance and high-evidence sufficiency.</p></div>
+    <div><h4>Falsification frontier</h4><p>If evidence gates collapse under unseen tasks or new sensor layouts, the method may be regularizing benchmark-specific correlations.</p></div>
+    <div><h4>Adversarial read</h4><p>Create scenes where tactile, wrist, and external camera cues alternate between helpful, irrelevant, and misleading while task success is held constant.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Multimodal evidence is useful only after low-evidence invariance and high-evidence sufficiency are separated.</p><p>Strong for multi-camera and visuotactile robot policies; weaker for single-sensor settings without an evidence partition.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.04201" target="_blank" rel="noopener">Scal3R: Learning Efficient Multi-Relative Pose Query for Scalable Online 3D Reconstruction</a></h3>
+  <p class="fit">online 3D reconstruction - long-video pose drift - multi-reference pose graph</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Online reconstruction often anchors pose regression to the first frame, forcing long videos into extrapolation beyond training distribution.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says depth stays locally stable while the global pose head collapses, so pose and local geometry fail differently.</p></div>
+    <div><h4>Hidden premise</h4><p>A reconstruction can be robot-usable only if global pose drift is repaired without discarding stable local depth evidence.</p></div>
+    <div><h4>Conceptual move</h4><p>Reformulate online reconstruction as multi-reference relative pose querying with lightweight tokens and pose-graph loop closure.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper reports more than 60 percent average ATE reduction on KITTI over the online baseline.</span></li><li><strong>[Abstract]</strong><span>It uses online pose-graph optimization with loop closure to suppress long-range drift.</span></li><li><strong>[Inference]</strong><span>APRL should score feed-forward reconstruction by relocalization and route or grasp changes under accumulated pose error.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Scal3R injects learnable pose-query tokens into a frozen backbone and queries poses relative to multiple past keyframes.</p></div>
+    <div><h4>Falsification frontier</h4><p>If drift reduction does not improve downstream localization or manipulation frames, Scal3R remains a reconstruction metric win rather than a robot-validity win.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress repeated corridors, moving objects, and loop-closure aliases where local depth appears stable but global action frames flip.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Separate local geometry evidence from global pose authority before releasing a map for robot action.</p><p>Strong for long-video mapping and navigation; less direct for short tabletop clips where first-frame anchoring is not the bottleneck.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.03561" target="_blank" rel="noopener">TRaIL-Odom: Tightly Coupled Continuous Time Radar-IMU-LiDAR Odometry with Adaptive Doppler Weighting</a></h3>
+  <p class="fit">radar-IMU-LiDAR odometry - directional degeneracy - adaptive Doppler weighting</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Radar-LiDAR fusion often applies fixed residual weights even when LiDAR geometry and radar Doppler are directionally informative in different ways.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says fixed radar weighting misallocates Doppler information across translational directions under geometric degeneracy.</p></div>
+    <div><h4>Hidden premise</h4><p>Sensor fusion should allocate trust by the currently weak motion subspace, not by a global sensor prior.</p></div>
+    <div><h4>Conceptual move</h4><p>Treat Doppler constraints as direction- and scan-dependent evidence that is reweighted against LiDAR geometric anisotropy.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Across 13 sequences the method reports state-of-the-art overall performance and clear advantages in degenerate scenes.</span></li><li><strong>[Abstract]</strong><span>In three degenerate ablations, both adaptive modules reduce RMSE ATE and RTE by 86.0 percent and 78.5 percent relative to fixed weighting.</span></li><li><strong>[Inference]</strong><span>APRL should condition odometry fusion weights on which direction is currently unobservable before planning trusts the pose.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>TRaIL-Odom combines per-point Doppler reweighting with scan-wise radar gain scheduling in a tightly coupled continuous-time odometry framework.</p></div>
+    <div><h4>Falsification frontier</h4><p>If adaptive weights do not improve recovery in robot navigation decisions, the odometry gain may not translate beyond trajectory metrics.</p></div>
+    <div><h4>Adversarial read</h4><p>Use tunnels, flat walls, wet surfaces, and lateral motion where radar and LiDAR disagree about the weak direction.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A sensor's evidence value is directional and state-dependent.</p><p>Direct for field robots with radar, LiDAR, and IMU; less direct for pure vision SLAM without Doppler constraints.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.03276" target="_blank" rel="noopener">R2S-Eval: Robot Evaluation with Real-to-Sim Calibration via Vision-Language Models</a></h3>
+  <p class="fit">robot evaluation - real-to-sim calibration - VLM preference ranking</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Robot policy evaluation is often treated as repeated hardware trials with binary success rates.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says real-world evaluation is labor-intensive, unstable, and can produce different policy rankings across repeated runs.</p></div>
+    <div><h4>Hidden premise</h4><p>A calibrated simulator and behavior-level preference evaluator can expose execution quality differences hidden by final success labels.</p></div>
+    <div><h4>Conceptual move</h4><p>Move robot evaluation from manual success counting to calibrated rollout videos and aggregated pairwise preference conclusions.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The pipeline is reported to achieve agreement with human preferences and reduce repeated hardware-operation effort.</span></li><li><strong>[Abstract]</strong><span>It reveals behavior-quality differences not captured by binary success labels.</span></li><li><strong>[Inference]</strong><span>APRL should publish policy rankings with calibration uncertainty and behavior-quality axes, not only success rate.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>R2S-Eval generates real-to-sim calibrated rollout videos and asks a VLM evaluator to rank execution quality before aggregating policy preferences.</p></div>
+    <div><h4>Falsification frontier</h4><p>If VLM preferences are biased by simulator visuals or fail on new domains, real-to-sim calibration may stabilize the wrong ranking.</p></div>
+    <div><h4>Adversarial read</h4><p>Hold final success fixed while changing collision margin, hesitation, contact force, and recovery quality in calibrated rollout videos.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Evaluation is a conclusion protocol, not a counter of terminal successes.</p><p>Strong for manipulation policy comparison; weaker for tasks where simulated videos cannot preserve critical tactile or force evidence.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.03681" target="_blank" rel="noopener">WISE: World-model-guided Imagination Scheduling for Efficient Post-training of Vision-Language-Action Models</a></h3>
+  <p class="fit">VLA post-training - imagination scheduling - bounded future evidence</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>World models are often used as always-on imagined rollout engines for policy refinement.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says imagination value varies by execution stage, while long rollouts can accumulate errors and introduce unreliable supervision.</p></div>
+    <div><h4>Hidden premise</h4><p>Imagined futures should refine policy actions only at interaction-relevant states and inside a trusted horizon.</p></div>
+    <div><h4>Conceptual move</h4><p>Schedule when and how world-model imagination is invoked during VLA post-training instead of using full imagination everywhere.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The method reports consistent improvements across manipulation tasks while reducing GPU computation time by about 80 percent compared with full imagination.</span></li><li><strong>[Abstract]</strong><span>Real-world evaluations show gains in robustness and generalization under distribution shifts.</span></li><li><strong>[Inference]</strong><span>APRL should record where imagination changes action ranking and where it becomes unreliable supervision.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>WISE selectively invokes bounded multi-view rollouts, evaluates candidate futures with progress and completion signals, and uses relative outcomes for action refinement.</p></div>
+    <div><h4>Falsification frontier</h4><p>If scheduling mostly removes hard cases, it may improve efficiency while leaving rare failure recovery unsolved.</p></div>
+    <div><h4>Adversarial read</h4><p>Force imagination at contact transitions, ambiguous object states, and recovery branches to find the horizon where supervision turns harmful.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>World-model imagination is an intervention with timing and stop conditions.</p><p>Strong for manipulation VLA post-training; weaker for policies whose world model cannot represent contact or hidden state.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.04193" target="_blank" rel="noopener">GIFT: Guided Intermediate Feature Training via Action-Oriented Structural Supervision for Robotic Manipulation</a></h3>
+  <p class="fit">robot manipulation - action-sufficiency gap - intermediate feature supervision</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Vision-language pretraining and world modeling can preserve rich visual information that is not useful for control.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract names an action-sufficiency gap: semantic and predictive features may omit geometry, affordance, or goal structure that actions need.</p></div>
+    <div><h4>Hidden premise</h4><p>Intermediate features should be supervised by control-relevant structure without forcing every model into the same action formulation.</p></div>
+    <div><h4>Conceptual move</h4><p>Guide intermediate robot features through geometry alignment, affordance prediction, and goal-region reconstruction.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>GIFT variants outperform corresponding baselines on LIBERO-Plus and RoboCasa.</span></li><li><strong>[Abstract]</strong><span>The gains are highlighted for articulated-object tasks and unseen visual and spatial perturbations.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate whether intermediate structure predicts action errors before final success changes.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>GIFT is instantiated in VLA, direct-action WAM, and inverse-dynamics WAM variants while retaining each model's action formulation.</p></div>
+    <div><h4>Falsification frontier</h4><p>If structural supervision helps only when benchmark labels mirror the auxiliary tasks, the action-sufficiency claim is over-broad.</p></div>
+    <div><h4>Adversarial read</h4><p>Hide affordance cues, perturb geometry, and change goal regions independently to test which structure actually controls action.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A feature is useful only if it is sufficient for the next action, not if it is visually rich.</p><p>Strong for manipulation and WAM/VLA comparisons; weaker for language-only planning or tasks without structural labels.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.03611" target="_blank" rel="noopener">FailBench: How Reliable are VLMs at Judging Robot Task Success?</a></h3>
+  <p class="fit">robot outcome evaluation - VLM judge reliability - failure detection</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Robot pipelines increasingly use VLMs as inexpensive judges for manipulation outcomes.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says existing benchmarks offer limited evidence of cross-domain generalization for robot failure detection.</p></div>
+    <div><h4>Hidden premise</h4><p>A judge can authorize evaluation conclusions only if it detects failure modes across tasks, domains, and visual conditions.</p></div>
+    <div><h4>Conceptual move</h4><p>Make robot-success judging itself a benchmarked perception problem rather than an assumed service.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The benchmark comprises 2,197 manipulation examples.</span></li><li><strong>[Abstract]</strong><span>It targets cross-domain robot failure detection rather than ordinary VQA accuracy.</span></li><li><strong>[Inference]</strong><span>APRL should validate every VLM evaluator before using it to rank robot policies.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>FailBench supplies manipulation outcome examples for testing whether VLMs can reliably judge task success and failure.</p></div>
+    <div><h4>Falsification frontier</h4><p>If the benchmark lacks force, tactile, or invisible-state failures, a VLM may pass while missing robot-relevant failures.</p></div>
+    <div><h4>Adversarial read</h4><p>Create visually successful but physically invalid trials, and physically successful but visually ambiguous trials, then compare judge rankings.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Evaluation agents need their own deployment benchmark.</p><p>Strong for vision-observable manipulation outcomes; incomplete for hidden contact, force, or proprioceptive failures.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.03153" target="_blank" rel="noopener">VeriPhy: Agentic Physical Reasoning for World Model Evaluation and Refinement</a></h3>
+  <p class="fit">world-model evaluation - physical verification - auditable refinement</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Generated videos can look fluent while violating physical obligations at specific moments.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says visual fluency and scalar quality scores cannot identify the obligation a clip violates or the moment of failure.</p></div>
+    <div><h4>Hidden premise</h4><p>A world-model clip should be audited through named physical obligations that can localize and repair failures.</p></div>
+    <div><h4>Conceptual move</h4><p>Turn world-model evaluation into an agentic physical-verification workflow with explicit violation traces.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper presents an auditable physical-verification system for generated video.</span></li><li><strong>[Abstract]</strong><span>It targets the obligation and moment where a clip fails, not only a scalar quality score.</span></li><li><strong>[Inference]</strong><span>APRL should define world-model failures as actionable physical obligations before using generated futures for planning.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>VeriPhy uses a tool-using agent to check physical constraints and refine generated clips based on discovered failures.</p></div>
+    <div><h4>Falsification frontier</h4><p>If verifier obligations are incomplete or tuned to visible violations only, the system may miss control-relevant hidden state errors.</p></div>
+    <div><h4>Adversarial read</h4><p>Test contact persistence, support, collision, gravity, and camera-motion obligations independently under visually plausible clips.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A generated future should carry a falsifiable physical obligation trace.</p><p>Strong for visual world-model auditing; weaker for tactile or force dynamics unless the verifier can observe them.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#9</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.03158" target="_blank" rel="noopener">Who Speaks for the Pruned? Visual Token Pruning as Coverage Optimization</a></h3>
+  <p class="fit">VLM efficiency - visual token pruning - coverage of discarded evidence</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Token pruning usually asks which visual tokens to keep and ignores what evidence the discarded tokens represented.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says retained-token selection can preserve redundant high-scoring tokens while leaving discarded evidence uncovered.</p></div>
+    <div><h4>Hidden premise</h4><p>A compressed visual representation is trustworthy only if every removed token has a surviving representative for the target query and model.</p></div>
+    <div><h4>Conceptual move</h4><p>Formulate visual token pruning as representational coverage maximization rather than top-token retention.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The method is training-free and reports the best average accuracy among compared methods across architectures and compression rates.</span></li><li><strong>[Abstract]</strong><span>The largest gains usually appear under aggressive compression.</span></li><li><strong>[Inference]</strong><span>APRL should measure whether pruned robot vision still covers the evidence that could change an action.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>CoverPruner covers the full projected visual-token set with query-weighted demand using projector-space coverage and first-layer attention probes.</p></div>
+    <div><h4>Falsification frontier</h4><p>If coverage preserves semantics but misses geometry, grasp contact, or safety cues, it may still fail robot action admission.</p></div>
+    <div><h4>Adversarial read</h4><p>Prune scenes with small hazards, thin wires, transparent objects, and distant navigation cues while measuring action changes.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask who represents the discarded evidence before accepting a cheaper visual context.</p><p>Strong for VLM visual context budgets; less direct for dense control policies that do not expose token-level evidence.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#10</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.03055" target="_blank" rel="noopener">Seeing Less Is Not Seeing Safely: Privacy Leakage from Task-Scoped Robot Perception Exports</a></h3>
+  <p class="fit">robot privacy - task-scoped perception export - utility and leakage trade-off</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>A robot perception export can be treated as safe once raw sensor data stay local and only task-scoped structure leaves the device.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says structured exports still leak household information through semantics, geometry, spatial structure, and task targets.</p></div>
+    <div><h4>Hidden premise</h4><p>A perception export should be released only after task utility and multiple residual inference risks are evaluated together.</p></div>
+    <div><h4>Conceptual move</h4><p>Profile downstream robot representations by utility, direct exposure, and held-out representation-aware privacy attacks.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Three navigation exports achieve identical success and path ratio while linkability ranges from 0.532 to 0.970.</span></li><li><strong>[Abstract]</strong><span>Replacing explicit target labels with target regions reduces target-category macro-F1 while preserving near-identical task success.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate robot representation exports as safety and privacy release decisions, not logging details.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>TFPD keeps rich perception local and evaluates navigation, collision checking, and object-goal exports on AI2-THOR and ProcTHOR splits.</p></div>
+    <div><h4>Falsification frontier</h4><p>If held-out attackers are weak or scene distributions are too narrow, leakage ordering may not transfer to real homes.</p></div>
+    <div><h4>Adversarial read</h4><p>Test target, geometry, topological, and semantic exports against attackers trained on disjoint houses and tasks.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Seeing less is not a safety proof unless task utility and residual inference risk are jointly bounded.</p><p>Strong for domestic robots and cloud planner interfaces; less direct for fully local deployments with no representation export.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>Robot learning papers now name the evidence variable</h3><p class='links'>EGR - RoboTok - R2S-Eval - WISE - GIFT</p><p><strong>Observed</strong> - The abstracts separate modality relevance, web-video motion retrieval, calibrated evaluation, imagination timing, and action-sufficient structure.</p><p><strong>Inference</strong> - The common decision is to let data, sensors, simulated futures, or features influence policy only after their action relevance is tested.</p></article><article><h3>Geometry papers are release gates for downstream action</h3><p class='links'>Scal3R - TRaIL-Odom - WireSeg-32K - semantic mapping - robotic weld mapping</p><p><strong>Observed</strong> - The batch covers pose drift, radar-LiDAR degeneracy, physically grounded wire deformation, dynamic semantic maps, and weld-seam localization.</p><p><strong>Inference</strong> - APRL should treat maps and reconstructions as candidates for action authority, with drift, contact, semantic freshness, and task error measured together.</p></article><article><h3>Safety and efficiency papers reject average-score comfort</h3><p class='links'>FailBench - CoverPruner - SafeRestore - PZR - privacy exports</p><p><strong>Observed</strong> - The papers test judge reliability, coverage of pruned evidence, detector-relative restoration risk, uncertainty monitor precision, and privacy leakage.</p><p><strong>Inference</strong> - Cheaper or safer-looking systems still need evidence-retention, risk, and failure-family tests before they can be trusted in a robot loop.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>August 31 through September 3 repeatedly framed robot intelligence as an action-release contract.</p><p>September 4 strengthens that contract with modality evidence gates, real-to-sim evaluation, world-model scheduling, robot judge benchmarks, and uncertainty monitors.</p></article><article><span>New signal</span><p class='history'>Earlier notes focused on provenance, geometry validity, and feedback-matched world models.</p><p>Today adds a stronger budget axis: visual tokens, sensor exports, imagination steps, and frame selections should be spent only when they preserve decision-changing evidence.</p></article><article><span>Contradiction</span><p class='history'>Robot learning often treats more modalities, more web demonstrations, or more imagined futures as better supervision.</p><p>EGR, WISE, CoverPruner, and privacy export work all show that extra evidence can be harmful, redundant, or leaky unless it is gated by relevance and risk.</p></article><article><span>Missing axis</span><p class='history'>Geometry, VLA evaluation, privacy, and runtime monitoring are still largely separate artifacts.</p><p>APRL can own a shared evidence-budget benchmark that ties sensor trust, geometry drift, privacy leakage, uncertainty precision, and action changes in one robot episode.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Evidence-budgeted robot action benchmark</h3><p class="thesis">Build robot episodes where every camera, tactile stream, map update, compressed token set, and imagined future must prove that it changes action safely.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 5</span><span>timing 5</span><span>tractability 4</span><span>defensibility 5</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create five manipulation and navigation episodes with informative, irrelevant, corrupted, duplicated, and missing sensor evidence.</p></div>
+    <div><strong>4-week build</strong><p>Compare EGR-style gates, ordinary fusion, token pruning, real-to-sim evaluation, and uncertainty monitors under the same action-admission labels.</p></div>
+    <div><strong>Success metric</strong><p>An evidence gate changes unsafe action permission or recovery timing before final task success diverges on at least three failure families.</p></div>
+    <div><strong>Stop condition</strong><p>Stop if evidence partitions do not change decisions beyond ordinary confidence or success-rate thresholds.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Robot episodes with sensor relevance labels, token budgets, action deltas, uncertainty sets, privacy exports, and fallback outcomes.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Exploit</span><span class="total">total 27/30</span></div>
+  <h3>Robot-usable geometry drift suite</h3><p class="thesis">Evaluate maps and reconstructions by the pose, correspondence, contact, and semantic freshness failures that change downstream robot action.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 4</span><span>timing 5</span><span>tractability 4</span><span>defensibility 5</span><span>scientific_depth 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Record one corridor route and one tabletop cable or weld-like object with repeated views, weak labels, and sensor degeneracy.</p></div>
+    <div><strong>4-week build</strong><p>Benchmark Scal3R-like reconstruction, radar/LiDAR odometry, semantic mapping, and task-specific segmentation against route and manipulation outcomes.</p></div>
+    <div><strong>Success metric</strong><p>A robot-validity metric predicts relocalization, grasp, or inspection failure better than reconstruction or trajectory metrics alone.</p></div>
+    <div><strong>Stop condition</strong><p>Stop if downstream failures are fully explained by standard pose error and no representation-specific variable matters.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Robot trajectories, wire or weld geometry, semantic update logs, odometry degeneracy labels, and downstream action outcomes.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 26/30</span></div>
+  <h3>Scheduled imagination release gate</h3><p class="thesis">Treat robot world-model imagination as a bounded intervention whose timing, horizon, and verifier must be released before it can train or guide a policy.</p>
+  <div class="scores"><span>strategic_fit 4</span><span>asymmetry 5</span><span>timing 5</span><span>tractability 3</span><span>defensibility 4</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Replay two manipulation tasks with imagined rollouts injected at contact approach, contact transition, recovery, and terminal phases.</p></div>
+    <div><strong>4-week build</strong><p>Compare full imagination, WISE-style scheduling, physical-verification rejection, and JEPA state-alignment gates under controlled distribution shifts.</p></div>
+    <div><strong>Success metric</strong><p>A scheduled or verified imagination policy beats full imagination under at least two shift families while using less compute.</p></div>
+    <div><strong>Stop condition</strong><p>Stop if imagination timing does not alter policy ranking or if verifier errors correlate poorly with action failure.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Imagined-future traces, injection timings, physical-obligation labels, action rankings, and compute profiles.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-09-04.json">intelligence/2026-09-04.json</a>.</footer>
+</body></html>

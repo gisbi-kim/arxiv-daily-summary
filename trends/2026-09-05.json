@@ -1,0 +1,284 @@
+{
+  "date": "2026-09-05",
+  "iso_week": "2026-W36",
+  "week_start": "2026-08-30",
+  "week_end": "2026-09-05",
+  "source_listing_date": "2026-09-04",
+  "source_mode": "pastweek",
+  "source_daily_artifacts": [
+    "2026-08-31",
+    "2026-09-01",
+    "2026-09-02",
+    "2026-09-03",
+    "2026-09-04"
+  ],
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "totals": {
+    "selected": 432,
+    "total_scanned": 1022
+  },
+  "daily_totals": {
+    "cv": 809,
+    "ro": 254,
+    "selected": 849,
+    "total_scanned": 1022
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 57,
+      "cv": 47,
+      "ro": 8,
+      "cvro": 2
+    },
+    "Robot Learning": {
+      "total": 72,
+      "cv": 2,
+      "ro": 60,
+      "cvro": 10
+    },
+    "Autonomous Driving": {
+      "total": 33,
+      "cv": 11,
+      "ro": 17,
+      "cvro": 5
+    },
+    "Foundation Models": {
+      "total": 68,
+      "cv": 64,
+      "ro": 4,
+      "cvro": 0
+    },
+    "Generation": {
+      "total": 98,
+      "cv": 85,
+      "ro": 11,
+      "cvro": 2
+    },
+    "Efficiency/Systems": {
+      "total": 55,
+      "cv": 47,
+      "ro": 8,
+      "cvro": 0
+    },
+    "Embodied AI": {
+      "total": 24,
+      "cv": 3,
+      "ro": 17,
+      "cvro": 4
+    },
+    "Safety/Alignment": {
+      "total": 25,
+      "cv": 21,
+      "ro": 4,
+      "cvro": 0
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA authority moves from larger context to evidence-gated action permission",
+      "representative_ids": [
+        "2608.27609",
+        "2609.01215",
+        "2609.00908",
+        "2609.01662",
+        "2609.03142",
+        "2609.03276",
+        "2609.04193"
+      ],
+      "why": "The week repeatedly rejects the idea that a VLA should simply consume more prompts, memories, sensors, or demonstrations. Planning-horizon reasoning, typed motor programs, adaptive chunk stops, provenance-conserving action admission, evidence-gated modality regularization, real-to-sim behavior evaluation, and action-sufficient intermediate features all ask whether an input is authorized to change a command. APRL should therefore measure action delta, failure-warning lead time, and fallback timing before trusting context size or final success.",
+      "confidence": "High - every weekday produced independent evidence around VLA action authority, stop contracts, provenance, evaluation, or modality gates.",
+      "lab_action": "Run one shared manipulation suite with prompt authority, typed skill library, action chunk stop, provenance partition, modality relevance, real-to-sim judge, and intermediate structural supervision as independent conditions; compare action delta, unsafe permission, failure lead time, recovery success, and judge stability."
+    },
+    {
+      "cluster": "Robot-usable geometry becomes the release gate for maps, reconstruction, and odometry",
+      "representative_ids": [
+        "2608.27497",
+        "2608.28891",
+        "2609.00775",
+        "2609.01899",
+        "2609.02717",
+        "2609.04201",
+        "2609.03561"
+      ],
+      "why": "Geometry papers no longer stop at plausible maps or lower trajectory error. Metric-aware perception, drone-satellite registration, open-vocabulary instance maps, multi-view 3D tracking, scanner-validated surgical perception, long-video pose repair, and adaptive radar-LiDAR odometry all ask whether recovered state can safely define route, grasp, surgery, inspection, or localization decisions. APRL's geometry benchmark should connect representation error directly to robot task error.",
+      "confidence": "High - daily artifacts include metric geometry, dynamic maps, multi-view tracking, surgical reconstruction, online reconstruction, and radar-LiDAR odometry.",
+      "lab_action": "Compare SLAM, Gaussian maps, feed-forward reconstruction, multi-view tracking, weak-label geo-registration, and radar-LiDAR odometry on repeated robot routes, deforming wires, surgical-like surfaces, and low-observability scenes; score relocalization, scale drift, correspondence failure, contact error, and downstream task success."
+    },
+    {
+      "cluster": "World models are judged by feedback timing, action consequences, and risk qualification",
+      "representative_ids": [
+        "2608.27549",
+        "2609.00188",
+        "2609.02531",
+        "2609.02811",
+        "2609.03681",
+        "2609.03952",
+        "2609.03565",
+        "2609.03774"
+      ],
+      "why": "The week turns world models from plausible future generators into controlled interventions. Executable worlds, video-pretrained WAMs, geometric latent diffusion, feedback-sensitive rollout evaluation, scheduled imagination, action-aligned reward models, state-aligned JEPA planning, and risk-informed world-model design all ask which future matters for the next action and when that future should be rejected. APRL should publish correction schedules and stop conditions for every imagined signal.",
+      "confidence": "High - action-faithfulness, feedback schedule, physical state, reward chunking, and safety-critical consequence signals recur across the full week.",
+      "lab_action": "Create mobile and manipulation episodes with matched open-loop rollouts, intermittent feedback, scheduled imagination, physical-obligation checks, and risk memories; compare closed-loop ranking, recovery timing, physical-state error, action consequence agreement, and compute spent per useful correction."
+    },
+    {
+      "cluster": "Contact-rich embodiment shifts from success counting to continuation and recovery conditions",
+      "representative_ids": [
+        "2608.29601",
+        "2609.01596",
+        "2609.02358",
+        "2609.02402",
+        "2609.03889",
+        "2609.03591",
+        "2609.03199"
+      ],
+      "why": "Manipulation and HRI papers show that terminal success can hide the physical variables that matter most: tactile data, contact-rich foundation policies, stoppability, assistive-care force safety, force-aware whole-body compensation, bimanual on-policy correction, and retrieved human demonstrations. The shared weekly move is to decide when a robot may continue, reset, slow down, change grip, or ask for help before the terminal label arrives.",
+      "confidence": "High - tactile, contact, stop, assistive HRI, force-aware compensation, bimanual correction, and web-video retrieval evidence all target physical continuation.",
+      "lab_action": "Use deformable, articulated, bimanual, assistive-care, and loco-manipulation tasks with contact geometry, force threshold, tactile history, recovery branch, retrieved demo, and body compensation ablations; compare safe continuation, force violation, slip onset, reset quality, and task recovery."
+    },
+    {
+      "cluster": "VLM reliability moves from answer scores to evidence provenance and shortcut tests",
+      "representative_ids": [
+        "2608.28316",
+        "2608.28698",
+        "2608.29374",
+        "2609.00232",
+        "2609.00868",
+        "2609.02028",
+        "2609.03611",
+        "2609.03261"
+      ],
+      "why": "VLM papers attack the assumption that a correct or fluent answer proves visual understanding. Conditional evidence utility, state-conditioned retrieval, visual self-correction, task verification, visual insensitivity, attention-drift masking, robot failure judging, and medical shortcut benchmarks all inspect whether the model used the right evidence. For robot use, the question is whether evidence changes permission to act, abstain, confirm, or reject an evaluator's ranking.",
+      "confidence": "High - answer verification, visual-use diagnostics, provenance, hallucination detection, and robot judge reliability recur from Monday through Friday.",
+      "lab_action": "Evaluate robot VLMs and VLM judges with target absence, duplicated views, shortcut-rich questions, masked decisive regions, old-frame retrieval, task invalidity, and physically impossible scenes; compare refusal precision, evidence-use sensitivity, unsafe action permission, and policy-ranking stability."
+    },
+    {
+      "cluster": "Efficiency and safety become evidence-retention contracts under budget and uncertainty",
+      "representative_ids": [
+        "2608.27808",
+        "2609.00291",
+        "2609.02780",
+        "2609.03158",
+        "2609.03820",
+        "2609.03055",
+        "2609.03699",
+        "2609.03475"
+      ],
+      "why": "Deployment work this week is strongest when it refuses to equate cheaper execution with safer execution. Runtime alarms, adaptive streaming look-depth, shallow video indexing, token coverage pruning, controlled long-video allocation, robot privacy exports, predictive zonotope reduction, and detector-relative restoration certificates all ask what evidence or risk bound remains after compression, abstraction, or monitoring. APRL should score budget changes by decisive-cue retention and action-risk change, not latency alone.",
+      "confidence": "High - multiple independent systems papers tie compute, privacy, monitoring, restoration, and compression to evidence or risk preservation.",
+      "lab_action": "Sweep visual-token budget, frame-retrieval depth, shallow index layer, perception-export abstraction, zonotope reducer, and restoration gate on robot video, home navigation, industrial inspection, and arm monitoring tasks; compare decisive-cue recall, privacy leakage, false alarms, detector evidence loss, latency, and downstream action delta."
+    }
+  ],
+  "frontier_memory": {
+    "new": [
+      "Friday adds a clear evidence-budget axis: sensors, tokens, privacy exports, and imagination steps must prove action relevance before use.",
+      "Robot privacy exports appear as an action-release concern rather than a logging or compliance side issue.",
+      "World-model scheduling and physical verification make imagination timing a first-class experimental variable."
+    ],
+    "strengthening": [
+      "Action admission, provenance, and fallback permission strengthened across VLA, HRI, world models, and VLM judge papers.",
+      "Robot-usable geometry strengthened through metric perception, dynamic semantic maps, multi-view tracking, surgical reconstruction, pose repair, and radar-LiDAR odometry.",
+      "Efficiency work strengthened around decisive-cue retention rather than raw token, frame, or latency reduction."
+    ],
+    "commoditizing": [
+      "Generic more-data VLA claims, pretty world-model rollouts, and pruning-only speedups look weak unless they expose which evidence variable changed action."
+    ],
+    "contradiction": [
+      "The same week celebrates broader multimodal robot context and warns that extra context can be redundant, correlated, privacy-leaking, or unsafe without explicit evidence gates."
+    ],
+    "missing_axis": [
+      "No single public benchmark yet combines modality relevance, robot-usable geometry, world-model feedback timing, VLM judge reliability, privacy leakage, and runtime safety margin in one closed-loop robot episode."
+    ]
+  },
+  "strategy_board": [
+    {
+      "opportunity": "Evidence-Budgeted Action Admission Suite",
+      "portfolio": "Build moat",
+      "why_now": "W36 produced repeated evidence gates across VLA, maps, world models, VLM judges, token pruning, privacy exports, and runtime monitors.",
+      "what_others_optimize": "Most papers still optimize isolated success rate, reconstruction score, VQA accuracy, token count, or runtime false positives.",
+      "our_contrarian_bet": "APRL should own the shared action-admission protocol that says when evidence is allowed to influence the robot.",
+      "required_moat": "Synchronized robot episodes with sensor provenance, modality relevance, map drift, compressed evidence, privacy attack labels, safety margins, and fallback outcomes.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "score_rationale": {
+        "strategic_fit": "Directly matches APRL robot perception, SLAM, VLA, and safety interests.",
+        "asymmetry": "A small lab can win by owning hard evidence episodes rather than model scale.",
+        "timing": "The evidence-gate vocabulary is emerging before standards settle.",
+        "tractability": "A five-episode probe can be started with existing robots and cameras.",
+        "defensibility": "Curated evidence partitions and failure labels become hard-to-copy assets.",
+        "scientific_depth": "The question separates evidence authority from final success."
+      },
+      "one_week_probe": "Build five episodes with informative, irrelevant, duplicated, missing, and privacy-sensitive evidence sources.",
+      "four_week_build": "Benchmark fusion, VLA, map, VLM judge, pruning, privacy export, and runtime-monitor variants on the same admission labels.",
+      "success_metric": "Evidence gates change unsafe action permission or recovery timing before final success diverges on three failure families.",
+      "stop_condition": "Stop if evidence partitions do not change decisions beyond ordinary confidence or terminal success.",
+      "paper_path": "Evidence-budgeted action admission for multimodal robot intelligence.",
+      "asset_path": "Robot episodes, synchronized evidence partitions, action deltas, fallback labels, privacy attacks, and safety margins."
+    },
+    {
+      "opportunity": "Robot-Usable Geometry and Drift Protocol",
+      "portfolio": "Exploit",
+      "why_now": "The week tied metric geometry, dynamic maps, multi-view tracking, surgical reconstruction, pose repair, and radar-LiDAR odometry into one release-gate problem.",
+      "what_others_optimize": "Reconstruction appearance, ATE, correspondence accuracy, or isolated map quality.",
+      "our_contrarian_bet": "A map should be accepted only if its error predicts route, grasp, inspection, or safety outcomes under robot deployment conditions.",
+      "required_moat": "Robot trajectories, weak-label maps, dynamic scenes, deformable wires, inspection targets, sensor degeneracy, and downstream action outcomes.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 4
+      },
+      "score_rationale": {
+        "strategic_fit": "Core APRL SLAM and robot perception work.",
+        "asymmetry": "Deployment-validity episodes beat generic reconstruction scale.",
+        "timing": "3D foundation models, Gaussian maps, and sensor fusion are converging now.",
+        "tractability": "A corridor and tabletop probe are feasible in one week.",
+        "defensibility": "Repeated robot routes and task outcomes are reusable assets.",
+        "scientific_depth": "Links representation error to action consequence."
+      },
+      "one_week_probe": "Record two route and tabletop scenes with pose aliases, moving objects, wire-like contacts, and weak semantic labels.",
+      "four_week_build": "Compare reconstruction, SLAM, multi-view tracking, semantic maps, and radar-LiDAR odometry against downstream robot tasks.",
+      "success_metric": "A robot-validity score predicts action failure better than ATE, PSNR, or segmentation mAP alone.",
+      "stop_condition": "Stop if standard pose or segmentation error fully explains downstream failures.",
+      "paper_path": "Operational geometry validity for robot maps and reconstruction.",
+      "asset_path": "Robot route data, calibration, map states, object/contact annotations, drift labels, and downstream outcomes."
+    },
+    {
+      "opportunity": "Feedback-Faithful World-Model Release Gate",
+      "portfolio": "Explore",
+      "why_now": "W36 repeatedly asks whether imagined futures are timed, verified, action-faithful, and risk-qualified.",
+      "what_others_optimize": "Visual plausibility, rollout error, video reward, or policy gain in isolation.",
+      "our_contrarian_bet": "A world model should be blocked from policy learning unless it preserves the action consequence under the actual feedback schedule.",
+      "required_moat": "Counterfactual robot futures, measurement-update schedules, physical-obligation labels, risk memories, and policy-correction outcomes.",
+      "scores": {
+        "strategic_fit": 4,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 3,
+        "defensibility": 4,
+        "scientific_depth": 5
+      },
+      "score_rationale": {
+        "strategic_fit": "Close to APRL robot execution, though model integration may be heavier.",
+        "asymmetry": "A validity benchmark can expose failures in larger models.",
+        "timing": "WAM and world-model evaluation criteria are still unsettled.",
+        "tractability": "A small replay probe is easy; full WAM comparison is harder.",
+        "defensibility": "Action-consequence traces and feedback schedules are reusable.",
+        "scientific_depth": "Tests causal action state, not visual texture alone."
+      },
+      "one_week_probe": "Replay two manipulation and one navigation task with open-loop, intermittent-feedback, and scheduled-imagination variants.",
+      "four_week_build": "Compare WAM, JEPA, reward-model, and physical-verifier gates by closed-loop action ranking and recovery outcome.",
+      "success_metric": "Feedback-matched metrics predict robot control ranking better than ordinary visual or rollout scores.",
+      "stop_condition": "Stop if all metrics rank methods identically once realistic feedback is included.",
+      "paper_path": "Feedback-faithful evaluation for robot world-action models.",
+      "asset_path": "Rollout traces, feedback schedules, counterfactual actions, physical failures, risk labels, and policy outcomes."
+    }
+  ]
+}
