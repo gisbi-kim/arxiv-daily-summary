@@ -1,0 +1,451 @@
+{
+  "date": "2026-09-09",
+  "edition": "Research Intelligence",
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "source_mode": "new",
+  "scope_note": "Daily edition from matching Wednesday /new listings: 359 non-replacement cs.CV rows, 155 cs.RO rows, 485 deduplicated papers, and 401 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claim is asserted unless the abstract itself states it.",
+  "executive_thesis": "The September 9 batch makes action authority conditional on evidence freshness. VLA and robot-learning papers ask whether a policy knows where success stops, which memory operation is needed, when a force signal must interrupt an action chunk, and how long reasoning can stay executable on a mobile robot. Geometry papers move 3DGS, spherical LiDAR, in-hand reconstruction, inertial odometry, and learned occupancy into closed-loop validity tests rather than visual-quality scores. Driving and embodied navigation papers then attach those representations to scenario testing, reachability, consequence-weighted failure, and stale-map filtering. The safety and systems papers close the loop by asking whether compressed tokens, cached KV states, visual CoT, authority cues, and multimodal guardrails still preserve the exact evidence that should permit, block, or revise an action.",
+  "decision_cards": [
+    {
+      "label": "Decision",
+      "title": "VLA reliability moved to boundary variables",
+      "body": "CR-VLA-Force, Failure-Boundary Learning, VLA-Corrector, MEMOBench, SimpleMemVLA, and MobileVLA-R1 separate success into force timing, failure boundaries, stage recovery, memory operations, and reasoning-to-control consistency."
+    },
+    {
+      "label": "Decision",
+      "title": "Geometry needs planner-facing validity gates",
+      "body": "LightSplat, Spheriverse, AURORA, observation-gated occupancy, and closed-loop BEV evaluation ask whether geometry remains useful once tracking, map updates, collision constraints, and task endpoints depend on it."
+    },
+    {
+      "label": "Decision",
+      "title": "Efficient evidence must remain auditable",
+      "body": "DefTEval, CrACK, CoVeR, ECOKV, STAR-Pro, GradeTrap, and Evidence-Aligned Guardrails show that compression, collaboration, and visual reasoning are unsafe unless the retained evidence can still be localized and stress-tested."
+    }
+  ],
+  "papers": [
+    {
+      "rank": 1,
+      "title": "CR-VLA-Force: Learning Control-aware Compliance VLA Model for Robust Contact-rich Robotic Manipulation",
+      "arxiv_id": "2609.05832",
+      "fit": "contact-rich VLA - force timing - reactive compliance",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Force-aware VLA policies can still execute long action chunks before force feedback changes the command.",
+      "friction": "The abstract says force-aware VLA models remain weak at precise force tracking and rapid successive adjustment.",
+      "hidden_premise": "Contact evidence should be allowed to interrupt or reshape an action chunk before unsafe force accumulates.",
+      "conceptual_move": "Encode force signal sequences with visual-language features and treat compliance as a control-aware VLA capability.",
+      "mechanism": "The proposed CC-VLA framework uses multimodal mixture-of-experts features so force and visual-language evidence can jointly shape reactive control.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper targets action-chunk latency and force-tracking limits in contact-rich manipulation."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It introduces Control-aware Compliance VLA for reactive control with force/torque perception."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should score whether force evidence changes the remaining command before a contact failure completes."
+        }
+      ],
+      "falsification": "If gains disappear when contact timing, material compliance, or object geometry changes, the method may be fitting familiar force profiles.",
+      "adversarial": "Test delayed force spikes, near-identical visual states with different contact stiffness, and action chunks that must be interrupted mid-execution.",
+      "thinking_tool": "Treat contact as a permission signal over the next action, not as an auxiliary observation.",
+      "transfer_boundary": "Direct for force/torque-equipped manipulation; weaker for tasks without contact sensing or chunked policy execution."
+    },
+    {
+      "rank": 2,
+      "title": "Where Success Breaks: Failure-Boundary Learning for Robust Vision-Language-Action Models",
+      "arxiv_id": "2609.06114",
+      "fit": "VLA adaptation - failure boundary - semantic progress localization",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Supervised fine-tuning teaches successful demonstrations but gives little signal about where a policy stops being reliable.",
+      "friction": "The abstract frames robust adaptation as discovering, localizing, and shaping the boundary between recoverable deviations and task failure.",
+      "hidden_premise": "A robot policy should learn the margin around success, not only imitate points that already succeeded.",
+      "conceptual_move": "Use real-grounded priors, digital-twin rollouts, and semantic progress localization to turn near-failures into training signal.",
+      "mechanism": "The abstract describes DLS as a pipeline that discovers failure boundaries at scale and assigns progress-aware signals from privileged simulator states.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The work argues SFT inherits an asymmetry because expert demonstrations do not show where success ceases."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It proposes Failure-Boundary Learning with discovery, localization, and shaping stages."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should add margin and recoverability labels next to episode success."
+        }
+      ],
+      "falsification": "If digital-twin failures do not match real robot boundary cases, the learned boundary may be simulation-specific.",
+      "adversarial": "Compare simulator-discovered boundaries with physical perturbations that preserve the same nominal task and object layout.",
+      "thinking_tool": "Robustness begins at the border where success becomes unrecoverable.",
+      "transfer_boundary": "Strong for VLA manipulation with simulators; less direct for field robots whose failure boundary is not easily simulated."
+    },
+    {
+      "rank": 3,
+      "title": "SimpleMemVLA: A Simple but Effective Native-Video Memory for Vision-Language-Action Models",
+      "arxiv_id": "2609.05533",
+      "fit": "long-horizon manipulation - native video memory - shared prefix efficiency",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Robot memory modules often decide what to compress or retrieve before knowing what a later action will need.",
+      "friction": "The abstract says minute-scale history may now be tractable for modern VLM backbones, weakening the assumption behind custom memory modules.",
+      "hidden_premise": "A VLA can use history in the format its backbone already understands if the action head receives the right generated sub-task state.",
+      "conceptual_move": "Keep sampled history as timestamped video and use shared-prefix prefilling instead of a separate learned memory bank.",
+      "mechanism": "The generated sub-task hidden states provide the channel from native video history to a standard flow-matching action head.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The method keeps sampled history intact and passes it as timestamped video."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "Consecutive decisions share most history, so prefix reuse is a central efficiency mechanism."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should test when full-history retention beats hand-designed memory compression."
+        }
+      ],
+      "falsification": "If critical details are sparse and long-tail, a native-video history may still bury them under redundant context.",
+      "adversarial": "Use manipulation episodes where the decisive cue appears briefly, moves off-screen, and conflicts with current visual evidence.",
+      "thinking_tool": "Question memory compression only after measuring what the uncompressed backbone can actually retain.",
+      "transfer_boundary": "Strong for video-pretrained VLA backbones; weaker for lightweight policies with strict context budgets."
+    },
+    {
+      "rank": 4,
+      "title": "LightSplat: Real-Time High-Fidelity 3D Gaussian SLAM with Loop Closure",
+      "arxiv_id": "2609.07274",
+      "fit": "3DGS SLAM - loop closure - real-time robot mapping",
+      "status": "Tier A - abstract-only",
+      "status_quo": "3DGS SLAM can produce dense maps but often struggles with real-time operation and online map consistency.",
+      "friction": "The abstract names operational performance and map adaptability as deployment blockers for 3DGS SLAM.",
+      "hidden_premise": "A Gaussian map becomes robot-usable only if tracking, submap construction, and loop closure fit the online control budget.",
+      "conceptual_move": "Combine sparse tracking features, dense Gaussian submaps, and feature-accelerated 3DGS registration for online loop closure.",
+      "mechanism": "The hybrid RGB-D SLAM backend progressively builds Gaussian submaps and refines global consistency through pose graph optimization.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The work proposes real-time 3D Gaussian SLAM with online loop closure."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It reports experiments on multiple datasets and a real-world robotic platform."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should evaluate 3DGS maps by relocalization, loop-closure timing, and action-relevant map validity."
+        }
+      ],
+      "falsification": "If loop closure improves render quality without improving navigation or manipulation decisions, the map is not yet a robotics asset.",
+      "adversarial": "Use repeated corridors, dynamic obstacles, and viewpoint revisits where wrong loop closure would change a robot goal or collision decision.",
+      "thinking_tool": "A map update is useful only when it preserves downstream action constraints.",
+      "transfer_boundary": "Strong for RGB-D navigation and mapping; less direct for contact-rich manipulation requiring finer local geometry."
+    },
+    {
+      "rank": 5,
+      "title": "Rethinking Learned Occupancy in Autonomous Active Mapping with Observation-Gated Filtering",
+      "arxiv_id": "2609.09069",
+      "fit": "active mapping - learned occupancy - planner-facing uncertainty",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Learned occupancy completion is often judged by map accuracy before asking how the completed map changes a planner.",
+      "friction": "The abstract says one predicted map can both score information gain and constrain collision-free motion, so unsupported occupancy distorts where the robot looks and travels.",
+      "hidden_premise": "Planner-facing occupancy needs an evidence gate because hallucinated free or occupied space has direct action consequences.",
+      "conceptual_move": "Hold the active-mapping system fixed and vary only the planner-facing occupancy source across observation-only, learned, oracle-corrected, and ground-truth conditions.",
+      "mechanism": "Observation-gated filtering separates supported occupancy from learned completion before planning consumes the map.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper studies the coupled interface between occupancy accuracy and closed-loop active mapping."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It reports that improving occupancy accuracy does not monotonically improve closed-loop coverage."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should require learned maps to prove collision and sensing decisions improve, not only voxel metrics."
+        }
+      ],
+      "falsification": "If observation gates remove useful hidden-space priors, coverage can improve less than a calibrated planner with explicit uncertainty.",
+      "adversarial": "Test narrow passages, glass-like occluders, and movable objects where occupancy hallucination creates plausible but unsafe plans.",
+      "thinking_tool": "Map predictions need action permissions attached to evidence support.",
+      "transfer_boundary": "Direct for active mapping and exploration; less direct for offline reconstruction without a planner in the loop."
+    },
+    {
+      "rank": 6,
+      "title": "Closed-Loop Evaluation of Bird's-Eye-View Maps from Cross-View Transformers as Inputs to Behavior-Cloning Policies",
+      "arxiv_id": "2609.05783",
+      "fit": "autonomous driving - BEV perception - closed-loop behavior cloning",
+      "status": "Tier A - abstract-only",
+      "status_quo": "BEV perception is often evaluated as segmentation or mapping quality before measuring the driving policy it feeds.",
+      "friction": "The abstract says camera-predicted BEV maps replace ground-truth BEV at deployment, but the downstream closed-loop impact of their errors is not well understood.",
+      "hidden_premise": "A perception error matters according to the behavior policy and scenario in which it changes control.",
+      "conceptual_move": "Feed CVT-predicted BEV maps directly into behavior-cloning policies and evaluate the policy in CARLA.",
+      "mechanism": "A six-channel BEV representation and KDE-weighted segmentation loss connect perception classes to closed-loop driving behavior.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper evaluates camera-predicted BEV maps as direct inputs to a behavior-cloning agent."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It frames deployment as replacing simulator ground-truth BEV with predicted BEV."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should judge map errors by whether they change action safety, not by aggregate IoU alone."
+        }
+      ],
+      "falsification": "If policy failures correlate with unmeasured simulator shortcuts, the result may not isolate BEV representation quality.",
+      "adversarial": "Perturb rare road users, lane boundaries, and traffic lights separately while holding global segmentation scores similar.",
+      "thinking_tool": "Perception metrics should be weighted by the controller they serve.",
+      "transfer_boundary": "Direct for driving and top-down navigation; less direct for manipulation unless translated into task-state maps."
+    },
+    {
+      "rank": 7,
+      "title": "OmniNav: Robust Long-Horizon Target Navigation in Dynamic Environments",
+      "arxiv_id": "2609.08159",
+      "fit": "long-horizon navigation - stale scene memory - target belief revision",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Navigation systems often maintain a scene memory as if objects and interaction endpoints remain valid after the first observation.",
+      "friction": "The abstract says scene representations become stale when objects move, failed searches alter target beliefs, and convenient endpoints may be interaction-infeasible.",
+      "hidden_premise": "Target navigation requires a posterior over scene validity, target belief, and interaction feasibility rather than a single static map.",
+      "conceptual_move": "Formulate long-horizon navigation as continual inference over a factorized task-state posterior.",
+      "mechanism": "The system couples scene validity, target belief revision, and endpoint feasibility across evolving observations and decisions.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The method explicitly names scene memory, target belief, and interaction feasibility as coupled capabilities."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It targets dynamic environments where observations and physical interactions change over time."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should label when a remembered object, target hypothesis, or endpoint becomes invalid."
+        }
+      ],
+      "falsification": "If state factors are not identifiable from realistic observations, posterior updates may look principled but fail in clutter.",
+      "adversarial": "Move target-like distractors after first observation and require the robot to revise belief before committing to an endpoint.",
+      "thinking_tool": "Memory is valid only under an explicit freshness condition.",
+      "transfer_boundary": "Strong for object/target navigation; less direct for single-shot manipulation without revisits."
+    },
+    {
+      "rank": 8,
+      "title": "PhysWeep: Does a Video Generator Realize the Physics You Ask For?",
+      "arxiv_id": "2609.06207",
+      "fit": "video generation - physical parameter audit - world-model skepticism",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Video generators are often treated as implicit world models when their clips look physically plausible.",
+      "friction": "The abstract says plausibility can hide the wrong realized physical parameter and that no existing benchmark measures this gap directly.",
+      "hidden_premise": "A generated future is useful for robotics only if the requested physical variable can be recovered from the output.",
+      "conceptual_move": "Audit a frozen generator as a black box by recovering realized physical parameters from generated pixels.",
+      "mechanism": "PhysWeep reports trackability, parameter error, and support for proposed failure mechanisms, with a deterministic-simulator positive control.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The benchmark measures whether generation realizes the requested governing physical parameter."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It separates plausibility from measurable physical parameter adherence."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should reject world-model videos that look plausible but fail task-relevant physics checks."
+        }
+      ],
+      "falsification": "If parameter recovery is unreliable from generated pixels, the audit may punish measurement failure rather than generation failure.",
+      "adversarial": "Use robot-relevant physical parameters where visually plausible clips can still imply unsafe dynamics.",
+      "thinking_tool": "A world model claim should expose a recoverable physical variable.",
+      "transfer_boundary": "Strong for generative simulation audits; weaker for policies that do not use generated video for planning."
+    },
+    {
+      "rank": 9,
+      "title": "Do Input-Level Defenses Transfer to Observation-Level Attacks on VideoLLMs?",
+      "arxiv_id": "2609.08331",
+      "fit": "VideoLLM safety - frame sampling - observation-pipeline attacks",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Video safety defenses often operate on sampled pixel frames, assuming input-level robustness transfers to the model's observation pipeline.",
+      "friction": "The abstract says observation-level attacks exploit frame sampling, token compression, and modality fusion before the model forms its internal representation.",
+      "hidden_premise": "A defense should protect the evidence admission pipeline, not only the already-sampled image content.",
+      "conceptual_move": "Evaluate whether existing input-level adversarial defenses mitigate observation-level attacks across VideoLLMs.",
+      "mechanism": "DefTEval varies VideoLLMs, defenses, and attack types to measure where the observation pipeline loses harmful content.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper studies attacks that prevent VideoLLMs from perceiving harmful content through the observation pipeline."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It evaluates five VideoLLMs, eleven defenses, and five attack types."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should test whether token or frame selection removes robot-critical hazards before policy evaluation."
+        }
+      ],
+      "falsification": "If attack success depends on narrow sampling policies, a different video encoder may need a separate threat model.",
+      "adversarial": "Create robot video streams where a hazardous frame is brief, off-center, or compressed away while the final answer remains confident.",
+      "thinking_tool": "Safety starts at evidence admission, not at the final classifier verdict.",
+      "transfer_boundary": "Direct for video-based agents and guardrails; needs adaptation for non-video robot state estimators."
+    },
+    {
+      "rank": 10,
+      "title": "CoVeR: Coverage-Based Token Pruning for Multi-View 3D Reasoning in VLMs",
+      "arxiv_id": "2609.08345",
+      "fit": "multi-view 3D reasoning - token pruning - spatial coverage",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Visual token pruning often ranks individual tokens by salience without ensuring that the retained set covers the 3D scene.",
+      "friction": "The abstract says learned importance methods keep duplicate regions in multi-view settings and can leave most of the scene unrepresented.",
+      "hidden_premise": "For 3D reasoning, the useful budget is spatial coverage under exact token constraints, not generic attention magnitude.",
+      "conceptual_move": "Use coverage-based token pruning to retain spatially complementary evidence across overlapping multi-view observations.",
+      "mechanism": "CoVeR links spatial coverage to 3D reasoning performance and enforces token-budgeted retention across views.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper identifies redundancy as fundamentally spatial in multi-view 3D VLM reasoning."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It introduces coverage-based pruning for an exact token budget."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should measure whether token pruning preserves the scene regions that determine robot action."
+        }
+      ],
+      "falsification": "If reasoning failures are semantic rather than coverage-based, spatial pruning may preserve views while dropping object identity cues.",
+      "adversarial": "Hold token count fixed while placing action-critical evidence in a small view overlap, a distant object, or a low-salience region.",
+      "thinking_tool": "Compression should name the evidence manifold it refuses to drop.",
+      "transfer_boundary": "Strong for multi-view VLM and 3D scene reasoning; weaker for single-frame policies where redundancy is not spatial."
+    }
+  ],
+  "synthesis": [
+    {
+      "title": "VLA success is decomposing into control-time contracts",
+      "links": "CR-VLA-Force - Failure-Boundary Learning - VLA-Corrector - MEMOBench - SimpleMemVLA",
+      "facts": "The abstracts separately target force feedback timing, failure-boundary discovery, stage-aware recovery, process-level memory, and native-video history.",
+      "inference": "The common decision is to attach action authority to named boundary variables instead of trusting a final episode label."
+    },
+    {
+      "title": "Maps and geometry are being tested through planners",
+      "links": "LightSplat - Spheriverse - AURORA - observation-gated occupancy - closed-loop BEV evaluation",
+      "facts": "The batch connects map consistency, spherical geometry, in-hand uncertainty, learned occupancy, and BEV prediction to tracking, planning, or closed-loop control.",
+      "inference": "APRL should evaluate representations by the collision, relocalization, endpoint, and controller decisions they change."
+    },
+    {
+      "title": "Compressed multimodal evidence now needs threat models",
+      "links": "DefTEval - CrACK - CoVeR - ECOKV - STAR-Pro - GradeTrap",
+      "facts": "The papers attack or audit frame sampling, model collaboration interfaces, token coverage, KV diversity, stage-wise pruning, and authority cue bias.",
+      "inference": "The retained evidence must be stress-tested before a robot or VLM judge can use it as permission to act."
+    }
+  ],
+  "frontier_memory": [
+    {
+      "label": "Strengthening",
+      "history": "Recent daily reports repeatedly treated robot intelligence as evidence budgeting before action authority.",
+      "body": "September 9 strengthens that line with force-aware action interruption, failure-boundary shaping, process-level memory, and planner-facing occupancy gates."
+    },
+    {
+      "label": "New signal",
+      "history": "Early September geometry notes emphasized 3DGS and map validity for navigation.",
+      "body": "Today adds spherical image-LiDAR sequences, in-hand uncertainty-driven reconstruction, and exact-token multi-view 3D pruning as separate evidence contracts."
+    },
+    {
+      "label": "Commoditizing",
+      "history": "World-model papers increasingly claim physical or controllable futures.",
+      "body": "PhysWeep and related active-mapping papers make the differentiator measurable: realized physical parameters and observation-gated planner safety."
+    },
+    {
+      "label": "Contradiction",
+      "history": "Bigger VLA or denser maps can look like the default answer.",
+      "body": "SimpleMemVLA questions custom memory modules, CoVeR questions salience-only token pruning, and occupancy work shows more accurate maps do not automatically improve closed-loop coverage."
+    },
+    {
+      "label": "Missing axis",
+      "history": "The repository still sees separate tracks for VLA recovery, geometry, safety, and efficiency.",
+      "body": "APRL can own a single episode protocol where contact timing, map freshness, language invariance, token pruning, and recovery outcome are evaluated together."
+    }
+  ],
+  "strategy": [
+    {
+      "priority": "Build moat",
+      "portfolio": "Build moat",
+      "title": "Evidence freshness benchmark for long-horizon manipulation",
+      "thesis": "Build episodes where the correct action depends on stale memory, force timing, visual distractors, and failure-boundary recovery rather than terminal success alone.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week": "Instrument ten tabletop episodes with hidden early cues, delayed contact changes, induced object displacement, and task-preserving language variants.",
+      "one_week_probe": "Instrument ten tabletop episodes with hidden early cues, delayed contact changes, induced object displacement, and task-preserving language variants.",
+      "four_week": "Compare SimpleMemVLA-style full history, process-level memory labels, force-aware correction, failure-boundary detection, and stage-aware recovery on the same episodes.",
+      "four_week_build": "Compare SimpleMemVLA-style full history, process-level memory labels, force-aware correction, failure-boundary detection, and stage-aware recovery on the same episodes.",
+      "success": "At least one evidence gate predicts the needed recovery or interruption one action chunk before final failure across three failure families.",
+      "success_metric": "At least one evidence gate predicts the needed recovery or interruption one action chunk before final failure across three failure families.",
+      "stop": "Stop if memory freshness and force timing do not improve recovery choice beyond terminal success or trajectory-level confidence.",
+      "stop_condition": "Stop if memory freshness and force timing do not improve recovery choice beyond terminal success or trajectory-level confidence.",
+      "paper_path": "Evidence-fresh VLA recovery for long-horizon manipulation.",
+      "asset_path": "Timestamped manipulation episodes with memory operations, force events, language variants, failure boundaries, and recovery labels.",
+      "asset": "Timestamped manipulation episodes with memory operations, force events, language variants, failure boundaries, and recovery labels."
+    },
+    {
+      "priority": "Exploit",
+      "portfolio": "Exploit",
+      "title": "Planner-facing geometry validity suite",
+      "thesis": "Turn local 3DGS, spherical LiDAR, in-hand reconstruction, learned occupancy, and BEV maps into action-level validity tests.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 4
+      },
+      "one_week": "Create two lab routes and two tabletop objects with loop closures, occluded surfaces, stale occupancy, and BEV-style map perturbations.",
+      "one_week_probe": "Create two lab routes and two tabletop objects with loop closures, occluded surfaces, stale occupancy, and BEV-style map perturbations.",
+      "four_week": "Benchmark LightSplat-style mapping, spherical occupancy, AURORA-style view selection, observation-gated occupancy, and closed-loop BEV policy inputs against robot actions.",
+      "four_week_build": "Benchmark LightSplat-style mapping, spherical occupancy, AURORA-style view selection, observation-gated occupancy, and closed-loop BEV policy inputs against robot actions.",
+      "success": "A representation validity score predicts relocalization, collision, endpoint feasibility, or manipulation-view failure better than reconstruction quality alone.",
+      "success_metric": "A representation validity score predicts relocalization, collision, endpoint feasibility, or manipulation-view failure better than reconstruction quality alone.",
+      "stop": "Stop if closed-loop action failures are fully explained by standard pose or segmentation error with no representation-specific validity variable.",
+      "stop_condition": "Stop if closed-loop action failures are fully explained by standard pose or segmentation error with no representation-specific validity variable.",
+      "paper_path": "Robot-usable geometry validity for 3DGS, occupancy, and BEV representations.",
+      "asset_path": "Scenes, maps, occupancy gates, BEV perturbations, object-view histories, and action outcome logs.",
+      "asset": "Scenes, maps, occupancy gates, BEV perturbations, object-view histories, and action outcome logs."
+    },
+    {
+      "priority": "Explore",
+      "portfolio": "Explore",
+      "title": "Auditable efficient evidence admission",
+      "thesis": "Evaluate whether token pruning, KV eviction, frame sampling, collaborative VFM pipelines, and visual reasoning guardrails preserve action-critical evidence.",
+      "scores": {
+        "strategic_fit": 4,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 4,
+        "scientific_depth": 5
+      },
+      "one_week": "Build a small video-and-multiview suite where hazards, target attributes, or spatial cues appear briefly, off-center, or only in one view.",
+      "one_week_probe": "Build a small video-and-multiview suite where hazards, target attributes, or spatial cues appear briefly, off-center, or only in one view.",
+      "four_week": "Compare frame sampling, CoVeR-style spatial token coverage, STAR-Pro-style progressive pruning, ECOKV-style cache eviction, and evidence-localized guardrails.",
+      "four_week_build": "Compare frame sampling, CoVeR-style spatial token coverage, STAR-Pro-style progressive pruning, ECOKV-style cache eviction, and evidence-localized guardrails.",
+      "success": "A compression policy reduces cost while preserving localized evidence and safe action decisions on at least four stress patterns.",
+      "success_metric": "A compression policy reduces cost while preserving localized evidence and safe action decisions on at least four stress patterns.",
+      "stop": "Stop if cost savings consistently remove decisive hazards or produce unverifiable reasoning traces.",
+      "stop_condition": "Stop if cost savings consistently remove decisive hazards or produce unverifiable reasoning traces.",
+      "paper_path": "Evidence-admission safety for efficient multimodal robot perception.",
+      "asset_path": "Stress videos, multi-view token masks, cache-retention traces, evidence boxes, and action-permission outcomes.",
+      "asset": "Stress videos, multi-view token masks, cache-retention traces, evidence boxes, and action-permission outcomes."
+    }
+  ]
+}

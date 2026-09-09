@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-09-09 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-09-09 arXiv Research Intelligence</h1>
+<p class="lead">The September 9 batch makes action authority conditional on evidence freshness. VLA and robot-learning papers ask whether a policy knows where success stops, which memory operation is needed, when a force signal must interrupt an action chunk, and how long reasoning can stay executable on a mobile robot. Geometry papers move 3DGS, spherical LiDAR, in-hand reconstruction, inertial odometry, and learned occupancy into closed-loop validity tests rather than visual-quality scores. Driving and embodied navigation papers then attach those representations to scenario testing, reachability, consequence-weighted failure, and stale-map filtering. The safety and systems papers close the loop by asking whether compressed tokens, cached KV states, visual CoT, authority cues, and multimodal guardrails still preserve the exact evidence that should permit, block, or revise an action.</p><p class="scope">Daily edition from matching Wednesday /new listings: 359 non-replacement cs.CV rows, 155 cs.RO rows, 485 deduplicated papers, and 401 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claim is asserted unless the abstract itself states it.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>VLA reliability moved to boundary variables</h3><p>CR-VLA-Force, Failure-Boundary Learning, VLA-Corrector, MEMOBench, SimpleMemVLA, and MobileVLA-R1 separate success into force timing, failure boundaries, stage recovery, memory operations, and reasoning-to-control consistency.</p></article><article><span>Decision</span><h3>Geometry needs planner-facing validity gates</h3><p>LightSplat, Spheriverse, AURORA, observation-gated occupancy, and closed-loop BEV evaluation ask whether geometry remains useful once tracking, map updates, collision constraints, and task endpoints depend on it.</p></article><article><span>Decision</span><h3>Efficient evidence must remain auditable</h3><p>DefTEval, CrACK, CoVeR, ECOKV, STAR-Pro, GradeTrap, and Evidence-Aligned Guardrails show that compression, collaboration, and visual reasoning are unsafe unless the retained evidence can still be localized and stress-tested.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.05832" target="_blank" rel="noopener">CR-VLA-Force: Learning Control-aware Compliance VLA Model for Robust Contact-rich Robotic Manipulation</a></h3>
+  <p class="fit">contact-rich VLA - force timing - reactive compliance</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Force-aware VLA policies can still execute long action chunks before force feedback changes the command.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says force-aware VLA models remain weak at precise force tracking and rapid successive adjustment.</p></div>
+    <div><h4>Hidden premise</h4><p>Contact evidence should be allowed to interrupt or reshape an action chunk before unsafe force accumulates.</p></div>
+    <div><h4>Conceptual move</h4><p>Encode force signal sequences with visual-language features and treat compliance as a control-aware VLA capability.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper targets action-chunk latency and force-tracking limits in contact-rich manipulation.</span></li><li><strong>[Abstract]</strong><span>It introduces Control-aware Compliance VLA for reactive control with force/torque perception.</span></li><li><strong>[Inference]</strong><span>APRL should score whether force evidence changes the remaining command before a contact failure completes.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The proposed CC-VLA framework uses multimodal mixture-of-experts features so force and visual-language evidence can jointly shape reactive control.</p></div>
+    <div><h4>Falsification frontier</h4><p>If gains disappear when contact timing, material compliance, or object geometry changes, the method may be fitting familiar force profiles.</p></div>
+    <div><h4>Adversarial read</h4><p>Test delayed force spikes, near-identical visual states with different contact stiffness, and action chunks that must be interrupted mid-execution.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat contact as a permission signal over the next action, not as an auxiliary observation.</p><p>Direct for force/torque-equipped manipulation; weaker for tasks without contact sensing or chunked policy execution.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.06114" target="_blank" rel="noopener">Where Success Breaks: Failure-Boundary Learning for Robust Vision-Language-Action Models</a></h3>
+  <p class="fit">VLA adaptation - failure boundary - semantic progress localization</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Supervised fine-tuning teaches successful demonstrations but gives little signal about where a policy stops being reliable.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract frames robust adaptation as discovering, localizing, and shaping the boundary between recoverable deviations and task failure.</p></div>
+    <div><h4>Hidden premise</h4><p>A robot policy should learn the margin around success, not only imitate points that already succeeded.</p></div>
+    <div><h4>Conceptual move</h4><p>Use real-grounded priors, digital-twin rollouts, and semantic progress localization to turn near-failures into training signal.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The work argues SFT inherits an asymmetry because expert demonstrations do not show where success ceases.</span></li><li><strong>[Abstract]</strong><span>It proposes Failure-Boundary Learning with discovery, localization, and shaping stages.</span></li><li><strong>[Inference]</strong><span>APRL should add margin and recoverability labels next to episode success.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes DLS as a pipeline that discovers failure boundaries at scale and assigns progress-aware signals from privileged simulator states.</p></div>
+    <div><h4>Falsification frontier</h4><p>If digital-twin failures do not match real robot boundary cases, the learned boundary may be simulation-specific.</p></div>
+    <div><h4>Adversarial read</h4><p>Compare simulator-discovered boundaries with physical perturbations that preserve the same nominal task and object layout.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Robustness begins at the border where success becomes unrecoverable.</p><p>Strong for VLA manipulation with simulators; less direct for field robots whose failure boundary is not easily simulated.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.05533" target="_blank" rel="noopener">SimpleMemVLA: A Simple but Effective Native-Video Memory for Vision-Language-Action Models</a></h3>
+  <p class="fit">long-horizon manipulation - native video memory - shared prefix efficiency</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Robot memory modules often decide what to compress or retrieve before knowing what a later action will need.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says minute-scale history may now be tractable for modern VLM backbones, weakening the assumption behind custom memory modules.</p></div>
+    <div><h4>Hidden premise</h4><p>A VLA can use history in the format its backbone already understands if the action head receives the right generated sub-task state.</p></div>
+    <div><h4>Conceptual move</h4><p>Keep sampled history as timestamped video and use shared-prefix prefilling instead of a separate learned memory bank.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The method keeps sampled history intact and passes it as timestamped video.</span></li><li><strong>[Abstract]</strong><span>Consecutive decisions share most history, so prefix reuse is a central efficiency mechanism.</span></li><li><strong>[Inference]</strong><span>APRL should test when full-history retention beats hand-designed memory compression.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The generated sub-task hidden states provide the channel from native video history to a standard flow-matching action head.</p></div>
+    <div><h4>Falsification frontier</h4><p>If critical details are sparse and long-tail, a native-video history may still bury them under redundant context.</p></div>
+    <div><h4>Adversarial read</h4><p>Use manipulation episodes where the decisive cue appears briefly, moves off-screen, and conflicts with current visual evidence.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Question memory compression only after measuring what the uncompressed backbone can actually retain.</p><p>Strong for video-pretrained VLA backbones; weaker for lightweight policies with strict context budgets.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.07274" target="_blank" rel="noopener">LightSplat: Real-Time High-Fidelity 3D Gaussian SLAM with Loop Closure</a></h3>
+  <p class="fit">3DGS SLAM - loop closure - real-time robot mapping</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>3DGS SLAM can produce dense maps but often struggles with real-time operation and online map consistency.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract names operational performance and map adaptability as deployment blockers for 3DGS SLAM.</p></div>
+    <div><h4>Hidden premise</h4><p>A Gaussian map becomes robot-usable only if tracking, submap construction, and loop closure fit the online control budget.</p></div>
+    <div><h4>Conceptual move</h4><p>Combine sparse tracking features, dense Gaussian submaps, and feature-accelerated 3DGS registration for online loop closure.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The work proposes real-time 3D Gaussian SLAM with online loop closure.</span></li><li><strong>[Abstract]</strong><span>It reports experiments on multiple datasets and a real-world robotic platform.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate 3DGS maps by relocalization, loop-closure timing, and action-relevant map validity.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The hybrid RGB-D SLAM backend progressively builds Gaussian submaps and refines global consistency through pose graph optimization.</p></div>
+    <div><h4>Falsification frontier</h4><p>If loop closure improves render quality without improving navigation or manipulation decisions, the map is not yet a robotics asset.</p></div>
+    <div><h4>Adversarial read</h4><p>Use repeated corridors, dynamic obstacles, and viewpoint revisits where wrong loop closure would change a robot goal or collision decision.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A map update is useful only when it preserves downstream action constraints.</p><p>Strong for RGB-D navigation and mapping; less direct for contact-rich manipulation requiring finer local geometry.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.09069" target="_blank" rel="noopener">Rethinking Learned Occupancy in Autonomous Active Mapping with Observation-Gated Filtering</a></h3>
+  <p class="fit">active mapping - learned occupancy - planner-facing uncertainty</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Learned occupancy completion is often judged by map accuracy before asking how the completed map changes a planner.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says one predicted map can both score information gain and constrain collision-free motion, so unsupported occupancy distorts where the robot looks and travels.</p></div>
+    <div><h4>Hidden premise</h4><p>Planner-facing occupancy needs an evidence gate because hallucinated free or occupied space has direct action consequences.</p></div>
+    <div><h4>Conceptual move</h4><p>Hold the active-mapping system fixed and vary only the planner-facing occupancy source across observation-only, learned, oracle-corrected, and ground-truth conditions.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper studies the coupled interface between occupancy accuracy and closed-loop active mapping.</span></li><li><strong>[Abstract]</strong><span>It reports that improving occupancy accuracy does not monotonically improve closed-loop coverage.</span></li><li><strong>[Inference]</strong><span>APRL should require learned maps to prove collision and sensing decisions improve, not only voxel metrics.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>Observation-gated filtering separates supported occupancy from learned completion before planning consumes the map.</p></div>
+    <div><h4>Falsification frontier</h4><p>If observation gates remove useful hidden-space priors, coverage can improve less than a calibrated planner with explicit uncertainty.</p></div>
+    <div><h4>Adversarial read</h4><p>Test narrow passages, glass-like occluders, and movable objects where occupancy hallucination creates plausible but unsafe plans.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Map predictions need action permissions attached to evidence support.</p><p>Direct for active mapping and exploration; less direct for offline reconstruction without a planner in the loop.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.05783" target="_blank" rel="noopener">Closed-Loop Evaluation of Bird's-Eye-View Maps from Cross-View Transformers as Inputs to Behavior-Cloning Policies</a></h3>
+  <p class="fit">autonomous driving - BEV perception - closed-loop behavior cloning</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>BEV perception is often evaluated as segmentation or mapping quality before measuring the driving policy it feeds.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says camera-predicted BEV maps replace ground-truth BEV at deployment, but the downstream closed-loop impact of their errors is not well understood.</p></div>
+    <div><h4>Hidden premise</h4><p>A perception error matters according to the behavior policy and scenario in which it changes control.</p></div>
+    <div><h4>Conceptual move</h4><p>Feed CVT-predicted BEV maps directly into behavior-cloning policies and evaluate the policy in CARLA.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper evaluates camera-predicted BEV maps as direct inputs to a behavior-cloning agent.</span></li><li><strong>[Abstract]</strong><span>It frames deployment as replacing simulator ground-truth BEV with predicted BEV.</span></li><li><strong>[Inference]</strong><span>APRL should judge map errors by whether they change action safety, not by aggregate IoU alone.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>A six-channel BEV representation and KDE-weighted segmentation loss connect perception classes to closed-loop driving behavior.</p></div>
+    <div><h4>Falsification frontier</h4><p>If policy failures correlate with unmeasured simulator shortcuts, the result may not isolate BEV representation quality.</p></div>
+    <div><h4>Adversarial read</h4><p>Perturb rare road users, lane boundaries, and traffic lights separately while holding global segmentation scores similar.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Perception metrics should be weighted by the controller they serve.</p><p>Direct for driving and top-down navigation; less direct for manipulation unless translated into task-state maps.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.08159" target="_blank" rel="noopener">OmniNav: Robust Long-Horizon Target Navigation in Dynamic Environments</a></h3>
+  <p class="fit">long-horizon navigation - stale scene memory - target belief revision</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Navigation systems often maintain a scene memory as if objects and interaction endpoints remain valid after the first observation.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says scene representations become stale when objects move, failed searches alter target beliefs, and convenient endpoints may be interaction-infeasible.</p></div>
+    <div><h4>Hidden premise</h4><p>Target navigation requires a posterior over scene validity, target belief, and interaction feasibility rather than a single static map.</p></div>
+    <div><h4>Conceptual move</h4><p>Formulate long-horizon navigation as continual inference over a factorized task-state posterior.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The method explicitly names scene memory, target belief, and interaction feasibility as coupled capabilities.</span></li><li><strong>[Abstract]</strong><span>It targets dynamic environments where observations and physical interactions change over time.</span></li><li><strong>[Inference]</strong><span>APRL should label when a remembered object, target hypothesis, or endpoint becomes invalid.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The system couples scene validity, target belief revision, and endpoint feasibility across evolving observations and decisions.</p></div>
+    <div><h4>Falsification frontier</h4><p>If state factors are not identifiable from realistic observations, posterior updates may look principled but fail in clutter.</p></div>
+    <div><h4>Adversarial read</h4><p>Move target-like distractors after first observation and require the robot to revise belief before committing to an endpoint.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Memory is valid only under an explicit freshness condition.</p><p>Strong for object/target navigation; less direct for single-shot manipulation without revisits.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.06207" target="_blank" rel="noopener">PhysWeep: Does a Video Generator Realize the Physics You Ask For?</a></h3>
+  <p class="fit">video generation - physical parameter audit - world-model skepticism</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Video generators are often treated as implicit world models when their clips look physically plausible.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says plausibility can hide the wrong realized physical parameter and that no existing benchmark measures this gap directly.</p></div>
+    <div><h4>Hidden premise</h4><p>A generated future is useful for robotics only if the requested physical variable can be recovered from the output.</p></div>
+    <div><h4>Conceptual move</h4><p>Audit a frozen generator as a black box by recovering realized physical parameters from generated pixels.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The benchmark measures whether generation realizes the requested governing physical parameter.</span></li><li><strong>[Abstract]</strong><span>It separates plausibility from measurable physical parameter adherence.</span></li><li><strong>[Inference]</strong><span>APRL should reject world-model videos that look plausible but fail task-relevant physics checks.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>PhysWeep reports trackability, parameter error, and support for proposed failure mechanisms, with a deterministic-simulator positive control.</p></div>
+    <div><h4>Falsification frontier</h4><p>If parameter recovery is unreliable from generated pixels, the audit may punish measurement failure rather than generation failure.</p></div>
+    <div><h4>Adversarial read</h4><p>Use robot-relevant physical parameters where visually plausible clips can still imply unsafe dynamics.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A world model claim should expose a recoverable physical variable.</p><p>Strong for generative simulation audits; weaker for policies that do not use generated video for planning.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#9</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.08331" target="_blank" rel="noopener">Do Input-Level Defenses Transfer to Observation-Level Attacks on VideoLLMs?</a></h3>
+  <p class="fit">VideoLLM safety - frame sampling - observation-pipeline attacks</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Video safety defenses often operate on sampled pixel frames, assuming input-level robustness transfers to the model's observation pipeline.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says observation-level attacks exploit frame sampling, token compression, and modality fusion before the model forms its internal representation.</p></div>
+    <div><h4>Hidden premise</h4><p>A defense should protect the evidence admission pipeline, not only the already-sampled image content.</p></div>
+    <div><h4>Conceptual move</h4><p>Evaluate whether existing input-level adversarial defenses mitigate observation-level attacks across VideoLLMs.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper studies attacks that prevent VideoLLMs from perceiving harmful content through the observation pipeline.</span></li><li><strong>[Abstract]</strong><span>It evaluates five VideoLLMs, eleven defenses, and five attack types.</span></li><li><strong>[Inference]</strong><span>APRL should test whether token or frame selection removes robot-critical hazards before policy evaluation.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>DefTEval varies VideoLLMs, defenses, and attack types to measure where the observation pipeline loses harmful content.</p></div>
+    <div><h4>Falsification frontier</h4><p>If attack success depends on narrow sampling policies, a different video encoder may need a separate threat model.</p></div>
+    <div><h4>Adversarial read</h4><p>Create robot video streams where a hazardous frame is brief, off-center, or compressed away while the final answer remains confident.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Safety starts at evidence admission, not at the final classifier verdict.</p><p>Direct for video-based agents and guardrails; needs adaptation for non-video robot state estimators.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#10</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.08345" target="_blank" rel="noopener">CoVeR: Coverage-Based Token Pruning for Multi-View 3D Reasoning in VLMs</a></h3>
+  <p class="fit">multi-view 3D reasoning - token pruning - spatial coverage</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Visual token pruning often ranks individual tokens by salience without ensuring that the retained set covers the 3D scene.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract says learned importance methods keep duplicate regions in multi-view settings and can leave most of the scene unrepresented.</p></div>
+    <div><h4>Hidden premise</h4><p>For 3D reasoning, the useful budget is spatial coverage under exact token constraints, not generic attention magnitude.</p></div>
+    <div><h4>Conceptual move</h4><p>Use coverage-based token pruning to retain spatially complementary evidence across overlapping multi-view observations.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper identifies redundancy as fundamentally spatial in multi-view 3D VLM reasoning.</span></li><li><strong>[Abstract]</strong><span>It introduces coverage-based pruning for an exact token budget.</span></li><li><strong>[Inference]</strong><span>APRL should measure whether token pruning preserves the scene regions that determine robot action.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>CoVeR links spatial coverage to 3D reasoning performance and enforces token-budgeted retention across views.</p></div>
+    <div><h4>Falsification frontier</h4><p>If reasoning failures are semantic rather than coverage-based, spatial pruning may preserve views while dropping object identity cues.</p></div>
+    <div><h4>Adversarial read</h4><p>Hold token count fixed while placing action-critical evidence in a small view overlap, a distant object, or a low-salience region.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Compression should name the evidence manifold it refuses to drop.</p><p>Strong for multi-view VLM and 3D scene reasoning; weaker for single-frame policies where redundancy is not spatial.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>VLA success is decomposing into control-time contracts</h3><p class='links'>CR-VLA-Force - Failure-Boundary Learning - VLA-Corrector - MEMOBench - SimpleMemVLA</p><p><strong>Observed</strong> - The abstracts separately target force feedback timing, failure-boundary discovery, stage-aware recovery, process-level memory, and native-video history.</p><p><strong>Inference</strong> - The common decision is to attach action authority to named boundary variables instead of trusting a final episode label.</p></article><article><h3>Maps and geometry are being tested through planners</h3><p class='links'>LightSplat - Spheriverse - AURORA - observation-gated occupancy - closed-loop BEV evaluation</p><p><strong>Observed</strong> - The batch connects map consistency, spherical geometry, in-hand uncertainty, learned occupancy, and BEV prediction to tracking, planning, or closed-loop control.</p><p><strong>Inference</strong> - APRL should evaluate representations by the collision, relocalization, endpoint, and controller decisions they change.</p></article><article><h3>Compressed multimodal evidence now needs threat models</h3><p class='links'>DefTEval - CrACK - CoVeR - ECOKV - STAR-Pro - GradeTrap</p><p><strong>Observed</strong> - The papers attack or audit frame sampling, model collaboration interfaces, token coverage, KV diversity, stage-wise pruning, and authority cue bias.</p><p><strong>Inference</strong> - The retained evidence must be stress-tested before a robot or VLM judge can use it as permission to act.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>Recent daily reports repeatedly treated robot intelligence as evidence budgeting before action authority.</p><p>September 9 strengthens that line with force-aware action interruption, failure-boundary shaping, process-level memory, and planner-facing occupancy gates.</p></article><article><span>New signal</span><p class='history'>Early September geometry notes emphasized 3DGS and map validity for navigation.</p><p>Today adds spherical image-LiDAR sequences, in-hand uncertainty-driven reconstruction, and exact-token multi-view 3D pruning as separate evidence contracts.</p></article><article><span>Commoditizing</span><p class='history'>World-model papers increasingly claim physical or controllable futures.</p><p>PhysWeep and related active-mapping papers make the differentiator measurable: realized physical parameters and observation-gated planner safety.</p></article><article><span>Contradiction</span><p class='history'>Bigger VLA or denser maps can look like the default answer.</p><p>SimpleMemVLA questions custom memory modules, CoVeR questions salience-only token pruning, and occupancy work shows more accurate maps do not automatically improve closed-loop coverage.</p></article><article><span>Missing axis</span><p class='history'>The repository still sees separate tracks for VLA recovery, geometry, safety, and efficiency.</p><p>APRL can own a single episode protocol where contact timing, map freshness, language invariance, token pruning, and recovery outcome are evaluated together.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Evidence freshness benchmark for long-horizon manipulation</h3><p class="thesis">Build episodes where the correct action depends on stale memory, force timing, visual distractors, and failure-boundary recovery rather than terminal success alone.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 5</span><span>timing 5</span><span>tractability 4</span><span>defensibility 5</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Instrument ten tabletop episodes with hidden early cues, delayed contact changes, induced object displacement, and task-preserving language variants.</p></div>
+    <div><strong>4-week build</strong><p>Compare SimpleMemVLA-style full history, process-level memory labels, force-aware correction, failure-boundary detection, and stage-aware recovery on the same episodes.</p></div>
+    <div><strong>Success metric</strong><p>At least one evidence gate predicts the needed recovery or interruption one action chunk before final failure across three failure families.</p></div>
+    <div><strong>Stop condition</strong><p>Stop if memory freshness and force timing do not improve recovery choice beyond terminal success or trajectory-level confidence.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Timestamped manipulation episodes with memory operations, force events, language variants, failure boundaries, and recovery labels.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Exploit</span><span class="total">total 27/30</span></div>
+  <h3>Planner-facing geometry validity suite</h3><p class="thesis">Turn local 3DGS, spherical LiDAR, in-hand reconstruction, learned occupancy, and BEV maps into action-level validity tests.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 4</span><span>timing 5</span><span>tractability 4</span><span>defensibility 5</span><span>scientific_depth 4</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Create two lab routes and two tabletop objects with loop closures, occluded surfaces, stale occupancy, and BEV-style map perturbations.</p></div>
+    <div><strong>4-week build</strong><p>Benchmark LightSplat-style mapping, spherical occupancy, AURORA-style view selection, observation-gated occupancy, and closed-loop BEV policy inputs against robot actions.</p></div>
+    <div><strong>Success metric</strong><p>A representation validity score predicts relocalization, collision, endpoint feasibility, or manipulation-view failure better than reconstruction quality alone.</p></div>
+    <div><strong>Stop condition</strong><p>Stop if closed-loop action failures are fully explained by standard pose or segmentation error with no representation-specific validity variable.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Scenes, maps, occupancy gates, BEV perturbations, object-view histories, and action outcome logs.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 27/30</span></div>
+  <h3>Auditable efficient evidence admission</h3><p class="thesis">Evaluate whether token pruning, KV eviction, frame sampling, collaborative VFM pipelines, and visual reasoning guardrails preserve action-critical evidence.</p>
+  <div class="scores"><span>strategic_fit 4</span><span>asymmetry 5</span><span>timing 5</span><span>tractability 4</span><span>defensibility 4</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Build a small video-and-multiview suite where hazards, target attributes, or spatial cues appear briefly, off-center, or only in one view.</p></div>
+    <div><strong>4-week build</strong><p>Compare frame sampling, CoVeR-style spatial token coverage, STAR-Pro-style progressive pruning, ECOKV-style cache eviction, and evidence-localized guardrails.</p></div>
+    <div><strong>Success metric</strong><p>A compression policy reduces cost while preserving localized evidence and safe action decisions on at least four stress patterns.</p></div>
+    <div><strong>Stop condition</strong><p>Stop if cost savings consistently remove decisive hazards or produce unverifiable reasoning traces.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Stress videos, multi-view token masks, cache-retention traces, evidence boxes, and action-permission outcomes.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-09-09.json">intelligence/2026-09-09.json</a>.</footer>
+</body></html>
