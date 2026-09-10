@@ -1,0 +1,402 @@
+#!/usr/bin/env python3
+"""Generate the 2026-09-10 Research Intelligence edition."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from gen_research_intelligence_20260811 import build_html
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE_PROMPT = "prompts/instruction_v20260713.md"
+
+
+RI_BY_DATE = {
+    "2026-09-10": {
+        "date": "2026-09-10",
+        "edition": "Research Intelligence",
+        "source_prompt": SOURCE_PROMPT,
+        "source_mode": "new",
+        "scope_note": (
+            "Daily edition from matching Thursday /new listings: 106 non-replacement cs.CV rows, "
+            "56 cs.RO rows, 153 deduplicated papers, and 117 ROI papers. Tier A cards are conservative "
+            "abstract-only autopsies from the repository parser output; no figure, table, full-text, code, "
+            "or dataset-release claim is asserted unless the abstract itself states it."
+        ),
+        "executive_thesis": (
+            "The September 10 batch turns robot intelligence into an evidence-contract problem. Robot policy "
+            "papers ask whether imagined rollouts, verifiers, post-training samples, future representations, "
+            "action frequencies, and semantic harnesses should be allowed to change an action. Geometry papers "
+            "ask whether 3DGS, LiDAR registration, monocular metric point clouds, pose graphs, and map-assisted "
+            "drift correction expose uncertainty or degeneracy before a planner consumes them. Driving and field "
+            "robotics papers attach safety to relative risk, policy uncertainty, vulnerable road-user recall, "
+            "warehouse routing, and marine-simulation coverage. VLM and systems papers complete the same pattern "
+            "by testing whether confidence, token pruning, video hallucination detectors, chain-of-thought checks, "
+            "belief states, and privacy claims preserve the evidence that gives a model permission to answer or act."
+        ),
+        "decision_cards": [
+            {
+                "label": "Decision",
+                "title": "Robot learning needs verifier-aware action authority",
+                "body": (
+                    "HaWMPO, No Free Checker, RoboDrop, JEPA Policy, FreqFM, and Show-Harness all make a different "
+                    "interface responsible for deciding when a robot action, sample, rollout, or semantic command is trustworthy."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Geometry must report uncertainty before planning",
+                "body": (
+                    "VSCP, DCReg, OSM lane drift correction, OmniPoint, and LiDAR diffusion papers convert pose, "
+                    "view synthesis, and 3D features into uncertainty, degeneracy, or transfer checks."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Efficient multimodal systems make irreversible evidence choices",
+                "body": (
+                    "TRACE, VIP-Router, video-efficiency surveys, Evidence-Order Calibration, VidHalLoc, CT-SAFR, "
+                    "and Belief-State Engine show that token, cache, reasoning, and belief filters must be tested as admission policies."
+                ),
+            },
+        ],
+        "papers": [
+            {
+                "rank": 1,
+                "title": "HaWMPO: Hallucination-Aware World Model-based Policy Optimization for Generalist Robot Policy",
+                "arxiv_id": "2609.09941",
+                "fit": "VLA post-training - hallucination-aware world models - closed-loop policy optimization",
+                "status": "Tier A - abstract-only",
+                "status_quo": "VLA post-training can use online robot reinforcement learning, but physical rollouts are costly, slow, and risky.",
+                "friction": "The abstract says world-model rollouts can hallucinate long-horizon state transitions and mislead policy learning.",
+                "hidden_premise": "Imagined experience should not have equal authority unless its reliability is scored at the action-chunk level.",
+                "conceptual_move": "Attach hallucination scores to action-conditioned generated image sequences and soften policy optimization rewards accordingly.",
+                "mechanism": "HaWMPO estimates generated-rollout reliability and uses a Reward-Soft mechanism to suppress unreliable action chunks during GRPO-style post-training.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper targets world-model hallucinations in long-horizon VLA policy post-training."},
+                    {"trace": "[Abstract]", "claim": "It reports LIBERO gains and real-world G1 manipulation improvement from 67.5 percent to 80.0 percent across two tasks."},
+                    {"trace": "[Inference]", "claim": "APRL should weight imagined robot rollouts by hallucination risk before using them as training evidence."},
+                ],
+                "falsification": "If hallucination scores fail under new objects, cameras, or contact regimes, the optimizer may still amplify plausible but wrong trajectories.",
+                "adversarial": "Compare imagined rollouts with physical rollouts under hidden object displacement, long-horizon dependency, and contact-state changes.",
+                "thinking_tool": "A world model is a source of proposed evidence, not a free substitute for physical interaction.",
+                "transfer_boundary": "Direct for VLA manipulation post-training; weaker for tasks whose world-model error is not visually observable.",
+            },
+            {
+                "rank": 2,
+                "title": "No Free Checker: A Survey of Verifiers for Robot Policies",
+                "arxiv_id": "2609.09250",
+                "fit": "robot policy verification - verifier availability - verifier credibility",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Robot policy scores are often treated as if denser, cheaper, or earlier feedback is automatically better.",
+                "friction": "The abstract frames a trade-off: availability rises as verdicts become cheaper and earlier, while credibility can fall as judgments become gameable.",
+                "hidden_premise": "Every policy verifier needs its own validation protocol before it can train or certify a robot behavior.",
+                "conceptual_move": "Compare roughly 150 verifiers by who supplies the judgment and by the availability-credibility trade-off.",
+                "mechanism": "The survey groups human, rule-based, formal, learned, pretrained, and model-intrinsic verifiers, then asks what validates the verifier itself.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper defines availability as verdict cost, timing, and query density."},
+                    {"trace": "[Abstract]", "claim": "It defines credibility as how much a high score says about the real task and whether the judgment is gameable."},
+                    {"trace": "[Inference]", "claim": "APRL should report verifier latency, gameability, and validation source next to every robot-policy score."},
+                ],
+                "falsification": "If a verifier's score predicts deployment success under reward hacking and distribution shift, high availability may not imply weak credibility.",
+                "adversarial": "Test success detectors, learned rewards, and runtime monitors on policies explicitly optimized to exploit each verifier family.",
+                "thinking_tool": "Before trusting a policy score, ask who checks the checker.",
+                "transfer_boundary": "Broadly useful across robot policy evaluation; less direct for perception-only benchmarks without behavior scoring.",
+            },
+            {
+                "rank": 3,
+                "title": "DUET-DINO: Simultaneous Cross-View World Modeling for Latent Planning in Robot Manipulation",
+                "arxiv_id": "2609.10506",
+                "fit": "cross-view world modeling - latent planning - 7-DoF manipulation",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Latent world models can predict future visual representations but may underrepresent fine-grained spatial and rotational actions.",
+                "friction": "The abstract says full 7-DoF end-effector control needs reliable predictions across side and wrist views.",
+                "hidden_premise": "A useful latent world model should preserve both global scene context and gripper-centric local evidence.",
+                "conceptual_move": "Learn simultaneous action-conditioned predictions from static side-camera and wrist-camera observations through cross-view conditioning.",
+                "mechanism": "DUET-DINO uses complementary view information for latent planning over the full action space and compares DINOv3-style predictions with wrist-view dynamics.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper targets unreliable fine-grained spatial and rotational predictions in latent world models."},
+                    {"trace": "[Abstract]", "claim": "It reports 92 percent reach, 72.5 percent angled-reach, and 60.0 percent lift success across evaluated tasks."},
+                    {"trace": "[Inference]", "claim": "APRL should test whether cross-view latents predict action errors before final manipulation success changes."},
+                ],
+                "falsification": "If gains vanish when wrist or side views are corrupted independently, the cross-view latent may be overfitting camera-specific cues.",
+                "adversarial": "Swap side-view clutter, wrist occlusion, orientation-intensive reaches, and multi-goal grasps while holding language constant.",
+                "thinking_tool": "A latent is action-grounded only if it predicts the view that controls the next motion.",
+                "transfer_boundary": "Strong for multi-view manipulation; weaker for single-camera or non-calibrated robot settings.",
+            },
+            {
+                "rank": 4,
+                "title": "View-Structured Conformal Prediction for 3D Gaussian Splatting",
+                "arxiv_id": "2609.10307",
+                "fit": "3DGS uncertainty - view-wise coverage - structured regression",
+                "status": "Tier A - abstract-only",
+                "status_quo": "3DGS uncertainty maps are often visually inspected without finite-sample guarantees for a whole rendered view.",
+                "friction": "The abstract says marginal pixel coverage can look acceptable while view-level coverage fails.",
+                "hidden_premise": "A rendered scene should expose view-wise uncertainty before a robot uses it for localization, collision, or inspection.",
+                "conceptual_move": "Treat novel-view synthesis as structured regression and require coverage over a fraction of pixels in a new view.",
+                "mechanism": "VSCP separates renderer-provided spatial shape from a transferable view-difficulty multiplier, then calibrates across held-out views.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "Pixel-pooled calibration reaches 89.9 percent marginal pixel coverage but only 61.4 percent view-event coverage at a 90 percent target."},
+                    {"trace": "[Abstract]", "claim": "View-CP reaches 91.7 to 92.0 percent view-event coverage in the reported setting."},
+                    {"trace": "[Inference]", "claim": "APRL should ask whether 3D maps report action-relevant uncertainty at the view or task level."},
+                ],
+                "falsification": "If calibrated view boxes do not predict downstream relocalization or collision-query risk, uncertainty remains visual rather than robotic.",
+                "adversarial": "Evaluate viewpoint sweeps where small uncovered regions contain the obstacle, target handle, or localization feature needed for action.",
+                "thinking_tool": "Uncertainty must be calibrated at the unit where decisions are made.",
+                "transfer_boundary": "Direct for view synthesis and mapping; needs task-level translation before certifying robot actions.",
+            },
+            {
+                "rank": 5,
+                "title": "DCReg: Decoupled Characterization for Efficient Degenerate LiDAR Registration",
+                "arxiv_id": "2509.06285",
+                "fit": "LiDAR registration - degeneracy characterization - interpretable mitigation",
+                "status": "Tier A - abstract-only",
+                "status_quo": "LiDAR registration failures in corridors and weakly constrained spaces are often detected late through accumulated pose drift.",
+                "friction": "The abstract says full-Hessian analyses can mask which physical motion directions are ill-conditioned.",
+                "hidden_premise": "A registration system should identify the unconstrained motion subspace before optimization silently chooses an unstable pose.",
+                "conceptual_move": "Decouple 6-DoF registration into cleaner rotational and translational subspaces for detection, characterization, and mitigation.",
+                "mechanism": "DCReg uses Schur complement decomposition, eigenspace basis alignment, and preconditioner-side eigenvalue clamping without changing the original objective.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper targets geometrically degenerate environments such as corridors."},
+                    {"trace": "[Abstract]", "claim": "It reports 20-50 percent higher long-duration localization accuracy and 5-30x speedups, with up to 116x in evaluated cases."},
+                    {"trace": "[Inference]", "claim": "APRL should log the physical motion directions that a map cannot constrain before trusting a pose update."},
+                ],
+                "falsification": "If characterization is unstable under sensor noise, dynamic objects, or changing feature density, mitigation can give false confidence.",
+                "adversarial": "Use corridors, open spaces, repeated structures, and dynamic-object scenes where different translation or rotation axes lose observability.",
+                "thinking_tool": "Degeneracy is a physical direction of missing evidence, not just a poor numeric condition number.",
+                "transfer_boundary": "Direct for LiDAR navigation and SLAM; weaker for dense RGB-D reconstruction without the same registration Hessian structure.",
+            },
+            {
+                "rank": 6,
+                "title": "Data-Driven Risk Fields for Safer End-to-End Autonomous Driving",
+                "arxiv_id": "2609.10377",
+                "fit": "driving risk fields - relative risk supervision - end-to-end planning",
+                "status": "Tier A - abstract-only",
+                "status_quo": "End-to-end driving models can optimize planning while safety priors remain hand-tuned or indirectly encoded.",
+                "friction": "The abstract says absolute handcrafted risk scores may not capture ego-conditioned planning risk.",
+                "hidden_premise": "Safety supervision should preserve risk ordering that matters for the ego planner, not only regress a fixed cost map.",
+                "conceptual_move": "Train a BEV risk field from pairwise risk labels derived from rule-based priors, jointly with map segmentation and planning.",
+                "mechanism": "DRiF learns static map segmentation, dynamic risk prediction, and vehicle planning in a shared BEV representation.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper converts rule-based safety priors into pairwise risk labels."},
+                    {"trace": "[Abstract]", "claim": "Bench2Drive experiments report improvements in driving score, success rate, and collision-related metrics."},
+                    {"trace": "[Inference]", "claim": "APRL should compare whether relative risk order changes the actual planner decision under near-miss scenarios."},
+                ],
+                "falsification": "If relative risk labels inherit flawed rule priors, the learned risk field may preserve interpretable but wrong safety rankings.",
+                "adversarial": "Create scenarios where rule priors disagree with human risk order, rare vulnerable road-user behavior, or map segmentation uncertainty.",
+                "thinking_tool": "Safety priors should be learned as planner-facing order constraints.",
+                "transfer_boundary": "Direct for driving; translatable to field robots with ego-conditioned collision and mission-risk labels.",
+            },
+            {
+                "rank": 7,
+                "title": "Evidence-Order Calibration for Selective Visual Reasoning under Progressive Loss of Question-Critical Evidence",
+                "arxiv_id": "2609.09184",
+                "fit": "VLM reliability - critical evidence masking - selective reasoning calibration",
+                "status": "Tier A - abstract-only",
+                "status_quo": "VLM confidence is often evaluated as a scalar correctness signal after inputs are corrupted.",
+                "friction": "The abstract says confidence may be structurally inconsistent across evidence-loss trajectories inside individual examples.",
+                "hidden_premise": "A reliable VLM should become less authorized to answer as question-critical visual evidence disappears.",
+                "conceptual_move": "Construct question-conditioned masking trajectories and train a post-hoc reliability head with evidence-order supervision.",
+                "mechanism": "The study progressively masks scene-graph-localized critical regions and measures evidence monotonicity violation rates.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "Native sequence confidence has an EMVR of 0.436, and 92.0 percent of trajectories contain at least one adjacent violation."},
+                    {"trace": "[Abstract]", "claim": "Critical masking reduces accuracy by 28.2 points versus 0.6 points for matched non-critical masks."},
+                    {"trace": "[Inference]", "claim": "APRL should calibrate robot VLM judges against ordered removal of action-critical evidence."},
+                ],
+                "falsification": "If evidence order improves monotonicity but not selective-risk ranking, it may not replace ordinary confidence for deployment triage.",
+                "adversarial": "Mask action-critical object regions, harmless distractors, and spatial relations separately while measuring answer confidence and action choice.",
+                "thinking_tool": "Reliability should degrade in the same order that evidence disappears.",
+                "transfer_boundary": "Strong for VLM judging and spatial QA; needs embodied masking protocols before direct robot deployment.",
+            },
+            {
+                "rank": 8,
+                "title": "TRACE: Trajectory-robust Admission with Evidence Ordering for Efficient GUI Agents",
+                "arxiv_id": "2609.10297",
+                "fit": "GUI agents - token pruning - monotone KV contraction",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Training-free visual token pruning is often treated as a reversible efficiency trick.",
+                "friction": "The abstract says once GUI visual tokens are discarded under cache reuse, the agent cannot recover that evidence without re-encoding.",
+                "hidden_premise": "Token pruning in a trajectory is an irreversible admission decision about future action evidence.",
+                "conceptual_move": "Rank visual evidence by future utility, instruction relevance, feature novelty, and coverage of operable regions.",
+                "mechanism": "TRACE forms a nested token order and contracts retired frames into compact session state through monotone KV contraction.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper frames pruning as irreversible because cache reuse prevents recovery of discarded visual evidence."},
+                    {"trace": "[Abstract]", "claim": "It reserves budget for native visual tokens distributed across the screen to repair missing spatial coverage."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate robot video pruning as a future-action evidence admission policy."},
+                ],
+                "falsification": "If future targets are not predictable from layout and instruction priors, monotone pruning may discard rare but decisive evidence.",
+                "adversarial": "Hide the only safe action cue in a low-salience region that becomes relevant several steps later.",
+                "thinking_tool": "Compression choices should be audited by the future actions they make impossible.",
+                "transfer_boundary": "Direct for GUI agents; useful for robot video and multi-view streams after replacing GUI operable regions with action-affordance regions.",
+            },
+            {
+                "rank": 9,
+                "title": "MotionBlind: Probing the Illusion of Motion Understanding in Video-LLMs",
+                "arxiv_id": "2609.09528",
+                "fit": "VideoLLM motion understanding - world-model evidence - physical variables",
+                "status": "Tier A - abstract-only",
+                "status_quo": "VideoLLMs are increasingly used as perceptual fronts for world models because they recognize objects and describe scenes.",
+                "friction": "The abstract says models can name objects but still fail to distinguish speed, magnitude, and direction in near-identical clips.",
+                "hidden_premise": "A world-model frontend must read the physical variable that planning depends on, not only scene appearance.",
+                "conceptual_move": "Use paired clips and complementary yes/no questions so motion understanding requires all four answers to be correct.",
+                "mechanism": "MotionBlind tests frame order, frame count, and selection strategies, with Instance Accuracy as the all-or-nothing metric.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The benchmark has a 6.25 percent chance floor for four-item instances."},
+                    {"trace": "[Abstract]", "claim": "Open models sit near chance and scale alone does not close the gap in the reported study."},
+                    {"trace": "[Inference]", "claim": "APRL should not use VideoLLM descriptions as reward or supervision unless motion variables are directly tested."},
+                ],
+                "falsification": "If newer video encoders solve paired motion variables under robot camera motion, the limitation may be model-generation specific.",
+                "adversarial": "Test same-object clips with different speed, direction, contact impulse, and camera movement while holding appearance constant.",
+                "thinking_tool": "A model that sees objects may still be blind to the dynamics that matter.",
+                "transfer_boundary": "Strong for video-world-model audits; less direct for static perception pipelines.",
+            },
+            {
+                "rank": 10,
+                "title": "Geometry Conditioning in an Embodied SLM: Training Controls and Robustness Diagnostics in a 0.8B Hybrid Model",
+                "arxiv_id": "2609.09213",
+                "fit": "embodied SLM - geometry conditioning - robustness diagnostics",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Adding explicit geometry to embodied language models can be assumed to improve physical generalization.",
+                "friction": "The abstract reports inconclusive or negative controls: shuffled training-time geometry outperforms aligned increments under the tested recipe.",
+                "hidden_premise": "A geometry interface should be validated against physical-layout generalization, not assumed beneficial because inputs are geometric.",
+                "conceptual_move": "Run controlled geometry-conditioning variants and robustness tests on a small hybrid manipulation model.",
+                "mechanism": "The study compares recurrent decay gates, token adapters, token-clock conditioning, relative-coordinate policies, and visual policies under held-out rollouts.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "Geometry-conditioned recurrent gates score 28.9 percent versus 36.7 percent when increments are shuffled during training."},
+                    {"trace": "[Abstract]", "claim": "A state-only relative-coordinate policy retains 7/10 success under frame relabeling while tested visual policies fall after object displacement."},
+                    {"trace": "[Inference]", "claim": "APRL should require geometry conditioning to improve layout shifts, not just expose coordinate-like inputs."},
+                ],
+                "falsification": "If a different architecture or data scale reverses the result, the finding is a diagnostic warning rather than a general law.",
+                "adversarial": "Separate coordinate invariance, object displacement, frame relabeling, and visual-policy robustness on the same LIBERO-style tasks.",
+                "thinking_tool": "Physical-state inputs need negative controls before they become trusted evidence.",
+                "transfer_boundary": "Useful as a caution for embodied model design; not a proof that geometry conditioning is generally harmful.",
+            },
+        ],
+        "synthesis": [
+            {
+                "title": "VLA post-training is becoming a verifier problem",
+                "links": "HaWMPO - No Free Checker - RoboDrop - JEPA Policy - FreqFM",
+                "facts": "The abstracts separately target hallucinated imagined rollouts, verifier credibility, corrupted demonstrations, future-representation supervision, and action-frequency conditioning.",
+                "inference": "The common decision is to expose the evidence channel that authorizes a sample, rollout, verifier score, or action chunk before optimization trusts it.",
+            },
+            {
+                "title": "Geometry papers are naming the missing evidence dimension",
+                "links": "VSCP - DCReg - OSM lane correction - OmniPoint - LiDAR diffusion",
+                "facts": "The batch turns view uncertainty, registration degeneracy, sparse map priors, camera-model independence, and 2D-to-3D transfer into explicit tests.",
+                "inference": "APRL should evaluate map representations by the uncertainty, degeneracy, and planner risk they reveal before a robot commits.",
+            },
+            {
+                "title": "Multimodal efficiency is now an admission policy",
+                "links": "TRACE - VIP-Router - Evidence-Order Calibration - VidHalLoc - CT-SAFR - BSE",
+                "facts": "The papers audit token pruning, cache contraction, confidence monotonicity, hallucination detector reliability, reasoning faithfulness, and hidden-state belief updates.",
+                "inference": "Compression and reasoning filters should be judged by whether they retain the evidence needed for later decisions, not only by average accuracy or latency.",
+            },
+        ],
+        "frontier_memory": [
+            {
+                "label": "Strengthening",
+                "history": "Recent releases repeatedly framed VLA reliability as action permission under evidence freshness.",
+                "body": "September 10 strengthens that axis with hallucination-scored imagined rollouts, checker credibility, gradient-compatible data curation, and action-frequency conditioning.",
+            },
+            {
+                "label": "New signal",
+                "history": "The previous geometry line emphasized robot-usable maps and planner-facing validity.",
+                "body": "Today adds view-level conformal coverage, explicit LiDAR degeneracy directions, and OSM lane-geometry correction as uncertainty contracts before navigation.",
+            },
+            {
+                "label": "Commoditizing",
+                "history": "World-model papers have increasingly promised control, simulation, or physical future prediction.",
+                "body": "The differentiator is no longer the word world model; it is whether habit, physics, nuisance, view prediction, tactile force, and programmable state are separable.",
+            },
+            {
+                "label": "Contradiction",
+                "history": "Bigger context and richer conditioning often look like the default answer.",
+                "body": "MotionBlind questions VideoLLM motion perception, TRACE warns that pruning is irreversible, and geometry-conditioning controls show explicit state inputs can fail under physical shift.",
+            },
+            {
+                "label": "Missing axis",
+                "history": "The repo has separate VLA, geometry, safety, and efficiency threads.",
+                "body": "APRL can connect them by scoring when a verifier, map, token filter, world model, or belief state is allowed to change the same robot action.",
+            },
+        ],
+        "strategy": [
+            {
+                "priority": "Build moat",
+                "portfolio": "Build moat",
+                "title": "Verifier credibility suite for VLA post-training",
+                "thesis": "Build a policy-training benchmark where imagined rollouts, learned rewards, success detectors, gradient-compatible samples, and formal monitors are all treated as candidate verifiers.",
+                "scores": {"strategic_fit": 5, "asymmetry": 5, "timing": 5, "tractability": 4, "defensibility": 5, "scientific_depth": 5},
+                "one_week": "Instrument ten LIBERO/RoboCasa-style tasks with hallucinated world-model frames, corrupted demonstrations, delayed failures, and verifier-score traces.",
+                "one_week_probe": "Instrument ten LIBERO/RoboCasa-style tasks with hallucinated world-model frames, corrupted demonstrations, delayed failures, and verifier-score traces.",
+                "four_week": "Compare HaWMPO-style rollout scoring, RoboDrop-style sample filtering, success detectors, VLM rewards, and temporal-logic monitors on identical failure families.",
+                "four_week_build": "Compare HaWMPO-style rollout scoring, RoboDrop-style sample filtering, success detectors, VLM rewards, and temporal-logic monitors on identical failure families.",
+                "success": "At least one verifier family improves downstream success while resisting a reward-hacking or hallucinated-rollout stress split.",
+                "success_metric": "At least one verifier family improves downstream success while resisting a reward-hacking or hallucinated-rollout stress split.",
+                "stop": "Stop if verifier ranking is fully explained by ordinary terminal success and does not predict recovery, safety, or data-cleaning outcomes.",
+                "stop_condition": "Stop if verifier ranking is fully explained by ordinary terminal success and does not predict recovery, safety, or data-cleaning outcomes.",
+                "paper_path": "Credible verifiers for hallucination-aware VLA post-training.",
+                "asset_path": "Paired episodes, imagined rollouts, verifier traces, corruption labels, reward-hacking probes, and real-robot validation logs.",
+                "asset": "Paired episodes, imagined rollouts, verifier traces, corruption labels, reward-hacking probes, and real-robot validation logs.",
+            },
+            {
+                "priority": "Exploit",
+                "portfolio": "Exploit",
+                "title": "Planner-facing geometry uncertainty protocol",
+                "thesis": "Evaluate 3DGS, LiDAR registration, monocular point clouds, and map-assisted drift correction by whether they expose the uncertainty or degeneracy that changes navigation decisions.",
+                "scores": {"strategic_fit": 5, "asymmetry": 4, "timing": 5, "tractability": 4, "defensibility": 5, "scientific_depth": 5},
+                "one_week": "Create corridor, open-space, sparse-view, fisheye, and lane-map routes with manually labeled pose-degeneracy and collision-risk cases.",
+                "one_week_probe": "Create corridor, open-space, sparse-view, fisheye, and lane-map routes with manually labeled pose-degeneracy and collision-risk cases.",
+                "four_week": "Benchmark VSCP-style view coverage, DCReg-style degeneracy directions, OSM lane correction, OmniPoint-style ray-distance geometry, and LiDAR diffusion features.",
+                "four_week_build": "Benchmark VSCP-style view coverage, DCReg-style degeneracy directions, OSM lane correction, OmniPoint-style ray-distance geometry, and LiDAR diffusion features.",
+                "success": "A task-level uncertainty score predicts relocalization failure, wrong turn, or unsafe collision query better than reconstruction or registration error alone.",
+                "success_metric": "A task-level uncertainty score predicts relocalization failure, wrong turn, or unsafe collision query better than reconstruction or registration error alone.",
+                "stop": "Stop if calibrated uncertainty and degeneracy directions do not change planner risk relative to standard pose and map metrics.",
+                "stop_condition": "Stop if calibrated uncertainty and degeneracy directions do not change planner risk relative to standard pose and map metrics.",
+                "paper_path": "Uncertainty-calibrated robot-usable geometry for navigation and mapping.",
+                "asset_path": "View sweeps, LiDAR degeneracy labels, sparse-map priors, lane-geometry alignments, and planner outcome traces.",
+                "asset": "View sweeps, LiDAR degeneracy labels, sparse-map priors, lane-geometry alignments, and planner outcome traces.",
+            },
+            {
+                "priority": "Explore",
+                "portfolio": "Explore",
+                "title": "Irreversible evidence admission benchmark",
+                "thesis": "Treat frame sampling, token pruning, KV contraction, chain-of-thought verification, and belief-state filtering as policies that admit or discard action evidence.",
+                "scores": {"strategic_fit": 4, "asymmetry": 5, "timing": 5, "tractability": 4, "defensibility": 4, "scientific_depth": 5},
+                "one_week": "Build a small video, GUI, and robot-view suite where the decisive cue appears briefly, off-center, late in the trajectory, or only through hidden-state belief updates.",
+                "one_week_probe": "Build a small video, GUI, and robot-view suite where the decisive cue appears briefly, off-center, late in the trajectory, or only through hidden-state belief updates.",
+                "four_week": "Compare TRACE, VIP-Router-like routing, evidence-order calibration, VidHalLoc-style detector checks, CT-SAFR-style reasoning verification, and explicit belief-state filtering.",
+                "four_week_build": "Compare TRACE, VIP-Router-like routing, evidence-order calibration, VidHalLoc-style detector checks, CT-SAFR-style reasoning verification, and explicit belief-state filtering.",
+                "success": "A retained-evidence policy reduces cost while preserving answer monotonicity, detector reliability, hidden-state belief consistency, and safe action permission.",
+                "success_metric": "A retained-evidence policy reduces cost while preserving answer monotonicity, detector reliability, hidden-state belief consistency, and safe action permission.",
+                "stop": "Stop if all cost savings remove rare decisive cues or if reasoning verification does not predict action safety.",
+                "stop_condition": "Stop if all cost savings remove rare decisive cues or if reasoning verification does not predict action safety.",
+                "paper_path": "Evidence admission and belief consistency for efficient multimodal robot agents.",
+                "asset_path": "Pruned videos, GUI token orders, robot-view masks, belief traces, reasoning-verification labels, and action-permission outcomes.",
+                "asset": "Pruned videos, GUI token orders, robot-view masks, belief traces, reasoning-verification labels, and action-permission outcomes.",
+            },
+        ],
+    }
+}
+
+
+def main() -> int:
+    (ROOT / "intelligence").mkdir(exist_ok=True)
+    (ROOT / "posts").mkdir(exist_ok=True)
+    for date, data in RI_BY_DATE.items():
+        (ROOT / "intelligence" / f"{date}.json").write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        (ROOT / "posts" / f"{date}-research-intelligence.html").write_text(
+            build_html(data),
+            encoding="utf-8",
+            newline="\n",
+        )
+        print(f"wrote intelligence/{date}.json and posts/{date}-research-intelligence.html")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
