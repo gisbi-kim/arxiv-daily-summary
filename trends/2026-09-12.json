@@ -1,0 +1,296 @@
+{
+  "date": "2026-09-12",
+  "iso_week": "2026-W37",
+  "week_start": "2026-09-06",
+  "week_end": "2026-09-12",
+  "source_listing_date": "2026-09-11",
+  "source_mode": "pastweek",
+  "source_daily_artifacts": [
+    "2026-09-07",
+    "2026-09-09",
+    "2026-09-10",
+    "2026-09-11"
+  ],
+  "no_listing_dates": [
+    "2026-09-08"
+  ],
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "totals": {
+    "selected": 453,
+    "total_scanned": 1055
+  },
+  "daily_totals": {
+    "cv": 664,
+    "ro": 296,
+    "selected": 734,
+    "total_scanned": 904
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 59,
+      "cv": 40,
+      "ro": 15,
+      "cvro": 4
+    },
+    "Robot Learning": {
+      "total": 108,
+      "cv": 3,
+      "ro": 91,
+      "cvro": 14
+    },
+    "Autonomous Driving": {
+      "total": 35,
+      "cv": 10,
+      "ro": 16,
+      "cvro": 9
+    },
+    "Foundation Models": {
+      "total": 64,
+      "cv": 55,
+      "ro": 6,
+      "cvro": 3
+    },
+    "Generation": {
+      "total": 87,
+      "cv": 70,
+      "ro": 12,
+      "cvro": 5
+    },
+    "Efficiency/Systems": {
+      "total": 51,
+      "cv": 46,
+      "ro": 5,
+      "cvro": 0
+    },
+    "Embodied AI": {
+      "total": 20,
+      "cv": 5,
+      "ro": 13,
+      "cvro": 2
+    },
+    "Safety/Alignment": {
+      "total": 29,
+      "cv": 26,
+      "ro": 3,
+      "cvro": 0
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA authority shifts from final success to transition-level evidence gates",
+      "representative_ids": [
+        "2609.04277",
+        "2609.05324",
+        "2609.05376",
+        "2609.05832",
+        "2609.06114",
+        "2609.09941",
+        "2609.10706",
+        "2609.10915",
+        "2609.11445",
+        "2609.11875"
+      ],
+      "why": "The week repeatedly rejects terminal success as the only VLA evidence. FailureSpot, RoboSPA, and What Matters When split timestamped failure, spatial-procedural difficulty, and conditional visual grounding; CR-VLA-Force and Where Success Breaks make force or boundary signals interrupt the policy; HaWMPO, HuRo, IMLE-VLA, FARM, and UniMPA ask whether imagined worlds, robotized human videos, faster action heads, predictive states, and memory banks are authorized to change a transition. APRL should evaluate the permission signal before the final success label.",
+      "confidence": "High - every available listing day contributed independent VLA evidence around failure timing, grounding, force, boundary, world-model, pretraining, or memory authority.",
+      "lab_action": "Run one manipulation suite with task difficulty, conditional visual grounding, force interruption, failure-boundary labels, world-model rollouts, robotized pretraining, single-step action heads, predictive-state readouts, and memory banks as separate interventions; compare action delta, warning lead time, jerk, unsafe permission, recovery, and OOD success."
+    },
+    {
+      "cluster": "Robot geometry release gates move from reconstruction quality to degraded-sensor validity",
+      "representative_ids": [
+        "2609.04602",
+        "2609.05325",
+        "2609.07274",
+        "2609.09069",
+        "2609.10307",
+        "2509.06285",
+        "2609.11079",
+        "2609.10756",
+        "2609.11616",
+        "2609.11894"
+      ],
+      "why": "The 3D/SLAM signal is not just more Gaussian splats or cleaner registration. NavArena turns 3DGS reconstructions into navigation benchmarks, FIRE-LIVWO and DCReg expose sensor failure and LiDAR degeneracy, LightSplat and View-Structured conformal prediction add loop closure and uncertainty contracts, and RIDE, GRADE, LangStreet, and mmWave point splatting ask whether geometry survives occlusion, haze, radar sensing, street semantics, and relocalization. The release gate should be robot validity under degraded evidence, not visual fidelity alone.",
+      "confidence": "High - 59 weekly 3D/Scene ROI papers plus repeated SLAM, LiDAR, Gaussian, radar, occupancy, uncertainty, and relocalization evidence trigger the geometry watch lens.",
+      "lab_action": "Compare 3DGS maps, LiDAR-inertial-wheel odometry, learned occupancy, conformal 3DGS uncertainty, degenerate LiDAR registration, radar depth, street language fields, and mmWave splats on repeated robot routes with haze, occlusion, dynamic objects, and sparse viewpoints; score relocalization, depth drift, semantic persistence, uncertainty calibration, and downstream navigation success."
+    },
+    {
+      "cluster": "World models are judged by physical commitments and feedback timing",
+      "representative_ids": [
+        "2609.04911",
+        "2609.05266",
+        "2609.06207",
+        "2609.10506",
+        "2609.09941",
+        "2609.11172",
+        "2609.11242",
+        "2609.11900",
+        "2609.11499"
+      ],
+      "why": "World-model papers moved away from plausible videos toward testable physical commitments. TourPhysics and TacPAC make physics and tactile contact influence exploration and correction; PhysWeep asks whether a generator realizes the requested physical variable; DUET-DINO and HaWMPO connect cross-view latent worlds and hallucination-aware rollouts to policy learning; EgoGenEval, Think-with-Video, MindTopo, and Recursive Code World Models separate ego-motion, symbolic rules, topology, and scene programs. APRL should decide which imagined signal may enter control only after testing feedback schedule and physical-state preservation.",
+      "confidence": "High - generation, robot learning, and planning papers all converged on physical variable, feedback timing, topology, or executable-scene commitments.",
+      "lab_action": "Build matched manipulation and navigation episodes with open-loop imagination, tactile feedback, cross-view latent prediction, ego-motion target views, topological relations, and recursive scene programs; compare physical-state error, topology violation, action ranking, recovery timing, and compute spent per useful correction."
+    },
+    {
+      "cluster": "Safety and autonomy move into executable hazard and recovery contracts",
+      "representative_ids": [
+        "2609.05178",
+        "2609.05401",
+        "2609.10377",
+        "2609.10297",
+        "2609.10895",
+        "2609.10951",
+        "2609.10726",
+        "2609.11697"
+      ],
+      "why": "Safety was strongest when it stopped being a passive score. LIBERO-RECOVER and ROBORMBENCH expose recovery and reward fragility after apparent success; Data-Driven Risk Fields and TRACE make autonomy decisions depend on relative risk and evidence order; ReactHuman executes committed hazard reactions; Testing Between the Test Cases reasons about steering conditions never driven; information-risk valuation and ActSafeGuard ask when information gathering or a flow-matching action should be blocked. The shared decision is whether evidence has enough operational authority to continue, interrupt, or recover.",
+      "confidence": "High - recovery, reward fragility, risk fields, evidence ordering, embodied hazards, formal steering, hazardous exploration, and differentiable constraints form one executable-safety axis.",
+      "lab_action": "Use household hazard scenes, LIBERO recovery tasks, CARLA steering intervals, hazardous exploration grids, GUI evidence-order tasks, and flow-policy manipulation with hard constraints; compare reaction deadline, recovery branch quality, unsafe continuation, risk-weighted information gain, intervention count, and trace replayability."
+    },
+    {
+      "cluster": "VLM and multimodal reliability shifts from confidence to evidence-use diagnostics",
+      "representative_ids": [
+        "2609.04276",
+        "2609.09184",
+        "2609.09528",
+        "2609.09895",
+        "2609.09790",
+        "2609.11244",
+        "2609.11899",
+        "2609.11582",
+        "2609.10798"
+      ],
+      "why": "The reliability thread was not merely better calibration. FailSAE tries to expose interpretable VLM failure features; Evidence-Order Calibration tests whether answers survive progressive loss of question-critical evidence; MotionBlind and VidHalLoc probe whether video systems and hallucination detectors see the motion they claim; LogiScope-VQA and OmniHallu turn industrial hazards and cross-modal hallucinations into explicit evidence tests. Caption-once, OmniKVQuant, and RiVaT-Fuse then make frame retrieval, cache compression, and modality trust part of the same evidence-use contract.",
+      "confidence": "High - interpretability, evidence-order loss, video hallucination, logistics hazards, cross-modal hallucination, frame routing, KV compression, and modality uncertainty all test whether the model used the right cue.",
+      "lab_action": "Evaluate robot VLMs and multimodal agents with decisive-region masking, stale frames, brief motion cues, duplicated views, industrial hazard scenes, hallucinated cross-modal claims, frame-router failures, low-bit KV caches, and missing modalities; compare refusal precision, answer flips, decisive-cue recall, action permission, cache drift, and modality-trust calibration."
+    },
+    {
+      "cluster": "Embodied contact and navigation become reusable physical-structure tests",
+      "representative_ids": [
+        "2609.05266",
+        "2609.11753",
+        "2609.11775",
+        "2609.11361",
+        "2609.11553",
+        "2609.11043",
+        "2609.08442",
+        "2609.08159",
+        "2609.05596"
+      ],
+      "why": "Contact-rich and embodied navigation papers ask which physical structure can be reused across tasks, not just whether a larger dataset solves the task. TacPAC turns tactile prediction into real-time correction, SEED-UMI shares the exoskeleton measurement frame across human and robot, online Jacobian pen writing learns without precollected demonstrations, GeoTrussRover and CAP expose morphology and perception-blind locomotion structure, LTLDiff uses temporal logic in multi-agent manipulation, and AirAnchor, OmniNav, and Time-Aware Assistive Navigation test spatial belief and assistance timing. APRL can own the physical variable, not the average success curve.",
+      "confidence": "Medium-High - tactile, exoskeleton, Jacobian, morphology, denoised locomotion, temporal logic, aerial/global anchors, stale navigation beliefs, and timed assistance are coherent but spread across embodiments.",
+      "lab_action": "Create dexterous, morphable, aerial, and assistive-navigation tasks with tactile history, shared exoskeleton frame, online Jacobian update, morphology parameter, depth corruption, LTL action order, global-local anchor, and assistive timing as interventions; compare contact stability, transfer success, belief staleness, safe continuation, and recovery cost."
+    }
+  ],
+  "frontier_memory": {
+    "new": [
+      "The week adds explicit transition accountability: action heads, memories, maps, generated futures, and constraints must state which transition they authorize.",
+      "Sep 8 had no arXiv listing in cs.CV or cs.RO, making the week unusually compressed but not incomplete.",
+      "Radar, haze, street-language Gaussian fields, and mmWave splats turn degraded sensing into a geometry release gate rather than a side benchmark."
+    ],
+    "strengthening": [
+      "Evidence admission strengthened across VLA failures, force interruption, verifier-aware post-training, predictive-state readouts, and hard constraints.",
+      "Robot-usable geometry strengthened through 3DGS navigation, LiDAR-wheel-radar odometry, learned occupancy, conformal 3DGS, degenerate registration, RIDE, and GRADE.",
+      "World-model evaluation strengthened around physical variables, ego-motion, topology, tactile correction, and feedback timing."
+    ],
+    "commoditizing": [
+      "Generic world-model, VLA scaling, and token-pruning claims look weak unless they expose the specific evidence variable that changes action or recovery."
+    ],
+    "contradiction": [
+      "The week rewards richer context but repeatedly warns that stale memories, unverified imagined futures, degraded sensors, and compressed caches can create false authority."
+    ],
+    "missing_axis": [
+      "No public benchmark yet ties transition evidence, degraded-sensor geometry, physical world-model commitments, VLM evidence use, and embodied recovery into one closed-loop robot episode."
+    ]
+  },
+  "strategy_board": [
+    {
+      "opportunity": "Transition-Accountability Benchmark for VLA Control",
+      "portfolio": "Build moat",
+      "why_now": "W37 repeatedly exposed the same gap across failure detection, force feedback, world-model rollouts, robotized pretraining, single-step action heads, and hard constraints.",
+      "what_others_optimize": "Most papers still optimize success rate, throughput, or isolated benchmark accuracy.",
+      "our_contrarian_bet": "APRL should own the transition-level evidence labels that decide when a policy may continue, interrupt, recover, or fall back.",
+      "required_moat": "Robot episodes with transition labels, force events, stale memory, imagined rollout mismatch, predictive-state warning, and recovery outcomes.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "score_rationale": {
+        "strategic_fit": "Directly matches APRL interests in robot perception, VLA, and failure analysis.",
+        "asymmetry": "A small lab can win by owning hard failure episodes rather than model scale.",
+        "timing": "The field is naming evidence gates before standards settle.",
+        "tractability": "A tabletop probe with force, memory, and recovery labels is feasible in one week.",
+        "defensibility": "Curated transition labels and recovery traces are difficult to copy.",
+        "scientific_depth": "The benchmark separates evidence authority from final task success."
+      },
+      "one_week_probe": "Record five manipulation episodes where force, memory, visual grounding, or predictive-state warning should change the next action.",
+      "four_week_build": "Compare VLA, single-step action head, memory bank, force-interruption, and safeguard variants on the same transition labels.",
+      "success_metric": "Transition evidence predicts recovery, unsafe continuation, and action correction before terminal success diverges.",
+      "stop_condition": "Stop if transition labels add no information beyond terminal success and ordinary confidence.",
+      "paper_path": "Transition accountability for evidence-gated VLA control.",
+      "asset_path": "Synchronized robot episodes, transition labels, force traces, predictive-state warnings, memory retrieval logs, and recovery outcomes."
+    },
+    {
+      "opportunity": "Degraded-Sensor Geometry Release Gate",
+      "portfolio": "Exploit",
+      "why_now": "This week tied 3DGS, LiDAR, radar, learned occupancy, conformal uncertainty, street language fields, and relocalization depth to deployment failures.",
+      "what_others_optimize": "Reconstruction appearance, isolated pose error, segmentation accuracy, or rendering quality.",
+      "our_contrarian_bet": "A map or reconstruction should enter the robot loop only if it survives the sensor condition that will break the task.",
+      "required_moat": "Repeated robot routes with haze, occlusion, sparse views, radar/RGB disagreement, dynamic objects, and downstream action outcomes.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "score_rationale": {
+        "strategic_fit": "This is core SLAM, mapping, and robot perception territory.",
+        "asymmetry": "Deployment-validity scenes beat generic 3D scale.",
+        "timing": "Gaussian maps and foundation geometry models are converging now.",
+        "tractability": "A corridor and tabletop degraded-sensor suite can start quickly.",
+        "defensibility": "Sensor-survival labels and repeated robot routes become reusable assets.",
+        "scientific_depth": "The work connects representation uncertainty to action consequence."
+      },
+      "one_week_probe": "Collect a small route/tabletop suite with haze, occlusion, sparse views, radar or depth disagreement, and moving clutter.",
+      "four_week_build": "Evaluate 3DGS, LiDAR odometry, learned occupancy, conformal uncertainty, radar depth, and street semantic maps against downstream robot tasks.",
+      "success_metric": "A degraded-sensor validity score predicts relocalization failure and task failure better than visual quality or ATE alone.",
+      "stop_condition": "Stop if ordinary pose or reconstruction metrics fully explain downstream failures.",
+      "paper_path": "Robot-usable geometry under degraded sensing.",
+      "asset_path": "Sensor-degraded routes, maps, uncertainty outputs, relocalization traces, semantic persistence labels, and downstream outcomes."
+    },
+    {
+      "opportunity": "Physical-Commitment Gate for World Models",
+      "portfolio": "Explore",
+      "why_now": "World-model papers this week asked whether generated futures preserve physics, tactile state, ego-motion, topology, and feedback timing.",
+      "what_others_optimize": "Visual plausibility, rollout loss, or policy gain in separate setups.",
+      "our_contrarian_bet": "A generated future should be blocked from policy authority unless it preserves the physical variable that changes the next action.",
+      "required_moat": "Counterfactual futures with tactile/contact labels, camera motion, topology, physical-rule violations, and feedback schedules.",
+      "scores": {
+        "strategic_fit": 4,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 3,
+        "defensibility": 4,
+        "scientific_depth": 5
+      },
+      "score_rationale": {
+        "strategic_fit": "Close to APRL robot execution, though world-model integration may be heavier.",
+        "asymmetry": "A validity benchmark can expose failures in larger models.",
+        "timing": "World-action model evaluation criteria are unsettled.",
+        "tractability": "A replay probe is feasible; full policy integration is harder.",
+        "defensibility": "Feedback schedules and physical-failure labels become reusable.",
+        "scientific_depth": "The test separates physical commitment from visual fluency."
+      },
+      "one_week_probe": "Replay two manipulation and one navigation scene with generated futures that disagree on contact, topology, or ego-motion.",
+      "four_week_build": "Compare world models, tactile predictors, topological planners, and hallucination-aware policy updates by action ranking and recovery outcomes.",
+      "success_metric": "Physical-commitment metrics predict closed-loop action ranking better than ordinary video quality or rollout score.",
+      "stop_condition": "Stop if all world-model metrics rank methods identically after realistic feedback is included.",
+      "paper_path": "Physical commitment tests for robot world models.",
+      "asset_path": "Rollout traces, physical-variable labels, feedback schedules, topology constraints, counterfactual actions, and policy outcomes."
+    }
+  ]
+}
