@@ -1,0 +1,430 @@
+{
+  "date": "2026-09-15",
+  "edition": "Research Intelligence",
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "source_mode": "new",
+  "scope_note": "Daily edition from matching Tuesday /new listings: 233 non-replacement cs.CV rows, 129 cs.RO rows, 343 deduplicated papers, and 272 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claim is asserted unless the abstract itself states it.",
+  "executive_thesis": "The September 15 batch turns embodied intelligence into a permission problem: a model may reason, compress, retrieve, or predict only if the evidence it preserves is allowed to change an action, map, navigation commitment, or safety intervention. Affordance papers show that VLM manipulation errors often come from missing part grounding rather than missing action vocabulary. VLA papers then ask whether action heads, safety critics, tactile benchmarks, and metrological evidence gates expose the variable that should control execution. Geometry papers move SLAM and reconstruction toward uncertainty-aware, self-correcting map evidence. Video, document, and world-model papers add the same lesson under runtime budgets: more tokens, more frames, or more samples matter only when selection recovers decision-relevant evidence. APRL's advantage is to own benchmarks where each evidence packet must prove what decision it is authorized to change.",
+  "decision_cards": [
+    {
+      "label": "Decision",
+      "title": "Grounding must be factorized before action is judged",
+      "body": "Part Grounding, GroundBench, CSGR, outcome bottlenecks, and STAGE separate part localization, semantic recovery, causal regions, and action sensitivity instead of accepting aggregate VLM scores."
+    },
+    {
+      "label": "Decision",
+      "title": "Deployment VLAs need permission gates",
+      "body": "ShieldVLA, EffVLA, FRAME, Bench2Dex, Physical Kernel, and Attention-DP3 ask whether a safety critic, action head, tactile stream, or geometric prior can authorize execution under stress."
+    },
+    {
+      "label": "Decision",
+      "title": "Maps, memories, and tokens need causal value tests",
+      "body": "SCOUT-SLAM, SURE-Map, CVA, StepPrune, C2Nav, and GRAVA all test whether preserved evidence changes trajectory, scale, answer, stopping, or executable action rather than merely improving a proxy."
+    }
+  ],
+  "papers": [
+    {
+      "rank": 1,
+      "title": "Part Grounding, Not Action Knowledge: Locating the Bottleneck in VLM Affordance Prediction",
+      "arxiv_id": "2609.13225",
+      "fit": "VLM affordance prediction - part grounding - manipulation diagnosis",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Affordance failures are often read as missing low-level action knowledge in vision-language models.",
+      "friction": "The abstract reports that models often describe a different part than the one being scored and fail to outperform a constant answer under the open prompt.",
+      "hidden_premise": "The correct manipulation action is available only after the model identifies the specific object part that should be acted on.",
+      "conceptual_move": "Separate part grounding from action-category knowledge so the benchmark can locate which stage actually fails.",
+      "mechanism": "Naming the target part supplies the missing grounding variable; action accuracy and push recall then rise across all eight tested models.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "Naming the target part raises action accuracy from 0.158-0.474 to 0.684-0.947 for every model."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "Under an open prompt, no model beats a constant answer that ignores the image."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should test robot affordance systems with part-localization controls before blaming action decoding."
+        }
+      ],
+      "falsification": "If a model localizes the target part correctly but still chooses the wrong manipulation action, the bottleneck shifts from grounding to action mechanics.",
+      "adversarial": "Use counterfactual parts on the same object and trivial constant baselines before crediting visual reasoning.",
+      "thinking_tool": "Do not score affordance as one number until part identity, part location, and action mapping are separated.",
+      "transfer_boundary": "Strong for articulated-object affordance tasks; weaker for skills where the target part is externally specified by fixtures or tools."
+    },
+    {
+      "rank": 2,
+      "title": "GroundBench: A Factorized, Counterfactual Benchmark for Locating VLM Affordance Failures",
+      "arxiv_id": "2609.13308",
+      "fit": "counterfactual benchmark - affordance shortcuts - grounding failure localization",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Supplying extra information to a VLM can make affordance accuracy look grounded without revealing which information caused the improvement.",
+      "friction": "The abstract says target-region information without identity leaves accuracy at or below the majority baseline, while identity without location gives above-baseline gains.",
+      "hidden_premise": "A benchmark should branch the evidence bundle so visual grounding, category-to-action association, and mechanical reasoning cannot hide behind each other.",
+      "conceptual_move": "Use branch-and-merge conditions and same-image counterfactual re-asks to test which supplied evidence changes affordance behavior.",
+      "mechanism": "GroundBench supplies location, identity, joint type, and motion-axis bundles separately and measures whether models comply under counterfactual target parts.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "Supplying target identity without location yields 0.74, 0.68, and 0.68 across three OpenAI models."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "Supplying target region without identity leaves accuracy at or below the 0.53 majority baseline in the reported setting."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should build manipulation diagnostics where a shortcut textual cue and a visual cue make different predictions."
+        }
+      ],
+      "falsification": "If region-only evidence becomes sufficient on real robot views with calibrated masks, the current shortcut diagnosis may be dataset-specific.",
+      "adversarial": "Force part identity and location to conflict, then measure whether the policy follows the visual region or the category prior.",
+      "thinking_tool": "A counterfactual affordance test should tell which evidence bundle changed the action.",
+      "transfer_boundary": "Strong for VLM affordance evaluation; needs closed-loop robot trials before becoming a deployment safety claim."
+    },
+    {
+      "rank": 3,
+      "title": "Learning Manipulation-Sufficient Representations via Outcome Bottlenecks",
+      "arxiv_id": "2609.13235",
+      "fit": "networked manipulation - outcome bottleneck - compact action-sufficient state",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Manipulation endpoints often exchange dense geometric states optimized for fidelity across bandwidth-limited links.",
+      "friction": "The abstract argues that geometric fidelity can preserve details that do not determine action outcomes.",
+      "hidden_premise": "The smallest useful representation is the statistic that preserves outcome distributions for admissible actions.",
+      "conceptual_move": "Replace geometry-fidelity compression with an action-conditioned outcome bottleneck trained by marginal outcome log-loss and rate regularization.",
+      "mechanism": "The same compact interface supports grasp selection, conformal filtering, active viewpoint selection, and latent test-time adaptation.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "A reconstructed-geometry wrench score reports 0.542 AUC against lift success, while the learned representation reports 0.876."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "The 512-byte interface is described as 288x smaller than one RGB-D frame and runs at 16 ms per CPU decision."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should judge robot state compression by outcome invariance rather than mesh or point-cloud reconstruction quality."
+        }
+      ],
+      "falsification": "If unseen-object AUC remains near chance after realistic distribution shifts, the learned bottleneck may overfit simulator outcome factors.",
+      "adversarial": "Vary object curvature, contact patch, and viewpoint while holding visual reconstruction quality constant.",
+      "thinking_tool": "Compress only the variables that keep the action-outcome distribution identifiable.",
+      "transfer_boundary": "Strong for grasping and networked manipulation; weaker for language-heavy tasks where the admissible action set is not fixed."
+    },
+    {
+      "rank": 4,
+      "title": "ShieldVLA: Feasibility-Aware Safety Alignment for Vision-Language-Action Models",
+      "arxiv_id": "2609.13231",
+      "fit": "VLA safety - feasibility critic - reachability-inspired gating",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Safety fine-tuning for VLAs often trades reward against soft expected-cost penalties.",
+      "friction": "The abstract says such methods can leave residual constraint violations or become overly conservative, especially without dense safety labels.",
+      "hidden_premise": "The policy should know whether it is inside a feasible operating region before reward maximization is trusted.",
+      "conceptual_move": "Approximate a Hamilton-Jacobi reachability value from visual observations and use it to gate policy optimization.",
+      "mechanism": "ShieldVLA separates reward maximization in feasible regions from recovery near unsafe states and uses rubric-based VLM safety scores as critic targets.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "Across five benchmarks, ShieldVLA reports 57 percent average cumulative safety-cost reduction."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It reports +0.13 task-success improvement over SafeVLA."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should report when the safety critic changes the action, not only final safety cost."
+        }
+      ],
+      "falsification": "If rubric-derived safety targets miss physical near-collisions, the critic may appear safe while failing geometry-level constraints.",
+      "adversarial": "Stress states near the feasibility boundary with distractors, partial observability, and recovery choices.",
+      "thinking_tool": "Safety alignment should be a feasibility gate with recovery semantics, not just a scalar cost penalty.",
+      "transfer_boundary": "Strong for visual navigation and manipulation; needs careful calibration when rubric safety does not observe physical constraints."
+    },
+    {
+      "rank": 5,
+      "title": "What Makes an Efficient VLA? Navigating Action-Head Design, Scaling, and Latency",
+      "arxiv_id": "2609.13984",
+      "fit": "VLA efficiency - action-head alignment - measured latency",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Efficient VLA design can be framed as choosing smaller modules or faster inference tricks.",
+      "friction": "The abstract says action-head initialization is the largest lever and helps at every module scale without adding latency.",
+      "hidden_premise": "The action head must inherit instruction-object alignment from the language backbone before extra decoder expressiveness pays off.",
+      "conceptual_move": "Measure action-head design, module scale, and on-device latency under a fixed training pipeline instead of comparing heterogeneous VLA recipes.",
+      "mechanism": "Copying the last transformer layers into the action head keeps attention on instruction object nouns and close to the backbone weight space.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "Flow matching, heavier decoders, and extra inference passes reverse or lose value once the head is aligned."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "Further scaling has diminishing in-domain returns near the size used by current pi-series VLAs."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should pair VLA accuracy with measured latency and action-head alignment diagnostics."
+        }
+      ],
+      "falsification": "If copied-layer alignment fails on contact-rich or cross-embodiment tasks, the recipe may be benchmark-specific.",
+      "adversarial": "Latency-pair aligned and misaligned heads under object-noun swaps, unseen tools, and real robot timing pressure.",
+      "thinking_tool": "Measure whether capacity buys action alignment before spending latency budget.",
+      "transfer_boundary": "Strong for LIBERO-style VLA deployment; less certain for architectures without transformer-layer action heads."
+    },
+    {
+      "rank": 6,
+      "title": "SCOUT-SLAM: Structurally-Coupled Dual Uncertainty-Aware 3DGS SLAM in the Wild",
+      "arxiv_id": "2609.14634",
+      "fit": "3DGS SLAM - tracking uncertainty - dynamic environments",
+      "status": "Tier A - abstract-only",
+      "status_quo": "3DGS-SLAM often derives uncertainty from scene reconstruction stability.",
+      "friction": "The abstract identifies a circular dependency: reconstruction instability degrades uncertainty modeling, which then damages tracking and static reconstruction.",
+      "hidden_premise": "A SLAM system needs tracking uncertainty that is not merely a shadow of reconstruction quality.",
+      "conceptual_move": "Estimate tracking and reconstruction uncertainties from a shared base network while decoupling tracking uncertainty from reconstruction instability.",
+      "mechanism": "Low-rank adaptation trained on multi-view feature consistency estimates tracking uncertainty; a spatially adaptive prior protects static-region reconstruction.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper targets rapid camera motion and cluttered dynamic environments."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It reports state-of-the-art camera tracking accuracy and artifact-free static scene reconstruction on dynamic benchmarks."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should stress 3DGS maps by separating tracking uncertainty, dynamic object uncertainty, and map-update authority."
+        }
+      ],
+      "falsification": "If uncertainty still rises only where rendering degrades, it has not escaped the reconstruction-quality loop.",
+      "adversarial": "Inject dynamic clutter, rapid motion, and loop-closure ambiguity while evaluating localization and map corruption separately.",
+      "thinking_tool": "Map uncertainty should decide whether to trust the pose estimate before it decides how pretty the reconstruction is.",
+      "transfer_boundary": "Strong for 3DGS-SLAM under dynamic scenes; less direct for offline reconstruction without closed-loop tracking."
+    },
+    {
+      "rank": 7,
+      "title": "SURE-Map: Self-Correcting Streaming Geometric Foundation Model",
+      "arxiv_id": "2609.15795",
+      "fit": "streaming geometry - self-correction - long-horizon scale drift",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Streaming geometric foundation models predict local pose and depth from limited context and can be treated as SLAM replacements.",
+      "friction": "The abstract says dynamic objects and weak textures make local errors accumulate into geometric distortion and long-horizon scale drift.",
+      "hidden_premise": "A streaming model is reliable only if it can periodically bring longer-range geometric evidence back into the recent trajectory.",
+      "conceptual_move": "Add cross-view geometric uncertainty plus multi-timescale self-correction to fast feed-forward reconstruction.",
+      "mechanism": "Consecutive-frame inference preserves streaming speed, while sparse keyframe-window inference recalibrates recent trajectory scale.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "SURE-Map reduces ATE-RMSE from 24.00 to 17.24 m on KITTI and further to 15.17 m with loop closure refinement."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It explicitly models whether jointly predicted pose and depth induce consistent cross-view pixel correspondences."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should evaluate geometry foundation models by scale drift, correction latency, and downstream navigation recovery."
+        }
+      ],
+      "falsification": "If self-correction improves trajectory metrics but not robot task recovery, it is a geometry benchmark win rather than a robotics asset.",
+      "adversarial": "Stress dynamic objects, weak texture, long straight corridors, and delayed loop-closure evidence.",
+      "thinking_tool": "A foundation geometry model needs a correction clock, not only a fast predictor.",
+      "transfer_boundary": "Strong for online reconstruction and robot mapping; weaker for single-frame 3D perception tasks."
+    },
+    {
+      "rank": 8,
+      "title": "Sampling headroom is not selection gain: a compute-value audit of test-time scaling for video world models",
+      "arxiv_id": "2609.13257",
+      "fit": "video world models - test-time scaling - compute-value audit",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Generating more rollout candidates is often assumed to improve world-model outputs at deployment.",
+      "friction": "The abstract distinguishes oracle headroom from the ability to identify and select the better candidate under full compute cost.",
+      "hidden_premise": "Extra sampling has value only when observable signals support a beneficial selection action whose gain exceeds generation and verification cost.",
+      "conceptual_move": "Audit test-time scaling as a sequential decision problem: opportunity, observable state, selection action, and net value.",
+      "mechanism": "CVA measures whether scoring signals and adaptive-depth policies recover candidate-pool headroom in video world-model settings.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "Expanding from 4 to 16 candidates increases oracle quality by +9.23 IQ on 192 Physics-IQ scenes."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "Flow, Cycle, and VideoReward fail to recover the headroom reliably, and tested adaptive policies do not beat uniform compute."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should audit generated robot rollouts by net action-selection value, not by candidate diversity alone."
+        }
+      ],
+      "falsification": "If a robot-specific verifier reliably predicts downstream success, video TTS may become useful despite the negative general result.",
+      "adversarial": "Charge the full rollout, verification, and replanning cost while comparing selected futures to privileged oracle choices.",
+      "thinking_tool": "Sampling headroom is not deployment value until selection converts it into a better action.",
+      "transfer_boundary": "Strong warning for video world models; needs action-conditioned rollout tests before direct robot conclusions."
+    },
+    {
+      "rank": 9,
+      "title": "C2Nav: Compare Before You Commit for Zero-Shot Vision-and-Language Navigation",
+      "arxiv_id": "2609.15142",
+      "fit": "VLN - comparative VLM interface - revocable navigation commitments",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Zero-shot VLN systems often ask a VLM for cardinal quantities such as headings, waypoints, progress, or final arrival decisions.",
+      "friction": "The abstract argues that such questions couple generative answers to geometric magnitudes and irreversible commitments.",
+      "hidden_premise": "A robot should let the VLM compare physically vetted alternatives while geometry controls magnitude and execution.",
+      "conceptual_move": "Replace cardinal VLM outputs with comparative choices for seeing, route memory, and arrival decisions.",
+      "mechanism": "C2Nav performs ordinal gaze election, adjacent instruction-leg comparison, and a hesitation/look-back/walk-back arrival interface.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "With GPT-5.5, C2Nav reports 54.0 percent OSR, 44.0 percent SR, and 29.0 percent SPL on OpenNav R2R-CE 100."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "Replacing comparative answers with cardinal or absolute questions reduces SR in spatial, transition, and terminal slots."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should test embodied agents with revocable comparison interfaces before allowing absolute stop or turn commands."
+        }
+      ],
+      "falsification": "If comparison choices fail under many similar candidates, the interface may simply defer geometric ambiguity to candidate construction.",
+      "adversarial": "Construct near-tie views, ambiguous instruction legs, and false-arrival states where a one-shot absolute answer is tempting.",
+      "thinking_tool": "Let foundation models rank vetted alternatives; keep metric authority on the robot side.",
+      "transfer_boundary": "Strong for zero-shot VLN; less direct for continuous manipulation where alternatives may be harder to discretize."
+    },
+    {
+      "rank": 10,
+      "title": "GRAVA: Grounded Reasoning-to-Action Representation and Learning for Autonomous Driving",
+      "arxiv_id": "2609.15169",
+      "fit": "driving VLA - grounded reasoning - executable trajectory action",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Driving VLA systems may reason before acting, but their intermediate reasoning can be loosely tied to physical scene evidence and executable behavior.",
+      "friction": "The abstract says action-relevant references must be grounded to visual regions, ego states, interactions, and trajectory-anchored graph structure.",
+      "hidden_premise": "Reasoning helps driving only when the serialized explanation preserves evidence that deterministically decodes into an executable plan.",
+      "conceptual_move": "Unify grounding, typed reasoning, and action generation in a single autoregressive stream ending in a deterministic planner action.",
+      "mechanism": "GRA links 2D visual regions to ego-centric physical states and object interactions, then serializes the structure before decoding trajectory actions.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "GRAVA uses 2.2M grounded QA pairs and 70K reasoning traces in GR-NavSim."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "Full GRA improves key-object compliance and Closed-loop Driving Score by 19.3 percent and 20.5 percent over action-only prediction on an internal long-tail benchmark."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should ask whether reasoning tokens preserve evidence that changes the executed trajectory."
+        }
+      ],
+      "falsification": "If grounded reasoning improves explanations but not closed-loop recovery under rare interactions, it is not action-causal.",
+      "adversarial": "Remove or corrupt referenced key objects and measure trajectory changes, intervention timing, and recovery behavior.",
+      "thinking_tool": "Reasoning is useful only when it forms an evidence trail into the executable action.",
+      "transfer_boundary": "Strong for autonomous driving and multi-agent robot navigation; less direct for low-level manipulation without typed scene graphs."
+    }
+  ],
+  "synthesis": [
+    {
+      "title": "Grounding failures are being localized instead of averaged",
+      "links": "Part Grounding - GroundBench - CSGR - STAGE",
+      "facts": "The papers split part identity, visual region, semantic instruction, and action sensitivity into separate test conditions.",
+      "inference": "APRL should stop treating VLM affordance and embodied grounding as one accuracy number and instead ask which supplied evidence changed the action."
+    },
+    {
+      "title": "Action interfaces are becoming feasibility and outcome contracts",
+      "links": "Outcome Bottleneck - ShieldVLA - EffVLA - FRAME - Bench2Dex",
+      "facts": "The batch names outcome sufficiency, feasibility reachability, action-head alignment, admissible inspection evidence, and tactile hardware variation as deployment constraints.",
+      "inference": "The next robot benchmark should say which compact state, critic, tactile cue, or evidence gate is allowed to authorize execution."
+    },
+    {
+      "title": "Geometry and world models need correction or selection value",
+      "links": "SCOUT-SLAM - SURE-Map - CVA - C2Nav - GRAVA",
+      "facts": "The papers test uncertainty, self-correction, sampling value, comparative decisions, and grounded reasoning-to-action interfaces.",
+      "inference": "Robot map and rollout evidence should be scored by whether it corrects drift, changes a trajectory, or prevents an unsafe commitment."
+    }
+  ],
+  "frontier_memory": [
+    {
+      "label": "Strengthening",
+      "history": "September 14 framed robotics as evidence-interface authorization across action, maps, memory, and safety.",
+      "body": "September 15 strengthens that line with counterfactual affordance grounding, outcome bottlenecks, safety reachability, and compare-before-commit navigation."
+    },
+    {
+      "label": "New signal",
+      "history": "Recent geometry notes emphasized relocalization, chained SLAM, and map governance.",
+      "body": "Today adds self-correcting streaming geometry and uncertainty-decoupled 3DGS SLAM, making correction timing part of the map interface."
+    },
+    {
+      "label": "Commoditizing",
+      "history": "Long-video and MLLM work repeatedly argues for more frames, more tokens, or larger context.",
+      "body": "The stronger signal is selection value: keyframe selectors, token pruners, and test-time sampling must prove which retained evidence changes the answer or action."
+    },
+    {
+      "label": "Contradiction",
+      "history": "More generated candidates and richer visual representations are often treated as monotonic improvements.",
+      "body": "CVA reports oracle headroom without reliable selection gain, and affordance papers show visual region supply can be less useful than category identity shortcuts."
+    },
+    {
+      "label": "Missing axis",
+      "history": "The repo has separate threads for VLA safety, embodied navigation, and 3D map uncertainty.",
+      "body": "A unified permission benchmark should ask when evidence may change action, map update, navigation stop, or safety recovery under the same episode."
+    }
+  ],
+  "strategy": [
+    {
+      "priority": "Build moat",
+      "title": "Permission-gated embodied evidence benchmark",
+      "thesis": "Create tasks where part grounding, semantic transfer, outcome bottlenecks, safety critics, and metrological evidence must justify exactly which robot action they authorize.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week": "Prototype three LIBERO or tabletop counterfactuals with target-part swaps, instruction-only semantic swaps, and compact outcome-state ablations.",
+      "four_week": "Add ShieldVLA-style feasibility gates, tactile/dexterous perturbations, and inspection admissibility logs across manipulation and mobile-manipulation tasks.",
+      "success": "Evidence gates predict or change action choice, recovery, and safety violations better than terminal success, VLM confidence, or reconstruction scores.",
+      "stop": "Stop if evidence gates collapse to category priors or do not alter policy behavior under counterfactual interventions.",
+      "asset": "Part-swap images, action-sensitivity labels, outcome-state latents, feasibility traces, tactile perturbations, and recovery annotations."
+    },
+    {
+      "priority": "Exploit",
+      "title": "Self-correcting robot geometry protocol",
+      "thesis": "Evaluate 3DGS-SLAM and streaming geometry models by uncertainty separation, correction timing, and downstream navigation recovery.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week": "Run a small dynamic-scene sequence with camera jerk, moving objects, weak texture, and delayed loop evidence, then score pose, map, and recovery separately.",
+      "four_week": "Compare SCOUT-style dual uncertainty, SURE-style multi-timescale correction, aerial-ground anchors, UAV localization, and radar-LiDAR fusion under shared map-change episodes.",
+      "success": "Correction and uncertainty metrics predict wrong-pose, wrong-map-update, and navigation-recovery failures before visual reconstruction quality does.",
+      "stop": "Stop if correction improves only ATE or rendering while downstream navigation and localization decisions are unchanged.",
+      "asset": "Dynamic mapping sequences, uncertainty traces, loop-closure timing, map-update decisions, and robot task outcome labels."
+    },
+    {
+      "priority": "Explore",
+      "title": "Selection-value audit for world models and multimodal agents",
+      "thesis": "Unify compute-value audits, token pruning, keyframe selection, evidence threading, C2Nav comparisons, and grounded reasoning-to-action into one decision-value test.",
+      "scores": {
+        "strategic_fit": 4,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 3,
+        "defensibility": 4,
+        "scientific_depth": 5
+      },
+      "one_week": "Measure whether token, frame, rollout, and comparison choices change answers or actions on a small robot-video QA and navigation set.",
+      "four_week": "Charge full compute cost for candidate generation, verification, VLM comparison, and trajectory decoding while tracking action-value improvement.",
+      "success": "Selection policies beat uniform compute or naive context by net action value, not only by answer accuracy or oracle headroom.",
+      "stop": "Stop if selected evidence improves offline scores but fails to change trajectories, stopping, recovery, or safety decisions.",
+      "asset": "Candidate pools, verifier scores, keyframe/token selections, comparison logs, trajectory deltas, and compute-cost ledgers."
+    }
+  ]
+}
