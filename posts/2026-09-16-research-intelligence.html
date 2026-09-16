@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-09-16 arXiv Research Intelligence</title>
+<style>
+:root{--ink:#162033;--muted:#5b677a;--line:#dce3ea;--blue:#0f4c81;--cyan:#087990;--soft:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+header,main,footer{max-width:1120px;margin:0 auto;padding:36px 40px}header{padding-top:52px}.home{display:inline-block;margin-bottom:18px;color:var(--blue);text-decoration:none;font-weight:700}
+h1{font-size:38px;line-height:1.12;margin:0 0 10px}h2{font-size:24px;margin:42px 0 16px}h3{margin:6px 0 8px}p{margin:0 0 10px}.lead{font-size:18px;color:#304258;max-width:960px}.scope{padding:14px 16px;background:#fff;border-left:4px solid var(--cyan);border-radius:10px;color:#3d4c5f}
+.decision-grid,.synthesis-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.decision-grid article,.synthesis-grid article,.memory-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.decision-grid span,.memory-grid span{font-size:11px;font-weight:800;color:#075985;background:#e0f2fe;border-radius:999px;padding:3px 8px}
+.autopsy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 22px #1d29390a}.paper-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:26px;font-weight:900;color:#b7c4d4}.tier{font-size:11px;font-weight:800;background:#ecfeff;color:#075985;border-radius:999px;padding:5px 10px;align-self:center}.fit,.links,.history{color:var(--muted);font-size:13px}
+.field-grid,.critical-grid,.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-grid>div,.critical-grid>div,.strategy-grid>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.evidence{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}.evidence li{margin:8px 0}.evidence strong{display:block;color:#075985;font-size:12px}.tool{background:#fff9e8!important;border-color:#f3ce71!important}
+.strategy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}.strategy-head{display:flex;justify-content:space-between}.priority{font-size:11px;font-weight:900;background:#dcfce7;color:#166534;border-radius:999px;padding:5px 10px}.scores{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.scores span{font-size:11px;background:#eef2f6;border-radius:6px;padding:4px 8px}.assets{background:var(--soft);padding:10px 12px;border-radius:8px}
+footer{color:var(--muted);font-size:13px}@media(max-width:800px){header,main,footer{padding-left:22px;padding-right:22px}.decision-grid,.synthesis-grid,.memory-grid,.field-grid,.critical-grid,.strategy-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style></head><body>
+<header><a class="home" href="../">arXiv Daily Summary</a><h1>2026-09-16 arXiv Research Intelligence</h1>
+<p class="lead">The September 16 batch turns world models, maps, manipulation policies, and navigation safety into authority-allocation problems. WAM and VLA papers ask which future modality, spatial stream, temporal state, or action head is allowed to change the command. Geometry papers ask when a map, splat, point cloud, or digital twin is trustworthy enough for localization, change detection, or active vision. Manipulation papers move contact and embodiment from hidden nuisance variables to explicit contracts. Navigation and safety papers normalize uncertainty over episodes, terrain shifts, rover transfer, cyber attacks, and reachability gaps. APRL's best move is to own benchmarks where every representation must declare the robot decision it is allowed to modify and the condition under which that authority is revoked.</p><p class="scope">Daily edition from matching Wednesday /new listings: 123 non-replacement cs.CV rows, 77 cs.RO rows, 187 deduplicated papers, and 156 ROI papers. Tier A cards are conservative abstract-only autopsies from the repository parser output; no figure, table, full-text, code, or dataset-release claim is asserted unless the abstract itself states it.</p></header>
+<main>
+<h2>Research decisions today</h2><div class="decision-grid"><article><span>Decision</span><h3>World models must prove action authority</h3><p>WAM surveys, ModAR, WholeBodyWAM, sensVLA, GeoLAM, TEMPO, and SlotDiT all separate useful prediction from the modality or latent that actually changes an executable action.</p></article><article><span>Decision</span><h3>Geometry is becoming a trust interface</h3><p>PanoGS-SLAM, HuMemSLAM, LiLi, CDSD, BRAVE-6D, Neverwhere, and LiDAR fidelity diagnostics shift 3D evaluation from appearance toward tracking, map-update, and deployment failure tests.</p></article><article><span>Decision</span><h3>Contact and uncertainty need revocation rules</h3><p>Dexterous manipulation, VLN uncertainty, traversability adaptation, rover slippage, resilience, and reachability papers all expose when a policy should defer, adapt, or stop.</p></article></div>
+<h2>Paper Reasoning Autopsy</h2>
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#1</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.17524" target="_blank" rel="noopener">Modality-Autoregressive World-Action Models</a></h3>
+  <p class="fit">world-action model - modality ordering - executable action prediction</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>WAMs are often treated as future RGB predictors with an action head attached.</p></div>
+    <div><h4>Friction / anomaly</h4><p>RGB prediction may be expensive and not consistently useful when depth, point tracks, and visual features carry more action-relevant state.</p></div>
+    <div><h4>Hidden premise</h4><p>A WAM should order modalities by the evidence they contribute to action success, not by visual naturalness.</p></div>
+    <div><h4>Conceptual move</h4><p>Autoregressively denoise future modalities before predicting actions so each modality can condition on earlier generated evidence.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper reports that point tracks, DINO features, and depth maps help, while future RGB does not provide a consistent benefit.</span></li><li><strong>[Abstract]</strong><span>ModAR reports 75 percent average success versus 72 percent for a video-model-initialized WAM while using about 20x fewer training FLOPs.</span></li><li><strong>[Inference]</strong><span>APRL should score each predicted modality by action delta and recovery value before paying RGB-generation cost.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract says ModAR predicts point tracks, DINO features, and depth maps and then predicts actions from the modality sequence.</p></div>
+    <div><h4>Falsification frontier</h4><p>If RGB prediction becomes the strongest signal under contact-rich or human-demonstration transfer tasks, the modality ranking is task-specific.</p></div>
+    <div><h4>Adversarial read</h4><p>Averaged success can hide failure families; test modality order under occlusion, geometry corruption, and distractor motion.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Ask which future modality earns the right to condition the next action.</p><p>Strong for WAM robot manipulation; weaker for purely visual planning tasks where action labels are unavailable.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#2</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.16697" target="_blank" rel="noopener">World Models for Embodied Intelligence: From Plausible to Controllable to Actionable</a></h3>
+  <p class="fit">world model taxonomy - actionable prediction - closed-loop improvement</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>World-model progress is frequently judged by visual fidelity, rollout plausibility, or architectural category.</p></div>
+    <div><h4>Friction / anomaly</h4><p>For robots, the useful prediction is the one that improves planning, recovery, evaluation, verification, or data selection.</p></div>
+    <div><h4>Hidden premise</h4><p>Plausibility is the weakest capability level; intervention prediction and behavior improvement are stronger requirements.</p></div>
+    <div><h4>Conceptual move</h4><p>Organize world models by Plausible, Controllable, and Actionable capabilities crossed with geometry, physics, and action grounding.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper states that world-model value lies in improving behavior, not visual fidelity alone.</span></li><li><strong>[Abstract]</strong><span>It defines stronger capability levels from plausible to controllable to actionable.</span></li><li><strong>[Inference]</strong><span>APRL should refuse world-model claims that cannot name the closed-loop decision they improve.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract frames world models as maintaining hidden state, anticipating consequences, comparing interventions, and adapting when execution departs from expectations.</p></div>
+    <div><h4>Falsification frontier</h4><p>If a visually plausible model improves task success without explicit intervention tests, the hierarchy may miss useful implicit state.</p></div>
+    <div><h4>Adversarial read</h4><p>Surveys can overgeneralize across embodiments; use it as a checklist, not evidence that a specific model transfers.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Rank predictions by the improvement loop they enable: data, reward, policy, model, verification, or recovery.</p><p>Useful as a framework across embodied AI; not a substitute for method-specific experiments.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#3</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.16864" target="_blank" rel="noopener">TEMPO: Learning Temporal Context for Dynamic Robot Manipulation</a></h3>
+  <p class="fit">dynamic manipulation - temporal context - VLA failure diagnosis</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA failures in dynamic tasks can be blamed on model size or inference latency.</p></div>
+    <div><h4>Friction / anomaly</h4><p>The abstract identifies motion ambiguity and state aliasing as failures that persist regardless of scale and latency.</p></div>
+    <div><h4>Hidden premise</h4><p>A single observation is insufficient when visually similar states require different actions or future motion must be anticipated.</p></div>
+    <div><h4>Conceptual move</h4><p>Add a video-foundation-model motion summary and compact proprioceptive history to a pretrained VLA without modifying the backbone.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper reports Bottle Handover success improving from 44 percent to 74 percent.</span></li><li><strong>[Abstract]</strong><span>It says TEMPO is the only evaluated method that solves state aliasing.</span></li><li><strong>[Inference]</strong><span>APRL should test whether a failure is temporal-state missingness before increasing VLA scale.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>TEMPO resolves motion ambiguity through visual temporal context and state aliasing through proprioceptive history.</p></div>
+    <div><h4>Falsification frontier</h4><p>If temporal inputs help only in the benchmark's scripted dynamics, the diagnosis may not generalize to open-world manipulation.</p></div>
+    <div><h4>Adversarial read</h4><p>Motion summaries can leak future cues in offline datasets; closed-loop timing and sensor latency should be stress-tested.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Separate motion ambiguity from state aliasing before changing the action decoder.</p><p>Strong for dynamic manipulation; weaker for quasi-static tasks where one frame and proprioception are sufficient.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#4</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.17387" target="_blank" rel="noopener">PanoGS-SLAM: Panoramic 3D Gaussian Splatting SLAM</a></h3>
+  <p class="fit">3DGS SLAM - sensing geometry - panoramic optimization</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Dense 3DGS-SLAM often assumes narrow-FoV pinhole cameras and relies on photometric optimization.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Limited angular coverage weakens pose observability and destabilizes optimization under rapid motion and large viewpoint changes.</p></div>
+    <div><h4>Hidden premise</h4><p>The sensing geometry itself shapes the conditioning of differentiable SLAM optimization.</p></div>
+    <div><h4>Conceptual move</h4><p>Render and optimize directly in the spherical domain with panoramic photometric constraints and depth-guided Gaussian initialization.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The paper says controlled field-of-view experiments show monotonic improvement as angular coverage increases.</span></li><li><strong>[Abstract]</strong><span>It reports outperforming geometric and GS-based baselines in tracking accuracy and rendering quality on panoramic benchmarks.</span></li><li><strong>[Inference]</strong><span>APRL should treat camera FoV as a map-trust variable, not only an acquisition detail.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract names sphere-consistent photometric loss and depth-guided Gaussian initialization as the stabilization path.</p></div>
+    <div><h4>Falsification frontier</h4><p>If panoramic benefit disappears in dynamic clutter or robot-mounted motion blur, FoV alone is not the governing factor.</p></div>
+    <div><h4>Adversarial read</h4><p>Rendering quality and pose accuracy can move together without improving downstream navigation; task-level recovery tests are needed.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Map representation claims should expose the sensor geometry that made optimization trustworthy.</p><p>Strong for panoramic SLAM; less direct for narrow-FoV robot cameras unless sensor placement can be changed.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#5</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.17145" target="_blank" rel="noopener">LiLi: Lie Theory Based 3D LiDAR Scan Alignment Degeneracy Detection</a></h3>
+  <p class="fit">LiDAR localization - degeneracy detection - SE(3) uncertainty</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>LiDAR odometry often detects degeneracy with Hessian-style local criteria.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Noise and complex degeneracies can make the alignment solution non-unique, compromising localization and mapping accuracy.</p></div>
+    <div><h4>Hidden premise</h4><p>A robot must know the full set of transformations that remain ambiguous after scan alignment.</p></div>
+    <div><h4>Conceptual move</h4><p>Use Lie algebra generators and perturbations of the optimized solution to describe degenerate SE(3) transformations.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Synthetic evaluations report a 50 percent reduction in alignment error over a Hessian-based method.</span></li><li><strong>[Abstract]</strong><span>The integrated odometry succeeds on a 430 m round-trip tunnel trajectory where the reference fails.</span></li><li><strong>[Inference]</strong><span>APRL should route localization confidence through the unresolved transformation family, not a scalar pose covariance alone.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract says LiLi compares resulting optimized poses after perturbation to detect degeneracy robustly.</p></div>
+    <div><h4>Falsification frontier</h4><p>If detected degeneracy does not predict navigation or mapping failure, the representation is diagnostic but not operational.</p></div>
+    <div><h4>Adversarial read</h4><p>Straight corridors are a known case; test cluttered warehouses and dynamic actors where reassociation changes the degeneracy set.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>When alignment is ambiguous, report which motions remain unobservable before updating the map.</p><p>Strong for LiDAR odometry; weaker for visual SLAM unless an equivalent transformation ambiguity is modeled.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#6</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.16504" target="_blank" rel="noopener">UniDex-ViTac: Learning Unified Visuo-Tactile Dexterous Manipulation Policy from Human Video Data</a></h3>
+  <p class="fit">dexterous manipulation - tactile transfer - human-video-guided simulation</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Human manipulation videos provide rich visual examples but lack executable robot actions and tactile observations.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Dexterous manipulation needs contact evidence that vision-only policies often cannot infer under occlusion and hand-object interaction.</p></div>
+    <div><h4>Hidden premise</h4><p>Human-video references become robot-useful when they are converted into action targets paired with robot-side contact observations.</p></div>
+    <div><h4>Conceptual move</h4><p>Use human-video-guided simulation to generate robot demonstrations with fingertip contact labels, then train a unified visuo-tactile ACT policy.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>The contact-augmented configuration reports 68.3 percent macro-average simulation success versus 55.5 percent for point-cloud only.</span></li><li><strong>[Abstract]</strong><span>Without real-robot demonstrations or fine-tuning, it succeeds in 73/110 physical trials versus 60/110 for the baseline.</span></li><li><strong>[Inference]</strong><span>APRL should test whether tactile tokens change action choice under contact ambiguity, not just improve aggregate success.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract says residual RL specialists adapt human-object references into robot rollouts paired with fingertip contact observations.</p></div>
+    <div><h4>Falsification frontier</h4><p>If gains vanish on different tactile hardware or unseen contact materials, the policy may learn simulator-specific contact codes.</p></div>
+    <div><h4>Adversarial read</h4><p>Binary contact labels can be too coarse for slip and force direction; stress with soft, deformable, and low-friction objects.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Treat touch as the missing evidence channel when video demonstrations must become executable contact.</p><p>Strong for dexterous manipulation; less direct for non-contact navigation or rigid pick-place tasks.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#7</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.17499" target="_blank" rel="noopener">ENCP: Episode-Normalized Conformal Prediction for Vision-and-Language Navigation</a></h3>
+  <p class="fit">VLN uncertainty - conformal prediction - episode-level coverage</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Conformal prediction can be applied step-wise to VLN uncertainty as if predictions were independent.</p></div>
+    <div><h4>Friction / anomaly</h4><p>VLN episodes are dependent, variable-length sequences, so standard calibration can fail to guarantee coverage across an episode.</p></div>
+    <div><h4>Hidden premise</h4><p>A navigation uncertainty score must be normalized by episode dynamics before it can authorize defer, replan, or human-assist decisions.</p></div>
+    <div><h4>Conceptual move</h4><p>Rescale nonconformity by policy residual confidence and calibrate one maximum score per episode.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Across four VLN policies and three scores on R2R and REVERIE, ENCP meets all reported empirical step-coverage targets.</span></li><li><strong>[Abstract]</strong><span>The paper explicitly motivates deferring to a more capable predictor, including human assistance.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate uncertainty gates over complete episodes, not isolated waypoints.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>ENCP targets coverage of the ground truth at every step under exchangeable calibration and test episodes.</p></div>
+    <div><h4>Falsification frontier</h4><p>If exchangeability breaks under new buildings or instruction styles, coverage can look calibrated while unsafe paths remain uncovered.</p></div>
+    <div><h4>Adversarial read</h4><p>Coverage alone can be conservative; measure false defers, late defers, and recovery value.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Normalize uncertainty by the episode before letting it stop or defer navigation.</p><p>Strong for VLN; requires adaptation before use in continuous control or manipulation.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#8</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.17292" target="_blank" rel="noopener">Escape-Aware Control Barrier Functions for Quadrotor Safety under Body-Rate Limits</a></h3>
+  <p class="fit">quadrotor safety - escape authority - input-rate limits</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>State-only CBFs can certify safety while hiding the time needed to reorient the thrust vector.</p></div>
+    <div><h4>Friction / anomaly</h4><p>A quadrotor can enter a state where deceleration is physically unreachable because body-rate limits delay escape.</p></div>
+    <div><h4>Hidden premise</h4><p>Safety authority depends on both the state and the previously applied input.</p></div>
+    <div><h4>Conceptual move</h4><p>Define an escape barrier over state plus previous input, measuring one-step reachable thrust authority.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Across 550 paired closed-loop episodes, the proposed controller completes every tested scenario.</span></li><li><strong>[Abstract]</strong><span>The stopping-distance barrier fails 15 percent and 25 percent of episodes in the predicted gap scenarios.</span></li><li><strong>[Inference]</strong><span>APRL should include actuation-rate history in safety certificates for aerial and mobile robots.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract says the certification gap width is proportional to closing speed and inversely proportional to body-rate limit.</p></div>
+    <div><h4>Falsification frontier</h4><p>If actuator dynamics or aerodynamic disturbances dominate, the one-step reachable thrust cap may be insufficient.</p></div>
+    <div><h4>Adversarial read</h4><p>A certified escape condition should be tested under sensing delay, wind, and planner replanning latency.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>A safety certificate should say whether the robot still has time to execute the escape action.</p><p>Strong for quadrotor barriers; analogous but not direct for ground robots and manipulators.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#9</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.16503" target="_blank" rel="noopener">Dense to MoE Adaptation for Compact Vision Language Action Policies</a></h3>
+  <p class="fit">VLA compression - MoE adaptation - active parameter reduction</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>VLA policies keep growing, making deployment on resource-constrained robots difficult.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Turning off model capacity after training can collapse performance if expert usage is not protected.</p></div>
+    <div><h4>Hidden premise</h4><p>A dense VLA can be converted to sparse active capacity if deactivation follows router evidence rather than fixed pruning.</p></div>
+    <div><h4>Conceptual move</h4><p>Convert dense feed-forward blocks into MoE layers and update expert retention masks from router statistics during fine-tuning.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>With 40 percent of LLM parameters deactivated, AdaDE retains 95.1 percent average success in LIBERO.</span></li><li><strong>[Abstract]</strong><span>It reports 42.0 percent average success across all 50 RobotWin2.0 tasks.</span></li><li><strong>[Inference]</strong><span>APRL should pair active-parameter savings with per-task action degradation and failure family analysis.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract says Dense2MoE preserves the original dense function at initialization and uses staged training plus expert protection.</p></div>
+    <div><h4>Falsification frontier</h4><p>If rare tasks depend on experts that router statistics under-sample, average success can hide catastrophic loss.</p></div>
+    <div><h4>Adversarial read</h4><p>Stress long-tail object, language, and contact skills after expert deactivation.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>Compression should retain the experts that change robot behavior under the target skill distribution.</p><p>Strong for transformer VLA deployment; less direct for non-MoE or modular controllers.</p></div>
+  </div>
+</article>
+
+<article class="autopsy-card">
+  <div class="paper-top"><span class="rank">#10</span><span class="tier">Tier A - abstract-only</span></div>
+  <h3><a href="https://arxiv.org/abs/2609.17198" target="_blank" rel="noopener">TIO-Former: Ultra-Lightweight 6-Directional ToF-Inertial Odometry for Nano-UAVs via a Streaming Causal Transformer</a></h3>
+  <p class="fit">nano-UAV odometry - sparse range sensing - SWaP-C deployment</p>
+  <div class="field-grid">
+    <div><h4>Status quo belief</h4><p>Nano-UAV odometry often assumes visual sensors, LiDAR, or inertial-only estimators that strain payload or drift in low texture.</p></div>
+    <div><h4>Friction / anomaly</h4><p>Only 384 range values per frame create invalid returns, anisotropic observability, and temporal scaling challenges.</p></div>
+    <div><h4>Hidden premise</h4><p>A very sparse geometric payload can be operational if memory and attention are routed by platform kinematics.</p></div>
+    <div><h4>Conceptual move</h4><p>Use six orthogonal 8x8 ToF arrays, IMU-guided cross-attention, and streaming causal memory for bounded odometry.</p></div>
+  </div>
+  <div class="evidence"><h4>Evidence trace</h4><ul><li><strong>[Abstract]</strong><span>Real-flight evaluations report 54.4 percent lower open-loop position error than nano-UAV optical flow.</span></li><li><strong>[Abstract]</strong><span>Deployment on an edge RISC-V companion reports P95 latency of 10.466 ms and 6.324 MiB peak resident memory.</span></li><li><strong>[Inference]</strong><span>APRL should evaluate sensor-minimal odometry by drift, latency, and failure recovery together.</span></li></ul></div>
+  <div class="critical-grid">
+    <div><h4>Mechanism</h4><p>The abstract describes a bilateral gated difference frontend and compressed Chunk-FIFO memory with an uncompressed local KV cache.</p></div>
+    <div><h4>Falsification frontier</h4><p>If sparse ToF fails under glass, specular surfaces, or outdoor sunlight, the payload advantage narrows.</p></div>
+    <div><h4>Adversarial read</h4><p>Test with invalid returns, rapid yaw, textureless corridors, and payload-induced vibration.</p></div>
+    <div class="tool"><h4>Transferable thinking tool</h4><p>SWaP-C constraints are part of the state estimator's evidence contract.</p><p>Strong for nano-UAVs; less direct for robots that can carry full LiDAR or stereo.</p></div>
+  </div>
+</article>
+
+<h2>Cross-paper decision synthesis</h2><div class="synthesis-grid"><article><h3>World-action work is choosing modalities by action value</h3><p class='links'>ModAR - WAM Survey - WholeBodyWAM - sensVLA - GeoLAM - TEMPO - SlotDiT</p><p><strong>Observed</strong> - The papers separate future RGB, depth, point tracks, DINO features, BEV LiDAR, temporal summaries, geometry teachers, and whole-body controller intents.</p><p><strong>Inference</strong> - APRL should test each modality or latent by whether it changes execution under stress, not by representation beauty.</p></article><article><h3>Geometry papers expose map authority conditions</h3><p class='links'>PanoGS-SLAM - HuMemSLAM - LiLi - CDSD - BRAVE-6D - Neverwhere - LiDAR fidelity</p><p><strong>Observed</strong> - The batch uses panoramic FoV, semantic place memory, Lie degeneracy sets, submap change detection, active-vision benchmarks, and digital-twin structure diagnostics.</p><p><strong>Inference</strong> - Map evaluation should report when localization, map update, active view, or simulation transfer should be trusted or blocked.</p></article><article><h3>Runtime uncertainty now spans navigation, safety, and deployment compression</h3><p class='links'>ENCP - traversability continual learning - Fleet-to-Lab - RobResilience - escape-aware CBF - AdaDE - TIO-Former</p><p><strong>Observed</strong> - The papers normalize uncertainty over episodes, generated recall, model fusion, cyberattack predicates, body-rate limits, router masks, and sparse sensor memory.</p><p><strong>Inference</strong> - A robot stack needs revocation signals whenever evidence is dependent, shifted, attacked, rate-limited, compressed, or sensor-starved.</p></article></div>
+<h2>Frontier memory</h2><div class="memory-grid"><article><span>Strengthening</span><p class='history'>September 15 framed embodied AI as permissioned evidence for action, map update, navigation commitment, and safety intervention.</p><p>September 16 strengthens the same line: WAM modalities, geometry maps, tactile/contact states, conformal uncertainty, and compression masks all need explicit action authority.</p></article><article><span>New signal</span><p class='history'>Recent RI editions discussed WAMs mostly through future prediction and VLA deployment.</p><p>Today adds modality ordering as a design axis: point tracks, depth, DINO features, BEV LiDAR, temporal summaries, and controller intents compete with RGB futures.</p></article><article><span>Commoditizing</span><p class='history'>3DGS, VLA, and edge compression have appeared repeatedly in the last month.</p><p>The differentiator is no longer using 3DGS/VLA/compression, but proving when the representation can safely change localization, contact, or action selection.</p></article><article><span>Contradiction</span><p class='history'>More visual information is often assumed to help embodied agents.</p><p>ModAR questions future RGB's consistent value, TEMPO says missing temporal state matters more than scale, and AdaDE says many active VLA parameters can be removed if router evidence supports it.</p></article><article><span>Missing axis</span><p class='history'>The repo has separate lines for geometry, contact manipulation, navigation uncertainty, and efficient deployment.</p><p>A shared revocation benchmark is missing: one suite should ask when evidence loses permission to update the map, continue a trajectory, compress a model, or execute contact.</p></article></div>
+<h2>APRL Leading Group Strategy Board</h2>
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Build moat</span><span class="total">total 29/30</span></div>
+  <h3>Robot evidence authority benchmark</h3><p class="thesis">Create a shared benchmark where every latent, modality, map, tactile signal, and uncertainty score must declare which robot decision it can change.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 5</span><span>timing 5</span><span>tractability 4</span><span>defensibility 5</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Prototype three tasks: WAM modality ablation for manipulation, 3DGS map-update trust under dynamic change, and ENCP-style defer decisions in VLN.</p></div>
+    <div><strong>4-week build</strong><p>Unify action-delta logs, map-update gates, tactile/contact ablations, and uncertainty revocation events across manipulation and navigation.</p></div>
+    <div><strong>Success metric</strong><p>At least two representation signals predict wrong action, wrong map update, or late defer better than terminal success or reconstruction metrics.</p></div>
+    <div><strong>Stop condition</strong><p>Stop if all authority signals reduce to model confidence or do not change intervention timing.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Authority-labeled episodes, modality masks, action deltas, map update decisions, contact traces, and defer/recover labels.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Exploit</span><span class="total">total 28/30</span></div>
+  <h3>Geometry trust and revocation protocol</h3><p class="thesis">Evaluate SLAM, 3DGS, LiDAR, active vision, and digital twins by the conditions under which their geometry should be trusted, corrected, or rejected.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 4</span><span>timing 5</span><span>tractability 4</span><span>defensibility 5</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Run a small sequence with FoV change, corridor degeneracy, dynamic object insertion, and submap change labels.</p></div>
+    <div><strong>4-week build</strong><p>Compare PanoGS-style FoV conditioning, HuMem-style place retrieval, LiLi-style degeneracy, CDSD change detection, and LiDAR simulation fidelity diagnostics.</p></div>
+    <div><strong>Success metric</strong><p>Trust gates predict localization failure, wrong loop closure, or harmful map update before downstream navigation fails.</p></div>
+    <div><strong>Stop condition</strong><p>Stop if gates improve pose metrics but do not alter recovery or navigation decisions.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Geometry stress scenes, degeneracy labels, submap changes, simulation-real graph diagnostics, and recovery outcomes.</p>
+</article>
+
+<article class="strategy-card">
+  <div class="strategy-head"><span class="priority">Explore</span><span class="total">total 26/30</span></div>
+  <h3>Contact and embodiment transfer contract</h3><p class="thesis">Turn tactile, proximity, embodiment, constraint, and whole-body cues into explicit contracts for when human-video or language-derived skills transfer to a robot.</p>
+  <div class="scores"><span>strategic_fit 5</span><span>asymmetry 5</span><span>timing 4</span><span>tractability 3</span><span>defensibility 4</span><span>scientific_depth 5</span></div>
+  <div class="strategy-grid">
+    <div><strong>1-week probe</strong><p>Use one dexterous task to compare point-cloud only, binary contact, proximity dynamics, and canonical embodiment cues under occlusion.</p></div>
+    <div><strong>4-week build</strong><p>Add constraint-conditioned grasping, tactile teleoperation, whole-body humanoid contact, and soft-robot proprioception to the same transfer table.</p></div>
+    <div><strong>Success metric</strong><p>Contact or embodiment contracts predict transfer failures and select better recovery actions on unseen objects or hardware.</p></div>
+    <div><strong>Stop condition</strong><p>Stop if contact cues improve average success but fail to identify the failure mode under perturbation.</p></div>
+  </div>
+  <p class="assets"><strong>Asset path</strong> - Contact-state labels, proximity trajectories, embodiment-canonical point clouds, constraint masks, and transfer-failure taxonomy.</p>
+</article>
+
+</main><footer>Source prompt: <a href="../prompts/instruction_v20260713.md">prompts/instruction_v20260713.md</a>. Structured source: <a href="../intelligence/2026-09-16.json">intelligence/2026-09-16.json</a>.</footer>
+</body></html>
