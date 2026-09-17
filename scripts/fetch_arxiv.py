@@ -17,6 +17,7 @@ import json
 import re
 import sys
 import time
+import urllib.error
 import urllib.request
 import html as htmllib
 
@@ -31,16 +32,27 @@ UA = "Mozilla/5.0 (arxiv-daily-summary helper)"
 def fetch(url: str) -> str:
     sep = "&" if "?" in url else "?"
     fresh_url = f"{url}{sep}_={int(time.time())}"
-    req = urllib.request.Request(
-        fresh_url,
-        headers={
-            "User-Agent": UA,
-            "Cache-Control": "no-cache",
-            "Pragma": "no-cache",
-        },
-    )
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return r.read().decode("utf-8", errors="replace")
+    headers = {
+        "User-Agent": UA,
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache",
+    }
+    urls = [url, fresh_url]
+    last_error: urllib.error.HTTPError | None = None
+    for attempt in range(3):
+        for candidate in urls:
+            req = urllib.request.Request(candidate, headers=headers)
+            try:
+                with urllib.request.urlopen(req, timeout=60) as r:
+                    return r.read().decode("utf-8", errors="replace")
+            except urllib.error.HTTPError as exc:
+                last_error = exc
+                if exc.code != 429:
+                    raise
+        time.sleep(10 * (attempt + 1))
+    if last_error is not None:
+        raise last_error
+    raise RuntimeError(f"failed to fetch {url}")
 
 
 def strip_tags(s: str) -> str:

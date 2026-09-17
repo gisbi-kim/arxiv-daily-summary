@@ -1,0 +1,387 @@
+#!/usr/bin/env python3
+"""Generate the 2026-09-17 Research Intelligence edition."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from gen_research_intelligence_20260811 import build_html
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE_PROMPT = "prompts/instruction_v20260713.md"
+
+
+RI_BY_DATE = {
+    "2026-09-17": {
+        "date": "2026-09-17",
+        "edition": "Research Intelligence",
+        "source_prompt": SOURCE_PROMPT,
+        "source_mode": "new",
+        "scope_note": (
+            "Daily edition from matching Thursday /new listings: 118 non-replacement cs.CV rows, "
+            "113 cs.RO rows, 217 deduplicated papers, and 179 ROI papers. Tier A cards are conservative "
+            "abstract-only autopsies from repository parser output; no figure, table, full-text, code, "
+            "or dataset-release claim is asserted unless the abstract itself states it."
+        ),
+        "executive_thesis": (
+            "The September 17 batch turns robot learning into an evidence-contract problem. VLA papers stop "
+            "treating the backbone as the only object of study and instead ask which context, layer, action token, "
+            "future representation, cache, or local fallback has authority to change the robot command. Geometry "
+            "papers ask when feed-forward 3D, Gaussian splats, LiDAR submaps, sonar-only SLAM, and physical-property "
+            "maps should be trusted or rejected. Navigation papers turn gaze, grounding, geometric memory, social "
+            "response, and route constraints into active evidence before committing motion. Contact-rich manipulation "
+            "papers make force, tactile history, energy, morphology, and generated audio/physics signals explicit "
+            "correction channels. APRL's opening is to build benchmarks where each representation must prove what "
+            "decision it changes, when it should be revoked, and what failure evidence would falsify it."
+        ),
+        "decision_cards": [
+            {
+                "label": "Decision",
+                "title": "VLA adaptation is moving to measurable interfaces",
+                "body": (
+                    "GPT-Policy, layer-diagnostic LoRA, action tokenizers, FIVE-VLA, RAF-VLA, CSWAM, VLA-ULAP, "
+                    "and rMuscle all expose a specific interface between context, representation, memory, and action."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Geometry models now need trust gates",
+                "body": (
+                    "GeoCond, Wind on Trees, CADSplat, NormLift, PhysVGGT, VIO stress tests, SEAM, and SOL-SLAM "
+                    "ask not only whether geometry is reconstructed, but when a robot should believe it."
+                ),
+            },
+            {
+                "label": "Decision",
+                "title": "Execution should be revoked by runtime evidence",
+                "body": (
+                    "RoboVAD, OmniRisk, heterogeneous cooperative perception attacks, VLM-MPPI, CALOS, and RiskWorld "
+                    "turn anomaly, risk, adversarial consistency, language mode choice, and safety layers into runtime stop conditions."
+                ),
+            },
+        ],
+        "papers": [
+            {
+                "rank": 1,
+                "title": "In-Context Robot Learning with VLM Agents",
+                "arxiv_id": "2609.19138",
+                "fit": "robot in-context learning - VLM agent - executable tool actions",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Robot adaptation is usually treated as fine-tuning or collecting more demonstrations for a fixed policy.",
+                "friction": "A finite demonstration set cannot cover deployment variation, and VLM reasoning does not automatically become executable robot behavior.",
+                "hidden_premise": "Context becomes useful only if visual transitions, tool actions, controller verification, and execution feedback remain in one closed loop.",
+                "conceptual_move": "Use a context compiler, VLM action proposal, constrained controller, and outcome reports as a deployment-time learning loop without gradient updates.",
+                "mechanism": "The abstract says GPT-Policy preserves task-relevant transitions, proposes robot-tool actions, verifies each action, executes it, and feeds back outcomes.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "Human video demonstrations improve real-robot task completion even without robot action labels."},
+                    {"trace": "[Abstract]", "claim": "Aligned action references further help contact-sensitive tasks."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate which context item changes the next action and which controller check prevents unsafe execution."},
+                ],
+                "falsification": "If context examples help only by restating task labels and not by changing verified tool actions, this is prompt retrieval rather than robot learning.",
+                "adversarial": "Commercial VLM ability can hide brittle low-level control; test unseen object geometry, contact ambiguity, and failed-action feedback.",
+                "thinking_tool": "Treat in-context learning as a verified action loop, not as a smarter instruction parser.",
+                "transfer_boundary": "Strong for tool-mediated manipulation; weaker when actions are continuous and cannot be verified by a constrained controller.",
+            },
+            {
+                "rank": 2,
+                "title": "ActionPiece: Rethinking Action Tokenization for Autoregressive Vision-Language-Action Models",
+                "arxiv_id": "2609.18487",
+                "fit": "action tokenization - physical rank consistency - VLA policy success",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Action tokenizers are often judged by pointwise reconstruction error such as MSE.",
+                "friction": "Small pointwise errors can still distort local action adjustments that matter for context-dependent control.",
+                "hidden_premise": "A token is robot-useful only if it preserves physical relationships among nearby actions after decoding.",
+                "conceptual_move": "Evaluate and train tokenization with physical rank consistency, supervising near-far order in representation and codeword assignment.",
+                "mechanism": "The abstract says ActionPiece augments reconstruction with representation and quantization objectives that preserve physical action relationships.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The paper argues MSE misses diminished, distorted, or reversed context-specific action adjustments."},
+                    {"trace": "[Abstract]", "claim": "It reports 94.8 percent on LIBERO and 68.8 percent on unseen LIBERO-Plus under the same Qwen3-VL-4B setup."},
+                    {"trace": "[Inference]", "claim": "APRL should rank action tokenizers by whether recovered actions preserve local intervention order, not only by average error."},
+                ],
+                "falsification": "If PRC improves while closed-loop recovery and contact-sensitive success do not, the preserved rank is not the relevant physical relation.",
+                "adversarial": "Rank consistency may reward smooth action neighborhoods that fail under discontinuous contact events.",
+                "thinking_tool": "Ask what physical relation the discrete action vocabulary preserves.",
+                "transfer_boundary": "Strong for autoregressive VLA policies; less direct for continuous diffusion controllers without discrete action recovery.",
+            },
+            {
+                "rank": 3,
+                "title": "Not All Layers Need Tuning: Diagnosing and Directing Adaptation in Vision-Language-Action Models",
+                "arxiv_id": "2609.18084",
+                "fit": "VLA adaptation diagnosis - variable-rank LoRA - deployment shifts",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Parameter-efficient VLA adaptation usually applies similar adapter capacity across model regions.",
+                "friction": "Appearance, instruction, and novel-object shifts stress different parts of the model, so uniform adaptation wastes capacity or tunes the wrong region.",
+                "hidden_premise": "A deployment shift has a measurable regional adaptation cost before fine-tuning starts.",
+                "conceptual_move": "Diagnose per-region cost from a few unlabeled target observations, allocate variable-rank adapters, and freeze calibrated regions.",
+                "mechanism": "The abstract combines reference-free gradient signals, Monte Carlo Dropout, and CKA against a cached source reference.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The diagnostic ranks regions at median Spearman 0.91 against isolated fine-tuning costs."},
+                    {"trace": "[Abstract]", "claim": "On physical xArm-7 instruction shift, it matches full fine-tuning with 0.04 percent trainable parameters."},
+                    {"trace": "[Inference]", "claim": "APRL should identify whether a failure is vision, language, or action-head adaptation before spending fine-tuning budget."},
+                ],
+                "falsification": "If regional rankings change after real contact or long-horizon execution, ten unlabeled observations may underdiagnose the shift.",
+                "adversarial": "A cached source reference can encode old task biases; stress with object, lighting, instruction, and force shifts simultaneously.",
+                "thinking_tool": "Measure the adaptation locus before choosing the adapter budget.",
+                "transfer_boundary": "Strong for PEFT VLA deployment; less direct when full retraining or modular state estimators dominate adaptation.",
+            },
+            {
+                "rank": 4,
+                "title": "GeoCond: A Conditioning-Aware Reliability Adapter for Feed-Forward 3D Reconstruction",
+                "arxiv_id": "2609.18465",
+                "fit": "feed-forward 3D - geometric conditioning - pose uncertainty gate",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Feed-forward 3D foundation models can output camera, depth, and point maps in one pass, often with native confidence scores.",
+                "friction": "Low overlap, low parallax, and extreme rotation cause silent failure that native aleatoric confidence may not capture.",
+                "hidden_premise": "A 3D model should expose geometric conditioning before its pose, depth, or point map is allowed into a robot pipeline.",
+                "conceptual_move": "Attach a lightweight adapter that reads predicted geometry and outputs pose-level uncertainty plus a refinement gate.",
+                "mechanism": "The abstract describes supervision from permutation orbit variance, ground-truth pose error, or cycle residuals from unlabelled pose graphs.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "GeoCond improves OOD AUSE on VGGT from 0.32 to 0.20 over native confidence."},
+                    {"trace": "[Abstract]", "claim": "It avoids collapse caused by applying bundle adjustment uniformly."},
+                    {"trace": "[Inference]", "claim": "APRL should gate map updates by geometric conditioning rather than trusting single-pass 3D uniformly."},
+                ],
+                "falsification": "If pose-level uncertainty does not predict downstream navigation or manipulation failure, it is calibration without operational value.",
+                "adversarial": "Cycle residuals can miss symmetric scenes; test repeated corridors, textureless surfaces, and dynamic objects.",
+                "thinking_tool": "A feed-forward 3D prediction needs a trust gate before it becomes robot state.",
+                "transfer_boundary": "Strong for VGGT-like 3D backbones; less direct for SLAM systems with explicit multi-frame optimization.",
+            },
+            {
+                "rank": 5,
+                "title": "Wind on Trees: Testing Physical Grounding in Dynamic 4D Gaussian Splatting",
+                "arxiv_id": "2609.17810",
+                "fit": "dynamic 4DGS - physical prior - extrapolation and parameter recovery",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Dynamic 4DGS can optimize photometric consistency and appear physically plausible.",
+                "friction": "Wind-driven vegetation is underconstrained, so the optimized deformation can fit views without recovering the true motion process.",
+                "hidden_premise": "Physical grounding should be tested by extrapolation, unseen driving conditions, and recovery of latent physical parameters.",
+                "conceptual_move": "Replace generic learned deformation with a damped-oscillator prior driven by observed wind, then test held-out views, time, wind speeds, and parameters.",
+                "mechanism": "The abstract says the prior improves extrapolation but parameter recovery is weak, with damping not recovered at all.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "The physical prior costs in-distribution appearance fidelity but extrapolates better outside the training window and wind."},
+                    {"trace": "[Abstract]", "claim": "Frequency recovery survives a null control only on the sparsest tree, and damping is not recovered."},
+                    {"trace": "[Inference]", "claim": "APRL should separate visual fit, extrapolation, and physical parameter validity in dynamic maps."},
+                ],
+                "falsification": "If the same prior fails on real vegetation or robot-mounted observations, the synthetic testbed may isolate only a narrow motion family.",
+                "adversarial": "A physics prior can be a good regularizer without identifying the real physical variables; use null controls and downstream planning tests.",
+                "thinking_tool": "Physical grounding is not visual plausibility; it is parameter recovery and valid extrapolation.",
+                "transfer_boundary": "Strong for dynamic 3D scene evaluation; less direct for rigid indoor mapping unless dynamics are present.",
+            },
+            {
+                "rank": 6,
+                "title": "GroundingVLN: Reasoning and Acting with Grounding for Vision-Language Navigation",
+                "arxiv_id": "2609.18581",
+                "fit": "vision-language navigation - grounded reasoning - pixel goal execution",
+                "status": "Tier A - abstract-only",
+                "status_quo": "VLN agents often reason semantically but hand a vague high-level decision to low-level motion.",
+                "friction": "Intermediate reasoning can be unanchored from visual evidence, and spatial decisions can lack precise goals.",
+                "hidden_premise": "Grounding can be the shared interface between language reasoning and geometric control.",
+                "conceptual_move": "Anchor reasoning to task-relevant image locations and predict a progress-aligned pixel goal that a geometric planner can execute.",
+                "mechanism": "The abstract describes GroundingCOTVLN-188K and execution-aware reinforcement learning to align reasoning and spatial decisions.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "GroundingVLN reports 69.9 percent SR on R2R-CE and 75.1 percent SR on RxR-CE."},
+                    {"trace": "[Abstract]", "claim": "It uses 0.9 percent as much training data as the strongest baseline according to the abstract."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate whether a grounded landmark actually changes the next waypoint and reduces detours."},
+                ],
+                "falsification": "If pixel goals improve benchmark scores but fail under moving occluders or map ambiguity, grounding is not stable enough for deployment.",
+                "adversarial": "Grounded traces can become dataset-specific rationales; test unseen building styles and misleading landmarks.",
+                "thinking_tool": "A navigation reason should name the visual evidence and the spatial goal it authorizes.",
+                "transfer_boundary": "Strong for VLN and object search; less direct for low-level locomotion without image-goal planners.",
+            },
+            {
+                "rank": 7,
+                "title": "ForceDelta-VLA: Distilling Force-Conditioned ActionCorrections for Contact-Rich Manipulation",
+                "arxiv_id": "2609.18242",
+                "fit": "force-conditioned VLA - action correction - contact-rich manipulation",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Force-aware VLA policies often mix nominal task motion and contact correction into one action prediction.",
+                "friction": "Demonstrations rarely label what part of the action is task reference and what part is contact-dependent correction.",
+                "hidden_premise": "Contact-rich execution should separate slower reference actions from faster force-conditioned corrections.",
+                "conceptual_move": "Distill explicit force-correction targets from paired force-conditioned and force-agnostic teacher predictions.",
+                "mechanism": "The abstract says the lightweight policy adjusts reference actions using recent force history and robot state between reference-action updates.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "ForceDelta-VLA reports 82.2 percent mean success versus 54.4 percent for ForceVLA across nine contact-rich tasks."},
+                    {"trace": "[Abstract]", "claim": "It reduces mean peak contact force over successful trials by about 26 percent on both platforms."},
+                    {"trace": "[Inference]", "claim": "APRL should score contact corrections by force overshoot, slip recovery, and whether nominal motion remains intact."},
+                ],
+                "falsification": "If the correction target depends on one teacher's quirks, it may not transfer across hardware or force sensors.",
+                "adversarial": "Peak force over successful trials can miss failures; include failed attempts, material changes, and delayed force sensing.",
+                "thinking_tool": "Separate the action that aims at the task from the action that repairs contact.",
+                "transfer_boundary": "Strong for contact-rich manipulation; weaker for tasks where proprioceptive or force signals are sparse.",
+            },
+            {
+                "rank": 8,
+                "title": "RoboVAD: A Large Cross-Domain Evaluation Benchmark for Anomaly Detection in Robotic Arm Manipulation Videos",
+                "arxiv_id": "2609.17843",
+                "fit": "robot anomaly detection - cross-domain benchmark - recovery trigger",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Video anomaly detection benchmarks mostly come from surveillance or traffic rather than robot manipulation.",
+                "friction": "Robot arms can face unseen tasks and unseen anomaly types, but current resources do not isolate that cross-domain failure.",
+                "hidden_premise": "Recovery systems need anomaly detectors that generalize across both action domains and anomaly families.",
+                "conceptual_move": "Construct a robotic arm VAD benchmark with held-out tasks and held-out anomaly types, then test adapted VAD methods.",
+                "mechanism": "The abstract frames anomalies as mistakes during robotic arm tasks and evaluates frame-level detection under cross-domain splits.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "All tested methods remain below 70 percent micro-averaged frame-level AUC in the most challenging setup."},
+                    {"trace": "[Abstract]", "claim": "The benchmark is designed for unforeseen tasks and new anomaly types."},
+                    {"trace": "[Inference]", "claim": "APRL should use anomaly detection as a recovery trigger only after cross-task and cross-anomaly validation."},
+                ],
+                "falsification": "If anomalies are visually obvious but not control-relevant, the benchmark may not predict real intervention value.",
+                "adversarial": "Frame AUC can reward late detection; add lead-time, recoverability, and false-stop cost metrics.",
+                "thinking_tool": "An anomaly benchmark should test whether the recovery trigger sees the failure before it matters.",
+                "transfer_boundary": "Strong for manipulation video monitoring; less direct for force-only or state-only anomalies.",
+            },
+            {
+                "rank": 9,
+                "title": "OmniRisk: Omnidirectional Trajectory-Risk Learning for Agile Quadrotor Dynamic Avoidance",
+                "arxiv_id": "2609.18191",
+                "fit": "quadrotor avoidance - trajectory risk - onboard primitive selection",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Online trajectory optimization can either scale poorly with obstacle count or stay fast while losing reliability in dense dynamic encounters.",
+                "friction": "Sparse range observations do not directly reveal obstacle motion, yet agile avoidance needs reaction within short windows.",
+                "hidden_premise": "Risk should be learned as trajectory-level evidence aligned with obstacle velocity, then reused cheaply at runtime.",
+                "conceptual_move": "Predict terminal boundary states and dynamic risks over an omnidirectional primitive lattice in one forward pass.",
+                "mechanism": "The abstract describes LiDAR panoramas, dynamic masks, Cartesian surface velocities, and an asymmetric velocity-aligned risk field.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "Risk inference cost is independent of obstacle count because online accumulation is removed."},
+                    {"trace": "[Abstract]", "claim": "Real-world flights demonstrate consecutive evasive maneuvers at relative encounter speeds up to 15 m/s without fine-tuning."},
+                    {"trace": "[Inference]", "claim": "APRL should compare risk fields by unnecessary hesitation after obstacles pass, not just collision avoidance."},
+                ],
+                "falsification": "If the risk field fails under sensor dropout or adversarial motion, the fixed primitive lattice may be too narrow.",
+                "adversarial": "Velocity-aligned risk can underweight rare lateral maneuvers; stress with accelerating and occluded obstacles.",
+                "thinking_tool": "Runtime safety needs a risk field that knows when danger is approaching and when it has passed.",
+                "transfer_boundary": "Strong for agile aerial robots; analogous but not direct for ground robots with different dynamics.",
+            },
+            {
+                "rank": 10,
+                "title": "VLA-ULAP: Interleaving Cloud VLA Calls with Ultra-Lightweight Local Action Prediction at the Edge",
+                "arxiv_id": "2609.18663",
+                "fit": "edge VLA - local fallback - latency-aware execution",
+                "status": "Tier A - abstract-only",
+                "status_quo": "Billion-parameter VLA policies often assume onboard compute or remote inference can keep up with control demands.",
+                "friction": "Power limits and communication delay make remote calls too slow for dynamic robot response.",
+                "hidden_premise": "A small local predictor can hold temporary action authority between cloud VLA calls if its context and history are sufficient.",
+                "conceptual_move": "Interleave remote VLA calls with a 7.4M-parameter local action predictor using current views, proprioception, and executed action history.",
+                "mechanism": "The abstract says ULAP predicts action chunks independently, without VLA hidden states or server round trips.",
+                "evidence": [
+                    {"trace": "[Abstract]", "claim": "ULAP removes 48.8 to 76.7 percent of VLA calls while retaining 95.0 to 97.5 percent baseline success in simulated settings."},
+                    {"trace": "[Abstract]", "claim": "Physical SO-101 experiments retain 95.2 to 100 percent baseline success while reducing estimated inference time and device energy."},
+                    {"trace": "[Inference]", "claim": "APRL should evaluate local fallback by latency-aware success, not by average policy agreement alone."},
+                ],
+                "falsification": "If local predictors miss rare contact transitions or unexpected objects, call reduction can hide safety debt.",
+                "adversarial": "Measure false local autonomy: cases where the cloud call would have corrected a trajectory but ULAP continues stale action chunks.",
+                "thinking_tool": "Edge deployment is an authority handoff between remote intelligence and local muscle memory.",
+                "transfer_boundary": "Strong for repetitive or latency-sensitive manipulation; less direct for open-ended tasks requiring new reasoning at each step.",
+            },
+        ],
+        "synthesis": [
+            {
+                "title": "VLA papers are exposing action authority variables",
+                "links": "GPT-Policy - Not All Layers Need Tuning - M2Tok - ActionPiece - FIVE-VLA - RAF-VLA - CSWAM - VLA-ULAP - rMuscle",
+                "facts": "The papers name context examples, model regions, action vocabularies, future representations, semantic history, remote calls, and activation caches as variables that affect action.",
+                "inference": "APRL should log which variable actually changes the command under each shift, then revoke authority when the variable no longer predicts recovery.",
+            },
+            {
+                "title": "Geometry is becoming a decision gate",
+                "links": "GeoCond - Wind on Trees - CADSplat - NormLift - PhysVGGT - VIO stress tests - SEAM - SOL-SLAM",
+                "facts": "The batch separates visual quality from conditioning, physical extrapolation, CAD anchoring, semantic reliability, physical property prediction, submap evidence, and sensor degradation.",
+                "inference": "A robot map should report not only state, but whether this state is conditioned well enough to support localization, contact, planning, or update decisions.",
+            },
+            {
+                "title": "Runtime safety is moving from static score to revocation timing",
+                "links": "RoboVAD - OmniRisk - HetPoison/HetShield - VLM-MPPI - RiskWorld - CALOS",
+                "facts": "The papers detect unseen manipulation anomalies, predict velocity-aligned trajectory risk, validate cooperative features, choose diverse flight behaviors, replace trajectories selectively, and enforce attitude safety.",
+                "inference": "The evaluation target should be how early and how specifically a system stops, defers, switches mode, or repairs the current plan.",
+            },
+        ],
+        "frontier_memory": [
+            {
+                "label": "Strengthening",
+                "history": "September 16 framed robot intelligence as authority allocation across world-action, map, contact, safety, and deployment representations.",
+                "body": "September 17 strengthens that thesis with more explicit contracts: action tokens preserve physical rank, layers reveal adaptation cost, 3D models expose conditioning, and edge VLAs hand authority to local predictors.",
+            },
+            {
+                "label": "New signal",
+                "history": "Recent editions emphasized WAM/VLA evidence but less often the discrete vocabulary of action itself.",
+                "body": "M2Tok and ActionPiece make the action tokenizer a central scientific object: the question is whether a token vocabulary preserves controllable physical relations.",
+            },
+            {
+                "label": "Commoditizing",
+                "history": "3DGS, VGGT-style feed-forward 3D, and VLA deployment papers have appeared repeatedly across September.",
+                "body": "The differentiator is now the trust or revocation gate around these systems, not the fact of using Gaussian splats, geometry foundation models, or large VLA backbones.",
+            },
+            {
+                "label": "Contradiction",
+                "history": "Bigger context and richer world models are often assumed to help embodiment.",
+                "body": "Today complicates that: Wind on Trees improves extrapolation while failing parameter recovery, VLA-ULAP removes many cloud VLA calls, and layer diagnostics suggest most regions need not be tuned.",
+            },
+            {
+                "label": "Missing axis",
+                "history": "The repo has separate lines for action-interface audits, geometry trust, runtime safety, and contact correction.",
+                "body": "A shared evidence-contract benchmark is still missing: one suite should ask when context, geometry, force, risk, and local fallback are allowed to change a robot decision.",
+            },
+        ],
+        "strategy": [
+            {
+                "priority": "Build moat",
+                "title": "Robot evidence-contract benchmark",
+                "thesis": "Build one benchmark where context, action tokens, geometry, force, risk, and edge fallback must each declare the decision they can change and the revocation condition.",
+                "scores": {"strategic_fit": 5, "asymmetry": 5, "timing": 5, "tractability": 4, "defensibility": 5, "scientific_depth": 5},
+                "one_week": "Prototype three tasks: action-token rank preservation on LIBERO, GeoCond-style map trust on sparse-view scenes, and ForceDelta-style correction on one contact task.",
+                "four_week": "Unify action deltas, geometric trust gates, force corrections, anomaly lead time, and local/cloud handoff logs under one evidence-contract schema.",
+                "success": "At least two evidence variables predict failure or recovery earlier than terminal success and change intervention timing.",
+                "stop": "Stop if all variables reduce to generic confidence and do not alter action, map update, contact correction, or defer behavior.",
+                "paper_path": "A benchmark and analysis paper on representation authority and revocation in robot execution.",
+                "asset_path": "Authority-labeled episodes, action-token rankings, geometry conditioning labels, force correction traces, anomaly lead-time labels, and edge fallback decisions.",
+                "asset": "Authority-labeled episodes, action-token rankings, geometry conditioning labels, force correction traces, anomaly lead-time labels, and edge fallback decisions.",
+            },
+            {
+                "priority": "Exploit",
+                "title": "Geometry trust gate for robot maps",
+                "thesis": "Turn feed-forward 3D, 3DGS, LiDAR, sonar, and physical-property outputs into map-update and planning gates instead of passive perception products.",
+                "scores": {"strategic_fit": 5, "asymmetry": 4, "timing": 5, "tractability": 4, "defensibility": 5, "scientific_depth": 5},
+                "one_week": "Stress one reconstruction stack with low overlap, low parallax, dynamic object insertion, and sensor degradation, then score pose uncertainty versus downstream failure.",
+                "four_week": "Compare GeoCond-style conditioning, NormLift semantic reliability, SEAM submap evidence, VIO perturbation thresholds, and sonar-only local SLAM gates.",
+                "success": "Trust gates predict harmful localization, map-update, or grasp-planning errors before the downstream task fails.",
+                "stop": "Stop if gates improve calibration curves but do not change robot decisions or recovery outcomes.",
+                "paper_path": "A robot-usable geometry evaluation paper centered on trust gating rather than visual fidelity.",
+                "asset_path": "Sparse-view scenes, degradation scripts, submap-change labels, sonar/LiDAR sequences, conditioning scores, and decision outcomes.",
+                "asset": "Sparse-view scenes, degradation scripts, submap-change labels, sonar/LiDAR sequences, conditioning scores, and decision outcomes.",
+            },
+            {
+                "priority": "Explore",
+                "title": "Contact-correction authority stack",
+                "thesis": "Separate nominal task motion from force, tactile, energy, morphology, and generated audio/physics correction channels for contact-rich manipulation.",
+                "scores": {"strategic_fit": 5, "asymmetry": 5, "timing": 4, "tractability": 3, "defensibility": 4, "scientific_depth": 5},
+                "one_week": "Run one contact task with force-conditioned correction, tactile prior, and energy regularization ablations; measure peak force, slip, and recovery timing.",
+                "four_week": "Add cross-embodiment grasp geometry, deformable asset generation, and audio-shaped desired-force profiles into one correction benchmark.",
+                "success": "Correction channels predict when nominal action should be overridden and reduce force overshoot or invalid contact on unseen objects.",
+                "stop": "Stop if contact channels raise average success but cannot explain or anticipate failure modes.",
+                "paper_path": "A contact-rich manipulation paper on explicit correction authority across sensing and embodiment channels.",
+                "asset_path": "Force histories, tactile/proprioceptive traces, contact labels, embodiment tokens, generated deformable assets, and recovery annotations.",
+                "asset": "Force histories, tactile/proprioceptive traces, contact labels, embodiment tokens, generated deformable assets, and recovery annotations.",
+            },
+        ],
+    }
+}
+
+
+def main() -> int:
+    (ROOT / "intelligence").mkdir(exist_ok=True)
+    (ROOT / "posts").mkdir(exist_ok=True)
+    for date, data in RI_BY_DATE.items():
+        (ROOT / "intelligence" / f"{date}.json").write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        (ROOT / "posts" / f"{date}-research-intelligence.html").write_text(
+            build_html(data),
+            encoding="utf-8",
+            newline="\n",
+        )
+        print(f"wrote intelligence/{date}.json and posts/{date}-research-intelligence.html")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
