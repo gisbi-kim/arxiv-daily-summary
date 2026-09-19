@@ -1,0 +1,303 @@
+{
+  "date": "2026-09-19",
+  "iso_week": "2026-W38",
+  "week_start": "2026-09-13",
+  "week_end": "2026-09-19",
+  "source_listing_date": "2026-09-18",
+  "source_mode": "pastweek",
+  "source_daily_artifacts": [
+    "2026-09-14",
+    "2026-09-15",
+    "2026-09-16",
+    "2026-09-17",
+    "2026-09-18"
+  ],
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "totals": {
+    "selected": 515,
+    "total_scanned": 1121
+  },
+  "daily_totals": {
+    "cv": 689,
+    "ro": 511,
+    "selected": 913,
+    "total_scanned": 1121
+  },
+  "buckets": {
+    "3D/Scene": {
+      "total": 67,
+      "cv": 41,
+      "ro": 18,
+      "cvro": 8
+    },
+    "Robot Learning": {
+      "total": 162,
+      "cv": 4,
+      "ro": 135,
+      "cvro": 23
+    },
+    "Autonomous Driving": {
+      "total": 36,
+      "cv": 8,
+      "ro": 23,
+      "cvro": 5
+    },
+    "Foundation Models": {
+      "total": 62,
+      "cv": 51,
+      "ro": 6,
+      "cvro": 5
+    },
+    "Generation": {
+      "total": 58,
+      "cv": 38,
+      "ro": 13,
+      "cvro": 7
+    },
+    "Efficiency/Systems": {
+      "total": 58,
+      "cv": 49,
+      "ro": 8,
+      "cvro": 1
+    },
+    "Embodied AI": {
+      "total": 36,
+      "cv": 3,
+      "ro": 26,
+      "cvro": 7
+    },
+    "Safety/Alignment": {
+      "total": 36,
+      "cv": 22,
+      "ro": 11,
+      "cvro": 3
+    }
+  },
+  "clusters": [
+    {
+      "cluster": "VLA control shifts from bigger backbones to measured action interfaces",
+      "representative_ids": [
+        "2609.12641",
+        "2609.13225",
+        "2609.13231",
+        "2609.13984",
+        "2609.19138",
+        "2609.18084",
+        "2609.18487",
+        "2609.18259",
+        "2609.19669",
+        "2609.20822"
+      ],
+      "why": "The week repeatedly weakens the idea that VLA reliability is mainly a larger-model problem. Breaking the Vision-Action Shortcut, Part Grounding, ShieldVLA, and Efficient VLA split perception grounding, feasibility, latency, and action-head design; In-Context Robot Learning, layer-selective adaptation, ActionPiece, M2Tok, persistent adversarial patches, and obstacle-aware coding agents all ask where action authority enters the system. APRL should evaluate the action interface that grants or withdraws permission, not just final task success.",
+      "confidence": "High - all five daily releases contributed independent VLA evidence around grounding, feasibility, action-head design, tokenization, adaptation, adversarial persistence, or obstacle-aware control.",
+      "lab_action": "Run LIBERO/RoboCasa and one real tabletop suite with visual shortcut removal, part grounding, feasibility shield, action-head variants, layer tuning, action tokenization, persistent adversarial patches, and obstacle-aware code harnesses as separate interventions; compare action delta, unsafe continuation, latency, recovery, and OOD object success."
+    },
+    {
+      "cluster": "Robot geometry becomes a trust-gated map state rather than reconstruction output",
+      "representative_ids": [
+        "2609.12557",
+        "2609.12221",
+        "2609.14634",
+        "2609.15795",
+        "2609.17387",
+        "2609.17168",
+        "2609.18465",
+        "2609.17810",
+        "2609.19518",
+        "2609.19628",
+        "2609.20348",
+        "2609.20589"
+      ],
+      "why": "The geometry signal is not another Gaussian or LiDAR quality contest. DRS-VPT and Chain-SLAM make relocalization and global consistency explicit; SCOUT-SLAM, SURE-Map, PanoGS-SLAM, HuMemSLAM, GeoCond, Wind on Trees, AMB3R-SLAM, VGGT-GS SLAM, EliGSiR, and RawSLAM ask whether map state remains valid under uncertainty, dynamic 4D motion, bounded compute, feed-forward priors, HDR radiance, and kilometer-scale loops. The release gate is when the map should be trusted, corrected, or revoked for robot use.",
+      "confidence": "High - 67 weekly 3D/Scene ROI papers and repeated SLAM, Gaussian, LiDAR, relocalization, uncertainty, dynamic-scene, bounded-compute, and HDR map evidence trigger the geometry watch lens.",
+      "lab_action": "Compare 3DGS maps, LiDAR SLAM, feed-forward Gaussian priors, semantic place recognition, self-correcting maps, bounded-compute RGB-D mapping, and HDR Gaussian SLAM on repeated robot routes with lighting change, dynamic objects, sparse viewpoints, and loop closures; score relocalization, map revocation timing, update cost, uncertainty calibration, and downstream navigation success."
+    },
+    {
+      "cluster": "Contact-rich manipulation moves from nominal motion to correction authority",
+      "representative_ids": [
+        "2609.12549",
+        "2609.12103",
+        "2609.12634",
+        "2609.16319",
+        "2609.16504",
+        "2609.18164",
+        "2609.18242",
+        "2609.20649",
+        "2609.20669",
+        "2609.14219"
+      ],
+      "why": "Manipulation papers converge on the same research decision: contact, material, tactile history, energy, and measurement evidence should decide when motion continues or changes. STAR, RodForesight, material-conditioned diffusion, ConGraspXL, UniDex-ViTac, energy-regularized imitation, ForceDelta-VLA, DexTouch-WM, trajectory-free foresight, and metrological inspection all move beyond collecting more demonstrations toward specifying which physical variable has correction authority.",
+      "confidence": "High - tactile, material, force, dexterous grasping, energy, measurement, and foresight papers recur across the week and share contact-state intervention logic.",
+      "lab_action": "Use deformable rods, articulated in-hand manipulation, dexterous bimanual tasks, and metrological inspection with tactile sparsity, material estimate, force correction, energy cost, and foresight horizon as ablation axes; compare slip onset, correction timing, work, measurement error, and recovery success."
+    },
+    {
+      "cluster": "Embodied navigation becomes evidence gathering before motion commitment",
+      "representative_ids": [
+        "2609.15098",
+        "2609.15142",
+        "2609.15195",
+        "2609.14806",
+        "2609.17499",
+        "2609.17628",
+        "2609.18581",
+        "2609.19554",
+        "2609.20191",
+        "2609.20388"
+      ],
+      "why": "Navigation and embodied-agent papers repeatedly make motion a revocable commitment. LG-VLN, C2Nav, HarnessVLN, belief-adaptive quadrotor autonomy, ENCP, LEAP, GroundingVLN, VABench, VLN on the Fly, and Navi-Agent separate route language, geometry anchors, active perception, uncertainty, and onboard constraints before action. The common decision is to gather or verify missing evidence before the robot spends motion authority.",
+      "confidence": "High - the evidence-gathering signal appears in zero-shot VLN, quadrotor GNSS degradation, conformal prediction, active perception, embodied spatial benchmarks, aerial onboard stacks, and unlocalized monocular navigation.",
+      "lab_action": "Create navigation episodes with missing landmarks, stale maps, GNSS degradation, unknown scale, active perception choices, and onboard compute limits; compare commitment timing, evidence-gathering cost, path regret, conformal abstention, and recovery after a wrong turn."
+    },
+    {
+      "cluster": "World-action models become closed-loop instruments with falsifiable physical commitments",
+      "representative_ids": [
+        "2609.12441",
+        "2609.14973",
+        "2609.14073",
+        "2609.13257",
+        "2609.17524",
+        "2609.16074",
+        "2609.16697",
+        "2609.20034",
+        "2609.20377",
+        "2609.20277",
+        "2609.19315"
+      ],
+      "why": "World-model work this week is strongest when it states what physical or action consequence would falsify the imagined future. IMPLY, PhysBrain, learned adjudicators, compute-value audits, modality-autoregressive WAMs, WAM surveys, embodied-intelligence world models, Astronex-World, MM-Future, JEPA-WAM, and GAVEL ask whether a generated state can guide action, scenario stress, or verification. APRL should test when a generated future is useful enough to enter the loop and when it should be rejected.",
+      "confidence": "High - daily and Friday papers repeatedly connect world models to physical consistency, selection value, generated instruction, scenario evaluation, graph verification, and control authority.",
+      "lab_action": "Replay manipulation, off-road, and driving episodes with generated futures, physical adjudicators, world-action rollouts, graph constraints, and multi-mode driving predictions; compare physical-state error, action ranking, scenario criticality, verification failures, and closed-loop recovery."
+    },
+    {
+      "cluster": "Multimodal deployment is judged by decisive evidence surviving pruning, routing, and fallback",
+      "representative_ids": [
+        "2609.13804",
+        "2609.13250",
+        "2609.13293",
+        "2609.17953",
+        "2609.17269",
+        "2609.16646",
+        "2609.18663",
+        "2609.19104",
+        "2609.19990",
+        "2609.20299",
+        "2609.15671"
+      ],
+      "why": "Efficiency and reliability papers are no longer just shrinking models. StepPrune, plug-and-play key-value evaluation, egocentric anticipation, EDCT-Bench, semantic-spatial verification, hallucination probes, VLA-ULAP, robotic muscle memory, QCPruner, dynamic CLIP layer routing, and question-guided token pruning all ask which evidence survives compression, routing, fallback, or privacy defense. Deployment wins only if decisive cues remain available when action or refusal depends on them.",
+      "confidence": "High - pruning, KV routing, anticipation, counterfactual testing, hallucination diagnosis, cloud fallback, memory, OOD routing, and privacy token pruning all share evidence-retention criteria.",
+      "lab_action": "Sweep visual-token pruning, KV routing, local/cloud fallback, muscle-memory cache, dynamic layer routing, privacy pruning, and hallucination probes on robot video and VLM-control tasks; compare decisive-cue recall, action-permission flips, OOD rejection, privacy leakage, latency, and downstream failure."
+    }
+  ],
+  "frontier_memory": {
+    "new": [
+      "W38 adds revocation timing as the shared contract: VLA actions, maps, navigation commitments, generated futures, tactile corrections, and pruned evidence must say when authority expires.",
+      "Friday's map stack, adversarial VLA, command authorization, and obstacle-aware coding papers make safety less about detection alone and more about withdrawing permission before the next transition.",
+      "Action tokenization and tactile world models appear as actionable system interfaces rather than model-internal representation choices."
+    ],
+    "strengthening": [
+      "Robot-usable geometry strengthened across relocalization, multi-session LiDAR, self-correcting maps, panoramic 3DGS SLAM, feed-forward Gaussian SLAM, bounded-compute RGB-D mapping, and HDR Gaussian SLAM.",
+      "Evidence-gated VLA strengthened from visual shortcut diagnosis through feasibility shields, action-head latency, layer-selective adaptation, action tokenization, adversarial persistence, and obstacle-aware control.",
+      "Physical correction strengthened across tactile representation, material-conditioned diffusion, visuo-tactile dexterity, force-aware imitation, and action-conditioned tactile world models."
+    ],
+    "commoditizing": [
+      "Generic larger-context VLA, prettier Gaussian reconstructions, and lower-latency deployment claims look weak unless they specify the exact evidence variable that changes or revokes action."
+    ],
+    "contradiction": [
+      "The week rewards richer sensor and memory context while repeatedly warning that stale maps, persistent adversarial cues, over-pruned tokens, and unverified generated futures can create false action authority."
+    ],
+    "missing_axis": [
+      "No public benchmark yet couples action-interface ablations, map-trust revocation, tactile correction authority, navigation evidence gathering, world-model falsification, and evidence-pruning survival in one robot episode family."
+    ]
+  },
+  "strategy_board": [
+    {
+      "opportunity": "Revocation-Timed VLA Evaluation Harness",
+      "portfolio": "Build moat",
+      "why_now": "W38 repeatedly exposed that VLA, command authorization, adversarial patches, action tokenization, feasibility shields, and obstacle-aware coding all need a transition-level withdrawal signal.",
+      "what_others_optimize": "Average success, larger backbones, lower action-head latency, or isolated safety classifiers.",
+      "our_contrarian_bet": "APRL should own episodes where evidence says when a policy must stop, switch, ask for help, or fall back before terminal failure.",
+      "required_moat": "Robot episodes with visual shortcuts, adversarial residues, infeasible commands, obstacle conflicts, tokenization variants, latency traces, and recovery labels.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "score_rationale": {
+        "strategic_fit": "Directly matches APRL robot perception, VLA, safety, and failure analysis.",
+        "asymmetry": "A small lab can own rare transition failures rather than model scale.",
+        "timing": "Action interfaces and safety authorization are emerging before standards settle.",
+        "tractability": "A tabletop probe with obstacle, command, and adversarial conditions can start in one week.",
+        "defensibility": "Revocation labels and synchronized recovery traces are difficult to copy.",
+        "scientific_depth": "The work separates action authority from final task success."
+      },
+      "one_week_probe": "Record five manipulation/navigation episodes where a visual shortcut, infeasible command, adversarial patch residue, or obstacle condition should revoke the next action.",
+      "four_week_build": "Compare VLA variants, action tokenizers, feasibility shields, local fallback, and obstacle-aware coding agents on the same revocation labels.",
+      "success_metric": "Revocation labels predict unsafe continuation and recovery success earlier than terminal success or confidence.",
+      "stop_condition": "Stop if revocation labels do not add predictive value beyond ordinary confidence and final success.",
+      "paper_path": "Revocation-timed evaluation for evidence-gated VLA control.",
+      "asset_path": "Robot videos, action tokens, command states, adversarial residue labels, obstacle maps, fallback traces, and recovery outcomes."
+    },
+    {
+      "opportunity": "Robot Map Trust-State Protocol",
+      "portfolio": "Exploit",
+      "why_now": "The week produced unusually dense SLAM and Gaussian map evidence around relocalization, bounded compute, dynamic motion, feed-forward priors, and HDR radiance.",
+      "what_others_optimize": "Reconstruction quality, ATE, loop-closure accuracy, or isolated map update speed.",
+      "our_contrarian_bet": "A robot map should expose a trust state that predicts when navigation, manipulation, or inspection decisions should use, repair, or reject it.",
+      "required_moat": "Repeated routes and tabletop scenes with lighting shifts, dynamic clutter, sparse views, loop closures, bounded-compute updates, and downstream task outcomes.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "score_rationale": {
+        "strategic_fit": "This is core APRL SLAM, mapping, and robot perception territory.",
+        "asymmetry": "Deployment trust-state data beats generic 3D scale.",
+        "timing": "Gaussian SLAM and foundation geometry models are converging now.",
+        "tractability": "A corridor and tabletop map-trust probe is feasible.",
+        "defensibility": "Repeated robot routes and trust labels become reusable assets.",
+        "scientific_depth": "Links representation validity to action consequence."
+      },
+      "one_week_probe": "Run one robot route under lighting, viewpoint, and moving-clutter shifts; label when map evidence should be trusted, corrected, or ignored.",
+      "four_week_build": "Compare LiDAR SLAM, Gaussian SLAM, feed-forward priors, self-correcting maps, bounded-compute RGB-D mapping, and HDR Gaussian SLAM against downstream route and manipulation tasks.",
+      "success_metric": "Trust-state labels predict relocalization and task failure better than ATE, PSNR, or update cost alone.",
+      "stop_condition": "Stop if standard pose/reconstruction metrics fully explain downstream failures.",
+      "paper_path": "Trust-state release gates for robot maps and Gaussian SLAM.",
+      "asset_path": "Repeated routes, map states, uncertainty outputs, lighting/dynamic-object labels, relocalization traces, and downstream outcomes."
+    },
+    {
+      "opportunity": "Contact-Correction Authority Dataset",
+      "portfolio": "Build moat",
+      "why_now": "Tactile representation, material estimation, force-aware imitation, dexterous grasping, and tactile world models all asked which physical signal may correct motion.",
+      "what_others_optimize": "Demonstration volume, final grasp success, or isolated tactile prediction accuracy.",
+      "our_contrarian_bet": "APRL can own the correction moment: the instant tactile, material, force, or foresight evidence should change the command.",
+      "required_moat": "Synchronized tactile, force, material, vision, action, and recovery traces across deformable, articulated, and dexterous tasks.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 4,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "score_rationale": {
+        "strategic_fit": "Strong fit with APRL manipulation and perception interests.",
+        "asymmetry": "Correction traces are harder to scrape than demonstrations.",
+        "timing": "Visuo-tactile and tactile world models are getting enough density to standardize evaluation.",
+        "tractability": "A small tactile probe can start quickly with a few objects.",
+        "defensibility": "Force/tactile correction labels become hard-to-copy assets.",
+        "scientific_depth": "The question separates nominal policy from physical evidence authority."
+      },
+      "one_week_probe": "Collect ten failed or near-failed contact episodes where tactile, material, or force evidence should change the next command.",
+      "four_week_build": "Evaluate tactile representations, material-conditioned policies, force-conditioned correction, and tactile world models on the same correction labels.",
+      "success_metric": "Correction authority labels reduce slip, excess work, and reset count before final success diverges.",
+      "stop_condition": "Stop if physical correction signals do not predict recovery better than vision-only state.",
+      "paper_path": "Contact-correction authority for dexterous robot manipulation.",
+      "asset_path": "Tactile streams, force traces, material labels, action corrections, recovery branches, and failure taxonomy."
+    }
+  ]
+}
