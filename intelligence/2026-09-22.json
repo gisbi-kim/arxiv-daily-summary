@@ -1,0 +1,436 @@
+{
+  "date": "2026-09-22",
+  "edition": "Research Intelligence",
+  "source_prompt": "prompts/instruction_v20260713.md",
+  "source_mode": "new",
+  "scope_note": "Daily edition from matching Tuesday /new listings: 272 non-replacement cs.CV rows, 210 cs.RO rows, 455 deduplicated papers, and 382 ROI papers. Tier A cards are conservative abstract-only autopsies from repository parser output; no figure, table, full-text, code, or dataset-release claim is asserted unless the abstract itself states it.",
+  "executive_thesis": "The September 22 batch is a stress test for robot decision contracts. VLA papers such as Validating, Not Sampling, LIBERO-VPro, Beyond the Leaderboard, MaskVLA, Anatomy of a Closed-Loop Collapse, and BAS-VLA show that a policy can look strong under sampled perturbations, offline validation, or nominal rollouts while failing when visual evidence becomes stale, local, task-semantic, or closed-loop. Contact papers including DexTacWAM, HapticWAM, When Does Touch Matter?, InsertAnything, and ContactDP make touch and force into correction authority rather than auxiliary features. Geometry papers including ZIL, Splat-CBF, Elevator-VIGS, WOLF, BayesianGS-SLAM, and When Wider Views Fail ask when registration, view planning, transport-state estimation, and uncertainty should change robot motion. Navigation, world-model, and safety papers then add the system rule: commitment should wait until the evidence source, action parameterization, uncertainty interval, and recovery policy are all aligned with the downstream decision.",
+  "decision_cards": [
+    {
+      "label": "Decision",
+      "title": "Closed-loop robustness must be validated over regions, not sampled points",
+      "body": "Validating, Not Sampling, LIBERO-VPro, Beyond the Leaderboard, Anatomy of a Closed-Loop Collapse, and BAS-VLA all turn robustness into a counterfactual or region-level contract rather than a nominal task score."
+    },
+    {
+      "label": "Decision",
+      "title": "Touch and force are becoming action authority",
+      "body": "DexTacWAM, HapticWAM, When Does Touch Matter?, InsertAnything, ContactDP, and ForceRFT ask which contact signal is strong enough to override or refine a vision-conditioned action."
+    },
+    {
+      "label": "Decision",
+      "title": "World models and maps need explicit evidence budgets",
+      "body": "Splat-CBF, WOLF, BayesianGS-SLAM, OnlineWM, DualWAM, and Robot World Models Are Not Invariant to How the Actions Are Written all expose hidden contracts between observation, action encoding, uncertainty, and downstream control."
+    }
+  ],
+  "papers": [
+    {
+      "rank": 1,
+      "title": "Validating, Not Sampling: Region-Level Robustness of Vision-Language and Vision-Language-Action Models",
+      "arxiv_id": "2609.22293",
+      "fit": "VLA robustness validation - continuous perturbation regions - action sensitivity",
+      "status": "Tier A - abstract-only",
+      "status_quo": "VLM and VLA robustness is often estimated by sampling a handful of perturbed inputs.",
+      "friction": "A sampled pass does not certify that no nearby perturbation changes the robot decision.",
+      "hidden_premise": "For robot actions, robustness should be a property of an input region, not a point estimate.",
+      "conceptual_move": "Validate entire continuous photometric and geometric perturbation regions for VLMs and VLAs.",
+      "mechanism": "The abstract introduces H2V-M, a margin-aware convergence rule that searches perturbation regions efficiently at large-model scale.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The paper validates brightness shifts, camera rotations, and their composition over continuous regions."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It reports that VLAs can change commanded actions under perturbations as small as plus or minus one degree."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should treat camera pose and exposure perturbation regions as release gates for manipulation policies."
+        }
+      ],
+      "falsification": "If region-level counterexamples do not predict closed-loop failures or recoverability, the certificate is conservative but not decision-relevant.",
+      "adversarial": "Separate harmless action variation from contact-critical action variation; otherwise the validator can overstate risk.",
+      "thinking_tool": "Replace random perturbation sampling with region-level action invariance tests.",
+      "transfer_boundary": "Direct for vision-conditioned actions; less direct for policies with explicit geometric state estimation and downstream safety filters."
+    },
+    {
+      "rank": 2,
+      "title": "LIBERO-VPro: Benchmarking Closed-Loop Visual Robustness of Robotic Foundation Models",
+      "arxiv_id": "2609.24350",
+      "fit": "closed-loop visual robustness - robotic foundation models - perturbation taxonomy",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Robotic foundation models are usually tested under clean, timely, and consistent observations.",
+      "friction": "Nominal success can hide brittle grounding when visual evidence is degraded, stale, inconsistent, or task-relevantly changed.",
+      "hidden_premise": "Visual robustness is multi-dimensional and architecture-dependent, so one clean benchmark score cannot certify deployment.",
+      "conceptual_move": "Perturb visual evidence during closed-loop execution across degradation, staleness, source consistency, and task-relevant scene variation.",
+      "mechanism": "The abstract describes 12 challenge categories, 96 settings, and 3,296 task-condition cases evaluated across simulated and real rollouts.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The benchmark perturbs visual evidence throughout execution rather than only at the start."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "The results show different robustness profiles for VLAs and WAMs."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should keep stale camera, local cue disruption, and changed precondition tests separate."
+        }
+      ],
+      "falsification": "If perturbation families do not change model rankings or recovery choices, the benchmark may be too broad to guide design.",
+      "adversarial": "Real-world perturbations can co-occur; testing one axis at a time may miss coupled failures.",
+      "thinking_tool": "Treat visual robustness as a set of closed-loop failure families, not one corruption score.",
+      "transfer_boundary": "Strong for manipulation foundation models; needs adaptation for field robots with non-visual redundancy."
+    },
+    {
+      "rank": 3,
+      "title": "Anatomy of a Closed-Loop Collapse: A Causal Case Study of a Compressed VLA Policy",
+      "arxiv_id": "2609.23048",
+      "fit": "compressed VLA policy - offline validation failure - closed-loop causal forensics",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Compression is often accepted when offline imitation metrics or teacher ratios remain high.",
+      "friction": "A compressed policy can pass every offline check and still collapse to zero closed-loop success.",
+      "hidden_premise": "Closed-loop deployment distribution and action-trace signatures can reveal failure modes that marginal offline statistics miss.",
+      "conceptual_move": "Dissect one naturally occurring collapse with paired action traces, intervention tests, and deployment-distribution teacher rollouts.",
+      "mechanism": "The abstract isolates a late-heavy negative z residual and shows that deployment-distribution rollouts remove it and restore parity.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The compressed Octo-Base student passes offline checks but scores 0/72 in the simulated closed-loop task."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "A minimal-pair intervention using deployment-distribution teacher rollouts restores teacher-like behavior."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should require a few dozen closed-loop trials before accepting compressed VLA policies."
+        }
+      ],
+      "falsification": "If the collapse signature is specific to one architecture and task, it is a case study rather than a general compression law.",
+      "adversarial": "Check whether the repaired policy overfits the deployment rollouts and fails under object or camera shifts.",
+      "thinking_tool": "Audit compression by closed-loop causal signatures, not teacher-ratio averages.",
+      "transfer_boundary": "Strong for compressed policies; less direct for safety-filtered modular controllers."
+    },
+    {
+      "rank": 4,
+      "title": "DexTacWAM: A Visuo-Tactile World-Action Model for Dexterous Manipulation",
+      "arxiv_id": "2609.24976",
+      "fit": "visuo-tactile WAM - dexterous contact dynamics - tactile latent prediction",
+      "status": "Tier A - abstract-only",
+      "status_quo": "World-action models usually inherit video priors but remain vision-centric at deployment.",
+      "friction": "Dexterous contact dynamics are only partly visible, so vision-only WAMs can miss slip, force, or finger-specific contact state.",
+      "hidden_premise": "A tactile latent should enter the predicted world state, not merely condition an action head.",
+      "conceptual_move": "Encode each fingertip, compress tactile features with finger and pose awareness, and inject touch into video diffusion world modeling.",
+      "mechanism": "The abstract attributes gains to modeling contact evolution as part of the predicted world state rather than tactile conditioning alone.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "DexTacWAM models distributed multi-finger contact dynamics on a 22-DoF bimanual platform."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "Removing tactile world modeling substantially lowers the reported four-task mean."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should distinguish tactile feature conditioning from tactile future-state modeling."
+        }
+      ],
+      "falsification": "If touch improves the benchmark but does not change recovery timing or contact failure avoidance, it is predictive but not authoritative.",
+      "adversarial": "Evaluate unseen materials, changing fingertip calibration, and object geometries where tactile priors can overfit.",
+      "thinking_tool": "Make contact evolution a predicted state variable that can change action.",
+      "transfer_boundary": "Direct for tactile dexterous manipulation; weaker for grippers without reliable tactile sensing."
+    },
+    {
+      "rank": 5,
+      "title": "HapticWAM: Distilling Imagined Touch into a World-Action Model without Inference-Time Tactile Sensing",
+      "arxiv_id": "2609.23888",
+      "fit": "tactile distillation - contact package prediction - deployment without fingertip input",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Tactile sensors help contact tasks, but deployment may not support fingertip observations at inference time.",
+      "friction": "The policy still needs force, slip, and contact geometry estimates when direct tactile observations are unavailable.",
+      "hidden_premise": "A student can retain a generative contact head that imagines future contact mechanics from vision and action history.",
+      "conceptual_move": "Distill heterogeneous tactile contact futures and action predictions into a WAM that removes fingertip input branches at deployment.",
+      "mechanism": "The abstract describes a teacher with gel images, deformation, shear, forces, wrench, and derived contact state, then a student with imagined touch.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The model predicts a contact package, not only tactile pixels."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "The student removes fingertip input branches while retaining the generative contact head."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL can test whether imagined touch is enough to delay, refine, or veto action chunks."
+        }
+      ],
+      "falsification": "If imagined touch fails exactly when contact becomes novel, the distilled representation cannot replace deployment tactile sensing.",
+      "adversarial": "Stress transparent, deformable, and high-friction objects where visual contact cues mislead the contact head.",
+      "thinking_tool": "Use tactile supervision to train a contact-state simulator that survives sensor removal.",
+      "transfer_boundary": "Useful for low-cost deployment; risky for high-force assembly where missing touch can cause damage."
+    },
+    {
+      "rank": 6,
+      "title": "Splat-CBF: Safe Next-Best-View Control in 3D Gaussian-Splat Maps",
+      "arxiv_id": "2609.23100",
+      "fit": "3D Gaussian maps - safe active perception - control barrier functions",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Active perception often treats next-best-view and collision avoidance as separate planning objectives.",
+      "friction": "The most informative regions are often the least trusted for collision margins, so information gain can pull the robot toward unsafe space.",
+      "hidden_premise": "Perception should be a soft objective only after safety is encoded as a hard motion constraint.",
+      "conceptual_move": "Use a risk-aware CBF over Gaussian-field uncertainty for safety and a second perception barrier for expected Fisher information.",
+      "mechanism": "The abstract describes a quadratic program where safety is hard, perception is soft, and slack adapts near uncertain regions.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The method enforces collision avoidance as a hard constraint while steering toward informative views."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "It reports indoor simulations and robot experiments on manipulator and Ackermann platforms."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should evaluate map representations by safe information gain along the planned path."
+        }
+      ],
+      "falsification": "If the slack schedule frequently sacrifices perception near the very regions that matter, next-best-view gains may not reach downstream tasks.",
+      "adversarial": "Test dynamic obstacles and reflective clutter where Gaussian uncertainty can understate collision risk.",
+      "thinking_tool": "Treat view selection as a constrained control problem, not a pure reconstruction objective.",
+      "transfer_boundary": "Strong for exploration and inspection; less direct for static offline reconstruction."
+    },
+    {
+      "rank": 7,
+      "title": "BayesianGS-SLAM: Uncertainty-Aware Neural Rendering SLAM via Probabilistic Formulation",
+      "arxiv_id": "2609.24140",
+      "fit": "uncertainty-aware GS-SLAM - predictive surprise - keyframe selection",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Neural-rendering SLAM often uses rendered residuals without a consistent reliability estimate.",
+      "friction": "Unreliable residuals can corrupt pose optimization, while already explained frames can waste mapping updates.",
+      "hidden_premise": "Map representation uncertainty and sensor noise must travel through tracking, mapping, and keyframe selection together.",
+      "conceptual_move": "Propagate color and depth predictive uncertainty through a probabilistic 3DGS SLAM pipeline.",
+      "mechanism": "The abstract combines sensor-noise and opacity-induced map uncertainty and uses predictive surprise for keyframe choice.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The uncertainty estimate is reused across mapping, robust pose tracking, and keyframe selection."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "The keyframe strategy reduces selected keyframes and mapping calls while maintaining competitive tracking and rendering."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should test whether uncertainty reduces wrong-pose commitments, not only mapping calls."
+        }
+      ],
+      "falsification": "If uncertainty ranks residual error but not downstream navigation risk, it remains a rendering diagnostic.",
+      "adversarial": "Check scene changes and dynamic objects where low predictive surprise can hide stale geometry.",
+      "thinking_tool": "Use predictive surprise to decide when a map update is worth trusting.",
+      "transfer_boundary": "Strong for RGB-D neural SLAM; needs adaptation for LiDAR, sonar, and event-camera pipelines."
+    },
+    {
+      "rank": 8,
+      "title": "RiverVLN: Phase-Grounded Temporal Vision--Language Navigation for Unmanned Surface Vehicles",
+      "arxiv_id": "2609.23423",
+      "fit": "USV VLN - semantic phase tracking - continuous motion",
+      "status": "Tier A - abstract-only",
+      "status_quo": "VLN often assumes discrete indoor motion and treats language as a static goal.",
+      "friction": "River navigation has inertia, sparse landmarks, limited maneuverability, and long-horizon instructions that need progress state.",
+      "hidden_premise": "Language grounding should be converted into visually verifiable phases that can be updated online.",
+      "conceptual_move": "Represent navigation as phase-grounded temporal VLN with predict-execute-re-observe control for USVs.",
+      "mechanism": "The abstract converts instructions into ordered semantic phases and fuses phase state with visual-motion history to predict local SE(2) increments.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The benchmark targets continuous riverine USV motion instead of indoor discrete actions."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "PGT-NAV updates phase and grounding online and replans through a map-based safety layer."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL navigation benchmarks should log semantic phase progress separately from final route success."
+        }
+      ],
+      "falsification": "If phase labels fail under visually ambiguous bridges or currents, the representation may encode dataset landmarks rather than progress.",
+      "adversarial": "Stress similar-looking landmarks, current disturbances, and delayed correction after wrong phase transitions.",
+      "thinking_tool": "Turn long instructions into online phase commitments with re-observation gates.",
+      "transfer_boundary": "Strong for USV and long-horizon route following; less direct for short object-nav tasks."
+    },
+    {
+      "rank": 9,
+      "title": "Robot World Models Are Not Invariant to How the Actions Are Written",
+      "arxiv_id": "2609.23252",
+      "fit": "action parameterization - world model invariance - latent rollout disagreement",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Action parameterization is often treated as an implementation detail if encodings are mutually reconstructible.",
+      "friction": "A world model can answer a different future-prediction question when the same trajectory is written in another action coordinate system.",
+      "hidden_premise": "World-model invariance must be audited in the action channel, not only in visual input transformations.",
+      "conceptual_move": "Test whether latent dynamics are invariant to absolute versus delta action encodings and repair the defect through objective averaging and disagreement penalties.",
+      "mechanism": "The abstract reports large retrieval and action-selection degradation when trained and evaluated under mismatched action parameterizations.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The two encodings are mutually reconstructible, yet the world model's beliefs become near-orthogonal in a PushT case."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "The repair depends on where averaging is applied; output averaging is not generally available for direction-valued prediction."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should treat action representation as a model contract that needs invariance tests."
+        }
+      ],
+      "falsification": "If controller performance is insensitive to the latent disagreement, the defect may matter more for model evaluation than deployment.",
+      "adversarial": "Test mixed action spaces, normalized joints, end-effector deltas, and contact-conditioned action chunks.",
+      "thinking_tool": "Audit the action channel as a source of hidden world-model failure.",
+      "transfer_boundary": "Direct for WAMs and imitation policies; less direct for planners with explicit dynamics models."
+    },
+    {
+      "rank": 10,
+      "title": "BarrierFormer: Transformer-Guided Predictive Barrier Enforcement for Safe Robot Control",
+      "arxiv_id": "2609.23896",
+      "fit": "predictive safety - CBF constraints - model-free control",
+      "status": "Tier A - abstract-only",
+      "status_quo": "Standard CBF safety filters enforce constraints myopically at the current time step or require online MPC.",
+      "friction": "A controller can be pushed toward a future boundary where no feasible safe action remains, while online optimization can be too expensive.",
+      "hidden_premise": "A learned policy can internalize rollout-level barrier constraints if trained against predictive safety supervision.",
+      "conceptual_move": "Use a causal transformer to generate predictive rollouts, evaluate barrier violations, and learn residual corrections without online optimization.",
+      "mechanism": "The abstract describes a dynamics head, action head, barrier critic, and safety teacher that supervises barrier-consistent actions.",
+      "evidence": [
+        {
+          "trace": "[Abstract]",
+          "claim": "The method encodes rollout-level CBF constraints rather than only current-step safety."
+        },
+        {
+          "trace": "[Abstract]",
+          "claim": "During inference it maps observation-action history to controls without online optimization or known model dynamics."
+        },
+        {
+          "trace": "[Inference]",
+          "claim": "APRL should compare predictive safety by latency, future-boundary violations, and false conservatism."
+        }
+      ],
+      "falsification": "If safety gains rely on simulated systems with simple dynamics, real robot deployment can reintroduce model mismatch.",
+      "adversarial": "Stress moving obstacles, contact-rich dynamics, and uncertainty intervals where predictive rollouts become miscalibrated.",
+      "thinking_tool": "Move safety from a current-step veto into a learned predictive constraint contract.",
+      "transfer_boundary": "Strong for goal-directed navigation and low-level control; needs care for high-dimensional contact manipulation."
+    }
+  ],
+  "synthesis": [
+    {
+      "title": "Robustness is moving from scoreboards to counterfactual contracts",
+      "links": "Validating, Not Sampling - LIBERO-VPro - Beyond the Leaderboard - BAS-VLA - Closed-Loop Collapse",
+      "facts": "The papers validate perturbation regions, closed-loop visual evidence families, edited driving scenes, task-semantic swaps, and compressed-policy rollouts.",
+      "inference": "APRL should require every policy claim to name the counterfactual that would change the action and the perturbation family that must not."
+    },
+    {
+      "title": "Contact and geometry signals are becoming commitment gates",
+      "links": "DexTacWAM - HapticWAM - When Does Touch Matter? - Splat-CBF - BayesianGS-SLAM",
+      "facts": "The batch predicts tactile futures, compares wrench/taxel policies, enforces safe view choice, and propagates predictive uncertainty through SLAM.",
+      "inference": "The shared decision is whether an evidence source is strong enough to refine, delay, or veto a robot commitment."
+    },
+    {
+      "title": "World-model reliability depends on hidden interface choices",
+      "links": "Robot World Models Are Not Invariant - DualWAM - OnlineWM - AffordanceWAM - DriveReferee",
+      "facts": "The papers expose action encoding, asynchronous local refinement, causal simulator queries, affordance interfaces, and analytic geometric verdicts.",
+      "inference": "APRL should audit the interface variable that links world prediction to action before judging generated futures."
+    }
+  ],
+  "frontier_memory": [
+    {
+      "label": "Strengthening",
+      "history": "September 21 emphasized early evidence timing for VLA failure, contact, mapping, social navigation, and recovery authority.",
+      "body": "September 22 strengthens the same axis, but shifts from first warning time to validation contracts: perturbation regions, stale evidence, tactile authority, uncertainty-aware maps, and action-encoding invariance."
+    },
+    {
+      "label": "New signal",
+      "history": "Recent reports treated tactile WAMs and safety filters as separate lines.",
+      "body": "Today they converge: touch, force, barrier rollouts, conformal uncertainty, and recovery data all act as gates that decide whether a nominal command keeps authority."
+    },
+    {
+      "label": "Commoditizing",
+      "history": "VLA, WAM, 3DGS, and Gaussian SLAM now recur almost every run.",
+      "body": "The differentiator is no longer proposing one of these backbones; it is proving which interface variable survives closed-loop stress and changes the robot action."
+    },
+    {
+      "label": "Contradiction",
+      "history": "Leaderboard and nominal benchmark progress often imply that better models transfer directly.",
+      "body": "Counterfactual driving, closed-loop VLA collapse, LIBERO-VPro, and region validation argue that nominal success can be almost orthogonal to deployment behavior."
+    },
+    {
+      "label": "Missing axis",
+      "history": "The repo has many per-modality diagnostics but few cross-modality arbitration rules.",
+      "body": "A shared arbitration benchmark is still missing: when camera, touch, map uncertainty, action encoding, and safety filter disagree, which signal should own the next command?"
+    }
+  ],
+  "strategy": [
+    {
+      "priority": "Build moat",
+      "title": "Closed-loop evidence contract benchmark",
+      "thesis": "Build one suite where VLA actions are tested under perturbation regions, stale/missing camera evidence, task-semantic swaps, and compressed-policy rollout checks.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 5,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 5,
+        "scientific_depth": 5
+      },
+      "one_week": "Run LIBERO-style tasks with brightness/rotation regions, camera staleness, object swap, and one compressed policy baseline.",
+      "four_week": "Add driving-style counterfactual edits, action-trace residual forensics, and task-semantic calibration labels across manipulation and navigation.",
+      "success": "The suite separates at least two policies that have similar nominal success but different closed-loop failure families.",
+      "stop": "Stop if all axes collapse to generic confidence or clean success and do not change recovery choices.",
+      "paper_path": "Benchmark paper on counterfactual closed-loop validation for robotic foundation models.",
+      "asset_path": "Perturbation-region certificates, stale-camera episodes, semantic-swap labels, action traces, and recovery outcomes.",
+      "asset": "Perturbation-region certificates, stale-camera episodes, semantic-swap labels, action traces, and recovery outcomes."
+    },
+    {
+      "priority": "Exploit",
+      "title": "Contact authority ladder for manipulation",
+      "thesis": "Rank vision, imagined touch, real tactile features, force residuals, and contact diffusion by when each should override the nominal action.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 5,
+        "tractability": 4,
+        "defensibility": 4,
+        "scientific_depth": 5
+      },
+      "one_week": "Compare vision-only, wrench, taxel, and imagined-touch signals on cluttered grasping and one insertion task.",
+      "four_week": "Add DexTacWAM-style tactile world modeling, HapticWAM-style distillation, ForceRFT residual correction, and ContactDP insertion trials.",
+      "success": "At least one contact channel predicts and corrects slip, jam, or force overshoot before the final failure.",
+      "stop": "Stop if tactile signals improve offline prediction but cannot change recovery timing or reduce peak force.",
+      "paper_path": "Manipulation paper on contact evidence as command authority for VLA/WAM policies.",
+      "asset_path": "Synchronized RGB, tactile, wrench, contact package, action residual, and task-outcome logs.",
+      "asset": "Synchronized RGB, tactile, wrench, contact package, action residual, and task-outcome logs."
+    },
+    {
+      "priority": "Explore",
+      "title": "Evidence-budgeted maps and world models",
+      "thesis": "Audit when a robot should buy more geometry, query a simulator, trust a SLAM residual, or change the action parameterization before committing motion.",
+      "scores": {
+        "strategic_fit": 5,
+        "asymmetry": 4,
+        "timing": 4,
+        "tractability": 4,
+        "defensibility": 4,
+        "scientific_depth": 5
+      },
+      "one_week": "Run Splat-CBF, BayesianGS-SLAM uncertainty, and action-encoding invariance tests on one small navigation/manipulation environment.",
+      "four_week": "Add ZIL registration, WOLF predictive frontiers, Elevator-VIGS transport-state stress, OnlineWM counterfactual simulator queries, and DualWAM local refinement.",
+      "success": "Extra evidence or interface repair improves downstream safety or task success more than its time/compute cost.",
+      "stop": "Stop if map/world-model metrics improve but route commitment, collision avoidance, or contact recovery do not.",
+      "paper_path": "Systems paper on evidence budgets and hidden interface contracts in robot world models.",
+      "asset_path": "View-selection logs, uncertainty maps, action-encoding pairs, simulator query traces, and downstream action changes.",
+      "asset": "View-selection logs, uncertainty maps, action-encoding pairs, simulator query traces, and downstream action changes."
+    }
+  ]
+}
